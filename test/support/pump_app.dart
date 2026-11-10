@@ -1,11 +1,15 @@
+import 'dart:async';
+
 import 'package:clock/clock.dart';
 import 'package:expense_tracker/app.dart';
+import 'package:expense_tracker/core/models/raw_capture.dart';
 import 'package:expense_tracker/data/data_providers.dart';
 import 'package:expense_tracker/data/db/app_database.dart';
 import 'package:expense_tracker/features/quick_add/presentation/widgets/keypad.dart';
 import 'package:expense_tracker/routing/floating_tab_bar.dart';
 import 'package:expense_tracker/services/clipboard_service.dart';
 import 'package:expense_tracker/services/haptics.dart';
+import 'package:expense_tracker/services/native/capture_queue_service.dart';
 import 'package:expense_tracker/services/service_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -59,12 +63,45 @@ final class FakeClipboard implements ClipboardService {
   Future<String?> readText() async => text;
 }
 
+/// A native capture queue held in memory.
+final class FakeCaptureQueue implements CaptureQueueService {
+  /// Creates the queue holding [items].
+  new([List<RawCapture>? items]) : items = [...?items];
+
+  /// What is waiting.
+  final List<RawCapture> items;
+
+  /// Ids acked so far.
+  final List<String> acked = [];
+
+  final StreamController<void> _changes = StreamController<void>.broadcast();
+
+  /// Simulates a share arriving while the app is open.
+  void arrive(RawCapture capture) {
+    items.add(capture);
+    _changes.add(null);
+  }
+
+  @override
+  Future<List<RawCapture>> drain() async => [...items];
+
+  @override
+  Future<void> ack(List<String> ids) async {
+    acked.addAll(ids);
+    items.removeWhere((c) => ids.contains(c.id));
+  }
+
+  @override
+  Stream<void> get changes => _changes.stream;
+}
+
 /// Pumps the whole app over a fresh in-memory database and a fixed clock.
 /// Returns the database so a test can seed or inspect it.
 Future<AppDatabase> pumpApp(
   WidgetTester tester, {
   FakeHaptics? haptics,
   FakeClipboard? clipboard,
+  FakeCaptureQueue? captureQueue,
   Size? size,
   double textScale = 1,
 }) async {
@@ -84,6 +121,9 @@ Future<AppDatabase> pumpApp(
         clockProvider.overrideWithValue(clock),
         hapticsProvider.overrideWithValue(haptics ?? FakeHaptics()),
         clipboardProvider.overrideWithValue(clipboard ?? FakeClipboard()),
+        captureQueueProvider.overrideWithValue(
+          captureQueue ?? FakeCaptureQueue(),
+        ),
       ],
       child: const App(),
     ),

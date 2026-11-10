@@ -275,9 +275,12 @@
   "quickAddIncomeTitle": "Add money in",
   "quickAddRefundTitle": "Add refund",
   "quickAddFromMessage": "From a message",
-  "quickAddFromMessageSemantics": "Filled from a message: {details}",
+  "quickAddFromMessageSemantics": "Filled from a message: {payee}, {details}",
   "@quickAddFromMessageSemantics": {
     "placeholders": {
+      "payee": {
+        "type": "String"
+      },
       "details": {
         "type": "String"
       }
@@ -329,5 +332,22 @@
     }
   },
   "settingsSectionMessages": "Messages",
-  "back": "Back"
+  "back": "Back",
+  "quickAddFromMessageDetails": "From a message, {account}",
+  "@quickAddFromMessageDetails": {
+    "placeholders": {
+      "account": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsUnparsedCount": "{count}",
+  "@settingsUnparsedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  }
 }

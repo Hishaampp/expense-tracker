@@ -655,8 +655,8 @@ abstract class AppLocalizations {
   /// No description provided for @quickAddFromMessageSemantics.
   ///
   /// In en, this message translates to:
-  /// **'Filled from a message: {details}'**
-  String quickAddFromMessageSemantics(String details);
+  /// **'Filled from a message: {payee}, {details}'**
+  String quickAddFromMessageSemantics(String payee, String details);
 
   /// No description provided for @quickAddPaymentFallback.
   ///
@@ -795,6 +795,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Back'**
   String get back;
+
+  /// No description provided for @quickAddFromMessageDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'From a message, {account}'**
+  String quickAddFromMessageDetails(String account);
+
+  /// No description provided for @settingsUnparsedCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}'**
+  String settingsUnparsedCount(int count);
 }
 
 class _AppLocalizationsDelegate

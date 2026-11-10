@@ -34,6 +34,7 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
     required this.shakeDistance,
     required this.shadowOffset,
     required this.headerBarHeight,
+    required this.titleCollapseOffset,
     required this.shadowBlur,
   });
 
@@ -66,6 +67,7 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
     shakeDistance: 8,
     shadowOffset: 6,
     headerBarHeight: 52,
+    titleCollapseOffset: 40,
     shadowBlur: 18,
   );
 
@@ -150,6 +152,9 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
   /// Height of the bar above a large title, which holds its actions.
   final double headerBarHeight;
 
+  /// How far the page scrolls before the small title fades into the bar.
+  final double titleCollapseOffset;
+
   /// Blur radius of the floating shadow.
   final double shadowBlur;
 
@@ -189,6 +194,7 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
     double? shakeDistance,
     double? shadowOffset,
     double? headerBarHeight,
+    double? titleCollapseOffset,
     double? shadowBlur,
   }) {
     return AppMetrics(
@@ -219,6 +225,7 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
       shakeDistance: shakeDistance ?? this.shakeDistance,
       shadowOffset: shadowOffset ?? this.shadowOffset,
       headerBarHeight: headerBarHeight ?? this.headerBarHeight,
+      titleCollapseOffset: titleCollapseOffset ?? this.titleCollapseOffset,
       shadowBlur: shadowBlur ?? this.shadowBlur,
     );
   }
@@ -255,6 +262,7 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
       shakeDistance: mix(shakeDistance, other.shakeDistance),
       shadowOffset: mix(shadowOffset, other.shadowOffset),
       headerBarHeight: mix(headerBarHeight, other.headerBarHeight),
+      titleCollapseOffset: mix(titleCollapseOffset, other.titleCollapseOffset),
       shadowBlur: mix(shadowBlur, other.shadowBlur),
     );
   }

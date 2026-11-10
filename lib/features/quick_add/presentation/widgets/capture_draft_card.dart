@@ -22,10 +22,13 @@ class CaptureDraftCard extends StatelessWidget {
     final metrics = AppMetrics.of(context);
     final textTheme = Theme.of(context).textTheme;
     final title = draft.payeeDisplay ?? l10n.quickAddPaymentFallback;
-    final details = [l10n.quickAddFromMessage, ?draft.accountLabel].join(', ');
+    final account = draft.accountLabel;
+    final details = account == null
+        ? l10n.quickAddFromMessage
+        : l10n.quickAddFromMessageDetails(account);
     return Semantics(
       container: true,
-      label: l10n.quickAddFromMessageSemantics('$title, $details'),
+      label: l10n.quickAddFromMessageSemantics(title, details),
       child: ExcludeSemantics(
         child: DecoratedBox(
           decoration: BoxDecoration(

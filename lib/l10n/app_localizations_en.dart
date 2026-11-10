@@ -346,8 +346,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get quickAddFromMessage => 'From a message';
 
   @override
-  String quickAddFromMessageSemantics(String details) {
-    return 'Filled from a message: $details';
+  String quickAddFromMessageSemantics(String payee, String details) {
+    return 'Filled from a message: $payee, $details';
   }
 
   @override
@@ -427,4 +427,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get back => 'Back';
+
+  @override
+  String quickAddFromMessageDetails(String account) {
+    return 'From a message, $account';
+  }
+
+  @override
+  String settingsUnparsedCount(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString';
+  }
 }

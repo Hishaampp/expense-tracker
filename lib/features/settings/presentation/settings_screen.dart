@@ -128,10 +128,14 @@ class SettingsScreen extends ConsumerWidget {
                   color: tiles.blue,
                 ),
                 title: l10n.unparsedTitle,
-                trailingText: '${state.unparsedCount}',
+                trailingText: state.unparsedCount == null
+                    ? null
+                    : l10n.settingsUnparsedCount(state.unparsedCount!),
                 trailingIsAmount: false,
                 showChevron: true,
-                semanticLabel: l10n.unparsedRowSemantics(state.unparsedCount),
+                semanticLabel: state.unparsedCount == null
+                    ? l10n.unparsedTitle
+                    : l10n.unparsedRowSemantics(state.unparsedCount!),
                 onTap: () => unawaited(context.push(Routes.unparsed)),
               ),
             ],

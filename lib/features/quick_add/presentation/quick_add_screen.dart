@@ -27,7 +27,6 @@ class QuickAddScreen extends ConsumerWidget {
   /// Creates the screen for [args].
   const new({this.args = newExpenseArgs, super.key});
 
-  /// Id of the transaction to edit, or null to add a new one.
   /// What Quick Add was opened for.
   final QuickAddArgs args;
 
@@ -178,63 +177,71 @@ class QuickAddScreen extends ConsumerWidget {
       body = Center(child: PulsingPlaceholder(semanticLabel: l10n.loading));
     }
     final canDelete = state != null && state.isEditing && !state.isSaving;
-    return Scaffold(
-      backgroundColor: colors.surface,
-      body: SafeArea(
-        child: Align(
-          alignment: AlignmentDirectional.topCenter,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: metrics.readableWidth),
-            child: Padding(
-              padding: EdgeInsetsDirectional.symmetric(
-                horizontal: metrics.spaceLg,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Row(
-                    children: [
-                      RoundIconButton(
-                        icon: Icons.close_rounded,
-                        tooltip: l10n.close,
-                        floating: false,
-                        color: colors.onSurface,
-                        onPressed: context.pop,
-                      ),
-                      Expanded(
-                        child: Semantics(
-                          header: true,
-                          child: Text(
-                            _title(l10n, state),
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.titleMedium,
+    // Every way out (Close, Go back, the back gesture, saving) pops this
+    // route, so the shared text is released in one place.
+    return PopScope(
+      onPopInvokedWithResult: (didPop, _) {
+        if (didPop) notifier.releaseCapture();
+      },
+      child: Scaffold(
+        backgroundColor: colors.surface,
+        body: SafeArea(
+          child: Align(
+            alignment: AlignmentDirectional.topCenter,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: metrics.readableWidth),
+              child: Padding(
+                padding: EdgeInsetsDirectional.symmetric(
+                  horizontal: metrics.spaceLg,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Row(
+                      children: [
+                        RoundIconButton(
+                          icon: Icons.close_rounded,
+                          tooltip: l10n.close,
+                          floating: false,
+                          color: colors.onSurface,
+                          onPressed: context.pop,
+                        ),
+                        Expanded(
+                          child: Semantics(
+                            header: true,
+                            child: Text(
+                              _title(l10n, state),
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
                           ),
                         ),
-                      ),
-                      if (args.editId != null)
-                        RoundIconButton(
-                          icon: Icons.delete_outline_rounded,
-                          tooltip: l10n.delete,
-                          floating: false,
-                          color: colors.danger,
-                          onPressed: canDelete ? notifier.delete : null,
-                        )
-                      else if (args.unparsedId == null)
-                        RoundIconButton(
-                          icon: Icons.content_paste_rounded,
-                          tooltip: l10n.quickAddPaste,
-                          floating: false,
-                          onPressed: state == null || state.isSaving
-                              ? null
-                              : notifier.paste,
-                        )
-                      else
-                        SizedBox.square(dimension: metrics.minTapTarget),
-                    ],
-                  ),
-                  Expanded(child: body),
-                  SizedBox(height: metrics.spaceSm),
-                ],
+                        if (args.editId != null)
+                          RoundIconButton(
+                            icon: Icons.delete_outline_rounded,
+                            tooltip: l10n.delete,
+                            floating: false,
+                            color: colors.danger,
+                            onPressed: canDelete ? notifier.delete : null,
+                          )
+                        else if (args.unparsedId == null)
+                          RoundIconButton(
+                            icon: Icons.content_paste_rounded,
+                            tooltip: l10n.quickAddPaste,
+                            floating: false,
+                            color: colors.accent,
+                            onPressed: state == null || state.isSaving
+                                ? null
+                                : notifier.paste,
+                          )
+                        else
+                          SizedBox.square(dimension: metrics.minTapTarget),
+                      ],
+                    ),
+                    Expanded(child: body),
+                    SizedBox(height: metrics.spaceSm),
+                  ],
+                ),
               ),
             ),
           ),

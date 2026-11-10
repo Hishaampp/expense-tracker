@@ -1,0 +1,87 @@
+import 'dart:async';
+
+import 'package:expense_tracker/core/models/raw_capture.dart';
+import 'package:expense_tracker/features/capture/application/capture_providers.dart';
+import 'package:expense_tracker/routing/app_router.dart';
+import 'package:expense_tracker/routing/routes.dart';
+import 'package:expense_tracker/services/service_providers.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+/// Drains the native capture queue when the app starts, when it returns to
+/// the foreground, and when the queue says something arrived. Each shared
+/// message opens Quick Add, filled in; the text waits in memory, never in a
+/// route. Wraps the app; renders [child] unchanged.
+class CaptureInbox extends ConsumerStatefulWidget {
+  /// Wraps [child].
+  const new({required this.child, super.key});
+
+  /// The app.
+  final Widget child;
+
+  @override
+  ConsumerState<CaptureInbox> createState() => _CaptureInboxState();
+}
+
+class _CaptureInboxState extends ConsumerState<CaptureInbox> {
+  StreamSubscription<void>? _changes;
+  late final AppLifecycleListener _lifecycle;
+  bool _draining = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _lifecycle = AppLifecycleListener(onResume: _drainSoon);
+    _changes = ref
+        .read(captureQueueProvider)
+        .changes
+        .listen((_) => _drainSoon(), onError: _logStreamError);
+    WidgetsBinding.instance.addPostFrameCallback((_) => _drainSoon());
+  }
+
+  void _drainSoon() => unawaited(_drain());
+
+  void _logStreamError(Object error, StackTrace stack) {
+    ref
+        .read(appLoggerProvider)
+        .error('capture.events', error.runtimeType, stack);
+  }
+
+  Future<void> _drain() async {
+    if (_draining) return;
+    _draining = true;
+    final queue = ref.read(captureQueueProvider);
+    final pending = ref.read(pendingCapturesProvider.notifier);
+    final router = ref.read(routerProvider);
+    try {
+      final captures = await queue.drain();
+      // Shares are handled here; other sources arrive in later phases.
+      final shares = [
+        for (final c in captures)
+          if (c.source == CaptureSource.share) c,
+      ];
+      for (final share in shares) {
+        pending.put(share);
+        unawaited(router.push(Routes.shared(share.id)));
+      }
+      await queue.ack([for (final s in shares) s.id]);
+    } on PlatformException catch (e, st) {
+      ref.read(appLoggerProvider).error('capture.drain', e.runtimeType, st);
+    } on MissingPluginException catch (e, st) {
+      ref.read(appLoggerProvider).error('capture.drain', e.runtimeType, st);
+    } finally {
+      _draining = false;
+    }
+  }
+
+  @override
+  void dispose() {
+    unawaited(_changes?.cancel());
+    _lifecycle.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => widget.child;
+}

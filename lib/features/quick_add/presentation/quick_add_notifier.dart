@@ -299,9 +299,9 @@ class QuickAddNotifier extends AsyncNotifier<QuickAddState> {
     }
     final captureId = args.captureId;
     if (captureId != null) {
-      final capture = ref
-          .read(pendingCapturesProvider.notifier)
-          .take(captureId);
+      // Peek, so Try again can read it again. The screen releases it when
+      // the session ends (`releaseCapture`).
+      final capture = ref.read(pendingCapturesProvider)[captureId];
       if (capture != null) return await _applyIngestion(base, capture);
     }
     return base;
@@ -418,7 +418,13 @@ class QuickAddNotifier extends AsyncNotifier<QuickAddState> {
     );
     final next = await _applyIngestion(current, capture);
     if (!ref.mounted) return;
-    ref.read(hapticsProvider).select();
+    // Filled in: a selection. A note or a failure: a rejection.
+    final haptics = ref.read(hapticsProvider);
+    if (next.draft != null && next.notice == null && next.failure == null) {
+      haptics.select();
+    } else {
+      haptics.reject();
+    }
     state = AsyncData(next);
   }
 
@@ -452,6 +458,12 @@ class QuickAddNotifier extends AsyncNotifier<QuickAddState> {
         IngestedNoAmount() => current.copyWith(notice: QuickAddNotice.noAmount),
       },
     };
+  }
+
+  /// Drops the shared message this session was opened for from memory.
+  void releaseCapture() {
+    final id = args.captureId;
+    if (id != null) ref.read(pendingCapturesProvider.notifier).take(id);
   }
 
   /// Picks a category. When adding, this saves the transaction; when

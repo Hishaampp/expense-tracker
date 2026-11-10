@@ -12,6 +12,7 @@ class LargeTitlePage extends StatefulWidget {
     required this.title,
     required this.children,
     this.actions = const [],
+    this.leading,
     super.key,
   });
 
@@ -21,6 +22,9 @@ class LargeTitlePage extends StatefulWidget {
 
   /// Floating round buttons at the top end.
   final List<Widget> actions;
+
+  /// A back button at the top start, for a pushed (non-tab) screen.
+  final Widget? leading;
 
   /// The page content, top to bottom. Space between cards is added here.
   final List<Widget> children;
@@ -41,7 +45,7 @@ class _LargeTitlePageState extends State<LargeTitlePage> {
 
   void _onScroll() {
     final collapsed =
-        _scroll.offset > AppMetrics.of(context).headerBarHeight * 0.75;
+        _scroll.offset > AppMetrics.of(context).titleCollapseOffset;
     if (collapsed != _collapsed) setState(() => _collapsed = collapsed);
   }
 
@@ -71,6 +75,10 @@ class _LargeTitlePageState extends State<LargeTitlePage> {
               SliverAppBar(
                 pinned: true,
                 automaticallyImplyLeading: false,
+                leading: widget.leading,
+                leadingWidth: widget.leading == null
+                    ? null
+                    : metrics.minTapTarget + metrics.spaceLg,
                 toolbarHeight: metrics.headerBarHeight,
                 backgroundColor: colors.background,
                 surfaceTintColor: colors.background,

@@ -1,6 +1,7 @@
 import 'package:expense_tracker/core/app_identity.dart';
 import 'package:expense_tracker/core/models/appearance_mode.dart';
 import 'package:expense_tracker/data/query_providers.dart';
+import 'package:expense_tracker/features/capture/application/capture_inbox.dart';
 import 'package:expense_tracker/l10n/app_localizations.dart';
 import 'package:expense_tracker/routing/app_router.dart';
 import 'package:expense_tracker/theme/app_theme.dart';
@@ -31,6 +32,8 @@ class App extends ConsumerWidget {
       themeAnimationStyle: AnimationStyle.noAnimation,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
+      builder: (context, child) =>
+          CaptureInbox(child: child ?? const SizedBox.shrink()),
     );
   }
 }

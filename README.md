@@ -26,6 +26,19 @@ flutter run                      # iPhone (no flavors on iOS)
 
 Minimum versions: Android 8.0 (API 26) and iOS 17.
 
+## Message parser
+
+`packages/txn_parser` is a pure-Dart package that reads bank, card and UPI
+messages. Its own tests:
+
+```bash
+cd packages/txn_parser && dart test
+```
+
+Every test message in `packages/txn_parser/test/fixtures/` is marked
+`"synthetic": true` (written by hand). No bank is claimed as supported until
+real, anonymised samples are added.
+
 ## Checks
 
 Run before every push:
@@ -50,8 +63,8 @@ motion live only in `lib/theme/`.
 | Phase | What | Status |
 |---|---|---|
 | 0 | Project setup, flavors, App Group, lints, CI | done |
-| 1 | Core money tracking (manual) | built, waiting for owner's check on a phone |
-| 2 | Parser + paste/share capture | |
+| 1 | Core money tracking (manual) | done |
+| 2 | Parser + paste/share capture | built; needs real bank samples before Phase 3 |
 | 3 | Android auto-capture | |
 | 4 | iOS auto-capture | |
 | 5 | Rooms | |

@@ -109,6 +109,8 @@ Text is never clamped: layouts work at the largest system text size.
 - **Row-list cards** (Activity days, settings groups) use 16 side padding
   and 8 top and bottom, so rows sit close to the card edge.
 - **Sheets** all use `SheetFrame` and open with `showAppSheet`.
+- **Inline panels** on a white page (Quick Add's "From a message") are a
+  sunken rounded panel (`surfaceSunken`, radius 16), not a card.
 - **No lines between cards.** A divider appears only between rows inside one
   card.
 - **Elevation:** none on cards. Only the floating round buttons and the
@@ -123,6 +125,9 @@ Text is never clamped: layouts work at the largest system text size.
   per screen.
 - **Round floating button** (white, accent glyph): Add, top right.
 - **Text button** (`accentText`): small links such as "See all".
+- **Back and close** sit at the top start, flat (not floating): Back on a
+  pushed screen (`LargeTitlePage(leading: …)`), Close on a full-screen
+  modal such as Quick Add. The top end is kept for actions such as Add.
 - **Outlined (no border, white pill):** recovery actions such as Try again.
 
 ## Motion
