@@ -329,5 +329,17 @@
       "payeeVpa": "swiggy@icici",
       "accountHint": "1234"
     }
+  },
+  {
+    "name": "Refund naming the merchant before 'credited'",
+    "synthetic": true,
+    "origin": null,
+    "text": "Refund of ₹499 from Flipkart credited to your account",
+    "expected": {
+      "class": "reversalRefund",
+      "amountPaise": 49900,
+      "direction": "credit",
+      "payeeName": "Flipkart"
+    }
   }
 ]

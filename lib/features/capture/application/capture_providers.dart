@@ -1,6 +1,7 @@
 import 'package:expense_tracker/core/models/raw_capture.dart';
 import 'package:expense_tracker/data/data_providers.dart';
 import 'package:expense_tracker/data/repositories/capture_repository.dart';
+import 'package:expense_tracker/features/capture/application/auto_ingestion.dart';
 import 'package:expense_tracker/features/capture/application/capture_ingestion.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:txn_parser/txn_parser.dart';
@@ -42,4 +43,13 @@ final pendingCapturesProvider =
 /// Unresolved Unparsed messages, newest first. Live.
 final unparsedMessagesProvider = StreamProvider<List<UnparsedItem>>(
   (ref) => ref.watch(captureRepositoryProvider).watchUnparsed(),
+);
+
+/// Saves automatically captured messages.
+final autoIngestionProvider = Provider<AutoIngestion>(
+  (ref) => AutoIngestion(
+    ref.watch(captureIngestionProvider),
+    ref.watch(autoCaptureRepositoryProvider),
+    ref.watch(transactionRepositoryProvider),
+  ),
 );

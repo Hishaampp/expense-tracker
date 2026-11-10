@@ -100,7 +100,7 @@ String? extractPayeeName(String text, Direction direction) {
       : '(?:received from|transferred from|from|by)';
   final match = RegExp(
     "\\b$lead\\s+(?:vpa\\s+)?([A-Za-z0-9&'][A-Za-z0-9&'.@_\\- ]{1,40}?)"
-    r'(?=\s+(?:on|via|ref|refno|rrn|utr|txn|upi|using|thru|through|at|avl|avbl|is|was|in|'
+    r'(?=\s+(?:on|via|ref|refno|rrn|utr|txn|upi|using|thru|through|at|avl|avbl|is|was|in|credited|debited|has|have|towards|'
     r'from|to|for|info|dated|with|and|not|-)\b|[.,;:(]|\s*$)',
     caseSensitive: false,
   );

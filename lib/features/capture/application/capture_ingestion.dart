@@ -67,10 +67,14 @@ class CaptureIngestion {
   final TxnParser _parser;
   final CaptureRepository _captures;
 
-  /// Parses and, where needed, records [capture].
+  /// Parses and, where needed, records [capture]. With
+  /// [skipRefDuplicates] false (paste and share) a payment whose reference
+  /// number is already saved is reported as a duplicate; automatic capture
+  /// passes true and merges it instead.
   Future<Result<IngestionOutcome, StoreFailure>> ingest(
-    RawCapture capture,
-  ) async {
+    RawCapture capture, {
+    bool skipRefDuplicates = false,
+  }) async {
     if (await _captures.isKnown(capture.contentHash)) {
       return const Ok(IngestedDuplicate());
     }
@@ -79,7 +83,9 @@ class CaptureIngestion {
       case ParsedTransaction():
         final draft = _draftFrom(capture, result);
         final ref = draft.refNo;
-        if (ref != null && await _captures.hasTransactionWithRef(ref)) {
+        if (!skipRefDuplicates &&
+            ref != null &&
+            await _captures.hasTransactionWithRef(ref)) {
           return const Ok(IngestedDuplicate());
         }
         return Ok(IngestedDraft(draft));
