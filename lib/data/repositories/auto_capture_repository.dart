@@ -243,6 +243,20 @@ class AutoCaptureRepository {
     );
   }
 
+  /// Puts [txn] back in the review inbox exactly as it was (Undo).
+  @useResult
+  Future<Result<void, StoreFailure>> restoreReview(MoneyTransaction txn) {
+    return _update(
+      'review.undo',
+      txn.id,
+      TransactionsCompanion(
+        kind: Value(txn.kind),
+        categoryId: Value(txn.categoryId),
+        reviewStatus: Value(txn.reviewStatus),
+      ),
+    );
+  }
+
   /// Confirms every waiting transaction that already has a suggested
   /// category. Returns how many were confirmed.
   @useResult

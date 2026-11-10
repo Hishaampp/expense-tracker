@@ -31,6 +31,10 @@ void main() {
         .whereType<File>()
         .where((f) => f.path.endsWith('.dart'))
         .where((f) => !f.path.startsWith('lib/theme/'))
+        // Domain rules (a 10-minute duplicate window, 30 days for refunds)
+        // are not design values; only UI code is held to the theme.
+        .where((f) => !f.path.startsWith('lib/core/'))
+        .where((f) => !f.path.startsWith('lib/data/'))
         .where((f) => !f.path.startsWith('lib/l10n/'))
         .where((f) => !f.path.endsWith('.g.dart'));
     for (final file in files) {

@@ -807,6 +807,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count}'**
   String settingsUnparsedCount(int count);
+
+  /// No description provided for @reviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Review'**
+  String get reviewTitle;
+
+  /// No description provided for @reviewBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} to review'**
+  String reviewBadge(int count);
+
+  /// No description provided for @reviewBadgeSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 payment to review} other{{count} payments to review}}'**
+  String reviewBadgeSemantics(int count);
+
+  /// No description provided for @reviewHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Captured automatically. Tap a category to confirm.'**
+  String get reviewHint;
+
+  /// No description provided for @reviewConfirmAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm all suggested ({count})'**
+  String reviewConfirmAll(int count);
+
+  /// No description provided for @reviewConfirmedAll.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 payment confirmed} other{{count} payments confirmed}}'**
+  String reviewConfirmedAll(int count);
+
+  /// No description provided for @reviewTransfer.
+  ///
+  /// In en, this message translates to:
+  /// **'It\'s a transfer'**
+  String get reviewTransfer;
+
+  /// No description provided for @reviewSuggested.
+  ///
+  /// In en, this message translates to:
+  /// **'suggested'**
+  String get reviewSuggested;
+
+  /// No description provided for @reviewConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirmed as {category}'**
+  String reviewConfirmed(String category);
+
+  /// No description provided for @reviewMarkedTransfer.
+  ///
+  /// In en, this message translates to:
+  /// **'Marked as a transfer'**
+  String get reviewMarkedTransfer;
+
+  /// No description provided for @reviewEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'All caught up'**
+  String get reviewEmptyTitle;
+
+  /// No description provided for @reviewEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Payments captured from your messages wait here until you confirm them.'**
+  String get reviewEmptyBody;
+
+  /// No description provided for @reviewCardSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount}, {payee}, {details}'**
+  String reviewCardSemantics(String amount, String payee, String details);
+
+  /// No description provided for @reviewPickSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm as {category}'**
+  String reviewPickSemantics(String category);
+
+  /// No description provided for @reviewPickSuggestedSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm as {category}, suggested'**
+  String reviewPickSuggestedSemantics(String category);
+
+  /// No description provided for @reviewUnknownPayee.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment'**
+  String get reviewUnknownPayee;
 }
 
 class _AppLocalizationsDelegate

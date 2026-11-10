@@ -1,6 +1,6 @@
 import 'package:expense_tracker/core/models/category.dart';
-import 'package:expense_tracker/features/quick_add/presentation/widgets/category_tile.dart';
 import 'package:expense_tracker/theme/app_metrics.dart';
+import 'package:expense_tracker/widgets/category/category_tile.dart';
 import 'package:expense_tracker/widgets/category_style.dart';
 import 'package:flutter/material.dart';
 

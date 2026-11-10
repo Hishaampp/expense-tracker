@@ -1,5 +1,5 @@
 import 'package:expense_tracker/core/models/category.dart';
-import 'package:expense_tracker/features/quick_add/presentation/widgets/category_grid.dart';
+import 'package:expense_tracker/widgets/category/category_grid.dart';
 import 'package:expense_tracker/widgets/sheet_frame.dart';
 import 'package:flutter/material.dart';
 

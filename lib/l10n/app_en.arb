@@ -349,5 +349,84 @@
         "format": "decimalPattern"
       }
     }
-  }
+  },
+  "reviewTitle": "Review",
+  "reviewBadge": "{count} to review",
+  "@reviewBadge": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "reviewBadgeSemantics": "{count, plural, =1{1 payment to review} other{{count} payments to review}}",
+  "@reviewBadgeSemantics": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reviewHint": "Captured automatically. Tap a category to confirm.",
+  "reviewConfirmAll": "Confirm all suggested ({count})",
+  "@reviewConfirmAll": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reviewConfirmedAll": "{count, plural, =1{1 payment confirmed} other{{count} payments confirmed}}",
+  "@reviewConfirmedAll": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reviewTransfer": "It's a transfer",
+  "reviewSuggested": "suggested",
+  "reviewConfirmed": "Confirmed as {category}",
+  "@reviewConfirmed": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "reviewMarkedTransfer": "Marked as a transfer",
+  "reviewEmptyTitle": "All caught up",
+  "reviewEmptyBody": "Payments captured from your messages wait here until you confirm them.",
+  "reviewCardSemantics": "{amount}, {payee}, {details}",
+  "@reviewCardSemantics": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "payee": {
+        "type": "String"
+      },
+      "details": {
+        "type": "String"
+      }
+    }
+  },
+  "reviewPickSemantics": "Confirm as {category}",
+  "@reviewPickSemantics": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "reviewPickSuggestedSemantics": "Confirm as {category}, suggested",
+  "@reviewPickSuggestedSemantics": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "reviewUnknownPayee": "Payment"
 }

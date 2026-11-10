@@ -441,4 +441,85 @@ class AppLocalizationsEn extends AppLocalizations {
 
     return '$countString';
   }
+
+  @override
+  String get reviewTitle => 'Review';
+
+  @override
+  String reviewBadge(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString to review';
+  }
+
+  @override
+  String reviewBadgeSemantics(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count payments to review',
+      one: '1 payment to review',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get reviewHint => 'Captured automatically. Tap a category to confirm.';
+
+  @override
+  String reviewConfirmAll(int count) {
+    return 'Confirm all suggested ($count)';
+  }
+
+  @override
+  String reviewConfirmedAll(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count payments confirmed',
+      one: '1 payment confirmed',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get reviewTransfer => 'It\'s a transfer';
+
+  @override
+  String get reviewSuggested => 'suggested';
+
+  @override
+  String reviewConfirmed(String category) {
+    return 'Confirmed as $category';
+  }
+
+  @override
+  String get reviewMarkedTransfer => 'Marked as a transfer';
+
+  @override
+  String get reviewEmptyTitle => 'All caught up';
+
+  @override
+  String get reviewEmptyBody =>
+      'Payments captured from your messages wait here until you confirm them.';
+
+  @override
+  String reviewCardSemantics(String amount, String payee, String details) {
+    return '$amount, $payee, $details';
+  }
+
+  @override
+  String reviewPickSemantics(String category) {
+    return 'Confirm as $category';
+  }
+
+  @override
+  String reviewPickSuggestedSemantics(String category) {
+    return 'Confirm as $category, suggested';
+  }
+
+  @override
+  String get reviewUnknownPayee => 'Payment';
 }

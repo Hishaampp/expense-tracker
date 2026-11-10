@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:expense_tracker/data/query_providers.dart';
 import 'package:expense_tracker/features/home/presentation/home_notifier.dart';
 import 'package:expense_tracker/features/home/presentation/widgets/hero_summary.dart';
 import 'package:expense_tracker/features/home/presentation/widgets/recent_card.dart';
@@ -15,6 +16,7 @@ import 'package:expense_tracker/widgets/large_title_page.dart';
 import 'package:expense_tracker/widgets/month_picker_sheet.dart';
 import 'package:expense_tracker/widgets/month_title.dart';
 import 'package:expense_tracker/widgets/pulsing_placeholder.dart';
+import 'package:expense_tracker/widgets/review_badge.dart';
 import 'package:expense_tracker/widgets/round_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -56,6 +58,14 @@ class HomeScreen extends ConsumerWidget {
     final async = ref.watch(homeNotifierProvider);
     // Keep the last month on screen while the next one loads.
     final state = async.value;
+    final reviewCount = ref.watch(reviewCountProvider).value ?? 0;
+    final review = reviewCount == 0
+        ? null
+        : ReviewBadge(
+            label: l10n.reviewBadge(reviewCount),
+            semanticLabel: l10n.reviewBadgeSemantics(reviewCount),
+            onTap: () => unawaited(context.push(Routes.review)),
+          );
     final add = RoundIconButton(
       icon: Icons.add_rounded,
       tooltip: l10n.addExpense,
@@ -65,7 +75,7 @@ class HomeScreen extends ConsumerWidget {
     if (state == null) {
       return LargeTitlePage(
         title: Text(l10n.navHome),
-        actions: [add],
+        actions: [?review, add],
         children: [
           if (async.hasError)
             ErrorStateView(
@@ -86,7 +96,7 @@ class HomeScreen extends ConsumerWidget {
         semanticLabel: l10n.changeMonth(month),
         onTap: () => unawaited(_pickMonth(context, ref, state)),
       ),
-      actions: [add],
+      actions: [?review, add],
       children: [
         Entrance(
           child: HeroSummary(state: state, onSeeAll: seeAll),
