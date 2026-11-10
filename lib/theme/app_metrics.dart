@@ -33,6 +33,7 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
     required this.entranceOffset,
     required this.shakeDistance,
     required this.shadowOffset,
+    required this.headerBarHeight,
     required this.shadowBlur,
   });
 
@@ -64,6 +65,7 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
     entranceOffset: 16,
     shakeDistance: 8,
     shadowOffset: 6,
+    headerBarHeight: 52,
     shadowBlur: 18,
   );
 
@@ -145,6 +147,9 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
   /// Downward offset of the floating shadow.
   final double shadowOffset;
 
+  /// Height of the bar above a large title, which holds its actions.
+  final double headerBarHeight;
+
   /// Blur radius of the floating shadow.
   final double shadowBlur;
 
@@ -183,6 +188,7 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
     double? entranceOffset,
     double? shakeDistance,
     double? shadowOffset,
+    double? headerBarHeight,
     double? shadowBlur,
   }) {
     return AppMetrics(
@@ -212,6 +218,7 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
       entranceOffset: entranceOffset ?? this.entranceOffset,
       shakeDistance: shakeDistance ?? this.shakeDistance,
       shadowOffset: shadowOffset ?? this.shadowOffset,
+      headerBarHeight: headerBarHeight ?? this.headerBarHeight,
       shadowBlur: shadowBlur ?? this.shadowBlur,
     );
   }
@@ -247,6 +254,7 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
       entranceOffset: mix(entranceOffset, other.entranceOffset),
       shakeDistance: mix(shakeDistance, other.shakeDistance),
       shadowOffset: mix(shadowOffset, other.shadowOffset),
+      headerBarHeight: mix(headerBarHeight, other.headerBarHeight),
       shadowBlur: mix(shadowBlur, other.shadowBlur),
     );
   }

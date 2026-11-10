@@ -78,10 +78,10 @@ line up and do not jitter while counting.
 
 | Style | Size | Weight | Used for |
 |---|---|---|---|
-| `headlineMedium` | 34 | 700 | The large title that opens a tab |
-| `headlineSmall` | 24 | 700 | Titles inside the hero card |
-| `titleLarge` | 20 | 700 | Empty-state titles |
-| `titleMedium` | 17 | 700 | Card titles, app bar |
+| `headlineMedium` | 36 | 700 | The large title that opens a tab |
+| `headlineSmall` | 26 | 700 | Titles inside the hero card |
+| `titleLarge` | 22 | 700 | Empty-state titles |
+| `titleMedium` | 18 | 700 | Card titles, app bar |
 | `bodyLarge` | 16 | 500 | Row titles |
 | `bodyMedium` | 15 | 400 | Body text |
 | `bodySmall` | 13 | 400 | Supporting lines (muted) |
@@ -98,6 +98,9 @@ Text is never clamped: layouts work at the largest system text size.
 
 - **Corners:** 24 on cards and sheets, 9 on small icon tiles, 16 on Quick Add
   tiles; buttons, pills and the tab bar are fully rounded.
+- **Large title:** a slim bar (52) holds the actions; the big title sits
+  right under it and scrolls away, and a small centred title fades into the
+  bar once it has gone.
 - **Spacing:** a 4-point grid: 4, 8, 12, 16, 24, 32. Page gutter and card
   padding are 16; cards are 12 apart; a title has 24–32 above it.
 - **Headings:** a card's own title (Top categories, Recent) sits inside the

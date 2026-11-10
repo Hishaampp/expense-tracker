@@ -34,11 +34,11 @@ TextStyle _style(
 /// Builds the Material text theme in [color], with secondary text in [muted].
 TextTheme buildTextTheme({required Color color, required Color muted}) {
   return TextTheme(
-        displaySmall: _style(34, FontWeight.w700, 1.1, letterSpacing: -0.6),
-        headlineMedium: _style(34, FontWeight.w700, 1.1, letterSpacing: -0.6),
-        headlineSmall: _style(24, FontWeight.w700, 1.15, letterSpacing: -0.3),
-        titleLarge: _style(20, FontWeight.w700, 1.2, letterSpacing: -0.2),
-        titleMedium: _style(17, FontWeight.w700, 1.25),
+        displaySmall: _style(36, FontWeight.w700, 1.1, letterSpacing: -0.7),
+        headlineMedium: _style(36, FontWeight.w700, 1.1, letterSpacing: -0.7),
+        headlineSmall: _style(26, FontWeight.w700, 1.15, letterSpacing: -0.3),
+        titleLarge: _style(22, FontWeight.w700, 1.2, letterSpacing: -0.2),
+        titleMedium: _style(18, FontWeight.w700, 1.25),
         bodyLarge: _style(16, FontWeight.w500, 1.35),
         bodyMedium: _style(15, FontWeight.w400, 1.4),
         bodySmall: _style(13, FontWeight.w400, 1.35),
