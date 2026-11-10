@@ -53,6 +53,11 @@ the tests in random order. It also checks the Android manifests:
 - The `play` flavor must not ask for SMS permissions.
 - No release build may ask for internet access.
 
+## Contributing
+
+Work happens on branches and arrives through pull requests; see
+[CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## Design
 
 The look is "Passbook": see `docs/DESIGN.md`. Colours, spacing, type and
