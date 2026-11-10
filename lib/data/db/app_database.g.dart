@@ -3020,6 +3020,1513 @@ class SettingsCompanion extends UpdateCompanion<SettingRow> {
   }
 }
 
+class $RawCapturesTable extends RawCaptures
+    with TableInfo<$RawCapturesTable, RawCaptureRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $RawCapturesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _contentHashMeta = const VerificationMeta(
+    'contentHash',
+  );
+  @override
+  late final GeneratedColumn<String> contentHash = GeneratedColumn<String>(
+    'content_hash',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways('UNIQUE'),
+  );
+  static const VerificationMeta _sourceMeta = const VerificationMeta('source');
+  @override
+  late final GeneratedColumn<String> source = GeneratedColumn<String>(
+    'source',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _originMeta = const VerificationMeta('origin');
+  @override
+  late final GeneratedColumn<String> origin = GeneratedColumn<String>(
+    'origin',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _receivedAtMeta = const VerificationMeta(
+    'receivedAt',
+  );
+  @override
+  late final GeneratedColumn<int> receivedAt = GeneratedColumn<int>(
+    'received_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _statusMeta = const VerificationMeta('status');
+  @override
+  late final GeneratedColumn<String> status = GeneratedColumn<String>(
+    'status',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _dropReasonMeta = const VerificationMeta(
+    'dropReason',
+  );
+  @override
+  late final GeneratedColumn<String> dropReason = GeneratedColumn<String>(
+    'drop_reason',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    contentHash,
+    source,
+    origin,
+    receivedAt,
+    status,
+    dropReason,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'raw_captures';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<RawCaptureRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('content_hash')) {
+      context.handle(
+        _contentHashMeta,
+        contentHash.isAcceptableOrUnknown(
+          data['content_hash']!,
+          _contentHashMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_contentHashMeta);
+    }
+    if (data.containsKey('source')) {
+      context.handle(
+        _sourceMeta,
+        source.isAcceptableOrUnknown(data['source']!, _sourceMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_sourceMeta);
+    }
+    if (data.containsKey('origin')) {
+      context.handle(
+        _originMeta,
+        origin.isAcceptableOrUnknown(data['origin']!, _originMeta),
+      );
+    }
+    if (data.containsKey('received_at')) {
+      context.handle(
+        _receivedAtMeta,
+        receivedAt.isAcceptableOrUnknown(data['received_at']!, _receivedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_receivedAtMeta);
+    }
+    if (data.containsKey('status')) {
+      context.handle(
+        _statusMeta,
+        status.isAcceptableOrUnknown(data['status']!, _statusMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_statusMeta);
+    }
+    if (data.containsKey('drop_reason')) {
+      context.handle(
+        _dropReasonMeta,
+        dropReason.isAcceptableOrUnknown(data['drop_reason']!, _dropReasonMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  RawCaptureRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return RawCaptureRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      contentHash: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}content_hash'],
+      )!,
+      source: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}source'],
+      )!,
+      origin: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}origin'],
+      ),
+      receivedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}received_at'],
+      )!,
+      status: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}status'],
+      )!,
+      dropReason: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}drop_reason'],
+      ),
+    );
+  }
+
+  @override
+  $RawCapturesTable createAlias(String alias) {
+    return $RawCapturesTable(attachedDatabase, alias);
+  }
+
+  @override
+  bool get isStrict => true;
+}
+
+class RawCaptureRow extends DataClass implements Insertable<RawCaptureRow> {
+  /// Stable unique id (the native queue's id when it came from there).
+  final String id;
+
+  /// Hash of origin + text + minute received; the de-duplication key.
+  final String contentHash;
+
+  /// Where it came from.
+  final String source;
+
+  /// App package or SMS sender ID, if known.
+  final String? origin;
+
+  /// When the device received it, UTC epoch milliseconds.
+  final int receivedAt;
+
+  /// What became of it.
+  final String status;
+
+  /// Why it was dropped, for dropped captures (the message class).
+  final String? dropReason;
+  const RawCaptureRow({
+    required this.id,
+    required this.contentHash,
+    required this.source,
+    this.origin,
+    required this.receivedAt,
+    required this.status,
+    this.dropReason,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['content_hash'] = Variable<String>(contentHash);
+    map['source'] = Variable<String>(source);
+    if (!nullToAbsent || origin != null) {
+      map['origin'] = Variable<String>(origin);
+    }
+    map['received_at'] = Variable<int>(receivedAt);
+    map['status'] = Variable<String>(status);
+    if (!nullToAbsent || dropReason != null) {
+      map['drop_reason'] = Variable<String>(dropReason);
+    }
+    return map;
+  }
+
+  RawCapturesCompanion toCompanion(bool nullToAbsent) {
+    return RawCapturesCompanion(
+      id: Value(id),
+      contentHash: Value(contentHash),
+      source: Value(source),
+      origin: origin == null && nullToAbsent
+          ? const Value.absent()
+          : Value(origin),
+      receivedAt: Value(receivedAt),
+      status: Value(status),
+      dropReason: dropReason == null && nullToAbsent
+          ? const Value.absent()
+          : Value(dropReason),
+    );
+  }
+
+  factory RawCaptureRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return RawCaptureRow(
+      id: serializer.fromJson<String>(json['id']),
+      contentHash: serializer.fromJson<String>(json['contentHash']),
+      source: serializer.fromJson<String>(json['source']),
+      origin: serializer.fromJson<String?>(json['origin']),
+      receivedAt: serializer.fromJson<int>(json['receivedAt']),
+      status: serializer.fromJson<String>(json['status']),
+      dropReason: serializer.fromJson<String?>(json['dropReason']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'contentHash': serializer.toJson<String>(contentHash),
+      'source': serializer.toJson<String>(source),
+      'origin': serializer.toJson<String?>(origin),
+      'receivedAt': serializer.toJson<int>(receivedAt),
+      'status': serializer.toJson<String>(status),
+      'dropReason': serializer.toJson<String?>(dropReason),
+    };
+  }
+
+  RawCaptureRow copyWith({
+    String? id,
+    String? contentHash,
+    String? source,
+    Value<String?> origin = const Value.absent(),
+    int? receivedAt,
+    String? status,
+    Value<String?> dropReason = const Value.absent(),
+  }) => RawCaptureRow(
+    id: id ?? this.id,
+    contentHash: contentHash ?? this.contentHash,
+    source: source ?? this.source,
+    origin: origin.present ? origin.value : this.origin,
+    receivedAt: receivedAt ?? this.receivedAt,
+    status: status ?? this.status,
+    dropReason: dropReason.present ? dropReason.value : this.dropReason,
+  );
+  RawCaptureRow copyWithCompanion(RawCapturesCompanion data) {
+    return RawCaptureRow(
+      id: data.id.present ? data.id.value : this.id,
+      contentHash: data.contentHash.present
+          ? data.contentHash.value
+          : this.contentHash,
+      source: data.source.present ? data.source.value : this.source,
+      origin: data.origin.present ? data.origin.value : this.origin,
+      receivedAt: data.receivedAt.present
+          ? data.receivedAt.value
+          : this.receivedAt,
+      status: data.status.present ? data.status.value : this.status,
+      dropReason: data.dropReason.present
+          ? data.dropReason.value
+          : this.dropReason,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RawCaptureRow(')
+          ..write('id: $id, ')
+          ..write('contentHash: $contentHash, ')
+          ..write('source: $source, ')
+          ..write('origin: $origin, ')
+          ..write('receivedAt: $receivedAt, ')
+          ..write('status: $status, ')
+          ..write('dropReason: $dropReason')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    contentHash,
+    source,
+    origin,
+    receivedAt,
+    status,
+    dropReason,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is RawCaptureRow &&
+          other.id == this.id &&
+          other.contentHash == this.contentHash &&
+          other.source == this.source &&
+          other.origin == this.origin &&
+          other.receivedAt == this.receivedAt &&
+          other.status == this.status &&
+          other.dropReason == this.dropReason);
+}
+
+class RawCapturesCompanion extends UpdateCompanion<RawCaptureRow> {
+  final Value<String> id;
+  final Value<String> contentHash;
+  final Value<String> source;
+  final Value<String?> origin;
+  final Value<int> receivedAt;
+  final Value<String> status;
+  final Value<String?> dropReason;
+  final Value<int> rowid;
+  const RawCapturesCompanion({
+    this.id = const Value.absent(),
+    this.contentHash = const Value.absent(),
+    this.source = const Value.absent(),
+    this.origin = const Value.absent(),
+    this.receivedAt = const Value.absent(),
+    this.status = const Value.absent(),
+    this.dropReason = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  RawCapturesCompanion.insert({
+    required String id,
+    required String contentHash,
+    required String source,
+    this.origin = const Value.absent(),
+    required int receivedAt,
+    required String status,
+    this.dropReason = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       contentHash = Value(contentHash),
+       source = Value(source),
+       receivedAt = Value(receivedAt),
+       status = Value(status);
+  static Insertable<RawCaptureRow> custom({
+    Expression<String>? id,
+    Expression<String>? contentHash,
+    Expression<String>? source,
+    Expression<String>? origin,
+    Expression<int>? receivedAt,
+    Expression<String>? status,
+    Expression<String>? dropReason,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (contentHash != null) 'content_hash': contentHash,
+      if (source != null) 'source': source,
+      if (origin != null) 'origin': origin,
+      if (receivedAt != null) 'received_at': receivedAt,
+      if (status != null) 'status': status,
+      if (dropReason != null) 'drop_reason': dropReason,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  RawCapturesCompanion copyWith({
+    Value<String>? id,
+    Value<String>? contentHash,
+    Value<String>? source,
+    Value<String?>? origin,
+    Value<int>? receivedAt,
+    Value<String>? status,
+    Value<String?>? dropReason,
+    Value<int>? rowid,
+  }) {
+    return RawCapturesCompanion(
+      id: id ?? this.id,
+      contentHash: contentHash ?? this.contentHash,
+      source: source ?? this.source,
+      origin: origin ?? this.origin,
+      receivedAt: receivedAt ?? this.receivedAt,
+      status: status ?? this.status,
+      dropReason: dropReason ?? this.dropReason,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (contentHash.present) {
+      map['content_hash'] = Variable<String>(contentHash.value);
+    }
+    if (source.present) {
+      map['source'] = Variable<String>(source.value);
+    }
+    if (origin.present) {
+      map['origin'] = Variable<String>(origin.value);
+    }
+    if (receivedAt.present) {
+      map['received_at'] = Variable<int>(receivedAt.value);
+    }
+    if (status.present) {
+      map['status'] = Variable<String>(status.value);
+    }
+    if (dropReason.present) {
+      map['drop_reason'] = Variable<String>(dropReason.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RawCapturesCompanion(')
+          ..write('id: $id, ')
+          ..write('contentHash: $contentHash, ')
+          ..write('source: $source, ')
+          ..write('origin: $origin, ')
+          ..write('receivedAt: $receivedAt, ')
+          ..write('status: $status, ')
+          ..write('dropReason: $dropReason, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $TransactionSourcesTable extends TransactionSources
+    with TableInfo<$TransactionSourcesTable, TransactionSourceRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $TransactionSourcesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _transactionIdMeta = const VerificationMeta(
+    'transactionId',
+  );
+  @override
+  late final GeneratedColumn<String> transactionId = GeneratedColumn<String>(
+    'transaction_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES transactions (id) ON DELETE CASCADE',
+    ),
+  );
+  static const VerificationMeta _rawCaptureIdMeta = const VerificationMeta(
+    'rawCaptureId',
+  );
+  @override
+  late final GeneratedColumn<String> rawCaptureId = GeneratedColumn<String>(
+    'raw_capture_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES raw_captures (id) ON DELETE CASCADE',
+    ),
+  );
+  static const VerificationMeta _sourceMeta = const VerificationMeta('source');
+  @override
+  late final GeneratedColumn<String> source = GeneratedColumn<String>(
+    'source',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _originMeta = const VerificationMeta('origin');
+  @override
+  late final GeneratedColumn<String> origin = GeneratedColumn<String>(
+    'origin',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _receivedAtMeta = const VerificationMeta(
+    'receivedAt',
+  );
+  @override
+  late final GeneratedColumn<int> receivedAt = GeneratedColumn<int>(
+    'received_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _rawTextMeta = const VerificationMeta(
+    'rawText',
+  );
+  @override
+  late final GeneratedColumn<String> rawText = GeneratedColumn<String>(
+    'raw_text',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _parserTemplateIdMeta = const VerificationMeta(
+    'parserTemplateId',
+  );
+  @override
+  late final GeneratedColumn<String> parserTemplateId = GeneratedColumn<String>(
+    'parser_template_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _confidenceMeta = const VerificationMeta(
+    'confidence',
+  );
+  @override
+  late final GeneratedColumn<double> confidence = GeneratedColumn<double>(
+    'confidence',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    transactionId,
+    rawCaptureId,
+    source,
+    origin,
+    receivedAt,
+    rawText,
+    parserTemplateId,
+    confidence,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'transaction_sources';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<TransactionSourceRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('transaction_id')) {
+      context.handle(
+        _transactionIdMeta,
+        transactionId.isAcceptableOrUnknown(
+          data['transaction_id']!,
+          _transactionIdMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_transactionIdMeta);
+    }
+    if (data.containsKey('raw_capture_id')) {
+      context.handle(
+        _rawCaptureIdMeta,
+        rawCaptureId.isAcceptableOrUnknown(
+          data['raw_capture_id']!,
+          _rawCaptureIdMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_rawCaptureIdMeta);
+    }
+    if (data.containsKey('source')) {
+      context.handle(
+        _sourceMeta,
+        source.isAcceptableOrUnknown(data['source']!, _sourceMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_sourceMeta);
+    }
+    if (data.containsKey('origin')) {
+      context.handle(
+        _originMeta,
+        origin.isAcceptableOrUnknown(data['origin']!, _originMeta),
+      );
+    }
+    if (data.containsKey('received_at')) {
+      context.handle(
+        _receivedAtMeta,
+        receivedAt.isAcceptableOrUnknown(data['received_at']!, _receivedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_receivedAtMeta);
+    }
+    if (data.containsKey('raw_text')) {
+      context.handle(
+        _rawTextMeta,
+        rawText.isAcceptableOrUnknown(data['raw_text']!, _rawTextMeta),
+      );
+    }
+    if (data.containsKey('parser_template_id')) {
+      context.handle(
+        _parserTemplateIdMeta,
+        parserTemplateId.isAcceptableOrUnknown(
+          data['parser_template_id']!,
+          _parserTemplateIdMeta,
+        ),
+      );
+    }
+    if (data.containsKey('confidence')) {
+      context.handle(
+        _confidenceMeta,
+        confidence.isAcceptableOrUnknown(data['confidence']!, _confidenceMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  TransactionSourceRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return TransactionSourceRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      transactionId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}transaction_id'],
+      )!,
+      rawCaptureId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}raw_capture_id'],
+      )!,
+      source: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}source'],
+      )!,
+      origin: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}origin'],
+      ),
+      receivedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}received_at'],
+      )!,
+      rawText: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}raw_text'],
+      ),
+      parserTemplateId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}parser_template_id'],
+      ),
+      confidence: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}confidence'],
+      ),
+    );
+  }
+
+  @override
+  $TransactionSourcesTable createAlias(String alias) {
+    return $TransactionSourcesTable(attachedDatabase, alias);
+  }
+
+  @override
+  bool get isStrict => true;
+}
+
+class TransactionSourceRow extends DataClass
+    implements Insertable<TransactionSourceRow> {
+  /// Stable unique id.
+  final String id;
+
+  /// The transaction.
+  final String transactionId;
+
+  /// The capture.
+  final String rawCaptureId;
+
+  /// Copy of the capture's source.
+  final String source;
+
+  /// Copy of the capture's origin.
+  final String? origin;
+
+  /// When the capture was received, UTC epoch milliseconds.
+  final int receivedAt;
+
+  /// The original message, kept for re-parsing until the retention purge
+  /// (Phase 8). Never logged.
+  final String? rawText;
+
+  /// The parser template that read it.
+  final String? parserTemplateId;
+
+  /// The parser's confidence, 0–1.
+  final double? confidence;
+  const TransactionSourceRow({
+    required this.id,
+    required this.transactionId,
+    required this.rawCaptureId,
+    required this.source,
+    this.origin,
+    required this.receivedAt,
+    this.rawText,
+    this.parserTemplateId,
+    this.confidence,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['transaction_id'] = Variable<String>(transactionId);
+    map['raw_capture_id'] = Variable<String>(rawCaptureId);
+    map['source'] = Variable<String>(source);
+    if (!nullToAbsent || origin != null) {
+      map['origin'] = Variable<String>(origin);
+    }
+    map['received_at'] = Variable<int>(receivedAt);
+    if (!nullToAbsent || rawText != null) {
+      map['raw_text'] = Variable<String>(rawText);
+    }
+    if (!nullToAbsent || parserTemplateId != null) {
+      map['parser_template_id'] = Variable<String>(parserTemplateId);
+    }
+    if (!nullToAbsent || confidence != null) {
+      map['confidence'] = Variable<double>(confidence);
+    }
+    return map;
+  }
+
+  TransactionSourcesCompanion toCompanion(bool nullToAbsent) {
+    return TransactionSourcesCompanion(
+      id: Value(id),
+      transactionId: Value(transactionId),
+      rawCaptureId: Value(rawCaptureId),
+      source: Value(source),
+      origin: origin == null && nullToAbsent
+          ? const Value.absent()
+          : Value(origin),
+      receivedAt: Value(receivedAt),
+      rawText: rawText == null && nullToAbsent
+          ? const Value.absent()
+          : Value(rawText),
+      parserTemplateId: parserTemplateId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(parserTemplateId),
+      confidence: confidence == null && nullToAbsent
+          ? const Value.absent()
+          : Value(confidence),
+    );
+  }
+
+  factory TransactionSourceRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return TransactionSourceRow(
+      id: serializer.fromJson<String>(json['id']),
+      transactionId: serializer.fromJson<String>(json['transactionId']),
+      rawCaptureId: serializer.fromJson<String>(json['rawCaptureId']),
+      source: serializer.fromJson<String>(json['source']),
+      origin: serializer.fromJson<String?>(json['origin']),
+      receivedAt: serializer.fromJson<int>(json['receivedAt']),
+      rawText: serializer.fromJson<String?>(json['rawText']),
+      parserTemplateId: serializer.fromJson<String?>(json['parserTemplateId']),
+      confidence: serializer.fromJson<double?>(json['confidence']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'transactionId': serializer.toJson<String>(transactionId),
+      'rawCaptureId': serializer.toJson<String>(rawCaptureId),
+      'source': serializer.toJson<String>(source),
+      'origin': serializer.toJson<String?>(origin),
+      'receivedAt': serializer.toJson<int>(receivedAt),
+      'rawText': serializer.toJson<String?>(rawText),
+      'parserTemplateId': serializer.toJson<String?>(parserTemplateId),
+      'confidence': serializer.toJson<double?>(confidence),
+    };
+  }
+
+  TransactionSourceRow copyWith({
+    String? id,
+    String? transactionId,
+    String? rawCaptureId,
+    String? source,
+    Value<String?> origin = const Value.absent(),
+    int? receivedAt,
+    Value<String?> rawText = const Value.absent(),
+    Value<String?> parserTemplateId = const Value.absent(),
+    Value<double?> confidence = const Value.absent(),
+  }) => TransactionSourceRow(
+    id: id ?? this.id,
+    transactionId: transactionId ?? this.transactionId,
+    rawCaptureId: rawCaptureId ?? this.rawCaptureId,
+    source: source ?? this.source,
+    origin: origin.present ? origin.value : this.origin,
+    receivedAt: receivedAt ?? this.receivedAt,
+    rawText: rawText.present ? rawText.value : this.rawText,
+    parserTemplateId: parserTemplateId.present
+        ? parserTemplateId.value
+        : this.parserTemplateId,
+    confidence: confidence.present ? confidence.value : this.confidence,
+  );
+  TransactionSourceRow copyWithCompanion(TransactionSourcesCompanion data) {
+    return TransactionSourceRow(
+      id: data.id.present ? data.id.value : this.id,
+      transactionId: data.transactionId.present
+          ? data.transactionId.value
+          : this.transactionId,
+      rawCaptureId: data.rawCaptureId.present
+          ? data.rawCaptureId.value
+          : this.rawCaptureId,
+      source: data.source.present ? data.source.value : this.source,
+      origin: data.origin.present ? data.origin.value : this.origin,
+      receivedAt: data.receivedAt.present
+          ? data.receivedAt.value
+          : this.receivedAt,
+      rawText: data.rawText.present ? data.rawText.value : this.rawText,
+      parserTemplateId: data.parserTemplateId.present
+          ? data.parserTemplateId.value
+          : this.parserTemplateId,
+      confidence: data.confidence.present
+          ? data.confidence.value
+          : this.confidence,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('TransactionSourceRow(')
+          ..write('id: $id, ')
+          ..write('transactionId: $transactionId, ')
+          ..write('rawCaptureId: $rawCaptureId, ')
+          ..write('source: $source, ')
+          ..write('origin: $origin, ')
+          ..write('receivedAt: $receivedAt, ')
+          ..write('rawText: $rawText, ')
+          ..write('parserTemplateId: $parserTemplateId, ')
+          ..write('confidence: $confidence')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    transactionId,
+    rawCaptureId,
+    source,
+    origin,
+    receivedAt,
+    rawText,
+    parserTemplateId,
+    confidence,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is TransactionSourceRow &&
+          other.id == this.id &&
+          other.transactionId == this.transactionId &&
+          other.rawCaptureId == this.rawCaptureId &&
+          other.source == this.source &&
+          other.origin == this.origin &&
+          other.receivedAt == this.receivedAt &&
+          other.rawText == this.rawText &&
+          other.parserTemplateId == this.parserTemplateId &&
+          other.confidence == this.confidence);
+}
+
+class TransactionSourcesCompanion
+    extends UpdateCompanion<TransactionSourceRow> {
+  final Value<String> id;
+  final Value<String> transactionId;
+  final Value<String> rawCaptureId;
+  final Value<String> source;
+  final Value<String?> origin;
+  final Value<int> receivedAt;
+  final Value<String?> rawText;
+  final Value<String?> parserTemplateId;
+  final Value<double?> confidence;
+  final Value<int> rowid;
+  const TransactionSourcesCompanion({
+    this.id = const Value.absent(),
+    this.transactionId = const Value.absent(),
+    this.rawCaptureId = const Value.absent(),
+    this.source = const Value.absent(),
+    this.origin = const Value.absent(),
+    this.receivedAt = const Value.absent(),
+    this.rawText = const Value.absent(),
+    this.parserTemplateId = const Value.absent(),
+    this.confidence = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  TransactionSourcesCompanion.insert({
+    required String id,
+    required String transactionId,
+    required String rawCaptureId,
+    required String source,
+    this.origin = const Value.absent(),
+    required int receivedAt,
+    this.rawText = const Value.absent(),
+    this.parserTemplateId = const Value.absent(),
+    this.confidence = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       transactionId = Value(transactionId),
+       rawCaptureId = Value(rawCaptureId),
+       source = Value(source),
+       receivedAt = Value(receivedAt);
+  static Insertable<TransactionSourceRow> custom({
+    Expression<String>? id,
+    Expression<String>? transactionId,
+    Expression<String>? rawCaptureId,
+    Expression<String>? source,
+    Expression<String>? origin,
+    Expression<int>? receivedAt,
+    Expression<String>? rawText,
+    Expression<String>? parserTemplateId,
+    Expression<double>? confidence,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (transactionId != null) 'transaction_id': transactionId,
+      if (rawCaptureId != null) 'raw_capture_id': rawCaptureId,
+      if (source != null) 'source': source,
+      if (origin != null) 'origin': origin,
+      if (receivedAt != null) 'received_at': receivedAt,
+      if (rawText != null) 'raw_text': rawText,
+      if (parserTemplateId != null) 'parser_template_id': parserTemplateId,
+      if (confidence != null) 'confidence': confidence,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  TransactionSourcesCompanion copyWith({
+    Value<String>? id,
+    Value<String>? transactionId,
+    Value<String>? rawCaptureId,
+    Value<String>? source,
+    Value<String?>? origin,
+    Value<int>? receivedAt,
+    Value<String?>? rawText,
+    Value<String?>? parserTemplateId,
+    Value<double?>? confidence,
+    Value<int>? rowid,
+  }) {
+    return TransactionSourcesCompanion(
+      id: id ?? this.id,
+      transactionId: transactionId ?? this.transactionId,
+      rawCaptureId: rawCaptureId ?? this.rawCaptureId,
+      source: source ?? this.source,
+      origin: origin ?? this.origin,
+      receivedAt: receivedAt ?? this.receivedAt,
+      rawText: rawText ?? this.rawText,
+      parserTemplateId: parserTemplateId ?? this.parserTemplateId,
+      confidence: confidence ?? this.confidence,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (transactionId.present) {
+      map['transaction_id'] = Variable<String>(transactionId.value);
+    }
+    if (rawCaptureId.present) {
+      map['raw_capture_id'] = Variable<String>(rawCaptureId.value);
+    }
+    if (source.present) {
+      map['source'] = Variable<String>(source.value);
+    }
+    if (origin.present) {
+      map['origin'] = Variable<String>(origin.value);
+    }
+    if (receivedAt.present) {
+      map['received_at'] = Variable<int>(receivedAt.value);
+    }
+    if (rawText.present) {
+      map['raw_text'] = Variable<String>(rawText.value);
+    }
+    if (parserTemplateId.present) {
+      map['parser_template_id'] = Variable<String>(parserTemplateId.value);
+    }
+    if (confidence.present) {
+      map['confidence'] = Variable<double>(confidence.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('TransactionSourcesCompanion(')
+          ..write('id: $id, ')
+          ..write('transactionId: $transactionId, ')
+          ..write('rawCaptureId: $rawCaptureId, ')
+          ..write('source: $source, ')
+          ..write('origin: $origin, ')
+          ..write('receivedAt: $receivedAt, ')
+          ..write('rawText: $rawText, ')
+          ..write('parserTemplateId: $parserTemplateId, ')
+          ..write('confidence: $confidence, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $UnparsedMessagesTable extends UnparsedMessages
+    with TableInfo<$UnparsedMessagesTable, UnparsedRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $UnparsedMessagesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _rawCaptureIdMeta = const VerificationMeta(
+    'rawCaptureId',
+  );
+  @override
+  late final GeneratedColumn<String> rawCaptureId = GeneratedColumn<String>(
+    'raw_capture_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES raw_captures (id) ON DELETE CASCADE',
+    ),
+  );
+  static const VerificationMeta _maskedTextMeta = const VerificationMeta(
+    'maskedText',
+  );
+  @override
+  late final GeneratedColumn<String> maskedText = GeneratedColumn<String>(
+    'masked_text',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _receivedAtMeta = const VerificationMeta(
+    'receivedAt',
+  );
+  @override
+  late final GeneratedColumn<int> receivedAt = GeneratedColumn<int>(
+    'received_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _resolvedTransactionIdMeta =
+      const VerificationMeta('resolvedTransactionId');
+  @override
+  late final GeneratedColumn<String> resolvedTransactionId =
+      GeneratedColumn<String>(
+        'resolved_transaction_id',
+        aliasedName,
+        true,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'REFERENCES transactions (id) ON DELETE SET NULL',
+        ),
+      );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    rawCaptureId,
+    maskedText,
+    receivedAt,
+    resolvedTransactionId,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'unparsed';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<UnparsedRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('raw_capture_id')) {
+      context.handle(
+        _rawCaptureIdMeta,
+        rawCaptureId.isAcceptableOrUnknown(
+          data['raw_capture_id']!,
+          _rawCaptureIdMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_rawCaptureIdMeta);
+    }
+    if (data.containsKey('masked_text')) {
+      context.handle(
+        _maskedTextMeta,
+        maskedText.isAcceptableOrUnknown(data['masked_text']!, _maskedTextMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_maskedTextMeta);
+    }
+    if (data.containsKey('received_at')) {
+      context.handle(
+        _receivedAtMeta,
+        receivedAt.isAcceptableOrUnknown(data['received_at']!, _receivedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_receivedAtMeta);
+    }
+    if (data.containsKey('resolved_transaction_id')) {
+      context.handle(
+        _resolvedTransactionIdMeta,
+        resolvedTransactionId.isAcceptableOrUnknown(
+          data['resolved_transaction_id']!,
+          _resolvedTransactionIdMeta,
+        ),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  UnparsedRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return UnparsedRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      rawCaptureId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}raw_capture_id'],
+      )!,
+      maskedText: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}masked_text'],
+      )!,
+      receivedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}received_at'],
+      )!,
+      resolvedTransactionId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}resolved_transaction_id'],
+      ),
+    );
+  }
+
+  @override
+  $UnparsedMessagesTable createAlias(String alias) {
+    return $UnparsedMessagesTable(attachedDatabase, alias);
+  }
+
+  @override
+  bool get isStrict => true;
+}
+
+class UnparsedRow extends DataClass implements Insertable<UnparsedRow> {
+  /// Stable unique id.
+  final String id;
+
+  /// The capture it came from.
+  final String rawCaptureId;
+
+  /// The message with UPI ids, account and reference numbers masked.
+  final String maskedText;
+
+  /// When it was received, UTC epoch milliseconds.
+  final int receivedAt;
+
+  /// The transaction the user made from it, once resolved.
+  final String? resolvedTransactionId;
+  const UnparsedRow({
+    required this.id,
+    required this.rawCaptureId,
+    required this.maskedText,
+    required this.receivedAt,
+    this.resolvedTransactionId,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['raw_capture_id'] = Variable<String>(rawCaptureId);
+    map['masked_text'] = Variable<String>(maskedText);
+    map['received_at'] = Variable<int>(receivedAt);
+    if (!nullToAbsent || resolvedTransactionId != null) {
+      map['resolved_transaction_id'] = Variable<String>(resolvedTransactionId);
+    }
+    return map;
+  }
+
+  UnparsedMessagesCompanion toCompanion(bool nullToAbsent) {
+    return UnparsedMessagesCompanion(
+      id: Value(id),
+      rawCaptureId: Value(rawCaptureId),
+      maskedText: Value(maskedText),
+      receivedAt: Value(receivedAt),
+      resolvedTransactionId: resolvedTransactionId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(resolvedTransactionId),
+    );
+  }
+
+  factory UnparsedRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return UnparsedRow(
+      id: serializer.fromJson<String>(json['id']),
+      rawCaptureId: serializer.fromJson<String>(json['rawCaptureId']),
+      maskedText: serializer.fromJson<String>(json['maskedText']),
+      receivedAt: serializer.fromJson<int>(json['receivedAt']),
+      resolvedTransactionId: serializer.fromJson<String?>(
+        json['resolvedTransactionId'],
+      ),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'rawCaptureId': serializer.toJson<String>(rawCaptureId),
+      'maskedText': serializer.toJson<String>(maskedText),
+      'receivedAt': serializer.toJson<int>(receivedAt),
+      'resolvedTransactionId': serializer.toJson<String?>(
+        resolvedTransactionId,
+      ),
+    };
+  }
+
+  UnparsedRow copyWith({
+    String? id,
+    String? rawCaptureId,
+    String? maskedText,
+    int? receivedAt,
+    Value<String?> resolvedTransactionId = const Value.absent(),
+  }) => UnparsedRow(
+    id: id ?? this.id,
+    rawCaptureId: rawCaptureId ?? this.rawCaptureId,
+    maskedText: maskedText ?? this.maskedText,
+    receivedAt: receivedAt ?? this.receivedAt,
+    resolvedTransactionId: resolvedTransactionId.present
+        ? resolvedTransactionId.value
+        : this.resolvedTransactionId,
+  );
+  UnparsedRow copyWithCompanion(UnparsedMessagesCompanion data) {
+    return UnparsedRow(
+      id: data.id.present ? data.id.value : this.id,
+      rawCaptureId: data.rawCaptureId.present
+          ? data.rawCaptureId.value
+          : this.rawCaptureId,
+      maskedText: data.maskedText.present
+          ? data.maskedText.value
+          : this.maskedText,
+      receivedAt: data.receivedAt.present
+          ? data.receivedAt.value
+          : this.receivedAt,
+      resolvedTransactionId: data.resolvedTransactionId.present
+          ? data.resolvedTransactionId.value
+          : this.resolvedTransactionId,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('UnparsedRow(')
+          ..write('id: $id, ')
+          ..write('rawCaptureId: $rawCaptureId, ')
+          ..write('maskedText: $maskedText, ')
+          ..write('receivedAt: $receivedAt, ')
+          ..write('resolvedTransactionId: $resolvedTransactionId')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    rawCaptureId,
+    maskedText,
+    receivedAt,
+    resolvedTransactionId,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is UnparsedRow &&
+          other.id == this.id &&
+          other.rawCaptureId == this.rawCaptureId &&
+          other.maskedText == this.maskedText &&
+          other.receivedAt == this.receivedAt &&
+          other.resolvedTransactionId == this.resolvedTransactionId);
+}
+
+class UnparsedMessagesCompanion extends UpdateCompanion<UnparsedRow> {
+  final Value<String> id;
+  final Value<String> rawCaptureId;
+  final Value<String> maskedText;
+  final Value<int> receivedAt;
+  final Value<String?> resolvedTransactionId;
+  final Value<int> rowid;
+  const UnparsedMessagesCompanion({
+    this.id = const Value.absent(),
+    this.rawCaptureId = const Value.absent(),
+    this.maskedText = const Value.absent(),
+    this.receivedAt = const Value.absent(),
+    this.resolvedTransactionId = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  UnparsedMessagesCompanion.insert({
+    required String id,
+    required String rawCaptureId,
+    required String maskedText,
+    required int receivedAt,
+    this.resolvedTransactionId = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       rawCaptureId = Value(rawCaptureId),
+       maskedText = Value(maskedText),
+       receivedAt = Value(receivedAt);
+  static Insertable<UnparsedRow> custom({
+    Expression<String>? id,
+    Expression<String>? rawCaptureId,
+    Expression<String>? maskedText,
+    Expression<int>? receivedAt,
+    Expression<String>? resolvedTransactionId,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (rawCaptureId != null) 'raw_capture_id': rawCaptureId,
+      if (maskedText != null) 'masked_text': maskedText,
+      if (receivedAt != null) 'received_at': receivedAt,
+      if (resolvedTransactionId != null)
+        'resolved_transaction_id': resolvedTransactionId,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  UnparsedMessagesCompanion copyWith({
+    Value<String>? id,
+    Value<String>? rawCaptureId,
+    Value<String>? maskedText,
+    Value<int>? receivedAt,
+    Value<String?>? resolvedTransactionId,
+    Value<int>? rowid,
+  }) {
+    return UnparsedMessagesCompanion(
+      id: id ?? this.id,
+      rawCaptureId: rawCaptureId ?? this.rawCaptureId,
+      maskedText: maskedText ?? this.maskedText,
+      receivedAt: receivedAt ?? this.receivedAt,
+      resolvedTransactionId:
+          resolvedTransactionId ?? this.resolvedTransactionId,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (rawCaptureId.present) {
+      map['raw_capture_id'] = Variable<String>(rawCaptureId.value);
+    }
+    if (maskedText.present) {
+      map['masked_text'] = Variable<String>(maskedText.value);
+    }
+    if (receivedAt.present) {
+      map['received_at'] = Variable<int>(receivedAt.value);
+    }
+    if (resolvedTransactionId.present) {
+      map['resolved_transaction_id'] = Variable<String>(
+        resolvedTransactionId.value,
+      );
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('UnparsedMessagesCompanion(')
+          ..write('id: $id, ')
+          ..write('rawCaptureId: $rawCaptureId, ')
+          ..write('maskedText: $maskedText, ')
+          ..write('receivedAt: $receivedAt, ')
+          ..write('resolvedTransactionId: $resolvedTransactionId, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -3028,6 +4535,12 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $RoomsTable rooms = $RoomsTable(this);
   late final $TransactionsTable transactions = $TransactionsTable(this);
   late final $SettingsTable settings = $SettingsTable(this);
+  late final $RawCapturesTable rawCaptures = $RawCapturesTable(this);
+  late final $TransactionSourcesTable transactionSources =
+      $TransactionSourcesTable(this);
+  late final $UnparsedMessagesTable unparsedMessages = $UnparsedMessagesTable(
+    this,
+  );
   late final Index transactionsOccurredAt = Index(
     'transactions_occurred_at',
     'CREATE INDEX transactions_occurred_at ON transactions (occurred_at)',
@@ -3048,6 +4561,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     'transactions_payee_key',
     'CREATE INDEX transactions_payee_key ON transactions (payee_key)',
   );
+  late final Index transactionSourcesTransaction = Index(
+    'transaction_sources_transaction',
+    'CREATE INDEX transaction_sources_transaction ON transaction_sources (transaction_id)',
+  );
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -3058,11 +4575,15 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     rooms,
     transactions,
     settings,
+    rawCaptures,
+    transactionSources,
+    unparsedMessages,
     transactionsOccurredAt,
     transactionsRoomId,
     transactionsCategoryId,
     transactionsRefNo,
     transactionsPayeeKey,
+    transactionSourcesTransaction,
   ];
   @override
   StreamQueryUpdateRules get streamUpdateRules => const StreamQueryUpdateRules([
@@ -3079,6 +4600,34 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         limitUpdateKind: UpdateKind.delete,
       ),
       result: [TableUpdate('transactions', kind: UpdateKind.update)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'transactions',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('transaction_sources', kind: UpdateKind.delete)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'raw_captures',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('transaction_sources', kind: UpdateKind.delete)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'raw_captures',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('unparsed', kind: UpdateKind.delete)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'transactions',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('unparsed', kind: UpdateKind.update)],
     ),
   ]);
 }
@@ -4188,6 +5737,51 @@ final class $$TransactionsTableReferences
       manager.$state.copyWith(prefetchedData: [item]),
     );
   }
+
+  static MultiTypedResultKey<
+    $TransactionSourcesTable,
+    List<TransactionSourceRow>
+  >
+  _transactionSourcesRefsTable(_$AppDatabase db) =>
+      MultiTypedResultKey.fromTable(
+        db.transactionSources,
+        aliasName: 'transactions__id__transaction_sources__transaction_id',
+      );
+
+  $$TransactionSourcesTableProcessedTableManager get transactionSourcesRefs {
+    final manager = $$TransactionSourcesTableTableManager(
+      $_db,
+      $_db.transactionSources,
+    ).filter((f) => f.transactionId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(
+      _transactionSourcesRefsTable($_db),
+    );
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+
+  static MultiTypedResultKey<$UnparsedMessagesTable, List<UnparsedRow>>
+  _unparsedMessagesRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.unparsedMessages,
+    aliasName: 'transactions__id__unparsed__resolved_transaction_id',
+  );
+
+  $$UnparsedMessagesTableProcessedTableManager get unparsedMessagesRefs {
+    final manager =
+        $$UnparsedMessagesTableTableManager($_db, $_db.unparsedMessages).filter(
+          (f) =>
+              f.resolvedTransactionId.id.sqlEquals($_itemColumn<String>('id')!),
+        );
+
+    final cache = $_typedResult.readTableOrNull(
+      _unparsedMessagesRefsTable($_db),
+    );
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
 }
 
 class $$TransactionsTableFilterComposer
@@ -4373,6 +5967,56 @@ class $$TransactionsTableFilterComposer
           ),
     );
     return composer;
+  }
+
+  Expression<bool> transactionSourcesRefs(
+    Expression<bool> Function($$TransactionSourcesTableFilterComposer f) f,
+  ) {
+    final $$TransactionSourcesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.transactionSources,
+      getReferencedColumn: (t) => t.transactionId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$TransactionSourcesTableFilterComposer(
+            $db: $db,
+            $table: $db.transactionSources,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<bool> unparsedMessagesRefs(
+    Expression<bool> Function($$UnparsedMessagesTableFilterComposer f) f,
+  ) {
+    final $$UnparsedMessagesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.unparsedMessages,
+      getReferencedColumn: (t) => t.resolvedTransactionId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$UnparsedMessagesTableFilterComposer(
+            $db: $db,
+            $table: $db.unparsedMessages,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
   }
 }
 
@@ -4720,6 +6364,57 @@ class $$TransactionsTableAnnotationComposer
     );
     return composer;
   }
+
+  Expression<T> transactionSourcesRefs<T extends Object>(
+    Expression<T> Function($$TransactionSourcesTableAnnotationComposer a) f,
+  ) {
+    final $$TransactionSourcesTableAnnotationComposer composer =
+        $composerBuilder(
+          composer: this,
+          getCurrentColumn: (t) => t.id,
+          referencedTable: $db.transactionSources,
+          getReferencedColumn: (t) => t.transactionId,
+          builder:
+              (
+                joinBuilder, {
+                $addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer,
+              }) => $$TransactionSourcesTableAnnotationComposer(
+                $db: $db,
+                $table: $db.transactionSources,
+                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                joinBuilder: joinBuilder,
+                $removeJoinBuilderFromRootComposer:
+                    $removeJoinBuilderFromRootComposer,
+              ),
+        );
+    return f(composer);
+  }
+
+  Expression<T> unparsedMessagesRefs<T extends Object>(
+    Expression<T> Function($$UnparsedMessagesTableAnnotationComposer a) f,
+  ) {
+    final $$UnparsedMessagesTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.unparsedMessages,
+      getReferencedColumn: (t) => t.resolvedTransactionId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$UnparsedMessagesTableAnnotationComposer(
+            $db: $db,
+            $table: $db.unparsedMessages,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
 }
 
 class $$TransactionsTableTableManager
@@ -4740,6 +6435,8 @@ class $$TransactionsTableTableManager
             bool toAccountId,
             bool categoryId,
             bool roomId,
+            bool transactionSourcesRefs,
+            bool unparsedMessagesRefs,
           })
         > {
   $$TransactionsTableTableManager(_$AppDatabase db, $TransactionsTable table)
@@ -4859,10 +6556,15 @@ class $$TransactionsTableTableManager
                 toAccountId = false,
                 categoryId = false,
                 roomId = false,
+                transactionSourcesRefs = false,
+                unparsedMessagesRefs = false,
               }) {
                 return PrefetchHooks(
                   db: db,
-                  explicitlyWatchedTables: [],
+                  explicitlyWatchedTables: [
+                    if (transactionSourcesRefs) db.transactionSources,
+                    if (unparsedMessagesRefs) db.unparsedMessages,
+                  ],
                   addJoins:
                       <
                         T extends TableManagerState<
@@ -4927,7 +6629,48 @@ class $$TransactionsTableTableManager
                         return state;
                       },
                   getPrefetchedDataCallback: (items) async {
-                    return [];
+                    return [
+                      if (transactionSourcesRefs)
+                        await $_getPrefetchedDataByColumns<
+                          TransactionRow,
+                          $TransactionsTable,
+                          TransactionSourceRow,
+                          $TransactionSourcesTable
+                        >(
+                          currentTable: table,
+                          referencedTable: $$TransactionsTableReferences
+                              ._transactionSourcesRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$TransactionsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).transactionSourcesRefs,
+                          currentColumn: 'id',
+                          referencedColumn: 'transaction_id',
+                          typedResults: items,
+                        ),
+                      if (unparsedMessagesRefs)
+                        await $_getPrefetchedDataByColumns<
+                          TransactionRow,
+                          $TransactionsTable,
+                          UnparsedRow,
+                          $UnparsedMessagesTable
+                        >(
+                          currentTable: table,
+                          referencedTable: $$TransactionsTableReferences
+                              ._unparsedMessagesRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$TransactionsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).unparsedMessagesRefs,
+                          currentColumn: 'id',
+                          referencedColumn: 'resolved_transaction_id',
+                          typedResults: items,
+                        ),
+                    ];
                   },
                 );
               },
@@ -4952,6 +6695,8 @@ typedef $$TransactionsTableProcessedTableManager =
         bool toAccountId,
         bool categoryId,
         bool roomId,
+        bool transactionSourcesRefs,
+        bool unparsedMessagesRefs,
       })
     >;
 typedef $$SettingsTableCreateCompanionBuilder = SettingsCompanion Function({
@@ -5091,6 +6836,1377 @@ typedef $$SettingsTableProcessedTableManager =
       SettingRow,
       PrefetchHooks Function()
     >;
+typedef $$RawCapturesTableCreateCompanionBuilder =
+    RawCapturesCompanion Function({
+      required String id,
+      required String contentHash,
+      required String source,
+      Value<String?> origin,
+      required int receivedAt,
+      required String status,
+      Value<String?> dropReason,
+      Value<int> rowid,
+    });
+typedef $$RawCapturesTableUpdateCompanionBuilder =
+    RawCapturesCompanion Function({
+      Value<String> id,
+      Value<String> contentHash,
+      Value<String> source,
+      Value<String?> origin,
+      Value<int> receivedAt,
+      Value<String> status,
+      Value<String?> dropReason,
+      Value<int> rowid,
+    });
+
+final class $$RawCapturesTableReferences
+    extends BaseReferences<_$AppDatabase, $RawCapturesTable, RawCaptureRow> {
+  $$RawCapturesTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static MultiTypedResultKey<
+    $TransactionSourcesTable,
+    List<TransactionSourceRow>
+  >
+  _transactionSourcesRefsTable(_$AppDatabase db) =>
+      MultiTypedResultKey.fromTable(
+        db.transactionSources,
+        aliasName: 'raw_captures__id__transaction_sources__raw_capture_id',
+      );
+
+  $$TransactionSourcesTableProcessedTableManager get transactionSourcesRefs {
+    final manager = $$TransactionSourcesTableTableManager(
+      $_db,
+      $_db.transactionSources,
+    ).filter((f) => f.rawCaptureId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(
+      _transactionSourcesRefsTable($_db),
+    );
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+
+  static MultiTypedResultKey<$UnparsedMessagesTable, List<UnparsedRow>>
+  _unparsedMessagesRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.unparsedMessages,
+    aliasName: 'raw_captures__id__unparsed__raw_capture_id',
+  );
+
+  $$UnparsedMessagesTableProcessedTableManager get unparsedMessagesRefs {
+    final manager = $$UnparsedMessagesTableTableManager(
+      $_db,
+      $_db.unparsedMessages,
+    ).filter((f) => f.rawCaptureId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(
+      _unparsedMessagesRefsTable($_db),
+    );
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+}
+
+class $$RawCapturesTableFilterComposer
+    extends Composer<_$AppDatabase, $RawCapturesTable> {
+  $$RawCapturesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get contentHash => $composableBuilder(
+    column: $table.contentHash,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get source => $composableBuilder(
+    column: $table.source,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get origin => $composableBuilder(
+    column: $table.origin,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get receivedAt => $composableBuilder(
+    column: $table.receivedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get status => $composableBuilder(
+    column: $table.status,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get dropReason => $composableBuilder(
+    column: $table.dropReason,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  Expression<bool> transactionSourcesRefs(
+    Expression<bool> Function($$TransactionSourcesTableFilterComposer f) f,
+  ) {
+    final $$TransactionSourcesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.transactionSources,
+      getReferencedColumn: (t) => t.rawCaptureId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$TransactionSourcesTableFilterComposer(
+            $db: $db,
+            $table: $db.transactionSources,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<bool> unparsedMessagesRefs(
+    Expression<bool> Function($$UnparsedMessagesTableFilterComposer f) f,
+  ) {
+    final $$UnparsedMessagesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.unparsedMessages,
+      getReferencedColumn: (t) => t.rawCaptureId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$UnparsedMessagesTableFilterComposer(
+            $db: $db,
+            $table: $db.unparsedMessages,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+}
+
+class $$RawCapturesTableOrderingComposer
+    extends Composer<_$AppDatabase, $RawCapturesTable> {
+  $$RawCapturesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get contentHash => $composableBuilder(
+    column: $table.contentHash,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get source => $composableBuilder(
+    column: $table.source,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get origin => $composableBuilder(
+    column: $table.origin,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get receivedAt => $composableBuilder(
+    column: $table.receivedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get status => $composableBuilder(
+    column: $table.status,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get dropReason => $composableBuilder(
+    column: $table.dropReason,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$RawCapturesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $RawCapturesTable> {
+  $$RawCapturesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get contentHash => $composableBuilder(
+    column: $table.contentHash,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get source =>
+      $composableBuilder(column: $table.source, builder: (column) => column);
+
+  GeneratedColumn<String> get origin =>
+      $composableBuilder(column: $table.origin, builder: (column) => column);
+
+  GeneratedColumn<int> get receivedAt => $composableBuilder(
+    column: $table.receivedAt,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get status =>
+      $composableBuilder(column: $table.status, builder: (column) => column);
+
+  GeneratedColumn<String> get dropReason => $composableBuilder(
+    column: $table.dropReason,
+    builder: (column) => column,
+  );
+
+  Expression<T> transactionSourcesRefs<T extends Object>(
+    Expression<T> Function($$TransactionSourcesTableAnnotationComposer a) f,
+  ) {
+    final $$TransactionSourcesTableAnnotationComposer composer =
+        $composerBuilder(
+          composer: this,
+          getCurrentColumn: (t) => t.id,
+          referencedTable: $db.transactionSources,
+          getReferencedColumn: (t) => t.rawCaptureId,
+          builder:
+              (
+                joinBuilder, {
+                $addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer,
+              }) => $$TransactionSourcesTableAnnotationComposer(
+                $db: $db,
+                $table: $db.transactionSources,
+                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                joinBuilder: joinBuilder,
+                $removeJoinBuilderFromRootComposer:
+                    $removeJoinBuilderFromRootComposer,
+              ),
+        );
+    return f(composer);
+  }
+
+  Expression<T> unparsedMessagesRefs<T extends Object>(
+    Expression<T> Function($$UnparsedMessagesTableAnnotationComposer a) f,
+  ) {
+    final $$UnparsedMessagesTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.unparsedMessages,
+      getReferencedColumn: (t) => t.rawCaptureId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$UnparsedMessagesTableAnnotationComposer(
+            $db: $db,
+            $table: $db.unparsedMessages,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+}
+
+class $$RawCapturesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $RawCapturesTable,
+          RawCaptureRow,
+          $$RawCapturesTableFilterComposer,
+          $$RawCapturesTableOrderingComposer,
+          $$RawCapturesTableAnnotationComposer,
+          $$RawCapturesTableCreateCompanionBuilder,
+          $$RawCapturesTableUpdateCompanionBuilder,
+          (RawCaptureRow, $$RawCapturesTableReferences),
+          RawCaptureRow,
+          PrefetchHooks Function({
+            bool transactionSourcesRefs,
+            bool unparsedMessagesRefs,
+          })
+        > {
+  $$RawCapturesTableTableManager(_$AppDatabase db, $RawCapturesTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$RawCapturesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$RawCapturesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$RawCapturesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> contentHash = const Value.absent(),
+                Value<String> source = const Value.absent(),
+                Value<String?> origin = const Value.absent(),
+                Value<int> receivedAt = const Value.absent(),
+                Value<String> status = const Value.absent(),
+                Value<String?> dropReason = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => RawCapturesCompanion(
+                id: id,
+                contentHash: contentHash,
+                source: source,
+                origin: origin,
+                receivedAt: receivedAt,
+                status: status,
+                dropReason: dropReason,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String contentHash,
+                required String source,
+                Value<String?> origin = const Value.absent(),
+                required int receivedAt,
+                required String status,
+                Value<String?> dropReason = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => RawCapturesCompanion.insert(
+                id: id,
+                contentHash: contentHash,
+                source: source,
+                origin: origin,
+                receivedAt: receivedAt,
+                status: status,
+                dropReason: dropReason,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$RawCapturesTable, RawCaptureRow>(table),
+                  $$RawCapturesTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback:
+              ({transactionSourcesRefs = false, unparsedMessagesRefs = false}) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [
+                    if (transactionSourcesRefs) db.transactionSources,
+                    if (unparsedMessagesRefs) db.unparsedMessages,
+                  ],
+                  addJoins: null,
+                  getPrefetchedDataCallback: (items) async {
+                    return [
+                      if (transactionSourcesRefs)
+                        await $_getPrefetchedDataByColumns<
+                          RawCaptureRow,
+                          $RawCapturesTable,
+                          TransactionSourceRow,
+                          $TransactionSourcesTable
+                        >(
+                          currentTable: table,
+                          referencedTable: $$RawCapturesTableReferences
+                              ._transactionSourcesRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$RawCapturesTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).transactionSourcesRefs,
+                          currentColumn: 'id',
+                          referencedColumn: 'raw_capture_id',
+                          typedResults: items,
+                        ),
+                      if (unparsedMessagesRefs)
+                        await $_getPrefetchedDataByColumns<
+                          RawCaptureRow,
+                          $RawCapturesTable,
+                          UnparsedRow,
+                          $UnparsedMessagesTable
+                        >(
+                          currentTable: table,
+                          referencedTable: $$RawCapturesTableReferences
+                              ._unparsedMessagesRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$RawCapturesTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).unparsedMessagesRefs,
+                          currentColumn: 'id',
+                          referencedColumn: 'raw_capture_id',
+                          typedResults: items,
+                        ),
+                    ];
+                  },
+                );
+              },
+        ),
+      );
+}
+
+typedef $$RawCapturesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $RawCapturesTable,
+      RawCaptureRow,
+      $$RawCapturesTableFilterComposer,
+      $$RawCapturesTableOrderingComposer,
+      $$RawCapturesTableAnnotationComposer,
+      $$RawCapturesTableCreateCompanionBuilder,
+      $$RawCapturesTableUpdateCompanionBuilder,
+      (RawCaptureRow, $$RawCapturesTableReferences),
+      RawCaptureRow,
+      PrefetchHooks Function({
+        bool transactionSourcesRefs,
+        bool unparsedMessagesRefs,
+      })
+    >;
+typedef $$TransactionSourcesTableCreateCompanionBuilder =
+    TransactionSourcesCompanion Function({
+      required String id,
+      required String transactionId,
+      required String rawCaptureId,
+      required String source,
+      Value<String?> origin,
+      required int receivedAt,
+      Value<String?> rawText,
+      Value<String?> parserTemplateId,
+      Value<double?> confidence,
+      Value<int> rowid,
+    });
+typedef $$TransactionSourcesTableUpdateCompanionBuilder =
+    TransactionSourcesCompanion Function({
+      Value<String> id,
+      Value<String> transactionId,
+      Value<String> rawCaptureId,
+      Value<String> source,
+      Value<String?> origin,
+      Value<int> receivedAt,
+      Value<String?> rawText,
+      Value<String?> parserTemplateId,
+      Value<double?> confidence,
+      Value<int> rowid,
+    });
+
+final class $$TransactionSourcesTableReferences
+    extends
+        BaseReferences<
+          _$AppDatabase,
+          $TransactionSourcesTable,
+          TransactionSourceRow
+        > {
+  $$TransactionSourcesTableReferences(
+    super.$_db,
+    super.$_table,
+    super.$_typedResult,
+  );
+
+  static $TransactionsTable _transactionIdTable(_$AppDatabase db) => db
+      .transactions
+      .createAlias('transaction_sources__transaction_id__transactions__id');
+
+  $$TransactionsTableProcessedTableManager get transactionId {
+    final $_column = $_itemColumn<String>('transaction_id')!;
+
+    final manager = $$TransactionsTableTableManager(
+      $_db,
+      $_db.transactions,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_transactionIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+
+  static $RawCapturesTable _rawCaptureIdTable(_$AppDatabase db) => db
+      .rawCaptures
+      .createAlias('transaction_sources__raw_capture_id__raw_captures__id');
+
+  $$RawCapturesTableProcessedTableManager get rawCaptureId {
+    final $_column = $_itemColumn<String>('raw_capture_id')!;
+
+    final manager = $$RawCapturesTableTableManager(
+      $_db,
+      $_db.rawCaptures,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_rawCaptureIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+}
+
+class $$TransactionSourcesTableFilterComposer
+    extends Composer<_$AppDatabase, $TransactionSourcesTable> {
+  $$TransactionSourcesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get source => $composableBuilder(
+    column: $table.source,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get origin => $composableBuilder(
+    column: $table.origin,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get receivedAt => $composableBuilder(
+    column: $table.receivedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get rawText => $composableBuilder(
+    column: $table.rawText,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get parserTemplateId => $composableBuilder(
+    column: $table.parserTemplateId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get confidence => $composableBuilder(
+    column: $table.confidence,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$TransactionsTableFilterComposer get transactionId {
+    final $$TransactionsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.transactionId,
+      referencedTable: $db.transactions,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$TransactionsTableFilterComposer(
+            $db: $db,
+            $table: $db.transactions,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$RawCapturesTableFilterComposer get rawCaptureId {
+    final $$RawCapturesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.rawCaptureId,
+      referencedTable: $db.rawCaptures,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$RawCapturesTableFilterComposer(
+            $db: $db,
+            $table: $db.rawCaptures,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$TransactionSourcesTableOrderingComposer
+    extends Composer<_$AppDatabase, $TransactionSourcesTable> {
+  $$TransactionSourcesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get source => $composableBuilder(
+    column: $table.source,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get origin => $composableBuilder(
+    column: $table.origin,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get receivedAt => $composableBuilder(
+    column: $table.receivedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get rawText => $composableBuilder(
+    column: $table.rawText,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get parserTemplateId => $composableBuilder(
+    column: $table.parserTemplateId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get confidence => $composableBuilder(
+    column: $table.confidence,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$TransactionsTableOrderingComposer get transactionId {
+    final $$TransactionsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.transactionId,
+      referencedTable: $db.transactions,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$TransactionsTableOrderingComposer(
+            $db: $db,
+            $table: $db.transactions,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$RawCapturesTableOrderingComposer get rawCaptureId {
+    final $$RawCapturesTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.rawCaptureId,
+      referencedTable: $db.rawCaptures,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$RawCapturesTableOrderingComposer(
+            $db: $db,
+            $table: $db.rawCaptures,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$TransactionSourcesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $TransactionSourcesTable> {
+  $$TransactionSourcesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get source =>
+      $composableBuilder(column: $table.source, builder: (column) => column);
+
+  GeneratedColumn<String> get origin =>
+      $composableBuilder(column: $table.origin, builder: (column) => column);
+
+  GeneratedColumn<int> get receivedAt => $composableBuilder(
+    column: $table.receivedAt,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get rawText =>
+      $composableBuilder(column: $table.rawText, builder: (column) => column);
+
+  GeneratedColumn<String> get parserTemplateId => $composableBuilder(
+    column: $table.parserTemplateId,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<double> get confidence => $composableBuilder(
+    column: $table.confidence,
+    builder: (column) => column,
+  );
+
+  $$TransactionsTableAnnotationComposer get transactionId {
+    final $$TransactionsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.transactionId,
+      referencedTable: $db.transactions,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$TransactionsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.transactions,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$RawCapturesTableAnnotationComposer get rawCaptureId {
+    final $$RawCapturesTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.rawCaptureId,
+      referencedTable: $db.rawCaptures,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$RawCapturesTableAnnotationComposer(
+            $db: $db,
+            $table: $db.rawCaptures,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$TransactionSourcesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $TransactionSourcesTable,
+          TransactionSourceRow,
+          $$TransactionSourcesTableFilterComposer,
+          $$TransactionSourcesTableOrderingComposer,
+          $$TransactionSourcesTableAnnotationComposer,
+          $$TransactionSourcesTableCreateCompanionBuilder,
+          $$TransactionSourcesTableUpdateCompanionBuilder,
+          (TransactionSourceRow, $$TransactionSourcesTableReferences),
+          TransactionSourceRow,
+          PrefetchHooks Function({bool transactionId, bool rawCaptureId})
+        > {
+  $$TransactionSourcesTableTableManager(
+    _$AppDatabase db,
+    $TransactionSourcesTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$TransactionSourcesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$TransactionSourcesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$TransactionSourcesTableAnnotationComposer(
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> transactionId = const Value.absent(),
+                Value<String> rawCaptureId = const Value.absent(),
+                Value<String> source = const Value.absent(),
+                Value<String?> origin = const Value.absent(),
+                Value<int> receivedAt = const Value.absent(),
+                Value<String?> rawText = const Value.absent(),
+                Value<String?> parserTemplateId = const Value.absent(),
+                Value<double?> confidence = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => TransactionSourcesCompanion(
+                id: id,
+                transactionId: transactionId,
+                rawCaptureId: rawCaptureId,
+                source: source,
+                origin: origin,
+                receivedAt: receivedAt,
+                rawText: rawText,
+                parserTemplateId: parserTemplateId,
+                confidence: confidence,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String transactionId,
+                required String rawCaptureId,
+                required String source,
+                Value<String?> origin = const Value.absent(),
+                required int receivedAt,
+                Value<String?> rawText = const Value.absent(),
+                Value<String?> parserTemplateId = const Value.absent(),
+                Value<double?> confidence = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => TransactionSourcesCompanion.insert(
+                id: id,
+                transactionId: transactionId,
+                rawCaptureId: rawCaptureId,
+                source: source,
+                origin: origin,
+                receivedAt: receivedAt,
+                rawText: rawText,
+                parserTemplateId: parserTemplateId,
+                confidence: confidence,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$TransactionSourcesTable, TransactionSourceRow>(
+                    table,
+                  ),
+                  $$TransactionSourcesTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback:
+              ({transactionId = false, rawCaptureId = false}) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [],
+                  addJoins:
+                      <
+                        T extends TableManagerState<
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic
+                        >
+                      >(state) {
+                        if (transactionId) {
+                          state = state.withJoin(
+                            currentTable: table,
+                            currentColumn: table.transactionId,
+                            referencedTable: $$TransactionSourcesTableReferences
+                                ._transactionIdTable(db),
+                            referencedColumn:
+                                $$TransactionSourcesTableReferences
+                                    ._transactionIdTable(db)
+                                    .id,
+                          ) as T;
+                        }
+                        if (rawCaptureId) {
+                          state = state.withJoin(
+                            currentTable: table,
+                            currentColumn: table.rawCaptureId,
+                            referencedTable: $$TransactionSourcesTableReferences
+                                ._rawCaptureIdTable(db),
+                            referencedColumn:
+                                $$TransactionSourcesTableReferences
+                                    ._rawCaptureIdTable(db)
+                                    .id,
+                          ) as T;
+                        }
+
+                        return state;
+                      },
+                  getPrefetchedDataCallback: (items) async {
+                    return [];
+                  },
+                );
+              },
+        ),
+      );
+}
+
+typedef $$TransactionSourcesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $TransactionSourcesTable,
+      TransactionSourceRow,
+      $$TransactionSourcesTableFilterComposer,
+      $$TransactionSourcesTableOrderingComposer,
+      $$TransactionSourcesTableAnnotationComposer,
+      $$TransactionSourcesTableCreateCompanionBuilder,
+      $$TransactionSourcesTableUpdateCompanionBuilder,
+      (TransactionSourceRow, $$TransactionSourcesTableReferences),
+      TransactionSourceRow,
+      PrefetchHooks Function({bool transactionId, bool rawCaptureId})
+    >;
+typedef $$UnparsedMessagesTableCreateCompanionBuilder =
+    UnparsedMessagesCompanion Function({
+      required String id,
+      required String rawCaptureId,
+      required String maskedText,
+      required int receivedAt,
+      Value<String?> resolvedTransactionId,
+      Value<int> rowid,
+    });
+typedef $$UnparsedMessagesTableUpdateCompanionBuilder =
+    UnparsedMessagesCompanion Function({
+      Value<String> id,
+      Value<String> rawCaptureId,
+      Value<String> maskedText,
+      Value<int> receivedAt,
+      Value<String?> resolvedTransactionId,
+      Value<int> rowid,
+    });
+
+final class $$UnparsedMessagesTableReferences
+    extends BaseReferences<_$AppDatabase, $UnparsedMessagesTable, UnparsedRow> {
+  $$UnparsedMessagesTableReferences(
+    super.$_db,
+    super.$_table,
+    super.$_typedResult,
+  );
+
+  static $RawCapturesTable _rawCaptureIdTable(_$AppDatabase db) =>
+      db.rawCaptures.createAlias('unparsed__raw_capture_id__raw_captures__id');
+
+  $$RawCapturesTableProcessedTableManager get rawCaptureId {
+    final $_column = $_itemColumn<String>('raw_capture_id')!;
+
+    final manager = $$RawCapturesTableTableManager(
+      $_db,
+      $_db.rawCaptures,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_rawCaptureIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+
+  static $TransactionsTable _resolvedTransactionIdTable(_$AppDatabase db) => db
+      .transactions
+      .createAlias('unparsed__resolved_transaction_id__transactions__id');
+
+  $$TransactionsTableProcessedTableManager? get resolvedTransactionId {
+    final $_column = $_itemColumn<String>('resolved_transaction_id');
+    if ($_column == null) return null;
+    final manager = $$TransactionsTableTableManager(
+      $_db,
+      $_db.transactions,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(
+      _resolvedTransactionIdTable($_db),
+    );
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+}
+
+class $$UnparsedMessagesTableFilterComposer
+    extends Composer<_$AppDatabase, $UnparsedMessagesTable> {
+  $$UnparsedMessagesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get maskedText => $composableBuilder(
+    column: $table.maskedText,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get receivedAt => $composableBuilder(
+    column: $table.receivedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$RawCapturesTableFilterComposer get rawCaptureId {
+    final $$RawCapturesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.rawCaptureId,
+      referencedTable: $db.rawCaptures,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$RawCapturesTableFilterComposer(
+            $db: $db,
+            $table: $db.rawCaptures,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$TransactionsTableFilterComposer get resolvedTransactionId {
+    final $$TransactionsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.resolvedTransactionId,
+      referencedTable: $db.transactions,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$TransactionsTableFilterComposer(
+            $db: $db,
+            $table: $db.transactions,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$UnparsedMessagesTableOrderingComposer
+    extends Composer<_$AppDatabase, $UnparsedMessagesTable> {
+  $$UnparsedMessagesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get maskedText => $composableBuilder(
+    column: $table.maskedText,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get receivedAt => $composableBuilder(
+    column: $table.receivedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$RawCapturesTableOrderingComposer get rawCaptureId {
+    final $$RawCapturesTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.rawCaptureId,
+      referencedTable: $db.rawCaptures,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$RawCapturesTableOrderingComposer(
+            $db: $db,
+            $table: $db.rawCaptures,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$TransactionsTableOrderingComposer get resolvedTransactionId {
+    final $$TransactionsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.resolvedTransactionId,
+      referencedTable: $db.transactions,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$TransactionsTableOrderingComposer(
+            $db: $db,
+            $table: $db.transactions,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$UnparsedMessagesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $UnparsedMessagesTable> {
+  $$UnparsedMessagesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get maskedText => $composableBuilder(
+    column: $table.maskedText,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get receivedAt => $composableBuilder(
+    column: $table.receivedAt,
+    builder: (column) => column,
+  );
+
+  $$RawCapturesTableAnnotationComposer get rawCaptureId {
+    final $$RawCapturesTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.rawCaptureId,
+      referencedTable: $db.rawCaptures,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$RawCapturesTableAnnotationComposer(
+            $db: $db,
+            $table: $db.rawCaptures,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$TransactionsTableAnnotationComposer get resolvedTransactionId {
+    final $$TransactionsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.resolvedTransactionId,
+      referencedTable: $db.transactions,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$TransactionsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.transactions,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$UnparsedMessagesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $UnparsedMessagesTable,
+          UnparsedRow,
+          $$UnparsedMessagesTableFilterComposer,
+          $$UnparsedMessagesTableOrderingComposer,
+          $$UnparsedMessagesTableAnnotationComposer,
+          $$UnparsedMessagesTableCreateCompanionBuilder,
+          $$UnparsedMessagesTableUpdateCompanionBuilder,
+          (UnparsedRow, $$UnparsedMessagesTableReferences),
+          UnparsedRow,
+          PrefetchHooks Function({
+            bool rawCaptureId,
+            bool resolvedTransactionId,
+          })
+        > {
+  $$UnparsedMessagesTableTableManager(
+    _$AppDatabase db,
+    $UnparsedMessagesTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$UnparsedMessagesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$UnparsedMessagesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$UnparsedMessagesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> rawCaptureId = const Value.absent(),
+                Value<String> maskedText = const Value.absent(),
+                Value<int> receivedAt = const Value.absent(),
+                Value<String?> resolvedTransactionId = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => UnparsedMessagesCompanion(
+                id: id,
+                rawCaptureId: rawCaptureId,
+                maskedText: maskedText,
+                receivedAt: receivedAt,
+                resolvedTransactionId: resolvedTransactionId,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String rawCaptureId,
+                required String maskedText,
+                required int receivedAt,
+                Value<String?> resolvedTransactionId = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => UnparsedMessagesCompanion.insert(
+                id: id,
+                rawCaptureId: rawCaptureId,
+                maskedText: maskedText,
+                receivedAt: receivedAt,
+                resolvedTransactionId: resolvedTransactionId,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$UnparsedMessagesTable, UnparsedRow>(table),
+                  $$UnparsedMessagesTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback:
+              ({rawCaptureId = false, resolvedTransactionId = false}) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [],
+                  addJoins:
+                      <
+                        T extends TableManagerState<
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic
+                        >
+                      >(state) {
+                        if (rawCaptureId) {
+                          state = state.withJoin(
+                            currentTable: table,
+                            currentColumn: table.rawCaptureId,
+                            referencedTable: $$UnparsedMessagesTableReferences
+                                ._rawCaptureIdTable(db),
+                            referencedColumn: $$UnparsedMessagesTableReferences
+                                ._rawCaptureIdTable(db)
+                                .id,
+                          ) as T;
+                        }
+                        if (resolvedTransactionId) {
+                          state = state.withJoin(
+                            currentTable: table,
+                            currentColumn: table.resolvedTransactionId,
+                            referencedTable: $$UnparsedMessagesTableReferences
+                                ._resolvedTransactionIdTable(db),
+                            referencedColumn: $$UnparsedMessagesTableReferences
+                                ._resolvedTransactionIdTable(db)
+                                .id,
+                          ) as T;
+                        }
+
+                        return state;
+                      },
+                  getPrefetchedDataCallback: (items) async {
+                    return [];
+                  },
+                );
+              },
+        ),
+      );
+}
+
+typedef $$UnparsedMessagesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $UnparsedMessagesTable,
+      UnparsedRow,
+      $$UnparsedMessagesTableFilterComposer,
+      $$UnparsedMessagesTableOrderingComposer,
+      $$UnparsedMessagesTableAnnotationComposer,
+      $$UnparsedMessagesTableCreateCompanionBuilder,
+      $$UnparsedMessagesTableUpdateCompanionBuilder,
+      (UnparsedRow, $$UnparsedMessagesTableReferences),
+      UnparsedRow,
+      PrefetchHooks Function({bool rawCaptureId, bool resolvedTransactionId})
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -5105,4 +8221,10 @@ class $AppDatabaseManager {
       $$TransactionsTableTableManager(_db, _db.transactions);
   $$SettingsTableTableManager get settings =>
       $$SettingsTableTableManager(_db, _db.settings);
+  $$RawCapturesTableTableManager get rawCaptures =>
+      $$RawCapturesTableTableManager(_db, _db.rawCaptures);
+  $$TransactionSourcesTableTableManager get transactionSources =>
+      $$TransactionSourcesTableTableManager(_db, _db.transactionSources);
+  $$UnparsedMessagesTableTableManager get unparsedMessages =>
+      $$UnparsedMessagesTableTableManager(_db, _db.unparsedMessages);
 }

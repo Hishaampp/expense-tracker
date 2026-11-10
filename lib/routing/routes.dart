@@ -15,6 +15,21 @@ abstract final class Routes {
   /// Quick Add, for a new expense.
   static const String addExpense = '/add';
 
+  /// Quick Add for shared text, by pending-capture id.
+  static const String sharedPattern = '/add/shared/:id';
+
+  /// Quick Add for the shared text held under [id].
+  static String shared(String id) => '/add/shared/$id';
+
+  /// The Unparsed messages list.
+  static const String unparsed = '/unparsed';
+
+  /// Path pattern of Quick Add resolving an Unparsed message.
+  static const String resolveUnparsedPattern = '/unparsed/:id';
+
+  /// Quick Add resolving the Unparsed message [id].
+  static String resolveUnparsed(String id) => '/unparsed/$id';
+
   /// Path pattern of the expense editor.
   static const String transactionPattern = '/transactions/:id';
 

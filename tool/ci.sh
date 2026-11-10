@@ -25,8 +25,10 @@ fi
 
 step "generated code is up to date"
 dart run build_runner build --delete-conflicting-outputs >/dev/null
-dart run drift_dev schema dump lib/data/db/app_database.dart drift_schemas/ >/dev/null
-if [[ -d .git ]] && ! git diff --exit-code --stat -- '*.g.dart' drift_schemas/; then
+dart run drift_dev schema dump lib/data/db/app_database.dart drift_schemas/app/ >/dev/null
+dart run drift_dev schema steps drift_schemas/app/ lib/data/db/app_database.steps.dart >/dev/null
+dart run drift_dev schema generate --data-classes --companions drift_schemas/app/ test/drift/app/generated/ >/dev/null
+if [[ -d .git ]] && ! git diff --exit-code --stat -- '*.g.dart' '*.steps.dart' drift_schemas/ test/drift/app/generated/; then
   echo "::error::Generated code or drift_schemas/ is stale. If you changed a table: bump schemaVersion, add a migration step, then commit the regenerated files."; exit 1
 fi
 
@@ -38,6 +40,9 @@ flutter analyze --fatal-infos
 
 step "test"
 flutter test --test-randomize-ordering-seed random
+
+step "parser package tests"
+(cd packages/txn_parser && dart test)
 
 step "manifest checks"
 tool/check_manifests.sh

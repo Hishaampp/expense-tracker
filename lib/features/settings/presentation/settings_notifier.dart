@@ -3,6 +3,7 @@ import 'package:expense_tracker/core/models/appearance_mode.dart';
 import 'package:expense_tracker/core/result.dart';
 import 'package:expense_tracker/data/data_providers.dart';
 import 'package:expense_tracker/data/query_providers.dart';
+import 'package:expense_tracker/features/capture/application/capture_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meta/meta.dart';
 
@@ -10,13 +11,20 @@ import 'package:meta/meta.dart';
 @immutable
 final class SettingsState {
   /// Creates the state.
-  const new({required this.monthStartDay, required this.appearance});
+  const new({
+    required this.monthStartDay,
+    required this.appearance,
+    required this.unparsedCount,
+  });
 
   /// The day of the month a budgeting month starts on.
   final int monthStartDay;
 
   /// Light, dark or follow the phone.
   final AppearanceMode appearance;
+
+  /// How many messages wait on the Unparsed list.
+  final int unparsedCount;
 }
 
 /// The Settings view model over the live settings.
@@ -26,6 +34,7 @@ class SettingsNotifier extends AsyncNotifier<SettingsState> {
     return SettingsState(
       monthStartDay: await ref.watch(monthStartDayProvider.future),
       appearance: await ref.watch(appearanceProvider.future),
+      unparsedCount: (await ref.watch(unparsedMessagesProvider.future)).length,
     );
   }
 

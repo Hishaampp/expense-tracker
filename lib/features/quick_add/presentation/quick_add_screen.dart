@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:expense_tracker/core/models/transaction_kind.dart';
 import 'package:expense_tracker/features/quick_add/presentation/quick_add_notifier.dart';
 import 'package:expense_tracker/features/quick_add/presentation/undo_delete_notifier.dart';
 import 'package:expense_tracker/features/quick_add/presentation/widgets/all_categories_sheet.dart';
@@ -20,13 +21,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 /// Quick Add: keypad first, then a category tap saves a cash expense.
-/// With an [editId] it edits or deletes that transaction instead.
+/// [args] can instead open it to edit a transaction, to resolve an
+/// Unparsed message, or to finish a shared message.
 class QuickAddScreen extends ConsumerWidget {
-  /// Creates the screen; pass [editId] to edit an existing transaction.
-  const new({this.editId, super.key});
+  /// Creates the screen for [args].
+  const new({this.args = newExpenseArgs, super.key});
 
   /// Id of the transaction to edit, or null to add a new one.
-  final String? editId;
+  /// What Quick Add was opened for.
+  final QuickAddArgs args;
 
   void _onOutcome(BuildContext context, WidgetRef ref, QuickAddOutcome done) {
     final l10n = AppLocalizations.of(context);
@@ -73,7 +76,7 @@ class QuickAddScreen extends ConsumerWidget {
     WidgetRef ref,
     QuickAddState state,
   ) async {
-    final notifier = ref.read(quickAddNotifierProvider(editId).notifier);
+    final notifier = ref.read(quickAddNotifierProvider(args).notifier);
     final picked = await showDatePicker(
       context: context,
       initialDate: state.occurredAt ?? state.latestDate,
@@ -89,7 +92,7 @@ class QuickAddScreen extends ConsumerWidget {
     WidgetRef ref,
     QuickAddState state,
   ) async {
-    final notifier = ref.read(quickAddNotifierProvider(editId).notifier);
+    final notifier = ref.read(quickAddNotifierProvider(args).notifier);
     final note = await showDialog<String>(
       context: context,
       builder: (_) => NoteDialog(initialNote: state.note),
@@ -104,12 +107,12 @@ class QuickAddScreen extends ConsumerWidget {
     QuickAddState state,
   ) async {
     final l10n = AppLocalizations.of(context);
-    final notifier = ref.read(quickAddNotifierProvider(editId).notifier);
+    final notifier = ref.read(quickAddNotifierProvider(args).notifier);
     final picked = await showAppSheet<String>(
       context,
       AllCategoriesSheet(
         title: l10n.quickAddAllCategories,
-        categories: state.categories,
+        categories: state.categoriesForKind,
         selectedId: state.categoryId,
         selectedLabel: l10n.selected,
       ),
@@ -118,12 +121,23 @@ class QuickAddScreen extends ConsumerWidget {
     if (picked != null) notifier.pickCategory(picked);
   }
 
+  String _title(AppLocalizations l10n, QuickAddState? state) {
+    if (args.editId != null) return l10n.quickAddEditTitle;
+    return switch (state?.kind) {
+      TransactionKind.income => l10n.quickAddIncomeTitle,
+      TransactionKind.refund => l10n.quickAddRefundTitle,
+      TransactionKind.expense ||
+      TransactionKind.transfer ||
+      null => l10n.quickAddTitle,
+    };
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final colors = AppColors.of(context);
     final metrics = AppMetrics.of(context);
-    final provider = quickAddNotifierProvider(editId);
+    final provider = quickAddNotifierProvider(args);
     ref.listen(provider.select((s) => s.value?.outcome), (previous, next) {
       if (next != null) _onOutcome(context, ref, next);
     });
@@ -191,21 +205,28 @@ class QuickAddScreen extends ConsumerWidget {
                         child: Semantics(
                           header: true,
                           child: Text(
-                            editId == null
-                                ? l10n.quickAddTitle
-                                : l10n.quickAddEditTitle,
+                            _title(l10n, state),
                             textAlign: TextAlign.center,
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ),
                       ),
-                      if (editId != null)
+                      if (args.editId != null)
                         RoundIconButton(
                           icon: Icons.delete_outline_rounded,
                           tooltip: l10n.delete,
                           floating: false,
                           color: colors.danger,
                           onPressed: canDelete ? notifier.delete : null,
+                        )
+                      else if (args.unparsedId == null)
+                        RoundIconButton(
+                          icon: Icons.content_paste_rounded,
+                          tooltip: l10n.quickAddPaste,
+                          floating: false,
+                          onPressed: state == null || state.isSaving
+                              ? null
+                              : notifier.paste,
                         )
                       else
                         SizedBox.square(dimension: metrics.minTapTarget),

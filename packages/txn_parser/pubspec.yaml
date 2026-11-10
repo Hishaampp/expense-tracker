@@ -1,0 +1,15 @@
+name: txn_parser
+description: Reads Indian bank, card and UPI messages into structured transactions. Pure Dart.
+version: 0.0.0
+publish_to: none
+resolution: workspace
+
+environment:
+  sdk: ^3.13.7
+
+dependencies:
+  meta: ^1.19.0
+
+dev_dependencies:
+  test: ^1.31.1
+  very_good_analysis: ^11.0.0

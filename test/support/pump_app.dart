@@ -4,6 +4,7 @@ import 'package:expense_tracker/data/data_providers.dart';
 import 'package:expense_tracker/data/db/app_database.dart';
 import 'package:expense_tracker/features/quick_add/presentation/widgets/keypad.dart';
 import 'package:expense_tracker/routing/floating_tab_bar.dart';
+import 'package:expense_tracker/services/clipboard_service.dart';
 import 'package:expense_tracker/services/haptics.dart';
 import 'package:expense_tracker/services/service_providers.dart';
 import 'package:flutter/material.dart';
@@ -46,11 +47,24 @@ void appTest(String description, Future<void> Function(WidgetTester) body) {
   });
 }
 
+/// A clipboard holding [text].
+final class FakeClipboard implements ClipboardService {
+  /// Creates the clipboard.
+  new([this.text]);
+
+  /// What a paste reads.
+  String? text;
+
+  @override
+  Future<String?> readText() async => text;
+}
+
 /// Pumps the whole app over a fresh in-memory database and a fixed clock.
 /// Returns the database so a test can seed or inspect it.
 Future<AppDatabase> pumpApp(
   WidgetTester tester, {
   FakeHaptics? haptics,
+  FakeClipboard? clipboard,
   Size? size,
   double textScale = 1,
 }) async {
@@ -69,6 +83,7 @@ Future<AppDatabase> pumpApp(
         appDatabaseProvider.overrideWithValue(db),
         clockProvider.overrideWithValue(clock),
         hapticsProvider.overrideWithValue(haptics ?? FakeHaptics()),
+        clipboardProvider.overrideWithValue(clipboard ?? FakeClipboard()),
       ],
       child: const App(),
     ),

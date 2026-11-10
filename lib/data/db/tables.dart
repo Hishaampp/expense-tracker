@@ -234,3 +234,118 @@ class Settings extends Table {
   @override
   bool get isStrict => true;
 }
+
+/// Raw text received from a capture source, before parsing (spec §12).
+/// Holds no message text: only what is needed to de-duplicate and to say
+/// what happened to it.
+@DataClassName('RawCaptureRow')
+class RawCaptures extends Table {
+  /// Stable unique id (the native queue's id when it came from there).
+  TextColumn get id => text()();
+
+  /// Hash of origin + text + minute received; the de-duplication key.
+  TextColumn get contentHash => text().unique()();
+
+  /// Where it came from.
+  TextColumn get source => text()();
+
+  /// App package or SMS sender ID, if known.
+  TextColumn get origin => text().nullable()();
+
+  /// When the device received it, UTC epoch milliseconds.
+  IntColumn get receivedAt => integer()();
+
+  /// What became of it.
+  TextColumn get status => text()();
+
+  /// Why it was dropped, for dropped captures (the message class).
+  TextColumn get dropReason => text().nullable()();
+
+  @override
+  Set<Column<Object>> get primaryKey => {id};
+
+  @override
+  bool get isStrict => true;
+
+  @override
+  List<String> get customConstraints => const [
+    // One SQL literal; splitting it would read as two list items.
+    // ignore: lines_longer_than_80_chars
+    "CHECK (source IN ('android_notification', 'android_sms', 'ios_shortcut', 'share', 'paste'))",
+    "CHECK (status IN ('parsed', 'dropped', 'unparsed', 'duplicate'))",
+  ];
+}
+
+/// Links a transaction to every capture that described it (spec §7.6).
+@DataClassName('TransactionSourceRow')
+@TableIndex(name: 'transaction_sources_transaction', columns: {#transactionId})
+class TransactionSources extends Table {
+  /// Stable unique id.
+  TextColumn get id => text()();
+
+  /// The transaction.
+  TextColumn get transactionId =>
+      text().references(Transactions, #id, onDelete: KeyAction.cascade)();
+
+  /// The capture.
+  TextColumn get rawCaptureId =>
+      text().references(RawCaptures, #id, onDelete: KeyAction.cascade)();
+
+  /// Copy of the capture's source.
+  TextColumn get source => text()();
+
+  /// Copy of the capture's origin.
+  TextColumn get origin => text().nullable()();
+
+  /// When the capture was received, UTC epoch milliseconds.
+  IntColumn get receivedAt => integer()();
+
+  /// The original message, kept for re-parsing until the retention purge
+  /// (Phase 8). Never logged.
+  TextColumn get rawText => text().nullable()();
+
+  /// The parser template that read it.
+  TextColumn get parserTemplateId => text().nullable()();
+
+  /// The parser's confidence, 0–1.
+  RealColumn get confidence => real().nullable()();
+
+  @override
+  Set<Column<Object>> get primaryKey => {id};
+
+  @override
+  bool get isStrict => true;
+}
+
+/// Messages with an amount that could not be understood (spec §7.8).
+@DataClassName('UnparsedRow')
+class UnparsedMessages extends Table {
+  @override
+  String get tableName => 'unparsed';
+
+  /// Stable unique id.
+  TextColumn get id => text()();
+
+  /// The capture it came from.
+  TextColumn get rawCaptureId =>
+      text().references(RawCaptures, #id, onDelete: KeyAction.cascade)();
+
+  /// The message with UPI ids, account and reference numbers masked.
+  TextColumn get maskedText => text()();
+
+  /// When it was received, UTC epoch milliseconds.
+  IntColumn get receivedAt => integer()();
+
+  /// The transaction the user made from it, once resolved.
+  TextColumn get resolvedTransactionId => text().nullable().references(
+    Transactions,
+    #id,
+    onDelete: KeyAction.setNull,
+  )();
+
+  @override
+  Set<Column<Object>> get primaryKey => {id};
+
+  @override
+  bool get isStrict => true;
+}

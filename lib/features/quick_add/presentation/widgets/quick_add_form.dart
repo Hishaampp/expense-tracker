@@ -1,5 +1,6 @@
 import 'package:expense_tracker/features/quick_add/presentation/quick_add_notifier.dart';
 import 'package:expense_tracker/features/quick_add/presentation/widgets/amount_display.dart';
+import 'package:expense_tracker/features/quick_add/presentation/widgets/capture_draft_card.dart';
 import 'package:expense_tracker/features/quick_add/presentation/widgets/category_grid.dart';
 import 'package:expense_tracker/features/quick_add/presentation/widgets/keypad.dart';
 import 'package:expense_tracker/features/quick_add/presentation/widgets/pill_button.dart';
@@ -10,6 +11,7 @@ import 'package:expense_tracker/l10n/failure_messages.dart';
 import 'package:expense_tracker/theme/app_colors.dart';
 import 'package:expense_tracker/theme/app_metrics.dart';
 import 'package:flutter/material.dart';
+import 'package:txn_parser/txn_parser.dart';
 
 /// The Quick Add layout: big amount, Cash/date/note pills, the most-used
 /// categories, and the keypad. Renders [state] and reports taps.
@@ -65,6 +67,7 @@ class QuickAddForm extends StatelessWidget {
       state.amount.fractionDigits,
     );
     final occurredAt = state.occurredAt;
+    final account = state.draft?.accountLabel ?? l10n.quickAddCash;
     final date = occurredAt == null
         ? l10n.quickAddToday
         : formatShortDate(occurredAt, locale);
@@ -90,8 +93,8 @@ class QuickAddForm extends StatelessWidget {
                   children: [
                     PillButton(
                       icon: Icons.payments_rounded,
-                      label: l10n.quickAddCash,
-                      semanticLabel: l10n.quickAddCash,
+                      label: account,
+                      semanticLabel: account,
                     ),
                     PillButton(
                       icon: Icons.event_rounded,
@@ -111,6 +114,10 @@ class QuickAddForm extends StatelessWidget {
                     ),
                   ],
                 ),
+                if (state.draft case final draft?) ...[
+                  SizedBox(height: metrics.spaceMd),
+                  CaptureDraftCard(draft: draft),
+                ],
                 SizedBox(height: metrics.spaceLg),
                 _Guidance(state: state),
                 SizedBox(height: metrics.spaceMd),
@@ -119,8 +126,8 @@ class QuickAddForm extends StatelessWidget {
                   selectedId: state.categoryId,
                   selectedLabel: l10n.selected,
                   onPick: onPickCategory,
-                  moreLabel: l10n.quickAddMore,
-                  onMore: onMore,
+                  moreLabel: state.hasMore ? l10n.quickAddMore : null,
+                  onMore: state.hasMore ? onMore : null,
                 ),
                 SizedBox(height: metrics.spaceMd),
               ],
@@ -160,6 +167,25 @@ class _Guidance extends StatelessWidget {
     final metrics = AppMetrics.of(context);
     final textTheme = Theme.of(context).textTheme;
     final failure = state.failure;
+    final notice = state.notice;
+    if (failure == null && notice != null) {
+      return Semantics(
+        liveRegion: true,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.info_outline_rounded, color: colors.accent),
+            SizedBox(width: metrics.spaceSm),
+            Flexible(
+              child: Text(
+                noticeText(l10n, notice, state.droppedClass),
+                style: textTheme.bodySmall?.copyWith(color: colors.onSurface),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
     if (failure != null) {
       return Semantics(
         liveRegion: true,
@@ -208,4 +234,34 @@ class _Guidance extends StatelessWidget {
       ),
     );
   }
+}
+
+/// The words for [notice]; [droppedClass] says why a message was not a
+/// payment.
+String noticeText(
+  AppLocalizations l10n,
+  QuickAddNotice notice,
+  MessageClass? droppedClass,
+) {
+  return switch (notice) {
+    QuickAddNotice.clipboardEmpty => l10n.noticeClipboardEmpty,
+    QuickAddNotice.noAmount => l10n.noticeNoAmount,
+    QuickAddNotice.duplicate => l10n.noticeDuplicate,
+    QuickAddNotice.unparsed => l10n.noticeUnparsed,
+    QuickAddNotice.notAPayment => l10n.noticeNotPayment(switch (droppedClass) {
+      MessageClass.otp => l10n.reasonOtp,
+      MessageClass.promo => l10n.reasonPromo,
+      MessageClass.upcomingOrMandate => l10n.reasonUpcoming,
+      MessageClass.collectRequest => l10n.reasonCollect,
+      MessageClass.balanceInfo => l10n.reasonBalance,
+      MessageClass.cardBillDue => l10n.reasonCardBill,
+      MessageClass.statement => l10n.reasonStatement,
+      MessageClass.failed => l10n.reasonFailed,
+      MessageClass.debit ||
+      MessageClass.credit ||
+      MessageClass.reversalRefund ||
+      MessageClass.unknown ||
+      null => l10n.reasonOther,
+    }),
+  };
 }

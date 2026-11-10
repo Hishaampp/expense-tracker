@@ -14,27 +14,81 @@
   "addExpense": "Add expense",
   "selected": "selected",
   "changeMonth": "Change month, {month}",
-  "@changeMonth": {"placeholders": {"month": {"type": "String"}}},
+  "@changeMonth": {
+    "placeholders": {
+      "month": {
+        "type": "String"
+      }
+    }
+  },
   "pickMonthTitle": "Choose a month",
   "heroGreeting": "Hi!",
   "heroSpentThisMonth": "You've spent {amount} this month.",
-  "@heroSpentThisMonth": {"placeholders": {"amount": {"type": "String"}}},
+  "@heroSpentThisMonth": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
   "heroSpentSince": "You've spent {amount} since {date}.",
-  "@heroSpentSince": {"placeholders": {"amount": {"type": "String"}, "date": {"type": "String"}}},
+  "@heroSpentSince": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "heroSpentIn": "You spent {amount} in {month}.",
-  "@heroSpentIn": {"placeholders": {"amount": {"type": "String"}, "month": {"type": "String"}}},
+  "@heroSpentIn": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "month": {
+        "type": "String"
+      }
+    }
+  },
   "heroMoneyIn": "Money in",
   "heroDailyAverage": "Daily average",
   "heroInRooms": "In Rooms",
   "heroPayments": "Payments",
   "heroPaymentsValue": "{count, plural, =0{None yet} =1{1 payment} other{{count} payments}}",
-  "@heroPaymentsValue": {"placeholders": {"count": {"type": "int"}}},
+  "@heroPaymentsValue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "heroMoneyInSemantics": "{amount} money in",
-  "@heroMoneyInSemantics": {"placeholders": {"amount": {"type": "String"}}},
+  "@heroMoneyInSemantics": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
   "heroDailyAverageSemantics": "Daily average {amount}",
-  "@heroDailyAverageSemantics": {"placeholders": {"amount": {"type": "String"}}},
+  "@heroDailyAverageSemantics": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
   "heroInRoomsSemantics": "{amount} spent in Rooms",
-  "@heroInRoomsSemantics": {"placeholders": {"amount": {"type": "String"}}},
+  "@heroInRoomsSemantics": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
   "seeAllActivity": "See all activity",
   "homeTopCategories": "Top categories",
   "homeRecent": "Recent",
@@ -43,26 +97,83 @@
   "homeEmptyBody": "Add your first expense and this month comes to life.",
   "activityTitle": "Activity",
   "activityEmptyTitle": "Nothing in {month}",
-  "@activityEmptyTitle": {"placeholders": {"month": {"type": "String"}}},
+  "@activityEmptyTitle": {
+    "placeholders": {
+      "month": {
+        "type": "String"
+      }
+    }
+  },
   "activityEmptyBody": "Expenses you add for this month show up here.",
   "today": "Today",
   "yesterday": "Yesterday",
   "daySpent": "{amount} spent",
-  "@daySpent": {"placeholders": {"amount": {"type": "String"}}},
+  "@daySpent": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
   "uncategorised": "Uncategorised",
   "moneyIn": "Money in",
   "transfer": "Transfer",
   "refund": "Refund",
   "rowSpentSemantics": "{amount} spent, {what}",
-  "@rowSpentSemantics": {"placeholders": {"amount": {"type": "String"}, "what": {"type": "String"}}},
+  "@rowSpentSemantics": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "what": {
+        "type": "String"
+      }
+    }
+  },
   "rowMoneyInSemantics": "{amount} money in, {what}",
-  "@rowMoneyInSemantics": {"placeholders": {"amount": {"type": "String"}, "what": {"type": "String"}}},
+  "@rowMoneyInSemantics": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "what": {
+        "type": "String"
+      }
+    }
+  },
   "rowTransferSemantics": "{amount} transfer, {what}",
-  "@rowTransferSemantics": {"placeholders": {"amount": {"type": "String"}, "what": {"type": "String"}}},
+  "@rowTransferSemantics": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "what": {
+        "type": "String"
+      }
+    }
+  },
   "rowRefundSemantics": "{amount} refund, {what}",
-  "@rowRefundSemantics": {"placeholders": {"amount": {"type": "String"}, "what": {"type": "String"}}},
+  "@rowRefundSemantics": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "what": {
+        "type": "String"
+      }
+    }
+  },
   "categorySpentSemantics": "{amount} spent on {category}",
-  "@categorySpentSemantics": {"placeholders": {"amount": {"type": "String"}, "category": {"type": "String"}}},
+  "@categorySpentSemantics": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "category": {
+        "type": "String"
+      }
+    }
+  },
   "roomsTitle": "Rooms",
   "roomsComingTitle": "Trips and events, together",
   "roomsComingBody": "Rooms arrive in a coming update. A Room keeps a trip's or a wedding's spending together, and it still counts in your month.",
@@ -71,19 +182,43 @@
   "quickAddAmountHint": "Enter an amount",
   "quickAddPickCategory": "Tap a category to save",
   "quickAddAmountSemantics": "Amount {amount}",
-  "@quickAddAmountSemantics": {"placeholders": {"amount": {"type": "String"}}},
+  "@quickAddAmountSemantics": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
   "quickAddCash": "Cash",
   "quickAddToday": "Today",
   "quickAddDateLabel": "Date: {date}",
-  "@quickAddDateLabel": {"placeholders": {"date": {"type": "String"}}},
+  "@quickAddDateLabel": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "quickAddNote": "Note",
   "quickAddNoteLabel": "Note: {note}",
-  "@quickAddNoteLabel": {"placeholders": {"note": {"type": "String"}}},
+  "@quickAddNoteLabel": {
+    "placeholders": {
+      "note": {
+        "type": "String"
+      }
+    }
+  },
   "quickAddNoteHint": "Chai with Ravi",
   "quickAddMore": "More",
   "quickAddAllCategories": "All categories",
   "quickAddSaved": "{amount} added",
-  "@quickAddSaved": {"placeholders": {"amount": {"type": "String"}}},
+  "@quickAddSaved": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
   "quickAddUpdated": "Expense updated",
   "quickAddDeleted": "Expense deleted",
   "quickAddMissing": "This expense no longer exists.",
@@ -95,15 +230,39 @@
   "settingsSectionLook": "Look",
   "settingsMonthStart": "Month starts on",
   "settingsMonthStartValue": "Day {day}",
-  "@settingsMonthStartValue": {"placeholders": {"day": {"type": "int"}}},
+  "@settingsMonthStartValue": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
   "settingsMonthStartSemantics": "Month starts on day {day}",
-  "@settingsMonthStartSemantics": {"placeholders": {"day": {"type": "int"}}},
+  "@settingsMonthStartSemantics": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
   "settingsMonthStartHelp": "Pick your salary day to make each month run from one salary to the next.",
   "settingsMonthStartSaved": "Month now starts on day {day}",
-  "@settingsMonthStartSaved": {"placeholders": {"day": {"type": "int"}}},
+  "@settingsMonthStartSaved": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
   "settingsAppearance": "Appearance",
   "settingsAppearanceSemantics": "Appearance, {mode}",
-  "@settingsAppearanceSemantics": {"placeholders": {"mode": {"type": "String"}}},
+  "@settingsAppearanceSemantics": {
+    "placeholders": {
+      "mode": {
+        "type": "String"
+      }
+    }
+  },
   "themeSystem": "System",
   "themeLight": "Light",
   "themeDark": "Dark",
@@ -111,5 +270,64 @@
   "notFoundAction": "Go to Home",
   "failureStoreWrite": "Couldn't save. Try again.",
   "failureStoreMissing": "This record no longer exists.",
-  "failureLoad": "Couldn't load this. Try again."
+  "failureLoad": "Couldn't load this. Try again.",
+  "quickAddPaste": "Paste a payment message",
+  "quickAddIncomeTitle": "Add money in",
+  "quickAddRefundTitle": "Add refund",
+  "quickAddFromMessage": "From a message",
+  "quickAddFromMessageSemantics": "Filled from a message: {details}",
+  "@quickAddFromMessageSemantics": {
+    "placeholders": {
+      "details": {
+        "type": "String"
+      }
+    }
+  },
+  "quickAddPaymentFallback": "Payment",
+  "noticeClipboardEmpty": "Copy a bank or UPI message first, then tap Paste.",
+  "noticeNoAmount": "There's no amount in the copied text.",
+  "noticeDuplicate": "That payment is already added.",
+  "noticeUnparsed": "Couldn't read that message. It's saved under Unparsed messages in Settings.",
+  "noticeNotPayment": "That isn't a payment: {reason}.",
+  "@noticeNotPayment": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "reasonOtp": "it's a one-time password",
+  "reasonPromo": "it's an offer",
+  "reasonUpcoming": "it's a reminder of a future payment",
+  "reasonCollect": "it's a request for money",
+  "reasonBalance": "it's a balance update",
+  "reasonCardBill": "it's a card bill reminder",
+  "reasonStatement": "it's a statement notice",
+  "reasonFailed": "the payment failed",
+  "reasonOther": "nothing was paid",
+  "unparsedTitle": "Unparsed messages",
+  "unparsedRowSemantics": "Unparsed messages, {count}",
+  "@unparsedRowSemantics": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "unparsedEmptyTitle": "Nothing to sort out",
+  "unparsedEmptyBody": "Messages with an amount the app couldn't read appear here, so nothing is lost.",
+  "unparsedHint": "Tap a message to add it yourself.",
+  "unparsedItemSemantics": "Message received {date}: {text}",
+  "@unparsedItemSemantics": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "text": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsSectionMessages": "Messages",
+  "back": "Back"
 }

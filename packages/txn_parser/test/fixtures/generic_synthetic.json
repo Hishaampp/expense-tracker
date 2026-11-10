@@ -1,0 +1,333 @@
+[
+  {
+    "name": "UPI debit to a VPA, bank SMS",
+    "synthetic": true,
+    "origin": "AX-HDFCBK-S",
+    "text": "Rs.240.00 debited from A/c XX1234 on 10-11-26 to VPA swiggy@icici. UPI Ref No 631245678901. Not you? Call 18002586161",
+    "expected": {
+      "class": "debit",
+      "amountPaise": 24000,
+      "direction": "debit",
+      "instrument": "upi",
+      "bankHint": "HDFC",
+      "accountHint": "1234",
+      "payeeVpa": "swiggy@icici",
+      "refNo": "631245678901",
+      "date": "2026-11-10"
+    }
+  },
+  {
+    "name": "Debit with no currency sign goes to Unparsed",
+    "synthetic": true,
+    "origin": "VM-SBIUPI",
+    "text": "Dear UPI user A/C X5678 debited by 62.0 on date 10Nov26 trf to SHARMA DAIRY Refno 412398765432. If not u? call 1800111109. -SBI",
+    "expected": {
+      "class": "debit",
+      "result": "unparsed",
+      "amountPaise": null
+    }
+  },
+  {
+    "name": "UPI debit, SBI style with Rs",
+    "synthetic": true,
+    "origin": "VM-SBIUPI-S",
+    "text": "Dear UPI user A/C X5678 debited by Rs 62.00 on date 10Nov26 trf to SHARMA DAIRY Refno 412398765432. If not u? call 1800111109. -SBI",
+    "expected": {
+      "class": "debit",
+      "amountPaise": 6200,
+      "direction": "debit",
+      "instrument": "upi",
+      "bankHint": "SBI",
+      "accountHint": "5678",
+      "payeeName": "SHARMA DAIRY",
+      "refNo": "412398765432",
+      "date": "2026-11-10"
+    }
+  },
+  {
+    "name": "UPI credit from a person",
+    "synthetic": true,
+    "origin": "JD-ICICIT",
+    "text": "ICICI Bank Acct XX901 credited with Rs 1,500.00 on 09-Nov-26; RAVI KUMAR credited. UPI:631298765432. Call 18002662 for dispute.",
+    "expected": {
+      "class": "credit",
+      "amountPaise": 150000,
+      "direction": "credit",
+      "instrument": "upi",
+      "bankHint": "ICICI",
+      "accountHint": "901",
+      "date": "2026-11-09"
+    }
+  },
+  {
+    "name": "Card POS purchase",
+    "synthetic": true,
+    "origin": "AD-HDFCBK",
+    "text": "Rs.1,250.50 spent on HDFC Bank Card x4321 at RELIANCE SMART on 2026-11-08:19:42:10. Avl Lmt: Rs.84,320.00. Not you? Call 18002586161",
+    "expected": {
+      "class": "debit",
+      "amountPaise": 125050,
+      "direction": "debit",
+      "instrument": "card",
+      "bankHint": "HDFC",
+      "accountHint": "4321",
+      "payeeName": "RELIANCE SMART",
+      "date": "2026-11-08"
+    }
+  },
+  {
+    "name": "Credit card online spend",
+    "synthetic": true,
+    "origin": "VK-AXISBK",
+    "text": "Spent INR 799 Axis Bank Credit Card no. XX7788 07-11-26 21:15:03 IST AMAZON PAY IN Avl Limit: INR 45,201.00 Not you? SMS BLOCK 7788 to 919951860002",
+    "expected": {
+      "class": "debit",
+      "amountPaise": 79900,
+      "direction": "debit",
+      "instrument": "card",
+      "bankHint": "AXIS",
+      "accountHint": "7788",
+      "isCreditCard": true,
+      "date": "2026-11-07",
+      "time": "21:15:03"
+    }
+  },
+  {
+    "name": "ATM withdrawal",
+    "synthetic": true,
+    "origin": "BZ-KOTAKB",
+    "text": "Rs 2000.00 withdrawn at ATM KOTAK MG ROAD from Kotak Bank a/c XX3344 on 06-11-2026. Avl bal Rs 18,442.10",
+    "expected": {
+      "class": "debit",
+      "amountPaise": 200000,
+      "direction": "debit",
+      "instrument": "atm",
+      "bankHint": "KOTAK",
+      "accountHint": "3344",
+      "availableBalancePaise": 1844210,
+      "date": "2026-11-06"
+    }
+  },
+  {
+    "name": "NEFT credit (salary)",
+    "synthetic": true,
+    "origin": "AX-HDFCBK",
+    "text": "Update! INR 52,000.00 deposited in HDFC Bank A/c XX1234 on 01-NOV-26 for NEFT Cr-ACME TECH PVT LTD. Avl bal INR 74,180.25.",
+    "expected": {
+      "class": "credit",
+      "amountPaise": 5200000,
+      "direction": "credit",
+      "instrument": "neft",
+      "bankHint": "HDFC",
+      "accountHint": "1234",
+      "availableBalancePaise": 7418025,
+      "date": "2026-11-01"
+    }
+  },
+  {
+    "name": "IMPS debit",
+    "synthetic": true,
+    "origin": "VM-PNBSMS",
+    "text": "Your a/c no. XXXXXXXX6677 is debited for Rs.3,000.00 on 05-11-2026 14:02:11 and credited to a/c no. XXXXXXXX9012 (IMPS Ref no 631011112222).",
+    "expected": {
+      "class": "debit",
+      "amountPaise": 300000,
+      "direction": "debit",
+      "instrument": "imps",
+      "accountHint": "6677",
+      "refNo": "631011112222",
+      "date": "2026-11-05",
+      "time": "14:02:11"
+    }
+  },
+  {
+    "name": "Credit card bill payment",
+    "synthetic": true,
+    "origin": "AX-ICICIB",
+    "text": "Dear Customer, Payment of Rs 12,430.00 has been received on your ICICI Bank Credit Card Account 4xxx5566 on 04-Nov-26. Thank you.",
+    "expected": {
+      "class": "debit",
+      "amountPaise": 1243000,
+      "isCreditCard": true,
+      "bankHint": "ICICI"
+    }
+  },
+  {
+    "name": "Refund",
+    "synthetic": true,
+    "origin": "AD-HDFCBK",
+    "text": "Refund of Rs 499.00 credited to your HDFC Bank Card x4321 from FLIPKART on 03-11-26.",
+    "expected": {
+      "class": "reversalRefund",
+      "amountPaise": 49900,
+      "direction": "credit",
+      "instrument": "card",
+      "accountHint": "4321",
+      "date": "2026-11-03"
+    }
+  },
+  {
+    "name": "Failed UPI payment",
+    "synthetic": true,
+    "origin": "VM-SBIUPI",
+    "text": "Your UPI transaction of Rs 150.00 to cafe@ybl has failed. Amount if debited will be reversed within 48 hrs.",
+    "expected": {
+      "class": "reversalRefund",
+      "note": "mentions reversal; a later phase pairs it with its failure"
+    }
+  },
+  {
+    "name": "Failure without reversal wording",
+    "synthetic": true,
+    "origin": "VM-SBIUPI",
+    "text": "Your UPI transaction of Rs 150.00 to cafe@ybl has failed. Please try again.",
+    "expected": {
+      "class": "failed",
+      "result": "dropped"
+    }
+  },
+  {
+    "name": "Reversal of a failed payment",
+    "synthetic": true,
+    "origin": "VM-SBIUPI",
+    "text": "Rs 150.00 reversed to your A/c X5678 for failed UPI txn Ref 631299991111 on 02-11-26.",
+    "expected": {
+      "class": "reversalRefund",
+      "amountPaise": 15000,
+      "direction": "credit",
+      "accountHint": "5678",
+      "refNo": "631299991111"
+    }
+  },
+  {
+    "name": "OTP with amount",
+    "synthetic": true,
+    "origin": "AX-HDFCBK",
+    "text": "OTP is 482913 for txn of INR 2,499.00 at AMAZON on HDFC Bank card ending 4321. Valid for 5 mins. Do not share OTP.",
+    "expected": {
+      "class": "otp",
+      "result": "dropped"
+    }
+  },
+  {
+    "name": "Promo with an amount",
+    "synthetic": true,
+    "origin": "VK-PAYTMB",
+    "text": "Get cashback up to Rs 500 on your next 3 bill payments! Offer valid till 30 Nov. T&C apply. Click https://example.invalid/x",
+    "expected": {
+      "class": "promo",
+      "result": "dropped"
+    }
+  },
+  {
+    "name": "Autopay notice",
+    "synthetic": true,
+    "origin": "AX-ICICIB",
+    "text": "Your A/c XX901 will be debited with Rs 649.00 on 12-Nov-26 towards NETFLIX autopay. Ensure sufficient balance.",
+    "expected": {
+      "class": "upcomingOrMandate",
+      "result": "dropped"
+    }
+  },
+  {
+    "name": "Collect request",
+    "synthetic": true,
+    "origin": "VM-SBIUPI",
+    "text": "MOHAN STORES has requested money from you of Rs 320.00 on your UPI app. On approving, amount will be debited from your account.",
+    "expected": {
+      "class": "collectRequest",
+      "result": "dropped"
+    }
+  },
+  {
+    "name": "Balance alert",
+    "synthetic": true,
+    "origin": "BZ-KOTAKB",
+    "text": "Avl bal in Kotak a/c XX3344 as on 06-Nov-26 is Rs 18,442.10.",
+    "expected": {
+      "class": "balanceInfo",
+      "result": "dropped"
+    }
+  },
+  {
+    "name": "Card bill due",
+    "synthetic": true,
+    "origin": "VK-AXISBK",
+    "text": "Total amount due on Axis Bank Credit Card XX7788 is Rs 12,430.00, minimum amount due Rs 622.00. Payment due date 20-Nov-26.",
+    "expected": {
+      "class": "cardBillDue",
+      "result": "dropped"
+    }
+  },
+  {
+    "name": "Unknown with an amount goes to Unparsed",
+    "synthetic": true,
+    "origin": "VM-XYZBNK",
+    "text": "Txn alert: Rs 75 at KIRANA corner 10/11.",
+    "expected": {
+      "class": "unknown",
+      "result": "unparsed",
+      "amountPaise": 7500
+    }
+  },
+  {
+    "name": "No amount at all",
+    "synthetic": true,
+    "origin": "VM-XYZBNK",
+    "text": "Your cheque book has been dispatched.",
+    "expected": {
+      "class": "unknown",
+      "result": "noAmount"
+    }
+  },
+  {
+    "name": "Devanagari digits and zero-width spaces",
+    "synthetic": true,
+    "origin": "AX-HDFCBK",
+    "text": "Rs​.२४० debited from A/c XX1234 to VPA chai@ybl. UPI Ref No ६३१२४५६७८९०१",
+    "expected": {
+      "class": "debit",
+      "amountPaise": 24000,
+      "payeeVpa": "chai@ybl",
+      "refNo": "631245678901",
+      "accountHint": "1234"
+    }
+  },
+  {
+    "name": "Google Pay notification",
+    "synthetic": true,
+    "origin": "com.google.android.apps.nbu.paisa.user",
+    "text": "Paid ₹340 to Swiggy",
+    "expected": {
+      "class": "debit",
+      "amountPaise": 34000,
+      "direction": "debit",
+      "payeeName": "Swiggy"
+    }
+  },
+  {
+    "name": "PhonePe received notification",
+    "synthetic": true,
+    "origin": "com.phonepe.app",
+    "text": "Received ₹1,000 from Anita Sharma",
+    "expected": {
+      "class": "credit",
+      "amountPaise": 100000,
+      "direction": "credit",
+      "payeeName": "Anita Sharma"
+    }
+  },
+  {
+    "name": "Pasted UPI debit with no sender: the VPA's bank is not the user's bank",
+    "synthetic": true,
+    "origin": null,
+    "text": "Rs.240.00 debited from A/c XX1234 on 10-11-26 to VPA swiggy@icici. UPI Ref No 631245678901.",
+    "expected": {
+      "class": "debit",
+      "amountPaise": 24000,
+      "bankHint": null,
+      "payeeVpa": "swiggy@icici",
+      "accountHint": "1234"
+    }
+  }
+]

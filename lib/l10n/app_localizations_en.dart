@@ -332,4 +332,99 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get failureLoad => 'Couldn\'t load this. Try again.';
+
+  @override
+  String get quickAddPaste => 'Paste a payment message';
+
+  @override
+  String get quickAddIncomeTitle => 'Add money in';
+
+  @override
+  String get quickAddRefundTitle => 'Add refund';
+
+  @override
+  String get quickAddFromMessage => 'From a message';
+
+  @override
+  String quickAddFromMessageSemantics(String details) {
+    return 'Filled from a message: $details';
+  }
+
+  @override
+  String get quickAddPaymentFallback => 'Payment';
+
+  @override
+  String get noticeClipboardEmpty =>
+      'Copy a bank or UPI message first, then tap Paste.';
+
+  @override
+  String get noticeNoAmount => 'There\'s no amount in the copied text.';
+
+  @override
+  String get noticeDuplicate => 'That payment is already added.';
+
+  @override
+  String get noticeUnparsed =>
+      'Couldn\'t read that message. It\'s saved under Unparsed messages in Settings.';
+
+  @override
+  String noticeNotPayment(String reason) {
+    return 'That isn\'t a payment: $reason.';
+  }
+
+  @override
+  String get reasonOtp => 'it\'s a one-time password';
+
+  @override
+  String get reasonPromo => 'it\'s an offer';
+
+  @override
+  String get reasonUpcoming => 'it\'s a reminder of a future payment';
+
+  @override
+  String get reasonCollect => 'it\'s a request for money';
+
+  @override
+  String get reasonBalance => 'it\'s a balance update';
+
+  @override
+  String get reasonCardBill => 'it\'s a card bill reminder';
+
+  @override
+  String get reasonStatement => 'it\'s a statement notice';
+
+  @override
+  String get reasonFailed => 'the payment failed';
+
+  @override
+  String get reasonOther => 'nothing was paid';
+
+  @override
+  String get unparsedTitle => 'Unparsed messages';
+
+  @override
+  String unparsedRowSemantics(int count) {
+    return 'Unparsed messages, $count';
+  }
+
+  @override
+  String get unparsedEmptyTitle => 'Nothing to sort out';
+
+  @override
+  String get unparsedEmptyBody =>
+      'Messages with an amount the app couldn\'t read appear here, so nothing is lost.';
+
+  @override
+  String get unparsedHint => 'Tap a message to add it yourself.';
+
+  @override
+  String unparsedItemSemantics(String date, String text) {
+    return 'Message received $date: $text';
+  }
+
+  @override
+  String get settingsSectionMessages => 'Messages';
+
+  @override
+  String get back => 'Back';
 }

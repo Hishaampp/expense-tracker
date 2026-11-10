@@ -1,0 +1,9 @@
+include: package:very_good_analysis/analysis_options.11.0.0.yaml
+
+analyzer:
+  errors:
+    unawaited_futures: error
+    empty_catches: error
+    avoid_dynamic_calls: error
+    exhaustive_cases: error
+    avoid_print: error

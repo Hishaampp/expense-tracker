@@ -3,6 +3,7 @@ import 'package:expense_tracker/features/home/presentation/home_screen.dart';
 import 'package:expense_tracker/features/quick_add/presentation/quick_add_screen.dart';
 import 'package:expense_tracker/features/rooms/presentation/rooms_screen.dart';
 import 'package:expense_tracker/features/settings/presentation/settings_screen.dart';
+import 'package:expense_tracker/features/unparsed/presentation/unparsed_screen.dart';
 import 'package:expense_tracker/routing/app_shell.dart';
 import 'package:expense_tracker/routing/fading_branches.dart';
 import 'package:expense_tracker/routing/not_found_screen.dart';
@@ -37,11 +38,49 @@ final routerProvider = Provider<GoRouter>((ref) {
             _slideUpPage(context, state, const QuickAddScreen()),
       ),
       GoRoute(
+        path: Routes.sharedPattern,
+        pageBuilder: (context, state) => _slideUpPage(
+          context,
+          state,
+          QuickAddScreen(
+            args: (
+              editId: null,
+              unparsedId: null,
+              captureId: state.pathParameters['id'],
+            ),
+          ),
+        ),
+      ),
+      GoRoute(
+        path: Routes.unparsed,
+        builder: (context, state) => const UnparsedScreen(),
+      ),
+      GoRoute(
+        path: Routes.resolveUnparsedPattern,
+        pageBuilder: (context, state) => _slideUpPage(
+          context,
+          state,
+          QuickAddScreen(
+            args: (
+              editId: null,
+              unparsedId: state.pathParameters['id'],
+              captureId: null,
+            ),
+          ),
+        ),
+      ),
+      GoRoute(
         path: Routes.transactionPattern,
         pageBuilder: (context, state) => _slideUpPage(
           context,
           state,
-          QuickAddScreen(editId: state.pathParameters['id']),
+          QuickAddScreen(
+            args: (
+              editId: state.pathParameters['id'],
+              unparsedId: null,
+              captureId: null,
+            ),
+          ),
         ),
       ),
     ],

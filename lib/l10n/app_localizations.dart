@@ -627,6 +627,174 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Couldn\'t load this. Try again.'**
   String get failureLoad;
+
+  /// No description provided for @quickAddPaste.
+  ///
+  /// In en, this message translates to:
+  /// **'Paste a payment message'**
+  String get quickAddPaste;
+
+  /// No description provided for @quickAddIncomeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add money in'**
+  String get quickAddIncomeTitle;
+
+  /// No description provided for @quickAddRefundTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add refund'**
+  String get quickAddRefundTitle;
+
+  /// No description provided for @quickAddFromMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'From a message'**
+  String get quickAddFromMessage;
+
+  /// No description provided for @quickAddFromMessageSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Filled from a message: {details}'**
+  String quickAddFromMessageSemantics(String details);
+
+  /// No description provided for @quickAddPaymentFallback.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment'**
+  String get quickAddPaymentFallback;
+
+  /// No description provided for @noticeClipboardEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy a bank or UPI message first, then tap Paste.'**
+  String get noticeClipboardEmpty;
+
+  /// No description provided for @noticeNoAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'There\'s no amount in the copied text.'**
+  String get noticeNoAmount;
+
+  /// No description provided for @noticeDuplicate.
+  ///
+  /// In en, this message translates to:
+  /// **'That payment is already added.'**
+  String get noticeDuplicate;
+
+  /// No description provided for @noticeUnparsed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t read that message. It\'s saved under Unparsed messages in Settings.'**
+  String get noticeUnparsed;
+
+  /// No description provided for @noticeNotPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'That isn\'t a payment: {reason}.'**
+  String noticeNotPayment(String reason);
+
+  /// No description provided for @reasonOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'it\'s a one-time password'**
+  String get reasonOtp;
+
+  /// No description provided for @reasonPromo.
+  ///
+  /// In en, this message translates to:
+  /// **'it\'s an offer'**
+  String get reasonPromo;
+
+  /// No description provided for @reasonUpcoming.
+  ///
+  /// In en, this message translates to:
+  /// **'it\'s a reminder of a future payment'**
+  String get reasonUpcoming;
+
+  /// No description provided for @reasonCollect.
+  ///
+  /// In en, this message translates to:
+  /// **'it\'s a request for money'**
+  String get reasonCollect;
+
+  /// No description provided for @reasonBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'it\'s a balance update'**
+  String get reasonBalance;
+
+  /// No description provided for @reasonCardBill.
+  ///
+  /// In en, this message translates to:
+  /// **'it\'s a card bill reminder'**
+  String get reasonCardBill;
+
+  /// No description provided for @reasonStatement.
+  ///
+  /// In en, this message translates to:
+  /// **'it\'s a statement notice'**
+  String get reasonStatement;
+
+  /// No description provided for @reasonFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'the payment failed'**
+  String get reasonFailed;
+
+  /// No description provided for @reasonOther.
+  ///
+  /// In en, this message translates to:
+  /// **'nothing was paid'**
+  String get reasonOther;
+
+  /// No description provided for @unparsedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Unparsed messages'**
+  String get unparsedTitle;
+
+  /// No description provided for @unparsedRowSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Unparsed messages, {count}'**
+  String unparsedRowSemantics(int count);
+
+  /// No description provided for @unparsedEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing to sort out'**
+  String get unparsedEmptyTitle;
+
+  /// No description provided for @unparsedEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Messages with an amount the app couldn\'t read appear here, so nothing is lost.'**
+  String get unparsedEmptyBody;
+
+  /// No description provided for @unparsedHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a message to add it yourself.'**
+  String get unparsedHint;
+
+  /// No description provided for @unparsedItemSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Message received {date}: {text}'**
+  String unparsedItemSemantics(String date, String text);
+
+  /// No description provided for @settingsSectionMessages.
+  ///
+  /// In en, this message translates to:
+  /// **'Messages'**
+  String get settingsSectionMessages;
+
+  /// No description provided for @back.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get back;
 }
 
 class _AppLocalizationsDelegate

@@ -1,5 +1,6 @@
 import 'package:expense_tracker/data/db/app_database.dart';
 import 'package:expense_tracker/data/repositories/account_repository.dart';
+import 'package:expense_tracker/data/repositories/capture_repository.dart';
 import 'package:expense_tracker/data/repositories/category_repository.dart';
 import 'package:expense_tracker/data/repositories/settings_repository.dart';
 import 'package:expense_tracker/data/repositories/transaction_repository.dart';
@@ -35,6 +36,15 @@ final accountRepositoryProvider = Provider<AccountRepository>(
 final settingsRepositoryProvider = Provider<SettingsRepository>(
   (ref) => SettingsRepository(
     ref.watch(appDatabaseProvider),
+    ref.watch(appLoggerProvider),
+  ),
+);
+
+/// Records captures that are not transactions; serves the Unparsed list.
+final captureRepositoryProvider = Provider<CaptureRepository>(
+  (ref) => CaptureRepository(
+    ref.watch(appDatabaseProvider),
+    ref.watch(idGeneratorProvider),
     ref.watch(appLoggerProvider),
   ),
 );

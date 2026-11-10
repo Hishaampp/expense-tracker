@@ -7,6 +7,7 @@ import 'package:expense_tracker/features/settings/presentation/widgets/month_sta
 import 'package:expense_tracker/features/settings/presentation/widgets/settings_group.dart';
 import 'package:expense_tracker/l10n/app_localizations.dart';
 import 'package:expense_tracker/l10n/failure_messages.dart';
+import 'package:expense_tracker/routing/routes.dart';
 import 'package:expense_tracker/theme/category_colors.dart';
 import 'package:expense_tracker/widgets/entrance.dart';
 import 'package:expense_tracker/widgets/error_state_view.dart';
@@ -16,6 +17,7 @@ import 'package:expense_tracker/widgets/large_title_page.dart';
 import 'package:expense_tracker/widgets/pulsing_placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 /// App settings.
 class SettingsScreen extends ConsumerWidget {
@@ -117,6 +119,26 @@ class SettingsScreen extends ConsumerWidget {
         ),
         Entrance(
           index: 1,
+          child: SettingsGroup(
+            label: l10n.settingsSectionMessages,
+            rows: [
+              InfoRow(
+                leading: IconTile(
+                  icon: Icons.mark_unread_chat_alt_rounded,
+                  color: tiles.blue,
+                ),
+                title: l10n.unparsedTitle,
+                trailingText: '${state.unparsedCount}',
+                trailingIsAmount: false,
+                showChevron: true,
+                semanticLabel: l10n.unparsedRowSemantics(state.unparsedCount),
+                onTap: () => unawaited(context.push(Routes.unparsed)),
+              ),
+            ],
+          ),
+        ),
+        Entrance(
+          index: 2,
           child: SettingsGroup(
             label: l10n.settingsSectionLook,
             rows: [
