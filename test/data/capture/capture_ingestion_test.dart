@@ -6,14 +6,14 @@ import 'package:expense_tracker/core/models/raw_capture.dart';
 import 'package:expense_tracker/core/models/transaction_kind.dart';
 import 'package:expense_tracker/core/money.dart';
 import 'package:expense_tracker/core/result.dart';
+import 'package:expense_tracker/data/capture/capture_ingestion.dart';
 import 'package:expense_tracker/data/db/app_database.dart';
 import 'package:expense_tracker/data/repositories/capture_repository.dart';
 import 'package:expense_tracker/data/repositories/transaction_repository.dart';
-import 'package:expense_tracker/features/capture/application/capture_ingestion.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:txn_parser/txn_parser.dart';
 
-import '../../../support/test_database.dart';
+import '../../support/test_database.dart';
 
 const _hdfcDebit =
     'Rs.240.00 debited from A/c XX1234 on 10-11-26 to VPA swiggy@icici. '

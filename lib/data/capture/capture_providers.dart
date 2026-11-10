@@ -1,8 +1,8 @@
 import 'package:expense_tracker/core/models/raw_capture.dart';
+import 'package:expense_tracker/data/capture/auto_ingestion.dart';
+import 'package:expense_tracker/data/capture/capture_ingestion.dart';
 import 'package:expense_tracker/data/data_providers.dart';
 import 'package:expense_tracker/data/repositories/capture_repository.dart';
-import 'package:expense_tracker/features/capture/application/auto_ingestion.dart';
-import 'package:expense_tracker/features/capture/application/capture_ingestion.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:txn_parser/txn_parser.dart';
 

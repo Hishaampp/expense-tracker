@@ -9,6 +9,7 @@ import 'package:expense_tracker/features/quick_add/presentation/widgets/keypad.d
 import 'package:expense_tracker/routing/floating_tab_bar.dart';
 import 'package:expense_tracker/services/clipboard_service.dart';
 import 'package:expense_tracker/services/haptics.dart';
+import 'package:expense_tracker/services/native/capture_control_service.dart';
 import 'package:expense_tracker/services/native/capture_queue_service.dart';
 import 'package:expense_tracker/services/service_providers.dart';
 import 'package:flutter/material.dart';
@@ -95,6 +96,87 @@ final class FakeCaptureQueue implements CaptureQueueService {
   Stream<void> get changes => _changes.stream;
 }
 
+/// The native auto-capture controls, faked.
+final class FakeCaptureControl implements CaptureControlService {
+  /// Creates the fake with the given status.
+  FakeCaptureControl({
+    this.platform = 'android',
+    this.listenerEnabled = false,
+    this.smsSupported = false,
+    this.smsPermission = false,
+    this.manufacturer = 'Xiaomi',
+  });
+
+  /// `android` or `ios`.
+  String platform;
+
+  /// Whether notification access is on.
+  bool listenerEnabled;
+
+  /// Whether this build reads SMS.
+  bool smsSupported;
+
+  /// Whether SMS access is granted.
+  bool smsPermission;
+
+  /// The phone maker.
+  String manufacturer;
+
+  /// Calls made, in order.
+  final List<String> calls = [];
+
+  /// The allowlist.
+  List<String> allowed = [
+    'com.google.android.apps.messaging',
+    'com.phonepe.app',
+  ];
+
+  @override
+  Future<CaptureStatus> status() async => CaptureStatus(
+    platform: platform,
+    listenerEnabled: listenerEnabled,
+    smsSupported: smsSupported,
+    smsPermission: smsPermission,
+    queueSize: 0,
+    manufacturer: manufacturer,
+  );
+
+  @override
+  Future<CaptureSourceList> sources() async => (
+    allowed: allowed,
+    defaults: const [
+      'com.google.android.apps.messaging',
+      'com.phonepe.app',
+      'net.one97.paytm',
+    ],
+    defaultSms: null,
+  );
+
+  @override
+  Future<void> setSources(List<String> packages) async {
+    calls.add('setSources:${packages.join(',')}');
+    allowed = packages;
+  }
+
+  @override
+  Future<void> openCaptureSettings() async => calls.add('openCaptureSettings');
+
+  @override
+  Future<void> openBatterySettings() async => calls.add('openBatterySettings');
+
+  @override
+  Future<void> openAppSettings() async => calls.add('openAppSettings');
+
+  @override
+  Future<void> requestSmsPermission() async => calls.add('requestSms');
+
+  @override
+  Future<int> importSmsHistory(int months) async {
+    calls.add('import:$months');
+    return 12;
+  }
+}
+
 /// Pumps the whole app over a fresh in-memory database and a fixed clock.
 /// Returns the database so a test can seed or inspect it.
 Future<AppDatabase> pumpApp(
@@ -102,6 +184,7 @@ Future<AppDatabase> pumpApp(
   FakeHaptics? haptics,
   FakeClipboard? clipboard,
   FakeCaptureQueue? captureQueue,
+  FakeCaptureControl? captureControl,
   Size? size,
   double textScale = 1,
 }) async {
@@ -123,6 +206,9 @@ Future<AppDatabase> pumpApp(
         clipboardProvider.overrideWithValue(clipboard ?? FakeClipboard()),
         captureQueueProvider.overrideWithValue(
           captureQueue ?? FakeCaptureQueue(),
+        ),
+        captureControlProvider.overrideWithValue(
+          captureControl ?? FakeCaptureControl(),
         ),
       ],
       child: const App(),

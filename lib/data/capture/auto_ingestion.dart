@@ -5,9 +5,9 @@ import 'package:expense_tracker/core/models/capture_draft.dart';
 import 'package:expense_tracker/core/models/raw_capture.dart';
 import 'package:expense_tracker/core/models/transaction_kind.dart';
 import 'package:expense_tracker/core/result.dart';
+import 'package:expense_tracker/data/capture/capture_ingestion.dart';
 import 'package:expense_tracker/data/repositories/auto_capture_repository.dart';
 import 'package:expense_tracker/data/repositories/transaction_repository.dart';
-import 'package:expense_tracker/features/capture/application/capture_ingestion.dart';
 
 /// What automatic capture did with one message.
 enum AutoOutcome {

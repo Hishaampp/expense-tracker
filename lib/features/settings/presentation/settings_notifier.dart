@@ -1,9 +1,9 @@
 import 'package:expense_tracker/core/failure.dart';
 import 'package:expense_tracker/core/models/appearance_mode.dart';
 import 'package:expense_tracker/core/result.dart';
+import 'package:expense_tracker/data/capture/capture_providers.dart';
 import 'package:expense_tracker/data/data_providers.dart';
 import 'package:expense_tracker/data/query_providers.dart';
-import 'package:expense_tracker/features/capture/application/capture_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meta/meta.dart';
 

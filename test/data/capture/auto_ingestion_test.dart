@@ -4,17 +4,17 @@ import 'package:expense_tracker/core/models/account.dart';
 import 'package:expense_tracker/core/models/raw_capture.dart';
 import 'package:expense_tracker/core/models/transaction_kind.dart';
 import 'package:expense_tracker/core/result.dart';
+import 'package:expense_tracker/data/capture/auto_ingestion.dart';
+import 'package:expense_tracker/data/capture/capture_ingestion.dart';
 import 'package:expense_tracker/data/db/app_database.dart';
 import 'package:expense_tracker/data/mappers.dart';
 import 'package:expense_tracker/data/repositories/auto_capture_repository.dart';
 import 'package:expense_tracker/data/repositories/capture_repository.dart';
 import 'package:expense_tracker/data/repositories/transaction_repository.dart';
-import 'package:expense_tracker/features/capture/application/auto_ingestion.dart';
-import 'package:expense_tracker/features/capture/application/capture_ingestion.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:txn_parser/txn_parser.dart';
 
-import '../../../support/test_database.dart';
+import '../../support/test_database.dart';
 
 const _messages = 'com.google.android.apps.messaging';
 const _gpay = 'com.google.android.apps.nbu.paisa.user';

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:expense_tracker/core/models/raw_capture.dart';
 import 'package:expense_tracker/core/result.dart';
-import 'package:expense_tracker/features/capture/application/capture_providers.dart';
+import 'package:expense_tracker/data/capture/capture_providers.dart';
 import 'package:expense_tracker/routing/app_router.dart';
 import 'package:expense_tracker/routing/routes.dart';
 import 'package:expense_tracker/services/service_providers.dart';

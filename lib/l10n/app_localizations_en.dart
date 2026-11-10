@@ -522,4 +522,189 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reviewUnknownPayee => 'Payment';
+
+  @override
+  String get autoCaptureTitle => 'Auto-capture';
+
+  @override
+  String get autoCaptureRowOn => 'On';
+
+  @override
+  String get autoCaptureRowOff => 'Off';
+
+  @override
+  String autoCaptureRowSemantics(String state) {
+    return 'Auto-capture, $state';
+  }
+
+  @override
+  String get autoCaptureOnTitle => 'Auto-capture is on';
+
+  @override
+  String get autoCaptureOffTitle => 'Auto-capture is off';
+
+  @override
+  String autoCaptureLastCapture(String when) {
+    return 'Last payment captured $when';
+  }
+
+  @override
+  String get autoCaptureNever => 'No payments captured yet';
+
+  @override
+  String get autoCaptureDisclosureTitle => 'What the app reads';
+
+  @override
+  String get autoCaptureDisclosureBody =>
+      'To record payments for you, the app reads new notifications from your SMS app and the UPI apps listed below. It keeps only messages that contain a rupee amount, and ignores everything else, including personal chats. Everything stays on this phone: nothing is uploaded or shared.';
+
+  @override
+  String get autoCaptureLimitations =>
+      'Capture starts from the moment you turn it on. Notifications you swipe away while it is off, or that your phone\'s battery saver blocks, can be missed.';
+
+  @override
+  String get autoCaptureTurnOn => 'Turn on auto-capture';
+
+  @override
+  String get autoCaptureManage => 'Notification access settings';
+
+  @override
+  String get autoCaptureRestrictedTitle =>
+      'If Android says the setting is restricted';
+
+  @override
+  String get autoCaptureRestrictedBody =>
+      'Apps installed outside the Play Store need one extra step: open App info, tap the ⋮ menu, choose Allow restricted settings, then come back and turn auto-capture on.';
+
+  @override
+  String get autoCaptureOpenAppInfo => 'Open App info';
+
+  @override
+  String get autoCaptureBatteryTitle => 'Keep it running';
+
+  @override
+  String get autoCaptureBatteryOpen => 'Open battery settings';
+
+  @override
+  String get oemXiaomi =>
+      'On Xiaomi, Redmi and POCO: App info → Autostart on, and Battery saver → No restrictions.';
+
+  @override
+  String get oemVivo =>
+      'On Vivo and iQOO: Battery → Background power consumption → Allow, and turn on Auto-start.';
+
+  @override
+  String get oemOppo =>
+      'On Oppo, Realme and OnePlus: App info → Battery usage → Allow background activity, and allow Auto launch.';
+
+  @override
+  String get oemSamsung =>
+      'On Samsung: App info → Battery → Unrestricted, and keep the app out of Sleeping apps.';
+
+  @override
+  String get oemOther =>
+      'Set the app\'s battery use to Unrestricted, so Android does not stop it in the background.';
+
+  @override
+  String get autoCaptureSourcesTitle => 'Apps it reads';
+
+  @override
+  String get autoCaptureYourSmsApp => 'Your SMS app';
+
+  @override
+  String autoCaptureSourceSemantics(String app, String state) {
+    return '$app, $state';
+  }
+
+  @override
+  String get autoCaptureSmsTitle => 'Read SMS directly';
+
+  @override
+  String get autoCaptureSmsBody =>
+      'This build can read bank SMS itself, including past messages, as a backup to notifications.';
+
+  @override
+  String get autoCaptureSmsAllow => 'Allow SMS access';
+
+  @override
+  String get autoCaptureSmsAllowed => 'SMS access allowed';
+
+  @override
+  String get autoCaptureImport => 'Import past messages';
+
+  @override
+  String autoCaptureImportMonths(int months) {
+    String _temp0 = intl.Intl.pluralLogic(
+      months,
+      locale: localeName,
+      other: 'Last $months months',
+      one: 'Last month',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String autoCaptureImported(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count messages imported',
+      one: '1 message imported',
+      zero: 'No bank messages found',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get autoCaptureIosTitle => 'Auto-capture on iPhone';
+
+  @override
+  String get autoCaptureIosBody =>
+      'iPhone apps can\'t read SMS. Setup with a Shortcuts automation arrives in a coming update; until then, share or paste bank messages into the app.';
+
+  @override
+  String get autoCaptureUnavailable =>
+      'Couldn\'t read the auto-capture status on this phone.';
+
+  @override
+  String get timeJustNow => 'just now';
+
+  @override
+  String timeMinutesAgo(int minutes) {
+    String _temp0 = intl.Intl.pluralLogic(
+      minutes,
+      locale: localeName,
+      other: '$minutes minutes ago',
+      one: '1 minute ago',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String timeHoursAgo(int hours) {
+    String _temp0 = intl.Intl.pluralLogic(
+      hours,
+      locale: localeName,
+      other: '$hours hours ago',
+      one: '1 hour ago',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String timeDaysAgo(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days days ago',
+      one: 'yesterday',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get on => 'on';
+
+  @override
+  String get off => 'off';
 }

@@ -8,6 +8,7 @@ import 'package:expense_tracker/features/settings/presentation/widgets/settings_
 import 'package:expense_tracker/l10n/app_localizations.dart';
 import 'package:expense_tracker/l10n/failure_messages.dart';
 import 'package:expense_tracker/routing/routes.dart';
+import 'package:expense_tracker/services/service_providers.dart';
 import 'package:expense_tracker/theme/category_colors.dart';
 import 'package:expense_tracker/widgets/entrance.dart';
 import 'package:expense_tracker/widgets/error_state_view.dart';
@@ -74,6 +75,7 @@ class SettingsScreen extends ConsumerWidget {
     final tiles = CategoryColors.of(context);
     final async = ref.watch(settingsNotifierProvider);
     final state = async.value;
+    final autoCaptureOn = ref.watch(autoCaptureOnProvider).value;
 
     if (state == null) {
       return LargeTitlePage(
@@ -122,6 +124,23 @@ class SettingsScreen extends ConsumerWidget {
           child: SettingsGroup(
             label: l10n.settingsSectionMessages,
             rows: [
+              InfoRow(
+                leading: IconTile(icon: Icons.bolt_rounded, color: tiles.green),
+                title: l10n.autoCaptureTitle,
+                trailingText: switch (autoCaptureOn) {
+                  true => l10n.autoCaptureRowOn,
+                  false => l10n.autoCaptureRowOff,
+                  null => null,
+                },
+                trailingIsAmount: false,
+                showChevron: true,
+                semanticLabel: switch (autoCaptureOn) {
+                  true => l10n.autoCaptureRowSemantics(l10n.on),
+                  false => l10n.autoCaptureRowSemantics(l10n.off),
+                  null => l10n.autoCaptureTitle,
+                },
+                onTap: () => unawaited(context.push(Routes.autoCapture)),
+              ),
               InfoRow(
                 leading: IconTile(
                   icon: Icons.mark_unread_chat_alt_rounded,
