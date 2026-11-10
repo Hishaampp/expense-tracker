@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # The single CI gate (spec §16 Phase 0). Each step guards one contract:
 #   lint include pinned  -> a missing include silently disables every lint
+#   codegen freshness    -> a schema change without a migration loses data
 #   format               -> dart format is the only whitespace authority
 #   analyze --fatal-infos-> silence-bug lints are build failures
 #   test (random order)  -> behaviour + policy greps; catches state leakage
@@ -20,6 +21,13 @@ include=$(sed -n 's/^include: package:very_good_analysis\/\(.*\)$/\1/p' analysis
 vga_dir=$(dart pub deps --json | python3 -I -c 'import json,sys;d=json.load(sys.stdin);print(next(p["version"] for p in d["packages"] if p["name"]=="very_good_analysis"))')
 if [[ ! -f "$HOME/.pub-cache/hosted/pub.dev/very_good_analysis-$vga_dir/lib/$include" ]]; then
   echo "::error::analysis_options include '$include' not found in very_good_analysis $vga_dir — analysis would run with zero rules."; exit 1
+fi
+
+step "generated code is up to date"
+dart run build_runner build --delete-conflicting-outputs >/dev/null
+dart run drift_dev schema dump lib/data/db/app_database.dart drift_schemas/ >/dev/null
+if [[ -d .git ]] && ! git diff --exit-code --stat -- '*.g.dart' drift_schemas/; then
+  echo "::error::Generated code or drift_schemas/ is stale. If you changed a table: bump schemaVersion, add a migration step, then commit the regenerated files."; exit 1
 fi
 
 step "format"
