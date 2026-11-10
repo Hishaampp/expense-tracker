@@ -12,31 +12,59 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
     required this.spaceMd,
     required this.spaceLg,
     required this.spaceXl,
-    required this.radius,
-    required this.hairlineWidth,
-    required this.ruleWidth,
-    required this.minTapTarget,
+    required this.spaceXxl,
+    required this.radiusCard,
+    required this.radiusTile,
+    required this.radiusTileLarge,
+    required this.iconTileSize,
+    required this.iconTileLargeSize,
     required this.iconSize,
-    required this.barHeight,
+    required this.iconLargeSize,
+    required this.roundButtonSize,
+    required this.heroArrowSize,
+    required this.minTapTarget,
+    required this.progressHeight,
+    required this.hairlineWidth,
+    required this.tabBarHeight,
+    required this.tabBarRadius,
     required this.readableWidth,
     required this.stackedTextScale,
+    required this.pressedScale,
+    required this.entranceOffset,
+    required this.shakeDistance,
+    required this.shadowOffset,
+    required this.shadowBlur,
   });
 
-  /// The Passbook metrics: tight, 4-point grid, small corners.
+  /// The standard metrics: 4-point grid, large soft corners.
   static const AppMetrics standard = AppMetrics(
     spaceXs: 4,
     spaceSm: 8,
     spaceMd: 12,
     spaceLg: 16,
     spaceXl: 24,
-    radius: 6,
-    hairlineWidth: 1,
-    ruleWidth: 2,
+    spaceXxl: 32,
+    radiusCard: 24,
+    radiusTile: 9,
+    radiusTileLarge: 16,
+    iconTileSize: 32,
+    iconTileLargeSize: 52,
+    iconSize: 18,
+    iconLargeSize: 24,
+    roundButtonSize: 44,
+    heroArrowSize: 48,
     minTapTarget: 48,
-    iconSize: 20,
-    barHeight: 6,
+    progressHeight: 6,
+    hairlineWidth: 1,
+    tabBarHeight: 64,
+    tabBarRadius: 32,
     readableWidth: 560,
     stackedTextScale: 1.5,
+    pressedScale: 0.97,
+    entranceOffset: 16,
+    shakeDistance: 8,
+    shadowOffset: 6,
+    shadowBlur: 18,
   );
 
   /// 4 logical pixels.
@@ -45,39 +73,80 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
   /// 8 logical pixels.
   final double spaceSm;
 
-  /// 12 logical pixels: gap between an icon and its row text.
+  /// 12 logical pixels: icon-to-text gap.
   final double spaceMd;
 
-  /// 16 logical pixels: page gutter.
+  /// 16 logical pixels: page gutter and card padding.
   final double spaceLg;
 
-  /// 24 logical pixels: gap between page blocks.
+  /// 24 logical pixels: gap between cards.
   final double spaceXl;
 
-  /// Corner radius of buttons, chips, badges and sheets.
-  final double radius;
+  /// 32 logical pixels: gap before a large title.
+  final double spaceXxl;
 
-  /// Thickness of row dividers.
-  final double hairlineWidth;
+  /// Corner radius of cards and sheets.
+  final double radiusCard;
 
-  /// Thickness of the heavy rule that opens a ledger block.
-  final double ruleWidth;
+  /// Corner radius of small icon tiles.
+  final double radiusTile;
+
+  /// Corner radius of Quick Add category tiles.
+  final double radiusTileLarge;
+
+  /// Side of a small icon tile.
+  final double iconTileSize;
+
+  /// Side of a Quick Add category tile.
+  final double iconTileLargeSize;
+
+  /// Glyph size inside a small icon tile.
+  final double iconSize;
+
+  /// Glyph size inside a large tile and in round buttons.
+  final double iconLargeSize;
+
+  /// Diameter of floating round buttons.
+  final double roundButtonSize;
+
+  /// Diameter of the arrow button on the hero card.
+  final double heroArrowSize;
 
   /// Minimum height and width of anything tappable.
   final double minTapTarget;
 
-  /// Size of row and button icons.
-  final double iconSize;
+  /// Height of progress bars.
+  final double progressHeight;
 
-  /// Height of the budget bar.
-  final double barHeight;
+  /// Thickness of a divider.
+  final double hairlineWidth;
+
+  /// Height of the floating tab bar.
+  final double tabBarHeight;
+
+  /// Corner radius of the floating tab bar.
+  final double tabBarRadius;
 
   /// Maximum content width on tablets and foldables.
   final double readableWidth;
 
-  /// System text scale from which a row puts its amount on its own line
-  /// instead of beside the title.
+  /// System text scale from which a row puts its amount under the title.
   final double stackedTextScale;
+
+  /// Scale of a card or tile while pressed.
+  final double pressedScale;
+
+  /// Distance content rises while it fades in.
+  final double entranceOffset;
+
+  /// Sideways travel of the reject shake.
+  final double shakeDistance;
+
+  /// Downward offset of the floating shadow.
+  final double shadowOffset;
+
+  /// Blur radius of the floating shadow.
+  final double shadowBlur;
 
   /// Reads the metrics from the theme; asserts if the theme lacks them.
   static AppMetrics of(BuildContext context) {
@@ -93,14 +162,28 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
     double? spaceMd,
     double? spaceLg,
     double? spaceXl,
-    double? radius,
-    double? hairlineWidth,
-    double? ruleWidth,
-    double? minTapTarget,
+    double? spaceXxl,
+    double? radiusCard,
+    double? radiusTile,
+    double? radiusTileLarge,
+    double? iconTileSize,
+    double? iconTileLargeSize,
     double? iconSize,
-    double? barHeight,
+    double? iconLargeSize,
+    double? roundButtonSize,
+    double? heroArrowSize,
+    double? minTapTarget,
+    double? progressHeight,
+    double? hairlineWidth,
+    double? tabBarHeight,
+    double? tabBarRadius,
     double? readableWidth,
     double? stackedTextScale,
+    double? pressedScale,
+    double? entranceOffset,
+    double? shakeDistance,
+    double? shadowOffset,
+    double? shadowBlur,
   }) {
     return AppMetrics(
       spaceXs: spaceXs ?? this.spaceXs,
@@ -108,14 +191,28 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
       spaceMd: spaceMd ?? this.spaceMd,
       spaceLg: spaceLg ?? this.spaceLg,
       spaceXl: spaceXl ?? this.spaceXl,
-      radius: radius ?? this.radius,
-      hairlineWidth: hairlineWidth ?? this.hairlineWidth,
-      ruleWidth: ruleWidth ?? this.ruleWidth,
-      minTapTarget: minTapTarget ?? this.minTapTarget,
+      spaceXxl: spaceXxl ?? this.spaceXxl,
+      radiusCard: radiusCard ?? this.radiusCard,
+      radiusTile: radiusTile ?? this.radiusTile,
+      radiusTileLarge: radiusTileLarge ?? this.radiusTileLarge,
+      iconTileSize: iconTileSize ?? this.iconTileSize,
+      iconTileLargeSize: iconTileLargeSize ?? this.iconTileLargeSize,
       iconSize: iconSize ?? this.iconSize,
-      barHeight: barHeight ?? this.barHeight,
+      iconLargeSize: iconLargeSize ?? this.iconLargeSize,
+      roundButtonSize: roundButtonSize ?? this.roundButtonSize,
+      heroArrowSize: heroArrowSize ?? this.heroArrowSize,
+      minTapTarget: minTapTarget ?? this.minTapTarget,
+      progressHeight: progressHeight ?? this.progressHeight,
+      hairlineWidth: hairlineWidth ?? this.hairlineWidth,
+      tabBarHeight: tabBarHeight ?? this.tabBarHeight,
+      tabBarRadius: tabBarRadius ?? this.tabBarRadius,
       readableWidth: readableWidth ?? this.readableWidth,
       stackedTextScale: stackedTextScale ?? this.stackedTextScale,
+      pressedScale: pressedScale ?? this.pressedScale,
+      entranceOffset: entranceOffset ?? this.entranceOffset,
+      shakeDistance: shakeDistance ?? this.shakeDistance,
+      shadowOffset: shadowOffset ?? this.shadowOffset,
+      shadowBlur: shadowBlur ?? this.shadowBlur,
     );
   }
 
@@ -129,14 +226,28 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
       spaceMd: mix(spaceMd, other.spaceMd),
       spaceLg: mix(spaceLg, other.spaceLg),
       spaceXl: mix(spaceXl, other.spaceXl),
-      radius: mix(radius, other.radius),
-      hairlineWidth: mix(hairlineWidth, other.hairlineWidth),
-      ruleWidth: mix(ruleWidth, other.ruleWidth),
-      minTapTarget: mix(minTapTarget, other.minTapTarget),
+      spaceXxl: mix(spaceXxl, other.spaceXxl),
+      radiusCard: mix(radiusCard, other.radiusCard),
+      radiusTile: mix(radiusTile, other.radiusTile),
+      radiusTileLarge: mix(radiusTileLarge, other.radiusTileLarge),
+      iconTileSize: mix(iconTileSize, other.iconTileSize),
+      iconTileLargeSize: mix(iconTileLargeSize, other.iconTileLargeSize),
       iconSize: mix(iconSize, other.iconSize),
-      barHeight: mix(barHeight, other.barHeight),
+      iconLargeSize: mix(iconLargeSize, other.iconLargeSize),
+      roundButtonSize: mix(roundButtonSize, other.roundButtonSize),
+      heroArrowSize: mix(heroArrowSize, other.heroArrowSize),
+      minTapTarget: mix(minTapTarget, other.minTapTarget),
+      progressHeight: mix(progressHeight, other.progressHeight),
+      hairlineWidth: mix(hairlineWidth, other.hairlineWidth),
+      tabBarHeight: mix(tabBarHeight, other.tabBarHeight),
+      tabBarRadius: mix(tabBarRadius, other.tabBarRadius),
       readableWidth: mix(readableWidth, other.readableWidth),
       stackedTextScale: mix(stackedTextScale, other.stackedTextScale),
+      pressedScale: mix(pressedScale, other.pressedScale),
+      entranceOffset: mix(entranceOffset, other.entranceOffset),
+      shakeDistance: mix(shakeDistance, other.shakeDistance),
+      shadowOffset: mix(shadowOffset, other.shadowOffset),
+      shadowBlur: mix(shadowBlur, other.shadowBlur),
     );
   }
 }

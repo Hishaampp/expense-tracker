@@ -1,16 +1,18 @@
 import 'package:expense_tracker/theme/app_colors.dart';
 import 'package:expense_tracker/theme/app_metrics.dart';
+import 'package:expense_tracker/theme/app_motion.dart';
 import 'package:expense_tracker/theme/app_text_styles.dart';
+import 'package:expense_tracker/widgets/shake.dart';
 import 'package:flutter/material.dart';
 
-/// The amount being typed, with a hint or an error line beneath it.
+/// The amount being typed, large. Each change slides the new amount up into
+/// place; a rejected save shakes it.
 class AmountDisplay extends StatelessWidget {
   /// Creates the display.
   const new({
     required this.amountText,
     required this.semanticLabel,
-    this.helperText,
-    this.errorText,
+    required this.rejectCount,
     super.key,
   });
 
@@ -20,58 +22,48 @@ class AmountDisplay extends StatelessWidget {
   /// What a screen reader announces for the amount.
   final String semanticLabel;
 
-  /// Guidance shown under the amount, or null for none.
-  final String? helperText;
-
-  /// A save failure; replaces [helperText] and is announced.
-  final String? errorText;
+  /// Bumped on each rejected save; each bump shakes once.
+  final int rejectCount;
 
   @override
   Widget build(BuildContext context) {
-    final colors = AppColors.of(context);
-    final textTheme = Theme.of(context).textTheme;
-    final errorText = this.errorText;
-    final helperText = this.helperText;
-    final metrics = AppMetrics.of(context);
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Semantics(
-          label: semanticLabel,
-          liveRegion: true,
-          child: ExcludeSemantics(
+    final motion = AppMotion.of(context);
+    final offset = AppMetrics.of(context).entranceOffset;
+    return Semantics(
+      label: semanticLabel,
+      liveRegion: true,
+      child: ExcludeSemantics(
+        child: Shake(
+          trigger: rejectCount,
+          child: AnimatedSwitcher(
+            duration: resolveMotion(context, motion.quick),
+            switchInCurve: motion.enter,
+            switchOutCurve: motion.exit,
+            transitionBuilder: (child, animation) => FadeTransition(
+              opacity: animation,
+              child: AnimatedBuilder(
+                animation: animation,
+                builder: (context, child) => Transform.translate(
+                  offset: Offset(0, offset * (1 - animation.value)),
+                  child: child,
+                ),
+                child: child,
+              ),
+            ),
+            layoutBuilder: (current, previous) => Stack(
+              alignment: Alignment.center,
+              children: [...previous, ?current],
+            ),
             child: Text(
               amountText,
+              key: ValueKey(amountText),
               textAlign: TextAlign.center,
-              style: AppTextStyles.of(context).amountHero
-                  .copyWith(color: colors.onSurface),
+              style: AppTextStyles.of(context).amountDisplay
+                  .copyWith(color: AppColors.of(context).onSurface),
             ),
           ),
         ),
-        if (errorText != null)
-          Semantics(
-            liveRegion: true,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(Icons.error_outline, color: colors.danger),
-                SizedBox(width: metrics.spaceSm),
-                Flexible(
-                  child: Text(
-                    errorText,
-                    style: textTheme.bodySmall?.copyWith(color: colors.danger),
-                  ),
-                ),
-              ],
-            ),
-          )
-        else if (helperText != null)
-          Text(
-            helperText,
-            style: textTheme.bodySmall,
-            textAlign: TextAlign.center,
-          ),
-      ],
+      ),
     );
   }
 }

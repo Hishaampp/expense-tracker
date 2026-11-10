@@ -7,22 +7,10 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../../../support/pump_app.dart';
 
-Future<void> _addExpense(
-  WidgetTester tester,
-  String amount,
-  String category,
-) async {
-  await tester.tap(find.text('Add expense').last);
-  await tester.pumpAndSettle();
-  await typeAmount(tester, amount);
-  await tester.tap(find.text(category));
-  await tester.pumpAndSettle();
-}
-
 void main() {
   appTest('keypad: paise, backspace and the hint', (tester) async {
     await pumpApp(tester);
-    await tester.tap(find.text('Add expense'));
+    await tester.tap(find.byTooltip('Add expense'));
     await tester.pumpAndSettle();
 
     expect(find.text('Enter an amount'), findsOneWidget);
@@ -30,30 +18,60 @@ void main() {
     expect(find.text('₹12.5'), findsOneWidget);
     expect(find.text('Tap a category to save'), findsOneWidget);
     await tester.tap(find.bySemanticsLabel('Backspace'));
-    await tester.pump();
+    await tester.pumpAndSettle();
     expect(find.text('₹12.'), findsOneWidget);
+  });
+
+  appTest('More opens every category and a pick there saves', (tester) async {
+    await pumpApp(tester);
+    await tester.tap(find.byTooltip('Add expense'));
+    await tester.pumpAndSettle();
+    await typeAmount(tester, '75');
+
+    expect(find.text('Gifts & Shagun'), findsNothing);
+    await tester.tap(find.text('More'));
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('Gifts & Shagun'));
+    await tester.tap(find.text('Gifts & Shagun'));
+    await tester.pumpAndSettle();
+
+    expect(
+      find.bySemanticsLabel('₹75 spent on Gifts & Shagun'),
+      findsOneWidget,
+    );
+  });
+
+  appTest('the most-used category moves to the front', (tester) async {
+    await pumpApp(tester);
+    await addExpense(tester, '10', 'Groceries');
+    await tester.tap(find.byTooltip('Add expense').first);
+    await tester.pumpAndSettle();
+
+    final groceries = tester.getTopLeft(find.text('Groceries'));
+    final food = tester.getTopLeft(find.text('Food & Dining'));
+    expect(groceries.dx, lessThan(food.dx));
   });
 
   appTest('editing changes the amount and category', (tester) async {
     await pumpApp(tester);
-    await _addExpense(tester, '100', 'Food & Dining');
+    await addExpense(tester, '100', 'Food & Dining');
 
     await tester.tap(find.bySemanticsLabel(RegExp('₹100 spent, ')));
     await tester.pumpAndSettle();
     expect(find.text('Edit expense'), findsOneWidget);
     await typeAmount(tester, '0');
     await tester.tap(find.text('Groceries'));
-    await tester.pump();
+    await tester.pumpAndSettle();
     await tester.tap(find.widgetWithText(FilledButton, 'Save'));
     await tester.pumpAndSettle();
 
-    expect(find.bySemanticsLabel('₹1,000 spent this month'), findsOneWidget);
+    expect(find.text("You've spent ₹1,000 this month."), findsOneWidget);
     expect(find.bySemanticsLabel('₹1,000 spent on Groceries'), findsOneWidget);
   });
 
   appTest('delete removes the expense and Undo restores it', (tester) async {
     await pumpApp(tester);
-    await _addExpense(tester, '100', 'Food & Dining');
+    await addExpense(tester, '100', 'Food & Dining');
 
     await tester.tap(find.bySemanticsLabel(RegExp('₹100 spent, ')));
     await tester.pumpAndSettle();
@@ -63,7 +81,7 @@ void main() {
 
     await tester.tap(find.text('Undo'));
     await tester.pumpAndSettle();
-    expect(find.bySemanticsLabel('₹100 spent this month'), findsOneWidget);
+    expect(find.text("You've spent ₹100 this month."), findsOneWidget);
   });
 
   appTest('a link to a missing expense offers a way back', (tester) async {
@@ -88,7 +106,7 @@ void main() {
     container.read(routerProvider).go('/nowhere');
     await tester.pumpAndSettle();
 
-    expect(find.text("This page doesn't exist"), findsOneWidget);
+    expect(find.text("This page doesn't exist."), findsOneWidget);
     await tester.tap(find.text('Go to Home'));
     await tester.pumpAndSettle();
     expect(find.text('No expenses yet'), findsOneWidget);

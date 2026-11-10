@@ -2,14 +2,18 @@ import 'dart:async';
 
 import 'package:expense_tracker/features/quick_add/presentation/quick_add_notifier.dart';
 import 'package:expense_tracker/features/quick_add/presentation/undo_delete_notifier.dart';
+import 'package:expense_tracker/features/quick_add/presentation/widgets/all_categories_sheet.dart';
 import 'package:expense_tracker/features/quick_add/presentation/widgets/note_dialog.dart';
 import 'package:expense_tracker/features/quick_add/presentation/widgets/quick_add_form.dart';
 import 'package:expense_tracker/formatting/money_format.dart';
 import 'package:expense_tracker/l10n/app_localizations.dart';
+import 'package:expense_tracker/theme/app_colors.dart';
+import 'package:expense_tracker/theme/app_metrics.dart';
 import 'package:expense_tracker/theme/app_motion.dart';
 import 'package:expense_tracker/widgets/error_state_view.dart';
-import 'package:expense_tracker/widgets/ledger_skeleton.dart';
-import 'package:expense_tracker/widgets/page_frame.dart';
+import 'package:expense_tracker/widgets/pulsing_placeholder.dart';
+import 'package:expense_tracker/widgets/round_icon_button.dart';
+import 'package:expense_tracker/widgets/sheet_frame.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -94,9 +98,31 @@ class QuickAddScreen extends ConsumerWidget {
     if (note != null) notifier.setNote(note);
   }
 
+  Future<void> _showAllCategories(
+    BuildContext context,
+    WidgetRef ref,
+    QuickAddState state,
+  ) async {
+    final l10n = AppLocalizations.of(context);
+    final notifier = ref.read(quickAddNotifierProvider(editId).notifier);
+    final picked = await showAppSheet<String>(
+      context,
+      AllCategoriesSheet(
+        title: l10n.quickAddAllCategories,
+        categories: state.categories,
+        selectedId: state.categoryId,
+        selectedLabel: l10n.selected,
+      ),
+    );
+    // Null means dismissed: nothing picked.
+    if (picked != null) notifier.pickCategory(picked);
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
+    final colors = AppColors.of(context);
+    final metrics = AppMetrics.of(context);
     final provider = quickAddNotifierProvider(editId);
     ref.listen(provider.select((s) => s.value?.outcome), (previous, next) {
       if (next != null) _onOutcome(context, ref, next);
@@ -113,6 +139,7 @@ class QuickAddScreen extends ConsumerWidget {
         onPoint: notifier.point,
         onBackspace: notifier.backspace,
         onPickCategory: notifier.pickCategory,
+        onMore: () => unawaited(_showAllCategories(context, ref, state)),
         onPickDate: () => unawaited(_pickDate(context, ref, state)),
         onEditNote: () => unawaited(_editNote(context, ref, state)),
         onSave: notifier.save,
@@ -134,29 +161,64 @@ class QuickAddScreen extends ConsumerWidget {
         ),
       );
     } else {
-      body = LedgerSkeleton(semanticLabel: l10n.loading, rowCount: 3);
+      body = Center(child: PulsingPlaceholder(semanticLabel: l10n.loading));
     }
     final canDelete = state != null && state.isEditing && !state.isSaving;
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: context.pop,
-          tooltip: l10n.close,
-          icon: const Icon(Icons.close),
-        ),
-        title: Text(
-          editId == null ? l10n.quickAddTitle : l10n.quickAddEditTitle,
-        ),
-        actions: [
-          if (editId != null)
-            IconButton(
-              onPressed: canDelete ? notifier.delete : null,
-              tooltip: l10n.delete,
-              icon: const Icon(Icons.delete_outline),
+      backgroundColor: colors.surface,
+      body: SafeArea(
+        child: Align(
+          alignment: AlignmentDirectional.topCenter,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: metrics.readableWidth),
+            child: Padding(
+              padding: EdgeInsetsDirectional.symmetric(
+                horizontal: metrics.spaceLg,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    children: [
+                      RoundIconButton(
+                        icon: Icons.close_rounded,
+                        tooltip: l10n.close,
+                        floating: false,
+                        color: colors.onSurface,
+                        onPressed: context.pop,
+                      ),
+                      Expanded(
+                        child: Semantics(
+                          header: true,
+                          child: Text(
+                            editId == null
+                                ? l10n.quickAddTitle
+                                : l10n.quickAddEditTitle,
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                        ),
+                      ),
+                      if (editId != null)
+                        RoundIconButton(
+                          icon: Icons.delete_outline_rounded,
+                          tooltip: l10n.delete,
+                          floating: false,
+                          color: colors.danger,
+                          onPressed: canDelete ? notifier.delete : null,
+                        )
+                      else
+                        SizedBox.square(dimension: metrics.minTapTarget),
+                    ],
+                  ),
+                  Expanded(child: body),
+                  SizedBox(height: metrics.spaceSm),
+                ],
+              ),
             ),
-        ],
+          ),
+        ),
       ),
-      body: PageFrame(child: body),
     );
   }
 }

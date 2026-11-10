@@ -41,6 +41,27 @@ class TransactionRepository {
     );
   }
 
+  /// How many expenses each category has had since [sinceUtc], by category
+  /// id. Used to put the most-used categories first in Quick Add.
+  Future<Map<String, int>> categoryUsageSince(DateTime sinceUtc) async {
+    final count = _db.transactions.id.count();
+    final query = _db.selectOnly(_db.transactions)
+      ..addColumns([_db.transactions.categoryId, count])
+      ..where(
+        _db.transactions.kind.equals(TransactionKind.expense.name) &
+            _db.transactions.categoryId.isNotNull() &
+            _db.transactions.occurredAt.isBiggerOrEqualValue(
+              sinceUtc.millisecondsSinceEpoch,
+            ),
+      )
+      ..groupBy([_db.transactions.categoryId]);
+    final rows = await query.get();
+    return {
+      for (final row in rows)
+        row.read(_db.transactions.categoryId)!: row.read(count) ?? 0,
+    };
+  }
+
   /// The transaction with [id], or null if it does not exist.
   Future<MoneyTransaction?> findById(String id) async {
     final query = _db.select(_db.transactions)..where((t) => t.id.equals(id));

@@ -13,7 +13,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navHome => 'Home';
 
   @override
-  String get navTransactions => 'Transactions';
+  String get navActivity => 'Activity';
+
+  @override
+  String get navRooms => 'Rooms';
 
   @override
   String get navSettings => 'Settings';
@@ -40,34 +43,78 @@ class AppLocalizationsEn extends AppLocalizations {
   String get delete => 'Delete';
 
   @override
-  String get previousMonth => 'Previous month';
-
-  @override
-  String get nextMonth => 'Next month';
-
-  @override
   String get addExpense => 'Add expense';
 
   @override
-  String get homeSpentLabel => 'Spent this month';
+  String get selected => 'selected';
 
   @override
-  String homeIncludesRooms(String amount) {
-    return 'includes $amount in Rooms';
+  String changeMonth(String month) {
+    return 'Change month, $month';
   }
 
   @override
-  String homeSpentSemantics(String amount) {
-    return '$amount spent this month';
+  String get pickMonthTitle => 'Choose a month';
+
+  @override
+  String get heroGreeting => 'Hi!';
+
+  @override
+  String heroSpentThisMonth(String amount) {
+    return 'You\'ve spent $amount this month.';
   }
 
   @override
-  String get homeMoneyIn => 'Money in';
+  String heroSpentSince(String amount, String date) {
+    return 'You\'ve spent $amount since $date.';
+  }
 
   @override
-  String homeMoneyInSemantics(String amount) {
+  String heroSpentIn(String amount, String month) {
+    return 'You spent $amount in $month.';
+  }
+
+  @override
+  String get heroMoneyIn => 'Money in';
+
+  @override
+  String get heroDailyAverage => 'Daily average';
+
+  @override
+  String get heroInRooms => 'In Rooms';
+
+  @override
+  String get heroPayments => 'Payments';
+
+  @override
+  String heroPaymentsValue(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count payments',
+      one: '1 payment',
+      zero: 'None yet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String heroMoneyInSemantics(String amount) {
     return '$amount money in';
   }
+
+  @override
+  String heroDailyAverageSemantics(String amount) {
+    return 'Daily average $amount';
+  }
+
+  @override
+  String heroInRoomsSemantics(String amount) {
+    return '$amount spent in Rooms';
+  }
+
+  @override
+  String get seeAllActivity => 'See all activity';
 
   @override
   String get homeTopCategories => 'Top categories';
@@ -83,19 +130,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeEmptyBody =>
-      'Add your first expense to see this month\'s spending.';
+      'Add your first expense and this month comes to life.';
 
   @override
-  String get transactionsTitle => 'Transactions';
+  String get activityTitle => 'Activity';
 
   @override
-  String transactionsEmptyTitle(String month) {
+  String activityEmptyTitle(String month) {
     return 'Nothing in $month';
   }
 
   @override
-  String get transactionsEmptyBody =>
+  String get activityEmptyBody =>
       'Expenses you add for this month show up here.';
+
+  @override
+  String get today => 'Today';
+
+  @override
+  String get yesterday => 'Yesterday';
 
   @override
   String daySpent(String amount) {
@@ -140,6 +193,16 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get roomsTitle => 'Rooms';
+
+  @override
+  String get roomsComingTitle => 'Trips and events, together';
+
+  @override
+  String get roomsComingBody =>
+      'Rooms arrive in a coming update. A Room keeps a trip\'s or a wedding\'s spending together, and it still counts in your month.';
+
+  @override
   String get quickAddTitle => 'Add expense';
 
   @override
@@ -155,6 +218,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String quickAddAmountSemantics(String amount) {
     return 'Amount $amount';
   }
+
+  @override
+  String get quickAddCash => 'Cash';
 
   @override
   String get quickAddToday => 'Today';
@@ -174,6 +240,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get quickAddNoteHint => 'Chai with Ravi';
+
+  @override
+  String get quickAddMore => 'More';
+
+  @override
+  String get quickAddAllCategories => 'All categories';
 
   @override
   String quickAddSaved(String amount) {
@@ -199,25 +271,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get keypadPoint => 'Decimal point';
 
   @override
-  String get selected => 'selected';
-
-  @override
   String get settingsTitle => 'Settings';
 
   @override
-  String get settingsMonthSection => 'Month';
+  String get settingsSectionMonth => 'Your month';
+
+  @override
+  String get settingsSectionLook => 'Look';
 
   @override
   String get settingsMonthStart => 'Month starts on';
 
   @override
-  String settingsMonthStartSemantics(int day) {
-    return 'Month starts on day $day';
+  String settingsMonthStartValue(int day) {
+    return 'Day $day';
   }
 
   @override
-  String settingsMonthStartValue(int day) {
-    return 'Day $day';
+  String settingsMonthStartSemantics(int day) {
+    return 'Month starts on day $day';
   }
 
   @override
@@ -230,7 +302,24 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get notFoundTitle => 'This page doesn\'t exist';
+  String get settingsAppearance => 'Appearance';
+
+  @override
+  String settingsAppearanceSemantics(String mode) {
+    return 'Appearance, $mode';
+  }
+
+  @override
+  String get themeSystem => 'System';
+
+  @override
+  String get themeLight => 'Light';
+
+  @override
+  String get themeDark => 'Dark';
+
+  @override
+  String get notFoundTitle => 'This page doesn\'t exist.';
 
   @override
   String get notFoundAction => 'Go to Home';

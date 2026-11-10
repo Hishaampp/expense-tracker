@@ -1,4 +1,5 @@
 import 'package:expense_tracker/core/models/account.dart';
+import 'package:expense_tracker/core/models/appearance_mode.dart';
 import 'package:expense_tracker/core/models/category.dart';
 import 'package:expense_tracker/core/models/money_transaction.dart';
 import 'package:expense_tracker/core/month_period.dart';
@@ -19,6 +20,17 @@ final accountsProvider = StreamProvider<List<Account>>(
 /// The day of the month a budgeting month starts on. Live.
 final monthStartDayProvider = StreamProvider<int>(
   (ref) => ref.watch(settingsRepositoryProvider).watchMonthStartDay(),
+);
+
+/// The appearance read before the first frame, so the app never flashes
+/// the wrong theme. `bootstrap()` overrides it.
+final initialAppearanceProvider = Provider<AppearanceMode>(
+  (ref) => AppearanceMode.system,
+);
+
+/// Light, dark or follow the phone. Live.
+final appearanceProvider = StreamProvider<AppearanceMode>(
+  (ref) => ref.watch(settingsRepositoryProvider).watchAppearance(),
 );
 
 /// Transactions in one month, newest first. Live.

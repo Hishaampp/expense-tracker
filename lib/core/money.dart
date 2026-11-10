@@ -50,6 +50,15 @@ final class Money implements Comparable<Money> {
   /// Whether the amount is below zero.
   bool get isNegative => paise < 0;
 
+  /// This amount split into [parts] equal shares, rounded to the nearest
+  /// paisa (halves away from zero). Zero when [parts] is not positive.
+  Money dividedRounded(int parts) {
+    if (parts <= 0) return Money(0, currency);
+    final sign = paise < 0 ? -1 : 1;
+    final share = (paise.abs() * 2 + parts) ~/ (parts * 2);
+    return Money(sign * share, currency);
+  }
+
   /// The sum of this and [other].
   Money operator +(Money other) {
     _requireSameCurrency(other);

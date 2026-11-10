@@ -2,72 +2,123 @@ import 'dart:ui';
 
 /// Tier-1 colour primitives — the only file allowed a raw colour literal.
 ///
-/// Named `hue` + OKLCH lightness ×100 (the measured value), never by rank or
-/// appearance. Widgets must not read these; they read `AppColors`.
+/// Named hue + OKLCH lightness ×100 (the measured value). Widgets never read
+/// these; they read `AppColors` and `CategoryColors`.
 abstract final class Primitives {
-  /// Navy at OKLCH lightness 20.
-  static const Color navy20 = Color(0xFF0E1626);
+  /// Black at 8% opacity: the soft shadow under floating controls (light).
+  static const Color shadow08 = Color(0x14000000);
 
-  /// Navy at OKLCH lightness 25.
-  static const Color navy25 = Color(0xFF17223A);
+  /// Black at 40% opacity: the shadow under floating controls (dark).
+  static const Color shadow40 = Color(0x66000000);
 
-  /// Navy at OKLCH lightness 26.
-  static const Color navy26 = Color(0xFF16233F);
+  /// #F6F1EA.
+  static const Color sand96 = Color(0xFFF6F1EA);
 
-  /// Navy at OKLCH lightness 35.
-  static const Color navy35 = Color(0xFF2C3A57);
+  /// #EFE9E2.
+  static const Color sand94 = Color(0xFFEFE9E2);
 
-  /// Slate at OKLCH lightness 46.
-  static const Color slate46 = Color(0xFF4A5674);
-
-  /// Slate at OKLCH lightness 77.
-  static const Color slate77 = Color(0xFFA9B4CC);
-
-  /// Slate at OKLCH lightness 90.
-  static const Color slate90 = Color(0xFFD9DEE8);
-
-  /// Slate at OKLCH lightness 94.
-  static const Color slate94 = Color(0xFFE6EBF5);
-
-  /// Slate at OKLCH lightness 98.
-  static const Color slate98 = Color(0xFFF6F7F9);
-
-  /// White at OKLCH lightness 100.
+  /// #FFFFFF.
   static const Color white100 = Color(0xFFFFFFFF);
 
-  /// Blue at OKLCH lightness 43.
-  static const Color blue43 = Color(0xFF2747A0);
+  /// #141414.
+  static const Color ink19 = Color(0xFF141414);
 
-  /// Blue at OKLCH lightness 78.
-  static const Color blue78 = Color(0xFF9DB4F5);
+  /// #6B655F.
+  static const Color stone51 = Color(0xFF6B655F);
 
-  /// Green at OKLCH lightness 52.
-  static const Color green52 = Color(0xFF1C7A52);
+  /// #A8A29C.
+  static const Color stone72 = Color(0xFFA8A29C);
 
-  /// Green at OKLCH lightness 80.
-  static const Color green80 = Color(0xFF7BD3A8);
+  /// #E2600F.
+  static const Color saffron64 = Color(0xFFE2600F);
 
-  /// Red at OKLCH lightness 50.
-  static const Color red50 = Color(0xFFB3261E);
+  /// #C8500A.
+  static const Color saffron58 = Color(0xFFC8500A);
 
-  /// Red at OKLCH lightness 79.
-  static const Color red79 = Color(0xFFF2A29B);
+  /// #AD4806.
+  static const Color saffron53 = Color(0xFFAD4806);
 
-  /// Amber at OKLCH lightness 31.
-  static const Color amber31 = Color(0xFF3A2E0F);
+  /// #1A7742.
+  static const Color green50 = Color(0xFF1A7742);
 
-  /// Amber at OKLCH lightness 43.
-  static const Color amber43 = Color(0xFF6B4700);
+  /// #5BD38F.
+  static const Color green78 = Color(0xFF5BD38F);
 
-  /// Amber at OKLCH lightness 51.
-  static const Color amber51 = Color(0xFF8A5A00);
+  /// #C93439.
+  static const Color red56 = Color(0xFFC93439);
 
-  /// Amber at OKLCH lightness 78.
-  static const Color amber78 = Color(0xFFD9B24C);
+  /// #7A4F00.
+  static const Color amber46 = Color(0xFF7A4F00);
 
-  /// Amber at OKLCH lightness 88.
+  /// #FCEBC5.
+  static const Color amber94 = Color(0xFFFCEBC5);
+
+  /// #0F0E0D.
+  static const Color night16 = Color(0xFF0F0E0D);
+
+  /// #1C1A18.
+  static const Color night22 = Color(0xFF1C1A18);
+
+  /// #2A2724.
+  static const Color night27 = Color(0xFF2A2724);
+
+  /// #262320.
+  static const Color night26 = Color(0xFF262320);
+
+  /// #F4F1EC.
+  static const Color stone96 = Color(0xFFF4F1EC);
+
+  /// #A8A19A.
+  static const Color stone71 = Color(0xFFA8A19A);
+
+  /// #B3ADA6.
+  static const Color stone75 = Color(0xFFB3ADA6);
+
+  /// #FF8A3D.
+  static const Color saffron75 = Color(0xFFFF8A3D);
+
+  /// #FF9A55.
+  static const Color saffron78 = Color(0xFFFF9A55);
+
+  /// #1A0E05.
+  static const Color saffron18 = Color(0xFF1A0E05);
+
+  /// #FF7B7F.
+  static const Color red74 = Color(0xFFFF7B7F);
+
+  /// #F5D58A.
   static const Color amber88 = Color(0xFFF5D58A);
 
-  /// Amber at OKLCH lightness 96.
-  static const Color amber96 = Color(0xFFFFF1CC);
+  /// #3A2E0F.
+  static const Color amber31 = Color(0xFF3A2E0F);
+
+  /// #E2600F.
+  static const Color tileOrange64 = Color(0xFFE2600F);
+
+  /// #1E9550.
+  static const Color tileGreen59 = Color(0xFF1E9550);
+
+  /// #3B5BDB.
+  static const Color tileBlue53 = Color(0xFF3B5BDB);
+
+  /// #D9383E.
+  static const Color tileRed59 = Color(0xFFD9383E);
+
+  /// #A63BBF.
+  static const Color tilePurple56 = Color(0xFFA63BBF);
+
+  /// #B87300.
+  static const Color tileAmber62 = Color(0xFFB87300);
+
+  /// #6A4FE0.
+  static const Color tileViolet54 = Color(0xFF6A4FE0);
+
+  /// #0F8A80.
+  static const Color tileTeal57 = Color(0xFF0F8A80);
+
+  /// #C2347A.
+  static const Color tilePink56 = Color(0xFFC2347A);
+
+  /// #7A746E.
+  static const Color tileGrey56 = Color(0xFF7A746E);
 }

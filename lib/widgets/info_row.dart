@@ -2,43 +2,53 @@ import 'package:expense_tracker/theme/app_colors.dart';
 import 'package:expense_tracker/theme/app_metrics.dart';
 import 'package:expense_tracker/theme/app_text_styles.dart';
 import 'package:expense_tracker/widgets/money_tone.dart';
+import 'package:expense_tracker/widgets/pressable.dart';
 import 'package:flutter/material.dart';
 
-/// One ruled passbook row: icon, title and supporting line on the start
-/// side, the amount in a right-hand column.
-class LedgerRow extends StatelessWidget {
+/// One row inside a card: a leading tile, a title with an optional
+/// supporting line, and a trailing amount or value. At large text sizes the
+/// trailing text moves under the title so nothing is cut off.
+class InfoRow extends StatelessWidget {
   /// Creates a row. [semanticLabel] is the whole row as a screen reader
-  /// should say it, for example "₹340 spent at Swiggy, Food".
+  /// should say it, for example "₹340 spent, Swiggy, Food".
   const new({
-    required this.icon,
+    required this.leading,
     required this.title,
-    required this.amountText,
     required this.semanticLabel,
     this.subtitle,
+    this.trailingText,
+    this.trailingIsAmount = true,
     this.tone = MoneyTone.spent,
+    this.showChevron = false,
     this.onTap,
     super.key,
   });
 
-  /// Leading icon; its shape differs per state.
-  final IconData icon;
+  /// Leading tile.
+  final Widget leading;
 
-  /// Main line, for example the payee or category.
+  /// Main line.
   final String title;
 
   /// Supporting line under [title].
   final String? subtitle;
 
-  /// The formatted amount.
-  final String amountText;
+  /// Trailing amount or value.
+  final String? trailingText;
 
-  /// Colour reinforcement for [amountText].
+  /// Whether [trailingText] is money (bold, tabular) or a setting value.
+  final bool trailingIsAmount;
+
+  /// Colour reinforcement for a money [trailingText].
   final MoneyTone tone;
+
+  /// Shows a chevron, for rows that open another screen or sheet.
+  final bool showChevron;
 
   /// What a screen reader announces for the row.
   final String semanticLabel;
 
-  /// Called when the row is tapped; null makes the row static.
+  /// Called when the row is tapped; null makes it static.
   final VoidCallback? onTap;
 
   @override
@@ -46,28 +56,31 @@ class LedgerRow extends StatelessWidget {
     final colors = AppColors.of(context);
     final metrics = AppMetrics.of(context);
     final textTheme = Theme.of(context).textTheme;
-    final toneColor = tone.colorIn(colors);
-    final subtitle = this.subtitle;
-    // At large text sizes the amount moves under the title, so neither is
-    // squeezed or cut off.
     final stacked =
         MediaQuery.textScalerOf(context).scale(1) >= metrics.stackedTextScale;
-    final titleStyle = textTheme.bodyLarge?.copyWith(
-      color: tone == MoneyTone.transfer ? toneColor : colors.onSurface,
-    );
-    final amount = Text(
-      amountText,
-      textAlign: TextAlign.end,
-      style: AppTextStyles.of(context).amountRow.copyWith(color: toneColor),
-    );
+    final subtitle = this.subtitle;
+    final trailingText = this.trailingText;
+    final Widget? trailing = trailingText == null
+        ? null
+        : Text(
+            trailingText,
+            textAlign: TextAlign.end,
+            style: trailingIsAmount
+                ? AppTextStyles.of(context).amountRow
+                      .copyWith(color: tone.colorIn(colors))
+                : textTheme.bodyLarge?.copyWith(color: colors.accentText),
+          );
     return Semantics(
       container: true,
       button: onTap != null,
       label: semanticLabel,
       onTap: onTap,
       child: ExcludeSemantics(
-        child: InkWell(
+        child: Pressable(
           onTap: onTap,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(metrics.radiusTileLarge),
+          ),
           child: ConstrainedBox(
             constraints: BoxConstraints(minHeight: metrics.minTapTarget),
             child: Padding(
@@ -75,29 +88,36 @@ class LedgerRow extends StatelessWidget {
                 vertical: metrics.spaceSm,
               ),
               child: Row(
-                crossAxisAlignment: stacked
-                    ? CrossAxisAlignment.start
-                    : CrossAxisAlignment.center,
                 children: [
-                  Icon(icon, color: toneColor),
+                  leading,
                   SizedBox(width: metrics.spaceMd),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(title, style: titleStyle),
+                        Text(title, style: textTheme.bodyLarge),
                         if (subtitle != null)
                           Text(subtitle, style: textTheme.bodySmall),
-                        if (stacked)
+                        if (stacked && trailing != null)
                           Align(
                             alignment: AlignmentDirectional.centerEnd,
-                            child: amount,
+                            child: trailing,
                           ),
                       ],
                     ),
                   ),
-                  if (!stacked) ...[SizedBox(width: metrics.spaceMd), amount],
+                  if (!stacked && trailing != null) ...[
+                    SizedBox(width: metrics.spaceMd),
+                    trailing,
+                  ],
+                  if (showChevron) ...[
+                    SizedBox(width: metrics.spaceXs),
+                    Icon(
+                      Icons.chevron_right_rounded,
+                      color: colors.onSurfaceMuted,
+                    ),
+                  ],
                 ],
               ),
             ),

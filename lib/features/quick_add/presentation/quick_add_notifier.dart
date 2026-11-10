@@ -58,11 +58,12 @@ final class QuickAddState {
     this.editing,
     this.isMissing = false,
     this.isSaving = false,
+    this.rejectCount = 0,
     this.failure,
     this.outcome,
   });
 
-  /// Expense categories to choose from, in picker order.
+  /// Expense categories to choose from, most used first.
   final List<Category> categories;
 
   /// The earliest date the date picker offers.
@@ -92,6 +93,9 @@ final class QuickAddState {
   /// Whether a save or delete is in flight.
   final bool isSaving;
 
+  /// Counts rejected taps, so the screen can shake once per rejection.
+  final int rejectCount;
+
   /// The last failed save, shown inline until the next attempt.
   final StoreFailure? failure;
 
@@ -104,6 +108,21 @@ final class QuickAddState {
   /// Whether the amount can be saved.
   bool get canSave => amount.isValid && !isSaving;
 
+  /// How many categories Quick Add shows before "More".
+  static const int quickPickCount = 7;
+
+  /// The categories shown as tiles: the most used, always including the
+  /// selected one.
+  List<Category> get quickPicks {
+    final picks = categories.take(quickPickCount).toList();
+    final selected = categoryId;
+    if (selected != null && !picks.any((c) => c.id == selected)) {
+      final match = categories.where((c) => c.id == selected);
+      if (match.isNotEmpty) picks[picks.length - 1] = match.first;
+    }
+    return picks;
+  }
+
   /// A copy with the given fields replaced. The failure is cleared unless
   /// one is passed, because any new input makes it stale.
   QuickAddState copyWith({
@@ -112,6 +131,7 @@ final class QuickAddState {
     DateTime? occurredAt,
     String? note,
     bool? isSaving,
+    int? rejectCount,
     StoreFailure? failure,
     QuickAddOutcome? outcome,
   }) {
@@ -126,6 +146,7 @@ final class QuickAddState {
       editing: editing,
       isMissing: isMissing,
       isSaving: isSaving ?? this.isSaving,
+      rejectCount: rejectCount ?? this.rejectCount,
       failure: failure,
       outcome: outcome ?? this.outcome,
     );
@@ -144,15 +165,27 @@ class QuickAddNotifier extends AsyncNotifier<QuickAddState> {
   /// How many years back the date picker reaches.
   static const int firstYearsBack = 5;
 
+  /// How far back category use is counted to order the tiles.
+  static const int usageWindowDays = 90;
+
   @override
   Future<QuickAddState> build() async {
     // Read once: a category change mid-entry must not reset typed input.
     final all = await ref.read(categoriesProvider.future);
-    final categories = [
-      for (final c in all)
-        if (c.kind == CategoryKind.expense && !c.isArchived) c,
-    ];
     final today = ref.read(clockProvider).now().toLocal();
+    final usage = await ref
+        .read(transactionRepositoryProvider)
+        .categoryUsageSince(
+          today.toUtc().subtract(const Duration(days: usageWindowDays)),
+        );
+    final categories =
+        [
+          for (final c in all)
+            if (c.kind == CategoryKind.expense && !c.isArchived) c,
+        ]..sort((a, b) {
+          final byUse = (usage[b.id] ?? 0).compareTo(usage[a.id] ?? 0);
+          return byUse != 0 ? byUse : a.sortOrder.compareTo(b.sortOrder);
+        });
     final latest = DateTime(today.year, today.month, today.day);
     final earliest = DateTime(latest.year - firstYearsBack);
     QuickAddState base({bool isMissing = false}) => QuickAddState(
@@ -235,6 +268,7 @@ class QuickAddNotifier extends AsyncNotifier<QuickAddState> {
     }
     if (!current.amount.isValid) {
       ref.read(hapticsProvider).reject();
+      state = AsyncData(current.copyWith(rejectCount: current.rejectCount + 1));
       return;
     }
     unawaited(_persist(current.copyWith(categoryId: categoryId)));

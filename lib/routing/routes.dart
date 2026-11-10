@@ -3,8 +3,11 @@ abstract final class Routes {
   /// Home (month view).
   static const String home = '/';
 
-  /// Transactions list.
-  static const String transactions = '/transactions';
+  /// Activity: every transaction in a month.
+  static const String activity = '/activity';
+
+  /// Rooms.
+  static const String rooms = '/rooms';
 
   /// Settings.
   static const String settings = '/settings';

@@ -13,81 +13,85 @@ const List<String> appFontFallback = <String>[
 
 const List<FontFeature> _tabular = <FontFeature>[FontFeature.tabularFigures()];
 
-/// Builds the Material text theme in [color], with secondary text in [muted].
-TextTheme buildTextTheme({required Color color, required Color muted}) {
-  TextStyle style(double size, FontWeight weight, double height, Color c) {
-    return TextStyle(
-      fontFamily: appFontFamily,
-      fontFamilyFallback: appFontFallback,
-      fontSize: size,
-      fontWeight: weight,
-      height: height,
-      color: c,
-    );
-  }
-
-  return TextTheme(
-    headlineMedium: style(24, FontWeight.w600, 1.2, color),
-    titleLarge: style(20, FontWeight.w600, 1.25, color),
-    titleMedium: style(16, FontWeight.w500, 1.3, color),
-    bodyLarge: style(16, FontWeight.w400, 1.4, color),
-    bodyMedium: style(14, FontWeight.w400, 1.4, color),
-    bodySmall: style(13, FontWeight.w400, 1.35, muted),
-    labelLarge: style(15, FontWeight.w500, 1.2, color),
-    labelMedium: style(13, FontWeight.w500, 1.2, color),
+TextStyle _style(
+  double size,
+  FontWeight weight,
+  double height, {
+  double letterSpacing = 0,
+  List<FontFeature>? features,
+}) {
+  return TextStyle(
+    fontFamily: appFontFamily,
+    fontFamilyFallback: appFontFallback,
+    fontSize: size,
+    fontWeight: weight,
+    height: height,
+    letterSpacing: letterSpacing,
+    fontFeatures: features,
   );
 }
 
-/// Text styles for money. Digits are equal-width so amounts line up in a
-/// column. Colour is not set here: the money state decides it.
+/// Builds the Material text theme in [color], with secondary text in [muted].
+TextTheme buildTextTheme({required Color color, required Color muted}) {
+  return TextTheme(
+        displaySmall: _style(34, FontWeight.w700, 1.1, letterSpacing: -0.6),
+        headlineMedium: _style(34, FontWeight.w700, 1.1, letterSpacing: -0.6),
+        headlineSmall: _style(24, FontWeight.w700, 1.15, letterSpacing: -0.3),
+        titleLarge: _style(20, FontWeight.w700, 1.2, letterSpacing: -0.2),
+        titleMedium: _style(17, FontWeight.w700, 1.25),
+        bodyLarge: _style(16, FontWeight.w500, 1.35),
+        bodyMedium: _style(15, FontWeight.w400, 1.4),
+        bodySmall: _style(13, FontWeight.w400, 1.35),
+        labelLarge: _style(16, FontWeight.w600, 1.2),
+        labelMedium: _style(13, FontWeight.w600, 1.2),
+        labelSmall: _style(11, FontWeight.w600, 1.2),
+      )
+      .apply(bodyColor: color, displayColor: color)
+      .copyWith(
+        bodySmall: _style(13, FontWeight.w400, 1.35).copyWith(color: muted),
+      );
+}
+
+/// Text styles for money and the hero card. Digits are equal-width so
+/// amounts do not jitter while they count. Colour is not set here: the
+/// money state or the surface decides it.
 @immutable
 class AppTextStyles extends ThemeExtension<AppTextStyles> {
-  /// Creates the money styles; use [AppTextStyles.standard].
+  /// Creates the styles; use [AppTextStyles.standard].
   const new({
-    required this.amountHero,
-    required this.amountLarge,
+    required this.amountDisplay,
+    required this.heroSentence,
+    required this.statValue,
     required this.amountRow,
   });
 
-  /// The Passbook money styles.
-  static const AppTextStyles standard = AppTextStyles(
-    amountHero: TextStyle(
-      fontFamily: appFontFamily,
-      fontFamilyFallback: appFontFallback,
-      fontSize: 40,
-      fontWeight: FontWeight.w600,
-      height: 1.1,
-      letterSpacing: -0.5,
-      fontFeatures: _tabular,
+  /// The standard styles.
+  static final AppTextStyles standard = AppTextStyles(
+    amountDisplay: _style(
+      56,
+      FontWeight.w700,
+      1.05,
+      letterSpacing: -1.2,
+      features: _tabular,
     ),
-    amountLarge: TextStyle(
-      fontFamily: appFontFamily,
-      fontFamilyFallback: appFontFallback,
-      fontSize: 22,
-      fontWeight: FontWeight.w600,
-      height: 1.2,
-      fontFeatures: _tabular,
-    ),
-    amountRow: TextStyle(
-      fontFamily: appFontFamily,
-      fontFamilyFallback: appFontFallback,
-      fontSize: 15,
-      fontWeight: FontWeight.w500,
-      height: 1.3,
-      fontFeatures: _tabular,
-    ),
+    heroSentence: _style(20, FontWeight.w500, 1.3, letterSpacing: -0.2),
+    statValue: _style(19, FontWeight.w700, 1.2, features: _tabular),
+    amountRow: _style(16, FontWeight.w700, 1.3, features: _tabular),
   );
 
-  /// The one big number on a screen (month spend, keypad amount).
-  final TextStyle amountHero;
+  /// The amount being typed in Quick Add.
+  final TextStyle amountDisplay;
 
-  /// Secondary totals (safe to spend, money in, Room total).
-  final TextStyle amountLarge;
+  /// The sentence that opens the hero card.
+  final TextStyle heroSentence;
 
-  /// The amount column of a transaction row.
+  /// A number in the hero card's stat rows.
+  final TextStyle statValue;
+
+  /// The amount at the end of a row.
   final TextStyle amountRow;
 
-  /// Reads the money styles from the theme; asserts if the theme lacks them.
+  /// Reads the styles from the theme; asserts if the theme lacks them.
   static AppTextStyles of(BuildContext context) {
     final extension = Theme.of(context).extension<AppTextStyles>();
     assert(extension != null, 'AppTextStyles missing: use buildAppTheme().');
@@ -96,13 +100,15 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
 
   @override
   AppTextStyles copyWith({
-    TextStyle? amountHero,
-    TextStyle? amountLarge,
+    TextStyle? amountDisplay,
+    TextStyle? heroSentence,
+    TextStyle? statValue,
     TextStyle? amountRow,
   }) {
     return AppTextStyles(
-      amountHero: amountHero ?? this.amountHero,
-      amountLarge: amountLarge ?? this.amountLarge,
+      amountDisplay: amountDisplay ?? this.amountDisplay,
+      heroSentence: heroSentence ?? this.heroSentence,
+      statValue: statValue ?? this.statValue,
       amountRow: amountRow ?? this.amountRow,
     );
   }
@@ -111,8 +117,9 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
   AppTextStyles lerp(AppTextStyles? other, double t) {
     if (other == null) return this;
     return AppTextStyles(
-      amountHero: TextStyle.lerp(amountHero, other.amountHero, t)!,
-      amountLarge: TextStyle.lerp(amountLarge, other.amountLarge, t)!,
+      amountDisplay: TextStyle.lerp(amountDisplay, other.amountDisplay, t)!,
+      heroSentence: TextStyle.lerp(heroSentence, other.heroSentence, t)!,
+      statValue: TextStyle.lerp(statValue, other.statValue, t)!,
       amountRow: TextStyle.lerp(amountRow, other.amountRow, t)!,
     );
   }

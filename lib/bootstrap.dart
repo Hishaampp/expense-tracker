@@ -1,6 +1,9 @@
 import 'package:expense_tracker/app.dart';
 import 'package:expense_tracker/data/data_providers.dart';
 import 'package:expense_tracker/data/db/app_database.dart';
+import 'package:expense_tracker/data/query_providers.dart';
+import 'package:expense_tracker/data/repositories/settings_repository.dart';
+import 'package:expense_tracker/services/app_logger.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -11,9 +14,17 @@ Future<void> bootstrap() async {
   WidgetsFlutterBinding.ensureInitialized();
   LicenseRegistry.addLicense(_fontLicenses);
   final database = AppDatabase.open();
+  // Read before the first frame so the app never flashes the wrong theme.
+  final appearance = await SettingsRepository(
+    database,
+    const DeveloperLogger(),
+  ).watchAppearance().first;
   runApp(
     ProviderScope(
-      overrides: [appDatabaseProvider.overrideWithValue(database)],
+      overrides: [
+        appDatabaseProvider.overrideWithValue(database),
+        initialAppearanceProvider.overrideWithValue(appearance),
+      ],
       child: const App(),
     ),
   );

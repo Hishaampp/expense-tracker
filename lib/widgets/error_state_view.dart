@@ -1,8 +1,11 @@
-import 'package:expense_tracker/theme/app_colors.dart';
 import 'package:expense_tracker/theme/app_metrics.dart';
+import 'package:expense_tracker/theme/category_colors.dart';
+import 'package:expense_tracker/widgets/app_card.dart';
+import 'package:expense_tracker/widgets/icon_tile.dart';
 import 'package:flutter/material.dart';
 
-/// Shown when a screen could not load. Always offers a way forward.
+/// A card shown when something could not load or no longer exists. Always
+/// offers a way forward.
 class ErrorStateView extends StatelessWidget {
   /// Creates the view.
   const new({
@@ -24,13 +27,17 @@ class ErrorStateView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final metrics = AppMetrics.of(context);
-    return Padding(
-      padding: EdgeInsetsDirectional.symmetric(vertical: metrics.spaceXl),
+    return AppCard(
+      padding: EdgeInsetsDirectional.all(metrics.spaceXl),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.error_outline, color: AppColors.of(context).danger),
-          SizedBox(height: metrics.spaceSm),
+          IconTile(
+            icon: Icons.error_outline_rounded,
+            color: CategoryColors.of(context).red,
+            large: true,
+          ),
+          SizedBox(height: metrics.spaceLg),
           Semantics(
             liveRegion: true,
             child: Text(
@@ -39,7 +46,7 @@ class ErrorStateView extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
-          SizedBox(height: metrics.spaceLg),
+          SizedBox(height: metrics.spaceXl),
           OutlinedButton(onPressed: onAction, child: Text(actionLabel)),
         ],
       ),

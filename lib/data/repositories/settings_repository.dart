@@ -1,4 +1,5 @@
 import 'package:expense_tracker/core/failure.dart';
+import 'package:expense_tracker/core/models/appearance_mode.dart';
 import 'package:expense_tracker/core/month_period.dart';
 import 'package:expense_tracker/core/result.dart';
 import 'package:expense_tracker/data/db/app_database.dart';
@@ -15,6 +16,34 @@ class SettingsRepository {
   final AppLogger _log;
 
   static const String _monthStartDayKey = 'month_start_day';
+  static const String _appearanceKey = 'appearance';
+
+  /// Light, dark or follow the phone. Defaults to following the phone.
+  Stream<AppearanceMode> watchAppearance() {
+    final query = _db.select(_db.settings)
+      ..where((s) => s.key.equals(_appearanceKey));
+    return query.watchSingleOrNull().map(
+      (row) => AppearanceMode.parse(row?.value),
+    );
+  }
+
+  /// Saves the appearance [mode].
+  @useResult
+  Future<Result<AppearanceMode, StoreFailure>> setAppearance(
+    AppearanceMode mode,
+  ) async {
+    try {
+      await _db
+          .into(_db.settings)
+          .insertOnConflictUpdate(
+            SettingsCompanion.insert(key: _appearanceKey, value: mode.name),
+          );
+      return Ok(mode);
+    } on SqliteException catch (e, st) {
+      _log.error('settings.appearance', e.runtimeType, st);
+      return const Err(StoreWriteFailed());
+    }
+  }
 
   /// The day of the month a budgeting month starts on (spec §5.9).
   /// Defaults to 1.

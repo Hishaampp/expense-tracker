@@ -1,8 +1,10 @@
 import 'package:expense_tracker/theme/app_colors.dart';
 import 'package:expense_tracker/theme/app_metrics.dart';
+import 'package:expense_tracker/widgets/pressable.dart';
 import 'package:flutter/material.dart';
 
-/// The numeric keypad: 1–9, decimal point, 0 and backspace.
+/// The numeric keypad: 1–9, decimal point, 0 and backspace. Large keys with
+/// no borders; each press scales gently.
 class Keypad extends StatelessWidget {
   /// Creates the keypad.
   const new({
@@ -42,20 +44,28 @@ class Keypad extends StatelessWidget {
           Row(
             children: [
               for (final digit in row)
-                _Key(onPressed: () => onDigit(digit), child: Text('$digit')),
+                KeypadKey(
+                  label: '$digit',
+                  onPressed: () => onDigit(digit),
+                  child: Text('$digit'),
+                ),
             ],
           ),
         Row(
           children: [
-            _Key(
+            KeypadKey(
+              label: pointLabel,
               onPressed: onPoint,
-              semanticLabel: pointLabel,
               child: const Text('.'),
             ),
-            _Key(onPressed: () => onDigit(0), child: const Text('0')),
-            _Key(
+            KeypadKey(
+              label: '0',
+              onPressed: () => onDigit(0),
+              child: const Text('0'),
+            ),
+            KeypadKey(
+              label: backspaceLabel,
               onPressed: onBackspace,
-              semanticLabel: backspaceLabel,
               child: const Icon(Icons.backspace_outlined),
             ),
           ],
@@ -65,35 +75,56 @@ class Keypad extends StatelessWidget {
   }
 }
 
-class _Key extends StatelessWidget {
-  const new({required this.onPressed, required this.child, this.semanticLabel});
+/// One keypad key.
+class KeypadKey extends StatelessWidget {
+  /// Creates the key.
+  const new({
+    required this.label,
+    required this.onPressed,
+    required this.child,
+    super.key,
+  });
 
+  /// What a screen reader announces.
+  final String label;
+
+  /// Called when pressed.
   final VoidCallback onPressed;
+
+  /// The key face.
   final Widget child;
-  final String? semanticLabel;
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    final button = TextButton(
-      onPressed: onPressed,
-      style: TextButton.styleFrom(
-        foregroundColor: AppColors.of(context).onSurface,
-        textStyle: textTheme.titleLarge,
-        minimumSize: Size.square(AppMetrics.of(context).minTapTarget),
-      ),
-      child: child,
-    );
-    final label = semanticLabel;
+    final metrics = AppMetrics.of(context);
+    final colors = AppColors.of(context);
     return Expanded(
-      child: label == null
-          ? button
-          : Semantics(
-              button: true,
-              label: label,
-              onTap: onPressed,
-              child: ExcludeSemantics(child: button),
+      child: Semantics(
+        button: true,
+        label: label,
+        onTap: onPressed,
+        child: ExcludeSemantics(
+          child: Pressable(
+            onTap: onPressed,
+            shape: const StadiumBorder(),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minHeight: metrics.minTapTarget + metrics.spaceSm,
+              ),
+              child: Center(
+                child: DefaultTextStyle.merge(
+                  style: Theme.of(context).textTheme.headlineSmall
+                      ?.copyWith(color: colors.onSurface),
+                  child: IconTheme.merge(
+                    data: IconThemeData(color: colors.onSurface),
+                    child: child,
+                  ),
+                ),
+              ),
             ),
+          ),
+        ),
+      ),
     );
   }
 }

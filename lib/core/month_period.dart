@@ -64,6 +64,17 @@ final class MonthPeriod {
   bool contains(DateTime localDateTime) =>
       !localDateTime.isBefore(start) && localDateTime.isBefore(end);
 
+  /// Days of the period up to and including [localDate]: the whole length
+  /// for a past period, zero for a future one.
+  int daysElapsedOn(DateTime localDate) {
+    final day = DateTime.utc(localDate.year, localDate.month, localDate.day);
+    final from = DateTime.utc(start.year, start.month, start.day);
+    final to = DateTime.utc(end.year, end.month, end.day);
+    if (day.isBefore(from)) return 0;
+    final last = day.isBefore(to) ? day : to.subtract(const Duration(days: 1));
+    return last.difference(from).inDays + 1;
+  }
+
   /// Days from [localDate] to the end of the period, counting [localDate]
   /// itself. Zero if [localDate] is outside the period.
   int daysLeftIncluding(DateTime localDate) {

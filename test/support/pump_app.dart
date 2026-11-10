@@ -2,6 +2,8 @@ import 'package:clock/clock.dart';
 import 'package:expense_tracker/app.dart';
 import 'package:expense_tracker/data/data_providers.dart';
 import 'package:expense_tracker/data/db/app_database.dart';
+import 'package:expense_tracker/features/quick_add/presentation/widgets/keypad.dart';
+import 'package:expense_tracker/routing/floating_tab_bar.dart';
 import 'package:expense_tracker/services/haptics.dart';
 import 'package:expense_tracker/services/service_providers.dart';
 import 'package:flutter/material.dart';
@@ -54,12 +56,11 @@ Future<AppDatabase> pumpApp(
 }) async {
   final clock = Clock.fixed(testNow);
   final db = openTestDatabase(clock: clock);
-  if (size != null) {
-    tester.view
-      ..physicalSize = size
-      ..devicePixelRatio = 1;
-    addTearDown(tester.view.reset);
-  }
+  // A typical phone unless a test asks for another size.
+  tester.view
+    ..physicalSize = size ?? const Size(390, 844)
+    ..devicePixelRatio = 1;
+  addTearDown(tester.view.reset);
   tester.platformDispatcher.textScaleFactorTestValue = textScale;
   addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
   await tester.pumpWidget(
@@ -80,9 +81,39 @@ Future<AppDatabase> pumpApp(
 /// Types [amount] on the Quick Add keypad, for example `240` or `12.5`.
 Future<void> typeAmount(WidgetTester tester, String amount) async {
   for (final key in amount.split('')) {
-    final button = find.widgetWithText(TextButton, key);
+    final button = find.descendant(
+      of: find.byType(Keypad),
+      matching: find.text(key),
+    );
     await tester.ensureVisible(button);
     await tester.tap(button);
     await tester.pump();
   }
+  await tester.pumpAndSettle();
+}
+
+/// Taps the tab labelled [label] in the floating tab bar.
+Future<void> openTab(WidgetTester tester, String label) async {
+  await tester.tap(
+    find.descendant(
+      of: find.byType(FloatingTabBar),
+      matching: find.text(label),
+    ),
+  );
+  await tester.pumpAndSettle();
+}
+
+/// Opens Quick Add, types [amount] and taps [category] to save it.
+Future<void> addExpense(
+  WidgetTester tester,
+  String amount,
+  String category,
+) async {
+  await tester.tap(find.byTooltip('Add expense').first);
+  await tester.pumpAndSettle();
+  await typeAmount(tester, amount);
+  final tile = find.text(category);
+  await tester.ensureVisible(tile);
+  await tester.tap(tile);
+  await tester.pumpAndSettle();
 }

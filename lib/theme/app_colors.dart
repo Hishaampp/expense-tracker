@@ -3,87 +3,123 @@ import 'package:flutter/material.dart';
 
 /// Tier-2 semantic colour slots. Widgets read these, never a primitive.
 ///
-/// Every money state also has a non-colour signal (sign, icon, label); these
-/// colours only reinforce it (docs/DESIGN.md, "Money states").
+/// Every money state also has a non-colour signal (sign, icon or label);
+/// colour only reinforces it (docs/DESIGN.md, "Money states").
 @immutable
 class AppColors extends ThemeExtension<AppColors> {
   /// Creates a colour set; use [AppColors.light] or [AppColors.dark].
   const new({
+    required this.background,
     required this.surface,
-    required this.surfaceRaised,
+    required this.surfaceSunken,
     required this.onSurface,
     required this.onSurfaceMuted,
     required this.hairline,
-    required this.rule,
     required this.accent,
-    required this.onAccent,
+    required this.accentFill,
+    required this.onAccentFill,
+    required this.accentText,
+    required this.hero,
+    required this.onHero,
+    required this.onHeroMuted,
     required this.moneyIn,
+    required this.moneyInOnHero,
     required this.danger,
     required this.review,
     required this.reviewContainer,
-    required this.reviewOutline,
+    required this.floatingShadow,
   });
 
-  /// The light "Passbook" palette.
+  /// The light palette.
   static const AppColors light = AppColors(
-    surface: Primitives.slate98,
-    surfaceRaised: Primitives.white100,
-    onSurface: Primitives.navy26,
-    onSurfaceMuted: Primitives.slate46,
-    hairline: Primitives.slate90,
-    rule: Primitives.navy26,
-    accent: Primitives.blue43,
-    onAccent: Primitives.white100,
-    moneyIn: Primitives.green52,
-    danger: Primitives.red50,
-    review: Primitives.amber43,
-    reviewContainer: Primitives.amber96,
-    reviewOutline: Primitives.amber51,
+    background: Primitives.sand96,
+    surface: Primitives.white100,
+    surfaceSunken: Primitives.sand94,
+    onSurface: Primitives.ink19,
+    onSurfaceMuted: Primitives.stone51,
+    hairline: Primitives.sand94,
+    accent: Primitives.saffron64,
+    accentFill: Primitives.saffron58,
+    onAccentFill: Primitives.white100,
+    accentText: Primitives.saffron53,
+    hero: Primitives.ink19,
+    onHero: Primitives.white100,
+    onHeroMuted: Primitives.stone72,
+    moneyIn: Primitives.green50,
+    moneyInOnHero: Primitives.green78,
+    danger: Primitives.red56,
+    review: Primitives.amber46,
+    reviewContainer: Primitives.amber94,
+    floatingShadow: Primitives.shadow08,
   );
 
-  /// The dark "Passbook" palette, authored by hand (not a flip of light).
+  /// The dark palette, authored by hand (not a flip of light).
   static const AppColors dark = AppColors(
-    surface: Primitives.navy20,
-    surfaceRaised: Primitives.navy25,
-    onSurface: Primitives.slate94,
-    onSurfaceMuted: Primitives.slate77,
-    hairline: Primitives.navy35,
-    rule: Primitives.slate94,
-    accent: Primitives.blue78,
-    onAccent: Primitives.navy20,
-    moneyIn: Primitives.green80,
-    danger: Primitives.red79,
+    background: Primitives.night16,
+    surface: Primitives.night22,
+    surfaceSunken: Primitives.night27,
+    onSurface: Primitives.stone96,
+    onSurfaceMuted: Primitives.stone71,
+    hairline: Primitives.night27,
+    accent: Primitives.saffron75,
+    accentFill: Primitives.saffron75,
+    onAccentFill: Primitives.saffron18,
+    accentText: Primitives.saffron78,
+    hero: Primitives.night26,
+    onHero: Primitives.white100,
+    onHeroMuted: Primitives.stone75,
+    moneyIn: Primitives.green78,
+    moneyInOnHero: Primitives.green78,
+    danger: Primitives.red74,
     review: Primitives.amber88,
     reviewContainer: Primitives.amber31,
-    reviewOutline: Primitives.amber78,
+    floatingShadow: Primitives.shadow40,
   );
 
-  /// Page background ("paper").
+  /// Page background.
+  final Color background;
+
+  /// Cards, sheets and the tab bar.
   final Color surface;
 
-  /// Background of sheets, dialogs and raised panels.
-  final Color surfaceRaised;
+  /// Pills, selected tab and keypad keys: a step below [surface].
+  final Color surfaceSunken;
 
-  /// Primary text and icons ("ink"); also plain spent amounts.
+  /// Primary text and icons; spent amounts.
   final Color onSurface;
 
-  /// Supporting text; also transfers, which are not spending.
+  /// Supporting text; transfers.
   final Color onSurfaceMuted;
 
-  /// Row dividers.
+  /// The rare divider between rows inside one card.
   final Color hairline;
 
-  /// The heavy ruled line that opens a ledger block.
-  final Color rule;
-
-  /// Primary actions, selection and the budget bar.
+  /// Vivid accent for icons, progress and the floating + glyph. Not for text.
   final Color accent;
 
-  /// Text and icons on [accent].
-  final Color onAccent;
+  /// Fill of primary buttons.
+  final Color accentFill;
 
-  /// Money received.
+  /// Text and icons on [accentFill].
+  final Color onAccentFill;
+
+  /// Accent-coloured text, such as a tappable value.
+  final Color accentText;
+
+  /// The dark summary card.
+  final Color hero;
+
+  /// Text on [hero].
+  final Color onHero;
+
+  /// Supporting text on [hero].
+  final Color onHeroMuted;
+
+  /// Money received, on [surface] or [background].
   final Color moneyIn;
+
+  /// Money received, on [hero].
+  final Color moneyInOnHero;
 
   /// Over budget and destructive actions.
   final Color danger;
@@ -94,8 +130,8 @@ class AppColors extends ThemeExtension<AppColors> {
   /// Fill behind "needs review" badges.
   final Color reviewContainer;
 
-  /// Dashed outline of "needs review" items.
-  final Color reviewOutline;
+  /// Shadow under the floating round buttons and tab bar only.
+  final Color floatingShadow;
 
   /// Reads the colours from the theme; asserts if the theme lacks them.
   static AppColors of(BuildContext context) {
@@ -106,34 +142,46 @@ class AppColors extends ThemeExtension<AppColors> {
 
   @override
   AppColors copyWith({
+    Color? background,
     Color? surface,
-    Color? surfaceRaised,
+    Color? surfaceSunken,
     Color? onSurface,
     Color? onSurfaceMuted,
     Color? hairline,
-    Color? rule,
     Color? accent,
-    Color? onAccent,
+    Color? accentFill,
+    Color? onAccentFill,
+    Color? accentText,
+    Color? hero,
+    Color? onHero,
+    Color? onHeroMuted,
     Color? moneyIn,
+    Color? moneyInOnHero,
     Color? danger,
     Color? review,
     Color? reviewContainer,
-    Color? reviewOutline,
+    Color? floatingShadow,
   }) {
     return AppColors(
+      background: background ?? this.background,
       surface: surface ?? this.surface,
-      surfaceRaised: surfaceRaised ?? this.surfaceRaised,
+      surfaceSunken: surfaceSunken ?? this.surfaceSunken,
       onSurface: onSurface ?? this.onSurface,
       onSurfaceMuted: onSurfaceMuted ?? this.onSurfaceMuted,
       hairline: hairline ?? this.hairline,
-      rule: rule ?? this.rule,
       accent: accent ?? this.accent,
-      onAccent: onAccent ?? this.onAccent,
+      accentFill: accentFill ?? this.accentFill,
+      onAccentFill: onAccentFill ?? this.onAccentFill,
+      accentText: accentText ?? this.accentText,
+      hero: hero ?? this.hero,
+      onHero: onHero ?? this.onHero,
+      onHeroMuted: onHeroMuted ?? this.onHeroMuted,
       moneyIn: moneyIn ?? this.moneyIn,
+      moneyInOnHero: moneyInOnHero ?? this.moneyInOnHero,
       danger: danger ?? this.danger,
       review: review ?? this.review,
       reviewContainer: reviewContainer ?? this.reviewContainer,
-      reviewOutline: reviewOutline ?? this.reviewOutline,
+      floatingShadow: floatingShadow ?? this.floatingShadow,
     );
   }
 
@@ -142,19 +190,25 @@ class AppColors extends ThemeExtension<AppColors> {
     if (other == null) return this;
     Color mix(Color a, Color b) => Color.lerp(a, b, t) ?? b;
     return AppColors(
+      background: mix(background, other.background),
       surface: mix(surface, other.surface),
-      surfaceRaised: mix(surfaceRaised, other.surfaceRaised),
+      surfaceSunken: mix(surfaceSunken, other.surfaceSunken),
       onSurface: mix(onSurface, other.onSurface),
       onSurfaceMuted: mix(onSurfaceMuted, other.onSurfaceMuted),
       hairline: mix(hairline, other.hairline),
-      rule: mix(rule, other.rule),
       accent: mix(accent, other.accent),
-      onAccent: mix(onAccent, other.onAccent),
+      accentFill: mix(accentFill, other.accentFill),
+      onAccentFill: mix(onAccentFill, other.onAccentFill),
+      accentText: mix(accentText, other.accentText),
+      hero: mix(hero, other.hero),
+      onHero: mix(onHero, other.onHero),
+      onHeroMuted: mix(onHeroMuted, other.onHeroMuted),
       moneyIn: mix(moneyIn, other.moneyIn),
+      moneyInOnHero: mix(moneyInOnHero, other.moneyInOnHero),
       danger: mix(danger, other.danger),
       review: mix(review, other.review),
       reviewContainer: mix(reviewContainer, other.reviewContainer),
-      reviewOutline: mix(reviewOutline, other.reviewOutline),
+      floatingShadow: mix(floatingShadow, other.floatingShadow),
     );
   }
 }

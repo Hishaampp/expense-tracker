@@ -3,13 +3,11 @@ import 'package:expense_tracker/core/models/transaction_kind.dart';
 import 'package:expense_tracker/formatting/date_format.dart';
 import 'package:expense_tracker/formatting/money_format.dart';
 import 'package:expense_tracker/l10n/app_localizations.dart';
-import 'package:expense_tracker/widgets/category_icon.dart';
 import 'package:expense_tracker/widgets/money_tone.dart';
-import 'package:flutter/widgets.dart';
 
 /// Everything a ledger row shows for one transaction, already localized.
 typedef TransactionRowText = ({
-  IconData icon,
+  String iconKey,
   String title,
   String subtitle,
   String amountText,
@@ -33,7 +31,7 @@ TransactionRowText describeTransaction(
 
   return switch (txn.kind) {
     TransactionKind.expense => (
-      icon: categoryIcon(item.category?.iconKey),
+      iconKey: item.category?.iconKey ?? 'other',
       title: title,
       subtitle: withTime(categoryName),
       amountText: amount,
@@ -41,7 +39,7 @@ TransactionRowText describeTransaction(
       semanticLabel: l10n.rowSpentSemantics(amount, '$title, $categoryName'),
     ),
     TransactionKind.income => (
-      icon: categoryIcon('income'),
+      iconKey: 'income',
       title: title,
       subtitle: withTime(l10n.moneyIn),
       amountText: formatMoneyIn(txn.amount),
@@ -49,7 +47,7 @@ TransactionRowText describeTransaction(
       semanticLabel: l10n.rowMoneyInSemantics(amount, title),
     ),
     TransactionKind.transfer => (
-      icon: categoryIcon('transfer'),
+      iconKey: 'transfer',
       title: title,
       subtitle: withTime(l10n.transfer),
       amountText: amount,
@@ -57,7 +55,7 @@ TransactionRowText describeTransaction(
       semanticLabel: l10n.rowTransferSemantics(amount, title),
     ),
     TransactionKind.refund => (
-      icon: categoryIcon('refund'),
+      iconKey: 'refund',
       title: title,
       subtitle: withTime(l10n.refund),
       amountText: formatMoneyIn(txn.amount),

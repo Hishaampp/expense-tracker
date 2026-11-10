@@ -100,11 +100,17 @@ abstract class AppLocalizations {
   /// **'Home'**
   String get navHome;
 
-  /// No description provided for @navTransactions.
+  /// No description provided for @navActivity.
   ///
   /// In en, this message translates to:
-  /// **'Transactions'**
-  String get navTransactions;
+  /// **'Activity'**
+  String get navActivity;
+
+  /// No description provided for @navRooms.
+  ///
+  /// In en, this message translates to:
+  /// **'Rooms'**
+  String get navRooms;
 
   /// No description provided for @navSettings.
   ///
@@ -154,53 +160,107 @@ abstract class AppLocalizations {
   /// **'Delete'**
   String get delete;
 
-  /// No description provided for @previousMonth.
-  ///
-  /// In en, this message translates to:
-  /// **'Previous month'**
-  String get previousMonth;
-
-  /// No description provided for @nextMonth.
-  ///
-  /// In en, this message translates to:
-  /// **'Next month'**
-  String get nextMonth;
-
   /// No description provided for @addExpense.
   ///
   /// In en, this message translates to:
   /// **'Add expense'**
   String get addExpense;
 
-  /// No description provided for @homeSpentLabel.
+  /// No description provided for @selected.
   ///
   /// In en, this message translates to:
-  /// **'Spent this month'**
-  String get homeSpentLabel;
+  /// **'selected'**
+  String get selected;
 
-  /// No description provided for @homeIncludesRooms.
+  /// No description provided for @changeMonth.
   ///
   /// In en, this message translates to:
-  /// **'includes {amount} in Rooms'**
-  String homeIncludesRooms(String amount);
+  /// **'Change month, {month}'**
+  String changeMonth(String month);
 
-  /// No description provided for @homeSpentSemantics.
+  /// No description provided for @pickMonthTitle.
   ///
   /// In en, this message translates to:
-  /// **'{amount} spent this month'**
-  String homeSpentSemantics(String amount);
+  /// **'Choose a month'**
+  String get pickMonthTitle;
 
-  /// No description provided for @homeMoneyIn.
+  /// No description provided for @heroGreeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Hi!'**
+  String get heroGreeting;
+
+  /// No description provided for @heroSpentThisMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve spent {amount} this month.'**
+  String heroSpentThisMonth(String amount);
+
+  /// No description provided for @heroSpentSince.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve spent {amount} since {date}.'**
+  String heroSpentSince(String amount, String date);
+
+  /// No description provided for @heroSpentIn.
+  ///
+  /// In en, this message translates to:
+  /// **'You spent {amount} in {month}.'**
+  String heroSpentIn(String amount, String month);
+
+  /// No description provided for @heroMoneyIn.
   ///
   /// In en, this message translates to:
   /// **'Money in'**
-  String get homeMoneyIn;
+  String get heroMoneyIn;
 
-  /// No description provided for @homeMoneyInSemantics.
+  /// No description provided for @heroDailyAverage.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily average'**
+  String get heroDailyAverage;
+
+  /// No description provided for @heroInRooms.
+  ///
+  /// In en, this message translates to:
+  /// **'In Rooms'**
+  String get heroInRooms;
+
+  /// No description provided for @heroPayments.
+  ///
+  /// In en, this message translates to:
+  /// **'Payments'**
+  String get heroPayments;
+
+  /// No description provided for @heroPaymentsValue.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{None yet} =1{1 payment} other{{count} payments}}'**
+  String heroPaymentsValue(int count);
+
+  /// No description provided for @heroMoneyInSemantics.
   ///
   /// In en, this message translates to:
   /// **'{amount} money in'**
-  String homeMoneyInSemantics(String amount);
+  String heroMoneyInSemantics(String amount);
+
+  /// No description provided for @heroDailyAverageSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily average {amount}'**
+  String heroDailyAverageSemantics(String amount);
+
+  /// No description provided for @heroInRoomsSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} spent in Rooms'**
+  String heroInRoomsSemantics(String amount);
+
+  /// No description provided for @seeAllActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'See all activity'**
+  String get seeAllActivity;
 
   /// No description provided for @homeTopCategories.
   ///
@@ -229,26 +289,38 @@ abstract class AppLocalizations {
   /// No description provided for @homeEmptyBody.
   ///
   /// In en, this message translates to:
-  /// **'Add your first expense to see this month\'s spending.'**
+  /// **'Add your first expense and this month comes to life.'**
   String get homeEmptyBody;
 
-  /// No description provided for @transactionsTitle.
+  /// No description provided for @activityTitle.
   ///
   /// In en, this message translates to:
-  /// **'Transactions'**
-  String get transactionsTitle;
+  /// **'Activity'**
+  String get activityTitle;
 
-  /// No description provided for @transactionsEmptyTitle.
+  /// No description provided for @activityEmptyTitle.
   ///
   /// In en, this message translates to:
   /// **'Nothing in {month}'**
-  String transactionsEmptyTitle(String month);
+  String activityEmptyTitle(String month);
 
-  /// No description provided for @transactionsEmptyBody.
+  /// No description provided for @activityEmptyBody.
   ///
   /// In en, this message translates to:
   /// **'Expenses you add for this month show up here.'**
-  String get transactionsEmptyBody;
+  String get activityEmptyBody;
+
+  /// No description provided for @today.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get today;
+
+  /// No description provided for @yesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get yesterday;
 
   /// No description provided for @daySpent.
   ///
@@ -310,6 +382,24 @@ abstract class AppLocalizations {
   /// **'{amount} spent on {category}'**
   String categorySpentSemantics(String amount, String category);
 
+  /// No description provided for @roomsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Rooms'**
+  String get roomsTitle;
+
+  /// No description provided for @roomsComingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Trips and events, together'**
+  String get roomsComingTitle;
+
+  /// No description provided for @roomsComingBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Rooms arrive in a coming update. A Room keeps a trip\'s or a wedding\'s spending together, and it still counts in your month.'**
+  String get roomsComingBody;
+
   /// No description provided for @quickAddTitle.
   ///
   /// In en, this message translates to:
@@ -340,6 +430,12 @@ abstract class AppLocalizations {
   /// **'Amount {amount}'**
   String quickAddAmountSemantics(String amount);
 
+  /// No description provided for @quickAddCash.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash'**
+  String get quickAddCash;
+
   /// No description provided for @quickAddToday.
   ///
   /// In en, this message translates to:
@@ -369,6 +465,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Chai with Ravi'**
   String get quickAddNoteHint;
+
+  /// No description provided for @quickAddMore.
+  ///
+  /// In en, this message translates to:
+  /// **'More'**
+  String get quickAddMore;
+
+  /// No description provided for @quickAddAllCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'All categories'**
+  String get quickAddAllCategories;
 
   /// No description provided for @quickAddSaved.
   ///
@@ -412,23 +520,23 @@ abstract class AppLocalizations {
   /// **'Decimal point'**
   String get keypadPoint;
 
-  /// No description provided for @selected.
-  ///
-  /// In en, this message translates to:
-  /// **'selected'**
-  String get selected;
-
   /// No description provided for @settingsTitle.
   ///
   /// In en, this message translates to:
   /// **'Settings'**
   String get settingsTitle;
 
-  /// No description provided for @settingsMonthSection.
+  /// No description provided for @settingsSectionMonth.
   ///
   /// In en, this message translates to:
-  /// **'Month'**
-  String get settingsMonthSection;
+  /// **'Your month'**
+  String get settingsSectionMonth;
+
+  /// No description provided for @settingsSectionLook.
+  ///
+  /// In en, this message translates to:
+  /// **'Look'**
+  String get settingsSectionLook;
 
   /// No description provided for @settingsMonthStart.
   ///
@@ -436,17 +544,17 @@ abstract class AppLocalizations {
   /// **'Month starts on'**
   String get settingsMonthStart;
 
-  /// No description provided for @settingsMonthStartSemantics.
-  ///
-  /// In en, this message translates to:
-  /// **'Month starts on day {day}'**
-  String settingsMonthStartSemantics(int day);
-
   /// No description provided for @settingsMonthStartValue.
   ///
   /// In en, this message translates to:
   /// **'Day {day}'**
   String settingsMonthStartValue(int day);
+
+  /// No description provided for @settingsMonthStartSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Month starts on day {day}'**
+  String settingsMonthStartSemantics(int day);
 
   /// No description provided for @settingsMonthStartHelp.
   ///
@@ -460,10 +568,40 @@ abstract class AppLocalizations {
   /// **'Month now starts on day {day}'**
   String settingsMonthStartSaved(int day);
 
+  /// No description provided for @settingsAppearance.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get settingsAppearance;
+
+  /// No description provided for @settingsAppearanceSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance, {mode}'**
+  String settingsAppearanceSemantics(String mode);
+
+  /// No description provided for @themeSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get themeSystem;
+
+  /// No description provided for @themeLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get themeLight;
+
+  /// No description provided for @themeDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get themeDark;
+
   /// No description provided for @notFoundTitle.
   ///
   /// In en, this message translates to:
-  /// **'This page doesn\'t exist'**
+  /// **'This page doesn\'t exist.'**
   String get notFoundTitle;
 
   /// No description provided for @notFoundAction.
