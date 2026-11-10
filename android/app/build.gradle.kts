@@ -64,3 +64,8 @@ kotlin {
 flutter {
     source = "../.."
 }
+
+dependencies {
+    // NotificationCompat.MessagingStyle and NotificationManagerCompat.
+    implementation("androidx.core:core-ktx:1.17.0")
+}

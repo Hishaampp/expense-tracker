@@ -12,7 +12,10 @@ class MainActivity : FlutterActivity() {
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
-        capture = CaptureChannel(applicationContext, flutterEngine.dartExecutor.binaryMessenger)
+        capture = CaptureChannel(
+            applicationContext,
+            flutterEngine.dartExecutor.binaryMessenger,
+        ) { this }
         pendingShare?.let { handleShare(it) }
         pendingShare = null
     }
