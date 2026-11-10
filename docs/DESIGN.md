@@ -54,7 +54,9 @@ never the bare digits.
 
 ## Type
 
-- **Family:** Anek Latin, bundled with the app (no runtime font download).
+- **Family:** Anek Latin, bundled with the app as one variable font file
+  (`assets/fonts/`, SIL Open Font License; no runtime font download). It has
+  the ₹ sign, and its tabular digits are all the same width.
   Anek Devanagari and Anek Gurmukhi are added with Hindi and Punjabi.
 - **Weights:** 400 for text, 500 for labels, 600 for totals and titles.
 - **Amounts** use equal-width (tabular) digits and Indian grouping

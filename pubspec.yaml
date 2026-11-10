@@ -30,4 +30,12 @@ dev_dependencies:
   very_good_analysis: ^11.0.0
 flutter:
   uses-material-design: true
+  # Bundled, never fetched at runtime (docs/DESIGN.md, "Type"). One variable
+  # file: FontWeight drives its weight axis. Licence: AnekLatin-OFL.txt.
+  fonts:
+    - family: Anek Latin
+      fonts:
+        - asset: assets/fonts/AnekLatin-Variable.ttf
+  assets:
+    - assets/fonts/AnekLatin-OFL.txt
   generate: true
