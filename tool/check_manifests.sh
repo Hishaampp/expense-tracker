@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+# Merged-manifest gates (spec §6.2, §13). Fails if:
+#   1. the `play` flavor (any build type) merges READ_SMS or RECEIVE_SMS —
+#      Google Play allows SMS permissions only for default SMS handlers;
+#   2. any RELEASE build (either flavor) merges INTERNET — the app promises
+#      that no data leaves the phone. (Flutter's debug/profile manifests add
+#      INTERNET for hot reload; those are dev-only and not checked.)
+#   3. the `sideload` flavor does NOT carry RECEIVE_SMS (guards the flavor
+#      split itself, so gate 1 can't pass merely because nobody declares SMS).
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+variants=(PlayDebug PlayRelease SideloadRelease)
+tasks=()
+for v in "${variants[@]}"; do tasks+=(":app:process${v}Manifest"); done
+(cd android && ./gradlew "${tasks[@]}" -q)
+
+manifest() { # $1 = variant dir, e.g. playRelease (bash 3.2-safe capitalisation)
+  local cap
+  cap="$(printf '%s' "${1:0:1}" | tr '[:lower:]' '[:upper:]')${1:1}"
+  local f="build/app/intermediates/merged_manifests/$1/process${cap}Manifest/AndroidManifest.xml"
+  [[ -f "$f" ]] || { echo "::error::merged manifest not found: $f" >&2; exit 1; }
+  echo "$f"
+}
+has_perm() { grep -Eq "uses-permission[^>]*android:name=\"android\.permission\.$2\"" "$1"; }
+
+fail=0
+for v in playDebug playRelease; do
+  m=$(manifest "$v")
+  for p in READ_SMS RECEIVE_SMS; do
+    if has_perm "$m" "$p"; then
+      echo "::error::$v merges $p. The play flavor must never request SMS permissions (Play policy)."; fail=1
+    fi
+  done
+done
+for v in playRelease sideloadRelease; do
+  m=$(manifest "$v")
+  if has_perm "$m" INTERNET; then
+    echo "::error::$v merges INTERNET. Release builds must not have network access (spec §13). Find the plugin that adds it: grep the manifest-merger report."; fail=1
+  fi
+done
+if ! has_perm "$(manifest sideloadRelease)" RECEIVE_SMS; then
+  echo "::error::sideloadRelease lacks RECEIVE_SMS — the flavor split is broken."; fail=1
+fi
+
+[[ $fail -eq 0 ]] && echo "Manifest checks passed."
+exit $fail

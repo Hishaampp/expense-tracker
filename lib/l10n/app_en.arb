@@ -1,0 +1,11 @@
+{
+  "@@locale": "en",
+  "homeEmptyTitle": "No expenses yet",
+  "@homeEmptyTitle": {
+    "description": "Shown on Home before any transaction exists."
+  },
+  "homeEmptyBody": "Payments you make will show up here.",
+  "@homeEmptyBody": {
+    "description": "Supporting line under homeEmptyTitle."
+  }
+}

@@ -1,0 +1,7 @@
+// App identity — PLACEHOLDERS until the owner picks a name (spec §15, Phase 8).
+// iOS: change these two values only. Android: android/app/build.gradle.kts.
+// Dart: lib/core/app_identity.dart.
+APP_BUNDLE_ID = com.example.expenses
+APP_DISPLAY_NAME = Expenses
+// App Group shared with the App Intent / Share Extension capture queue (spec §6.3).
+APP_GROUP_ID = group.$(APP_BUNDLE_ID).capture
