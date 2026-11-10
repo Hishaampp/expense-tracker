@@ -1,4 +1,5 @@
 import 'package:expense_tracker/core/failure.dart';
+import 'package:expense_tracker/core/month_period.dart';
 import 'package:expense_tracker/core/result.dart';
 import 'package:expense_tracker/data/db/app_database.dart';
 import 'package:expense_tracker/services/app_logger.dart';
@@ -15,23 +16,23 @@ class SettingsRepository {
 
   static const String _monthStartDayKey = 'month_start_day';
 
-  /// Largest start day offered. Days 29–31 do not exist in every month.
-  static const int maxMonthStartDay = 28;
-
   /// The day of the month a budgeting month starts on (spec §5.9).
   /// Defaults to 1.
   Stream<int> watchMonthStartDay() {
     final query = _db.select(_db.settings)
       ..where((s) => s.key.equals(_monthStartDayKey));
     return query.watchSingleOrNull().map(
-      (row) => (int.tryParse(row?.value ?? '') ?? 1).clamp(1, maxMonthStartDay),
+      (row) => (int.tryParse(row?.value ?? '') ?? 1).clamp(
+        1,
+        MonthPeriod.maxStartDaySetting,
+      ),
     );
   }
 
   /// Saves the month start [day] (clamped to 1–28).
   @useResult
   Future<Result<int, StoreFailure>> setMonthStartDay(int day) async {
-    final value = day.clamp(1, maxMonthStartDay);
+    final value = day.clamp(1, MonthPeriod.maxStartDaySetting);
     try {
       await _db
           .into(_db.settings)

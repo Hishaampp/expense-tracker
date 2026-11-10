@@ -41,6 +41,13 @@ class TransactionRepository {
     );
   }
 
+  /// The transaction with [id], or null if it does not exist.
+  Future<MoneyTransaction?> findById(String id) async {
+    final query = _db.select(_db.transactions)..where((t) => t.id.equals(id));
+    final row = await query.getSingleOrNull();
+    return row == null ? null : transactionFromRow(row);
+  }
+
   /// Saves a new manual expense and returns it.
   @useResult
   Future<Result<MoneyTransaction, StoreFailure>> addExpense({

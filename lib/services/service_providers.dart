@@ -1,6 +1,7 @@
 import 'package:clock/clock.dart';
 import 'package:expense_tracker/core/id_generator.dart';
 import 'package:expense_tracker/services/app_logger.dart';
+import 'package:expense_tracker/services/haptics.dart';
 import 'package:expense_tracker/services/uuid_id_generator.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,3 +15,6 @@ final idGeneratorProvider = Provider<IdGenerator>(
 
 /// Local-only diagnostics log.
 final appLoggerProvider = Provider<AppLogger>((ref) => const DeveloperLogger());
+
+/// Touch feedback. Override with a fake in tests.
+final hapticsProvider = Provider<Haptics>((ref) => const SystemHaptics());

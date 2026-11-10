@@ -66,8 +66,8 @@ never the bare digits.
 | `amountLarge` | 22 | 600 | Secondary totals |
 | `amountRow` | 15 | 500 | Amount column in a row |
 | `headlineMedium` | 24 | 600 | Screen headings |
-| `titleLarge` | 20 | 600 | Section headings |
-| `titleMedium` | 16 | 500 | App bar, card titles |
+| `titleLarge` | 20 | 600 | Empty-state titles |
+| `titleMedium` | 16 | 500 | Section headings, app bar, month name |
 | `bodyLarge` | 16 | 400 | Row titles (payee) |
 | `bodyMedium` | 14 | 400 | Body text |
 | `bodySmall` | 13 | 400 | Supporting line under a row title |
@@ -86,6 +86,13 @@ Text is never clamped: layouts must work at the largest system text size.
 - **Elevation:** none. Sheets and dialogs differ by `surfaceRaised`, not by a
   shadow.
 - **Wide screens:** content is capped at 560 wide and centred.
+
+## Buttons
+
+- **Filled:** the screen's primary next step (Add expense, Save, an empty
+  state's action). At most one per screen.
+- **Outlined:** recovery actions, such as Try again on an error.
+- **Text:** small secondary links, such as See all.
 
 ## Motion
 

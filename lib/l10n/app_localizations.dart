@@ -94,17 +94,401 @@ abstract class AppLocalizations {
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[Locale('en')];
 
-  /// Shown on Home before any transaction exists.
+  /// No description provided for @navHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get navHome;
+
+  /// No description provided for @navTransactions.
+  ///
+  /// In en, this message translates to:
+  /// **'Transactions'**
+  String get navTransactions;
+
+  /// No description provided for @navSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get navSettings;
+
+  /// No description provided for @loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading'**
+  String get loading;
+
+  /// No description provided for @tryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get tryAgain;
+
+  /// No description provided for @undo.
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get undo;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @previousMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous month'**
+  String get previousMonth;
+
+  /// No description provided for @nextMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Next month'**
+  String get nextMonth;
+
+  /// No description provided for @addExpense.
+  ///
+  /// In en, this message translates to:
+  /// **'Add expense'**
+  String get addExpense;
+
+  /// No description provided for @homeSpentLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Spent this month'**
+  String get homeSpentLabel;
+
+  /// No description provided for @homeIncludesRooms.
+  ///
+  /// In en, this message translates to:
+  /// **'includes {amount} in Rooms'**
+  String homeIncludesRooms(String amount);
+
+  /// No description provided for @homeSpentSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} spent this month'**
+  String homeSpentSemantics(String amount);
+
+  /// No description provided for @homeMoneyIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Money in'**
+  String get homeMoneyIn;
+
+  /// No description provided for @homeMoneyInSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} money in'**
+  String homeMoneyInSemantics(String amount);
+
+  /// No description provided for @homeTopCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'Top categories'**
+  String get homeTopCategories;
+
+  /// No description provided for @homeRecent.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent'**
+  String get homeRecent;
+
+  /// No description provided for @homeSeeAll.
+  ///
+  /// In en, this message translates to:
+  /// **'See all'**
+  String get homeSeeAll;
+
+  /// No description provided for @homeEmptyTitle.
   ///
   /// In en, this message translates to:
   /// **'No expenses yet'**
   String get homeEmptyTitle;
 
-  /// Supporting line under homeEmptyTitle.
+  /// No description provided for @homeEmptyBody.
   ///
   /// In en, this message translates to:
-  /// **'Payments you make will show up here.'**
+  /// **'Add your first expense to see this month\'s spending.'**
   String get homeEmptyBody;
+
+  /// No description provided for @transactionsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Transactions'**
+  String get transactionsTitle;
+
+  /// No description provided for @transactionsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing in {month}'**
+  String transactionsEmptyTitle(String month);
+
+  /// No description provided for @transactionsEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Expenses you add for this month show up here.'**
+  String get transactionsEmptyBody;
+
+  /// No description provided for @daySpent.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} spent'**
+  String daySpent(String amount);
+
+  /// No description provided for @uncategorised.
+  ///
+  /// In en, this message translates to:
+  /// **'Uncategorised'**
+  String get uncategorised;
+
+  /// No description provided for @moneyIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Money in'**
+  String get moneyIn;
+
+  /// No description provided for @transfer.
+  ///
+  /// In en, this message translates to:
+  /// **'Transfer'**
+  String get transfer;
+
+  /// No description provided for @refund.
+  ///
+  /// In en, this message translates to:
+  /// **'Refund'**
+  String get refund;
+
+  /// No description provided for @rowSpentSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} spent, {what}'**
+  String rowSpentSemantics(String amount, String what);
+
+  /// No description provided for @rowMoneyInSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} money in, {what}'**
+  String rowMoneyInSemantics(String amount, String what);
+
+  /// No description provided for @rowTransferSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} transfer, {what}'**
+  String rowTransferSemantics(String amount, String what);
+
+  /// No description provided for @rowRefundSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} refund, {what}'**
+  String rowRefundSemantics(String amount, String what);
+
+  /// No description provided for @categorySpentSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} spent on {category}'**
+  String categorySpentSemantics(String amount, String category);
+
+  /// No description provided for @quickAddTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add expense'**
+  String get quickAddTitle;
+
+  /// No description provided for @quickAddEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit expense'**
+  String get quickAddEditTitle;
+
+  /// No description provided for @quickAddAmountHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter an amount'**
+  String get quickAddAmountHint;
+
+  /// No description provided for @quickAddPickCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a category to save'**
+  String get quickAddPickCategory;
+
+  /// No description provided for @quickAddAmountSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount {amount}'**
+  String quickAddAmountSemantics(String amount);
+
+  /// No description provided for @quickAddToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get quickAddToday;
+
+  /// No description provided for @quickAddDateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Date: {date}'**
+  String quickAddDateLabel(String date);
+
+  /// No description provided for @quickAddNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Note'**
+  String get quickAddNote;
+
+  /// No description provided for @quickAddNoteLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Note: {note}'**
+  String quickAddNoteLabel(String note);
+
+  /// No description provided for @quickAddNoteHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Chai with Ravi'**
+  String get quickAddNoteHint;
+
+  /// No description provided for @quickAddSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} added'**
+  String quickAddSaved(String amount);
+
+  /// No description provided for @quickAddUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Expense updated'**
+  String get quickAddUpdated;
+
+  /// No description provided for @quickAddDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Expense deleted'**
+  String get quickAddDeleted;
+
+  /// No description provided for @quickAddMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'This expense no longer exists.'**
+  String get quickAddMissing;
+
+  /// No description provided for @quickAddBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Go back'**
+  String get quickAddBack;
+
+  /// No description provided for @keypadBackspace.
+  ///
+  /// In en, this message translates to:
+  /// **'Backspace'**
+  String get keypadBackspace;
+
+  /// No description provided for @keypadPoint.
+  ///
+  /// In en, this message translates to:
+  /// **'Decimal point'**
+  String get keypadPoint;
+
+  /// No description provided for @selected.
+  ///
+  /// In en, this message translates to:
+  /// **'selected'**
+  String get selected;
+
+  /// No description provided for @settingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsTitle;
+
+  /// No description provided for @settingsMonthSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Month'**
+  String get settingsMonthSection;
+
+  /// No description provided for @settingsMonthStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Month starts on'**
+  String get settingsMonthStart;
+
+  /// No description provided for @settingsMonthStartSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Month starts on day {day}'**
+  String settingsMonthStartSemantics(int day);
+
+  /// No description provided for @settingsMonthStartValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Day {day}'**
+  String settingsMonthStartValue(int day);
+
+  /// No description provided for @settingsMonthStartHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick your salary day to make each month run from one salary to the next.'**
+  String get settingsMonthStartHelp;
+
+  /// No description provided for @settingsMonthStartSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Month now starts on day {day}'**
+  String settingsMonthStartSaved(int day);
+
+  /// No description provided for @notFoundTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'This page doesn\'t exist'**
+  String get notFoundTitle;
+
+  /// No description provided for @notFoundAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to Home'**
+  String get notFoundAction;
+
+  /// No description provided for @failureStoreWrite.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t save. Try again.'**
+  String get failureStoreWrite;
+
+  /// No description provided for @failureStoreMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'This record no longer exists.'**
+  String get failureStoreMissing;
+
+  /// No description provided for @failureLoad.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load this. Try again.'**
+  String get failureLoad;
 }
 
 class _AppLocalizationsDelegate

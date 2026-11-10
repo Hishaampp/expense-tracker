@@ -40,12 +40,17 @@ the tests in random order. It also checks the Android manifests:
 - The `play` flavor must not ask for SMS permissions.
 - No release build may ask for internet access.
 
+## Design
+
+The look is "Passbook": see `docs/DESIGN.md`. Colours, spacing, type and
+motion live only in `lib/theme/`.
+
 ## Status
 
 | Phase | What | Status |
 |---|---|---|
 | 0 | Project setup, flavors, App Group, lints, CI | done |
-| 1 | Core money tracking (manual) | next |
+| 1 | Core money tracking (manual) | built, waiting for owner's check on a phone |
 | 2 | Parser + paste/share capture | |
 | 3 | Android auto-capture | |
 | 4 | iOS auto-capture | |

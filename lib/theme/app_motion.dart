@@ -9,6 +9,8 @@ class AppMotion extends ThemeExtension<AppMotion> {
     required this.medium,
     required this.enter,
     required this.exit,
+    required this.undoWindow,
+    required this.undoWindowAccessible,
   });
 
   /// The Passbook motion: short durations, no bounce.
@@ -17,6 +19,8 @@ class AppMotion extends ThemeExtension<AppMotion> {
     medium: Duration(milliseconds: 200),
     enter: Curves.easeOutCubic,
     exit: Curves.easeInCubic,
+    undoWindow: Duration(seconds: 6),
+    undoWindowAccessible: Duration(seconds: 30),
   );
 
   /// Presses, the confirm "stamp", chip selection.
@@ -31,6 +35,12 @@ class AppMotion extends ThemeExtension<AppMotion> {
   /// Curve for things leaving.
   final Curve exit;
 
+  /// How long a snackbar with Undo stays up.
+  final Duration undoWindow;
+
+  /// The same, when a screen reader or switch is in use.
+  final Duration undoWindowAccessible;
+
   /// Reads the motion slots from the theme; asserts if the theme lacks them.
   static AppMotion of(BuildContext context) {
     final extension = Theme.of(context).extension<AppMotion>();
@@ -44,12 +54,16 @@ class AppMotion extends ThemeExtension<AppMotion> {
     Duration? medium,
     Curve? enter,
     Curve? exit,
+    Duration? undoWindow,
+    Duration? undoWindowAccessible,
   }) {
     return AppMotion(
       quick: quick ?? this.quick,
       medium: medium ?? this.medium,
       enter: enter ?? this.enter,
       exit: exit ?? this.exit,
+      undoWindow: undoWindow ?? this.undoWindow,
+      undoWindowAccessible: undoWindowAccessible ?? this.undoWindowAccessible,
     );
   }
 

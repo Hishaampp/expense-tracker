@@ -44,6 +44,9 @@ final class Money implements Comparable<Money> {
   /// Paise left over after [wholeRupees], always 0–99.
   int get paisePart => paise.abs() % currency.minorPerMajor;
 
+  /// Whether the amount is above zero.
+  bool get isPositive => paise > 0;
+
   /// Whether the amount is below zero.
   bool get isNegative => paise < 0;
 

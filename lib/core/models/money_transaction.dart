@@ -31,6 +31,9 @@ final class MoneyTransaction {
     this.origin = TransactionOrigin.manual,
   });
 
+  /// Longest note the user can type.
+  static const int noteMaxLength = 120;
+
   /// Stable unique id.
   final String id;
 

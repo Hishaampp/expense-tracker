@@ -19,6 +19,7 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
     required this.iconSize,
     required this.barHeight,
     required this.readableWidth,
+    required this.stackedTextScale,
   });
 
   /// The Passbook metrics: tight, 4-point grid, small corners.
@@ -35,6 +36,7 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
     iconSize: 20,
     barHeight: 6,
     readableWidth: 560,
+    stackedTextScale: 1.5,
   );
 
   /// 4 logical pixels.
@@ -73,6 +75,10 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
   /// Maximum content width on tablets and foldables.
   final double readableWidth;
 
+  /// System text scale from which a row puts its amount on its own line
+  /// instead of beside the title.
+  final double stackedTextScale;
+
   /// Reads the metrics from the theme; asserts if the theme lacks them.
   static AppMetrics of(BuildContext context) {
     final extension = Theme.of(context).extension<AppMetrics>();
@@ -94,6 +100,7 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
     double? iconSize,
     double? barHeight,
     double? readableWidth,
+    double? stackedTextScale,
   }) {
     return AppMetrics(
       spaceXs: spaceXs ?? this.spaceXs,
@@ -108,6 +115,7 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
       iconSize: iconSize ?? this.iconSize,
       barHeight: barHeight ?? this.barHeight,
       readableWidth: readableWidth ?? this.readableWidth,
+      stackedTextScale: stackedTextScale ?? this.stackedTextScale,
     );
   }
 
@@ -128,6 +136,7 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
       iconSize: mix(iconSize, other.iconSize),
       barHeight: mix(barHeight, other.barHeight),
       readableWidth: mix(readableWidth, other.readableWidth),
+      stackedTextScale: mix(stackedTextScale, other.stackedTextScale),
     );
   }
 }

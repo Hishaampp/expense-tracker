@@ -9,6 +9,13 @@ import 'package:meta/meta.dart';
 final class KeypadAmount {
   const new _(this._whole, this._fraction);
 
+  /// The keypad state that shows [money] (for editing a saved amount).
+  factory fromMoney(Money money) {
+    final whole = money.wholeRupees == 0 ? '' : '${money.wholeRupees}';
+    if (money.paisePart == 0) return KeypadAmount._(whole, null);
+    return KeypadAmount._(whole, money.paisePart.toString().padLeft(2, '0'));
+  }
+
   /// Nothing typed yet.
   static const KeypadAmount empty = KeypadAmount._('', null);
 

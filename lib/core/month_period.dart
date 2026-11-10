@@ -23,6 +23,10 @@ final class MonthPeriod {
     return MonthPeriod._(thisStart, next, day);
   }
 
+  /// Largest start day the user can choose. Days 29–31 do not exist in
+  /// every month.
+  static const int maxStartDaySetting = 28;
+
   /// First local day of the period, at midnight.
   final DateTime start;
 
@@ -46,6 +50,15 @@ final class MonthPeriod {
     start.subtract(const Duration(days: 1)),
     startDay: startDay,
   );
+
+  /// The period [months] after this one (before it, when negative).
+  MonthPeriod shifted(int months) {
+    var period = this;
+    for (var i = 0; i < months.abs(); i++) {
+      period = months > 0 ? period.next : period.previous;
+    }
+    return period;
+  }
 
   /// Whether [localDateTime] falls inside the period.
   bool contains(DateTime localDateTime) =>

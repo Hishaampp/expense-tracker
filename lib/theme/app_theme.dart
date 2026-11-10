@@ -71,6 +71,14 @@ ThemeData buildAppTheme(Brightness brightness) {
       backgroundColor: colors.surface,
       selectedColor: colors.accent,
       labelStyle: textTheme.labelMedium,
+      secondaryLabelStyle: textTheme.labelMedium?.copyWith(
+        color: colors.onAccent,
+      ),
+      checkmarkColor: colors.onAccent,
+      iconTheme: IconThemeData(
+        color: colors.onSurfaceMuted,
+        size: metrics.iconSize,
+      ),
     ),
     bottomSheetTheme: BottomSheetThemeData(
       backgroundColor: colors.surfaceRaised,
@@ -98,6 +106,8 @@ ColorScheme _colorScheme(Brightness brightness, AppColors c) {
     onPrimary: c.onAccent,
     secondary: c.accent,
     onSecondary: c.onAccent,
+    secondaryContainer: c.hairline,
+    onSecondaryContainer: c.onSurface,
     tertiary: c.moneyIn,
     onTertiary: c.surface,
     error: c.danger,
