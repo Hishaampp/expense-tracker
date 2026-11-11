@@ -74,7 +74,7 @@ class BudgetCard extends StatelessWidget {
     };
     final said = switch (body) {
       _Status(:final semanticLabel) => semanticLabel,
-      _ => l10n.budgetCardSetSemantics,
+      _ => l10n.listPair(l10n.homeBudgetSetTitle, l10n.homeBudgetSetBody),
     };
     // One node, one tap: the card says everything and opens Budgets.
     return Semantics(

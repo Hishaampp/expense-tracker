@@ -311,7 +311,12 @@ class _MonthlyCard extends StatelessWidget {
               if (monthly != null) ...[
                 Semantics(
                   container: true,
-                  label: l10n.homeBudgetPercentSemantics(over ? 100 : percent),
+                  label: switch (state.safe) {
+                    Overspent(:final over) => l10n.homeBudgetOver(
+                      formatMoney(over),
+                    ),
+                    _ => l10n.homeBudgetPercentSemantics(percent),
+                  },
                   child: RingChart(
                     segments: [
                       (
@@ -370,12 +375,18 @@ class _MonthlyCard extends StatelessWidget {
           if (monthly != null)
             Text(l10n.budgetsMonthlyHelp, style: textTheme.bodySmall),
           SizedBox(height: metrics.spaceSm),
-          OutlinedButton(
-            onPressed: onEdit,
-            child: Text(
-              monthly == null ? l10n.budgetsSetMonthly : l10n.budgetsChange,
+          // Setting the first budget is the screen's next step; changing
+          // it later is a small action in the card (docs/DESIGN.md).
+          if (monthly == null)
+            FilledButton(onPressed: onEdit, child: Text(l10n.budgetsSetMonthly))
+          else
+            Align(
+              alignment: AlignmentDirectional.centerStart,
+              child: TextButton(
+                onPressed: onEdit,
+                child: Text(l10n.budgetsChange),
+              ),
             ),
-          ),
         ],
       ),
     );

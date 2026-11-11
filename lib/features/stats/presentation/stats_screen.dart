@@ -167,7 +167,7 @@ class _WeekLink extends StatelessWidget {
     return Semantics(
       container: true,
       button: true,
-      label: l10n.statsWeekSemantics,
+      label: l10n.listPair(l10n.statsWeekTitle, l10n.statsWeekBody),
       onTap: onTap,
       child: ExcludeSemantics(
         child: AppCard(

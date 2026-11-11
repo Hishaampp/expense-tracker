@@ -2845,18 +2845,6 @@ abstract class AppLocalizations {
     String budget,
     String over,
   );
-
-  /// No description provided for @statsWeekSemantics.
-  ///
-  /// In en, this message translates to:
-  /// **'Your week. This week against last week, and who you paid most.'**
-  String get statsWeekSemantics;
-
-  /// No description provided for @budgetCardSetSemantics.
-  ///
-  /// In en, this message translates to:
-  /// **'Set a monthly budget. See what\'s safe to spend each day.'**
-  String get budgetCardSetSemantics;
 }
 
 class _AppLocalizationsDelegate

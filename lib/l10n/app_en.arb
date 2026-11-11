@@ -1486,7 +1486,5 @@
         "type": "String"
       }
     }
-  },
-  "statsWeekSemantics": "Your week. This week against last week, and who you paid most.",
-  "budgetCardSetSemantics": "Set a monthly budget. See what's safe to spend each day."
+  }
 }

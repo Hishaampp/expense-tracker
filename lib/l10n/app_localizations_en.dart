@@ -1806,12 +1806,4 @@ class AppLocalizationsEn extends AppLocalizations {
   ) {
     return '$name: $spent spent of $budget, over by $over. Change';
   }
-
-  @override
-  String get statsWeekSemantics =>
-      'Your week. This week against last week, and who you paid most.';
-
-  @override
-  String get budgetCardSetSemantics =>
-      'Set a monthly budget. See what\'s safe to spend each day.';
 }

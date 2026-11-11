@@ -147,7 +147,7 @@ class WeeklyReviewScreen extends ConsumerWidget {
                   SizedBox(height: metrics.spaceSm),
                   Align(
                     alignment: AlignmentDirectional.centerStart,
-                    child: OutlinedButton(
+                    child: TextButton(
                       onPressed: () => unawaited(context.push(Routes.review)),
                       child: Text(l10n.weeklyOpenReview),
                     ),

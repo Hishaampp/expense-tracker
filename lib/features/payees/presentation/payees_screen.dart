@@ -126,6 +126,7 @@ class PayeesScreen extends ConsumerWidget {
             index: 1,
             child: AppCard(
               padding: EdgeInsetsDirectional.symmetric(
+                horizontal: AppMetrics.of(context).spaceLg,
                 vertical: AppMetrics.of(context).spaceSm,
               ),
               child: Column(
