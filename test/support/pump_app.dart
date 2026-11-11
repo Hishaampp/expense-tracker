@@ -99,7 +99,7 @@ final class FakeCaptureQueue implements CaptureQueueService {
 /// The native auto-capture controls, faked.
 final class FakeCaptureControl implements CaptureControlService {
   /// Creates the fake with the given status.
-  FakeCaptureControl({
+  new({
     this.platform = 'android',
     this.listenerEnabled = false,
     this.smsSupported = false,
@@ -256,5 +256,18 @@ Future<void> addExpense(
   final tile = find.text(category);
   await tester.ensureVisible(tile);
   await tester.tap(tile);
+  await tester.pumpAndSettle();
+}
+
+/// Scrolls [finder] to the middle of its list, clear of the pinned header,
+/// so a tap lands on it.
+Future<void> bringIntoView(WidgetTester tester, Finder finder) async {
+  // The list on screen, not one in a hidden tab underneath.
+  await tester.scrollUntilVisible(
+    finder,
+    200,
+    scrollable: find.byType(Scrollable).hitTestable().first,
+  );
+  await Scrollable.ensureVisible(tester.element(finder), alignment: 0.5);
   await tester.pumpAndSettle();
 }

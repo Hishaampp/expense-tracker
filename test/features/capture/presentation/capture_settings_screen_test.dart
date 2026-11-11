@@ -19,13 +19,15 @@ void main() {
 
     expect(find.text('Auto-capture is off'), findsOneWidget);
     expect(find.text('What the app reads'), findsOneWidget);
-    expect(
-      find.text('If Android says the setting is restricted'),
-      findsOneWidget,
-    );
-    await tester.tap(find.widgetWithText(FilledButton, 'Turn on auto-capture'));
+    final button = find.widgetWithText(FilledButton, 'Turn on auto-capture');
+    await bringIntoView(tester, button);
+    await tester.tap(button);
     await tester.pumpAndSettle();
     expect(control.calls, ['openCaptureSettings']);
+
+    final restricted = find.text('If Android says the setting is restricted');
+    await bringIntoView(tester, restricted);
+    expect(restricted, findsOneWidget);
   });
 
   appTest('battery steps match the phone maker', (tester) async {
@@ -34,12 +36,10 @@ void main() {
       captureControl: FakeCaptureControl(manufacturer: 'vivo'),
     );
     await _open(tester);
-    await tester.scrollUntilVisible(
-      find.textContaining('On Vivo and iQOO'),
-      200,
-    );
+    final steps = find.textContaining('On Vivo and iQOO');
+    await bringIntoView(tester, steps);
 
-    expect(find.textContaining('On Vivo and iQOO'), findsOneWidget);
+    expect(steps, findsOneWidget);
   });
 
   appTest('apps can be switched off', (tester) async {
@@ -47,7 +47,7 @@ void main() {
     await pumpApp(tester, captureControl: control);
     await _open(tester);
     expect(find.text('Auto-capture is on'), findsOneWidget);
-    await tester.scrollUntilVisible(find.text('PhonePe'), 200);
+    await bringIntoView(tester, find.text('PhonePe'));
 
     await tester.tap(find.text('PhonePe'));
     await tester.pumpAndSettle();
@@ -62,7 +62,7 @@ void main() {
     );
     await pumpApp(tester, captureControl: control);
     await _open(tester);
-    await tester.scrollUntilVisible(find.text('Import past messages'), 200);
+    await bringIntoView(tester, find.text('Import past messages'));
 
     await tester.tap(find.text('Import past messages'));
     await tester.pumpAndSettle();
