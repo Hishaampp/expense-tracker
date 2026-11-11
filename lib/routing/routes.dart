@@ -21,6 +21,9 @@ abstract final class Routes {
   /// Settings → Payees & rules (the merchant book).
   static const String payees = '/settings/payees';
 
+  /// Settings → Backup & export.
+  static const String backup = '/settings/backup';
+
   /// The notification inbox.
   static const String notifications = '/notifications';
 

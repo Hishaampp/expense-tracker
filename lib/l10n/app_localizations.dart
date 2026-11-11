@@ -2845,6 +2845,276 @@ abstract class AppLocalizations {
     String budget,
     String over,
   );
+
+  /// No description provided for @lockTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Locked'**
+  String get lockTitle;
+
+  /// No description provided for @lockBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your expenses stay private until you unlock.'**
+  String get lockBody;
+
+  /// No description provided for @lockUnlock.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock'**
+  String get lockUnlock;
+
+  /// No description provided for @lockReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock to see your expenses'**
+  String get lockReason;
+
+  /// No description provided for @lockEnableReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm it\'s you to turn on the app lock'**
+  String get lockEnableReason;
+
+  /// No description provided for @settingsSectionPrivacy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy & data'**
+  String get settingsSectionPrivacy;
+
+  /// No description provided for @settingsAppLock.
+  ///
+  /// In en, this message translates to:
+  /// **'Lock with Face ID, fingerprint or passcode'**
+  String get settingsAppLock;
+
+  /// No description provided for @settingsAppLockUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Set a screen lock on your phone first.'**
+  String get settingsAppLockUnavailable;
+
+  /// No description provided for @settingsRetention.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep message text'**
+  String get settingsRetention;
+
+  /// No description provided for @settingsRetentionSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep message text, {value}'**
+  String settingsRetentionSemantics(String value);
+
+  /// No description provided for @retentionNever.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t keep'**
+  String get retentionNever;
+
+  /// No description provided for @retentionDays30.
+  ///
+  /// In en, this message translates to:
+  /// **'30 days'**
+  String get retentionDays30;
+
+  /// No description provided for @retentionForever.
+  ///
+  /// In en, this message translates to:
+  /// **'Until I delete it'**
+  String get retentionForever;
+
+  /// No description provided for @retentionHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'The original bank message is kept so a payment can be read again if the app gets better at it. Amounts and payees stay either way.'**
+  String get retentionHelp;
+
+  /// No description provided for @settingsBackup.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup & export'**
+  String get settingsBackup;
+
+  /// No description provided for @settingsBackupSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup and export'**
+  String get settingsBackupSemantics;
+
+  /// No description provided for @failureBackupPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'That password doesn\'t open this backup.'**
+  String get failureBackupPassword;
+
+  /// No description provided for @failureBackupNotBackup.
+  ///
+  /// In en, this message translates to:
+  /// **'This file isn\'t a backup from this app.'**
+  String get failureBackupNotBackup;
+
+  /// No description provided for @failureBackupTooNew.
+  ///
+  /// In en, this message translates to:
+  /// **'This backup is from a newer version of the app. Update the app, then try again.'**
+  String get failureBackupTooNew;
+
+  /// No description provided for @failureBackupFile.
+  ///
+  /// In en, this message translates to:
+  /// **'The file couldn\'t be saved or read. Try again.'**
+  String get failureBackupFile;
+
+  /// No description provided for @backupTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup & export'**
+  String get backupTitle;
+
+  /// No description provided for @backupCardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Encrypted backup'**
+  String get backupCardTitle;
+
+  /// No description provided for @backupCardBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Saves everything into one file locked with a password. Keep it in Files, Google Drive or iCloud. Without the password no one can open it, not even you, so write it down somewhere safe.'**
+  String get backupCardBody;
+
+  /// No description provided for @backupCreate.
+  ///
+  /// In en, this message translates to:
+  /// **'Create backup'**
+  String get backupCreate;
+
+  /// No description provided for @backupRestoreTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore from a backup'**
+  String get backupRestoreTitle;
+
+  /// No description provided for @backupRestoreBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Replaces everything on this phone with what\'s in the backup file.'**
+  String get backupRestoreBody;
+
+  /// No description provided for @backupRestoreChoose.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose backup file'**
+  String get backupRestoreChoose;
+
+  /// No description provided for @backupCsvTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Export to a spreadsheet'**
+  String get backupCsvTitle;
+
+  /// No description provided for @backupCsvBody.
+  ///
+  /// In en, this message translates to:
+  /// **'A CSV file of every payment, for Excel or Google Sheets. It is not encrypted: anyone who gets the file can read it.'**
+  String get backupCsvBody;
+
+  /// No description provided for @backupCsvExport.
+  ///
+  /// In en, this message translates to:
+  /// **'Export CSV'**
+  String get backupCsvExport;
+
+  /// No description provided for @backupPasswordNew.
+  ///
+  /// In en, this message translates to:
+  /// **'Set a backup password'**
+  String get backupPasswordNew;
+
+  /// No description provided for @backupPasswordOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup password'**
+  String get backupPasswordOpen;
+
+  /// No description provided for @backupPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get backupPasswordLabel;
+
+  /// No description provided for @backupPasswordRepeat.
+  ///
+  /// In en, this message translates to:
+  /// **'Repeat password'**
+  String get backupPasswordRepeat;
+
+  /// No description provided for @backupPasswordShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Use at least {count} characters'**
+  String backupPasswordShort(int count);
+
+  /// No description provided for @backupPasswordMismatch.
+  ///
+  /// In en, this message translates to:
+  /// **'The passwords don\'t match'**
+  String get backupPasswordMismatch;
+
+  /// No description provided for @backupContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get backupContinue;
+
+  /// No description provided for @backupWorking.
+  ///
+  /// In en, this message translates to:
+  /// **'Working on it…'**
+  String get backupWorking;
+
+  /// No description provided for @backupReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup created'**
+  String get backupReady;
+
+  /// No description provided for @backupNotShared.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup not saved'**
+  String get backupNotShared;
+
+  /// No description provided for @backupConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Replace all data?'**
+  String get backupConfirmTitle;
+
+  /// No description provided for @backupConfirmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything on this phone will be replaced by the backup. This can\'t be undone.'**
+  String get backupConfirmBody;
+
+  /// No description provided for @backupConfirmReplace.
+  ///
+  /// In en, this message translates to:
+  /// **'Replace'**
+  String get backupConfirmReplace;
+
+  /// No description provided for @backupRestored.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Restored, with 1 payment} other{Restored, with {count} payments}}'**
+  String backupRestored(int count);
+
+  /// No description provided for @backupCsvReady.
+  ///
+  /// In en, this message translates to:
+  /// **'CSV exported'**
+  String get backupCsvReady;
 }
 
 class _AppLocalizationsDelegate

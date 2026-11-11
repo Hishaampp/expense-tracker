@@ -1,5 +1,6 @@
 import 'package:expense_tracker/core/failure.dart';
 import 'package:expense_tracker/core/models/appearance_mode.dart';
+import 'package:expense_tracker/core/models/retention.dart';
 import 'package:expense_tracker/core/money.dart';
 import 'package:expense_tracker/core/result.dart';
 import 'package:expense_tracker/data/capture/capture_providers.dart';
@@ -19,6 +20,8 @@ final class SettingsState {
     required this.unparsedCount,
     required this.autoCaptureOn,
     this.monthlyBudget,
+    this.appLock = false,
+    this.retention = RawTextRetention.days30,
   });
 
   /// The day of the month a budgeting month starts on.
@@ -36,6 +39,12 @@ final class SettingsState {
 
   /// The monthly budget, or null when none is set.
   final Money? monthlyBudget;
+
+  /// Whether the app lock is on.
+  final bool appLock;
+
+  /// How long original message text is kept.
+  final RawTextRetention retention;
 }
 
 /// The Settings view model over the live settings.
@@ -49,6 +58,8 @@ class SettingsNotifier extends AsyncNotifier<SettingsState> {
       unparsedCount: ref.watch(unparsedMessagesProvider).value?.length,
       autoCaptureOn: ref.watch(autoCaptureOnProvider).value,
       monthlyBudget: ref.watch(budgetPlanProvider).value?.monthly,
+      appLock: ref.watch(appLockProvider).value ?? false,
+      retention: ref.watch(retentionProvider).value ?? RawTextRetention.days30,
     );
   }
 
@@ -59,6 +70,43 @@ class SettingsNotifier extends AsyncNotifier<SettingsState> {
         .read(settingsRepositoryProvider)
         .setMonthStartDay(day);
     return switch (result) {
+      Ok() => null,
+      Err(:final failure) => failure,
+    };
+  }
+
+  /// Turns the app lock on (after the user proves it's them, with
+  /// [reason] shown) or off. Returns false when the phone has no lock or
+  /// the user did not confirm; throws nothing.
+  Future<({bool changed, StoreFailure? failure})> setAppLock({
+    required bool on,
+    required String reason,
+  }) async {
+    final auth = ref.read(deviceAuthProvider);
+    if (on && !(await auth.isAvailable() && await auth.unlock(reason))) {
+      return (changed: false, failure: null);
+    }
+    final result = await ref
+        .read(settingsRepositoryProvider)
+        .setAppLock(on: on);
+    return switch (result) {
+      Ok() => (changed: true, failure: null),
+      Err(:final failure) => (changed: false, failure: failure),
+    };
+  }
+
+  /// Saves the retention [choice] and removes text it no longer keeps.
+  Future<StoreFailure?> setRetention(RawTextRetention choice) async {
+    final result = await ref
+        .read(settingsRepositoryProvider)
+        .setRetention(choice);
+    if (result case Err(:final failure)) return failure;
+    final cutoff = choice.cutoff(ref.read(clockProvider).now().toUtc());
+    if (cutoff == null) return null;
+    final purged = await ref
+        .read(captureRepositoryProvider)
+        .purgeRawText(cutoff);
+    return switch (purged) {
       Ok() => null,
       Err(:final failure) => failure,
     };

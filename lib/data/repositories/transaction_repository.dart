@@ -48,6 +48,13 @@ class TransactionRepository {
     );
   }
 
+  /// Every transaction, oldest first, read once (for CSV export).
+  Future<List<MoneyTransaction>> all() async {
+    final query = _db.select(_db.transactions)
+      ..orderBy([(t) => OrderingTerm.asc(t.occurredAt)]);
+    return (await query.get()).map(transactionFromRow).toList();
+  }
+
   /// How many expenses each category has had since [sinceUtc], by category
   /// id. Used to put the most-used categories first in Quick Add.
   Future<Map<String, int>> categoryUsageSince(DateTime sinceUtc) async {

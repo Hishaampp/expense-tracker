@@ -3,10 +3,10 @@ package com.example.expenses
 import android.content.Intent
 import android.os.Bundle
 import com.example.expenses.capture.CaptureChannel
-import io.flutter.embedding.android.FlutterActivity
+import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine
 
-class MainActivity : FlutterActivity() {
+class MainActivity : FlutterFragmentActivity() {
     private var capture: CaptureChannel? = null
     private var pendingShare: Intent? = null
 

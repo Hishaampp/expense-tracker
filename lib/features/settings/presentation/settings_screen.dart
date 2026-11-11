@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:expense_tracker/core/models/appearance_mode.dart';
+import 'package:expense_tracker/core/models/retention.dart';
 import 'package:expense_tracker/features/settings/presentation/settings_notifier.dart';
 import 'package:expense_tracker/features/settings/presentation/widgets/appearance_sheet.dart';
 import 'package:expense_tracker/features/settings/presentation/widgets/month_start_day_sheet.dart';
@@ -15,7 +16,10 @@ import 'package:expense_tracker/widgets/error_state_view.dart';
 import 'package:expense_tracker/widgets/icon_tile.dart';
 import 'package:expense_tracker/widgets/info_row.dart';
 import 'package:expense_tracker/widgets/large_title_page.dart';
+import 'package:expense_tracker/widgets/option_sheet.dart';
 import 'package:expense_tracker/widgets/pulsing_placeholder.dart';
+import 'package:expense_tracker/widgets/sheet_frame.dart';
+import 'package:expense_tracker/widgets/switch_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -49,6 +53,62 @@ class SettingsScreen extends ConsumerWidget {
         ),
       );
   }
+
+  Future<void> _setAppLock(BuildContext context, WidgetRef ref, bool on) async {
+    final messenger = ScaffoldMessenger.of(context);
+    final l10n = AppLocalizations.of(context);
+    final result = await ref
+        .read(settingsNotifierProvider.notifier)
+        .setAppLock(on: on, reason: l10n.lockEnableReason);
+    final text = switch (result) {
+      (changed: _, failure: final failure?) => failureMessage(l10n, failure),
+      (changed: false, failure: null) when on =>
+        l10n.settingsAppLockUnavailable,
+      _ => null,
+    };
+    if (text == null) return;
+    messenger
+      ..clearSnackBars()
+      ..showSnackBar(SnackBar(content: Text(text)));
+  }
+
+  Future<void> _pickRetention(
+    BuildContext context,
+    WidgetRef ref,
+    RawTextRetention current,
+  ) async {
+    final messenger = ScaffoldMessenger.of(context);
+    final l10n = AppLocalizations.of(context);
+    final picked = await showAppSheet<OptionPick>(
+      context,
+      OptionSheet(
+        title: l10n.settingsRetention,
+        subtitle: l10n.retentionHelp,
+        options: [
+          for (final r in RawTextRetention.values)
+            (value: r.name, label: _retentionName(l10n, r), icon: null),
+        ],
+        selected: current.name,
+      ),
+    );
+    final value = picked?.value;
+    if (value == null || value == current.name) return;
+    final failure = await ref
+        .read(settingsNotifierProvider.notifier)
+        .setRetention(RawTextRetention.parse(value));
+    if (failure != null) {
+      messenger
+        ..clearSnackBars()
+        ..showSnackBar(SnackBar(content: Text(failureMessage(l10n, failure))));
+    }
+  }
+
+  static String _retentionName(AppLocalizations l10n, RawTextRetention r) =>
+      switch (r) {
+        RawTextRetention.never => l10n.retentionNever,
+        RawTextRetention.days30 => l10n.retentionDays30,
+        RawTextRetention.forever => l10n.retentionForever,
+      };
 
   Future<void> _pickAppearance(
     BuildContext context,
@@ -207,6 +267,46 @@ class SettingsScreen extends ConsumerWidget {
                 semanticLabel: l10n.settingsAppearanceSemantics(appearance),
                 onTap: () =>
                     unawaited(_pickAppearance(context, ref, state.appearance)),
+              ),
+            ],
+          ),
+        ),
+        Entrance(
+          index: 3,
+          child: SettingsGroup(
+            label: l10n.settingsSectionPrivacy,
+            rows: [
+              SwitchRow(
+                leading: IconTile(icon: Icons.lock_rounded, color: tiles.green),
+                title: l10n.settingsAppLock,
+                value: state.appLock,
+                onChanged: (on) => unawaited(_setAppLock(context, ref, on)),
+              ),
+              InfoRow(
+                leading: IconTile(
+                  icon: Icons.history_toggle_off_rounded,
+                  color: tiles.teal,
+                ),
+                title: l10n.settingsRetention,
+                trailingText: _retentionName(l10n, state.retention),
+                trailingIsAmount: false,
+                showChevron: true,
+                semanticLabel: l10n.settingsRetentionSemantics(
+                  _retentionName(l10n, state.retention),
+                ),
+                onTap: () =>
+                    unawaited(_pickRetention(context, ref, state.retention)),
+              ),
+              InfoRow(
+                leading: IconTile(
+                  icon: Icons.save_alt_rounded,
+                  color: tiles.blue,
+                ),
+                title: l10n.settingsBackup,
+                trailingIsAmount: false,
+                showChevron: true,
+                semanticLabel: l10n.settingsBackupSemantics,
+                onTap: () => unawaited(context.push(Routes.backup)),
               ),
             ],
           ),

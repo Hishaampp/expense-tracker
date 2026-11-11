@@ -1806,4 +1806,161 @@ class AppLocalizationsEn extends AppLocalizations {
   ) {
     return '$name: $spent spent of $budget, over by $over. Change';
   }
+
+  @override
+  String get lockTitle => 'Locked';
+
+  @override
+  String get lockBody => 'Your expenses stay private until you unlock.';
+
+  @override
+  String get lockUnlock => 'Unlock';
+
+  @override
+  String get lockReason => 'Unlock to see your expenses';
+
+  @override
+  String get lockEnableReason => 'Confirm it\'s you to turn on the app lock';
+
+  @override
+  String get settingsSectionPrivacy => 'Privacy & data';
+
+  @override
+  String get settingsAppLock => 'Lock with Face ID, fingerprint or passcode';
+
+  @override
+  String get settingsAppLockUnavailable =>
+      'Set a screen lock on your phone first.';
+
+  @override
+  String get settingsRetention => 'Keep message text';
+
+  @override
+  String settingsRetentionSemantics(String value) {
+    return 'Keep message text, $value';
+  }
+
+  @override
+  String get retentionNever => 'Don\'t keep';
+
+  @override
+  String get retentionDays30 => '30 days';
+
+  @override
+  String get retentionForever => 'Until I delete it';
+
+  @override
+  String get retentionHelp =>
+      'The original bank message is kept so a payment can be read again if the app gets better at it. Amounts and payees stay either way.';
+
+  @override
+  String get settingsBackup => 'Backup & export';
+
+  @override
+  String get settingsBackupSemantics => 'Backup and export';
+
+  @override
+  String get failureBackupPassword =>
+      'That password doesn\'t open this backup.';
+
+  @override
+  String get failureBackupNotBackup =>
+      'This file isn\'t a backup from this app.';
+
+  @override
+  String get failureBackupTooNew =>
+      'This backup is from a newer version of the app. Update the app, then try again.';
+
+  @override
+  String get failureBackupFile =>
+      'The file couldn\'t be saved or read. Try again.';
+
+  @override
+  String get backupTitle => 'Backup & export';
+
+  @override
+  String get backupCardTitle => 'Encrypted backup';
+
+  @override
+  String get backupCardBody =>
+      'Saves everything into one file locked with a password. Keep it in Files, Google Drive or iCloud. Without the password no one can open it, not even you, so write it down somewhere safe.';
+
+  @override
+  String get backupCreate => 'Create backup';
+
+  @override
+  String get backupRestoreTitle => 'Restore from a backup';
+
+  @override
+  String get backupRestoreBody =>
+      'Replaces everything on this phone with what\'s in the backup file.';
+
+  @override
+  String get backupRestoreChoose => 'Choose backup file';
+
+  @override
+  String get backupCsvTitle => 'Export to a spreadsheet';
+
+  @override
+  String get backupCsvBody =>
+      'A CSV file of every payment, for Excel or Google Sheets. It is not encrypted: anyone who gets the file can read it.';
+
+  @override
+  String get backupCsvExport => 'Export CSV';
+
+  @override
+  String get backupPasswordNew => 'Set a backup password';
+
+  @override
+  String get backupPasswordOpen => 'Backup password';
+
+  @override
+  String get backupPasswordLabel => 'Password';
+
+  @override
+  String get backupPasswordRepeat => 'Repeat password';
+
+  @override
+  String backupPasswordShort(int count) {
+    return 'Use at least $count characters';
+  }
+
+  @override
+  String get backupPasswordMismatch => 'The passwords don\'t match';
+
+  @override
+  String get backupContinue => 'Continue';
+
+  @override
+  String get backupWorking => 'Working on it…';
+
+  @override
+  String get backupReady => 'Backup created';
+
+  @override
+  String get backupNotShared => 'Backup not saved';
+
+  @override
+  String get backupConfirmTitle => 'Replace all data?';
+
+  @override
+  String get backupConfirmBody =>
+      'Everything on this phone will be replaced by the backup. This can\'t be undone.';
+
+  @override
+  String get backupConfirmReplace => 'Replace';
+
+  @override
+  String backupRestored(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Restored, with $count payments',
+      one: 'Restored, with 1 payment',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get backupCsvReady => 'CSV exported';
 }

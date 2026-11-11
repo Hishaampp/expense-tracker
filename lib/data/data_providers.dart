@@ -1,3 +1,4 @@
+import 'package:expense_tracker/data/backup/backup_codec.dart';
 import 'package:expense_tracker/data/db/app_database.dart';
 import 'package:expense_tracker/data/repositories/account_repository.dart';
 import 'package:expense_tracker/data/repositories/auto_capture_repository.dart';
@@ -100,4 +101,9 @@ final payeeRepositoryProvider = Provider<PayeeRepository>(
     ref.watch(clockProvider),
     ref.watch(appLoggerProvider),
   ),
+);
+
+/// Encrypted backup and restore.
+final backupCodecProvider = Provider<BackupCodec>(
+  (ref) => BackupCodec(ref.watch(appDatabaseProvider)),
 );

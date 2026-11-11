@@ -1,14 +1,18 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:clock/clock.dart';
 import 'package:expense_tracker/app.dart';
 import 'package:expense_tracker/core/models/raw_capture.dart';
+import 'package:expense_tracker/data/backup/backup_codec.dart';
 import 'package:expense_tracker/data/data_providers.dart';
 import 'package:expense_tracker/data/db/app_database.dart';
 import 'package:expense_tracker/data/query_providers.dart';
 import 'package:expense_tracker/features/quick_add/presentation/widgets/keypad.dart';
 import 'package:expense_tracker/routing/floating_tab_bar.dart';
 import 'package:expense_tracker/services/clipboard_service.dart';
+import 'package:expense_tracker/services/device_auth.dart';
+import 'package:expense_tracker/services/file_share.dart';
 import 'package:expense_tracker/services/haptics.dart';
 import 'package:expense_tracker/services/native/capture_control_service.dart';
 import 'package:expense_tracker/services/native/capture_queue_service.dart';
@@ -121,6 +125,49 @@ final class FakeNotifications implements NotificationService {
 
   @override
   Future<void> cancelWeekly() async => weekly = 'off';
+}
+
+/// The phone lock, faked: [allow] decides each unlock.
+final class FakeDeviceAuth implements DeviceAuth {
+  /// Whether the phone has a lock.
+  bool available = true;
+
+  /// Whether the next unlock succeeds.
+  bool allow = true;
+
+  /// How many times an unlock was asked for.
+  int asked = 0;
+
+  @override
+  Future<bool> isAvailable() async => available;
+
+  @override
+  Future<bool> unlock(String reason) async {
+    asked++;
+    return allow;
+  }
+}
+
+/// The share sheet and picker, faked.
+final class FakeFileShare implements FileShare {
+  /// Files shared, by name.
+  final Map<String, Uint8List> shared = {};
+
+  /// What the next pick returns.
+  Uint8List? toPick;
+
+  @override
+  Future<bool> share({
+    required String name,
+    required Uint8List bytes,
+    required String mimeType,
+  }) async {
+    shared[name] = bytes;
+    return true;
+  }
+
+  @override
+  Future<Uint8List?> pick() async => toPick;
 }
 
 /// A clipboard holding [text].
@@ -258,6 +305,9 @@ Future<AppDatabase> pumpApp(
   FakeCaptureControl? captureControl,
   FakeNotifications? notifications,
   bool onboarded = true,
+  bool appLock = false,
+  FakeDeviceAuth? deviceAuth,
+  FakeFileShare? fileShare,
   Size? size,
   double textScale = 1,
 }) async {
@@ -287,6 +337,14 @@ Future<AppDatabase> pumpApp(
           notifications ?? FakeNotifications(),
         ),
         initialOnboardedProvider.overrideWithValue(onboarded),
+        initialAppLockProvider.overrideWithValue(appLock),
+        deviceAuthProvider.overrideWithValue(deviceAuth ?? FakeDeviceAuth()),
+        fileShareProvider.overrideWithValue(fileShare ?? FakeFileShare()),
+        // Fast key stretching: the real 600,000 rounds take seconds.
+        backupCodecProvider.overrideWith(
+          (ref) =>
+              BackupCodec(ref.watch(appDatabaseProvider), iterations: 1000),
+        ),
       ],
       child: const App(),
     ),
