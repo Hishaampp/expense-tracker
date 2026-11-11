@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:expense_tracker/core/models/raw_capture.dart';
 import 'package:expense_tracker/core/result.dart';
 import 'package:expense_tracker/data/capture/capture_providers.dart';
+import 'package:expense_tracker/data/data_providers.dart';
 import 'package:expense_tracker/routing/app_router.dart';
 import 'package:expense_tracker/routing/routes.dart';
 import 'package:expense_tracker/services/service_providers.dart';
@@ -77,6 +78,7 @@ class _CaptureInboxState extends ConsumerState<CaptureInbox> {
         }
       }
       await queue.ack(handled);
+      await _purgeOldText();
     } on PlatformException catch (e, st) {
       ref.read(appLoggerProvider).error('capture.drain', e.runtimeType, st);
     } on MissingPluginException catch (e, st) {
@@ -84,6 +86,14 @@ class _CaptureInboxState extends ConsumerState<CaptureInbox> {
     } finally {
       _draining = false;
     }
+  }
+
+  // Original message text goes once its retention is over (spec §13).
+  Future<void> _purgeOldText() async {
+    final retention = await ref.read(settingsRepositoryProvider).retention();
+    final cutoff = retention.cutoff(ref.read(clockProvider).now().toUtc());
+    if (cutoff == null) return;
+    final _ = await ref.read(captureRepositoryProvider).purgeRawText(cutoff);
   }
 
   @override

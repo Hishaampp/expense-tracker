@@ -1,5 +1,6 @@
 import 'package:expense_tracker/core/failure.dart';
 import 'package:expense_tracker/core/models/appearance_mode.dart';
+import 'package:expense_tracker/core/models/retention.dart';
 import 'package:expense_tracker/core/month_period.dart';
 import 'package:expense_tracker/core/result.dart';
 import 'package:expense_tracker/data/db/app_database.dart';
@@ -22,6 +23,43 @@ class SettingsRepository {
   static const String _watchCategoryKey = 'watch_category';
   static const String _weeklySinceKey = 'weekly_review_since';
   static const String _onboardedKey = 'onboarded';
+  static const String _appLockKey = 'app_lock';
+  static const String _retentionKey = 'raw_text_retention';
+
+  /// Whether the app asks for Face ID, fingerprint or the passcode on
+  /// open. Defaults to off. Live.
+  Stream<bool> watchAppLock() => _watch(_appLockKey).map((v) => v == 'on');
+
+  /// Whether the app lock is on, read once (before the first frame).
+  Future<bool> appLockOn() async {
+    final row = await (_db.select(
+      _db.settings,
+    )..where((s) => s.key.equals(_appLockKey))).getSingleOrNull();
+    return row?.value == 'on';
+  }
+
+  /// Turns the app lock on or off.
+  @useResult
+  Future<Result<bool, StoreFailure>> setAppLock({required bool on}) =>
+      _put('settings.app_lock', _appLockKey, on ? 'on' : 'off', on);
+
+  /// How long original message text is kept. Live.
+  Stream<RawTextRetention> watchRetention() =>
+      _watch(_retentionKey).map(RawTextRetention.parse);
+
+  /// How long original message text is kept, read once.
+  Future<RawTextRetention> retention() async {
+    final row = await (_db.select(
+      _db.settings,
+    )..where((s) => s.key.equals(_retentionKey))).getSingleOrNull();
+    return RawTextRetention.parse(row?.value);
+  }
+
+  /// Saves the retention [choice].
+  @useResult
+  Future<Result<RawTextRetention, StoreFailure>> setRetention(
+    RawTextRetention choice,
+  ) => _put('settings.retention', _retentionKey, choice.name, choice);
 
   /// Whether the first-launch welcome is done: it was finished, or the
   /// app already holds transactions from before it existed.

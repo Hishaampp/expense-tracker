@@ -18,8 +18,12 @@ class OptionSheet extends StatelessWidget {
     required this.title,
     required this.options,
     required this.selected,
+    this.subtitle,
     super.key,
   });
+
+  /// One supporting line under the heading.
+  final String? subtitle;
 
   /// The sheet's heading.
   final String title;
@@ -36,6 +40,7 @@ class OptionSheet extends StatelessWidget {
     final metrics = AppMetrics.of(context);
     return SheetFrame(
       title: title,
+      subtitle: subtitle,
       child: Column(
         children: [
           for (final option in options)

@@ -7,5 +7,9 @@ String failureMessage(AppLocalizations l10n, Failure failure) {
   return switch (failure) {
     StoreWriteFailed() => l10n.failureStoreWrite,
     StoreRecordMissing() => l10n.failureStoreMissing,
+    BackupWrongPassword() => l10n.failureBackupPassword,
+    BackupNotABackup() => l10n.failureBackupNotBackup,
+    BackupTooNew() => l10n.failureBackupTooNew,
+    BackupFileFailed() => l10n.failureBackupFile,
   };
 }

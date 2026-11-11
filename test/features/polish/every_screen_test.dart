@@ -20,6 +20,7 @@ void main() {
     Routes.weeklyReview,
     Routes.notifications,
     Routes.payees,
+    Routes.backup,
     Routes.review,
     Routes.unparsed,
     Routes.autoCapture,

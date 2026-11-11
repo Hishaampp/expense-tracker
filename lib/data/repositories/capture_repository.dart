@@ -153,4 +153,25 @@ class CaptureRepository {
       return const Err(StoreWriteFailed());
     }
   }
+
+  /// Removes original message text received before [cutoffUtc] (spec
+  /// §13). Returns how many messages lost their text.
+  @useResult
+  Future<Result<int, StoreFailure>> purgeRawText(DateTime cutoffUtc) async {
+    try {
+      final cleared =
+          await (_db.update(_db.transactionSources)..where(
+                (s) =>
+                    s.rawText.isNotNull() &
+                    s.receivedAt.isSmallerThanValue(
+                      cutoffUtc.millisecondsSinceEpoch,
+                    ),
+              ))
+              .write(const TransactionSourcesCompanion(rawText: Value(null)));
+      return Ok(cleared);
+    } on SqliteException catch (e, st) {
+      _log.error('capture.purge', e.runtimeType, st);
+      return const Err(StoreWriteFailed());
+    }
+  }
 }

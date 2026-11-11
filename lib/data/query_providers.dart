@@ -6,6 +6,7 @@ import 'package:expense_tracker/core/models/money_transaction.dart';
 import 'package:expense_tracker/core/models/notice.dart';
 import 'package:expense_tracker/core/models/payee_rule.dart';
 import 'package:expense_tracker/core/models/raw_capture.dart';
+import 'package:expense_tracker/core/models/retention.dart';
 import 'package:expense_tracker/core/models/room.dart';
 import 'package:expense_tracker/core/month_period.dart';
 import 'package:expense_tracker/data/data_providers.dart';
@@ -36,6 +37,20 @@ final initialAppearanceProvider = Provider<AppearanceMode>(
 /// Whether the first-launch welcome was done, read before the first
 /// frame. `bootstrap()` overrides it; tests start past it.
 final initialOnboardedProvider = Provider<bool>((ref) => true);
+
+/// Whether the app lock was on, read before the first frame so the app
+/// opens locked. `bootstrap()` overrides it.
+final initialAppLockProvider = Provider<bool>((ref) => false);
+
+/// Whether the app lock is on. Live.
+final appLockProvider = StreamProvider<bool>(
+  (ref) => ref.watch(settingsRepositoryProvider).watchAppLock(),
+);
+
+/// How long original message text is kept. Live.
+final retentionProvider = StreamProvider<RawTextRetention>(
+  (ref) => ref.watch(settingsRepositoryProvider).watchRetention(),
+);
 
 /// Light, dark or follow the phone. Live.
 final appearanceProvider = StreamProvider<AppearanceMode>(

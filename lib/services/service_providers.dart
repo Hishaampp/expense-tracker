@@ -2,6 +2,8 @@ import 'package:clock/clock.dart';
 import 'package:expense_tracker/core/id_generator.dart';
 import 'package:expense_tracker/services/app_logger.dart';
 import 'package:expense_tracker/services/clipboard_service.dart';
+import 'package:expense_tracker/services/device_auth.dart';
+import 'package:expense_tracker/services/file_share.dart';
 import 'package:expense_tracker/services/haptics.dart';
 import 'package:expense_tracker/services/native/capture_control_service.dart';
 import 'package:expense_tracker/services/native/capture_queue_service.dart';
@@ -60,3 +62,11 @@ final notificationServiceProvider = Provider<NotificationService>(
     ref.watch(clockProvider),
   ),
 );
+
+/// The phone's own lock, for the app lock. Override with a fake in tests.
+final deviceAuthProvider = Provider<DeviceAuth>(
+  (ref) => LocalDeviceAuth(ref.watch(appLoggerProvider)),
+);
+
+/// The share sheet and file picker. Override with a fake in tests.
+final fileShareProvider = Provider<FileShare>((ref) => const SystemFileShare());

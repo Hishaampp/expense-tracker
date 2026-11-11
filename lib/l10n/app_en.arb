@@ -1486,5 +1486,71 @@
         "type": "String"
       }
     }
-  }
+  },
+  "lockTitle": "Locked",
+  "lockBody": "Your expenses stay private until you unlock.",
+  "lockUnlock": "Unlock",
+  "lockReason": "Unlock to see your expenses",
+  "lockEnableReason": "Confirm it's you to turn on the app lock",
+  "settingsSectionPrivacy": "Privacy & data",
+  "settingsAppLock": "Lock with Face ID, fingerprint or passcode",
+  "settingsAppLockUnavailable": "Set a screen lock on your phone first.",
+  "settingsRetention": "Keep message text",
+  "settingsRetentionSemantics": "Keep message text, {value}",
+  "@settingsRetentionSemantics": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "retentionNever": "Don't keep",
+  "retentionDays30": "30 days",
+  "retentionForever": "Until I delete it",
+  "retentionHelp": "The original bank message is kept so a payment can be read again if the app gets better at it. Amounts and payees stay either way.",
+  "settingsBackup": "Backup & export",
+  "settingsBackupSemantics": "Backup and export",
+  "failureBackupPassword": "That password doesn't open this backup.",
+  "failureBackupNotBackup": "This file isn't a backup from this app.",
+  "failureBackupTooNew": "This backup is from a newer version of the app. Update the app, then try again.",
+  "failureBackupFile": "The file couldn't be saved or read. Try again.",
+  "backupTitle": "Backup & export",
+  "backupCardTitle": "Encrypted backup",
+  "backupCardBody": "Saves everything into one file locked with a password. Keep it in Files, Google Drive or iCloud. Without the password no one can open it, not even you, so write it down somewhere safe.",
+  "backupCreate": "Create backup",
+  "backupRestoreTitle": "Restore from a backup",
+  "backupRestoreBody": "Replaces everything on this phone with what's in the backup file.",
+  "backupRestoreChoose": "Choose backup file",
+  "backupCsvTitle": "Export to a spreadsheet",
+  "backupCsvBody": "A CSV file of every payment, for Excel or Google Sheets. It is not encrypted: anyone who gets the file can read it.",
+  "backupCsvExport": "Export CSV",
+  "backupPasswordNew": "Set a backup password",
+  "backupPasswordOpen": "Backup password",
+  "backupPasswordLabel": "Password",
+  "backupPasswordRepeat": "Repeat password",
+  "backupPasswordShort": "Use at least {count} characters",
+  "@backupPasswordShort": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "backupPasswordMismatch": "The passwords don't match",
+  "backupContinue": "Continue",
+  "backupWorking": "Working on it…",
+  "backupReady": "Backup created",
+  "backupNotShared": "Backup not saved",
+  "backupConfirmTitle": "Replace all data?",
+  "backupConfirmBody": "Everything on this phone will be replaced by the backup. This can't be undone.",
+  "backupConfirmReplace": "Replace",
+  "backupRestored": "{count, plural, =1{Restored, with 1 payment} other{Restored, with {count} payments}}",
+  "@backupRestored": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "backupCsvReady": "CSV exported"
 }
