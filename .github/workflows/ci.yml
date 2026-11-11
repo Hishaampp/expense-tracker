@@ -1,0 +1,39 @@
+# The PR gate. Runs exactly what tool/ci.sh runs locally, so a green local
+# run and a green PR mean the same thing. Each step's contract is listed
+# at the top of tool/ci.sh.
+#
+# What CI cannot prove: on-device capture, OEM battery behaviour, iOS
+# signing, real fonts on screen. Those are checked by hand on a phone.
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4 # VERIFY: current major
+      - uses: actions/setup-java@v4 # VERIFY: current major
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: '3.47.8' # the version the project is developed on
+          cache: true
+      - name: Host SQLite for database tests
+        run: sudo apt-get update && sudo apt-get install -y libsqlite3-dev
+      - name: Run the CI script
+        run: tool/ci.sh

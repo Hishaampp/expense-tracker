@@ -19,7 +19,8 @@ flutter pub get >/dev/null
 step "lint include resolves"
 include=$(sed -n 's/^include: package:very_good_analysis\/\(.*\)$/\1/p' analysis_options.yaml)
 vga_dir=$(dart pub deps --json | python3 -I -c 'import json,sys;d=json.load(sys.stdin);print(next(p["version"] for p in d["packages"] if p["name"]=="very_good_analysis"))')
-if [[ ! -f "$HOME/.pub-cache/hosted/pub.dev/very_good_analysis-$vga_dir/lib/$include" ]]; then
+pub_cache="${PUB_CACHE:-$HOME/.pub-cache}"
+if [[ ! -f "$pub_cache/hosted/pub.dev/very_good_analysis-$vga_dir/lib/$include" ]]; then
   echo "::error::analysis_options include '$include' not found in very_good_analysis $vga_dir — analysis would run with zero rules."; exit 1
 fi
 
