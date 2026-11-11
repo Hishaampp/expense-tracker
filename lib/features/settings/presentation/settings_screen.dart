@@ -299,6 +299,20 @@ class SettingsScreen extends ConsumerWidget {
               ),
               InfoRow(
                 leading: IconTile(
+                  icon: Icons.cloud_sync_rounded,
+                  color: tiles.violet,
+                ),
+                title: l10n.settingsAccount,
+                trailingText: state.syncEmail ?? l10n.settingsAccountOff,
+                trailingIsAmount: false,
+                showChevron: true,
+                semanticLabel: l10n.settingsAccountSemantics(
+                  state.syncEmail ?? l10n.settingsAccountOff,
+                ),
+                onTap: () => unawaited(context.push(Routes.account)),
+              ),
+              InfoRow(
+                leading: IconTile(
                   icon: Icons.save_alt_rounded,
                   color: tiles.blue,
                 ),

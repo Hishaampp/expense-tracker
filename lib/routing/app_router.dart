@@ -1,4 +1,5 @@
 import 'package:expense_tracker/data/query_providers.dart';
+import 'package:expense_tracker/features/account/presentation/account_screen.dart';
 import 'package:expense_tracker/features/activity/presentation/activity_screen.dart';
 import 'package:expense_tracker/features/backup/presentation/backup_screen.dart';
 import 'package:expense_tracker/features/budgets/presentation/budgets_screen.dart';
@@ -103,6 +104,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.welcome,
         builder: (context, state) => const OnboardingScreen(),
+      ),
+      GoRoute(
+        path: Routes.account,
+        builder: (context, state) => const AccountScreen(),
       ),
       GoRoute(
         path: Routes.backup,

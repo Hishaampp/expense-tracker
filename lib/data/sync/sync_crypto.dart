@@ -33,6 +33,10 @@ final class SyncKey {
     );
   }
 
+  /// The key from stored [raw] bytes, or null when they are not a key.
+  static SyncKey? fromBytes(List<int> raw) =>
+      raw.length == length ? SyncKey._(Uint8List.fromList(raw)) : null;
+
   /// The key from a [code] made by [recoveryCode], or null when the code
   /// is mistyped. Spaces, dashes and case do not matter; O reads as 0 and
   /// I or L as 1.

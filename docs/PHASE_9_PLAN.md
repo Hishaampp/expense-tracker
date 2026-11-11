@@ -15,10 +15,10 @@ These stay: no ads, no analytics on financial data, no AI calls, and raw SMS and
 
 ## How it works
 
-1. **Sign in:** Google, Apple, or a phone-number OTP, through Supabase Auth. The app never stores a password.
+1. **Sign in:** an email code (built now); Google and Apple come next. Through Supabase Auth. The app never stores a password.
 2. **Sync key:**
    - Made on the first phone: 256 random bits, kept in the Keystore or Keychain.
-   - Shown once as a **recovery code** (24 words), which the user writes down.
+   - Shown once as a **recovery code** (53 characters in groups of four, with a typo check), which the user writes down.
    - A new phone needs the login **and** the recovery code. Losing the code means the cloud copy cannot be read; the phone's own data is unaffected.
 3. **What is uploaded:**
    - each change (a payment added, edited or deleted; a Room, budget, rule or setting) becomes a small record, encrypted with AES-256-GCM using the sync key;
@@ -49,7 +49,17 @@ These stay: no ads, no analytics on financial data, no AI calls, and raw SMS and
    - a new phone restores from the cloud;
    - the server sees only ciphertext.
 
-## What the owner must do (I cannot create accounts)
+## Status
+- Built: steps 1–5 (email-code sign-in) and the docs.
+- Next: Google and Apple sign-in, and an onboarding step.
+
+## Supabase setup (once, in the dashboard)
+1. **SQL Editor → New query:** paste `supabase/migrations/20261111000000_sync_records.sql` and press **Run**. It creates the `sync_records` table with row-level security, plus the `push_records` and `delete_my_account` functions.
+2. **Authentication → Sign In / Providers → Email:** keep it on. Turn **"Confirm email"** on.
+3. **Authentication → Emails → Templates → "Magic Link":** add the line `Your code: {{ .Token }}`, so the email carries the 6-digit code the app asks for.
+4. **Authentication → Rate limits:** the built-in mailer sends only a few emails an hour. Before launch, set up your own SMTP under **Authentication → Emails → SMTP Settings** (for example Resend, Brevo or Amazon SES).
+
+## What the owner had to do (done)
 
 1. Create a free **Supabase** project at supabase.com. Pick the region **Mumbai (ap-south-1)**.
 2. Send me the **Project URL** and the **anon public key**. That key is meant to be public; never send the `service_role` key.

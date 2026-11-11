@@ -15,9 +15,11 @@
 
 | Question | Answer | Why |
 |---|---|---|
-| Does your app collect or share any of the required user data types? | **No** | Play counts data as *collected* only when it leaves the device. This app processes everything on the device and has no network access in release builds. A CI check fails the build if `INTERNET` appears in a release manifest. |
-| Is all user data encrypted in transit? | Not applicable | No data is transmitted. |
-| Do you provide a way for users to request that their data be deleted? | Yes | Users can delete any payment in the app, or uninstall it. No data is held anywhere else. |
+| Does your app collect or share any of the required user data types? | **Yes, collected only** (Phase 9) | Only when the user turns on the optional account. **Personal info:** email address (for account management). **Financial info:** purchase history, end-to-end encrypted, so the server cannot read it. Nothing is shared with third parties. |
+| Is the data processed ephemerally? | No | Kept until the user deletes their account. |
+| Is collection required? | **No, optional** | The app works fully without an account. |
+| Is all user data encrypted in transit? | Yes | TLS only (cleartext is blocked by a CI check). Records are also end-to-end encrypted. |
+| Do you provide a way for users to request that their data be deleted? | Yes | Settings → Account & sync → Delete account removes the login and every server record at once. |
 
 The user can export a backup or CSV file and share it through the system share sheet. Play treats that as user-initiated sharing, not collection. Mention it in the listing.
 
@@ -34,7 +36,7 @@ The user can export a backup or CSV file and share it through the system share s
 > To record payments for you, Expenses reads notifications from the apps you choose, like your SMS app and UPI apps. It only keeps the amount, payee and account of payments; other notifications are ignored and personal chats are never saved. Everything stays on this phone.
 
 ## App Store: privacy label ("nutrition label")
-- **Data Not Collected.** Apple counts data as *collected* only when it is sent off the device. Nothing is.
+- **Data Linked to You** (only with the optional account): **Contact Info: Email Address** (App Functionality); **Financial Info: Other Financial Info** (App Functionality, end-to-end encrypted).
 - **Tracking:** No.
 - **Face ID:** `NSFaceIDUsageDescription` explains the app lock.
 - **App Review notes:**

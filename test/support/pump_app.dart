@@ -8,9 +8,14 @@ import 'package:expense_tracker/data/backup/backup_codec.dart';
 import 'package:expense_tracker/data/data_providers.dart';
 import 'package:expense_tracker/data/db/app_database.dart';
 import 'package:expense_tracker/data/query_providers.dart';
+import 'package:expense_tracker/data/sync/sync_controller.dart';
+import 'package:expense_tracker/data/sync/sync_crypto.dart';
+import 'package:expense_tracker/data/sync/sync_engine.dart';
 import 'package:expense_tracker/features/quick_add/presentation/widgets/keypad.dart';
 import 'package:expense_tracker/routing/floating_tab_bar.dart';
 import 'package:expense_tracker/services/clipboard_service.dart';
+import 'package:expense_tracker/services/cloud/cloud_auth.dart';
+import 'package:expense_tracker/services/cloud/sync_key_store.dart';
 import 'package:expense_tracker/services/device_auth.dart';
 import 'package:expense_tracker/services/file_share.dart';
 import 'package:expense_tracker/services/haptics.dart';
@@ -170,6 +175,63 @@ final class FakeFileShare implements FileShare {
   Future<Uint8List?> pick() async => toPick;
 }
 
+/// The account, faked: any email, the code `123456`.
+final class FakeCloudAuth implements CloudAuth {
+  /// Creates it, signed in as [signedIn] if given.
+  new([this.signedIn]);
+
+  /// The signed-in email.
+  String? signedIn;
+
+  /// Whether deleteAccount was called.
+  bool deleted = false;
+
+  final StreamController<String?> _email =
+      StreamController<String?>.broadcast();
+
+  @override
+  Stream<String?> get email => _email.stream;
+
+  @override
+  String? get currentEmail => signedIn;
+
+  @override
+  Future<CloudAuthProblem?> sendCode(String address) async => null;
+
+  @override
+  Future<CloudAuthProblem?> verify(String address, String code) async {
+    if (code != '123456') return CloudAuthProblem.badCode;
+    signedIn = address;
+    _email.add(address);
+    return null;
+  }
+
+  @override
+  Future<void> signOut() async => signedIn = null;
+
+  @override
+  Future<CloudAuthProblem?> deleteAccount() async {
+    deleted = true;
+    signedIn = null;
+    return null;
+  }
+}
+
+/// The sync key store, in memory.
+final class FakeSyncKeyStore implements SyncKeyStore {
+  /// The key kept.
+  SyncKey? key;
+
+  @override
+  Future<SyncKey?> read() async => key;
+
+  @override
+  Future<void> write(SyncKey value) async => key = value;
+
+  @override
+  Future<void> delete() async => key = null;
+}
+
 /// A clipboard holding [text].
 final class FakeClipboard implements ClipboardService {
   /// Creates the clipboard.
@@ -308,6 +370,9 @@ Future<AppDatabase> pumpApp(
   bool appLock = false,
   FakeDeviceAuth? deviceAuth,
   FakeFileShare? fileShare,
+  FakeCloudAuth? cloudAuth,
+  FakeSyncKeyStore? syncKeys,
+  MemorySyncServer? syncServer,
   Size? size,
   double textScale = 1,
 }) async {
@@ -340,6 +405,9 @@ Future<AppDatabase> pumpApp(
         initialAppLockProvider.overrideWithValue(appLock),
         deviceAuthProvider.overrideWithValue(deviceAuth ?? FakeDeviceAuth()),
         fileShareProvider.overrideWithValue(fileShare ?? FakeFileShare()),
+        cloudAuthProvider.overrideWithValue(cloudAuth ?? FakeCloudAuth()),
+        syncKeyStoreProvider.overrideWithValue(syncKeys ?? FakeSyncKeyStore()),
+        syncServerProvider.overrideWithValue(syncServer ?? MemorySyncServer()),
         // Fast key stretching: the real 600,000 rounds take seconds.
         backupCodecProvider.overrideWith(
           (ref) =>

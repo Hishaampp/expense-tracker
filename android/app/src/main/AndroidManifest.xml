@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- Phase 9: the optional account syncs end-to-end encrypted records
+         with the project's Supabase server, and nothing else. -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <!-- Budget alerts and the weekly review (spec §10). Android 13+ asks
          the user at run time. No exact-alarm permission: the weekly review
          may arrive a few minutes late. -->
