@@ -1558,7 +1558,7 @@
   "accountIntroBody": "Sign in to sync your expenses between phones and get them back on a new one. Everything is locked on this phone before it's sent, so no one else, not even us, can read it. Without an account the app works just the same.",
   "accountEmailLabel": "Email",
   "accountSendCode": "Send code",
-  "accountCodeSent": "We sent a 6-digit code to {email}.",
+  "accountCodeSent": "We sent an email to {email}. On this phone, tap the link in it, or type the code from it here.",
   "@accountCodeSent": {
     "placeholders": {
       "email": {

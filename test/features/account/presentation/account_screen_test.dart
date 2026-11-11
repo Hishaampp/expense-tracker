@@ -121,4 +121,21 @@ void main() {
     expect(await db.select(db.transactions).get(), hasLength(1));
     expect(await db.select(db.syncOutbox).get(), isEmpty);
   });
+
+  appTest('tapping the email link signs in and shows the recovery code', (
+    tester,
+  ) async {
+    final auth = FakeCloudAuth();
+    final keys = FakeSyncKeyStore();
+    await pumpApp(tester, cloudAuth: auth, syncKeys: keys);
+    await _open(tester);
+    await tester.enterText(find.byType(TextFormField), 'asha@example.com');
+    await tester.tap(find.widgetWithText(FilledButton, 'Send code'));
+    await tester.pumpAndSettle();
+
+    auth.signInByLink('asha@example.com');
+    await tester.pumpAndSettle();
+    expect(find.text('Write down your recovery code'), findsOneWidget);
+    expect(find.text(keys.key!.recoveryCode), findsOneWidget);
+  });
 }

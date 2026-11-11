@@ -6,6 +6,10 @@ abstract final class CloudConfig {
   /// The project URL.
   static const String url = 'https://rsfiiiyhajwgfnkxuwtr.supabase.co';
 
+  /// Where the sign-in link in the account email returns to: this app.
+  /// Must be listed in Supabase → Authentication → URL Configuration.
+  static const String loginRedirect = 'expensetracker://login-callback';
+
   /// The project's publishable key.
   static const String publishableKey =
       'sb_publishable_XcpwLSWBcjVEOT6n56OXzw_cB8Lj0Sj';

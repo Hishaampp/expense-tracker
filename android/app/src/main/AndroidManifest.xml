@@ -41,6 +41,18 @@
                 <category android:name="android.intent.category.DEFAULT"/>
                 <data android:mimeType="text/plain"/>
             </intent-filter>
+            <!-- Phase 9: the sign-in link in the account email opens the app
+                 (expensetracker://login-callback); Supabase finishes sign-in. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="expensetracker" android:host="login-callback"/>
+            </intent-filter>
+            <!-- Links are read by Supabase, not turned into app routes. -->
+            <meta-data
+              android:name="flutter_deeplinking_enabled"
+              android:value="false"/>
         </activity>
         <!-- Reads payment notifications from allowlisted apps (spec §6.2).
              The user grants access in system settings after an in-app

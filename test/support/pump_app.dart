@@ -206,6 +206,12 @@ final class FakeCloudAuth implements CloudAuth {
     return null;
   }
 
+  /// Signs in as if the user tapped the email link.
+  void signInByLink(String address) {
+    signedIn = address;
+    _email.add(address);
+  }
+
   @override
   Future<void> signOut() async => signedIn = null;
 

@@ -3149,7 +3149,7 @@ abstract class AppLocalizations {
   /// No description provided for @accountCodeSent.
   ///
   /// In en, this message translates to:
-  /// **'We sent a 6-digit code to {email}.'**
+  /// **'We sent an email to {email}. On this phone, tap the link in it, or type the code from it here.'**
   String accountCodeSent(String email);
 
   /// No description provided for @accountCodeLabel.

@@ -1982,7 +1982,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String accountCodeSent(String email) {
-    return 'We sent a 6-digit code to $email.';
+    return 'We sent an email to $email. On this phone, tap the link in it, or type the code from it here.';
   }
 
   @override

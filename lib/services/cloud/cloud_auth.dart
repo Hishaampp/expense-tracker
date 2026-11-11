@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:expense_tracker/core/cloud_config.dart';
 import 'package:expense_tracker/services/app_logger.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -15,8 +16,9 @@ enum CloudAuthProblem {
   offline,
 }
 
-/// The optional account (Phase 9): sign in with a code sent by email. No
-/// password is ever stored by the app.
+/// The optional account (Phase 9): sign in with a code sent by email, or
+/// by tapping the link in that email on this phone. No password is ever
+/// stored by the app.
 abstract interface class CloudAuth {
   /// The signed-in email, or null. Live.
   Stream<String?> get email;
@@ -58,7 +60,10 @@ class SupabaseCloudAuth implements CloudAuth {
   @override
   Future<CloudAuthProblem?> sendCode(String address) => _guard(
     'cloud.send_code',
-    () => _client.auth.signInWithOtp(email: address.trim()),
+    () => _client.auth.signInWithOtp(
+      email: address.trim(),
+      emailRedirectTo: CloudConfig.loginRedirect,
+    ),
   );
 
   @override

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:expense_tracker/data/data_providers.dart';
 import 'package:expense_tracker/data/sync/supabase_sync_server.dart';
 import 'package:expense_tracker/data/sync/sync_crypto.dart';
@@ -71,6 +73,14 @@ class SyncController extends AsyncNotifier<SyncStatus> {
 
   @override
   Future<SyncStatus> build() async {
+    // Signing in by tapping the email link happens outside this screen's
+    // buttons: Supabase reads the link and signs in, and this picks it up.
+    final sub = _auth.email.listen((email) {
+      if (email != null && state.value is SyncSignedOut) {
+        unawaited(_afterSignIn(email));
+      }
+    });
+    ref.onDispose(sub.cancel);
     final email = _auth.currentEmail;
     if (email == null) return const SyncSignedOut();
     final key = await _keys.read();
@@ -84,7 +94,23 @@ class SyncController extends AsyncNotifier<SyncStatus> {
   Future<CloudAuthProblem?> verify(String email, String code) async {
     final problem = await _auth.verify(email, code);
     if (problem != null) return problem;
-    final signedIn = _auth.currentEmail ?? email;
+    return await _afterSignIn(_auth.currentEmail ?? email);
+  }
+
+  bool _settingUp = false;
+
+  /// Sets up or joins sync once signed in, by code or by link.
+  Future<CloudAuthProblem?> _afterSignIn(String signedIn) async {
+    if (_settingUp) return null;
+    _settingUp = true;
+    try {
+      return await _setUp(signedIn);
+    } finally {
+      _settingUp = false;
+    }
+  }
+
+  Future<CloudAuthProblem?> _setUp(String signedIn) async {
     final key = await _keys.read();
     if (key != null) {
       await _start(signedIn, key);
