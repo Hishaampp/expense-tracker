@@ -654,10 +654,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get autoCaptureIosTitle => 'Auto-capture on iPhone';
 
   @override
-  String get autoCaptureIosBody =>
-      'iPhone apps can\'t read SMS. Setup with a Shortcuts automation arrives in a coming update; until then, share or paste bank messages into the app.';
-
-  @override
   String get autoCaptureUnavailable =>
       'Couldn\'t read the auto-capture status on this phone.';
 
@@ -721,4 +717,126 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get autoCaptureActionFailed =>
       'That didn\'t work on this phone. Try again.';
+
+  @override
+  String get iosSetupTitle => 'Set up on iPhone';
+
+  @override
+  String get iosSetupIntro =>
+      'iPhone apps can\'t read SMS, so you make a small automation once. After that, bank messages are recorded without you opening the app.';
+
+  @override
+  String iosSetupStep(int number) {
+    return 'Step $number';
+  }
+
+  @override
+  String get iosStep1Title => 'Open Shortcuts';
+
+  @override
+  String get iosStep1Body =>
+      'In the Shortcuts app, tap Automation, then the + button, and choose Message.';
+
+  @override
+  String get iosStep1Action => 'Open Shortcuts';
+
+  @override
+  String get iosStep2Title => 'Choose the messages';
+
+  @override
+  String get iosStep2Body =>
+      'Under Message Contains, type debited. Choose Run Immediately, then tap Next.';
+
+  @override
+  String get iosStep3Title => 'Add this app\'s action';
+
+  @override
+  String get iosStep3Body =>
+      'Search for Log Bank Message, from this app. Tap its Message field and choose Shortcut Input, then Content. Tap Done.';
+
+  @override
+  String get iosStep4Title => 'Repeat for spent and credited';
+
+  @override
+  String get iosStep4Body =>
+      'Make two more automations the same way, with spent and with credited.';
+
+  @override
+  String get iosStep5Title => 'Test it';
+
+  @override
+  String get iosStep5Body =>
+      'Paste a real bank SMS here to check the app can read it. Nothing is saved.';
+
+  @override
+  String get iosTestHint => 'Paste a bank SMS';
+
+  @override
+  String get iosTestCheck => 'Check';
+
+  @override
+  String iosTestParsed(String amount, String direction) {
+    return 'Read as $amount $direction';
+  }
+
+  @override
+  String get iosTestSpent => 'spent';
+
+  @override
+  String get iosTestReceived => 'received';
+
+  @override
+  String get iosTestRefund => 'refunded';
+
+  @override
+  String iosTestNotPayment(String reason) {
+    return 'Not a payment, so it would be skipped: $reason.';
+  }
+
+  @override
+  String get iosTestUnreadable =>
+      'The app couldn\'t read this one. It would be kept under Unparsed messages, and the format can be added later.';
+
+  @override
+  String get iosTestNoAmount => 'There\'s no amount in this text.';
+
+  @override
+  String get iosSetupDone => 'I\'ve set it up';
+
+  @override
+  String get iosSetupSaved => 'Auto-capture is set up';
+
+  @override
+  String get iosLimitsTitle => 'Good to know';
+
+  @override
+  String get iosLimitsBody =>
+      'Only new bank SMS are recorded: not past messages, and not UPI app notifications, which iPhone apps can\'t read. It relies on Apple keeping this automation working.';
+
+  @override
+  String get iosStatusOn => 'Set up';
+
+  @override
+  String get iosStatusOff => 'Not set up yet';
+
+  @override
+  String get iosOpenSetup => 'Set up auto-capture';
+
+  @override
+  String get iosReviewSetup => 'See setup steps';
+
+  @override
+  String get healthTitle => 'Auto-capture may be off';
+
+  @override
+  String get healthBody =>
+      'No bank messages have arrived from Shortcuts in 5 days.';
+
+  @override
+  String get healthAction => 'Check setup';
+
+  @override
+  String iosTestParsedPayee(String amount, String direction, String payee) {
+    return 'Read as $amount $direction, $payee';
+  }
 }

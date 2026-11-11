@@ -24,6 +24,9 @@ abstract final class Routes {
   /// Settings → Auto-capture.
   static const String autoCapture = '/settings/auto-capture';
 
+  /// The iPhone auto-capture setup guide.
+  static const String iphoneSetup = '/settings/auto-capture/iphone';
+
   /// The review inbox.
   static const String review = '/review';
 

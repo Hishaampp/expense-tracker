@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F48075FCC461B2ADF7FADCD /* LogBankMessageIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA27DD175E1014A8500B87A /* LogBankMessageIntent.swift */; };
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		15A6EE75D0674465EE5437A3 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605C60D3F8D5F06FF4F9A587 /* ShareViewController.swift */; };
 		173986C9796B3A5DE005C7C0 /* ShareExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3111ECEB3A73B80E2B5122FE /* ShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -74,6 +75,7 @@
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
 		559FCEA277AC00A94F0F16C4 /* ShareExtension.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = ShareExtension.entitlements; sourceTree = "<group>"; };
 		605C60D3F8D5F06FF4F9A587 /* ShareViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		6DA27DD175E1014A8500B87A /* LogBankMessageIntent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LogBankMessageIntent.swift; sourceTree = "<group>"; };
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7884E8672EC3CC0400C636F2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 			children = (
 				90B23D3416662779D5AEB895 /* CaptureQueue.swift */,
 				EC33B45B94CF5CEC15BA6D6E /* CaptureChannel.swift */,
+				6DA27DD175E1014A8500B87A /* LogBankMessageIntent.swift */,
 			);
 			name = Capture;
 			path = Capture;
@@ -402,6 +405,7 @@
 				7884E8682EC3CC0700C636F2 /* SceneDelegate.swift in Sources */,
 				C4AF94F47BE4883E78DBB45D /* CaptureQueue.swift in Sources */,
 				6D4F5BC957665297C69AF22A /* CaptureChannel.swift in Sources */,
+				0F48075FCC461B2ADF7FADCD /* LogBankMessageIntent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -62,7 +62,7 @@ Work happens on branches and arrives through pull requests; see
 
 ## Design
 
-The look is "Passbook": see `docs/DESIGN.md`. Colours, spacing, type and
+The look is "Warm cards": see `docs/DESIGN.md`. Colours, spacing, type and
 motion live only in `lib/theme/`.
 
 ## Status
@@ -72,8 +72,8 @@ motion live only in `lib/theme/`.
 | 0 | Project setup, flavors, App Group, lints, CI | done |
 | 1 | Core money tracking (manual) | done |
 | 2 | Parser + paste/share capture | built; needs real bank samples before Phase 3 |
-| 3 | Android auto-capture | |
-| 4 | iOS auto-capture | |
+| 3 | Android auto-capture | built; needs real samples and an Android phone test |
+| 4 | iOS auto-capture | built; needs an iPhone test |
 | 5 | Rooms | |
 | 6 | Budgets | |
 | 7 | Learning & polish | |

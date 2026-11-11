@@ -1102,12 +1102,6 @@ abstract class AppLocalizations {
   /// **'Auto-capture on iPhone'**
   String get autoCaptureIosTitle;
 
-  /// No description provided for @autoCaptureIosBody.
-  ///
-  /// In en, this message translates to:
-  /// **'iPhone apps can\'t read SMS. Setup with a Shortcuts automation arrives in a coming update; until then, share or paste bank messages into the app.'**
-  String get autoCaptureIosBody;
-
   /// No description provided for @autoCaptureUnavailable.
   ///
   /// In en, this message translates to:
@@ -1173,6 +1167,216 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'That didn\'t work on this phone. Try again.'**
   String get autoCaptureActionFailed;
+
+  /// No description provided for @iosSetupTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Set up on iPhone'**
+  String get iosSetupTitle;
+
+  /// No description provided for @iosSetupIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'iPhone apps can\'t read SMS, so you make a small automation once. After that, bank messages are recorded without you opening the app.'**
+  String get iosSetupIntro;
+
+  /// No description provided for @iosSetupStep.
+  ///
+  /// In en, this message translates to:
+  /// **'Step {number}'**
+  String iosSetupStep(int number);
+
+  /// No description provided for @iosStep1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Shortcuts'**
+  String get iosStep1Title;
+
+  /// No description provided for @iosStep1Body.
+  ///
+  /// In en, this message translates to:
+  /// **'In the Shortcuts app, tap Automation, then the + button, and choose Message.'**
+  String get iosStep1Body;
+
+  /// No description provided for @iosStep1Action.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Shortcuts'**
+  String get iosStep1Action;
+
+  /// No description provided for @iosStep2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose the messages'**
+  String get iosStep2Title;
+
+  /// No description provided for @iosStep2Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Under Message Contains, type debited. Choose Run Immediately, then tap Next.'**
+  String get iosStep2Body;
+
+  /// No description provided for @iosStep3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Add this app\'s action'**
+  String get iosStep3Title;
+
+  /// No description provided for @iosStep3Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Search for Log Bank Message, from this app. Tap its Message field and choose Shortcut Input, then Content. Tap Done.'**
+  String get iosStep3Body;
+
+  /// No description provided for @iosStep4Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Repeat for spent and credited'**
+  String get iosStep4Title;
+
+  /// No description provided for @iosStep4Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Make two more automations the same way, with spent and with credited.'**
+  String get iosStep4Body;
+
+  /// No description provided for @iosStep5Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Test it'**
+  String get iosStep5Title;
+
+  /// No description provided for @iosStep5Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Paste a real bank SMS here to check the app can read it. Nothing is saved.'**
+  String get iosStep5Body;
+
+  /// No description provided for @iosTestHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Paste a bank SMS'**
+  String get iosTestHint;
+
+  /// No description provided for @iosTestCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'Check'**
+  String get iosTestCheck;
+
+  /// No description provided for @iosTestParsed.
+  ///
+  /// In en, this message translates to:
+  /// **'Read as {amount} {direction}'**
+  String iosTestParsed(String amount, String direction);
+
+  /// No description provided for @iosTestSpent.
+  ///
+  /// In en, this message translates to:
+  /// **'spent'**
+  String get iosTestSpent;
+
+  /// No description provided for @iosTestReceived.
+  ///
+  /// In en, this message translates to:
+  /// **'received'**
+  String get iosTestReceived;
+
+  /// No description provided for @iosTestRefund.
+  ///
+  /// In en, this message translates to:
+  /// **'refunded'**
+  String get iosTestRefund;
+
+  /// No description provided for @iosTestNotPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Not a payment, so it would be skipped: {reason}.'**
+  String iosTestNotPayment(String reason);
+
+  /// No description provided for @iosTestUnreadable.
+  ///
+  /// In en, this message translates to:
+  /// **'The app couldn\'t read this one. It would be kept under Unparsed messages, and the format can be added later.'**
+  String get iosTestUnreadable;
+
+  /// No description provided for @iosTestNoAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'There\'s no amount in this text.'**
+  String get iosTestNoAmount;
+
+  /// No description provided for @iosSetupDone.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'ve set it up'**
+  String get iosSetupDone;
+
+  /// No description provided for @iosSetupSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto-capture is set up'**
+  String get iosSetupSaved;
+
+  /// No description provided for @iosLimitsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Good to know'**
+  String get iosLimitsTitle;
+
+  /// No description provided for @iosLimitsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Only new bank SMS are recorded: not past messages, and not UPI app notifications, which iPhone apps can\'t read. It relies on Apple keeping this automation working.'**
+  String get iosLimitsBody;
+
+  /// No description provided for @iosStatusOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Set up'**
+  String get iosStatusOn;
+
+  /// No description provided for @iosStatusOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Not set up yet'**
+  String get iosStatusOff;
+
+  /// No description provided for @iosOpenSetup.
+  ///
+  /// In en, this message translates to:
+  /// **'Set up auto-capture'**
+  String get iosOpenSetup;
+
+  /// No description provided for @iosReviewSetup.
+  ///
+  /// In en, this message translates to:
+  /// **'See setup steps'**
+  String get iosReviewSetup;
+
+  /// No description provided for @healthTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto-capture may be off'**
+  String get healthTitle;
+
+  /// No description provided for @healthBody.
+  ///
+  /// In en, this message translates to:
+  /// **'No bank messages have arrived from Shortcuts in 5 days.'**
+  String get healthBody;
+
+  /// No description provided for @healthAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Check setup'**
+  String get healthAction;
+
+  /// No description provided for @iosTestParsedPayee.
+  ///
+  /// In en, this message translates to:
+  /// **'Read as {amount} {direction}, {payee}'**
+  String iosTestParsedPayee(String amount, String direction, String payee);
 }
 
 class _AppLocalizationsDelegate

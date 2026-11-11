@@ -1,3 +1,4 @@
+import 'package:expense_tracker/core/capture_health.dart';
 import 'package:expense_tracker/core/models/category.dart';
 import 'package:expense_tracker/core/models/transaction_item.dart';
 import 'package:expense_tracker/core/money.dart';
@@ -29,6 +30,7 @@ final class HomeState {
     required this.paymentCount,
     required this.topCategories,
     required this.recent,
+    this.captureMayBeOff = false,
   });
 
   /// How many top categories Home lists.
@@ -63,6 +65,9 @@ final class HomeState {
 
   /// The newest transactions, at most [recentCount].
   final List<TransactionItem> recent;
+
+  /// Whether iPhone auto-capture seems to have stopped (spec §6.3).
+  final bool captureMayBeOff;
 
   /// Whether this is the month in progress.
   bool get isCurrent => offset == 0;
@@ -117,6 +122,11 @@ class HomeNotifier extends AsyncNotifier<HomeState> {
             share: total <= 0 ? 0 : entry.spent.paise / total,
           ),
       ],
+      captureMayBeOff: captureMayBeOff(
+        setupAt: ref.watch(iosShortcutSetupAtProvider).value,
+        lastCaptureAt: ref.watch(lastShortcutCaptureAtProvider).value,
+        now: now.toUtc(),
+      ),
       recent: joinTransactions(
         visible.take(HomeState.recentCount),
         categories,

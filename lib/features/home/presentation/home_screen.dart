@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:expense_tracker/data/query_providers.dart';
 import 'package:expense_tracker/features/home/presentation/home_notifier.dart';
+import 'package:expense_tracker/features/home/presentation/widgets/capture_health_card.dart';
 import 'package:expense_tracker/features/home/presentation/widgets/hero_summary.dart';
 import 'package:expense_tracker/features/home/presentation/widgets/recent_card.dart';
 import 'package:expense_tracker/features/home/presentation/widgets/top_categories_card.dart';
@@ -90,6 +91,9 @@ class HomeScreen extends ConsumerWidget {
     }
     final month = formatPeriodTitle(state.period, state.today, locale);
     void seeAll() => context.go(Routes.activity);
+    // Cards enter one after another, in the order they appear.
+    var index = 0;
+    Widget enter(Widget child) => Entrance(index: index++, child: child);
     return LargeTitlePage(
       title: MonthTitle(
         label: month,
@@ -98,13 +102,16 @@ class HomeScreen extends ConsumerWidget {
       ),
       actions: [?review, add],
       children: [
-        Entrance(
-          child: HeroSummary(state: state, onSeeAll: seeAll),
-        ),
+        enter(HeroSummary(state: state, onSeeAll: seeAll)),
+        if (state.captureMayBeOff)
+          enter(
+            CaptureHealthCard(
+              onCheck: () => unawaited(context.push(Routes.iphoneSetup)),
+            ),
+          ),
         if (state.isEmpty)
-          Entrance(
-            index: 1,
-            child: EmptyStateView(
+          enter(
+            EmptyStateView(
               icon: Icons.receipt_long_rounded,
               iconColor: CategoryColors.of(context).orange,
               title: l10n.homeEmptyTitle,
@@ -115,13 +122,9 @@ class HomeScreen extends ConsumerWidget {
           )
         else ...[
           if (state.topCategories.isNotEmpty)
-            Entrance(
-              index: 1,
-              child: TopCategoriesCard(totals: state.topCategories),
-            ),
-          Entrance(
-            index: 2,
-            child: RecentCard(
+            enter(TopCategoriesCard(totals: state.topCategories)),
+          enter(
+            RecentCard(
               items: state.recent,
               onSeeAll: seeAll,
               onOpenTransaction: (id) =>

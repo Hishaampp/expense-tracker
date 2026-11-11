@@ -2,6 +2,7 @@ import 'package:expense_tracker/core/models/account.dart';
 import 'package:expense_tracker/core/models/appearance_mode.dart';
 import 'package:expense_tracker/core/models/category.dart';
 import 'package:expense_tracker/core/models/money_transaction.dart';
+import 'package:expense_tracker/core/models/raw_capture.dart';
 import 'package:expense_tracker/core/month_period.dart';
 import 'package:expense_tracker/data/data_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -47,4 +48,16 @@ final reviewCountProvider = StreamProvider<int>(
       .watch(autoCaptureRepositoryProvider)
       .watchNeedsReview()
       .map((list) => list.length),
+);
+
+/// When the iPhone Shortcuts setup was finished, or null. Live.
+final iosShortcutSetupAtProvider = StreamProvider<DateTime?>(
+  (ref) => ref.watch(settingsRepositoryProvider).watchIosShortcutSetupAt(),
+);
+
+/// When the newest Shortcuts capture arrived, or null. Live.
+final lastShortcutCaptureAtProvider = StreamProvider<DateTime?>(
+  (ref) => ref
+      .watch(captureRepositoryProvider)
+      .watchLastCaptureAt(CaptureSource.iosShortcut),
 );
