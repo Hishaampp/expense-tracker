@@ -5,8 +5,10 @@ without typing and groups trip and wedding spending into **Rooms**. Built in
 Flutter for Android and iPhone. All data stays on the phone: there is no server
 and no login.
 
-> The app has no final name yet. "Expenses" and `com.example.expenses` are
-> placeholders. To rename, change these three files together:
+> The app has no final name yet. "Expenses" is a placeholder. The iOS id is
+> `com.hishaam.expensetracker` (a Personal Team cannot sign `com.example.*`);
+> Android still uses the placeholder `com.example.expenses`. To rename, change
+> these three files together:
 > `lib/core/app_identity.dart`, `android/app/build.gradle.kts`,
 > `ios/Flutter/AppIdentity.xcconfig`.
 
