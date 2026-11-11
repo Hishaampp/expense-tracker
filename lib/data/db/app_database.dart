@@ -26,6 +26,7 @@ part 'app_database.g.dart';
     Budgets,
     FiredAlerts,
     Notices,
+    PayeeRules,
   ],
 )
 class AppDatabase extends _$AppDatabase {
@@ -53,7 +54,7 @@ class AppDatabase extends _$AppDatabase {
   final Clock _clock;
 
   @override
-  int get schemaVersion => 4;
+  int get schemaVersion => 5;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -76,6 +77,10 @@ class AppDatabase extends _$AppDatabase {
         // Phase 6: the in-app notification inbox.
         await m.createTable(schema.notices);
         await m.createIndex(schema.noticesCreatedAt);
+      },
+      from4To5: (m, schema) async {
+        // Phase 7: learned payee rules and the merchant book (spec §8).
+        await m.createTable(schema.payeeRules);
       },
     ),
     beforeOpen: (details) async {

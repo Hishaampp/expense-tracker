@@ -7,6 +7,7 @@ import 'package:expense_tracker/features/review/presentation/widgets/review_card
 import 'package:expense_tracker/l10n/app_localizations.dart';
 import 'package:expense_tracker/l10n/failure_messages.dart';
 import 'package:expense_tracker/theme/app_colors.dart';
+import 'package:expense_tracker/theme/app_metrics.dart';
 import 'package:expense_tracker/theme/app_motion.dart';
 import 'package:expense_tracker/theme/category_colors.dart';
 import 'package:expense_tracker/widgets/category/all_categories_sheet.dart';
@@ -40,9 +41,30 @@ class ReviewScreen extends ConsumerWidget {
         : motion.undoWindow;
     final notifier = ref.read(reviewNotifierProvider.notifier);
     final (String text, VoidCallback? undo) = switch (done) {
-      ReviewConfirmed(:final transaction, :final category) => (
-        l10n.reviewConfirmed(category.name),
-        () => unawaited(_undo(messenger, l10n, notifier, transaction)),
+      ReviewConfirmed(
+        :final transaction,
+        :final category,
+        :final learned,
+        :final others,
+      ) =>
+        (
+          switch ((learned, others.length)) {
+            (false, _) => l10n.reviewConfirmed(category.name),
+            (true, 0) => l10n.reviewConfirmedLearned(
+              transaction.payeeDisplay ?? l10n.reviewUnknownPayee,
+              category.name,
+            ),
+            (true, final more) => l10n.reviewConfirmedLearnedMore(
+              transaction.payeeDisplay ?? l10n.reviewUnknownPayee,
+              category.name,
+              more,
+            ),
+          },
+          () => unawaited(_undoAll(messenger, l10n, notifier, done)),
+        ),
+      ReviewConfirmedMany(:final transactions, :final category) => (
+        l10n.reviewConfirmedMany(transactions.length, category.name),
+        () => unawaited(_undoAll(messenger, l10n, notifier, done)),
       ),
       ReviewTransferred(:final transaction) => (
         l10n.reviewMarkedTransfer,
@@ -83,6 +105,44 @@ class ReviewScreen extends ConsumerWidget {
       ..showSnackBar(SnackBar(content: Text(failureMessage(l10n, failure))));
   }
 
+  static Future<void> _undoAll(
+    ScaffoldMessengerState messenger,
+    AppLocalizations l10n,
+    ReviewNotifier notifier,
+    ReviewDone done,
+  ) async {
+    final failure = await notifier.undoConfirm(done);
+    if (failure == null) return;
+    messenger
+      ..clearSnackBars()
+      ..showSnackBar(SnackBar(content: Text(failureMessage(l10n, failure))));
+  }
+
+  Future<void> _confirmSelected(
+    BuildContext context,
+    WidgetRef ref,
+    Set<String> ids,
+    List<Category> all,
+  ) async {
+    final l10n = AppLocalizations.of(context);
+    final picked = await showAppSheet<String>(
+      context,
+      AllCategoriesSheet(
+        title: l10n.reviewChooseCategory,
+        categories: all,
+        selectedId: null,
+        selectedLabel: l10n.selected,
+      ),
+    );
+    if (picked == null || !context.mounted) return;
+    final category = all.firstWhere((c) => c.id == picked);
+    final done = await ref
+        .read(reviewNotifierProvider.notifier)
+        .confirmSelected(ids, category);
+    ref.read(reviewChoicesProvider.notifier).setSelecting(on: false);
+    if (context.mounted) await _show(context, ref, done);
+  }
+
   Future<void> _more(
     BuildContext context,
     WidgetRef ref,
@@ -103,7 +163,11 @@ class ReviewScreen extends ConsumerWidget {
     // Null means dismissed: nothing changes.
     if (picked == null || !context.mounted) return;
     final category = all.firstWhere((c) => c.id == picked);
-    final done = await notifier.confirm(item, category);
+    final learn = !ref
+        .read(reviewChoicesProvider)
+        .notLearning
+        .contains(item.transaction.id);
+    final done = await notifier.confirm(item, category, learn: learn);
     if (context.mounted) await _show(context, ref, done);
   }
 
@@ -122,6 +186,9 @@ class ReviewScreen extends ConsumerWidget {
     final async = ref.watch(reviewNotifierProvider);
     final notifier = ref.read(reviewNotifierProvider.notifier);
     final state = async.value;
+    final choices = ref.watch(reviewChoicesProvider);
+    final choicesNotifier = ref.read(reviewChoicesProvider.notifier);
+    final selected = choices.selected;
 
     final List<Widget> children;
     if (state == null) {
@@ -155,7 +222,21 @@ class ReviewScreen extends ConsumerWidget {
             style: Theme.of(context).textTheme.bodySmall,
           ),
         ),
-        if (state.suggestedCount > 0)
+        if (selected != null)
+          _SelectionBar(
+            count: selected.length,
+            onChoose: selected.isEmpty
+                ? null
+                : () => unawaited(
+                    _confirmSelected(
+                      context,
+                      ref,
+                      selected,
+                      state.allCategories,
+                    ),
+                  ),
+          )
+        else if (state.suggestedCount > 0)
           Entrance(
             index: 1,
             child: FilledButton(
@@ -170,8 +251,22 @@ class ReviewScreen extends ConsumerWidget {
             index: index + 2,
             child: ReviewCard(
               item: item,
+              learn: !choices.notLearning.contains(item.transaction.id),
+              onToggleLearn: () =>
+                  choicesNotifier.toggleLearning(item.transaction.id),
+              selected: selected?.contains(item.transaction.id),
+              onToggleSelected: () =>
+                  choicesNotifier.toggleSelected(item.transaction.id),
               onPick: (category) => unawaited(
-                _run(context, ref, () => notifier.confirm(item, category)),
+                _run(
+                  context,
+                  ref,
+                  () => notifier.confirm(
+                    item,
+                    category,
+                    learn: !choices.notLearning.contains(item.transaction.id),
+                  ),
+                ),
               ),
               onMore: () =>
                   unawaited(_more(context, ref, item, state.allCategories)),
@@ -194,7 +289,50 @@ class ReviewScreen extends ConsumerWidget {
         color: AppColors.of(context).onSurface,
         onPressed: context.pop,
       ),
+      actions: [
+        if (state != null && state.items.length > 1)
+          RoundIconButton(
+            icon: selected == null
+                ? Icons.checklist_rounded
+                : Icons.close_rounded,
+            tooltip: selected == null
+                ? l10n.reviewSelect
+                : l10n.reviewSelectStop,
+            onPressed: () => choicesNotifier.setSelecting(on: selected == null),
+          ),
+      ],
       children: children,
+    );
+  }
+}
+
+class _SelectionBar extends StatelessWidget {
+  const new({required this.count, required this.onChoose});
+
+  final int count;
+  final VoidCallback? onChoose;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final metrics = AppMetrics.of(context);
+    return Semantics(
+      container: true,
+      liveRegion: true,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            l10n.reviewSelectedCount(count),
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+          SizedBox(height: metrics.spaceSm),
+          FilledButton(
+            onPressed: onChoose,
+            child: Text(l10n.reviewChooseCategory),
+          ),
+        ],
+      ),
     );
   }
 }

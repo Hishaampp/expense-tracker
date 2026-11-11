@@ -98,6 +98,16 @@ class _LegendRow extends StatelessWidget {
     final style = categoryStyle(context, total.category?.iconKey);
     final amount = formatMoney(total.spent);
     final percent = (total.share * 100).round();
+    final textTheme = Theme.of(context).textTheme;
+    // Large text: the share and amount move under the name, never cut.
+    final stacked =
+        MediaQuery.textScalerOf(context).scale(1) >= metrics.stackedTextScale;
+    final share = Text(l10n.statsShare(percent), style: textTheme.bodySmall);
+    final money = Text(
+      amount,
+      style: AppTextStyles.of(context).amountRow
+          .copyWith(color: colors.onSurface),
+    );
     return Semantics(
       container: true,
       label: l10n.statsCategorySemantics(name, amount, percent),
@@ -109,19 +119,23 @@ class _LegendRow extends StatelessWidget {
               IconTile(icon: style.icon, color: style.color),
               SizedBox(width: metrics.spaceMd),
               Expanded(
-                child: Text(name, style: Theme.of(context).textTheme.bodyLarge),
+                child: stacked
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(name, style: textTheme.bodyLarge),
+                          money,
+                          share,
+                        ],
+                      )
+                    : Text(name, style: textTheme.bodyLarge),
               ),
-              SizedBox(width: metrics.spaceSm),
-              Text(
-                l10n.statsShare(percent),
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-              SizedBox(width: metrics.spaceMd),
-              Text(
-                amount,
-                style: AppTextStyles.of(context).amountRow
-                    .copyWith(color: colors.onSurface),
-              ),
+              if (!stacked) ...[
+                SizedBox(width: metrics.spaceSm),
+                share,
+                SizedBox(width: metrics.spaceMd),
+                money,
+              ],
             ],
           ),
         ),

@@ -9,6 +9,7 @@ import 'package:expense_tracker/core/result.dart';
 import 'package:expense_tracker/core/room_tagging.dart';
 import 'package:expense_tracker/data/capture/capture_ingestion.dart';
 import 'package:expense_tracker/data/repositories/auto_capture_repository.dart';
+import 'package:expense_tracker/data/repositories/payee_repository.dart';
 import 'package:expense_tracker/data/repositories/room_repository.dart';
 import 'package:expense_tracker/data/repositories/transaction_repository.dart';
 
@@ -29,12 +30,19 @@ enum AutoOutcome {
 /// current; the review inbox collects what needs a look.
 class AutoIngestion {
   /// Creates the service.
-  new(this._ingestion, this._auto, this._transactions, this._rooms);
+  new(
+    this._ingestion,
+    this._auto,
+    this._transactions,
+    this._rooms,
+    this._payees,
+  );
 
   final CaptureIngestion _ingestion;
   final AutoCaptureRepository _auto;
   final TransactionRepository _transactions;
   final RoomRepository _rooms;
+  final PayeeRepository _payees;
 
   /// Handles one captured message. Idempotent: the same capture twice is
   /// recorded once (content hash), and the same payment from two sources
@@ -76,6 +84,8 @@ class AutoIngestion {
     }
 
     final plan = planCapture(draft);
+    final payeeKey = draft.payeeKey;
+    final rule = payeeKey == null ? null : await _payees.ruleFor(payeeKey);
     var categoryId = plan.categoryId;
     var reviewStatus = plan.reviewStatus;
     String? linkedId;
@@ -97,8 +107,21 @@ class AutoIngestion {
     } else if (plan.kind == TransactionKind.expense && !plan.isHidden) {
       // A trip's dates claim it; overlaps and suggestions wait for review
       // (spec §9.3).
-      final tag = tagRoom(day: LocalDay.of(at), rooms: await _rooms.all());
-      if (tag is RoomAssigned) roomId = tag.room.id;
+      final rooms = await _rooms.all();
+      final tag = tagRoom(day: LocalDay.of(at), rooms: rooms);
+      if (tag is RoomAssigned) {
+        roomId = tag.room.id;
+      } else if (tag is! RoomChoice) {
+        // Then the payee's Room, while that Room is active (spec §9.3).
+        final ruled = rule?.roomId;
+        if (rooms.any((r) => r.id == ruled && r.isActive)) roomId = ruled;
+      }
+      // A learned category is the user's own answer: no review needed,
+      // unless overlapping trips still need a choice (spec §8).
+      if (rule?.categoryId case final learned?) {
+        categoryId = learned;
+        if (tag is! RoomChoice) reviewStatus = ReviewStatus.confirmed;
+      }
     }
     final saved = await _transactions.addFromCapture(
       draft: draft,
@@ -110,6 +133,7 @@ class AutoIngestion {
       linkedTransactionId: linkedId,
       roomId: roomId,
       isHidden: plan.isHidden,
+      payeeDisplay: rule?.displayName,
     );
     return switch (saved) {
       Ok() => const Ok(AutoOutcome.saved),

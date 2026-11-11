@@ -5,6 +5,7 @@ import 'package:expense_tracker/app.dart';
 import 'package:expense_tracker/core/models/raw_capture.dart';
 import 'package:expense_tracker/data/data_providers.dart';
 import 'package:expense_tracker/data/db/app_database.dart';
+import 'package:expense_tracker/data/query_providers.dart';
 import 'package:expense_tracker/features/quick_add/presentation/widgets/keypad.dart';
 import 'package:expense_tracker/routing/floating_tab_bar.dart';
 import 'package:expense_tracker/services/clipboard_service.dart';
@@ -256,6 +257,7 @@ Future<AppDatabase> pumpApp(
   FakeCaptureQueue? captureQueue,
   FakeCaptureControl? captureControl,
   FakeNotifications? notifications,
+  bool onboarded = true,
   Size? size,
   double textScale = 1,
 }) async {
@@ -284,6 +286,7 @@ Future<AppDatabase> pumpApp(
         notificationServiceProvider.overrideWithValue(
           notifications ?? FakeNotifications(),
         ),
+        initialOnboardedProvider.overrideWithValue(onboarded),
       ],
       child: const App(),
     ),

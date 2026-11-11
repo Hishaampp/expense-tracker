@@ -438,3 +438,34 @@ class Notices extends Table {
     "CHECK (kind IN ('budget', 'weekly', 'room'))",
   ];
 }
+
+/// What the user taught the app about one payee (spec §8, §12): its
+/// category, its Room, and the name to show. Matched by exact payee key.
+@DataClassName('PayeeRuleRow')
+class PayeeRules extends Table {
+  /// The normalised payee key, for example a UPI id.
+  TextColumn get payeeKey => text()();
+
+  /// The category its payments always get; null asks each time.
+  TextColumn get categoryId => text().nullable().references(
+    Categories,
+    #id,
+    onDelete: KeyAction.setNull,
+  )();
+
+  /// The Room its payments go to while that Room is active; null for none.
+  TextColumn get roomId =>
+      text().nullable().references(Rooms, #id, onDelete: KeyAction.setNull)();
+
+  /// The name the user gave it ("Sharma Dairy"); null keeps the bank's.
+  TextColumn get displayName => text().nullable()();
+
+  /// Last change, UTC epoch milliseconds.
+  IntColumn get updatedAt => integer()();
+
+  @override
+  Set<Column<Object>> get primaryKey => {payeeKey};
+
+  @override
+  bool get isStrict => true;
+}

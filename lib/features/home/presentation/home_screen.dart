@@ -13,6 +13,7 @@ import 'package:expense_tracker/l10n/app_localizations.dart';
 import 'package:expense_tracker/l10n/failure_messages.dart';
 import 'package:expense_tracker/routing/routes.dart';
 import 'package:expense_tracker/services/service_providers.dart';
+import 'package:expense_tracker/theme/app_metrics.dart';
 import 'package:expense_tracker/theme/category_colors.dart';
 import 'package:expense_tracker/widgets/category_totals_card.dart';
 import 'package:expense_tracker/widgets/empty_state_view.dart';
@@ -91,6 +92,11 @@ class HomeScreen extends ConsumerWidget {
             semanticLabel: l10n.reviewBadgeSemantics(reviewCount),
             onTap: () => unawaited(context.push(Routes.review)),
           );
+    // Large text: the review badge leaves the top bar for the page, so the
+    // bar never runs out of room.
+    final roomy =
+        MediaQuery.textScalerOf(context).scale(1) <
+        AppMetrics.of(context).stackedTextScale;
     final unread = ref.watch(unreadNoticesProvider).value ?? 0;
     final bell = RoundIconButton(
       icon: unread > 0
@@ -111,7 +117,7 @@ class HomeScreen extends ConsumerWidget {
     if (state == null) {
       return LargeTitlePage(
         title: Text(l10n.navHome),
-        actions: [?review, bell, add],
+        actions: [if (roomy) ?review, bell, add],
         children: [
           if (async.hasError)
             ErrorStateView(
@@ -135,8 +141,9 @@ class HomeScreen extends ConsumerWidget {
         semanticLabel: l10n.changeMonth(month),
         onTap: () => unawaited(_pickMonth(context, ref, state)),
       ),
-      actions: [?review, bell, add],
+      actions: [if (roomy) ?review, bell, add],
       children: [
+        if (!roomy && review != null) enter(review),
         enter(HeroSummary(state: state, onSeeAll: seeAll)),
         if (state.isCurrent)
           enter(

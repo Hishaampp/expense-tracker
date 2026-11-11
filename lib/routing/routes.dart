@@ -3,6 +3,9 @@ abstract final class Routes {
   /// Home (month view).
   static const String home = '/';
 
+  /// The first-launch welcome.
+  static const String welcome = '/welcome';
+
   /// Activity: every transaction in a month.
   static const String activity = '/activity';
 
@@ -14,6 +17,9 @@ abstract final class Routes {
 
   /// Budgets: the monthly and category limits.
   static const String budgets = '/budgets';
+
+  /// Settings → Payees & rules (the merchant book).
+  static const String payees = '/settings/payees';
 
   /// The notification inbox.
   static const String notifications = '/notifications';

@@ -5506,6 +5506,400 @@ class NoticesCompanion extends UpdateCompanion<NoticeRow> {
   }
 }
 
+class $PayeeRulesTable extends PayeeRules
+    with TableInfo<$PayeeRulesTable, PayeeRuleRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $PayeeRulesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _payeeKeyMeta = const VerificationMeta(
+    'payeeKey',
+  );
+  @override
+  late final GeneratedColumn<String> payeeKey = GeneratedColumn<String>(
+    'payee_key',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _categoryIdMeta = const VerificationMeta(
+    'categoryId',
+  );
+  @override
+  late final GeneratedColumn<String> categoryId = GeneratedColumn<String>(
+    'category_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES categories (id) ON DELETE SET NULL',
+    ),
+  );
+  static const VerificationMeta _roomIdMeta = const VerificationMeta('roomId');
+  @override
+  late final GeneratedColumn<String> roomId = GeneratedColumn<String>(
+    'room_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES rooms (id) ON DELETE SET NULL',
+    ),
+  );
+  static const VerificationMeta _displayNameMeta = const VerificationMeta(
+    'displayName',
+  );
+  @override
+  late final GeneratedColumn<String> displayName = GeneratedColumn<String>(
+    'display_name',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<int> updatedAt = GeneratedColumn<int>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    payeeKey,
+    categoryId,
+    roomId,
+    displayName,
+    updatedAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'payee_rules';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<PayeeRuleRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('payee_key')) {
+      context.handle(
+        _payeeKeyMeta,
+        payeeKey.isAcceptableOrUnknown(data['payee_key']!, _payeeKeyMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_payeeKeyMeta);
+    }
+    if (data.containsKey('category_id')) {
+      context.handle(
+        _categoryIdMeta,
+        categoryId.isAcceptableOrUnknown(data['category_id']!, _categoryIdMeta),
+      );
+    }
+    if (data.containsKey('room_id')) {
+      context.handle(
+        _roomIdMeta,
+        roomId.isAcceptableOrUnknown(data['room_id']!, _roomIdMeta),
+      );
+    }
+    if (data.containsKey('display_name')) {
+      context.handle(
+        _displayNameMeta,
+        displayName.isAcceptableOrUnknown(
+          data['display_name']!,
+          _displayNameMeta,
+        ),
+      );
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_updatedAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {payeeKey};
+  @override
+  PayeeRuleRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return PayeeRuleRow(
+      payeeKey: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}payee_key'],
+      )!,
+      categoryId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}category_id'],
+      ),
+      roomId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}room_id'],
+      ),
+      displayName: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}display_name'],
+      ),
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}updated_at'],
+      )!,
+    );
+  }
+
+  @override
+  $PayeeRulesTable createAlias(String alias) {
+    return $PayeeRulesTable(attachedDatabase, alias);
+  }
+
+  @override
+  bool get isStrict => true;
+}
+
+class PayeeRuleRow extends DataClass implements Insertable<PayeeRuleRow> {
+  /// The normalised payee key, for example a UPI id.
+  final String payeeKey;
+
+  /// The category its payments always get; null asks each time.
+  final String? categoryId;
+
+  /// The Room its payments go to while that Room is active; null for none.
+  final String? roomId;
+
+  /// The name the user gave it ("Sharma Dairy"); null keeps the bank's.
+  final String? displayName;
+
+  /// Last change, UTC epoch milliseconds.
+  final int updatedAt;
+  const PayeeRuleRow({
+    required this.payeeKey,
+    this.categoryId,
+    this.roomId,
+    this.displayName,
+    required this.updatedAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['payee_key'] = Variable<String>(payeeKey);
+    if (!nullToAbsent || categoryId != null) {
+      map['category_id'] = Variable<String>(categoryId);
+    }
+    if (!nullToAbsent || roomId != null) {
+      map['room_id'] = Variable<String>(roomId);
+    }
+    if (!nullToAbsent || displayName != null) {
+      map['display_name'] = Variable<String>(displayName);
+    }
+    map['updated_at'] = Variable<int>(updatedAt);
+    return map;
+  }
+
+  PayeeRulesCompanion toCompanion(bool nullToAbsent) {
+    return PayeeRulesCompanion(
+      payeeKey: Value(payeeKey),
+      categoryId: categoryId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(categoryId),
+      roomId: roomId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(roomId),
+      displayName: displayName == null && nullToAbsent
+          ? const Value.absent()
+          : Value(displayName),
+      updatedAt: Value(updatedAt),
+    );
+  }
+
+  factory PayeeRuleRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return PayeeRuleRow(
+      payeeKey: serializer.fromJson<String>(json['payeeKey']),
+      categoryId: serializer.fromJson<String?>(json['categoryId']),
+      roomId: serializer.fromJson<String?>(json['roomId']),
+      displayName: serializer.fromJson<String?>(json['displayName']),
+      updatedAt: serializer.fromJson<int>(json['updatedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'payeeKey': serializer.toJson<String>(payeeKey),
+      'categoryId': serializer.toJson<String?>(categoryId),
+      'roomId': serializer.toJson<String?>(roomId),
+      'displayName': serializer.toJson<String?>(displayName),
+      'updatedAt': serializer.toJson<int>(updatedAt),
+    };
+  }
+
+  PayeeRuleRow copyWith({
+    String? payeeKey,
+    Value<String?> categoryId = const Value.absent(),
+    Value<String?> roomId = const Value.absent(),
+    Value<String?> displayName = const Value.absent(),
+    int? updatedAt,
+  }) => PayeeRuleRow(
+    payeeKey: payeeKey ?? this.payeeKey,
+    categoryId: categoryId.present ? categoryId.value : this.categoryId,
+    roomId: roomId.present ? roomId.value : this.roomId,
+    displayName: displayName.present ? displayName.value : this.displayName,
+    updatedAt: updatedAt ?? this.updatedAt,
+  );
+  PayeeRuleRow copyWithCompanion(PayeeRulesCompanion data) {
+    return PayeeRuleRow(
+      payeeKey: data.payeeKey.present ? data.payeeKey.value : this.payeeKey,
+      categoryId: data.categoryId.present
+          ? data.categoryId.value
+          : this.categoryId,
+      roomId: data.roomId.present ? data.roomId.value : this.roomId,
+      displayName: data.displayName.present
+          ? data.displayName.value
+          : this.displayName,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('PayeeRuleRow(')
+          ..write('payeeKey: $payeeKey, ')
+          ..write('categoryId: $categoryId, ')
+          ..write('roomId: $roomId, ')
+          ..write('displayName: $displayName, ')
+          ..write('updatedAt: $updatedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(payeeKey, categoryId, roomId, displayName, updatedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is PayeeRuleRow &&
+          other.payeeKey == this.payeeKey &&
+          other.categoryId == this.categoryId &&
+          other.roomId == this.roomId &&
+          other.displayName == this.displayName &&
+          other.updatedAt == this.updatedAt);
+}
+
+class PayeeRulesCompanion extends UpdateCompanion<PayeeRuleRow> {
+  final Value<String> payeeKey;
+  final Value<String?> categoryId;
+  final Value<String?> roomId;
+  final Value<String?> displayName;
+  final Value<int> updatedAt;
+  final Value<int> rowid;
+  const PayeeRulesCompanion({
+    this.payeeKey = const Value.absent(),
+    this.categoryId = const Value.absent(),
+    this.roomId = const Value.absent(),
+    this.displayName = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  PayeeRulesCompanion.insert({
+    required String payeeKey,
+    this.categoryId = const Value.absent(),
+    this.roomId = const Value.absent(),
+    this.displayName = const Value.absent(),
+    required int updatedAt,
+    this.rowid = const Value.absent(),
+  }) : payeeKey = Value(payeeKey),
+       updatedAt = Value(updatedAt);
+  static Insertable<PayeeRuleRow> custom({
+    Expression<String>? payeeKey,
+    Expression<String>? categoryId,
+    Expression<String>? roomId,
+    Expression<String>? displayName,
+    Expression<int>? updatedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (payeeKey != null) 'payee_key': payeeKey,
+      if (categoryId != null) 'category_id': categoryId,
+      if (roomId != null) 'room_id': roomId,
+      if (displayName != null) 'display_name': displayName,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  PayeeRulesCompanion copyWith({
+    Value<String>? payeeKey,
+    Value<String?>? categoryId,
+    Value<String?>? roomId,
+    Value<String?>? displayName,
+    Value<int>? updatedAt,
+    Value<int>? rowid,
+  }) {
+    return PayeeRulesCompanion(
+      payeeKey: payeeKey ?? this.payeeKey,
+      categoryId: categoryId ?? this.categoryId,
+      roomId: roomId ?? this.roomId,
+      displayName: displayName ?? this.displayName,
+      updatedAt: updatedAt ?? this.updatedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (payeeKey.present) {
+      map['payee_key'] = Variable<String>(payeeKey.value);
+    }
+    if (categoryId.present) {
+      map['category_id'] = Variable<String>(categoryId.value);
+    }
+    if (roomId.present) {
+      map['room_id'] = Variable<String>(roomId.value);
+    }
+    if (displayName.present) {
+      map['display_name'] = Variable<String>(displayName.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<int>(updatedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('PayeeRulesCompanion(')
+          ..write('payeeKey: $payeeKey, ')
+          ..write('categoryId: $categoryId, ')
+          ..write('roomId: $roomId, ')
+          ..write('displayName: $displayName, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -5523,6 +5917,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $BudgetsTable budgets = $BudgetsTable(this);
   late final $FiredAlertsTable firedAlerts = $FiredAlertsTable(this);
   late final $NoticesTable notices = $NoticesTable(this);
+  late final $PayeeRulesTable payeeRules = $PayeeRulesTable(this);
   late final Index transactionsOccurredAt = Index(
     'transactions_occurred_at',
     'CREATE INDEX transactions_occurred_at ON transactions (occurred_at)',
@@ -5567,6 +5962,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     budgets,
     firedAlerts,
     notices,
+    payeeRules,
     transactionsOccurredAt,
     transactionsRoomId,
     transactionsCategoryId,
@@ -5625,6 +6021,20 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         limitUpdateKind: UpdateKind.delete,
       ),
       result: [TableUpdate('budgets', kind: UpdateKind.delete)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'categories',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('payee_rules', kind: UpdateKind.update)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'rooms',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('payee_rules', kind: UpdateKind.update)],
     ),
   ]);
 }
@@ -5933,6 +6343,24 @@ final class $$CategoriesTableReferences
       manager.$state.copyWith(prefetchedData: cache),
     );
   }
+
+  static MultiTypedResultKey<$PayeeRulesTable, List<PayeeRuleRow>>
+  _payeeRulesRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.payeeRules,
+    aliasName: 'categories__id__payee_rules__category_id',
+  );
+
+  $$PayeeRulesTableProcessedTableManager get payeeRulesRefs {
+    final manager = $$PayeeRulesTableTableManager(
+      $_db,
+      $_db.payeeRules,
+    ).filter((f) => f.categoryId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_payeeRulesRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
 }
 
 class $$CategoriesTableFilterComposer
@@ -6016,6 +6444,31 @@ class $$CategoriesTableFilterComposer
           }) => $$BudgetsTableFilterComposer(
             $db: $db,
             $table: $db.budgets,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<bool> payeeRulesRefs(
+    Expression<bool> Function($$PayeeRulesTableFilterComposer f) f,
+  ) {
+    final $$PayeeRulesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.payeeRules,
+      getReferencedColumn: (t) => t.categoryId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PayeeRulesTableFilterComposer(
+            $db: $db,
+            $table: $db.payeeRules,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -6144,6 +6597,31 @@ class $$CategoriesTableAnnotationComposer
     );
     return f(composer);
   }
+
+  Expression<T> payeeRulesRefs<T extends Object>(
+    Expression<T> Function($$PayeeRulesTableAnnotationComposer a) f,
+  ) {
+    final $$PayeeRulesTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.payeeRules,
+      getReferencedColumn: (t) => t.categoryId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PayeeRulesTableAnnotationComposer(
+            $db: $db,
+            $table: $db.payeeRules,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
 }
 
 class $$CategoriesTableTableManager
@@ -6159,7 +6637,11 @@ class $$CategoriesTableTableManager
           $$CategoriesTableUpdateCompanionBuilder,
           (CategoryRow, $$CategoriesTableReferences),
           CategoryRow,
-          PrefetchHooks Function({bool transactionsRefs, bool budgetsRefs})
+          PrefetchHooks Function({
+            bool transactionsRefs,
+            bool budgetsRefs,
+            bool payeeRulesRefs,
+          })
         > {
   $$CategoriesTableTableManager(_$AppDatabase db, $CategoriesTable table)
     : super(
@@ -6217,12 +6699,17 @@ class $$CategoriesTableTableManager
               )
               .toList(),
           prefetchHooksCallback:
-              ({transactionsRefs = false, budgetsRefs = false}) {
+              ({
+                transactionsRefs = false,
+                budgetsRefs = false,
+                payeeRulesRefs = false,
+              }) {
                 return PrefetchHooks(
                   db: db,
                   explicitlyWatchedTables: [
                     if (transactionsRefs) db.transactions,
                     if (budgetsRefs) db.budgets,
+                    if (payeeRulesRefs) db.payeeRules,
                   ],
                   addJoins: null,
                   getPrefetchedDataCallback: (items) async {
@@ -6267,6 +6754,26 @@ class $$CategoriesTableTableManager
                           referencedColumn: 'category_id',
                           typedResults: items,
                         ),
+                      if (payeeRulesRefs)
+                        await $_getPrefetchedDataByColumns<
+                          CategoryRow,
+                          $CategoriesTable,
+                          PayeeRuleRow,
+                          $PayeeRulesTable
+                        >(
+                          currentTable: table,
+                          referencedTable: $$CategoriesTableReferences
+                              ._payeeRulesRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$CategoriesTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).payeeRulesRefs,
+                          currentColumn: 'id',
+                          referencedColumn: 'category_id',
+                          typedResults: items,
+                        ),
                     ];
                   },
                 );
@@ -6287,7 +6794,11 @@ typedef $$CategoriesTableProcessedTableManager =
       $$CategoriesTableUpdateCompanionBuilder,
       (CategoryRow, $$CategoriesTableReferences),
       CategoryRow,
-      PrefetchHooks Function({bool transactionsRefs, bool budgetsRefs})
+      PrefetchHooks Function({
+        bool transactionsRefs,
+        bool budgetsRefs,
+        bool payeeRulesRefs,
+      })
     >;
 typedef $$RoomsTableCreateCompanionBuilder = RoomsCompanion Function({
   required String id,
@@ -6335,6 +6846,24 @@ final class $$RoomsTableReferences
     ).filter((f) => f.roomId.id.sqlEquals($_itemColumn<String>('id')!));
 
     final cache = $_typedResult.readTableOrNull(_transactionsRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+
+  static MultiTypedResultKey<$PayeeRulesTable, List<PayeeRuleRow>>
+  _payeeRulesRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.payeeRules,
+    aliasName: 'rooms__id__payee_rules__room_id',
+  );
+
+  $$PayeeRulesTableProcessedTableManager get payeeRulesRefs {
+    final manager = $$PayeeRulesTableTableManager(
+      $_db,
+      $_db.payeeRules,
+    ).filter((f) => f.roomId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_payeeRulesRefsTable($_db));
     return ProcessedTableManager(
       manager.$state.copyWith(prefetchedData: cache),
     );
@@ -6423,6 +6952,31 @@ class $$RoomsTableFilterComposer extends Composer<_$AppDatabase, $RoomsTable> {
           }) => $$TransactionsTableFilterComposer(
             $db: $db,
             $table: $db.transactions,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<bool> payeeRulesRefs(
+    Expression<bool> Function($$PayeeRulesTableFilterComposer f) f,
+  ) {
+    final $$PayeeRulesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.payeeRules,
+      getReferencedColumn: (t) => t.roomId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PayeeRulesTableFilterComposer(
+            $db: $db,
+            $table: $db.payeeRules,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -6571,6 +7125,31 @@ class $$RoomsTableAnnotationComposer
     );
     return f(composer);
   }
+
+  Expression<T> payeeRulesRefs<T extends Object>(
+    Expression<T> Function($$PayeeRulesTableAnnotationComposer a) f,
+  ) {
+    final $$PayeeRulesTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.payeeRules,
+      getReferencedColumn: (t) => t.roomId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PayeeRulesTableAnnotationComposer(
+            $db: $db,
+            $table: $db.payeeRules,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
 }
 
 class $$RoomsTableTableManager
@@ -6586,7 +7165,7 @@ class $$RoomsTableTableManager
           $$RoomsTableUpdateCompanionBuilder,
           (RoomRow, $$RoomsTableReferences),
           RoomRow,
-          PrefetchHooks Function({bool transactionsRefs})
+          PrefetchHooks Function({bool transactionsRefs, bool payeeRulesRefs})
         > {
   $$RoomsTableTableManager(_$AppDatabase db, $RoomsTable table)
     : super(
@@ -6663,36 +7242,61 @@ class $$RoomsTableTableManager
                 ),
               )
               .toList(),
-          prefetchHooksCallback: ({transactionsRefs = false}) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [if (transactionsRefs) db.transactions],
-              addJoins: null,
-              getPrefetchedDataCallback: (items) async {
-                return [
-                  if (transactionsRefs)
-                    await $_getPrefetchedDataByColumns<
-                      RoomRow,
-                      $RoomsTable,
-                      TransactionRow,
-                      $TransactionsTable
-                    >(
-                      currentTable: table,
-                      referencedTable: $$RoomsTableReferences
-                          ._transactionsRefsTable(db),
-                      managerFromTypedResult: (p0) => $$RoomsTableReferences(
-                        db,
-                        table,
-                        p0,
-                      ).transactionsRefs,
-                      currentColumn: 'id',
-                      referencedColumn: 'room_id',
-                      typedResults: items,
-                    ),
-                ];
+          prefetchHooksCallback:
+              ({transactionsRefs = false, payeeRulesRefs = false}) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [
+                    if (transactionsRefs) db.transactions,
+                    if (payeeRulesRefs) db.payeeRules,
+                  ],
+                  addJoins: null,
+                  getPrefetchedDataCallback: (items) async {
+                    return [
+                      if (transactionsRefs)
+                        await $_getPrefetchedDataByColumns<
+                          RoomRow,
+                          $RoomsTable,
+                          TransactionRow,
+                          $TransactionsTable
+                        >(
+                          currentTable: table,
+                          referencedTable: $$RoomsTableReferences
+                              ._transactionsRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$RoomsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).transactionsRefs,
+                          currentColumn: 'id',
+                          referencedColumn: 'room_id',
+                          typedResults: items,
+                        ),
+                      if (payeeRulesRefs)
+                        await $_getPrefetchedDataByColumns<
+                          RoomRow,
+                          $RoomsTable,
+                          PayeeRuleRow,
+                          $PayeeRulesTable
+                        >(
+                          currentTable: table,
+                          referencedTable: $$RoomsTableReferences
+                              ._payeeRulesRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$RoomsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).payeeRulesRefs,
+                          currentColumn: 'id',
+                          referencedColumn: 'room_id',
+                          typedResults: items,
+                        ),
+                    ];
+                  },
+                );
               },
-            );
-          },
         ),
       );
 }
@@ -6709,7 +7313,7 @@ typedef $$RoomsTableProcessedTableManager =
       $$RoomsTableUpdateCompanionBuilder,
       (RoomRow, $$RoomsTableReferences),
       RoomRow,
-      PrefetchHooks Function({bool transactionsRefs})
+      PrefetchHooks Function({bool transactionsRefs, bool payeeRulesRefs})
     >;
 typedef $$TransactionsTableCreateCompanionBuilder =
     TransactionsCompanion Function({
@@ -9965,6 +10569,405 @@ typedef $$NoticesTableProcessedTableManager =
       NoticeRow,
       PrefetchHooks Function()
     >;
+typedef $$PayeeRulesTableCreateCompanionBuilder = PayeeRulesCompanion Function({
+  required String payeeKey,
+  Value<String?> categoryId,
+  Value<String?> roomId,
+  Value<String?> displayName,
+  required int updatedAt,
+  Value<int> rowid,
+});
+typedef $$PayeeRulesTableUpdateCompanionBuilder = PayeeRulesCompanion Function({
+  Value<String> payeeKey,
+  Value<String?> categoryId,
+  Value<String?> roomId,
+  Value<String?> displayName,
+  Value<int> updatedAt,
+  Value<int> rowid,
+});
+
+final class $$PayeeRulesTableReferences
+    extends BaseReferences<_$AppDatabase, $PayeeRulesTable, PayeeRuleRow> {
+  $$PayeeRulesTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $CategoriesTable _categoryIdTable(_$AppDatabase db) =>
+      db.categories.createAlias('payee_rules__category_id__categories__id');
+
+  $$CategoriesTableProcessedTableManager? get categoryId {
+    final $_column = $_itemColumn<String>('category_id');
+    if ($_column == null) return null;
+    final manager = $$CategoriesTableTableManager(
+      $_db,
+      $_db.categories,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_categoryIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+
+  static $RoomsTable _roomIdTable(_$AppDatabase db) =>
+      db.rooms.createAlias('payee_rules__room_id__rooms__id');
+
+  $$RoomsTableProcessedTableManager? get roomId {
+    final $_column = $_itemColumn<String>('room_id');
+    if ($_column == null) return null;
+    final manager = $$RoomsTableTableManager(
+      $_db,
+      $_db.rooms,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_roomIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+}
+
+class $$PayeeRulesTableFilterComposer
+    extends Composer<_$AppDatabase, $PayeeRulesTable> {
+  $$PayeeRulesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get payeeKey => $composableBuilder(
+    column: $table.payeeKey,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get displayName => $composableBuilder(
+    column: $table.displayName,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$CategoriesTableFilterComposer get categoryId {
+    final $$CategoriesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.categoryId,
+      referencedTable: $db.categories,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$CategoriesTableFilterComposer(
+            $db: $db,
+            $table: $db.categories,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$RoomsTableFilterComposer get roomId {
+    final $$RoomsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.roomId,
+      referencedTable: $db.rooms,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$RoomsTableFilterComposer(
+            $db: $db,
+            $table: $db.rooms,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$PayeeRulesTableOrderingComposer
+    extends Composer<_$AppDatabase, $PayeeRulesTable> {
+  $$PayeeRulesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get payeeKey => $composableBuilder(
+    column: $table.payeeKey,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get displayName => $composableBuilder(
+    column: $table.displayName,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$CategoriesTableOrderingComposer get categoryId {
+    final $$CategoriesTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.categoryId,
+      referencedTable: $db.categories,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$CategoriesTableOrderingComposer(
+            $db: $db,
+            $table: $db.categories,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$RoomsTableOrderingComposer get roomId {
+    final $$RoomsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.roomId,
+      referencedTable: $db.rooms,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$RoomsTableOrderingComposer(
+            $db: $db,
+            $table: $db.rooms,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$PayeeRulesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $PayeeRulesTable> {
+  $$PayeeRulesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get payeeKey =>
+      $composableBuilder(column: $table.payeeKey, builder: (column) => column);
+
+  GeneratedColumn<String> get displayName => $composableBuilder(
+    column: $table.displayName,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get updatedAt =>
+      $composableBuilder(column: $table.updatedAt, builder: (column) => column);
+
+  $$CategoriesTableAnnotationComposer get categoryId {
+    final $$CategoriesTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.categoryId,
+      referencedTable: $db.categories,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$CategoriesTableAnnotationComposer(
+            $db: $db,
+            $table: $db.categories,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$RoomsTableAnnotationComposer get roomId {
+    final $$RoomsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.roomId,
+      referencedTable: $db.rooms,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$RoomsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.rooms,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$PayeeRulesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $PayeeRulesTable,
+          PayeeRuleRow,
+          $$PayeeRulesTableFilterComposer,
+          $$PayeeRulesTableOrderingComposer,
+          $$PayeeRulesTableAnnotationComposer,
+          $$PayeeRulesTableCreateCompanionBuilder,
+          $$PayeeRulesTableUpdateCompanionBuilder,
+          (PayeeRuleRow, $$PayeeRulesTableReferences),
+          PayeeRuleRow,
+          PrefetchHooks Function({bool categoryId, bool roomId})
+        > {
+  $$PayeeRulesTableTableManager(_$AppDatabase db, $PayeeRulesTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$PayeeRulesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$PayeeRulesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$PayeeRulesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> payeeKey = const Value.absent(),
+                Value<String?> categoryId = const Value.absent(),
+                Value<String?> roomId = const Value.absent(),
+                Value<String?> displayName = const Value.absent(),
+                Value<int> updatedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => PayeeRulesCompanion(
+                payeeKey: payeeKey,
+                categoryId: categoryId,
+                roomId: roomId,
+                displayName: displayName,
+                updatedAt: updatedAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String payeeKey,
+                Value<String?> categoryId = const Value.absent(),
+                Value<String?> roomId = const Value.absent(),
+                Value<String?> displayName = const Value.absent(),
+                required int updatedAt,
+                Value<int> rowid = const Value.absent(),
+              }) => PayeeRulesCompanion.insert(
+                payeeKey: payeeKey,
+                categoryId: categoryId,
+                roomId: roomId,
+                displayName: displayName,
+                updatedAt: updatedAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$PayeeRulesTable, PayeeRuleRow>(table),
+                  $$PayeeRulesTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: ({categoryId = false, roomId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (categoryId) {
+                      state = state.withJoin(
+                        currentTable: table,
+                        currentColumn: table.categoryId,
+                        referencedTable: $$PayeeRulesTableReferences
+                            ._categoryIdTable(db),
+                        referencedColumn: $$PayeeRulesTableReferences
+                            ._categoryIdTable(db)
+                            .id,
+                      ) as T;
+                    }
+                    if (roomId) {
+                      state = state.withJoin(
+                        currentTable: table,
+                        currentColumn: table.roomId,
+                        referencedTable: $$PayeeRulesTableReferences
+                            ._roomIdTable(db),
+                        referencedColumn: $$PayeeRulesTableReferences
+                            ._roomIdTable(db)
+                            .id,
+                      ) as T;
+                    }
+
+                    return state;
+                  },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$PayeeRulesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $PayeeRulesTable,
+      PayeeRuleRow,
+      $$PayeeRulesTableFilterComposer,
+      $$PayeeRulesTableOrderingComposer,
+      $$PayeeRulesTableAnnotationComposer,
+      $$PayeeRulesTableCreateCompanionBuilder,
+      $$PayeeRulesTableUpdateCompanionBuilder,
+      (PayeeRuleRow, $$PayeeRulesTableReferences),
+      PayeeRuleRow,
+      PrefetchHooks Function({bool categoryId, bool roomId})
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -9991,4 +10994,6 @@ class $AppDatabaseManager {
       $$FiredAlertsTableTableManager(_db, _db.firedAlerts);
   $$NoticesTableTableManager get notices =>
       $$NoticesTableTableManager(_db, _db.notices);
+  $$PayeeRulesTableTableManager get payeeRules =>
+      $$PayeeRulesTableTableManager(_db, _db.payeeRules);
 }

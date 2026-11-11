@@ -258,6 +258,34 @@ class AutoCaptureRepository {
     );
   }
 
+  /// Confirms every waiting transaction in [ids] as [categoryId]. Returns
+  /// how many were confirmed.
+  @useResult
+  Future<Result<int, StoreFailure>> confirmMany(
+    Iterable<String> ids,
+    String categoryId,
+  ) async {
+    try {
+      final count =
+          await (_db.update(_db.transactions)..where(
+                (t) =>
+                    t.id.isIn(ids) &
+                    t.reviewStatus.equals(ReviewStatus.needsReview.name),
+              ))
+              .write(
+                TransactionsCompanion(
+                  categoryId: Value(categoryId),
+                  reviewStatus: const Value(ReviewStatus.confirmed),
+                  updatedAt: Value(_clock.now().toUtc().millisecondsSinceEpoch),
+                ),
+              );
+      return Ok(count);
+    } on SqliteException catch (e, st) {
+      _log.error('review.confirm_many', e.runtimeType, st);
+      return const Err(StoreWriteFailed());
+    }
+  }
+
   /// Confirms every waiting transaction that already has a suggested
   /// category. Returns how many were confirmed.
   @useResult

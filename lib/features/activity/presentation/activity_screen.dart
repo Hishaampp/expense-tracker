@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:expense_tracker/core/transaction_filter.dart';
 import 'package:expense_tracker/features/activity/presentation/activity_notifier.dart';
+import 'package:expense_tracker/features/activity/presentation/widgets/activity_search.dart';
 import 'package:expense_tracker/features/activity/presentation/widgets/day_card.dart';
 import 'package:expense_tracker/formatting/date_format.dart';
 import 'package:expense_tracker/l10n/app_localizations.dart';
@@ -85,7 +87,35 @@ class ActivityScreen extends ConsumerWidget {
       ),
       actions: [add],
       children: [
-        if (state.isEmpty)
+        ActivitySearch(
+          state: state,
+          onChanged: ref.read(activityFilterProvider.notifier).set,
+        ),
+        if (state.filter.isActive)
+          Semantics(
+            liveRegion: true,
+            child: Text(
+              state.filter.searches
+                  ? '${l10n.activityResults(state.count)} · '
+                        '${l10n.activitySearchingAll}'
+                  : l10n.activityResults(state.count),
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+          ),
+        if (state.isEmpty && state.filter.isActive)
+          Entrance(
+            child: EmptyStateView(
+              icon: Icons.search_off_rounded,
+              iconColor: CategoryColors.of(context).grey,
+              title: l10n.activityNoMatchTitle,
+              body: l10n.activityNoMatchBody,
+              actionLabel: l10n.activityClearFilters,
+              onAction: () => ref
+                  .read(activityFilterProvider.notifier)
+                  .set(const TransactionFilter()),
+            ),
+          )
+        else if (state.isEmpty)
           Entrance(
             child: EmptyStateView(
               icon: Icons.receipt_long_rounded,

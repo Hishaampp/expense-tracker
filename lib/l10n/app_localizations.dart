@@ -2426,6 +2426,438 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Kept for 60 days.'**
   String get noticesKeptFor;
+
+  /// No description provided for @reviewConfirmedLearned.
+  ///
+  /// In en, this message translates to:
+  /// **'{payee} will always go to {category}'**
+  String reviewConfirmedLearned(String payee, String category);
+
+  /// No description provided for @reviewConfirmedLearnedMore.
+  ///
+  /// In en, this message translates to:
+  /// **'{payee} will always go to {category}. {count, plural, =1{1 more payment} other{{count} more payments}} from them confirmed too.'**
+  String reviewConfirmedLearnedMore(String payee, String category, int count);
+
+  /// No description provided for @reviewConfirmedMany.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 payment} other{{count} payments}} confirmed as {category}'**
+  String reviewConfirmedMany(int count, String category);
+
+  /// No description provided for @reviewLearn.
+  ///
+  /// In en, this message translates to:
+  /// **'Always use this category for {payee}'**
+  String reviewLearn(String payee);
+
+  /// No description provided for @reviewSelect.
+  ///
+  /// In en, this message translates to:
+  /// **'Select payments'**
+  String get reviewSelect;
+
+  /// No description provided for @reviewSelectStop.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop selecting'**
+  String get reviewSelectStop;
+
+  /// No description provided for @reviewSelectedCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{Tap payments to select them} =1{1 selected} other{{count} selected}}'**
+  String reviewSelectedCount(int count);
+
+  /// No description provided for @reviewChooseCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose category'**
+  String get reviewChooseCategory;
+
+  /// No description provided for @reviewSelectableSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{label}. {state}'**
+  String reviewSelectableSemantics(String label, String state);
+
+  /// No description provided for @reviewNotSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'not selected'**
+  String get reviewNotSelected;
+
+  /// No description provided for @payeesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Payees & rules'**
+  String get payeesTitle;
+
+  /// No description provided for @payeesHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Name a payee once and teach it a category or a Room. New payments from them follow it.'**
+  String get payeesHelp;
+
+  /// No description provided for @payeesEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No payees yet'**
+  String get payeesEmptyTitle;
+
+  /// No description provided for @payeesEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Payees appear here once captured payments arrive.'**
+  String get payeesEmptyBody;
+
+  /// No description provided for @payeesNoRule.
+  ///
+  /// In en, this message translates to:
+  /// **'No rule'**
+  String get payeesNoRule;
+
+  /// No description provided for @payeesRuleCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Always {category}'**
+  String payeesRuleCategory(String category);
+
+  /// No description provided for @payeesRuleRoom.
+  ///
+  /// In en, this message translates to:
+  /// **'Goes to {room}'**
+  String payeesRuleRoom(String room);
+
+  /// No description provided for @payeesCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 payment} other{{count} payments}}'**
+  String payeesCount(int count);
+
+  /// No description provided for @payeesRowSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{name}. {rule}. {payments}. Edit'**
+  String payeesRowSemantics(String name, String rule, String payments);
+
+  /// No description provided for @payeesNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get payeesNameLabel;
+
+  /// No description provided for @payeesNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'For example, Sharma Dairy'**
+  String get payeesNameHint;
+
+  /// No description provided for @payeesCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get payeesCategory;
+
+  /// No description provided for @payeesAskEachTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask each time'**
+  String get payeesAskEachTime;
+
+  /// No description provided for @payeesRoom.
+  ///
+  /// In en, this message translates to:
+  /// **'Room'**
+  String get payeesRoom;
+
+  /// No description provided for @payeesNoRoom.
+  ///
+  /// In en, this message translates to:
+  /// **'No Room'**
+  String get payeesNoRoom;
+
+  /// No description provided for @payeesSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get payeesSave;
+
+  /// No description provided for @payeesForget.
+  ///
+  /// In en, this message translates to:
+  /// **'Forget this payee\'s rule'**
+  String get payeesForget;
+
+  /// No description provided for @payeesSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved for {name}'**
+  String payeesSaved(String name);
+
+  /// No description provided for @payeesForgotten.
+  ///
+  /// In en, this message translates to:
+  /// **'Rule removed'**
+  String get payeesForgotten;
+
+  /// No description provided for @payeesPickCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Always use'**
+  String get payeesPickCategory;
+
+  /// No description provided for @payeesPickRoom.
+  ///
+  /// In en, this message translates to:
+  /// **'Always add to'**
+  String get payeesPickRoom;
+
+  /// No description provided for @settingsPayees.
+  ///
+  /// In en, this message translates to:
+  /// **'Payees & rules'**
+  String get settingsPayees;
+
+  /// No description provided for @settingsPayeesSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Payees and rules'**
+  String get settingsPayeesSemantics;
+
+  /// No description provided for @activitySearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search payee, note or amount'**
+  String get activitySearchHint;
+
+  /// No description provided for @activityClearSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear search'**
+  String get activityClearSearch;
+
+  /// No description provided for @activityFilterCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get activityFilterCategory;
+
+  /// No description provided for @activityFilterRoom.
+  ///
+  /// In en, this message translates to:
+  /// **'Room'**
+  String get activityFilterRoom;
+
+  /// No description provided for @activityFilterAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get activityFilterAccount;
+
+  /// No description provided for @activityFilterKind.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get activityFilterKind;
+
+  /// No description provided for @activityFilterSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Source'**
+  String get activityFilterSource;
+
+  /// No description provided for @activityAny.
+  ///
+  /// In en, this message translates to:
+  /// **'Any'**
+  String get activityAny;
+
+  /// No description provided for @activityFilterSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{name}: {value}'**
+  String activityFilterSemantics(String name, String value);
+
+  /// No description provided for @kindSpent.
+  ///
+  /// In en, this message translates to:
+  /// **'Spent'**
+  String get kindSpent;
+
+  /// No description provided for @kindMoneyIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Money in'**
+  String get kindMoneyIn;
+
+  /// No description provided for @kindTransfer.
+  ///
+  /// In en, this message translates to:
+  /// **'Transfer'**
+  String get kindTransfer;
+
+  /// No description provided for @kindRefund.
+  ///
+  /// In en, this message translates to:
+  /// **'Refund'**
+  String get kindRefund;
+
+  /// No description provided for @sourceManual.
+  ///
+  /// In en, this message translates to:
+  /// **'Typed in'**
+  String get sourceManual;
+
+  /// No description provided for @sourceAuto.
+  ///
+  /// In en, this message translates to:
+  /// **'Captured'**
+  String get sourceAuto;
+
+  /// No description provided for @activityNoMatchTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing matches'**
+  String get activityNoMatchTitle;
+
+  /// No description provided for @activityNoMatchBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Try another word, or clear the filters.'**
+  String get activityNoMatchBody;
+
+  /// No description provided for @activityClearFilters.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear filters'**
+  String get activityClearFilters;
+
+  /// No description provided for @activitySearchingAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Searching the last 12 months'**
+  String get activitySearchingAll;
+
+  /// No description provided for @activityResults.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 result} other{{count} results}}'**
+  String activityResults(int count);
+
+  /// No description provided for @onboardCaptureTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Every payment, written down for you'**
+  String get onboardCaptureTitle;
+
+  /// No description provided for @onboardCaptureBody.
+  ///
+  /// In en, this message translates to:
+  /// **'UPI, card and bank payments are read from your bank\'s messages and notifications. You just pick a category, or let the app learn it.'**
+  String get onboardCaptureBody;
+
+  /// No description provided for @onboardRoomsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Rooms for trips and weddings'**
+  String get onboardRoomsTitle;
+
+  /// No description provided for @onboardRoomsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Start a trip in one tap. A Goa weekend or a family wedding gets its own total, without wrecking your month.'**
+  String get onboardRoomsBody;
+
+  /// No description provided for @onboardBudgetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Know what\'s safe to spend'**
+  String get onboardBudgetTitle;
+
+  /// No description provided for @onboardBudgetBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Set a monthly budget and see each day what you can still spend, with a nudge before you run out.'**
+  String get onboardBudgetBody;
+
+  /// No description provided for @onboardPrivacyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your money stays on your phone'**
+  String get onboardPrivacyTitle;
+
+  /// No description provided for @onboardPrivacyNoAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'No account, no sign-up'**
+  String get onboardPrivacyNoAccount;
+
+  /// No description provided for @onboardPrivacyNoInternet.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing is sent to the internet'**
+  String get onboardPrivacyNoInternet;
+
+  /// No description provided for @onboardPrivacyNoAds.
+  ///
+  /// In en, this message translates to:
+  /// **'No ads, and no one reads your messages'**
+  String get onboardPrivacyNoAds;
+
+  /// No description provided for @onboardSetupTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn on auto-capture'**
+  String get onboardSetupTitle;
+
+  /// No description provided for @onboardSetupBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Takes about two minutes. You can also do it later from Settings.'**
+  String get onboardSetupBody;
+
+  /// No description provided for @onboardSetupAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Set up now'**
+  String get onboardSetupAction;
+
+  /// No description provided for @onboardMonthlyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Set a monthly budget'**
+  String get onboardMonthlyTitle;
+
+  /// No description provided for @onboardMonthlyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional. Rooms like trips stay out of it.'**
+  String get onboardMonthlyBody;
+
+  /// No description provided for @onboardNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get onboardNext;
+
+  /// No description provided for @onboardSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get onboardSkip;
+
+  /// No description provided for @onboardStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get onboardStart;
+
+  /// No description provided for @onboardStep.
+  ///
+  /// In en, this message translates to:
+  /// **'Step {step} of {total}'**
+  String onboardStep(int step, int total);
 }
 
 class _AppLocalizationsDelegate

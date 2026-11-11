@@ -4,6 +4,7 @@ import 'package:expense_tracker/core/models/budget_plan.dart';
 import 'package:expense_tracker/core/models/category.dart';
 import 'package:expense_tracker/core/models/money_transaction.dart';
 import 'package:expense_tracker/core/models/notice.dart';
+import 'package:expense_tracker/core/models/payee_rule.dart';
 import 'package:expense_tracker/core/models/raw_capture.dart';
 import 'package:expense_tracker/core/models/room.dart';
 import 'package:expense_tracker/core/month_period.dart';
@@ -31,6 +32,10 @@ final monthStartDayProvider = StreamProvider<int>(
 final initialAppearanceProvider = Provider<AppearanceMode>(
   (ref) => AppearanceMode.system,
 );
+
+/// Whether the first-launch welcome was done, read before the first
+/// frame. `bootstrap()` overrides it; tests start past it.
+final initialOnboardedProvider = Provider<bool>((ref) => true);
 
 /// Light, dark or follow the phone. Live.
 final appearanceProvider = StreamProvider<AppearanceMode>(
@@ -120,4 +125,9 @@ final noticesProvider = StreamProvider<List<Notice>>(
 /// How many notices are unread. Live.
 final unreadNoticesProvider = StreamProvider<int>(
   (ref) => ref.watch(noticeRepositoryProvider).watchUnreadCount(),
+);
+
+/// The merchant book: every payee seen, with its rule. Live.
+final payeeBookProvider = StreamProvider<List<PayeeEntry>>(
+  (ref) => ref.watch(payeeRepositoryProvider).watchBook(),
 );

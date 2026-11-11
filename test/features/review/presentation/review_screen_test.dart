@@ -56,7 +56,10 @@ void main() {
     await tester.tap(find.bySemanticsLabel('Confirm as Food & Dining'));
     await tester.pumpAndSettle();
     expect(find.text('All caught up'), findsOneWidget);
-    expect(find.text('Confirmed as Food & Dining'), findsOneWidget);
+    expect(
+      find.text('Sharma Dairy will always go to Food & Dining'),
+      findsOneWidget,
+    );
 
     await tester.tap(find.text('Undo'));
     await tester.pumpAndSettle();

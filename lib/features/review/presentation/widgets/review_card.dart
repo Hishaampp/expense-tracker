@@ -27,8 +27,24 @@ class ReviewCard extends StatelessWidget {
     required this.onMore,
     required this.onTransfer,
     required this.onAddToRoom,
+    this.learn = true,
+    this.onToggleLearn,
+    this.selected,
+    this.onToggleSelected,
     super.key,
   });
+
+  /// Whether confirming also teaches a rule for this payee.
+  final bool learn;
+
+  /// Ticks or unticks [learn].
+  final VoidCallback? onToggleLearn;
+
+  /// In bulk selection, whether this payment is picked; null otherwise.
+  final bool? selected;
+
+  /// Picks or unpicks it in bulk selection.
+  final VoidCallback? onToggleSelected;
 
   /// The payment.
   final ReviewItem item;
@@ -66,19 +82,66 @@ class ReviewCard extends StatelessWidget {
     );
     final style = categoryStyle(context, item.suggested?.iconKey ?? 'other');
     final tone = isIn ? MoneyTone.moneyIn : MoneyTone.spent;
+    final label = isIn
+        ? l10n.reviewMoneyInSemantics(formatMoney(txn.amount), payee, details)
+        : l10n.reviewSpentSemantics(amount, payee, details);
+    final summary = Row(
+      children: [
+        IconTile(icon: style.icon, color: style.color),
+        SizedBox(width: metrics.spaceMd),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(payee, style: textTheme.bodyLarge),
+              Text(details, style: textTheme.bodySmall),
+            ],
+          ),
+        ),
+        SizedBox(width: metrics.spaceMd),
+        Text(
+          amount,
+          style: AppTextStyles.of(context).amountRow
+              .copyWith(color: tone.colorIn(colors)),
+        ),
+      ],
+    );
+    if (selected case final isPicked?) {
+      // Bulk selection: the whole card toggles; a box shows the state.
+      return Semantics(
+        container: true,
+        checked: isPicked,
+        label: l10n.reviewSelectableSemantics(
+          label,
+          isPicked ? l10n.selected : l10n.reviewNotSelected,
+        ),
+        onTap: onToggleSelected,
+        child: ExcludeSemantics(
+          child: AppCard(
+            onTap: onToggleSelected,
+            child: Row(
+              children: [
+                Icon(
+                  isPicked
+                      ? Icons.check_box_rounded
+                      : Icons.check_box_outline_blank_rounded,
+                  color: isPicked ? colors.accent : colors.onSurfaceMuted,
+                ),
+                SizedBox(width: metrics.spaceMd),
+                Expanded(child: summary),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
     return AppCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Semantics(
             container: true,
-            label: isIn
-                ? l10n.reviewMoneyInSemantics(
-                    formatMoney(txn.amount),
-                    payee,
-                    details,
-                  )
-                : l10n.reviewSpentSemantics(amount, payee, details),
+            label: label,
             child: ExcludeSemantics(
               child: Row(
                 children: [
@@ -117,6 +180,37 @@ class ReviewCard extends StatelessWidget {
               _MorePill(onTap: onMore),
             ],
           ),
+          if (item.canLearn && onToggleLearn != null)
+            Padding(
+              padding: EdgeInsetsDirectional.only(top: metrics.spaceSm),
+              child: MergeSemantics(
+                child: Pressable(
+                  onTap: onToggleLearn,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(metrics.radiusTile),
+                  ),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: metrics.minTapTarget,
+                    ),
+                    child: Row(
+                      children: [
+                        Checkbox(
+                          value: learn,
+                          onChanged: (_) => onToggleLearn?.call(),
+                        ),
+                        Expanded(
+                          child: Text(
+                            l10n.reviewLearn(payee),
+                            style: textTheme.bodyMedium,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
           if (item.room case final room?)
             Padding(
               padding: EdgeInsetsDirectional.only(top: metrics.spaceMd),

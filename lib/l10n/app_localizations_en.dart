@@ -1529,4 +1529,285 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noticesKeptFor => 'Kept for 60 days.';
+
+  @override
+  String reviewConfirmedLearned(String payee, String category) {
+    return '$payee will always go to $category';
+  }
+
+  @override
+  String reviewConfirmedLearnedMore(String payee, String category, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count more payments',
+      one: '1 more payment',
+    );
+    return '$payee will always go to $category. $_temp0 from them confirmed too.';
+  }
+
+  @override
+  String reviewConfirmedMany(int count, String category) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count payments',
+      one: '1 payment',
+    );
+    return '$_temp0 confirmed as $category';
+  }
+
+  @override
+  String reviewLearn(String payee) {
+    return 'Always use this category for $payee';
+  }
+
+  @override
+  String get reviewSelect => 'Select payments';
+
+  @override
+  String get reviewSelectStop => 'Stop selecting';
+
+  @override
+  String reviewSelectedCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count selected',
+      one: '1 selected',
+      zero: 'Tap payments to select them',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get reviewChooseCategory => 'Choose category';
+
+  @override
+  String reviewSelectableSemantics(String label, String state) {
+    return '$label. $state';
+  }
+
+  @override
+  String get reviewNotSelected => 'not selected';
+
+  @override
+  String get payeesTitle => 'Payees & rules';
+
+  @override
+  String get payeesHelp =>
+      'Name a payee once and teach it a category or a Room. New payments from them follow it.';
+
+  @override
+  String get payeesEmptyTitle => 'No payees yet';
+
+  @override
+  String get payeesEmptyBody =>
+      'Payees appear here once captured payments arrive.';
+
+  @override
+  String get payeesNoRule => 'No rule';
+
+  @override
+  String payeesRuleCategory(String category) {
+    return 'Always $category';
+  }
+
+  @override
+  String payeesRuleRoom(String room) {
+    return 'Goes to $room';
+  }
+
+  @override
+  String payeesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count payments',
+      one: '1 payment',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String payeesRowSemantics(String name, String rule, String payments) {
+    return '$name. $rule. $payments. Edit';
+  }
+
+  @override
+  String get payeesNameLabel => 'Name';
+
+  @override
+  String get payeesNameHint => 'For example, Sharma Dairy';
+
+  @override
+  String get payeesCategory => 'Category';
+
+  @override
+  String get payeesAskEachTime => 'Ask each time';
+
+  @override
+  String get payeesRoom => 'Room';
+
+  @override
+  String get payeesNoRoom => 'No Room';
+
+  @override
+  String get payeesSave => 'Save';
+
+  @override
+  String get payeesForget => 'Forget this payee\'s rule';
+
+  @override
+  String payeesSaved(String name) {
+    return 'Saved for $name';
+  }
+
+  @override
+  String get payeesForgotten => 'Rule removed';
+
+  @override
+  String get payeesPickCategory => 'Always use';
+
+  @override
+  String get payeesPickRoom => 'Always add to';
+
+  @override
+  String get settingsPayees => 'Payees & rules';
+
+  @override
+  String get settingsPayeesSemantics => 'Payees and rules';
+
+  @override
+  String get activitySearchHint => 'Search payee, note or amount';
+
+  @override
+  String get activityClearSearch => 'Clear search';
+
+  @override
+  String get activityFilterCategory => 'Category';
+
+  @override
+  String get activityFilterRoom => 'Room';
+
+  @override
+  String get activityFilterAccount => 'Account';
+
+  @override
+  String get activityFilterKind => 'Type';
+
+  @override
+  String get activityFilterSource => 'Source';
+
+  @override
+  String get activityAny => 'Any';
+
+  @override
+  String activityFilterSemantics(String name, String value) {
+    return '$name: $value';
+  }
+
+  @override
+  String get kindSpent => 'Spent';
+
+  @override
+  String get kindMoneyIn => 'Money in';
+
+  @override
+  String get kindTransfer => 'Transfer';
+
+  @override
+  String get kindRefund => 'Refund';
+
+  @override
+  String get sourceManual => 'Typed in';
+
+  @override
+  String get sourceAuto => 'Captured';
+
+  @override
+  String get activityNoMatchTitle => 'Nothing matches';
+
+  @override
+  String get activityNoMatchBody => 'Try another word, or clear the filters.';
+
+  @override
+  String get activityClearFilters => 'Clear filters';
+
+  @override
+  String get activitySearchingAll => 'Searching the last 12 months';
+
+  @override
+  String activityResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results',
+      one: '1 result',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get onboardCaptureTitle => 'Every payment, written down for you';
+
+  @override
+  String get onboardCaptureBody =>
+      'UPI, card and bank payments are read from your bank\'s messages and notifications. You just pick a category, or let the app learn it.';
+
+  @override
+  String get onboardRoomsTitle => 'Rooms for trips and weddings';
+
+  @override
+  String get onboardRoomsBody =>
+      'Start a trip in one tap. A Goa weekend or a family wedding gets its own total, without wrecking your month.';
+
+  @override
+  String get onboardBudgetTitle => 'Know what\'s safe to spend';
+
+  @override
+  String get onboardBudgetBody =>
+      'Set a monthly budget and see each day what you can still spend, with a nudge before you run out.';
+
+  @override
+  String get onboardPrivacyTitle => 'Your money stays on your phone';
+
+  @override
+  String get onboardPrivacyNoAccount => 'No account, no sign-up';
+
+  @override
+  String get onboardPrivacyNoInternet => 'Nothing is sent to the internet';
+
+  @override
+  String get onboardPrivacyNoAds => 'No ads, and no one reads your messages';
+
+  @override
+  String get onboardSetupTitle => 'Turn on auto-capture';
+
+  @override
+  String get onboardSetupBody =>
+      'Takes about two minutes. You can also do it later from Settings.';
+
+  @override
+  String get onboardSetupAction => 'Set up now';
+
+  @override
+  String get onboardMonthlyTitle => 'Set a monthly budget';
+
+  @override
+  String get onboardMonthlyBody => 'Optional. Rooms like trips stay out of it.';
+
+  @override
+  String get onboardNext => 'Next';
+
+  @override
+  String get onboardSkip => 'Skip';
+
+  @override
+  String get onboardStart => 'Start';
+
+  @override
+  String onboardStep(int step, int total) {
+    return 'Step $step of $total';
+  }
 }
