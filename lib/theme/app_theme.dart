@@ -88,6 +88,23 @@ ThemeData buildAppTheme(Brightness brightness) {
       ),
       unselectedLabelTextStyle: textTheme.labelSmall,
     ),
+    switchTheme: SwitchThemeData(
+      thumbColor: WidgetStateProperty.resolveWith(
+        (states) => states.contains(WidgetState.selected)
+            ? colors.onAccentFill
+            : colors.onSurfaceMuted,
+      ),
+      trackColor: WidgetStateProperty.resolveWith(
+        (states) => states.contains(WidgetState.selected)
+            ? colors.accentFill
+            : colors.surfaceSunken,
+      ),
+      trackOutlineColor: WidgetStateProperty.resolveWith(
+        (states) => states.contains(WidgetState.selected)
+            ? colors.accentFill
+            : colors.onSurfaceMuted,
+      ),
+    ),
     bottomSheetTheme: BottomSheetThemeData(
       backgroundColor: colors.surface,
       elevation: 0,

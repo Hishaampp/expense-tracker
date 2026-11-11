@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:expense_tracker/core/models/raw_capture.dart';
-import 'package:expense_tracker/features/capture/application/capture_providers.dart';
+import 'package:expense_tracker/core/result.dart';
+import 'package:expense_tracker/data/capture/capture_providers.dart';
 import 'package:expense_tracker/routing/app_router.dart';
 import 'package:expense_tracker/routing/routes.dart';
 import 'package:expense_tracker/services/service_providers.dart';
@@ -56,16 +57,26 @@ class _CaptureInboxState extends ConsumerState<CaptureInbox> {
     final router = ref.read(routerProvider);
     try {
       final captures = await queue.drain();
-      // Shares are handled here; other sources arrive in later phases.
-      final shares = [
-        for (final c in captures)
-          if (c.source == CaptureSource.share) c,
-      ];
-      for (final share in shares) {
-        pending.put(share);
-        unawaited(router.push(Routes.shared(share.id)));
+      final auto = ref.read(autoIngestionProvider);
+      final handled = <String>[];
+      for (final capture in captures) {
+        if (capture.source == CaptureSource.share) {
+          // The user shared it: let them finish it in Quick Add.
+          pending.put(capture);
+          unawaited(router.push(Routes.shared(capture.id)));
+          handled.add(capture.id);
+          continue;
+        }
+        // Notifications and SMS are saved without the user (spec §5.7).
+        // Only acked once recorded, so a failure is retried next time.
+        switch (await auto.ingest(capture)) {
+          case Ok():
+            handled.add(capture.id);
+          case Err():
+            break;
+        }
       }
-      await queue.ack([for (final s in shares) s.id]);
+      await queue.ack(handled);
     } on PlatformException catch (e, st) {
       ref.read(appLoggerProvider).error('capture.drain', e.runtimeType, st);
     } on MissingPluginException catch (e, st) {

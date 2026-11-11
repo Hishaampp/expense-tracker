@@ -123,6 +123,23 @@ class SettingsScreen extends ConsumerWidget {
             label: l10n.settingsSectionMessages,
             rows: [
               InfoRow(
+                leading: IconTile(icon: Icons.bolt_rounded, color: tiles.green),
+                title: l10n.autoCaptureTitle,
+                trailingText: switch (state.autoCaptureOn) {
+                  true => l10n.autoCaptureRowOn,
+                  false => l10n.autoCaptureRowOff,
+                  null => null,
+                },
+                trailingIsAmount: false,
+                showChevron: true,
+                semanticLabel: switch (state.autoCaptureOn) {
+                  true => l10n.autoCaptureRowSemantics(l10n.on),
+                  false => l10n.autoCaptureRowSemantics(l10n.off),
+                  null => l10n.autoCaptureTitle,
+                },
+                onTap: () => unawaited(context.push(Routes.autoCapture)),
+              ),
+              InfoRow(
                 leading: IconTile(
                   icon: Icons.mark_unread_chat_alt_rounded,
                   color: tiles.blue,

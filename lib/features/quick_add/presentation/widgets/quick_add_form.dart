@@ -1,7 +1,6 @@
 import 'package:expense_tracker/features/quick_add/presentation/quick_add_notifier.dart';
 import 'package:expense_tracker/features/quick_add/presentation/widgets/amount_display.dart';
 import 'package:expense_tracker/features/quick_add/presentation/widgets/capture_draft_card.dart';
-import 'package:expense_tracker/features/quick_add/presentation/widgets/category_grid.dart';
 import 'package:expense_tracker/features/quick_add/presentation/widgets/keypad.dart';
 import 'package:expense_tracker/features/quick_add/presentation/widgets/pill_button.dart';
 import 'package:expense_tracker/formatting/date_format.dart';
@@ -11,6 +10,7 @@ import 'package:expense_tracker/l10n/failure_messages.dart';
 import 'package:expense_tracker/l10n/notice_messages.dart';
 import 'package:expense_tracker/theme/app_colors.dart';
 import 'package:expense_tracker/theme/app_metrics.dart';
+import 'package:expense_tracker/widgets/category/category_grid.dart';
 import 'package:flutter/material.dart';
 
 /// The Quick Add layout: big amount, Cash/date/note pills, the most-used

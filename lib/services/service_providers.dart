@@ -3,8 +3,10 @@ import 'package:expense_tracker/core/id_generator.dart';
 import 'package:expense_tracker/services/app_logger.dart';
 import 'package:expense_tracker/services/clipboard_service.dart';
 import 'package:expense_tracker/services/haptics.dart';
+import 'package:expense_tracker/services/native/capture_control_service.dart';
 import 'package:expense_tracker/services/native/capture_queue_service.dart';
 import 'package:expense_tracker/services/uuid_id_generator.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// The source of "now". Override with `Clock.fixed` in tests.
@@ -30,3 +32,22 @@ final clipboardProvider = Provider<ClipboardService>(
 final captureQueueProvider = Provider<CaptureQueueService>(
   (ref) => const MethodChannelCaptureQueue(),
 );
+
+/// Native auto-capture controls. Override with a fake in tests.
+final captureControlProvider = Provider<CaptureControlService>(
+  (ref) => const MethodChannelCaptureControl(),
+);
+
+/// Whether auto-capture is on, for the Settings row; null if unknown (iOS,
+/// or the platform could not say).
+final FutureProvider<bool?> autoCaptureOnProvider =
+    FutureProvider.autoDispose<bool?>((ref) async {
+      try {
+        final status = await ref.watch(captureControlProvider).status();
+        return status.isAndroid ? status.listenerEnabled : null;
+      } on PlatformException {
+        return null;
+      } on MissingPluginException {
+        return null;
+      }
+    });

@@ -40,3 +40,11 @@ monthTransactionsProvider = StreamProvider.autoDispose
       (ref, period) =>
           ref.watch(transactionRepositoryProvider).watchInPeriod(period),
     );
+
+/// How many payments wait in the review inbox. Live.
+final reviewCountProvider = StreamProvider<int>(
+  (ref) => ref
+      .watch(autoCaptureRepositoryProvider)
+      .watchNeedsReview()
+      .map((list) => list.length),
+);

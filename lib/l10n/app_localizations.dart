@@ -807,6 +807,372 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count}'**
   String settingsUnparsedCount(int count);
+
+  /// No description provided for @reviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Review'**
+  String get reviewTitle;
+
+  /// No description provided for @reviewBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} to review'**
+  String reviewBadge(int count);
+
+  /// No description provided for @reviewBadgeSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 payment to review} other{{count} payments to review}}'**
+  String reviewBadgeSemantics(int count);
+
+  /// No description provided for @reviewHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Captured automatically. Tap a category to confirm.'**
+  String get reviewHint;
+
+  /// No description provided for @reviewConfirmAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm all suggested ({count})'**
+  String reviewConfirmAll(int count);
+
+  /// No description provided for @reviewConfirmedAll.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 payment confirmed} other{{count} payments confirmed}}'**
+  String reviewConfirmedAll(int count);
+
+  /// No description provided for @reviewTransfer.
+  ///
+  /// In en, this message translates to:
+  /// **'It\'s a transfer'**
+  String get reviewTransfer;
+
+  /// No description provided for @reviewSuggested.
+  ///
+  /// In en, this message translates to:
+  /// **'suggested'**
+  String get reviewSuggested;
+
+  /// No description provided for @reviewConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirmed as {category}'**
+  String reviewConfirmed(String category);
+
+  /// No description provided for @reviewMarkedTransfer.
+  ///
+  /// In en, this message translates to:
+  /// **'Marked as a transfer'**
+  String get reviewMarkedTransfer;
+
+  /// No description provided for @reviewEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'All caught up'**
+  String get reviewEmptyTitle;
+
+  /// No description provided for @reviewEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Payments captured from your messages wait here until you confirm them.'**
+  String get reviewEmptyBody;
+
+  /// No description provided for @reviewPickSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm as {category}'**
+  String reviewPickSemantics(String category);
+
+  /// No description provided for @reviewPickSuggestedSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm as {category}, suggested'**
+  String reviewPickSuggestedSemantics(String category);
+
+  /// No description provided for @reviewUnknownPayee.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment'**
+  String get reviewUnknownPayee;
+
+  /// No description provided for @autoCaptureTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto-capture'**
+  String get autoCaptureTitle;
+
+  /// No description provided for @autoCaptureRowOn.
+  ///
+  /// In en, this message translates to:
+  /// **'On'**
+  String get autoCaptureRowOn;
+
+  /// No description provided for @autoCaptureRowOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Off'**
+  String get autoCaptureRowOff;
+
+  /// No description provided for @autoCaptureRowSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto-capture, {state}'**
+  String autoCaptureRowSemantics(String state);
+
+  /// No description provided for @autoCaptureOnTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto-capture is on'**
+  String get autoCaptureOnTitle;
+
+  /// No description provided for @autoCaptureOffTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto-capture is off'**
+  String get autoCaptureOffTitle;
+
+  /// No description provided for @autoCaptureLastCapture.
+  ///
+  /// In en, this message translates to:
+  /// **'Last payment captured {when}'**
+  String autoCaptureLastCapture(String when);
+
+  /// No description provided for @autoCaptureNever.
+  ///
+  /// In en, this message translates to:
+  /// **'No payments captured yet'**
+  String get autoCaptureNever;
+
+  /// No description provided for @autoCaptureDisclosureTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What the app reads'**
+  String get autoCaptureDisclosureTitle;
+
+  /// No description provided for @autoCaptureDisclosureBody.
+  ///
+  /// In en, this message translates to:
+  /// **'To record payments for you, the app reads new notifications from your SMS app and the UPI apps listed below. It keeps only messages that contain a rupee amount, and ignores everything else, including personal chats. Everything stays on this phone: nothing is uploaded or shared.'**
+  String get autoCaptureDisclosureBody;
+
+  /// No description provided for @autoCaptureLimitations.
+  ///
+  /// In en, this message translates to:
+  /// **'Capture starts from the moment you turn it on. Notifications you swipe away while it is off, or that your phone\'s battery saver blocks, can be missed.'**
+  String get autoCaptureLimitations;
+
+  /// No description provided for @autoCaptureTurnOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn on auto-capture'**
+  String get autoCaptureTurnOn;
+
+  /// No description provided for @autoCaptureManage.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification access settings'**
+  String get autoCaptureManage;
+
+  /// No description provided for @autoCaptureRestrictedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'If Android says the setting is restricted'**
+  String get autoCaptureRestrictedTitle;
+
+  /// No description provided for @autoCaptureRestrictedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Apps installed outside the Play Store need one extra step: open App info, tap the ⋮ menu, choose Allow restricted settings, then come back and turn auto-capture on.'**
+  String get autoCaptureRestrictedBody;
+
+  /// No description provided for @autoCaptureOpenAppInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Open App info'**
+  String get autoCaptureOpenAppInfo;
+
+  /// No description provided for @autoCaptureBatteryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep it running'**
+  String get autoCaptureBatteryTitle;
+
+  /// No description provided for @autoCaptureBatteryOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open battery settings'**
+  String get autoCaptureBatteryOpen;
+
+  /// No description provided for @oemXiaomi.
+  ///
+  /// In en, this message translates to:
+  /// **'On Xiaomi, Redmi and POCO: App info → Autostart on, and Battery saver → No restrictions.'**
+  String get oemXiaomi;
+
+  /// No description provided for @oemVivo.
+  ///
+  /// In en, this message translates to:
+  /// **'On Vivo and iQOO: Battery → Background power consumption → Allow, and turn on Auto-start.'**
+  String get oemVivo;
+
+  /// No description provided for @oemOppo.
+  ///
+  /// In en, this message translates to:
+  /// **'On Oppo, Realme and OnePlus: App info → Battery usage → Allow background activity, and allow Auto launch.'**
+  String get oemOppo;
+
+  /// No description provided for @oemSamsung.
+  ///
+  /// In en, this message translates to:
+  /// **'On Samsung: App info → Battery → Unrestricted, and keep the app out of Sleeping apps.'**
+  String get oemSamsung;
+
+  /// No description provided for @oemOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Set the app\'s battery use to Unrestricted, so Android does not stop it in the background.'**
+  String get oemOther;
+
+  /// No description provided for @autoCaptureSourcesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Apps it reads'**
+  String get autoCaptureSourcesTitle;
+
+  /// No description provided for @autoCaptureYourSmsApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Your SMS app'**
+  String get autoCaptureYourSmsApp;
+
+  /// No description provided for @autoCaptureSourceSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{app}, {state}'**
+  String autoCaptureSourceSemantics(String app, String state);
+
+  /// No description provided for @autoCaptureSmsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Read SMS directly'**
+  String get autoCaptureSmsTitle;
+
+  /// No description provided for @autoCaptureSmsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This build can read bank SMS itself, including past messages, as a backup to notifications.'**
+  String get autoCaptureSmsBody;
+
+  /// No description provided for @autoCaptureSmsAllow.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow SMS access'**
+  String get autoCaptureSmsAllow;
+
+  /// No description provided for @autoCaptureSmsAllowed.
+  ///
+  /// In en, this message translates to:
+  /// **'SMS access allowed'**
+  String get autoCaptureSmsAllowed;
+
+  /// No description provided for @autoCaptureImport.
+  ///
+  /// In en, this message translates to:
+  /// **'Import past messages'**
+  String get autoCaptureImport;
+
+  /// No description provided for @autoCaptureImportMonths.
+  ///
+  /// In en, this message translates to:
+  /// **'{months, plural, =1{Last month} other{Last {months} months}}'**
+  String autoCaptureImportMonths(int months);
+
+  /// No description provided for @autoCaptureImported.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No bank messages found} =1{1 message imported} other{{count} messages imported}}'**
+  String autoCaptureImported(int count);
+
+  /// No description provided for @autoCaptureIosTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto-capture on iPhone'**
+  String get autoCaptureIosTitle;
+
+  /// No description provided for @autoCaptureIosBody.
+  ///
+  /// In en, this message translates to:
+  /// **'iPhone apps can\'t read SMS. Setup with a Shortcuts automation arrives in a coming update; until then, share or paste bank messages into the app.'**
+  String get autoCaptureIosBody;
+
+  /// No description provided for @autoCaptureUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t read the auto-capture status on this phone.'**
+  String get autoCaptureUnavailable;
+
+  /// No description provided for @timeJustNow.
+  ///
+  /// In en, this message translates to:
+  /// **'just now'**
+  String get timeJustNow;
+
+  /// No description provided for @timeMinutesAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes, plural, =1{1 minute ago} other{{minutes} minutes ago}}'**
+  String timeMinutesAgo(int minutes);
+
+  /// No description provided for @timeHoursAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{hours, plural, =1{1 hour ago} other{{hours} hours ago}}'**
+  String timeHoursAgo(int hours);
+
+  /// No description provided for @timeDaysAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{days, plural, =1{yesterday} other{{days} days ago}}'**
+  String timeDaysAgo(int days);
+
+  /// No description provided for @on.
+  ///
+  /// In en, this message translates to:
+  /// **'on'**
+  String get on;
+
+  /// No description provided for @off.
+  ///
+  /// In en, this message translates to:
+  /// **'off'**
+  String get off;
+
+  /// Two short parts of one line, joined by the locale's separator.
+  ///
+  /// In en, this message translates to:
+  /// **'{first}, {second}'**
+  String listPair(String first, String second);
+
+  /// No description provided for @reviewSpentSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} spent, {payee}, {details}'**
+  String reviewSpentSemantics(String amount, String payee, String details);
+
+  /// No description provided for @reviewMoneyInSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} money in, {payee}, {details}'**
+  String reviewMoneyInSemantics(String amount, String payee, String details);
+
+  /// No description provided for @autoCaptureActionFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'That didn\'t work on this phone. Try again.'**
+  String get autoCaptureActionFailed;
 }
 
 class _AppLocalizationsDelegate

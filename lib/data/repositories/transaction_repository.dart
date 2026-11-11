@@ -125,6 +125,11 @@ class TransactionRepository {
     DateTime? occurredAt,
     String? note,
     String? unparsedId,
+    ReviewStatus reviewStatus = ReviewStatus.confirmed,
+    String? toAccountId,
+    String? linkedTransactionId,
+    String? roomId,
+    bool isHidden = false,
   }) async {
     final now = _clock.now().toUtc();
     final capture = draft.capture;
@@ -138,12 +143,17 @@ class TransactionRepository {
           occurredAt: (occurredAt ?? draft.occurredAt ?? capture.receivedAt)
               .toUtc(),
           accountId: accountId,
+          toAccountId: toAccountId,
           categoryId: categoryId,
+          roomId: roomId,
           payeeKey: draft.payeeKey,
           payeeDisplay: draft.payeeDisplay,
           instrument: draft.instrument,
           refNo: draft.refNo,
           note: _blankToNull(note),
+          reviewStatus: reviewStatus,
+          isHidden: isHidden,
+          linkedTransactionId: linkedTransactionId,
           origin: TransactionOrigin.auto,
           createdAt: now,
           updatedAt: now,
@@ -192,6 +202,11 @@ class TransactionRepository {
       return const Err(StoreWriteFailed());
     }
   }
+
+  /// Finds the account the message names, or creates it; Cash when the
+  /// message names none. Must run inside a database transaction.
+  Future<String> resolveAccount(CaptureDraft draft, DateTime now) =>
+      _resolveAccount(draft, now);
 
   // Finds the account the message names, or creates it; Cash when the
   // message names none.

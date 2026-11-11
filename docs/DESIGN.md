@@ -124,7 +124,8 @@ Text is never clamped: layouts work at the largest system text size.
 - **Filled pill** (`accentFill`): the screen's primary next step. At most one
   per screen.
 - **Round floating button** (white, accent glyph): Add, top right.
-- **Text button** (`accentText`): small links such as "See all".
+- **Text button** (`accentText`): small links such as "See all", and a
+  small secondary action inside a card such as "It's a transfer".
 - **Back and close** sit at the top start, flat (not floating): Back on a
   pushed screen (`LargeTitlePage(leading: …)`), Close on a full-screen
   modal such as Quick Add. The top end is kept for actions such as Add.

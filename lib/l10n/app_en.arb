@@ -349,5 +349,212 @@
         "format": "decimalPattern"
       }
     }
-  }
+  },
+  "reviewTitle": "Review",
+  "reviewBadge": "{count} to review",
+  "@reviewBadge": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "reviewBadgeSemantics": "{count, plural, =1{1 payment to review} other{{count} payments to review}}",
+  "@reviewBadgeSemantics": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reviewHint": "Captured automatically. Tap a category to confirm.",
+  "reviewConfirmAll": "Confirm all suggested ({count})",
+  "@reviewConfirmAll": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reviewConfirmedAll": "{count, plural, =1{1 payment confirmed} other{{count} payments confirmed}}",
+  "@reviewConfirmedAll": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reviewTransfer": "It's a transfer",
+  "reviewSuggested": "suggested",
+  "reviewConfirmed": "Confirmed as {category}",
+  "@reviewConfirmed": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "reviewMarkedTransfer": "Marked as a transfer",
+  "reviewEmptyTitle": "All caught up",
+  "reviewEmptyBody": "Payments captured from your messages wait here until you confirm them.",
+  "reviewPickSemantics": "Confirm as {category}",
+  "@reviewPickSemantics": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "reviewPickSuggestedSemantics": "Confirm as {category}, suggested",
+  "@reviewPickSuggestedSemantics": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "reviewUnknownPayee": "Payment",
+  "autoCaptureTitle": "Auto-capture",
+  "autoCaptureRowOn": "On",
+  "autoCaptureRowOff": "Off",
+  "autoCaptureRowSemantics": "Auto-capture, {state}",
+  "@autoCaptureRowSemantics": {
+    "placeholders": {
+      "state": {
+        "type": "String"
+      }
+    }
+  },
+  "autoCaptureOnTitle": "Auto-capture is on",
+  "autoCaptureOffTitle": "Auto-capture is off",
+  "autoCaptureLastCapture": "Last payment captured {when}",
+  "@autoCaptureLastCapture": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "autoCaptureNever": "No payments captured yet",
+  "autoCaptureDisclosureTitle": "What the app reads",
+  "autoCaptureDisclosureBody": "To record payments for you, the app reads new notifications from your SMS app and the UPI apps listed below. It keeps only messages that contain a rupee amount, and ignores everything else, including personal chats. Everything stays on this phone: nothing is uploaded or shared.",
+  "autoCaptureLimitations": "Capture starts from the moment you turn it on. Notifications you swipe away while it is off, or that your phone's battery saver blocks, can be missed.",
+  "autoCaptureTurnOn": "Turn on auto-capture",
+  "autoCaptureManage": "Notification access settings",
+  "autoCaptureRestrictedTitle": "If Android says the setting is restricted",
+  "autoCaptureRestrictedBody": "Apps installed outside the Play Store need one extra step: open App info, tap the ⋮ menu, choose Allow restricted settings, then come back and turn auto-capture on.",
+  "autoCaptureOpenAppInfo": "Open App info",
+  "autoCaptureBatteryTitle": "Keep it running",
+  "autoCaptureBatteryOpen": "Open battery settings",
+  "oemXiaomi": "On Xiaomi, Redmi and POCO: App info → Autostart on, and Battery saver → No restrictions.",
+  "oemVivo": "On Vivo and iQOO: Battery → Background power consumption → Allow, and turn on Auto-start.",
+  "oemOppo": "On Oppo, Realme and OnePlus: App info → Battery usage → Allow background activity, and allow Auto launch.",
+  "oemSamsung": "On Samsung: App info → Battery → Unrestricted, and keep the app out of Sleeping apps.",
+  "oemOther": "Set the app's battery use to Unrestricted, so Android does not stop it in the background.",
+  "autoCaptureSourcesTitle": "Apps it reads",
+  "autoCaptureYourSmsApp": "Your SMS app",
+  "autoCaptureSourceSemantics": "{app}, {state}",
+  "@autoCaptureSourceSemantics": {
+    "placeholders": {
+      "app": {
+        "type": "String"
+      },
+      "state": {
+        "type": "String"
+      }
+    }
+  },
+  "autoCaptureSmsTitle": "Read SMS directly",
+  "autoCaptureSmsBody": "This build can read bank SMS itself, including past messages, as a backup to notifications.",
+  "autoCaptureSmsAllow": "Allow SMS access",
+  "autoCaptureSmsAllowed": "SMS access allowed",
+  "autoCaptureImport": "Import past messages",
+  "autoCaptureImportMonths": "{months, plural, =1{Last month} other{Last {months} months}}",
+  "@autoCaptureImportMonths": {
+    "placeholders": {
+      "months": {
+        "type": "int"
+      }
+    }
+  },
+  "autoCaptureImported": "{count, plural, =0{No bank messages found} =1{1 message imported} other{{count} messages imported}}",
+  "@autoCaptureImported": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "autoCaptureIosTitle": "Auto-capture on iPhone",
+  "autoCaptureIosBody": "iPhone apps can't read SMS. Setup with a Shortcuts automation arrives in a coming update; until then, share or paste bank messages into the app.",
+  "autoCaptureUnavailable": "Couldn't read the auto-capture status on this phone.",
+  "timeJustNow": "just now",
+  "timeMinutesAgo": "{minutes, plural, =1{1 minute ago} other{{minutes} minutes ago}}",
+  "@timeMinutesAgo": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "timeHoursAgo": "{hours, plural, =1{1 hour ago} other{{hours} hours ago}}",
+  "@timeHoursAgo": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "timeDaysAgo": "{days, plural, =1{yesterday} other{{days} days ago}}",
+  "@timeDaysAgo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "on": "on",
+  "off": "off",
+  "listPair": "{first}, {second}",
+  "@listPair": {
+    "description": "Two short parts of one line, joined by the locale's separator.",
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "second": {
+        "type": "String"
+      }
+    }
+  },
+  "reviewSpentSemantics": "{amount} spent, {payee}, {details}",
+  "@reviewSpentSemantics": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "payee": {
+        "type": "String"
+      },
+      "details": {
+        "type": "String"
+      }
+    }
+  },
+  "reviewMoneyInSemantics": "{amount} money in, {payee}, {details}",
+  "@reviewMoneyInSemantics": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "payee": {
+        "type": "String"
+      },
+      "details": {
+        "type": "String"
+      }
+    }
+  },
+  "autoCaptureActionFailed": "That didn't work on this phone. Try again."
 }

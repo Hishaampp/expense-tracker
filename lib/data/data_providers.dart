@@ -1,5 +1,6 @@
 import 'package:expense_tracker/data/db/app_database.dart';
 import 'package:expense_tracker/data/repositories/account_repository.dart';
+import 'package:expense_tracker/data/repositories/auto_capture_repository.dart';
 import 'package:expense_tracker/data/repositories/capture_repository.dart';
 import 'package:expense_tracker/data/repositories/category_repository.dart';
 import 'package:expense_tracker/data/repositories/settings_repository.dart';
@@ -44,6 +45,17 @@ final settingsRepositoryProvider = Provider<SettingsRepository>(
 final captureRepositoryProvider = Provider<CaptureRepository>(
   (ref) => CaptureRepository(
     ref.watch(appDatabaseProvider),
+    ref.watch(idGeneratorProvider),
+    ref.watch(appLoggerProvider),
+  ),
+);
+
+/// Duplicate checks, merging and the review inbox.
+final autoCaptureRepositoryProvider = Provider<AutoCaptureRepository>(
+  (ref) => AutoCaptureRepository(
+    ref.watch(appDatabaseProvider),
+    ref.watch(transactionRepositoryProvider),
+    ref.watch(clockProvider),
     ref.watch(idGeneratorProvider),
     ref.watch(appLoggerProvider),
   ),

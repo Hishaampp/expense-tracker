@@ -21,6 +21,12 @@ abstract final class Routes {
   /// Quick Add for the shared text held under [id].
   static String shared(String id) => '/add/shared/$id';
 
+  /// Settings → Auto-capture.
+  static const String autoCapture = '/settings/auto-capture';
+
+  /// The review inbox.
+  static const String review = '/review';
+
   /// The Unparsed messages list.
   static const String unparsed = '/unparsed';
 

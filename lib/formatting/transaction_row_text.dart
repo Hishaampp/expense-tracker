@@ -27,7 +27,8 @@ TransactionRowText describeTransaction(
   final categoryName = item.category?.name ?? l10n.uncategorised;
   final title = txn.payeeDisplay ?? txn.note ?? categoryName;
   final time = formatTime(txn.occurredAt.toLocal(), locale);
-  String withTime(String label) => label == title ? time : '$label, $time';
+  String withTime(String label) =>
+      label == title ? time : l10n.listPair(label, time);
 
   return switch (txn.kind) {
     TransactionKind.expense => (
@@ -36,7 +37,10 @@ TransactionRowText describeTransaction(
       subtitle: withTime(categoryName),
       amountText: amount,
       tone: MoneyTone.spent,
-      semanticLabel: l10n.rowSpentSemantics(amount, '$title, $categoryName'),
+      semanticLabel: l10n.rowSpentSemantics(
+        amount,
+        l10n.listPair(title, categoryName),
+      ),
     ),
     TransactionKind.income => (
       iconKey: 'income',

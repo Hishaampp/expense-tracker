@@ -43,6 +43,31 @@ void main() {
     );
   });
 
+  test('a feature never imports another feature', () {
+    final found = <String>[];
+    final features = Directory('lib/features')
+        .listSync()
+        .whereType<Directory>()
+        .map((d) => d.uri.pathSegments.where((p) => p.isNotEmpty).last);
+    for (final feature in features) {
+      found.addAll(
+        offenders(
+          'lib/features/$feature',
+          (uri) =>
+              uri.startsWith('package:expense_tracker/features/') &&
+              !uri.startsWith('package:expense_tracker/features/$feature/'),
+        ),
+      );
+    }
+    expect(
+      found,
+      isEmpty,
+      reason:
+          'Share through core/, data/, services/ or widgets/, or '
+          'navigate by route:\n${found.join('\n')}',
+    );
+  });
+
   test('core/ value types import no Flutter UI', () {
     final found = offenders(
       'lib/core',

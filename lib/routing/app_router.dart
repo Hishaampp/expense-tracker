@@ -1,6 +1,8 @@
 import 'package:expense_tracker/features/activity/presentation/activity_screen.dart';
+import 'package:expense_tracker/features/capture/presentation/capture_settings_screen.dart';
 import 'package:expense_tracker/features/home/presentation/home_screen.dart';
 import 'package:expense_tracker/features/quick_add/presentation/quick_add_screen.dart';
+import 'package:expense_tracker/features/review/presentation/review_screen.dart';
 import 'package:expense_tracker/features/rooms/presentation/rooms_screen.dart';
 import 'package:expense_tracker/features/settings/presentation/settings_screen.dart';
 import 'package:expense_tracker/features/unparsed/presentation/unparsed_screen.dart';
@@ -50,6 +52,14 @@ final routerProvider = Provider<GoRouter>((ref) {
             ),
           ),
         ),
+      ),
+      GoRoute(
+        path: Routes.autoCapture,
+        builder: (context, state) => const CaptureSettingsScreen(),
+      ),
+      GoRoute(
+        path: Routes.review,
+        builder: (context, state) => const ReviewScreen(),
       ),
       GoRoute(
         path: Routes.unparsed,
