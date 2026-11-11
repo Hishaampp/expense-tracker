@@ -2,9 +2,9 @@
 # Merged-manifest gates (spec §6.2, §13). Fails if:
 #   1. the `play` flavor (any build type) merges READ_SMS or RECEIVE_SMS —
 #      Google Play allows SMS permissions only for default SMS handlers;
-#   2. any RELEASE build (either flavor) merges INTERNET — the app promises
-#      that no data leaves the phone. (Flutter's debug/profile manifests add
-#      INTERNET for hot reload; those are dev-only and not checked.)
+#   2. any RELEASE build (either flavor) allows cleartext (http://) traffic.
+#      Since Phase 9 the app may reach the network, but only over TLS, and
+#      only its Supabase project (see test/policy/no_network_imports_test).
 #   3. the `sideload` flavor does NOT carry RECEIVE_SMS (guards the flavor
 #      split itself, so gate 1 can't pass merely because nobody declares SMS).
 set -euo pipefail
@@ -38,8 +38,8 @@ for v in playDebug playRelease; do
 done
 for v in playRelease sideloadRelease; do
   m=$(manifest "$v")
-  if has_perm "$m" INTERNET; then
-    echo "::error::$v merges INTERNET. Release builds must not have network access (spec §13). Find the plugin that adds it: grep the manifest-merger report."; fail=1
+  if grep -q 'android:usesCleartextTraffic="true"' "$m"; then
+    echo "::error::$v allows cleartext traffic. Release builds must use TLS only."; fail=1
   fi
 done
 if ! has_perm "$(manifest sideloadRelease)" RECEIVE_SMS; then

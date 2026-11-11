@@ -128,3 +128,10 @@ bool reducesMotion(BuildContext context) {
 Duration resolveMotion(BuildContext context, Duration full) {
   return reducesMotion(context) ? Duration.zero : full;
 }
+
+/// How far an onboarding step slides as it changes, as a share of its
+/// width.
+const double stepSlideShare = 0.08;
+
+/// The size an icon pops in from, as a share of its full size.
+const double popStartScale = 0.6;

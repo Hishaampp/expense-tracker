@@ -68,6 +68,19 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>login-callback</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>expensetracker</string>
+			</array>
+		</dict>
+	</array>
+	<key>FlutterDeepLinkingEnabled</key>
+	<false/>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Face ID keeps your expenses private when the app lock is on.</string>
 </dict>

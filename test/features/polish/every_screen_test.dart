@@ -21,6 +21,7 @@ void main() {
     Routes.notifications,
     Routes.payees,
     Routes.backup,
+    Routes.account,
     Routes.review,
     Routes.unparsed,
     Routes.autoCapture,

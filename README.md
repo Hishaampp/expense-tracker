@@ -77,4 +77,5 @@ motion live only in `lib/theme/`.
 | 5 | Rooms | built; needs a manual trip and wedding walkthrough |
 | 6 | Budgets & Stats | built; needs a check of real alerts and the Sunday review on a phone |
 | 7 | Learning & polish | built; needs a week of real use to check the learning |
-| 8 | Privacy, backup, store readiness | |
+| 8 | Privacy, backup, store readiness | built; final name and a release-build design review still open |
+| 9 | Optional account and end-to-end encrypted sync (Supabase) | email sign-in built; needs the Supabase setup in docs/PHASE_9_PLAN.md |

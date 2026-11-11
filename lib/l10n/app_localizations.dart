@@ -2766,13 +2766,13 @@ abstract class AppLocalizations {
   /// No description provided for @onboardPrivacyNoAccount.
   ///
   /// In en, this message translates to:
-  /// **'No account, no sign-up'**
+  /// **'No account needed'**
   String get onboardPrivacyNoAccount;
 
   /// No description provided for @onboardPrivacyNoInternet.
   ///
   /// In en, this message translates to:
-  /// **'Nothing is sent to the internet'**
+  /// **'Nothing leaves your phone unless you turn on sync, and then it\'s locked first'**
   String get onboardPrivacyNoInternet;
 
   /// No description provided for @onboardPrivacyNoAds.
@@ -3115,6 +3115,300 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'CSV exported'**
   String get backupCsvReady;
+
+  /// No description provided for @accountTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Account & sync'**
+  String get accountTitle;
+
+  /// No description provided for @accountIntroTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep your data on every phone'**
+  String get accountIntroTitle;
+
+  /// No description provided for @accountIntroBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in to sync your expenses between phones and get them back on a new one. Everything is locked on this phone before it\'s sent, so no one else, not even us, can read it. Without an account the app works just the same.'**
+  String get accountIntroBody;
+
+  /// No description provided for @accountEmailLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get accountEmailLabel;
+
+  /// No description provided for @accountSendCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Send code'**
+  String get accountSendCode;
+
+  /// No description provided for @accountCodeSent.
+  ///
+  /// In en, this message translates to:
+  /// **'We sent an email to {email}. On this phone, tap the link in it, or type the code from it here.'**
+  String accountCodeSent(String email);
+
+  /// No description provided for @accountCodeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Code from the email'**
+  String get accountCodeLabel;
+
+  /// No description provided for @accountVerify.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get accountVerify;
+
+  /// No description provided for @accountChangeEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Use another email'**
+  String get accountChangeEmail;
+
+  /// No description provided for @accountEmailInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter an email address'**
+  String get accountEmailInvalid;
+
+  /// No description provided for @accountProblemCode.
+  ///
+  /// In en, this message translates to:
+  /// **'That code didn\'t work. Check it, or send a new one.'**
+  String get accountProblemCode;
+
+  /// No description provided for @accountProblemTooMany.
+  ///
+  /// In en, this message translates to:
+  /// **'Too many tries. Wait a minute and try again.'**
+  String get accountProblemTooMany;
+
+  /// No description provided for @accountProblemOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'Can\'t reach the server. Check your internet and try again.'**
+  String get accountProblemOffline;
+
+  /// No description provided for @accountNewKeyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Write down your recovery code'**
+  String get accountNewKeyTitle;
+
+  /// No description provided for @accountNewKeyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ll need it to see your data on another phone. Keep it somewhere safe, like on paper. No one can recover it for you.'**
+  String get accountNewKeyBody;
+
+  /// No description provided for @accountNewKeySaved.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'ve written it down'**
+  String get accountNewKeySaved;
+
+  /// No description provided for @accountNeedsCodeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your recovery code'**
+  String get accountNeedsCodeTitle;
+
+  /// No description provided for @accountNeedsCodeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This account already has data from another phone. Enter the recovery code you wrote down when you set up sync.'**
+  String get accountNeedsCodeBody;
+
+  /// No description provided for @accountRecoveryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Recovery code'**
+  String get accountRecoveryLabel;
+
+  /// No description provided for @accountRecoveryWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'That code doesn\'t open this account\'s data. Check it and try again.'**
+  String get accountRecoveryWrong;
+
+  /// No description provided for @accountUnlock.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock my data'**
+  String get accountUnlock;
+
+  /// No description provided for @accountSignedInAs.
+  ///
+  /// In en, this message translates to:
+  /// **'Signed in as {email}'**
+  String accountSignedInAs(String email);
+
+  /// No description provided for @accountLastSynced.
+  ///
+  /// In en, this message translates to:
+  /// **'Last synced {time}'**
+  String accountLastSynced(String time);
+
+  /// No description provided for @accountNeverSynced.
+  ///
+  /// In en, this message translates to:
+  /// **'Not synced yet'**
+  String get accountNeverSynced;
+
+  /// No description provided for @accountOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline: changes will sync when you\'re back online.'**
+  String get accountOffline;
+
+  /// No description provided for @accountSyncNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync now'**
+  String get accountSyncNow;
+
+  /// No description provided for @accountShowCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Show recovery code'**
+  String get accountShowCode;
+
+  /// No description provided for @accountShowCodeReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm it\'s you to see the recovery code'**
+  String get accountShowCodeReason;
+
+  /// No description provided for @accountSignOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get accountSignOut;
+
+  /// No description provided for @accountSignedOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Signed out. Your data stays on this phone.'**
+  String get accountSignedOut;
+
+  /// No description provided for @accountDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account'**
+  String get accountDelete;
+
+  /// No description provided for @accountDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete your account?'**
+  String get accountDeleteTitle;
+
+  /// No description provided for @accountDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your account and its cloud copy are deleted for good. The data on this phone stays.'**
+  String get accountDeleteBody;
+
+  /// No description provided for @accountDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Account deleted. Your data stays on this phone.'**
+  String get accountDeleted;
+
+  /// No description provided for @accountCopy.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy'**
+  String get accountCopy;
+
+  /// No description provided for @accountCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Recovery code copied'**
+  String get accountCopied;
+
+  /// No description provided for @settingsAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Account & sync'**
+  String get settingsAccount;
+
+  /// No description provided for @settingsAccountOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Off'**
+  String get settingsAccountOff;
+
+  /// No description provided for @settingsAccountSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Account and sync, {value}'**
+  String settingsAccountSemantics(String value);
+
+  /// No description provided for @accountContinueApple.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Apple'**
+  String get accountContinueApple;
+
+  /// No description provided for @accountContinueGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Google'**
+  String get accountContinueGoogle;
+
+  /// No description provided for @accountOrEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Or use your email'**
+  String get accountOrEmail;
+
+  /// No description provided for @onboardPaydayTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'When does your salary come in?'**
+  String get onboardPaydayTitle;
+
+  /// No description provided for @onboardPaydayBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your month will run from one salary to the next, so the numbers match your real month. You can change it later in Settings.'**
+  String get onboardPaydayBody;
+
+  /// No description provided for @onboardPaydayFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'1st of the month'**
+  String get onboardPaydayFirst;
+
+  /// No description provided for @onboardPaydayOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Another day'**
+  String get onboardPaydayOther;
+
+  /// No description provided for @onboardSyncTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep your data safe if you change phones'**
+  String get onboardSyncTitle;
+
+  /// No description provided for @onboardSyncBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional. Sign in to sync between phones. Your data is locked on this phone before it\'s sent, so no one else can read it.'**
+  String get onboardSyncBody;
+
+  /// No description provided for @onboardSyncEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Use email instead'**
+  String get onboardSyncEmail;
 }
 
 class _AppLocalizationsDelegate

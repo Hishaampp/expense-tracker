@@ -1448,8 +1448,8 @@
   "onboardBudgetTitle": "Know what's safe to spend",
   "onboardBudgetBody": "Set a monthly budget and see each day what you can still spend, with a nudge before you run out.",
   "onboardPrivacyTitle": "Your money stays on your phone",
-  "onboardPrivacyNoAccount": "No account, no sign-up",
-  "onboardPrivacyNoInternet": "Nothing is sent to the internet",
+  "onboardPrivacyNoAccount": "No account needed",
+  "onboardPrivacyNoInternet": "Nothing leaves your phone unless you turn on sync, and then it's locked first",
   "onboardPrivacyNoAds": "No ads, and no one reads your messages",
   "onboardSetupTitle": "Turn on auto-capture",
   "onboardSetupBody": "Takes about two minutes. You can also do it later from Settings.",
@@ -1552,5 +1552,82 @@
       }
     }
   },
-  "backupCsvReady": "CSV exported"
+  "backupCsvReady": "CSV exported",
+  "accountTitle": "Account & sync",
+  "accountIntroTitle": "Keep your data on every phone",
+  "accountIntroBody": "Sign in to sync your expenses between phones and get them back on a new one. Everything is locked on this phone before it's sent, so no one else, not even us, can read it. Without an account the app works just the same.",
+  "accountEmailLabel": "Email",
+  "accountSendCode": "Send code",
+  "accountCodeSent": "We sent an email to {email}. On this phone, tap the link in it, or type the code from it here.",
+  "@accountCodeSent": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "accountCodeLabel": "Code from the email",
+  "accountVerify": "Sign in",
+  "accountChangeEmail": "Use another email",
+  "accountEmailInvalid": "Enter an email address",
+  "accountProblemCode": "That code didn't work. Check it, or send a new one.",
+  "accountProblemTooMany": "Too many tries. Wait a minute and try again.",
+  "accountProblemOffline": "Can't reach the server. Check your internet and try again.",
+  "accountNewKeyTitle": "Write down your recovery code",
+  "accountNewKeyBody": "You'll need it to see your data on another phone. Keep it somewhere safe, like on paper. No one can recover it for you.",
+  "accountNewKeySaved": "I've written it down",
+  "accountNeedsCodeTitle": "Enter your recovery code",
+  "accountNeedsCodeBody": "This account already has data from another phone. Enter the recovery code you wrote down when you set up sync.",
+  "accountRecoveryLabel": "Recovery code",
+  "accountRecoveryWrong": "That code doesn't open this account's data. Check it and try again.",
+  "accountUnlock": "Unlock my data",
+  "accountSignedInAs": "Signed in as {email}",
+  "@accountSignedInAs": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "accountLastSynced": "Last synced {time}",
+  "@accountLastSynced": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "accountNeverSynced": "Not synced yet",
+  "accountOffline": "Offline: changes will sync when you're back online.",
+  "accountSyncNow": "Sync now",
+  "accountShowCode": "Show recovery code",
+  "accountShowCodeReason": "Confirm it's you to see the recovery code",
+  "accountSignOut": "Sign out",
+  "accountSignedOut": "Signed out. Your data stays on this phone.",
+  "accountDelete": "Delete account",
+  "accountDeleteTitle": "Delete your account?",
+  "accountDeleteBody": "Your account and its cloud copy are deleted for good. The data on this phone stays.",
+  "accountDeleted": "Account deleted. Your data stays on this phone.",
+  "accountCopy": "Copy",
+  "accountCopied": "Recovery code copied",
+  "settingsAccount": "Account & sync",
+  "settingsAccountOff": "Off",
+  "settingsAccountSemantics": "Account and sync, {value}",
+  "@settingsAccountSemantics": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "accountContinueApple": "Continue with Apple",
+  "accountContinueGoogle": "Continue with Google",
+  "accountOrEmail": "Or use your email",
+  "onboardPaydayTitle": "When does your salary come in?",
+  "onboardPaydayBody": "Your month will run from one salary to the next, so the numbers match your real month. You can change it later in Settings.",
+  "onboardPaydayFirst": "1st of the month",
+  "onboardPaydayOther": "Another day",
+  "onboardSyncTitle": "Keep your data safe if you change phones",
+  "onboardSyncBody": "Optional. Sign in to sync between phones. Your data is locked on this phone before it's sent, so no one else can read it.",
+  "onboardSyncEmail": "Use email instead"
 }

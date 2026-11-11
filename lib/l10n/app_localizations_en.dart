@@ -1759,10 +1759,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboardPrivacyTitle => 'Your money stays on your phone';
 
   @override
-  String get onboardPrivacyNoAccount => 'No account, no sign-up';
+  String get onboardPrivacyNoAccount => 'No account needed';
 
   @override
-  String get onboardPrivacyNoInternet => 'Nothing is sent to the internet';
+  String get onboardPrivacyNoInternet =>
+      'Nothing leaves your phone unless you turn on sync, and then it\'s locked first';
 
   @override
   String get onboardPrivacyNoAds => 'No ads, and no one reads your messages';
@@ -1963,4 +1964,172 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get backupCsvReady => 'CSV exported';
+
+  @override
+  String get accountTitle => 'Account & sync';
+
+  @override
+  String get accountIntroTitle => 'Keep your data on every phone';
+
+  @override
+  String get accountIntroBody =>
+      'Sign in to sync your expenses between phones and get them back on a new one. Everything is locked on this phone before it\'s sent, so no one else, not even us, can read it. Without an account the app works just the same.';
+
+  @override
+  String get accountEmailLabel => 'Email';
+
+  @override
+  String get accountSendCode => 'Send code';
+
+  @override
+  String accountCodeSent(String email) {
+    return 'We sent an email to $email. On this phone, tap the link in it, or type the code from it here.';
+  }
+
+  @override
+  String get accountCodeLabel => 'Code from the email';
+
+  @override
+  String get accountVerify => 'Sign in';
+
+  @override
+  String get accountChangeEmail => 'Use another email';
+
+  @override
+  String get accountEmailInvalid => 'Enter an email address';
+
+  @override
+  String get accountProblemCode =>
+      'That code didn\'t work. Check it, or send a new one.';
+
+  @override
+  String get accountProblemTooMany =>
+      'Too many tries. Wait a minute and try again.';
+
+  @override
+  String get accountProblemOffline =>
+      'Can\'t reach the server. Check your internet and try again.';
+
+  @override
+  String get accountNewKeyTitle => 'Write down your recovery code';
+
+  @override
+  String get accountNewKeyBody =>
+      'You\'ll need it to see your data on another phone. Keep it somewhere safe, like on paper. No one can recover it for you.';
+
+  @override
+  String get accountNewKeySaved => 'I\'ve written it down';
+
+  @override
+  String get accountNeedsCodeTitle => 'Enter your recovery code';
+
+  @override
+  String get accountNeedsCodeBody =>
+      'This account already has data from another phone. Enter the recovery code you wrote down when you set up sync.';
+
+  @override
+  String get accountRecoveryLabel => 'Recovery code';
+
+  @override
+  String get accountRecoveryWrong =>
+      'That code doesn\'t open this account\'s data. Check it and try again.';
+
+  @override
+  String get accountUnlock => 'Unlock my data';
+
+  @override
+  String accountSignedInAs(String email) {
+    return 'Signed in as $email';
+  }
+
+  @override
+  String accountLastSynced(String time) {
+    return 'Last synced $time';
+  }
+
+  @override
+  String get accountNeverSynced => 'Not synced yet';
+
+  @override
+  String get accountOffline =>
+      'Offline: changes will sync when you\'re back online.';
+
+  @override
+  String get accountSyncNow => 'Sync now';
+
+  @override
+  String get accountShowCode => 'Show recovery code';
+
+  @override
+  String get accountShowCodeReason =>
+      'Confirm it\'s you to see the recovery code';
+
+  @override
+  String get accountSignOut => 'Sign out';
+
+  @override
+  String get accountSignedOut => 'Signed out. Your data stays on this phone.';
+
+  @override
+  String get accountDelete => 'Delete account';
+
+  @override
+  String get accountDeleteTitle => 'Delete your account?';
+
+  @override
+  String get accountDeleteBody =>
+      'Your account and its cloud copy are deleted for good. The data on this phone stays.';
+
+  @override
+  String get accountDeleted =>
+      'Account deleted. Your data stays on this phone.';
+
+  @override
+  String get accountCopy => 'Copy';
+
+  @override
+  String get accountCopied => 'Recovery code copied';
+
+  @override
+  String get settingsAccount => 'Account & sync';
+
+  @override
+  String get settingsAccountOff => 'Off';
+
+  @override
+  String settingsAccountSemantics(String value) {
+    return 'Account and sync, $value';
+  }
+
+  @override
+  String get accountContinueApple => 'Continue with Apple';
+
+  @override
+  String get accountContinueGoogle => 'Continue with Google';
+
+  @override
+  String get accountOrEmail => 'Or use your email';
+
+  @override
+  String get onboardPaydayTitle => 'When does your salary come in?';
+
+  @override
+  String get onboardPaydayBody =>
+      'Your month will run from one salary to the next, so the numbers match your real month. You can change it later in Settings.';
+
+  @override
+  String get onboardPaydayFirst => '1st of the month';
+
+  @override
+  String get onboardPaydayOther => 'Another day';
+
+  @override
+  String get onboardSyncTitle => 'Keep your data safe if you change phones';
+
+  @override
+  String get onboardSyncBody =>
+      'Optional. Sign in to sync between phones. Your data is locked on this phone before it\'s sent, so no one else can read it.';
+
+  @override
+  String get onboardSyncEmail => 'Use email instead';
 }

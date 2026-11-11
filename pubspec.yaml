@@ -26,6 +26,7 @@ dependencies:
   flutter_riverpod: ^3.5.0
   flutter_secure_storage: ^11.2.0
   go_router: ^18.1.4
+  http: ^1.6.0
   intl: ^0.20.3
   local_auth: ^3.0.2
   meta: ^1.19.0
@@ -33,6 +34,7 @@ dependencies:
   path_provider: ^2.1.6
   share_plus: ^13.3.1
   sqlite3: ^3.9.1
+  supabase_flutter: ^2.18.3
   timezone: ^0.11.2
   txn_parser: ^0.0.0
   uuid: ^4.6.0

@@ -4,7 +4,6 @@ import 'package:expense_tracker/core/models/appearance_mode.dart';
 import 'package:expense_tracker/core/models/retention.dart';
 import 'package:expense_tracker/features/settings/presentation/settings_notifier.dart';
 import 'package:expense_tracker/features/settings/presentation/widgets/appearance_sheet.dart';
-import 'package:expense_tracker/features/settings/presentation/widgets/month_start_day_sheet.dart';
 import 'package:expense_tracker/features/settings/presentation/widgets/settings_group.dart';
 import 'package:expense_tracker/formatting/money_format.dart';
 import 'package:expense_tracker/l10n/app_localizations.dart';
@@ -16,6 +15,7 @@ import 'package:expense_tracker/widgets/error_state_view.dart';
 import 'package:expense_tracker/widgets/icon_tile.dart';
 import 'package:expense_tracker/widgets/info_row.dart';
 import 'package:expense_tracker/widgets/large_title_page.dart';
+import 'package:expense_tracker/widgets/month_start_day_sheet.dart';
 import 'package:expense_tracker/widgets/option_sheet.dart';
 import 'package:expense_tracker/widgets/pulsing_placeholder.dart';
 import 'package:expense_tracker/widgets/sheet_frame.dart';
@@ -296,6 +296,20 @@ class SettingsScreen extends ConsumerWidget {
                 ),
                 onTap: () =>
                     unawaited(_pickRetention(context, ref, state.retention)),
+              ),
+              InfoRow(
+                leading: IconTile(
+                  icon: Icons.cloud_sync_rounded,
+                  color: tiles.violet,
+                ),
+                title: l10n.settingsAccount,
+                trailingText: state.syncEmail ?? l10n.settingsAccountOff,
+                trailingIsAmount: false,
+                showChevron: true,
+                semanticLabel: l10n.settingsAccountSemantics(
+                  state.syncEmail ?? l10n.settingsAccountOff,
+                ),
+                onTap: () => unawaited(context.push(Routes.account)),
               ),
               InfoRow(
                 leading: IconTile(

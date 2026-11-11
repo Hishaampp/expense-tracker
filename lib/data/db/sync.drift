@@ -1,0 +1,152 @@
+-- Phase 9: every change to a synced table, made on this phone while sync is
+-- on, queues its record for upload. Changes applied from the server set the
+-- `applying` flag and are not queued again. Message text tables
+-- (raw_captures, transaction_sources, unparsed) are never synced.
+import 'tables.dart';
+
+CREATE TRIGGER sync_accounts_insert AFTER INSERT ON accounts
+  WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'enabled') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'applying')
+BEGIN
+  INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at)
+  VALUES ('accounts', NEW.id, CAST((julianday('now') - 2440587.5) * 86400000 AS INTEGER));
+END;
+
+CREATE TRIGGER sync_accounts_update AFTER UPDATE ON accounts
+  WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'enabled') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'applying')
+BEGIN
+  INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at)
+  VALUES ('accounts', NEW.id, CAST((julianday('now') - 2440587.5) * 86400000 AS INTEGER));
+END;
+
+CREATE TRIGGER sync_accounts_delete AFTER DELETE ON accounts
+  WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'enabled') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'applying')
+BEGIN
+  INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at)
+  VALUES ('accounts', OLD.id, CAST((julianday('now') - 2440587.5) * 86400000 AS INTEGER));
+END;
+
+CREATE TRIGGER sync_categories_insert AFTER INSERT ON categories
+  WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'enabled') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'applying')
+BEGIN
+  INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at)
+  VALUES ('categories', NEW.id, CAST((julianday('now') - 2440587.5) * 86400000 AS INTEGER));
+END;
+
+CREATE TRIGGER sync_categories_update AFTER UPDATE ON categories
+  WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'enabled') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'applying')
+BEGIN
+  INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at)
+  VALUES ('categories', NEW.id, CAST((julianday('now') - 2440587.5) * 86400000 AS INTEGER));
+END;
+
+CREATE TRIGGER sync_categories_delete AFTER DELETE ON categories
+  WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'enabled') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'applying')
+BEGIN
+  INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at)
+  VALUES ('categories', OLD.id, CAST((julianday('now') - 2440587.5) * 86400000 AS INTEGER));
+END;
+
+CREATE TRIGGER sync_rooms_insert AFTER INSERT ON rooms
+  WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'enabled') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'applying')
+BEGIN
+  INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at)
+  VALUES ('rooms', NEW.id, CAST((julianday('now') - 2440587.5) * 86400000 AS INTEGER));
+END;
+
+CREATE TRIGGER sync_rooms_update AFTER UPDATE ON rooms
+  WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'enabled') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'applying')
+BEGIN
+  INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at)
+  VALUES ('rooms', NEW.id, CAST((julianday('now') - 2440587.5) * 86400000 AS INTEGER));
+END;
+
+CREATE TRIGGER sync_rooms_delete AFTER DELETE ON rooms
+  WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'enabled') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'applying')
+BEGIN
+  INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at)
+  VALUES ('rooms', OLD.id, CAST((julianday('now') - 2440587.5) * 86400000 AS INTEGER));
+END;
+
+CREATE TRIGGER sync_transactions_insert AFTER INSERT ON transactions
+  WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'enabled') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'applying')
+BEGIN
+  INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at)
+  VALUES ('transactions', NEW.id, CAST((julianday('now') - 2440587.5) * 86400000 AS INTEGER));
+END;
+
+CREATE TRIGGER sync_transactions_update AFTER UPDATE ON transactions
+  WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'enabled') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'applying')
+BEGIN
+  INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at)
+  VALUES ('transactions', NEW.id, CAST((julianday('now') - 2440587.5) * 86400000 AS INTEGER));
+END;
+
+CREATE TRIGGER sync_transactions_delete AFTER DELETE ON transactions
+  WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'enabled') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'applying')
+BEGIN
+  INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at)
+  VALUES ('transactions', OLD.id, CAST((julianday('now') - 2440587.5) * 86400000 AS INTEGER));
+END;
+
+CREATE TRIGGER sync_budgets_insert AFTER INSERT ON budgets
+  WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'enabled') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'applying')
+BEGIN
+  INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at)
+  VALUES ('budgets', NEW.id, CAST((julianday('now') - 2440587.5) * 86400000 AS INTEGER));
+END;
+
+CREATE TRIGGER sync_budgets_update AFTER UPDATE ON budgets
+  WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'enabled') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'applying')
+BEGIN
+  INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at)
+  VALUES ('budgets', NEW.id, CAST((julianday('now') - 2440587.5) * 86400000 AS INTEGER));
+END;
+
+CREATE TRIGGER sync_budgets_delete AFTER DELETE ON budgets
+  WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'enabled') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'applying')
+BEGIN
+  INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at)
+  VALUES ('budgets', OLD.id, CAST((julianday('now') - 2440587.5) * 86400000 AS INTEGER));
+END;
+
+CREATE TRIGGER sync_payee_rules_insert AFTER INSERT ON payee_rules
+  WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'enabled') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'applying')
+BEGIN
+  INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at)
+  VALUES ('payee_rules', NEW.payee_key, CAST((julianday('now') - 2440587.5) * 86400000 AS INTEGER));
+END;
+
+CREATE TRIGGER sync_payee_rules_update AFTER UPDATE ON payee_rules
+  WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'enabled') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'applying')
+BEGIN
+  INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at)
+  VALUES ('payee_rules', NEW.payee_key, CAST((julianday('now') - 2440587.5) * 86400000 AS INTEGER));
+END;
+
+CREATE TRIGGER sync_payee_rules_delete AFTER DELETE ON payee_rules
+  WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'enabled') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'applying')
+BEGIN
+  INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at)
+  VALUES ('payee_rules', OLD.payee_key, CAST((julianday('now') - 2440587.5) * 86400000 AS INTEGER));
+END;
+
+CREATE TRIGGER sync_settings_insert AFTER INSERT ON settings
+  WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'enabled') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'applying') AND NEW."key" IN ('month_start_day', 'watch_category')
+BEGIN
+  INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at)
+  VALUES ('settings', NEW.key, CAST((julianday('now') - 2440587.5) * 86400000 AS INTEGER));
+END;
+
+CREATE TRIGGER sync_settings_update AFTER UPDATE ON settings
+  WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'enabled') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'applying') AND NEW."key" IN ('month_start_day', 'watch_category')
+BEGIN
+  INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at)
+  VALUES ('settings', NEW.key, CAST((julianday('now') - 2440587.5) * 86400000 AS INTEGER));
+END;
+
+CREATE TRIGGER sync_settings_delete AFTER DELETE ON settings
+  WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'enabled') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = 'applying') AND OLD."key" IN ('month_start_day', 'watch_category')
+BEGIN
+  INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at)
+  VALUES ('settings', OLD.key, CAST((julianday('now') - 2440587.5) * 86400000 AS INTEGER));
+END;

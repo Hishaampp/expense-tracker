@@ -6,6 +6,7 @@ import 'package:expense_tracker/core/result.dart';
 import 'package:expense_tracker/data/capture/capture_providers.dart';
 import 'package:expense_tracker/data/data_providers.dart';
 import 'package:expense_tracker/data/query_providers.dart';
+import 'package:expense_tracker/data/sync/sync_controller.dart';
 import 'package:expense_tracker/services/service_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meta/meta.dart';
@@ -22,6 +23,7 @@ final class SettingsState {
     this.monthlyBudget,
     this.appLock = false,
     this.retention = RawTextRetention.days30,
+    this.syncEmail,
   });
 
   /// The day of the month a budgeting month starts on.
@@ -45,6 +47,9 @@ final class SettingsState {
 
   /// How long original message text is kept.
   final RawTextRetention retention;
+
+  /// The account syncing this phone, or null when sync is off.
+  final String? syncEmail;
 }
 
 /// The Settings view model over the live settings.
@@ -60,6 +65,12 @@ class SettingsNotifier extends AsyncNotifier<SettingsState> {
       monthlyBudget: ref.watch(budgetPlanProvider).value?.monthly,
       appLock: ref.watch(appLockProvider).value ?? false,
       retention: ref.watch(retentionProvider).value ?? RawTextRetention.days30,
+      syncEmail: switch (ref.watch(syncControllerProvider).value) {
+        SyncOn(:final email) ||
+        SyncNewKey(:final email) ||
+        SyncNeedsCode(:final email) => email,
+        _ => null,
+      },
     );
   }
 

@@ -1,3 +1,4 @@
+import 'package:drift/drift.dart' show countAll;
 import 'package:expense_tracker/core/models/account.dart';
 import 'package:expense_tracker/core/models/appearance_mode.dart';
 import 'package:expense_tracker/core/models/budget_plan.dart';
@@ -146,3 +147,11 @@ final unreadNoticesProvider = StreamProvider<int>(
 final payeeBookProvider = StreamProvider<List<PayeeEntry>>(
   (ref) => ref.watch(payeeRepositoryProvider).watchBook(),
 );
+
+/// How many local changes wait to be synced. Live.
+final pendingSyncProvider = StreamProvider<int>((ref) {
+  final db = ref.watch(appDatabaseProvider);
+  final count = countAll();
+  final query = db.selectOnly(db.syncOutbox)..addColumns([count]);
+  return query.watchSingle().map((row) => row.read(count) ?? 0);
+});
