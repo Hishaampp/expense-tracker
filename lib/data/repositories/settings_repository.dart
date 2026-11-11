@@ -21,6 +21,23 @@ class SettingsRepository {
   static const String _weeklyReviewKey = 'weekly_review';
   static const String _watchCategoryKey = 'watch_category';
   static const String _weeklySinceKey = 'weekly_review_since';
+  static const String _onboardedKey = 'onboarded';
+
+  /// Whether the first-launch welcome is done: it was finished, or the
+  /// app already holds transactions from before it existed.
+  Future<bool> isOnboarded() async {
+    final setting = await (_db.select(
+      _db.settings,
+    )..where((s) => s.key.equals(_onboardedKey))).getSingleOrNull();
+    if (setting != null) return true;
+    final any = await (_db.select(_db.transactions)..limit(1)).get();
+    return any.isNotEmpty;
+  }
+
+  /// Records that the first-launch welcome is done.
+  @useResult
+  Future<Result<bool, StoreFailure>> markOnboarded() =>
+      _put('settings.onboarded', _onboardedKey, 'yes', true);
 
   /// When the weekly review was first scheduled, or null.
   Future<DateTime?> weeklyReviewSince() async {

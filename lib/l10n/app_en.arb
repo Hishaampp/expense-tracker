@@ -965,7 +965,6 @@
     }
   },
   "statsTitle": "Stats",
-  "statsWhereItWent": "Where it went",
   "statsDonutSemantics": "Spending by category, {amount} in all. The categories are listed below.",
   "@statsDonutSemantics": {
     "placeholders": {
@@ -1145,7 +1144,6 @@
     }
   },
   "weeklyWatchCleared": "Not watching a category",
-  "weeklyWatchMore": "More",
   "notifyAlertsChannel": "Budget alerts",
   "notifyAlertsChannelInfo": "When a budget is nearly or fully used",
   "notifyWeeklyChannel": "Weekly review",
@@ -1286,5 +1284,207 @@
       }
     }
   },
-  "noticesKeptFor": "Kept for 60 days."
+  "noticesKeptFor": "Kept for 60 days.",
+  "reviewConfirmedLearned": "{payee} will always go to {category}",
+  "@reviewConfirmedLearned": {
+    "placeholders": {
+      "payee": {
+        "type": "String"
+      },
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "reviewConfirmedLearnedMore": "{payee} will always go to {category}. {count, plural, =1{1 more payment} other{{count} more payments}} from them confirmed too.",
+  "@reviewConfirmedLearnedMore": {
+    "placeholders": {
+      "payee": {
+        "type": "String"
+      },
+      "category": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reviewConfirmedMany": "{count, plural, =1{1 payment} other{{count} payments}} confirmed as {category}",
+  "@reviewConfirmedMany": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "reviewLearn": "Always use this category for {payee}",
+  "@reviewLearn": {
+    "placeholders": {
+      "payee": {
+        "type": "String"
+      }
+    }
+  },
+  "reviewSelect": "Select payments",
+  "reviewSelectStop": "Stop selecting",
+  "reviewSelectedCount": "{count, plural, =0{Tap payments to select them} =1{1 selected} other{{count} selected}}",
+  "@reviewSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reviewChooseCategory": "Choose category",
+  "payeesTitle": "Payees & rules",
+  "payeesHelp": "Name a payee once and teach it a category or a Room. New payments from them follow it.",
+  "payeesEmptyTitle": "No payees yet",
+  "payeesEmptyBody": "Payees appear here once captured payments arrive.",
+  "payeesNoRule": "No rule",
+  "payeesRuleCategory": "Always {category}",
+  "@payeesRuleCategory": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "payeesRuleRoom": "Goes to {room}",
+  "@payeesRuleRoom": {
+    "placeholders": {
+      "room": {
+        "type": "String"
+      }
+    }
+  },
+  "payeesCount": "{count, plural, =1{1 payment} other{{count} payments}}",
+  "@payeesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "payeesRowSemantics": "{name}. {rule}. {payments}. Edit",
+  "@payeesRowSemantics": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "rule": {
+        "type": "String"
+      },
+      "payments": {
+        "type": "String"
+      }
+    }
+  },
+  "payeesNameLabel": "Name",
+  "payeesNameHint": "For example, Sharma Dairy",
+  "payeesCategory": "Category",
+  "payeesAskEachTime": "Ask each time",
+  "payeesRoom": "Room",
+  "payeesNoRoom": "No Room",
+  "payeesSave": "Save",
+  "payeesForget": "Forget this payee's rule",
+  "payeesSaved": "Saved for {name}",
+  "@payeesSaved": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "payeesForgotten": "Rule removed",
+  "payeesPickCategory": "Always use",
+  "payeesPickRoom": "Always add to",
+  "settingsPayees": "Payees & rules",
+  "settingsPayeesSemantics": "Payees and rules",
+  "activitySearchHint": "Search payee, note or amount",
+  "activityClearSearch": "Clear search",
+  "activityFilterCategory": "Category",
+  "activityFilterRoom": "Room",
+  "activityFilterAccount": "Account",
+  "activityFilterKind": "Type",
+  "activityFilterSource": "Source",
+  "activityAny": "Any",
+  "activityFilterSemantics": "{name}: {value}",
+  "@activityFilterSemantics": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "kindSpent": "Spent",
+  "kindMoneyIn": "Money in",
+  "kindTransfer": "Transfer",
+  "kindRefund": "Refund",
+  "sourceManual": "Typed in",
+  "sourceAuto": "Captured",
+  "activityNoMatchTitle": "Nothing matches",
+  "activityNoMatchBody": "Try another word, or clear the filters.",
+  "activityClearFilters": "Clear filters",
+  "activitySearchingAll": "searching the last 12 months",
+  "activityResults": "{count, plural, =1{1 result} other{{count} results}}",
+  "@activityResults": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "onboardCaptureTitle": "Every payment, written down for you",
+  "onboardCaptureBody": "UPI, card and bank payments are read from your bank's messages and notifications. You just pick a category, or let the app learn it.",
+  "onboardRoomsTitle": "Rooms for trips and weddings",
+  "onboardRoomsBody": "Start a trip in one tap. A Goa weekend or a family wedding gets its own total, without wrecking your month.",
+  "onboardBudgetTitle": "Know what's safe to spend",
+  "onboardBudgetBody": "Set a monthly budget and see each day what you can still spend, with a nudge before you run out.",
+  "onboardPrivacyTitle": "Your money stays on your phone",
+  "onboardPrivacyNoAccount": "No account, no sign-up",
+  "onboardPrivacyNoInternet": "Nothing is sent to the internet",
+  "onboardPrivacyNoAds": "No ads, and no one reads your messages",
+  "onboardSetupTitle": "Turn on auto-capture",
+  "onboardSetupBody": "Takes about two minutes. You can also do it later from Settings.",
+  "onboardSetupAction": "Set up now",
+  "onboardMonthlyTitle": "Set a monthly budget",
+  "onboardMonthlyBody": "Optional. Rooms like trips stay out of it.",
+  "onboardNext": "Next",
+  "onboardSkip": "Skip",
+  "onboardStart": "Start",
+  "onboardStep": "Step {step} of {total}",
+  "@onboardStep": {
+    "placeholders": {
+      "step": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "budgetsCategoryOverSemantics": "{name}: {spent} spent of {budget}, over by {over}. Change",
+  "@budgetsCategoryOverSemantics": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "spent": {
+        "type": "String"
+      },
+      "budget": {
+        "type": "String"
+      },
+      "over": {
+        "type": "String"
+      }
+    }
+  }
 }

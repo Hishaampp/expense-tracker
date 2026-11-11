@@ -76,5 +76,5 @@ motion live only in `lib/theme/`.
 | 4 | iOS auto-capture | built; needs an iPhone test |
 | 5 | Rooms | built; needs a manual trip and wedding walkthrough |
 | 6 | Budgets & Stats | built; needs a check of real alerts and the Sunday review on a phone |
-| 7 | Learning & polish | |
+| 7 | Learning & polish | built; needs a week of real use to check the learning |
 | 8 | Privacy, backup, store readiness | |

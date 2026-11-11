@@ -1,5 +1,6 @@
 import 'package:expense_tracker/core/budget_input.dart';
 import 'package:expense_tracker/core/money.dart';
+import 'package:expense_tracker/formatting/money_format.dart';
 import 'package:expense_tracker/l10n/app_localizations.dart';
 import 'package:expense_tracker/theme/app_metrics.dart';
 import 'package:expense_tracker/widgets/sheet_frame.dart';
@@ -54,44 +55,42 @@ class _BudgetAmountSheetState extends State<BudgetAmountSheet> {
       ),
       child: SheetFrame(
         title: widget.title,
-        child: Padding(
-          padding: EdgeInsetsDirectional.symmetric(horizontal: metrics.spaceLg),
-          child: Form(
-            key: _form,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                TextFormField(
-                  controller: _amount,
-                  autofocus: true,
-                  keyboardType: TextInputType.number,
-                  textInputAction: TextInputAction.done,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                    LengthLimitingTextInputFormatter(maxBudgetDigits),
-                  ],
-                  decoration: InputDecoration(
-                    labelText: l10n.budgetsAmountLabel,
-                    prefixText: '₹ ',
-                  ),
-                  validator: (text) => parseBudget(text ?? '') == null
-                      ? l10n.budgetsAmountInvalid
-                      : null,
-                  onFieldSubmitted: (_) => _save(),
-                ),
-                SizedBox(height: metrics.spaceLg),
-                FilledButton(onPressed: _save, child: Text(l10n.budgetsSave)),
-                if (widget.current != null) ...[
-                  SizedBox(height: metrics.spaceSm),
-                  TextButton(
-                    onPressed: () =>
-                        Navigator.of(context).pop<BudgetEdit>((amount: null)),
-                    child: Text(l10n.budgetsRemove),
-                  ),
+        spreadContent: true,
+        child: Form(
+          key: _form,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              TextFormField(
+                controller: _amount,
+                autofocus: true,
+                keyboardType: TextInputType.number,
+                textInputAction: TextInputAction.done,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                  LengthLimitingTextInputFormatter(maxBudgetDigits),
                 ],
+                decoration: InputDecoration(
+                  labelText: l10n.budgetsAmountLabel,
+                  prefixText: rupeeFieldPrefix,
+                ),
+                validator: (text) => parseBudget(text ?? '') == null
+                    ? l10n.budgetsAmountInvalid
+                    : null,
+                onFieldSubmitted: (_) => _save(),
+              ),
+              SizedBox(height: metrics.spaceLg),
+              FilledButton(onPressed: _save, child: Text(l10n.budgetsSave)),
+              if (widget.current != null) ...[
+                SizedBox(height: metrics.spaceSm),
+                TextButton(
+                  onPressed: () =>
+                      Navigator.of(context).pop<BudgetEdit>((amount: null)),
+                  child: Text(l10n.budgetsRemove),
+                ),
               ],
-            ),
+            ],
           ),
         ),
       ),

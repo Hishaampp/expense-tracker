@@ -25,3 +25,6 @@ String formatTypedAmount(String wholeDigits, String? fractionDigits) {
   if (fractionDigits == null) return '₹$rupees';
   return '₹$rupees.$fractionDigits';
 }
+
+/// What goes before a typed rupee amount in a field.
+const String rupeeFieldPrefix = '₹ ';

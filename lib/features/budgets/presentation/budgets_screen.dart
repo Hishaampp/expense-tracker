@@ -58,6 +58,19 @@ class BudgetsScreen extends ConsumerWidget {
       );
   }
 
+  Future<void> _setWeekly(BuildContext context, WidgetRef ref, bool on) async {
+    final l10n = AppLocalizations.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    final result = await ref
+        .read(budgetsNotifierProvider.notifier)
+        .setWeeklyReview(on: on);
+    if (result case Err(:final failure)) {
+      messenger
+        ..clearSnackBars()
+        ..showSnackBar(SnackBar(content: Text(failureMessage(l10n, failure))));
+    }
+  }
+
   Future<void> _editMonthly(
     BuildContext context,
     WidgetRef ref,
@@ -206,10 +219,6 @@ class BudgetsScreen extends ConsumerWidget {
         ),
         enter(
           AppCard(
-            padding: EdgeInsetsDirectional.symmetric(
-              horizontal: metrics.spaceLg,
-              vertical: metrics.spaceMd,
-            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -247,11 +256,7 @@ class BudgetsScreen extends ConsumerWidget {
                   ),
                   title: l10n.budgetsWeeklyReview,
                   value: state.weeklyReviewOn,
-                  onChanged: (on) => unawaited(
-                    ref
-                        .read(budgetsNotifierProvider.notifier)
-                        .setWeeklyReview(on: on),
-                  ),
+                  onChanged: (on) => unawaited(_setWeekly(context, ref, on)),
                 ),
                 Text(l10n.budgetsWeeklyReviewHelp, style: textTheme.bodySmall),
                 SizedBox(height: metrics.spaceSm),
@@ -306,7 +311,12 @@ class _MonthlyCard extends StatelessWidget {
               if (monthly != null) ...[
                 Semantics(
                   container: true,
-                  label: l10n.homeBudgetPercentSemantics(over ? 100 : percent),
+                  label: switch (state.safe) {
+                    Overspent(:final over) => l10n.homeBudgetOver(
+                      formatMoney(over),
+                    ),
+                    _ => l10n.homeBudgetPercentSemantics(percent),
+                  },
                   child: RingChart(
                     segments: [
                       (
@@ -319,10 +329,16 @@ class _MonthlyCard extends StatelessWidget {
                     stroke: metrics.ringStroke,
                     trackColor: colors.surfaceSunken,
                     center: ExcludeSemantics(
-                      child: Text(
-                        l10n.homeBudgetPercent(over ? 100 : percent),
-                        style: textTheme.titleMedium,
-                      ),
+                      child: over
+                          ? Icon(
+                              Icons.warning_amber_rounded,
+                              color: colors.danger,
+                              size: metrics.iconLargeSize,
+                            )
+                          : Text(
+                              l10n.homeBudgetPercent(percent),
+                              style: textTheme.titleMedium,
+                            ),
                     ),
                   ),
                 ),
@@ -359,12 +375,18 @@ class _MonthlyCard extends StatelessWidget {
           if (monthly != null)
             Text(l10n.budgetsMonthlyHelp, style: textTheme.bodySmall),
           SizedBox(height: metrics.spaceSm),
-          FilledButton.tonal(
-            onPressed: onEdit,
-            child: Text(
-              monthly == null ? l10n.budgetsSetMonthly : l10n.budgetsChange,
+          // Setting the first budget is the screen's next step; changing
+          // it later is a small action in the card (docs/DESIGN.md).
+          if (monthly == null)
+            FilledButton(onPressed: onEdit, child: Text(l10n.budgetsSetMonthly))
+          else
+            Align(
+              alignment: AlignmentDirectional.centerStart,
+              child: TextButton(
+                onPressed: onEdit,
+                child: Text(l10n.budgetsChange),
+              ),
             ),
-          ),
         ],
       ),
     );
@@ -385,11 +407,20 @@ class _CategoryBudgetRow extends StatelessWidget {
     final style = categoryStyle(context, line.category.iconKey);
     final spent = formatMoney(line.spent);
     final budget = formatMoney(line.budget);
-    final full = line.spent.paise >= line.budget.paise;
+    // Over only when past the limit, as Rooms say it (room_card).
+    final over = line.spent.paise > line.budget.paise;
+    final overBy = formatMoney(line.spent - line.budget);
     return Semantics(
       container: true,
       button: true,
-      label: l10n.budgetsCategorySemantics(line.category.name, spent, budget),
+      label: over
+          ? l10n.budgetsCategoryOverSemantics(
+              line.category.name,
+              spent,
+              budget,
+              overBy,
+            )
+          : l10n.budgetsCategorySemantics(line.category.name, spent, budget),
       onTap: onTap,
       child: ExcludeSemantics(
         child: Pressable(
@@ -419,9 +450,9 @@ class _CategoryBudgetRow extends StatelessWidget {
                                 style: Theme.of(context).textTheme.bodyLarge,
                               ),
                             ),
-                            if (full)
+                            if (over)
                               Icon(
-                                Icons.error_rounded,
+                                Icons.warning_amber_rounded,
                                 color: colors.danger,
                                 size: metrics.iconSize,
                               ),
@@ -432,13 +463,19 @@ class _CategoryBudgetRow extends StatelessWidget {
                           fraction: line.budget.paise <= 0
                               ? 0
                               : line.spent.paise / line.budget.paise,
-                          color: full ? colors.danger : style.color,
+                          color: over ? colors.danger : style.color,
                           trackColor: colors.surfaceSunken,
                         ),
                         SizedBox(height: metrics.spaceXs),
                         Text(
-                          l10n.budgetsUsedOf(spent, budget),
-                          style: Theme.of(context).textTheme.bodySmall,
+                          over
+                              ? l10n.listPair(
+                                  l10n.budgetsUsedOf(spent, budget),
+                                  l10n.roomOver(overBy),
+                                )
+                              : l10n.budgetsUsedOf(spent, budget),
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(color: over ? colors.danger : null),
                         ),
                       ],
                     ),

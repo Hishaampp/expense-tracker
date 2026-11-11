@@ -162,6 +162,17 @@ class SettingsScreen extends ConsumerWidget {
               ),
               InfoRow(
                 leading: IconTile(
+                  icon: Icons.storefront_rounded,
+                  color: tiles.orange,
+                ),
+                title: l10n.settingsPayees,
+                trailingIsAmount: false,
+                showChevron: true,
+                semanticLabel: l10n.settingsPayeesSemantics,
+                onTap: () => unawaited(context.push(Routes.payees)),
+              ),
+              InfoRow(
+                leading: IconTile(
                   icon: Icons.mark_unread_chat_alt_rounded,
                   color: tiles.blue,
                 ),

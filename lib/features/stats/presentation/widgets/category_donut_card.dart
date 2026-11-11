@@ -38,14 +38,14 @@ class CategoryDonutCard extends StatelessWidget {
     );
     // Large text would not fit inside the ring: it moves under it.
     final inside =
-        MediaQuery.textScalerOf(context).scale(1) <= metrics.stackedTextScale;
+        MediaQuery.textScalerOf(context).scale(1) < metrics.stackedTextScale;
     return AppCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Semantics(
             header: true,
-            child: Text(l10n.statsWhereItWent, style: textTheme.titleMedium),
+            child: Text(l10n.roomWhereItWent, style: textTheme.titleMedium),
           ),
           SizedBox(height: metrics.spaceLg),
           Center(
@@ -98,30 +98,44 @@ class _LegendRow extends StatelessWidget {
     final style = categoryStyle(context, total.category?.iconKey);
     final amount = formatMoney(total.spent);
     final percent = (total.share * 100).round();
+    final textTheme = Theme.of(context).textTheme;
+    // Large text: the share and amount move under the name, never cut.
+    final stacked =
+        MediaQuery.textScalerOf(context).scale(1) >= metrics.stackedTextScale;
+    final share = Text(l10n.statsShare(percent), style: textTheme.bodySmall);
+    final money = Text(
+      amount,
+      style: AppTextStyles.of(context).amountRow
+          .copyWith(color: colors.onSurface),
+    );
     return Semantics(
       container: true,
       label: l10n.statsCategorySemantics(name, amount, percent),
       child: ExcludeSemantics(
         child: Padding(
-          padding: EdgeInsetsDirectional.symmetric(vertical: metrics.spaceXs),
+          padding: EdgeInsetsDirectional.symmetric(vertical: metrics.spaceSm),
           child: Row(
             children: [
               IconTile(icon: style.icon, color: style.color),
               SizedBox(width: metrics.spaceMd),
               Expanded(
-                child: Text(name, style: Theme.of(context).textTheme.bodyLarge),
+                child: stacked
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(name, style: textTheme.bodyLarge),
+                          money,
+                          share,
+                        ],
+                      )
+                    : Text(name, style: textTheme.bodyLarge),
               ),
-              SizedBox(width: metrics.spaceSm),
-              Text(
-                l10n.statsShare(percent),
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-              SizedBox(width: metrics.spaceMd),
-              Text(
-                amount,
-                style: AppTextStyles.of(context).amountRow
-                    .copyWith(color: colors.onSurface),
-              ),
+              if (!stacked) ...[
+                SizedBox(width: metrics.spaceSm),
+                share,
+                SizedBox(width: metrics.spaceMd),
+                money,
+              ],
             ],
           ),
         ),

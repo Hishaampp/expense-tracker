@@ -45,7 +45,9 @@ void main() {
     // October ₹1,000 and November ₹400: the months that had spending.
     expect(find.text('Average ₹700 a month'), findsOneWidget);
     expect(
-      find.bySemanticsLabel(RegExp(r'October: ₹1,000\. November: ₹400$')),
+      find.bySemanticsLabel(
+        RegExp(r'October: ₹1,000\. November: ₹400\. Average ₹700 a month$'),
+      ),
       findsOneWidget,
     );
   });

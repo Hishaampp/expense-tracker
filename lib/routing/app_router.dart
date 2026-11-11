@@ -1,9 +1,12 @@
+import 'package:expense_tracker/data/query_providers.dart';
 import 'package:expense_tracker/features/activity/presentation/activity_screen.dart';
 import 'package:expense_tracker/features/budgets/presentation/budgets_screen.dart';
 import 'package:expense_tracker/features/capture/presentation/capture_settings_screen.dart';
 import 'package:expense_tracker/features/capture/presentation/iphone_setup_screen.dart';
 import 'package:expense_tracker/features/home/presentation/home_screen.dart';
 import 'package:expense_tracker/features/notifications/presentation/notifications_screen.dart';
+import 'package:expense_tracker/features/onboarding/presentation/onboarding_screen.dart';
+import 'package:expense_tracker/features/payees/presentation/payees_screen.dart';
 import 'package:expense_tracker/features/quick_add/presentation/quick_add_screen.dart';
 import 'package:expense_tracker/features/review/presentation/review_screen.dart';
 import 'package:expense_tracker/features/rooms/presentation/room_detail_screen.dart';
@@ -25,7 +28,9 @@ import 'package:go_router/go_router.dart';
 /// The app's single router.
 final routerProvider = Provider<GoRouter>((ref) {
   final router = GoRouter(
-    initialLocation: Routes.home,
+    initialLocation: ref.read(initialOnboardedProvider)
+        ? Routes.home
+        : Routes.welcome,
     errorBuilder: (context, state) => const NotFoundScreen(),
     routes: [
       StatefulShellRoute(
@@ -93,6 +98,14 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.budgets,
         builder: (context, state) => const BudgetsScreen(),
+      ),
+      GoRoute(
+        path: Routes.welcome,
+        builder: (context, state) => const OnboardingScreen(),
+      ),
+      GoRoute(
+        path: Routes.payees,
+        builder: (context, state) => const PayeesScreen(),
       ),
       GoRoute(
         path: Routes.notifications,

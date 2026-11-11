@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:expense_tracker/theme/app_metrics.dart';
 import 'package:expense_tracker/theme/app_motion.dart';
+import 'package:expense_tracker/theme/chart_style.dart';
 import 'package:flutter/material.dart';
 
 /// Vertical bars, one per value, scaled to the largest, growing up from a
@@ -70,7 +71,9 @@ class BarChart extends StatelessWidget {
                   highlight: highlight,
                   guide: guide,
                   radius: metrics.chartBarRadius,
-                  gapRatio: values.length > 12 ? 0.3 : 0.45,
+                  gapRatio: values.length > ChartStyle.denseBarCount
+                      ? ChartStyle.denseBarGap
+                      : ChartStyle.barGap,
                   hairline: metrics.hairlineWidth,
                   progress: progress,
                 ),
@@ -88,7 +91,7 @@ class BarChart extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: labelStyle?.copyWith(
                         fontWeight: i == highlight
-                            ? FontWeight.bold
+                            ? ChartStyle.highlightWeight
                             : labelStyle.fontWeight,
                       ),
                     ),
@@ -157,7 +160,7 @@ class _BarPainter extends CustomPainter {
       final line = Paint()
         ..color = guideColor
         ..strokeWidth = hairline;
-      final dash = hairline * 4;
+      final dash = hairline * ChartStyle.dashHairlines;
       for (var x = 0.0; x < size.width; x += dash * 2) {
         canvas.drawLine(
           Offset(x, y),

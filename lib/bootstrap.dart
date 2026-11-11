@@ -15,15 +15,15 @@ Future<void> bootstrap() async {
   LicenseRegistry.addLicense(_fontLicenses);
   final database = AppDatabase.open();
   // Read before the first frame so the app never flashes the wrong theme.
-  final appearance = await SettingsRepository(
-    database,
-    const DeveloperLogger(),
-  ).watchAppearance().first;
+  final settings = SettingsRepository(database, const DeveloperLogger());
+  final appearance = await settings.watchAppearance().first;
+  final onboarded = await settings.isOnboarded();
   runApp(
     ProviderScope(
       overrides: [
         appDatabaseProvider.overrideWithValue(database),
         initialAppearanceProvider.overrideWithValue(appearance),
+        initialOnboardedProvider.overrideWithValue(onboarded),
       ],
       child: const App(),
     ),

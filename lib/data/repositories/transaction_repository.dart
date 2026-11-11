@@ -137,6 +137,7 @@ class TransactionRepository {
     String? linkedTransactionId,
     String? roomId,
     bool isHidden = false,
+    String? payeeDisplay,
   }) async {
     final now = _clock.now().toUtc();
     final capture = draft.capture;
@@ -154,7 +155,7 @@ class TransactionRepository {
           categoryId: categoryId,
           roomId: roomId,
           payeeKey: draft.payeeKey,
-          payeeDisplay: draft.payeeDisplay,
+          payeeDisplay: payeeDisplay ?? draft.payeeDisplay,
           instrument: draft.instrument,
           refNo: draft.refNo,
           note: _blankToNull(note),
