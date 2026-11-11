@@ -44,3 +44,12 @@ String formatShortDate(DateTime localDay, String locale) {
 String formatTime(DateTime localTime, String locale) {
   return DateFormat.jm(locale).format(localTime);
 }
+
+/// A month's short name for a chart axis, for example `Nov`. A month that
+/// starts mid-month is named after the month it ends in.
+String formatMonthShort(MonthPeriod period, String locale) {
+  final named = period.start.day == 1
+      ? period.start
+      : period.end.subtract(const Duration(days: 1));
+  return DateFormat.MMM(locale).format(named);
+}

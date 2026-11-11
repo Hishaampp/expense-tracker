@@ -22,6 +22,8 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+        // flutter_local_notifications needs java.time on older Android.
+        isCoreLibraryDesugaringEnabled = true
     }
 
     defaultConfig {
@@ -68,4 +70,5 @@ flutter {
 dependencies {
     // NotificationCompat.MessagingStyle and NotificationManagerCompat.
     implementation("androidx.core:core-ktx:1.17.0")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
 }

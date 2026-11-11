@@ -36,6 +36,12 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
     required this.headerBarHeight,
     required this.titleCollapseOffset,
     required this.shadowBlur,
+    required this.ringSize,
+    required this.ringStroke,
+    required this.donutSize,
+    required this.donutStroke,
+    required this.chartHeight,
+    required this.chartBarRadius,
   });
 
   /// The standard metrics: 4-point grid, large soft corners.
@@ -69,6 +75,12 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
     headerBarHeight: 52,
     titleCollapseOffset: 40,
     shadowBlur: 18,
+    ringSize: 96,
+    ringStroke: 10,
+    donutSize: 184,
+    donutStroke: 26,
+    chartHeight: 128,
+    chartBarRadius: 4,
   );
 
   /// 4 logical pixels.
@@ -158,6 +170,24 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
   /// Blur radius of the floating shadow.
   final double shadowBlur;
 
+  /// Diameter of the budget ring on Home.
+  final double ringSize;
+
+  /// Stroke of the budget ring.
+  final double ringStroke;
+
+  /// Diameter of the category donut on Stats.
+  final double donutSize;
+
+  /// Stroke of the category donut.
+  final double donutStroke;
+
+  /// Height of a bar chart.
+  final double chartHeight;
+
+  /// Corner radius of a chart bar.
+  final double chartBarRadius;
+
   /// Reads the metrics from the theme; asserts if the theme lacks them.
   static AppMetrics of(BuildContext context) {
     final extension = Theme.of(context).extension<AppMetrics>();
@@ -196,6 +226,12 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
     double? headerBarHeight,
     double? titleCollapseOffset,
     double? shadowBlur,
+    double? ringSize,
+    double? ringStroke,
+    double? donutSize,
+    double? donutStroke,
+    double? chartHeight,
+    double? chartBarRadius,
   }) {
     return AppMetrics(
       spaceXs: spaceXs ?? this.spaceXs,
@@ -227,6 +263,12 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
       headerBarHeight: headerBarHeight ?? this.headerBarHeight,
       titleCollapseOffset: titleCollapseOffset ?? this.titleCollapseOffset,
       shadowBlur: shadowBlur ?? this.shadowBlur,
+      ringSize: ringSize ?? this.ringSize,
+      ringStroke: ringStroke ?? this.ringStroke,
+      donutSize: donutSize ?? this.donutSize,
+      donutStroke: donutStroke ?? this.donutStroke,
+      chartHeight: chartHeight ?? this.chartHeight,
+      chartBarRadius: chartBarRadius ?? this.chartBarRadius,
     );
   }
 
@@ -264,6 +306,12 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
       headerBarHeight: mix(headerBarHeight, other.headerBarHeight),
       titleCollapseOffset: mix(titleCollapseOffset, other.titleCollapseOffset),
       shadowBlur: mix(shadowBlur, other.shadowBlur),
+      ringSize: mix(ringSize, other.ringSize),
+      ringStroke: mix(ringStroke, other.ringStroke),
+      donutSize: mix(donutSize, other.donutSize),
+      donutStroke: mix(donutStroke, other.donutStroke),
+      chartHeight: mix(chartHeight, other.chartHeight),
+      chartBarRadius: mix(chartBarRadius, other.chartBarRadius),
     );
   }
 }

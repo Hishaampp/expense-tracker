@@ -25,6 +25,8 @@ void main() {
 
     expect(find.text("You've spent ₹240 this month."), findsOneWidget);
     expect(find.text('Top categories'), findsOneWidget);
+    // The budget card sits between the hero and the lists.
+    await bringIntoView(tester, find.text('Recent'));
     expect(find.text('Recent'), findsOneWidget);
     expect(
       find.bySemanticsLabel('₹240 spent on Food & Dining'),
@@ -58,6 +60,10 @@ void main() {
       findsOneWidget,
     );
     expect(find.bySemanticsLabel('₹1,234.50 spent on Fuel'), findsOneWidget);
+    await bringIntoView(
+      tester,
+      find.bySemanticsLabel('₹1,234.50 spent, Fuel, Fuel'),
+    );
     expect(
       find.bySemanticsLabel('₹1,234.50 spent, Fuel, Fuel'),
       findsOneWidget,

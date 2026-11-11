@@ -1069,4 +1069,424 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeStartTrip => 'Start trip';
+
+  @override
+  String get navStats => 'Stats';
+
+  @override
+  String get budgetsTitle => 'Budgets';
+
+  @override
+  String get budgetsMonthly => 'Monthly budget';
+
+  @override
+  String get budgetsNotSet => 'Not set';
+
+  @override
+  String get budgetsMonthlyHelp =>
+      'Covers everyday spending. Rooms stay out unless you count them in.';
+
+  @override
+  String get budgetsSetMonthly => 'Set monthly budget';
+
+  @override
+  String get budgetsChange => 'Change';
+
+  @override
+  String get budgetsRemove => 'Remove budget';
+
+  @override
+  String get budgetsCategories => 'Category budgets';
+
+  @override
+  String get budgetsCategoriesHelp =>
+      'Get a nudge when one category is used up.';
+
+  @override
+  String get budgetsAddCategory => 'Add category budget';
+
+  @override
+  String budgetsUsedOf(String spent, String budget) {
+    return '$spent of $budget';
+  }
+
+  @override
+  String budgetsCategorySemantics(String name, String spent, String budget) {
+    return '$name: $spent spent of $budget. Change';
+  }
+
+  @override
+  String budgetsCategoryTitle(String name) {
+    return '$name budget';
+  }
+
+  @override
+  String get budgetsAmountLabel => 'Amount in rupees';
+
+  @override
+  String get budgetsAmountInvalid => 'Enter an amount above zero';
+
+  @override
+  String get budgetsSave => 'Save';
+
+  @override
+  String get budgetsSaved => 'Budget saved';
+
+  @override
+  String get budgetsRemoved => 'Budget removed';
+
+  @override
+  String get budgetsPickCategory => 'Pick a category';
+
+  @override
+  String get budgetsAlerts => 'Alerts';
+
+  @override
+  String get budgetsWeeklyReview => 'Sunday weekly review';
+
+  @override
+  String get budgetsWeeklyReviewHelp =>
+      'A look back at your week, every Sunday at 7 pm.';
+
+  @override
+  String get budgetsAlertsHelp =>
+      'You get a notification at 80% and 100% of your monthly budget and of each Room budget, and when a category budget is used up.';
+
+  @override
+  String get budgetsNotificationsOff =>
+      'Notifications are off, so alerts can\'t reach you. You can turn them on in your phone\'s Settings.';
+
+  @override
+  String get budgetsOpenWeek => 'See your week';
+
+  @override
+  String get homeBudgetSafe => 'Safe to spend today';
+
+  @override
+  String homeBudgetLeft(String left, String budget) {
+    return '$left left of $budget';
+  }
+
+  @override
+  String homeBudgetDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days left',
+      one: 'Last day of the month',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String homeBudgetSafeSemantics(
+    String amount,
+    String left,
+    String budget,
+    int count,
+  ) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days left.',
+      one: 'Last day of the month.',
+    );
+    return 'Safe to spend today: $amount. $left left of $budget. $_temp0';
+  }
+
+  @override
+  String homeBudgetOver(String amount) {
+    return 'Over budget by $amount';
+  }
+
+  @override
+  String homeBudgetOverBody(String spent, String budget) {
+    return 'Spent $spent of $budget this month.';
+  }
+
+  @override
+  String homeBudgetOverSemantics(String amount, String spent, String budget) {
+    return 'Over budget by $amount. Spent $spent of $budget this month.';
+  }
+
+  @override
+  String homeBudgetPercent(int percent) {
+    return '$percent%';
+  }
+
+  @override
+  String homeBudgetPercentSemantics(int percent) {
+    return '$percent% of the monthly budget used';
+  }
+
+  @override
+  String get homeBudgetSetTitle => 'Set a monthly budget';
+
+  @override
+  String get homeBudgetSetBody => 'See what\'s safe to spend each day.';
+
+  @override
+  String get homeBudgetSetAction => 'Set budget';
+
+  @override
+  String get homeBudgetOpen => 'Open budgets';
+
+  @override
+  String homeWatching(String name, String amount) {
+    return 'Watching $name: $amount this week';
+  }
+
+  @override
+  String get statsTitle => 'Stats';
+
+  @override
+  String get statsWhereItWent => 'Where it went';
+
+  @override
+  String statsDonutSemantics(String amount) {
+    return 'Spending by category, $amount in all. The categories are listed below.';
+  }
+
+  @override
+  String statsShare(int percent) {
+    return '$percent%';
+  }
+
+  @override
+  String statsCategorySemantics(String name, String amount, int percent) {
+    return '$name: $amount, $percent% of spending';
+  }
+
+  @override
+  String get statsByDay => 'Day by day';
+
+  @override
+  String statsHighestDay(String amount, String day) {
+    return 'Highest: $amount on $day';
+  }
+
+  @override
+  String statsDailyAverage(String amount) {
+    return 'Average $amount a day';
+  }
+
+  @override
+  String statsByDaySemantics(String amount, String day, String average) {
+    return 'Daily spending chart. Highest $amount on $day. Average $average a day.';
+  }
+
+  @override
+  String get statsByMonth => 'Last 6 months';
+
+  @override
+  String statsMonthAverage(String amount) {
+    return 'Average $amount a month';
+  }
+
+  @override
+  String statsMonthBar(String month, String amount) {
+    return '$month: $amount';
+  }
+
+  @override
+  String get statsEmptyTitle => 'Nothing to chart yet';
+
+  @override
+  String get statsEmptyBody =>
+      'Add or capture a few expenses and your charts appear here.';
+
+  @override
+  String get statsWeekTitle => 'Your week';
+
+  @override
+  String get statsWeekBody =>
+      'This week against last week, and who you paid most.';
+
+  @override
+  String get weeklyTitle => 'Your week';
+
+  @override
+  String weeklyRange(String start, String end) {
+    return '$start – $end';
+  }
+
+  @override
+  String weeklySpent(String amount) {
+    return 'You spent $amount this week.';
+  }
+
+  @override
+  String weeklyMore(String amount) {
+    return '$amount more than last week';
+  }
+
+  @override
+  String weeklyLess(String amount) {
+    return '$amount less than last week';
+  }
+
+  @override
+  String get weeklySame => 'The same as last week';
+
+  @override
+  String weeklyLastWeek(String amount) {
+    return 'Last week: $amount';
+  }
+
+  @override
+  String get weeklyTopCategories => 'Top categories';
+
+  @override
+  String get weeklyTopPayees => 'Who you paid most';
+
+  @override
+  String weeklyPayeeCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count payments',
+      one: '1 payment',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String weeklyPayeeSemantics(String amount, String name, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count payments',
+      one: '1 payment',
+    );
+    return '$amount paid to $name, $_temp0';
+  }
+
+  @override
+  String get weeklyEmpty => 'No spending this week.';
+
+  @override
+  String weeklyInbox(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count payments are waiting in Review.',
+      one: '1 payment is waiting in Review.',
+      zero: 'Nothing is waiting in Review.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get weeklyOpenReview => 'Open Review';
+
+  @override
+  String get weeklyWatchTitle => 'One thing to watch next week';
+
+  @override
+  String get weeklyWatchHelp =>
+      'Pick a category. Home keeps an eye on it for you.';
+
+  @override
+  String get weeklyWatchNone => 'Nothing';
+
+  @override
+  String weeklyWatchSaved(String name) {
+    return 'Watching $name next week';
+  }
+
+  @override
+  String get weeklyWatchCleared => 'Not watching a category';
+
+  @override
+  String get weeklyWatchMore => 'More';
+
+  @override
+  String get notifyAlertsChannel => 'Budget alerts';
+
+  @override
+  String get notifyAlertsChannelInfo => 'When a budget is nearly or fully used';
+
+  @override
+  String get notifyWeeklyChannel => 'Weekly review';
+
+  @override
+  String get notifyWeeklyChannelInfo => 'Your week, every Sunday evening';
+
+  @override
+  String get notifyRoomChannel => 'Add to Room';
+
+  @override
+  String get notifyRoomChannelInfo => 'Payments that may belong to a Room';
+
+  @override
+  String get notifyAddToRoom => 'Add to Room';
+
+  @override
+  String notifyAddTo(String name) {
+    return 'Add to $name';
+  }
+
+  @override
+  String get notifyMonth80Title => '80% of your monthly budget used';
+
+  @override
+  String notifyMonth80Body(String left) {
+    return '$left left for the rest of the month.';
+  }
+
+  @override
+  String get notifyMonth100Title => 'Monthly budget used up';
+
+  @override
+  String notifySpentOf(String spent, String budget) {
+    return 'You\'ve spent $spent of $budget.';
+  }
+
+  @override
+  String notifyCategoryTitle(String name) {
+    return '$name budget used up';
+  }
+
+  @override
+  String notifyRoom80Title(String name) {
+    return '80% of the $name budget used';
+  }
+
+  @override
+  String notifyRoom100Title(String name) {
+    return '$name budget used up';
+  }
+
+  @override
+  String get notifyWeeklyTitle => 'Your week in money';
+
+  @override
+  String get notifyWeeklyBody =>
+      'See how the week went, and pick one thing to watch.';
+
+  @override
+  String notifyRoomOfferTitle(String amount, String payee) {
+    return '$amount at $payee';
+  }
+
+  @override
+  String notifyRoomOfferTitleNoPayee(String amount) {
+    return '$amount captured';
+  }
+
+  @override
+  String notifyRoomOfferBody(String name) {
+    return 'Add it to $name?';
+  }
+
+  @override
+  String get notifyRoomOfferChoiceBody => 'Add it to a Room?';
+
+  @override
+  String get settingsBudgets => 'Budgets';
+
+  @override
+  String settingsBudgetsSemantics(String value) {
+    return 'Budgets, $value';
+  }
 }

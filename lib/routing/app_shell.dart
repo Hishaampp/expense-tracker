@@ -34,6 +34,11 @@ class AppShell extends ConsumerWidget {
         label: l10n.navActivity,
       ),
       (
+        icon: Icons.donut_large_outlined,
+        selectedIcon: Icons.donut_large_rounded,
+        label: l10n.navStats,
+      ),
+      (
         icon: Icons.luggage_outlined,
         selectedIcon: Icons.luggage_rounded,
         label: l10n.navRooms,

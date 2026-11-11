@@ -18,6 +18,60 @@ class SettingsRepository {
   static const String _monthStartDayKey = 'month_start_day';
   static const String _appearanceKey = 'appearance';
   static const String _iosSetupKey = 'ios_shortcut_setup_at';
+  static const String _weeklyReviewKey = 'weekly_review';
+  static const String _watchCategoryKey = 'watch_category';
+
+  Stream<String?> _watch(String key) {
+    final query = _db.select(_db.settings)..where((s) => s.key.equals(key));
+    return query.watchSingleOrNull().map((row) => row?.value);
+  }
+
+  Future<Result<T, StoreFailure>> _put<T>(
+    String event,
+    String key,
+    String? value,
+    T result,
+  ) async {
+    try {
+      if (value == null) {
+        await (_db.delete(_db.settings)..where((s) => s.key.equals(key))).go();
+      } else {
+        await _db
+            .into(_db.settings)
+            .insertOnConflictUpdate(
+              SettingsCompanion.insert(key: key, value: value),
+            );
+      }
+      return Ok(result);
+    } on SqliteException catch (e, st) {
+      _log.error(event, e.runtimeType, st);
+      return const Err(StoreWriteFailed());
+    }
+  }
+
+  /// Whether the Sunday-evening weekly review notification is on. Defaults
+  /// to on (spec §10).
+  Stream<bool> watchWeeklyReview() =>
+      _watch(_weeklyReviewKey).map((value) => value != 'off');
+
+  /// Turns the weekly review notification on or off.
+  @useResult
+  Future<Result<bool, StoreFailure>> setWeeklyReview({required bool on}) =>
+      _put('settings.weekly_review', _weeklyReviewKey, on ? 'on' : 'off', on);
+
+  /// The category the user chose to watch next week, or null (spec §10).
+  Stream<String?> watchWatchedCategory() => _watch(_watchCategoryKey);
+
+  /// Sets the category to watch, or clears it with null.
+  @useResult
+  Future<Result<String?, StoreFailure>> setWatchedCategory(
+    String? categoryId,
+  ) => _put(
+    'settings.watch_category',
+    _watchCategoryKey,
+    categoryId,
+    categoryId,
+  );
 
   /// When the user finished the iPhone Shortcuts setup, or null.
   Stream<DateTime?> watchIosShortcutSetupAt() {

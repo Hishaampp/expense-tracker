@@ -28,6 +28,7 @@ void main() {
   appTest('See all on Home opens Activity', (tester) async {
     await pumpApp(tester);
     await addExpense(tester, '100', 'Fuel');
+    await bringIntoView(tester, find.text('See all'));
     await tester.tap(find.text('See all'));
     await tester.pumpAndSettle();
 

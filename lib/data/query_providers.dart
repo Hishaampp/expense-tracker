@@ -1,5 +1,6 @@
 import 'package:expense_tracker/core/models/account.dart';
 import 'package:expense_tracker/core/models/appearance_mode.dart';
+import 'package:expense_tracker/core/models/budget_plan.dart';
 import 'package:expense_tracker/core/models/category.dart';
 import 'package:expense_tracker/core/models/money_transaction.dart';
 import 'package:expense_tracker/core/models/raw_capture.dart';
@@ -84,3 +85,28 @@ final activeRoomsProvider = Provider<AsyncValue<List<Room>>>(
 final roomSpentProvider = StreamProvider<Map<String, int>>(
   (ref) => ref.watch(roomRepositoryProvider).watchSpentByRoom(),
 );
+
+/// The budgets. Live.
+final budgetPlanProvider = StreamProvider<BudgetPlan>(
+  (ref) => ref.watch(budgetRepositoryProvider).watchPlan(),
+);
+
+/// Whether the weekly review notification is on. Live.
+final weeklyReviewOnProvider = StreamProvider<bool>(
+  (ref) => ref.watch(settingsRepositoryProvider).watchWeeklyReview(),
+);
+
+/// The category to watch this week, or null. Live.
+final watchedCategoryProvider = StreamProvider<String?>(
+  (ref) => ref.watch(settingsRepositoryProvider).watchWatchedCategory(),
+);
+
+/// Transactions from the range's start (inclusive) to its end
+/// (exclusive), both UTC epoch milliseconds, newest first. Live.
+final StreamProviderFamily<List<MoneyTransaction>, ({int start, int end})>
+rangeTransactionsProvider = StreamProvider.autoDispose
+    .family<List<MoneyTransaction>, ({int start, int end})>(
+      (ref, range) => ref
+          .watch(transactionRepositoryProvider)
+          .watchBetween(range.start, range.end),
+    );

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:expense_tracker/core/result.dart';
 import 'package:expense_tracker/data/query_providers.dart';
 import 'package:expense_tracker/features/home/presentation/home_notifier.dart';
+import 'package:expense_tracker/features/home/presentation/widgets/budget_card.dart';
 import 'package:expense_tracker/features/home/presentation/widgets/capture_health_card.dart';
 import 'package:expense_tracker/features/home/presentation/widgets/hero_summary.dart';
 import 'package:expense_tracker/features/home/presentation/widgets/recent_card.dart';
@@ -126,6 +127,14 @@ class HomeScreen extends ConsumerWidget {
       actions: [?review, add],
       children: [
         enter(HeroSummary(state: state, onSeeAll: seeAll)),
+        if (state.isCurrent)
+          enter(
+            BudgetCard(
+              safe: state.safe,
+              watched: state.watched,
+              onOpen: () => unawaited(context.push(Routes.budgets)),
+            ),
+          ),
         if (state.isCurrent)
           enter(
             RoomChips(

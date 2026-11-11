@@ -351,3 +351,51 @@ class UnparsedMessages extends Table {
   @override
   bool get isStrict => true;
 }
+
+/// Spending limits (spec §10): the monthly budget has the id `month` and
+/// no category; a category budget's id is `category:` + its category id.
+@DataClassName('BudgetRow')
+class Budgets extends Table {
+  /// `month`, or `category:<categoryId>`.
+  TextColumn get id => text()();
+
+  /// The category limited; null for the monthly budget.
+  TextColumn get categoryId => text().nullable().references(
+    Categories,
+    #id,
+    onDelete: KeyAction.cascade,
+  )();
+
+  /// The limit in paise, every month.
+  IntColumn get amountPaise => integer()();
+
+  @override
+  Set<Column<Object>> get primaryKey => {id};
+
+  @override
+  bool get isStrict => true;
+
+  @override
+  List<String> get customConstraints => const [
+    'CHECK (amount_paise > 0)',
+    // One monthly budget, and at most one per category. One SQL literal.
+    // ignore: lines_longer_than_80_chars
+    "CHECK ((id = 'month' AND category_id IS NULL) OR (category_id IS NOT NULL AND id = 'category:' || category_id))",
+  ];
+}
+
+/// Budget alerts already shown, so each threshold fires once (spec §10).
+@DataClassName('FiredAlertRow')
+class FiredAlerts extends Table {
+  /// The alert key, for example `month:20393:80`.
+  TextColumn get key => text()();
+
+  /// When it fired, UTC epoch milliseconds.
+  IntColumn get firedAt => integer()();
+
+  @override
+  Set<Column<Object>> get primaryKey => {key};
+
+  @override
+  bool get isStrict => true;
+}

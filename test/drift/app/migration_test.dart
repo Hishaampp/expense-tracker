@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'generated/schema.dart';
 import 'generated/schema_v1.dart' as v1;
 import 'generated/schema_v2.dart' as v2;
+import 'generated/schema_v3.dart' as v3;
 
 /// Every schema step, checked against the committed snapshots, plus a
 /// content test: data written by version 1 is still there after upgrading.
@@ -79,6 +80,48 @@ void main() {
         final accounts = await newDb.select(newDb.accounts).get();
         expect(accounts.single.id, 'account_cash');
         expect(await newDb.select(newDb.rawCaptures).get(), isEmpty);
+      },
+    );
+  });
+
+  test('2 to 3 keeps transactions and starts with no budgets', () async {
+    const account = v2.AccountsData(
+      id: 'account_cash',
+      name: 'Cash',
+      type: 'cash',
+      isArchived: 0,
+      createdAt: 1,
+    );
+    const transaction = v2.TransactionsData(
+      id: 'txn-1',
+      kind: 'expense',
+      amountPaise: 24000,
+      currency: 'INR',
+      occurredAt: 1762765800000,
+      accountId: 'account_cash',
+      instrument: 'cash',
+      reviewStatus: 'confirmed',
+      isHidden: 0,
+      origin: 'manual',
+      createdAt: 1762765800000,
+      updatedAt: 1762765800000,
+    );
+    await verifier.testWithDataIntegrity(
+      oldVersion: 2,
+      newVersion: 3,
+      createOld: v2.DatabaseAtV2.new,
+      createNew: v3.DatabaseAtV3.new,
+      openTestedDatabase: AppDatabase.new,
+      createItems: (batch, oldDb) {
+        batch
+          ..insert(oldDb.accounts, account)
+          ..insert(oldDb.transactions, transaction);
+      },
+      validateItems: (newDb) async {
+        final transactions = await newDb.select(newDb.transactions).get();
+        expect(transactions.single.amountPaise, 24000);
+        expect(await newDb.select(newDb.budgets).get(), isEmpty);
+        expect(await newDb.select(newDb.firedAlerts).get(), isEmpty);
       },
     );
   });

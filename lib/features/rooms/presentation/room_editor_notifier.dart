@@ -1,7 +1,7 @@
+import 'package:expense_tracker/core/budget_input.dart';
 import 'package:expense_tracker/core/failure.dart';
 import 'package:expense_tracker/core/local_day.dart';
 import 'package:expense_tracker/core/models/room.dart';
-import 'package:expense_tracker/core/money.dart';
 import 'package:expense_tracker/core/result.dart';
 import 'package:expense_tracker/data/data_providers.dart';
 import 'package:expense_tracker/services/service_providers.dart';
@@ -114,16 +114,6 @@ final class RoomEditorState {
       savedId: savedId ?? this.savedId,
     );
   }
-}
-
-/// Most rupee digits a budget takes (₹99,99,99,999).
-const int maxBudgetDigits = 9;
-
-/// Parses a whole-rupee budget; null when empty or not a number.
-Money? parseBudget(String text) {
-  final rupees = int.tryParse(text.trim());
-  if (rupees == null || rupees <= 0) return null;
-  return Money(rupees * Currency.inr.minorPerMajor);
 }
 
 /// The Room form's view model, keyed by the Room id (null to create).

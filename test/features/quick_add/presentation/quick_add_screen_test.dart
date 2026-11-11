@@ -56,6 +56,7 @@ void main() {
     await pumpApp(tester);
     await addExpense(tester, '100', 'Food & Dining');
 
+    await bringIntoView(tester, find.bySemanticsLabel(RegExp('₹100 spent, ')));
     await tester.tap(find.bySemanticsLabel(RegExp('₹100 spent, ')));
     await tester.pumpAndSettle();
     expect(find.text('Edit expense'), findsOneWidget);
@@ -73,6 +74,7 @@ void main() {
     await pumpApp(tester);
     await addExpense(tester, '100', 'Food & Dining');
 
+    await bringIntoView(tester, find.bySemanticsLabel(RegExp('₹100 spent, ')));
     await tester.tap(find.bySemanticsLabel(RegExp('₹100 spent, ')));
     await tester.pumpAndSettle();
     await tester.tap(find.byTooltip('Delete'));

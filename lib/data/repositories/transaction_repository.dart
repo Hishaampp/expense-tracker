@@ -27,12 +27,17 @@ class TransactionRepository {
   final AppLogger _log;
 
   /// Transactions whose time falls in [period], newest first.
-  Stream<List<MoneyTransaction>> watchInPeriod(MonthPeriod period) {
+  Stream<List<MoneyTransaction>> watchInPeriod(MonthPeriod period) =>
+      watchBetween(period.startUtcMs, period.endUtcMs);
+
+  /// Transactions from [startUtcMs] (inclusive) to [endUtcMs] (exclusive),
+  /// newest first.
+  Stream<List<MoneyTransaction>> watchBetween(int startUtcMs, int endUtcMs) {
     final query = _db.select(_db.transactions)
       ..where(
         (t) =>
-            t.occurredAt.isBiggerOrEqualValue(period.startUtcMs) &
-            t.occurredAt.isSmallerThanValue(period.endUtcMs),
+            t.occurredAt.isBiggerOrEqualValue(startUtcMs) &
+            t.occurredAt.isSmallerThanValue(endUtcMs),
       )
       ..orderBy([
         (t) => OrderingTerm.desc(t.occurredAt),

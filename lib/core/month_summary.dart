@@ -16,6 +16,7 @@ final class MonthSummary {
     required this.spentForBudget,
     required this.moneyIn,
     required this.byCategory,
+    required this.budgetByCategory,
   });
 
   /// Folds [transactions] into totals. Hidden transactions and transfers
@@ -33,6 +34,17 @@ final class MonthSummary {
     var outsideBudget = 0;
     var moneyIn = 0;
     final perCategory = <String?, int>{};
+    final budgetCategory = <String?, int>{};
+    void count(MoneyTransaction txn, int signed) {
+      final room = txn.roomId;
+      if (room != null && !budgetRoomIds.contains(room)) return;
+      budgetCategory.update(
+        txn.categoryId,
+        (v) => v + signed,
+        ifAbsent: () => signed,
+      );
+    }
+
     for (final txn in transactions) {
       if (txn.isHidden) continue;
       final paise = txn.amount.paise;
@@ -48,6 +60,7 @@ final class MonthSummary {
             (v) => v + paise,
             ifAbsent: () => paise,
           );
+          count(txn, paise);
         case TransactionKind.refund:
           spent -= paise;
           if (txn.roomId case final room?) {
@@ -59,6 +72,7 @@ final class MonthSummary {
             (v) => v - paise,
             ifAbsent: () => -paise,
           );
+          count(txn, -paise);
         case TransactionKind.income:
           moneyIn += paise;
         case TransactionKind.transfer:
@@ -75,6 +89,10 @@ final class MonthSummary {
       spentForBudget: Money(spent - outsideBudget),
       moneyIn: Money(moneyIn),
       byCategory: List.unmodifiable(byCategory),
+      budgetByCategory: Map.unmodifiable({
+        for (final entry in budgetCategory.entries)
+          entry.key: Money(entry.value),
+      }),
     );
   }
 
@@ -93,4 +111,8 @@ final class MonthSummary {
 
   /// Spending per category, largest first. A null id is "uncategorised".
   final List<CategorySpend> byCategory;
+
+  /// Budget-counted spending per category (Rooms outside the budget left
+  /// out), for category budgets. A null key is "uncategorised".
+  final Map<String?, Money> budgetByCategory;
 }

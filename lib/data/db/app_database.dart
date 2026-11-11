@@ -22,6 +22,8 @@ part 'app_database.g.dart';
     RawCaptures,
     TransactionSources,
     UnparsedMessages,
+    Budgets,
+    FiredAlerts,
   ],
 )
 class AppDatabase extends _$AppDatabase {
@@ -49,7 +51,7 @@ class AppDatabase extends _$AppDatabase {
   final Clock _clock;
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -62,6 +64,11 @@ class AppDatabase extends _$AppDatabase {
         await m.createTable(schema.transactionSources);
         await m.createTable(schema.unparsed);
         await m.createIndex(schema.transactionSourcesTransaction);
+      },
+      from2To3: (m, schema) async {
+        // Phase 6: budgets and the alerts already shown (spec §10).
+        await m.createTable(schema.budgets);
+        await m.createTable(schema.firedAlerts);
       },
     ),
     beforeOpen: (details) async {
