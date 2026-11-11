@@ -480,6 +480,502 @@ class AccountsCompanion extends UpdateCompanion<AccountRow> {
   }
 }
 
+class $SyncMetaTable extends SyncMeta
+    with TableInfo<$SyncMetaTable, SyncMetaRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $SyncMetaTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _keyMeta = const VerificationMeta('key');
+  @override
+  late final GeneratedColumn<String> key = GeneratedColumn<String>(
+    'key',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _valueMeta = const VerificationMeta('value');
+  @override
+  late final GeneratedColumn<String> value = GeneratedColumn<String>(
+    'value',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [key, value];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'sync_meta';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<SyncMetaRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('key')) {
+      context.handle(
+        _keyMeta,
+        key.isAcceptableOrUnknown(data['key']!, _keyMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_keyMeta);
+    }
+    if (data.containsKey('value')) {
+      context.handle(
+        _valueMeta,
+        value.isAcceptableOrUnknown(data['value']!, _valueMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_valueMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {key};
+  @override
+  SyncMetaRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return SyncMetaRow(
+      key: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}key'],
+      )!,
+      value: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}value'],
+      )!,
+    );
+  }
+
+  @override
+  $SyncMetaTable createAlias(String alias) {
+    return $SyncMetaTable(attachedDatabase, alias);
+  }
+
+  @override
+  bool get isStrict => true;
+}
+
+class SyncMetaRow extends DataClass implements Insertable<SyncMetaRow> {
+  /// `enabled`, `cursor` or `applying`.
+  final String key;
+
+  /// Its value.
+  final String value;
+  const SyncMetaRow({required this.key, required this.value});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['key'] = Variable<String>(key);
+    map['value'] = Variable<String>(value);
+    return map;
+  }
+
+  SyncMetaCompanion toCompanion(bool nullToAbsent) {
+    return SyncMetaCompanion(key: Value(key), value: Value(value));
+  }
+
+  factory SyncMetaRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return SyncMetaRow(
+      key: serializer.fromJson<String>(json['key']),
+      value: serializer.fromJson<String>(json['value']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'key': serializer.toJson<String>(key),
+      'value': serializer.toJson<String>(value),
+    };
+  }
+
+  SyncMetaRow copyWith({String? key, String? value}) =>
+      SyncMetaRow(key: key ?? this.key, value: value ?? this.value);
+  SyncMetaRow copyWithCompanion(SyncMetaCompanion data) {
+    return SyncMetaRow(
+      key: data.key.present ? data.key.value : this.key,
+      value: data.value.present ? data.value.value : this.value,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('SyncMetaRow(')
+          ..write('key: $key, ')
+          ..write('value: $value')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(key, value);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is SyncMetaRow &&
+          other.key == this.key &&
+          other.value == this.value);
+}
+
+class SyncMetaCompanion extends UpdateCompanion<SyncMetaRow> {
+  final Value<String> key;
+  final Value<String> value;
+  final Value<int> rowid;
+  const SyncMetaCompanion({
+    this.key = const Value.absent(),
+    this.value = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  SyncMetaCompanion.insert({
+    required String key,
+    required String value,
+    this.rowid = const Value.absent(),
+  }) : key = Value(key),
+       value = Value(value);
+  static Insertable<SyncMetaRow> custom({
+    Expression<String>? key,
+    Expression<String>? value,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (key != null) 'key': key,
+      if (value != null) 'value': value,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  SyncMetaCompanion copyWith({
+    Value<String>? key,
+    Value<String>? value,
+    Value<int>? rowid,
+  }) {
+    return SyncMetaCompanion(
+      key: key ?? this.key,
+      value: value ?? this.value,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (key.present) {
+      map['key'] = Variable<String>(key.value);
+    }
+    if (value.present) {
+      map['value'] = Variable<String>(value.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('SyncMetaCompanion(')
+          ..write('key: $key, ')
+          ..write('value: $value, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $SyncOutboxTable extends SyncOutbox
+    with TableInfo<$SyncOutboxTable, SyncOutboxRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $SyncOutboxTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _recordTableMeta = const VerificationMeta(
+    'recordTable',
+  );
+  @override
+  late final GeneratedColumn<String> recordTable = GeneratedColumn<String>(
+    'record_table',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _recordKeyMeta = const VerificationMeta(
+    'recordKey',
+  );
+  @override
+  late final GeneratedColumn<String> recordKey = GeneratedColumn<String>(
+    'record_key',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _changedAtMeta = const VerificationMeta(
+    'changedAt',
+  );
+  @override
+  late final GeneratedColumn<int> changedAt = GeneratedColumn<int>(
+    'changed_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [recordTable, recordKey, changedAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'sync_outbox';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<SyncOutboxRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('record_table')) {
+      context.handle(
+        _recordTableMeta,
+        recordTable.isAcceptableOrUnknown(
+          data['record_table']!,
+          _recordTableMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_recordTableMeta);
+    }
+    if (data.containsKey('record_key')) {
+      context.handle(
+        _recordKeyMeta,
+        recordKey.isAcceptableOrUnknown(data['record_key']!, _recordKeyMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_recordKeyMeta);
+    }
+    if (data.containsKey('changed_at')) {
+      context.handle(
+        _changedAtMeta,
+        changedAt.isAcceptableOrUnknown(data['changed_at']!, _changedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_changedAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {recordTable, recordKey};
+  @override
+  SyncOutboxRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return SyncOutboxRow(
+      recordTable: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}record_table'],
+      )!,
+      recordKey: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}record_key'],
+      )!,
+      changedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}changed_at'],
+      )!,
+    );
+  }
+
+  @override
+  $SyncOutboxTable createAlias(String alias) {
+    return $SyncOutboxTable(attachedDatabase, alias);
+  }
+
+  @override
+  bool get isStrict => true;
+}
+
+class SyncOutboxRow extends DataClass implements Insertable<SyncOutboxRow> {
+  /// The table changed, for example `transactions`.
+  final String recordTable;
+
+  /// The changed row's key in that table.
+  final String recordKey;
+
+  /// When it changed, UTC epoch milliseconds.
+  final int changedAt;
+  const SyncOutboxRow({
+    required this.recordTable,
+    required this.recordKey,
+    required this.changedAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['record_table'] = Variable<String>(recordTable);
+    map['record_key'] = Variable<String>(recordKey);
+    map['changed_at'] = Variable<int>(changedAt);
+    return map;
+  }
+
+  SyncOutboxCompanion toCompanion(bool nullToAbsent) {
+    return SyncOutboxCompanion(
+      recordTable: Value(recordTable),
+      recordKey: Value(recordKey),
+      changedAt: Value(changedAt),
+    );
+  }
+
+  factory SyncOutboxRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return SyncOutboxRow(
+      recordTable: serializer.fromJson<String>(json['recordTable']),
+      recordKey: serializer.fromJson<String>(json['recordKey']),
+      changedAt: serializer.fromJson<int>(json['changedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'recordTable': serializer.toJson<String>(recordTable),
+      'recordKey': serializer.toJson<String>(recordKey),
+      'changedAt': serializer.toJson<int>(changedAt),
+    };
+  }
+
+  SyncOutboxRow copyWith({
+    String? recordTable,
+    String? recordKey,
+    int? changedAt,
+  }) => SyncOutboxRow(
+    recordTable: recordTable ?? this.recordTable,
+    recordKey: recordKey ?? this.recordKey,
+    changedAt: changedAt ?? this.changedAt,
+  );
+  SyncOutboxRow copyWithCompanion(SyncOutboxCompanion data) {
+    return SyncOutboxRow(
+      recordTable: data.recordTable.present
+          ? data.recordTable.value
+          : this.recordTable,
+      recordKey: data.recordKey.present ? data.recordKey.value : this.recordKey,
+      changedAt: data.changedAt.present ? data.changedAt.value : this.changedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('SyncOutboxRow(')
+          ..write('recordTable: $recordTable, ')
+          ..write('recordKey: $recordKey, ')
+          ..write('changedAt: $changedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(recordTable, recordKey, changedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is SyncOutboxRow &&
+          other.recordTable == this.recordTable &&
+          other.recordKey == this.recordKey &&
+          other.changedAt == this.changedAt);
+}
+
+class SyncOutboxCompanion extends UpdateCompanion<SyncOutboxRow> {
+  final Value<String> recordTable;
+  final Value<String> recordKey;
+  final Value<int> changedAt;
+  final Value<int> rowid;
+  const SyncOutboxCompanion({
+    this.recordTable = const Value.absent(),
+    this.recordKey = const Value.absent(),
+    this.changedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  SyncOutboxCompanion.insert({
+    required String recordTable,
+    required String recordKey,
+    required int changedAt,
+    this.rowid = const Value.absent(),
+  }) : recordTable = Value(recordTable),
+       recordKey = Value(recordKey),
+       changedAt = Value(changedAt);
+  static Insertable<SyncOutboxRow> custom({
+    Expression<String>? recordTable,
+    Expression<String>? recordKey,
+    Expression<int>? changedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (recordTable != null) 'record_table': recordTable,
+      if (recordKey != null) 'record_key': recordKey,
+      if (changedAt != null) 'changed_at': changedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  SyncOutboxCompanion copyWith({
+    Value<String>? recordTable,
+    Value<String>? recordKey,
+    Value<int>? changedAt,
+    Value<int>? rowid,
+  }) {
+    return SyncOutboxCompanion(
+      recordTable: recordTable ?? this.recordTable,
+      recordKey: recordKey ?? this.recordKey,
+      changedAt: changedAt ?? this.changedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (recordTable.present) {
+      map['record_table'] = Variable<String>(recordTable.value);
+    }
+    if (recordKey.present) {
+      map['record_key'] = Variable<String>(recordKey.value);
+    }
+    if (changedAt.present) {
+      map['changed_at'] = Variable<int>(changedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('SyncOutboxCompanion(')
+          ..write('recordTable: $recordTable, ')
+          ..write('recordKey: $recordKey, ')
+          ..write('changedAt: $changedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 class $CategoriesTable extends Categories
     with TableInfo<$CategoriesTable, CategoryRow> {
   @override
@@ -2819,6 +3315,682 @@ class TransactionsCompanion extends UpdateCompanion<TransactionRow> {
   }
 }
 
+class $BudgetsTable extends Budgets with TableInfo<$BudgetsTable, BudgetRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $BudgetsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _categoryIdMeta = const VerificationMeta(
+    'categoryId',
+  );
+  @override
+  late final GeneratedColumn<String> categoryId = GeneratedColumn<String>(
+    'category_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES categories (id) ON DELETE CASCADE',
+    ),
+  );
+  static const VerificationMeta _amountPaiseMeta = const VerificationMeta(
+    'amountPaise',
+  );
+  @override
+  late final GeneratedColumn<int> amountPaise = GeneratedColumn<int>(
+    'amount_paise',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [id, categoryId, amountPaise];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'budgets';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<BudgetRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('category_id')) {
+      context.handle(
+        _categoryIdMeta,
+        categoryId.isAcceptableOrUnknown(data['category_id']!, _categoryIdMeta),
+      );
+    }
+    if (data.containsKey('amount_paise')) {
+      context.handle(
+        _amountPaiseMeta,
+        amountPaise.isAcceptableOrUnknown(
+          data['amount_paise']!,
+          _amountPaiseMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_amountPaiseMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  BudgetRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return BudgetRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      categoryId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}category_id'],
+      ),
+      amountPaise: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}amount_paise'],
+      )!,
+    );
+  }
+
+  @override
+  $BudgetsTable createAlias(String alias) {
+    return $BudgetsTable(attachedDatabase, alias);
+  }
+
+  @override
+  bool get isStrict => true;
+}
+
+class BudgetRow extends DataClass implements Insertable<BudgetRow> {
+  /// `month`, or `category:<categoryId>`.
+  final String id;
+
+  /// The category limited; null for the monthly budget.
+  final String? categoryId;
+
+  /// The limit in paise, every month.
+  final int amountPaise;
+  const BudgetRow({
+    required this.id,
+    this.categoryId,
+    required this.amountPaise,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    if (!nullToAbsent || categoryId != null) {
+      map['category_id'] = Variable<String>(categoryId);
+    }
+    map['amount_paise'] = Variable<int>(amountPaise);
+    return map;
+  }
+
+  BudgetsCompanion toCompanion(bool nullToAbsent) {
+    return BudgetsCompanion(
+      id: Value(id),
+      categoryId: categoryId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(categoryId),
+      amountPaise: Value(amountPaise),
+    );
+  }
+
+  factory BudgetRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return BudgetRow(
+      id: serializer.fromJson<String>(json['id']),
+      categoryId: serializer.fromJson<String?>(json['categoryId']),
+      amountPaise: serializer.fromJson<int>(json['amountPaise']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'categoryId': serializer.toJson<String?>(categoryId),
+      'amountPaise': serializer.toJson<int>(amountPaise),
+    };
+  }
+
+  BudgetRow copyWith({
+    String? id,
+    Value<String?> categoryId = const Value.absent(),
+    int? amountPaise,
+  }) => BudgetRow(
+    id: id ?? this.id,
+    categoryId: categoryId.present ? categoryId.value : this.categoryId,
+    amountPaise: amountPaise ?? this.amountPaise,
+  );
+  BudgetRow copyWithCompanion(BudgetsCompanion data) {
+    return BudgetRow(
+      id: data.id.present ? data.id.value : this.id,
+      categoryId: data.categoryId.present
+          ? data.categoryId.value
+          : this.categoryId,
+      amountPaise: data.amountPaise.present
+          ? data.amountPaise.value
+          : this.amountPaise,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('BudgetRow(')
+          ..write('id: $id, ')
+          ..write('categoryId: $categoryId, ')
+          ..write('amountPaise: $amountPaise')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, categoryId, amountPaise);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is BudgetRow &&
+          other.id == this.id &&
+          other.categoryId == this.categoryId &&
+          other.amountPaise == this.amountPaise);
+}
+
+class BudgetsCompanion extends UpdateCompanion<BudgetRow> {
+  final Value<String> id;
+  final Value<String?> categoryId;
+  final Value<int> amountPaise;
+  final Value<int> rowid;
+  const BudgetsCompanion({
+    this.id = const Value.absent(),
+    this.categoryId = const Value.absent(),
+    this.amountPaise = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  BudgetsCompanion.insert({
+    required String id,
+    this.categoryId = const Value.absent(),
+    required int amountPaise,
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       amountPaise = Value(amountPaise);
+  static Insertable<BudgetRow> custom({
+    Expression<String>? id,
+    Expression<String>? categoryId,
+    Expression<int>? amountPaise,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (categoryId != null) 'category_id': categoryId,
+      if (amountPaise != null) 'amount_paise': amountPaise,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  BudgetsCompanion copyWith({
+    Value<String>? id,
+    Value<String?>? categoryId,
+    Value<int>? amountPaise,
+    Value<int>? rowid,
+  }) {
+    return BudgetsCompanion(
+      id: id ?? this.id,
+      categoryId: categoryId ?? this.categoryId,
+      amountPaise: amountPaise ?? this.amountPaise,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (categoryId.present) {
+      map['category_id'] = Variable<String>(categoryId.value);
+    }
+    if (amountPaise.present) {
+      map['amount_paise'] = Variable<int>(amountPaise.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('BudgetsCompanion(')
+          ..write('id: $id, ')
+          ..write('categoryId: $categoryId, ')
+          ..write('amountPaise: $amountPaise, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $PayeeRulesTable extends PayeeRules
+    with TableInfo<$PayeeRulesTable, PayeeRuleRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $PayeeRulesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _payeeKeyMeta = const VerificationMeta(
+    'payeeKey',
+  );
+  @override
+  late final GeneratedColumn<String> payeeKey = GeneratedColumn<String>(
+    'payee_key',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _categoryIdMeta = const VerificationMeta(
+    'categoryId',
+  );
+  @override
+  late final GeneratedColumn<String> categoryId = GeneratedColumn<String>(
+    'category_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES categories (id) ON DELETE SET NULL',
+    ),
+  );
+  static const VerificationMeta _roomIdMeta = const VerificationMeta('roomId');
+  @override
+  late final GeneratedColumn<String> roomId = GeneratedColumn<String>(
+    'room_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES rooms (id) ON DELETE SET NULL',
+    ),
+  );
+  static const VerificationMeta _displayNameMeta = const VerificationMeta(
+    'displayName',
+  );
+  @override
+  late final GeneratedColumn<String> displayName = GeneratedColumn<String>(
+    'display_name',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<int> updatedAt = GeneratedColumn<int>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    payeeKey,
+    categoryId,
+    roomId,
+    displayName,
+    updatedAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'payee_rules';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<PayeeRuleRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('payee_key')) {
+      context.handle(
+        _payeeKeyMeta,
+        payeeKey.isAcceptableOrUnknown(data['payee_key']!, _payeeKeyMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_payeeKeyMeta);
+    }
+    if (data.containsKey('category_id')) {
+      context.handle(
+        _categoryIdMeta,
+        categoryId.isAcceptableOrUnknown(data['category_id']!, _categoryIdMeta),
+      );
+    }
+    if (data.containsKey('room_id')) {
+      context.handle(
+        _roomIdMeta,
+        roomId.isAcceptableOrUnknown(data['room_id']!, _roomIdMeta),
+      );
+    }
+    if (data.containsKey('display_name')) {
+      context.handle(
+        _displayNameMeta,
+        displayName.isAcceptableOrUnknown(
+          data['display_name']!,
+          _displayNameMeta,
+        ),
+      );
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_updatedAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {payeeKey};
+  @override
+  PayeeRuleRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return PayeeRuleRow(
+      payeeKey: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}payee_key'],
+      )!,
+      categoryId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}category_id'],
+      ),
+      roomId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}room_id'],
+      ),
+      displayName: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}display_name'],
+      ),
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}updated_at'],
+      )!,
+    );
+  }
+
+  @override
+  $PayeeRulesTable createAlias(String alias) {
+    return $PayeeRulesTable(attachedDatabase, alias);
+  }
+
+  @override
+  bool get isStrict => true;
+}
+
+class PayeeRuleRow extends DataClass implements Insertable<PayeeRuleRow> {
+  /// The normalised payee key, for example a UPI id.
+  final String payeeKey;
+
+  /// The category its payments always get; null asks each time.
+  final String? categoryId;
+
+  /// The Room its payments go to while that Room is active; null for none.
+  final String? roomId;
+
+  /// The name the user gave it ("Sharma Dairy"); null keeps the bank's.
+  final String? displayName;
+
+  /// Last change, UTC epoch milliseconds.
+  final int updatedAt;
+  const PayeeRuleRow({
+    required this.payeeKey,
+    this.categoryId,
+    this.roomId,
+    this.displayName,
+    required this.updatedAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['payee_key'] = Variable<String>(payeeKey);
+    if (!nullToAbsent || categoryId != null) {
+      map['category_id'] = Variable<String>(categoryId);
+    }
+    if (!nullToAbsent || roomId != null) {
+      map['room_id'] = Variable<String>(roomId);
+    }
+    if (!nullToAbsent || displayName != null) {
+      map['display_name'] = Variable<String>(displayName);
+    }
+    map['updated_at'] = Variable<int>(updatedAt);
+    return map;
+  }
+
+  PayeeRulesCompanion toCompanion(bool nullToAbsent) {
+    return PayeeRulesCompanion(
+      payeeKey: Value(payeeKey),
+      categoryId: categoryId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(categoryId),
+      roomId: roomId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(roomId),
+      displayName: displayName == null && nullToAbsent
+          ? const Value.absent()
+          : Value(displayName),
+      updatedAt: Value(updatedAt),
+    );
+  }
+
+  factory PayeeRuleRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return PayeeRuleRow(
+      payeeKey: serializer.fromJson<String>(json['payeeKey']),
+      categoryId: serializer.fromJson<String?>(json['categoryId']),
+      roomId: serializer.fromJson<String?>(json['roomId']),
+      displayName: serializer.fromJson<String?>(json['displayName']),
+      updatedAt: serializer.fromJson<int>(json['updatedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'payeeKey': serializer.toJson<String>(payeeKey),
+      'categoryId': serializer.toJson<String?>(categoryId),
+      'roomId': serializer.toJson<String?>(roomId),
+      'displayName': serializer.toJson<String?>(displayName),
+      'updatedAt': serializer.toJson<int>(updatedAt),
+    };
+  }
+
+  PayeeRuleRow copyWith({
+    String? payeeKey,
+    Value<String?> categoryId = const Value.absent(),
+    Value<String?> roomId = const Value.absent(),
+    Value<String?> displayName = const Value.absent(),
+    int? updatedAt,
+  }) => PayeeRuleRow(
+    payeeKey: payeeKey ?? this.payeeKey,
+    categoryId: categoryId.present ? categoryId.value : this.categoryId,
+    roomId: roomId.present ? roomId.value : this.roomId,
+    displayName: displayName.present ? displayName.value : this.displayName,
+    updatedAt: updatedAt ?? this.updatedAt,
+  );
+  PayeeRuleRow copyWithCompanion(PayeeRulesCompanion data) {
+    return PayeeRuleRow(
+      payeeKey: data.payeeKey.present ? data.payeeKey.value : this.payeeKey,
+      categoryId: data.categoryId.present
+          ? data.categoryId.value
+          : this.categoryId,
+      roomId: data.roomId.present ? data.roomId.value : this.roomId,
+      displayName: data.displayName.present
+          ? data.displayName.value
+          : this.displayName,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('PayeeRuleRow(')
+          ..write('payeeKey: $payeeKey, ')
+          ..write('categoryId: $categoryId, ')
+          ..write('roomId: $roomId, ')
+          ..write('displayName: $displayName, ')
+          ..write('updatedAt: $updatedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(payeeKey, categoryId, roomId, displayName, updatedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is PayeeRuleRow &&
+          other.payeeKey == this.payeeKey &&
+          other.categoryId == this.categoryId &&
+          other.roomId == this.roomId &&
+          other.displayName == this.displayName &&
+          other.updatedAt == this.updatedAt);
+}
+
+class PayeeRulesCompanion extends UpdateCompanion<PayeeRuleRow> {
+  final Value<String> payeeKey;
+  final Value<String?> categoryId;
+  final Value<String?> roomId;
+  final Value<String?> displayName;
+  final Value<int> updatedAt;
+  final Value<int> rowid;
+  const PayeeRulesCompanion({
+    this.payeeKey = const Value.absent(),
+    this.categoryId = const Value.absent(),
+    this.roomId = const Value.absent(),
+    this.displayName = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  PayeeRulesCompanion.insert({
+    required String payeeKey,
+    this.categoryId = const Value.absent(),
+    this.roomId = const Value.absent(),
+    this.displayName = const Value.absent(),
+    required int updatedAt,
+    this.rowid = const Value.absent(),
+  }) : payeeKey = Value(payeeKey),
+       updatedAt = Value(updatedAt);
+  static Insertable<PayeeRuleRow> custom({
+    Expression<String>? payeeKey,
+    Expression<String>? categoryId,
+    Expression<String>? roomId,
+    Expression<String>? displayName,
+    Expression<int>? updatedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (payeeKey != null) 'payee_key': payeeKey,
+      if (categoryId != null) 'category_id': categoryId,
+      if (roomId != null) 'room_id': roomId,
+      if (displayName != null) 'display_name': displayName,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  PayeeRulesCompanion copyWith({
+    Value<String>? payeeKey,
+    Value<String?>? categoryId,
+    Value<String?>? roomId,
+    Value<String?>? displayName,
+    Value<int>? updatedAt,
+    Value<int>? rowid,
+  }) {
+    return PayeeRulesCompanion(
+      payeeKey: payeeKey ?? this.payeeKey,
+      categoryId: categoryId ?? this.categoryId,
+      roomId: roomId ?? this.roomId,
+      displayName: displayName ?? this.displayName,
+      updatedAt: updatedAt ?? this.updatedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (payeeKey.present) {
+      map['payee_key'] = Variable<String>(payeeKey.value);
+    }
+    if (categoryId.present) {
+      map['category_id'] = Variable<String>(categoryId.value);
+    }
+    if (roomId.present) {
+      map['room_id'] = Variable<String>(roomId.value);
+    }
+    if (displayName.present) {
+      map['display_name'] = Variable<String>(displayName.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<int>(updatedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('PayeeRulesCompanion(')
+          ..write('payeeKey: $payeeKey, ')
+          ..write('categoryId: $categoryId, ')
+          ..write('roomId: $roomId, ')
+          ..write('displayName: $displayName, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 class $SettingsTable extends Settings
     with TableInfo<$SettingsTable, SettingRow> {
   @override
@@ -4540,288 +5712,6 @@ class UnparsedMessagesCompanion extends UpdateCompanion<UnparsedRow> {
   }
 }
 
-class $BudgetsTable extends Budgets with TableInfo<$BudgetsTable, BudgetRow> {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  $BudgetsTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedColumn<String> id = GeneratedColumn<String>(
-    'id',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _categoryIdMeta = const VerificationMeta(
-    'categoryId',
-  );
-  @override
-  late final GeneratedColumn<String> categoryId = GeneratedColumn<String>(
-    'category_id',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES categories (id) ON DELETE CASCADE',
-    ),
-  );
-  static const VerificationMeta _amountPaiseMeta = const VerificationMeta(
-    'amountPaise',
-  );
-  @override
-  late final GeneratedColumn<int> amountPaise = GeneratedColumn<int>(
-    'amount_paise',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  @override
-  List<GeneratedColumn> get $columns => [id, categoryId, amountPaise];
-  @override
-  String get aliasedName => _alias ?? actualTableName;
-  @override
-  String get actualTableName => $name;
-  static const String $name = 'budgets';
-  @override
-  VerificationContext validateIntegrity(
-    Insertable<BudgetRow> instance, {
-    bool isInserting = false,
-  }) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    } else if (isInserting) {
-      context.missing(_idMeta);
-    }
-    if (data.containsKey('category_id')) {
-      context.handle(
-        _categoryIdMeta,
-        categoryId.isAcceptableOrUnknown(data['category_id']!, _categoryIdMeta),
-      );
-    }
-    if (data.containsKey('amount_paise')) {
-      context.handle(
-        _amountPaiseMeta,
-        amountPaise.isAcceptableOrUnknown(
-          data['amount_paise']!,
-          _amountPaiseMeta,
-        ),
-      );
-    } else if (isInserting) {
-      context.missing(_amountPaiseMeta);
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {id};
-  @override
-  BudgetRow map(Map<String, dynamic> data, {String? tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return BudgetRow(
-      id: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}id'],
-      )!,
-      categoryId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}category_id'],
-      ),
-      amountPaise: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}amount_paise'],
-      )!,
-    );
-  }
-
-  @override
-  $BudgetsTable createAlias(String alias) {
-    return $BudgetsTable(attachedDatabase, alias);
-  }
-
-  @override
-  bool get isStrict => true;
-}
-
-class BudgetRow extends DataClass implements Insertable<BudgetRow> {
-  /// `month`, or `category:<categoryId>`.
-  final String id;
-
-  /// The category limited; null for the monthly budget.
-  final String? categoryId;
-
-  /// The limit in paise, every month.
-  final int amountPaise;
-  const BudgetRow({
-    required this.id,
-    this.categoryId,
-    required this.amountPaise,
-  });
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['id'] = Variable<String>(id);
-    if (!nullToAbsent || categoryId != null) {
-      map['category_id'] = Variable<String>(categoryId);
-    }
-    map['amount_paise'] = Variable<int>(amountPaise);
-    return map;
-  }
-
-  BudgetsCompanion toCompanion(bool nullToAbsent) {
-    return BudgetsCompanion(
-      id: Value(id),
-      categoryId: categoryId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(categoryId),
-      amountPaise: Value(amountPaise),
-    );
-  }
-
-  factory BudgetRow.fromJson(
-    Map<String, dynamic> json, {
-    ValueSerializer? serializer,
-  }) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return BudgetRow(
-      id: serializer.fromJson<String>(json['id']),
-      categoryId: serializer.fromJson<String?>(json['categoryId']),
-      amountPaise: serializer.fromJson<int>(json['amountPaise']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'id': serializer.toJson<String>(id),
-      'categoryId': serializer.toJson<String?>(categoryId),
-      'amountPaise': serializer.toJson<int>(amountPaise),
-    };
-  }
-
-  BudgetRow copyWith({
-    String? id,
-    Value<String?> categoryId = const Value.absent(),
-    int? amountPaise,
-  }) => BudgetRow(
-    id: id ?? this.id,
-    categoryId: categoryId.present ? categoryId.value : this.categoryId,
-    amountPaise: amountPaise ?? this.amountPaise,
-  );
-  BudgetRow copyWithCompanion(BudgetsCompanion data) {
-    return BudgetRow(
-      id: data.id.present ? data.id.value : this.id,
-      categoryId: data.categoryId.present
-          ? data.categoryId.value
-          : this.categoryId,
-      amountPaise: data.amountPaise.present
-          ? data.amountPaise.value
-          : this.amountPaise,
-    );
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('BudgetRow(')
-          ..write('id: $id, ')
-          ..write('categoryId: $categoryId, ')
-          ..write('amountPaise: $amountPaise')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => Object.hash(id, categoryId, amountPaise);
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is BudgetRow &&
-          other.id == this.id &&
-          other.categoryId == this.categoryId &&
-          other.amountPaise == this.amountPaise);
-}
-
-class BudgetsCompanion extends UpdateCompanion<BudgetRow> {
-  final Value<String> id;
-  final Value<String?> categoryId;
-  final Value<int> amountPaise;
-  final Value<int> rowid;
-  const BudgetsCompanion({
-    this.id = const Value.absent(),
-    this.categoryId = const Value.absent(),
-    this.amountPaise = const Value.absent(),
-    this.rowid = const Value.absent(),
-  });
-  BudgetsCompanion.insert({
-    required String id,
-    this.categoryId = const Value.absent(),
-    required int amountPaise,
-    this.rowid = const Value.absent(),
-  }) : id = Value(id),
-       amountPaise = Value(amountPaise);
-  static Insertable<BudgetRow> custom({
-    Expression<String>? id,
-    Expression<String>? categoryId,
-    Expression<int>? amountPaise,
-    Expression<int>? rowid,
-  }) {
-    return RawValuesInsertable({
-      if (id != null) 'id': id,
-      if (categoryId != null) 'category_id': categoryId,
-      if (amountPaise != null) 'amount_paise': amountPaise,
-      if (rowid != null) 'rowid': rowid,
-    });
-  }
-
-  BudgetsCompanion copyWith({
-    Value<String>? id,
-    Value<String?>? categoryId,
-    Value<int>? amountPaise,
-    Value<int>? rowid,
-  }) {
-    return BudgetsCompanion(
-      id: id ?? this.id,
-      categoryId: categoryId ?? this.categoryId,
-      amountPaise: amountPaise ?? this.amountPaise,
-      rowid: rowid ?? this.rowid,
-    );
-  }
-
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    if (id.present) {
-      map['id'] = Variable<String>(id.value);
-    }
-    if (categoryId.present) {
-      map['category_id'] = Variable<String>(categoryId.value);
-    }
-    if (amountPaise.present) {
-      map['amount_paise'] = Variable<int>(amountPaise.value);
-    }
-    if (rowid.present) {
-      map['rowid'] = Variable<int>(rowid.value);
-    }
-    return map;
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('BudgetsCompanion(')
-          ..write('id: $id, ')
-          ..write('categoryId: $categoryId, ')
-          ..write('amountPaise: $amountPaise, ')
-          ..write('rowid: $rowid')
-          ..write(')'))
-        .toString();
-  }
-}
-
 class $FiredAlertsTable extends FiredAlerts
     with TableInfo<$FiredAlertsTable, FiredAlertRow> {
   @override
@@ -5506,358 +6396,199 @@ class NoticesCompanion extends UpdateCompanion<NoticeRow> {
   }
 }
 
-class $PayeeRulesTable extends PayeeRules
-    with TableInfo<$PayeeRulesTable, PayeeRuleRow> {
+class $SyncStateTable extends SyncState
+    with TableInfo<$SyncStateTable, SyncStateRow> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $PayeeRulesTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _payeeKeyMeta = const VerificationMeta(
-    'payeeKey',
+  $SyncStateTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _recordIdMeta = const VerificationMeta(
+    'recordId',
   );
   @override
-  late final GeneratedColumn<String> payeeKey = GeneratedColumn<String>(
-    'payee_key',
+  late final GeneratedColumn<String> recordId = GeneratedColumn<String>(
+    'record_id',
     aliasedName,
     false,
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _categoryIdMeta = const VerificationMeta(
-    'categoryId',
+  static const VerificationMeta _changedAtMeta = const VerificationMeta(
+    'changedAt',
   );
   @override
-  late final GeneratedColumn<String> categoryId = GeneratedColumn<String>(
-    'category_id',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES categories (id) ON DELETE SET NULL',
-    ),
-  );
-  static const VerificationMeta _roomIdMeta = const VerificationMeta('roomId');
-  @override
-  late final GeneratedColumn<String> roomId = GeneratedColumn<String>(
-    'room_id',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES rooms (id) ON DELETE SET NULL',
-    ),
-  );
-  static const VerificationMeta _displayNameMeta = const VerificationMeta(
-    'displayName',
-  );
-  @override
-  late final GeneratedColumn<String> displayName = GeneratedColumn<String>(
-    'display_name',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
-    'updatedAt',
-  );
-  @override
-  late final GeneratedColumn<int> updatedAt = GeneratedColumn<int>(
-    'updated_at',
+  late final GeneratedColumn<int> changedAt = GeneratedColumn<int>(
+    'changed_at',
     aliasedName,
     false,
     type: DriftSqlType.int,
     requiredDuringInsert: true,
   );
   @override
-  List<GeneratedColumn> get $columns => [
-    payeeKey,
-    categoryId,
-    roomId,
-    displayName,
-    updatedAt,
-  ];
+  List<GeneratedColumn> get $columns => [recordId, changedAt];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
-  static const String $name = 'payee_rules';
+  static const String $name = 'sync_state';
   @override
   VerificationContext validateIntegrity(
-    Insertable<PayeeRuleRow> instance, {
+    Insertable<SyncStateRow> instance, {
     bool isInserting = false,
   }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
-    if (data.containsKey('payee_key')) {
+    if (data.containsKey('record_id')) {
       context.handle(
-        _payeeKeyMeta,
-        payeeKey.isAcceptableOrUnknown(data['payee_key']!, _payeeKeyMeta),
+        _recordIdMeta,
+        recordId.isAcceptableOrUnknown(data['record_id']!, _recordIdMeta),
       );
     } else if (isInserting) {
-      context.missing(_payeeKeyMeta);
+      context.missing(_recordIdMeta);
     }
-    if (data.containsKey('category_id')) {
+    if (data.containsKey('changed_at')) {
       context.handle(
-        _categoryIdMeta,
-        categoryId.isAcceptableOrUnknown(data['category_id']!, _categoryIdMeta),
-      );
-    }
-    if (data.containsKey('room_id')) {
-      context.handle(
-        _roomIdMeta,
-        roomId.isAcceptableOrUnknown(data['room_id']!, _roomIdMeta),
-      );
-    }
-    if (data.containsKey('display_name')) {
-      context.handle(
-        _displayNameMeta,
-        displayName.isAcceptableOrUnknown(
-          data['display_name']!,
-          _displayNameMeta,
-        ),
-      );
-    }
-    if (data.containsKey('updated_at')) {
-      context.handle(
-        _updatedAtMeta,
-        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+        _changedAtMeta,
+        changedAt.isAcceptableOrUnknown(data['changed_at']!, _changedAtMeta),
       );
     } else if (isInserting) {
-      context.missing(_updatedAtMeta);
+      context.missing(_changedAtMeta);
     }
     return context;
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {payeeKey};
+  Set<GeneratedColumn> get $primaryKey => {recordId};
   @override
-  PayeeRuleRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+  SyncStateRow map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return PayeeRuleRow(
-      payeeKey: attachedDatabase.typeMapping.read(
+    return SyncStateRow(
+      recordId: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
-        data['${effectivePrefix}payee_key'],
+        data['${effectivePrefix}record_id'],
       )!,
-      categoryId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}category_id'],
-      ),
-      roomId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}room_id'],
-      ),
-      displayName: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}display_name'],
-      ),
-      updatedAt: attachedDatabase.typeMapping.read(
+      changedAt: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
-        data['${effectivePrefix}updated_at'],
+        data['${effectivePrefix}changed_at'],
       )!,
     );
   }
 
   @override
-  $PayeeRulesTable createAlias(String alias) {
-    return $PayeeRulesTable(attachedDatabase, alias);
+  $SyncStateTable createAlias(String alias) {
+    return $SyncStateTable(attachedDatabase, alias);
   }
 
   @override
   bool get isStrict => true;
 }
 
-class PayeeRuleRow extends DataClass implements Insertable<PayeeRuleRow> {
-  /// The normalised payee key, for example a UPI id.
-  final String payeeKey;
+class SyncStateRow extends DataClass implements Insertable<SyncStateRow> {
+  /// The opaque record id the server knows.
+  final String recordId;
 
-  /// The category its payments always get; null asks each time.
-  final String? categoryId;
-
-  /// The Room its payments go to while that Room is active; null for none.
-  final String? roomId;
-
-  /// The name the user gave it ("Sharma Dairy"); null keeps the bank's.
-  final String? displayName;
-
-  /// Last change, UTC epoch milliseconds.
-  final int updatedAt;
-  const PayeeRuleRow({
-    required this.payeeKey,
-    this.categoryId,
-    this.roomId,
-    this.displayName,
-    required this.updatedAt,
-  });
+  /// When that version was made, UTC epoch milliseconds.
+  final int changedAt;
+  const SyncStateRow({required this.recordId, required this.changedAt});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    map['payee_key'] = Variable<String>(payeeKey);
-    if (!nullToAbsent || categoryId != null) {
-      map['category_id'] = Variable<String>(categoryId);
-    }
-    if (!nullToAbsent || roomId != null) {
-      map['room_id'] = Variable<String>(roomId);
-    }
-    if (!nullToAbsent || displayName != null) {
-      map['display_name'] = Variable<String>(displayName);
-    }
-    map['updated_at'] = Variable<int>(updatedAt);
+    map['record_id'] = Variable<String>(recordId);
+    map['changed_at'] = Variable<int>(changedAt);
     return map;
   }
 
-  PayeeRulesCompanion toCompanion(bool nullToAbsent) {
-    return PayeeRulesCompanion(
-      payeeKey: Value(payeeKey),
-      categoryId: categoryId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(categoryId),
-      roomId: roomId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(roomId),
-      displayName: displayName == null && nullToAbsent
-          ? const Value.absent()
-          : Value(displayName),
-      updatedAt: Value(updatedAt),
+  SyncStateCompanion toCompanion(bool nullToAbsent) {
+    return SyncStateCompanion(
+      recordId: Value(recordId),
+      changedAt: Value(changedAt),
     );
   }
 
-  factory PayeeRuleRow.fromJson(
+  factory SyncStateRow.fromJson(
     Map<String, dynamic> json, {
     ValueSerializer? serializer,
   }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return PayeeRuleRow(
-      payeeKey: serializer.fromJson<String>(json['payeeKey']),
-      categoryId: serializer.fromJson<String?>(json['categoryId']),
-      roomId: serializer.fromJson<String?>(json['roomId']),
-      displayName: serializer.fromJson<String?>(json['displayName']),
-      updatedAt: serializer.fromJson<int>(json['updatedAt']),
+    return SyncStateRow(
+      recordId: serializer.fromJson<String>(json['recordId']),
+      changedAt: serializer.fromJson<int>(json['changedAt']),
     );
   }
   @override
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'payeeKey': serializer.toJson<String>(payeeKey),
-      'categoryId': serializer.toJson<String?>(categoryId),
-      'roomId': serializer.toJson<String?>(roomId),
-      'displayName': serializer.toJson<String?>(displayName),
-      'updatedAt': serializer.toJson<int>(updatedAt),
+      'recordId': serializer.toJson<String>(recordId),
+      'changedAt': serializer.toJson<int>(changedAt),
     };
   }
 
-  PayeeRuleRow copyWith({
-    String? payeeKey,
-    Value<String?> categoryId = const Value.absent(),
-    Value<String?> roomId = const Value.absent(),
-    Value<String?> displayName = const Value.absent(),
-    int? updatedAt,
-  }) => PayeeRuleRow(
-    payeeKey: payeeKey ?? this.payeeKey,
-    categoryId: categoryId.present ? categoryId.value : this.categoryId,
-    roomId: roomId.present ? roomId.value : this.roomId,
-    displayName: displayName.present ? displayName.value : this.displayName,
-    updatedAt: updatedAt ?? this.updatedAt,
+  SyncStateRow copyWith({String? recordId, int? changedAt}) => SyncStateRow(
+    recordId: recordId ?? this.recordId,
+    changedAt: changedAt ?? this.changedAt,
   );
-  PayeeRuleRow copyWithCompanion(PayeeRulesCompanion data) {
-    return PayeeRuleRow(
-      payeeKey: data.payeeKey.present ? data.payeeKey.value : this.payeeKey,
-      categoryId: data.categoryId.present
-          ? data.categoryId.value
-          : this.categoryId,
-      roomId: data.roomId.present ? data.roomId.value : this.roomId,
-      displayName: data.displayName.present
-          ? data.displayName.value
-          : this.displayName,
-      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+  SyncStateRow copyWithCompanion(SyncStateCompanion data) {
+    return SyncStateRow(
+      recordId: data.recordId.present ? data.recordId.value : this.recordId,
+      changedAt: data.changedAt.present ? data.changedAt.value : this.changedAt,
     );
   }
 
   @override
   String toString() {
-    return (StringBuffer('PayeeRuleRow(')
-          ..write('payeeKey: $payeeKey, ')
-          ..write('categoryId: $categoryId, ')
-          ..write('roomId: $roomId, ')
-          ..write('displayName: $displayName, ')
-          ..write('updatedAt: $updatedAt')
+    return (StringBuffer('SyncStateRow(')
+          ..write('recordId: $recordId, ')
+          ..write('changedAt: $changedAt')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode =>
-      Object.hash(payeeKey, categoryId, roomId, displayName, updatedAt);
+  int get hashCode => Object.hash(recordId, changedAt);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is PayeeRuleRow &&
-          other.payeeKey == this.payeeKey &&
-          other.categoryId == this.categoryId &&
-          other.roomId == this.roomId &&
-          other.displayName == this.displayName &&
-          other.updatedAt == this.updatedAt);
+      (other is SyncStateRow &&
+          other.recordId == this.recordId &&
+          other.changedAt == this.changedAt);
 }
 
-class PayeeRulesCompanion extends UpdateCompanion<PayeeRuleRow> {
-  final Value<String> payeeKey;
-  final Value<String?> categoryId;
-  final Value<String?> roomId;
-  final Value<String?> displayName;
-  final Value<int> updatedAt;
+class SyncStateCompanion extends UpdateCompanion<SyncStateRow> {
+  final Value<String> recordId;
+  final Value<int> changedAt;
   final Value<int> rowid;
-  const PayeeRulesCompanion({
-    this.payeeKey = const Value.absent(),
-    this.categoryId = const Value.absent(),
-    this.roomId = const Value.absent(),
-    this.displayName = const Value.absent(),
-    this.updatedAt = const Value.absent(),
+  const SyncStateCompanion({
+    this.recordId = const Value.absent(),
+    this.changedAt = const Value.absent(),
     this.rowid = const Value.absent(),
   });
-  PayeeRulesCompanion.insert({
-    required String payeeKey,
-    this.categoryId = const Value.absent(),
-    this.roomId = const Value.absent(),
-    this.displayName = const Value.absent(),
-    required int updatedAt,
+  SyncStateCompanion.insert({
+    required String recordId,
+    required int changedAt,
     this.rowid = const Value.absent(),
-  }) : payeeKey = Value(payeeKey),
-       updatedAt = Value(updatedAt);
-  static Insertable<PayeeRuleRow> custom({
-    Expression<String>? payeeKey,
-    Expression<String>? categoryId,
-    Expression<String>? roomId,
-    Expression<String>? displayName,
-    Expression<int>? updatedAt,
+  }) : recordId = Value(recordId),
+       changedAt = Value(changedAt);
+  static Insertable<SyncStateRow> custom({
+    Expression<String>? recordId,
+    Expression<int>? changedAt,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
-      if (payeeKey != null) 'payee_key': payeeKey,
-      if (categoryId != null) 'category_id': categoryId,
-      if (roomId != null) 'room_id': roomId,
-      if (displayName != null) 'display_name': displayName,
-      if (updatedAt != null) 'updated_at': updatedAt,
+      if (recordId != null) 'record_id': recordId,
+      if (changedAt != null) 'changed_at': changedAt,
       if (rowid != null) 'rowid': rowid,
     });
   }
 
-  PayeeRulesCompanion copyWith({
-    Value<String>? payeeKey,
-    Value<String?>? categoryId,
-    Value<String?>? roomId,
-    Value<String?>? displayName,
-    Value<int>? updatedAt,
+  SyncStateCompanion copyWith({
+    Value<String>? recordId,
+    Value<int>? changedAt,
     Value<int>? rowid,
   }) {
-    return PayeeRulesCompanion(
-      payeeKey: payeeKey ?? this.payeeKey,
-      categoryId: categoryId ?? this.categoryId,
-      roomId: roomId ?? this.roomId,
-      displayName: displayName ?? this.displayName,
-      updatedAt: updatedAt ?? this.updatedAt,
+    return SyncStateCompanion(
+      recordId: recordId ?? this.recordId,
+      changedAt: changedAt ?? this.changedAt,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -5865,20 +6596,11 @@ class PayeeRulesCompanion extends UpdateCompanion<PayeeRuleRow> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (payeeKey.present) {
-      map['payee_key'] = Variable<String>(payeeKey.value);
+    if (recordId.present) {
+      map['record_id'] = Variable<String>(recordId.value);
     }
-    if (categoryId.present) {
-      map['category_id'] = Variable<String>(categoryId.value);
-    }
-    if (roomId.present) {
-      map['room_id'] = Variable<String>(roomId.value);
-    }
-    if (displayName.present) {
-      map['display_name'] = Variable<String>(displayName.value);
-    }
-    if (updatedAt.present) {
-      map['updated_at'] = Variable<int>(updatedAt.value);
+    if (changedAt.present) {
+      map['changed_at'] = Variable<int>(changedAt.value);
     }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
@@ -5888,12 +6610,9 @@ class PayeeRulesCompanion extends UpdateCompanion<PayeeRuleRow> {
 
   @override
   String toString() {
-    return (StringBuffer('PayeeRulesCompanion(')
-          ..write('payeeKey: $payeeKey, ')
-          ..write('categoryId: $categoryId, ')
-          ..write('roomId: $roomId, ')
-          ..write('displayName: $displayName, ')
-          ..write('updatedAt: $updatedAt, ')
+    return (StringBuffer('SyncStateCompanion(')
+          ..write('recordId: $recordId, ')
+          ..write('changedAt: $changedAt, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -5904,20 +6623,107 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
   late final $AccountsTable accounts = $AccountsTable(this);
+  late final $SyncMetaTable syncMeta = $SyncMetaTable(this);
+  late final $SyncOutboxTable syncOutbox = $SyncOutboxTable(this);
+  late final Trigger syncAccountsInsert = Trigger(
+    'CREATE TRIGGER sync_accounts_insert AFTER INSERT ON accounts WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'accounts\', NEW.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_accounts_insert',
+  );
+  late final Trigger syncAccountsUpdate = Trigger(
+    'CREATE TRIGGER sync_accounts_update AFTER UPDATE ON accounts WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'accounts\', NEW.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_accounts_update',
+  );
+  late final Trigger syncAccountsDelete = Trigger(
+    'CREATE TRIGGER sync_accounts_delete AFTER DELETE ON accounts WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'accounts\', OLD.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_accounts_delete',
+  );
   late final $CategoriesTable categories = $CategoriesTable(this);
+  late final Trigger syncCategoriesInsert = Trigger(
+    'CREATE TRIGGER sync_categories_insert AFTER INSERT ON categories WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'categories\', NEW.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_categories_insert',
+  );
+  late final Trigger syncCategoriesUpdate = Trigger(
+    'CREATE TRIGGER sync_categories_update AFTER UPDATE ON categories WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'categories\', NEW.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_categories_update',
+  );
+  late final Trigger syncCategoriesDelete = Trigger(
+    'CREATE TRIGGER sync_categories_delete AFTER DELETE ON categories WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'categories\', OLD.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_categories_delete',
+  );
   late final $RoomsTable rooms = $RoomsTable(this);
+  late final Trigger syncRoomsInsert = Trigger(
+    'CREATE TRIGGER sync_rooms_insert AFTER INSERT ON rooms WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'rooms\', NEW.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_rooms_insert',
+  );
+  late final Trigger syncRoomsUpdate = Trigger(
+    'CREATE TRIGGER sync_rooms_update AFTER UPDATE ON rooms WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'rooms\', NEW.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_rooms_update',
+  );
+  late final Trigger syncRoomsDelete = Trigger(
+    'CREATE TRIGGER sync_rooms_delete AFTER DELETE ON rooms WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'rooms\', OLD.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_rooms_delete',
+  );
   late final $TransactionsTable transactions = $TransactionsTable(this);
+  late final Trigger syncTransactionsInsert = Trigger(
+    'CREATE TRIGGER sync_transactions_insert AFTER INSERT ON transactions WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'transactions\', NEW.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_transactions_insert',
+  );
+  late final Trigger syncTransactionsUpdate = Trigger(
+    'CREATE TRIGGER sync_transactions_update AFTER UPDATE ON transactions WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'transactions\', NEW.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_transactions_update',
+  );
+  late final Trigger syncTransactionsDelete = Trigger(
+    'CREATE TRIGGER sync_transactions_delete AFTER DELETE ON transactions WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'transactions\', OLD.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_transactions_delete',
+  );
+  late final $BudgetsTable budgets = $BudgetsTable(this);
+  late final Trigger syncBudgetsInsert = Trigger(
+    'CREATE TRIGGER sync_budgets_insert AFTER INSERT ON budgets WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'budgets\', NEW.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_budgets_insert',
+  );
+  late final Trigger syncBudgetsUpdate = Trigger(
+    'CREATE TRIGGER sync_budgets_update AFTER UPDATE ON budgets WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'budgets\', NEW.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_budgets_update',
+  );
+  late final Trigger syncBudgetsDelete = Trigger(
+    'CREATE TRIGGER sync_budgets_delete AFTER DELETE ON budgets WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'budgets\', OLD.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_budgets_delete',
+  );
+  late final $PayeeRulesTable payeeRules = $PayeeRulesTable(this);
+  late final Trigger syncPayeeRulesInsert = Trigger(
+    'CREATE TRIGGER sync_payee_rules_insert AFTER INSERT ON payee_rules WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'payee_rules\', NEW.payee_key, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_payee_rules_insert',
+  );
+  late final Trigger syncPayeeRulesUpdate = Trigger(
+    'CREATE TRIGGER sync_payee_rules_update AFTER UPDATE ON payee_rules WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'payee_rules\', NEW.payee_key, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_payee_rules_update',
+  );
+  late final Trigger syncPayeeRulesDelete = Trigger(
+    'CREATE TRIGGER sync_payee_rules_delete AFTER DELETE ON payee_rules WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'payee_rules\', OLD.payee_key, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_payee_rules_delete',
+  );
   late final $SettingsTable settings = $SettingsTable(this);
+  late final Trigger syncSettingsInsert = Trigger(
+    'CREATE TRIGGER sync_settings_insert AFTER INSERT ON settings WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') AND NEW."key" IN (\'month_start_day\', \'watch_category\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'settings\', NEW."key", CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_settings_insert',
+  );
+  late final Trigger syncSettingsUpdate = Trigger(
+    'CREATE TRIGGER sync_settings_update AFTER UPDATE ON settings WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') AND NEW."key" IN (\'month_start_day\', \'watch_category\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'settings\', NEW."key", CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_settings_update',
+  );
+  late final Trigger syncSettingsDelete = Trigger(
+    'CREATE TRIGGER sync_settings_delete AFTER DELETE ON settings WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') AND OLD."key" IN (\'month_start_day\', \'watch_category\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'settings\', OLD."key", CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_settings_delete',
+  );
   late final $RawCapturesTable rawCaptures = $RawCapturesTable(this);
   late final $TransactionSourcesTable transactionSources =
       $TransactionSourcesTable(this);
   late final $UnparsedMessagesTable unparsedMessages = $UnparsedMessagesTable(
     this,
   );
-  late final $BudgetsTable budgets = $BudgetsTable(this);
   late final $FiredAlertsTable firedAlerts = $FiredAlertsTable(this);
   late final $NoticesTable notices = $NoticesTable(this);
-  late final $PayeeRulesTable payeeRules = $PayeeRulesTable(this);
+  late final $SyncStateTable syncState = $SyncStateTable(this);
   late final Index transactionsOccurredAt = Index(
     'transactions_occurred_at',
     'CREATE INDEX transactions_occurred_at ON transactions (occurred_at)',
@@ -5952,17 +6758,41 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities => [
     accounts,
+    syncMeta,
+    syncOutbox,
+    syncAccountsInsert,
+    syncAccountsUpdate,
+    syncAccountsDelete,
     categories,
+    syncCategoriesInsert,
+    syncCategoriesUpdate,
+    syncCategoriesDelete,
     rooms,
+    syncRoomsInsert,
+    syncRoomsUpdate,
+    syncRoomsDelete,
     transactions,
+    syncTransactionsInsert,
+    syncTransactionsUpdate,
+    syncTransactionsDelete,
+    budgets,
+    syncBudgetsInsert,
+    syncBudgetsUpdate,
+    syncBudgetsDelete,
+    payeeRules,
+    syncPayeeRulesInsert,
+    syncPayeeRulesUpdate,
+    syncPayeeRulesDelete,
     settings,
+    syncSettingsInsert,
+    syncSettingsUpdate,
+    syncSettingsDelete,
     rawCaptures,
     transactionSources,
     unparsedMessages,
-    budgets,
     firedAlerts,
     notices,
-    payeeRules,
+    syncState,
     transactionsOccurredAt,
     transactionsRoomId,
     transactionsCategoryId,
@@ -5973,6 +6803,69 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   ];
   @override
   StreamQueryUpdateRules get streamUpdateRules => const StreamQueryUpdateRules([
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'accounts',
+        limitUpdateKind: UpdateKind.insert,
+      ),
+      result: [TableUpdate('sync_outbox', kind: UpdateKind.insert)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'accounts',
+        limitUpdateKind: UpdateKind.update,
+      ),
+      result: [TableUpdate('sync_outbox', kind: UpdateKind.insert)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'accounts',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('sync_outbox', kind: UpdateKind.insert)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'categories',
+        limitUpdateKind: UpdateKind.insert,
+      ),
+      result: [TableUpdate('sync_outbox', kind: UpdateKind.insert)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'categories',
+        limitUpdateKind: UpdateKind.update,
+      ),
+      result: [TableUpdate('sync_outbox', kind: UpdateKind.insert)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'categories',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('sync_outbox', kind: UpdateKind.insert)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'rooms',
+        limitUpdateKind: UpdateKind.insert,
+      ),
+      result: [TableUpdate('sync_outbox', kind: UpdateKind.insert)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'rooms',
+        limitUpdateKind: UpdateKind.update,
+      ),
+      result: [TableUpdate('sync_outbox', kind: UpdateKind.insert)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'rooms',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('sync_outbox', kind: UpdateKind.insert)],
+    ),
     WritePropagation(
       on: TableUpdateQuery.onTableName(
         'categories',
@@ -5986,6 +6879,111 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         limitUpdateKind: UpdateKind.delete,
       ),
       result: [TableUpdate('transactions', kind: UpdateKind.update)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'transactions',
+        limitUpdateKind: UpdateKind.insert,
+      ),
+      result: [TableUpdate('sync_outbox', kind: UpdateKind.insert)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'transactions',
+        limitUpdateKind: UpdateKind.update,
+      ),
+      result: [TableUpdate('sync_outbox', kind: UpdateKind.insert)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'transactions',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('sync_outbox', kind: UpdateKind.insert)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'categories',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('budgets', kind: UpdateKind.delete)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'budgets',
+        limitUpdateKind: UpdateKind.insert,
+      ),
+      result: [TableUpdate('sync_outbox', kind: UpdateKind.insert)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'budgets',
+        limitUpdateKind: UpdateKind.update,
+      ),
+      result: [TableUpdate('sync_outbox', kind: UpdateKind.insert)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'budgets',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('sync_outbox', kind: UpdateKind.insert)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'categories',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('payee_rules', kind: UpdateKind.update)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'rooms',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('payee_rules', kind: UpdateKind.update)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'payee_rules',
+        limitUpdateKind: UpdateKind.insert,
+      ),
+      result: [TableUpdate('sync_outbox', kind: UpdateKind.insert)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'payee_rules',
+        limitUpdateKind: UpdateKind.update,
+      ),
+      result: [TableUpdate('sync_outbox', kind: UpdateKind.insert)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'payee_rules',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('sync_outbox', kind: UpdateKind.insert)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'settings',
+        limitUpdateKind: UpdateKind.insert,
+      ),
+      result: [TableUpdate('sync_outbox', kind: UpdateKind.insert)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'settings',
+        limitUpdateKind: UpdateKind.update,
+      ),
+      result: [TableUpdate('sync_outbox', kind: UpdateKind.insert)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'settings',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('sync_outbox', kind: UpdateKind.insert)],
     ),
     WritePropagation(
       on: TableUpdateQuery.onTableName(
@@ -6014,27 +7012,6 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         limitUpdateKind: UpdateKind.delete,
       ),
       result: [TableUpdate('unparsed', kind: UpdateKind.update)],
-    ),
-    WritePropagation(
-      on: TableUpdateQuery.onTableName(
-        'categories',
-        limitUpdateKind: UpdateKind.delete,
-      ),
-      result: [TableUpdate('budgets', kind: UpdateKind.delete)],
-    ),
-    WritePropagation(
-      on: TableUpdateQuery.onTableName(
-        'categories',
-        limitUpdateKind: UpdateKind.delete,
-      ),
-      result: [TableUpdate('payee_rules', kind: UpdateKind.update)],
-    ),
-    WritePropagation(
-      on: TableUpdateQuery.onTableName(
-        'rooms',
-        limitUpdateKind: UpdateKind.delete,
-      ),
-      result: [TableUpdate('payee_rules', kind: UpdateKind.update)],
     ),
   ]);
 }
@@ -6282,6 +7259,314 @@ typedef $$AccountsTableProcessedTableManager =
       $$AccountsTableUpdateCompanionBuilder,
       (AccountRow, BaseReferences<_$AppDatabase, $AccountsTable, AccountRow>),
       AccountRow,
+      PrefetchHooks Function()
+    >;
+typedef $$SyncMetaTableCreateCompanionBuilder = SyncMetaCompanion Function({
+  required String key,
+  required String value,
+  Value<int> rowid,
+});
+typedef $$SyncMetaTableUpdateCompanionBuilder = SyncMetaCompanion Function({
+  Value<String> key,
+  Value<String> value,
+  Value<int> rowid,
+});
+
+class $$SyncMetaTableFilterComposer
+    extends Composer<_$AppDatabase, $SyncMetaTable> {
+  $$SyncMetaTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get key => $composableBuilder(
+    column: $table.key,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get value => $composableBuilder(
+    column: $table.value,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$SyncMetaTableOrderingComposer
+    extends Composer<_$AppDatabase, $SyncMetaTable> {
+  $$SyncMetaTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get key => $composableBuilder(
+    column: $table.key,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get value => $composableBuilder(
+    column: $table.value,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$SyncMetaTableAnnotationComposer
+    extends Composer<_$AppDatabase, $SyncMetaTable> {
+  $$SyncMetaTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get key =>
+      $composableBuilder(column: $table.key, builder: (column) => column);
+
+  GeneratedColumn<String> get value =>
+      $composableBuilder(column: $table.value, builder: (column) => column);
+}
+
+class $$SyncMetaTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $SyncMetaTable,
+          SyncMetaRow,
+          $$SyncMetaTableFilterComposer,
+          $$SyncMetaTableOrderingComposer,
+          $$SyncMetaTableAnnotationComposer,
+          $$SyncMetaTableCreateCompanionBuilder,
+          $$SyncMetaTableUpdateCompanionBuilder,
+          (
+            SyncMetaRow,
+            BaseReferences<_$AppDatabase, $SyncMetaTable, SyncMetaRow>,
+          ),
+          SyncMetaRow,
+          PrefetchHooks Function()
+        > {
+  $$SyncMetaTableTableManager(_$AppDatabase db, $SyncMetaTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$SyncMetaTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$SyncMetaTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$SyncMetaTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> key = const Value.absent(),
+            Value<String> value = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) => SyncMetaCompanion(key: key, value: value, rowid: rowid),
+          createCompanionCallback: ({
+            required String key,
+            required String value,
+            Value<int> rowid = const Value.absent(),
+          }) => SyncMetaCompanion.insert(key: key, value: value, rowid: rowid),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$SyncMetaTable, SyncMetaRow>(table),
+                  BaseReferences<_$AppDatabase, $SyncMetaTable, SyncMetaRow>(
+                    db,
+                    table,
+                    e,
+                  ),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$SyncMetaTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $SyncMetaTable,
+      SyncMetaRow,
+      $$SyncMetaTableFilterComposer,
+      $$SyncMetaTableOrderingComposer,
+      $$SyncMetaTableAnnotationComposer,
+      $$SyncMetaTableCreateCompanionBuilder,
+      $$SyncMetaTableUpdateCompanionBuilder,
+      (SyncMetaRow, BaseReferences<_$AppDatabase, $SyncMetaTable, SyncMetaRow>),
+      SyncMetaRow,
+      PrefetchHooks Function()
+    >;
+typedef $$SyncOutboxTableCreateCompanionBuilder = SyncOutboxCompanion Function({
+  required String recordTable,
+  required String recordKey,
+  required int changedAt,
+  Value<int> rowid,
+});
+typedef $$SyncOutboxTableUpdateCompanionBuilder = SyncOutboxCompanion Function({
+  Value<String> recordTable,
+  Value<String> recordKey,
+  Value<int> changedAt,
+  Value<int> rowid,
+});
+
+class $$SyncOutboxTableFilterComposer
+    extends Composer<_$AppDatabase, $SyncOutboxTable> {
+  $$SyncOutboxTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get recordTable => $composableBuilder(
+    column: $table.recordTable,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get recordKey => $composableBuilder(
+    column: $table.recordKey,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get changedAt => $composableBuilder(
+    column: $table.changedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$SyncOutboxTableOrderingComposer
+    extends Composer<_$AppDatabase, $SyncOutboxTable> {
+  $$SyncOutboxTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get recordTable => $composableBuilder(
+    column: $table.recordTable,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get recordKey => $composableBuilder(
+    column: $table.recordKey,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get changedAt => $composableBuilder(
+    column: $table.changedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$SyncOutboxTableAnnotationComposer
+    extends Composer<_$AppDatabase, $SyncOutboxTable> {
+  $$SyncOutboxTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get recordTable => $composableBuilder(
+    column: $table.recordTable,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get recordKey =>
+      $composableBuilder(column: $table.recordKey, builder: (column) => column);
+
+  GeneratedColumn<int> get changedAt =>
+      $composableBuilder(column: $table.changedAt, builder: (column) => column);
+}
+
+class $$SyncOutboxTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $SyncOutboxTable,
+          SyncOutboxRow,
+          $$SyncOutboxTableFilterComposer,
+          $$SyncOutboxTableOrderingComposer,
+          $$SyncOutboxTableAnnotationComposer,
+          $$SyncOutboxTableCreateCompanionBuilder,
+          $$SyncOutboxTableUpdateCompanionBuilder,
+          (
+            SyncOutboxRow,
+            BaseReferences<_$AppDatabase, $SyncOutboxTable, SyncOutboxRow>,
+          ),
+          SyncOutboxRow,
+          PrefetchHooks Function()
+        > {
+  $$SyncOutboxTableTableManager(_$AppDatabase db, $SyncOutboxTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$SyncOutboxTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$SyncOutboxTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$SyncOutboxTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> recordTable = const Value.absent(),
+                Value<String> recordKey = const Value.absent(),
+                Value<int> changedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => SyncOutboxCompanion(
+                recordTable: recordTable,
+                recordKey: recordKey,
+                changedAt: changedAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String recordTable,
+                required String recordKey,
+                required int changedAt,
+                Value<int> rowid = const Value.absent(),
+              }) => SyncOutboxCompanion.insert(
+                recordTable: recordTable,
+                recordKey: recordKey,
+                changedAt: changedAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$SyncOutboxTable, SyncOutboxRow>(table),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $SyncOutboxTable,
+                    SyncOutboxRow
+                  >(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$SyncOutboxTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $SyncOutboxTable,
+      SyncOutboxRow,
+      $$SyncOutboxTableFilterComposer,
+      $$SyncOutboxTableOrderingComposer,
+      $$SyncOutboxTableAnnotationComposer,
+      $$SyncOutboxTableCreateCompanionBuilder,
+      $$SyncOutboxTableUpdateCompanionBuilder,
+      (
+        SyncOutboxRow,
+        BaseReferences<_$AppDatabase, $SyncOutboxTable, SyncOutboxRow>,
+      ),
+      SyncOutboxRow,
       PrefetchHooks Function()
     >;
 typedef $$CategoriesTableCreateCompanionBuilder = CategoriesCompanion Function({
@@ -8397,6 +9682,682 @@ typedef $$TransactionsTableProcessedTableManager =
         bool unparsedMessagesRefs,
       })
     >;
+typedef $$BudgetsTableCreateCompanionBuilder = BudgetsCompanion Function({
+  required String id,
+  Value<String?> categoryId,
+  required int amountPaise,
+  Value<int> rowid,
+});
+typedef $$BudgetsTableUpdateCompanionBuilder = BudgetsCompanion Function({
+  Value<String> id,
+  Value<String?> categoryId,
+  Value<int> amountPaise,
+  Value<int> rowid,
+});
+
+final class $$BudgetsTableReferences
+    extends BaseReferences<_$AppDatabase, $BudgetsTable, BudgetRow> {
+  $$BudgetsTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $CategoriesTable _categoryIdTable(_$AppDatabase db) =>
+      db.categories.createAlias('budgets__category_id__categories__id');
+
+  $$CategoriesTableProcessedTableManager? get categoryId {
+    final $_column = $_itemColumn<String>('category_id');
+    if ($_column == null) return null;
+    final manager = $$CategoriesTableTableManager(
+      $_db,
+      $_db.categories,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_categoryIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+}
+
+class $$BudgetsTableFilterComposer
+    extends Composer<_$AppDatabase, $BudgetsTable> {
+  $$BudgetsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get amountPaise => $composableBuilder(
+    column: $table.amountPaise,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$CategoriesTableFilterComposer get categoryId {
+    final $$CategoriesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.categoryId,
+      referencedTable: $db.categories,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$CategoriesTableFilterComposer(
+            $db: $db,
+            $table: $db.categories,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$BudgetsTableOrderingComposer
+    extends Composer<_$AppDatabase, $BudgetsTable> {
+  $$BudgetsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get amountPaise => $composableBuilder(
+    column: $table.amountPaise,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$CategoriesTableOrderingComposer get categoryId {
+    final $$CategoriesTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.categoryId,
+      referencedTable: $db.categories,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$CategoriesTableOrderingComposer(
+            $db: $db,
+            $table: $db.categories,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$BudgetsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $BudgetsTable> {
+  $$BudgetsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<int> get amountPaise => $composableBuilder(
+    column: $table.amountPaise,
+    builder: (column) => column,
+  );
+
+  $$CategoriesTableAnnotationComposer get categoryId {
+    final $$CategoriesTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.categoryId,
+      referencedTable: $db.categories,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$CategoriesTableAnnotationComposer(
+            $db: $db,
+            $table: $db.categories,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$BudgetsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $BudgetsTable,
+          BudgetRow,
+          $$BudgetsTableFilterComposer,
+          $$BudgetsTableOrderingComposer,
+          $$BudgetsTableAnnotationComposer,
+          $$BudgetsTableCreateCompanionBuilder,
+          $$BudgetsTableUpdateCompanionBuilder,
+          (BudgetRow, $$BudgetsTableReferences),
+          BudgetRow,
+          PrefetchHooks Function({bool categoryId})
+        > {
+  $$BudgetsTableTableManager(_$AppDatabase db, $BudgetsTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$BudgetsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$BudgetsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$BudgetsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String?> categoryId = const Value.absent(),
+                Value<int> amountPaise = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => BudgetsCompanion(
+                id: id,
+                categoryId: categoryId,
+                amountPaise: amountPaise,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                Value<String?> categoryId = const Value.absent(),
+                required int amountPaise,
+                Value<int> rowid = const Value.absent(),
+              }) => BudgetsCompanion.insert(
+                id: id,
+                categoryId: categoryId,
+                amountPaise: amountPaise,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$BudgetsTable, BudgetRow>(table),
+                  $$BudgetsTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: ({categoryId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (categoryId) {
+                      state = state.withJoin(
+                        currentTable: table,
+                        currentColumn: table.categoryId,
+                        referencedTable: $$BudgetsTableReferences
+                            ._categoryIdTable(db),
+                        referencedColumn: $$BudgetsTableReferences
+                            ._categoryIdTable(db)
+                            .id,
+                      ) as T;
+                    }
+
+                    return state;
+                  },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$BudgetsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $BudgetsTable,
+      BudgetRow,
+      $$BudgetsTableFilterComposer,
+      $$BudgetsTableOrderingComposer,
+      $$BudgetsTableAnnotationComposer,
+      $$BudgetsTableCreateCompanionBuilder,
+      $$BudgetsTableUpdateCompanionBuilder,
+      (BudgetRow, $$BudgetsTableReferences),
+      BudgetRow,
+      PrefetchHooks Function({bool categoryId})
+    >;
+typedef $$PayeeRulesTableCreateCompanionBuilder = PayeeRulesCompanion Function({
+  required String payeeKey,
+  Value<String?> categoryId,
+  Value<String?> roomId,
+  Value<String?> displayName,
+  required int updatedAt,
+  Value<int> rowid,
+});
+typedef $$PayeeRulesTableUpdateCompanionBuilder = PayeeRulesCompanion Function({
+  Value<String> payeeKey,
+  Value<String?> categoryId,
+  Value<String?> roomId,
+  Value<String?> displayName,
+  Value<int> updatedAt,
+  Value<int> rowid,
+});
+
+final class $$PayeeRulesTableReferences
+    extends BaseReferences<_$AppDatabase, $PayeeRulesTable, PayeeRuleRow> {
+  $$PayeeRulesTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $CategoriesTable _categoryIdTable(_$AppDatabase db) =>
+      db.categories.createAlias('payee_rules__category_id__categories__id');
+
+  $$CategoriesTableProcessedTableManager? get categoryId {
+    final $_column = $_itemColumn<String>('category_id');
+    if ($_column == null) return null;
+    final manager = $$CategoriesTableTableManager(
+      $_db,
+      $_db.categories,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_categoryIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+
+  static $RoomsTable _roomIdTable(_$AppDatabase db) =>
+      db.rooms.createAlias('payee_rules__room_id__rooms__id');
+
+  $$RoomsTableProcessedTableManager? get roomId {
+    final $_column = $_itemColumn<String>('room_id');
+    if ($_column == null) return null;
+    final manager = $$RoomsTableTableManager(
+      $_db,
+      $_db.rooms,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_roomIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+}
+
+class $$PayeeRulesTableFilterComposer
+    extends Composer<_$AppDatabase, $PayeeRulesTable> {
+  $$PayeeRulesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get payeeKey => $composableBuilder(
+    column: $table.payeeKey,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get displayName => $composableBuilder(
+    column: $table.displayName,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$CategoriesTableFilterComposer get categoryId {
+    final $$CategoriesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.categoryId,
+      referencedTable: $db.categories,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$CategoriesTableFilterComposer(
+            $db: $db,
+            $table: $db.categories,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$RoomsTableFilterComposer get roomId {
+    final $$RoomsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.roomId,
+      referencedTable: $db.rooms,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$RoomsTableFilterComposer(
+            $db: $db,
+            $table: $db.rooms,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$PayeeRulesTableOrderingComposer
+    extends Composer<_$AppDatabase, $PayeeRulesTable> {
+  $$PayeeRulesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get payeeKey => $composableBuilder(
+    column: $table.payeeKey,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get displayName => $composableBuilder(
+    column: $table.displayName,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$CategoriesTableOrderingComposer get categoryId {
+    final $$CategoriesTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.categoryId,
+      referencedTable: $db.categories,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$CategoriesTableOrderingComposer(
+            $db: $db,
+            $table: $db.categories,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$RoomsTableOrderingComposer get roomId {
+    final $$RoomsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.roomId,
+      referencedTable: $db.rooms,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$RoomsTableOrderingComposer(
+            $db: $db,
+            $table: $db.rooms,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$PayeeRulesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $PayeeRulesTable> {
+  $$PayeeRulesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get payeeKey =>
+      $composableBuilder(column: $table.payeeKey, builder: (column) => column);
+
+  GeneratedColumn<String> get displayName => $composableBuilder(
+    column: $table.displayName,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get updatedAt =>
+      $composableBuilder(column: $table.updatedAt, builder: (column) => column);
+
+  $$CategoriesTableAnnotationComposer get categoryId {
+    final $$CategoriesTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.categoryId,
+      referencedTable: $db.categories,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$CategoriesTableAnnotationComposer(
+            $db: $db,
+            $table: $db.categories,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$RoomsTableAnnotationComposer get roomId {
+    final $$RoomsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.roomId,
+      referencedTable: $db.rooms,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$RoomsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.rooms,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$PayeeRulesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $PayeeRulesTable,
+          PayeeRuleRow,
+          $$PayeeRulesTableFilterComposer,
+          $$PayeeRulesTableOrderingComposer,
+          $$PayeeRulesTableAnnotationComposer,
+          $$PayeeRulesTableCreateCompanionBuilder,
+          $$PayeeRulesTableUpdateCompanionBuilder,
+          (PayeeRuleRow, $$PayeeRulesTableReferences),
+          PayeeRuleRow,
+          PrefetchHooks Function({bool categoryId, bool roomId})
+        > {
+  $$PayeeRulesTableTableManager(_$AppDatabase db, $PayeeRulesTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$PayeeRulesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$PayeeRulesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$PayeeRulesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> payeeKey = const Value.absent(),
+                Value<String?> categoryId = const Value.absent(),
+                Value<String?> roomId = const Value.absent(),
+                Value<String?> displayName = const Value.absent(),
+                Value<int> updatedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => PayeeRulesCompanion(
+                payeeKey: payeeKey,
+                categoryId: categoryId,
+                roomId: roomId,
+                displayName: displayName,
+                updatedAt: updatedAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String payeeKey,
+                Value<String?> categoryId = const Value.absent(),
+                Value<String?> roomId = const Value.absent(),
+                Value<String?> displayName = const Value.absent(),
+                required int updatedAt,
+                Value<int> rowid = const Value.absent(),
+              }) => PayeeRulesCompanion.insert(
+                payeeKey: payeeKey,
+                categoryId: categoryId,
+                roomId: roomId,
+                displayName: displayName,
+                updatedAt: updatedAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$PayeeRulesTable, PayeeRuleRow>(table),
+                  $$PayeeRulesTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: ({categoryId = false, roomId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (categoryId) {
+                      state = state.withJoin(
+                        currentTable: table,
+                        currentColumn: table.categoryId,
+                        referencedTable: $$PayeeRulesTableReferences
+                            ._categoryIdTable(db),
+                        referencedColumn: $$PayeeRulesTableReferences
+                            ._categoryIdTable(db)
+                            .id,
+                      ) as T;
+                    }
+                    if (roomId) {
+                      state = state.withJoin(
+                        currentTable: table,
+                        currentColumn: table.roomId,
+                        referencedTable: $$PayeeRulesTableReferences
+                            ._roomIdTable(db),
+                        referencedColumn: $$PayeeRulesTableReferences
+                            ._roomIdTable(db)
+                            .id,
+                      ) as T;
+                    }
+
+                    return state;
+                  },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$PayeeRulesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $PayeeRulesTable,
+      PayeeRuleRow,
+      $$PayeeRulesTableFilterComposer,
+      $$PayeeRulesTableOrderingComposer,
+      $$PayeeRulesTableAnnotationComposer,
+      $$PayeeRulesTableCreateCompanionBuilder,
+      $$PayeeRulesTableUpdateCompanionBuilder,
+      (PayeeRuleRow, $$PayeeRulesTableReferences),
+      PayeeRuleRow,
+      PrefetchHooks Function({bool categoryId, bool roomId})
+    >;
 typedef $$SettingsTableCreateCompanionBuilder = SettingsCompanion Function({
   required String key,
   required String value,
@@ -9905,283 +11866,6 @@ typedef $$UnparsedMessagesTableProcessedTableManager =
       UnparsedRow,
       PrefetchHooks Function({bool rawCaptureId, bool resolvedTransactionId})
     >;
-typedef $$BudgetsTableCreateCompanionBuilder = BudgetsCompanion Function({
-  required String id,
-  Value<String?> categoryId,
-  required int amountPaise,
-  Value<int> rowid,
-});
-typedef $$BudgetsTableUpdateCompanionBuilder = BudgetsCompanion Function({
-  Value<String> id,
-  Value<String?> categoryId,
-  Value<int> amountPaise,
-  Value<int> rowid,
-});
-
-final class $$BudgetsTableReferences
-    extends BaseReferences<_$AppDatabase, $BudgetsTable, BudgetRow> {
-  $$BudgetsTableReferences(super.$_db, super.$_table, super.$_typedResult);
-
-  static $CategoriesTable _categoryIdTable(_$AppDatabase db) =>
-      db.categories.createAlias('budgets__category_id__categories__id');
-
-  $$CategoriesTableProcessedTableManager? get categoryId {
-    final $_column = $_itemColumn<String>('category_id');
-    if ($_column == null) return null;
-    final manager = $$CategoriesTableTableManager(
-      $_db,
-      $_db.categories,
-    ).filter((f) => f.id.sqlEquals($_column));
-    final item = $_typedResult.readTableOrNull(_categoryIdTable($_db));
-    if (item == null) return manager;
-    return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: [item]),
-    );
-  }
-}
-
-class $$BudgetsTableFilterComposer
-    extends Composer<_$AppDatabase, $BudgetsTable> {
-  $$BudgetsTableFilterComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  ColumnFilters<String> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<int> get amountPaise => $composableBuilder(
-    column: $table.amountPaise,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  $$CategoriesTableFilterComposer get categoryId {
-    final $$CategoriesTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.categoryId,
-      referencedTable: $db.categories,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$CategoriesTableFilterComposer(
-            $db: $db,
-            $table: $db.categories,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return composer;
-  }
-}
-
-class $$BudgetsTableOrderingComposer
-    extends Composer<_$AppDatabase, $BudgetsTable> {
-  $$BudgetsTableOrderingComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  ColumnOrderings<String> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<int> get amountPaise => $composableBuilder(
-    column: $table.amountPaise,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  $$CategoriesTableOrderingComposer get categoryId {
-    final $$CategoriesTableOrderingComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.categoryId,
-      referencedTable: $db.categories,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$CategoriesTableOrderingComposer(
-            $db: $db,
-            $table: $db.categories,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return composer;
-  }
-}
-
-class $$BudgetsTableAnnotationComposer
-    extends Composer<_$AppDatabase, $BudgetsTable> {
-  $$BudgetsTableAnnotationComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  GeneratedColumn<String> get id =>
-      $composableBuilder(column: $table.id, builder: (column) => column);
-
-  GeneratedColumn<int> get amountPaise => $composableBuilder(
-    column: $table.amountPaise,
-    builder: (column) => column,
-  );
-
-  $$CategoriesTableAnnotationComposer get categoryId {
-    final $$CategoriesTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.categoryId,
-      referencedTable: $db.categories,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$CategoriesTableAnnotationComposer(
-            $db: $db,
-            $table: $db.categories,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return composer;
-  }
-}
-
-class $$BudgetsTableTableManager
-    extends
-        RootTableManager<
-          _$AppDatabase,
-          $BudgetsTable,
-          BudgetRow,
-          $$BudgetsTableFilterComposer,
-          $$BudgetsTableOrderingComposer,
-          $$BudgetsTableAnnotationComposer,
-          $$BudgetsTableCreateCompanionBuilder,
-          $$BudgetsTableUpdateCompanionBuilder,
-          (BudgetRow, $$BudgetsTableReferences),
-          BudgetRow,
-          PrefetchHooks Function({bool categoryId})
-        > {
-  $$BudgetsTableTableManager(_$AppDatabase db, $BudgetsTable table)
-    : super(
-        TableManagerState(
-          db: db,
-          table: table,
-          createFilteringComposer: () =>
-              $$BudgetsTableFilterComposer($db: db, $table: table),
-          createOrderingComposer: () =>
-              $$BudgetsTableOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer: () =>
-              $$BudgetsTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback:
-              ({
-                Value<String> id = const Value.absent(),
-                Value<String?> categoryId = const Value.absent(),
-                Value<int> amountPaise = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
-              }) => BudgetsCompanion(
-                id: id,
-                categoryId: categoryId,
-                amountPaise: amountPaise,
-                rowid: rowid,
-              ),
-          createCompanionCallback:
-              ({
-                required String id,
-                Value<String?> categoryId = const Value.absent(),
-                required int amountPaise,
-                Value<int> rowid = const Value.absent(),
-              }) => BudgetsCompanion.insert(
-                id: id,
-                categoryId: categoryId,
-                amountPaise: amountPaise,
-                rowid: rowid,
-              ),
-          withReferenceMapper: (p0) => p0
-              .map(
-                (e) => (
-                  e.readTable<$BudgetsTable, BudgetRow>(table),
-                  $$BudgetsTableReferences(db, table, e),
-                ),
-              )
-              .toList(),
-          prefetchHooksCallback: ({categoryId = false}) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [],
-              addJoins:
-                  <
-                    T extends TableManagerState<
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic
-                    >
-                  >(state) {
-                    if (categoryId) {
-                      state = state.withJoin(
-                        currentTable: table,
-                        currentColumn: table.categoryId,
-                        referencedTable: $$BudgetsTableReferences
-                            ._categoryIdTable(db),
-                        referencedColumn: $$BudgetsTableReferences
-                            ._categoryIdTable(db)
-                            .id,
-                      ) as T;
-                    }
-
-                    return state;
-                  },
-              getPrefetchedDataCallback: (items) async {
-                return [];
-              },
-            );
-          },
-        ),
-      );
-}
-
-typedef $$BudgetsTableProcessedTableManager =
-    ProcessedTableManager<
-      _$AppDatabase,
-      $BudgetsTable,
-      BudgetRow,
-      $$BudgetsTableFilterComposer,
-      $$BudgetsTableOrderingComposer,
-      $$BudgetsTableAnnotationComposer,
-      $$BudgetsTableCreateCompanionBuilder,
-      $$BudgetsTableUpdateCompanionBuilder,
-      (BudgetRow, $$BudgetsTableReferences),
-      BudgetRow,
-      PrefetchHooks Function({bool categoryId})
-    >;
 typedef $$FiredAlertsTableCreateCompanionBuilder =
     FiredAlertsCompanion Function({
       required String key,
@@ -10569,404 +12253,155 @@ typedef $$NoticesTableProcessedTableManager =
       NoticeRow,
       PrefetchHooks Function()
     >;
-typedef $$PayeeRulesTableCreateCompanionBuilder = PayeeRulesCompanion Function({
-  required String payeeKey,
-  Value<String?> categoryId,
-  Value<String?> roomId,
-  Value<String?> displayName,
-  required int updatedAt,
+typedef $$SyncStateTableCreateCompanionBuilder = SyncStateCompanion Function({
+  required String recordId,
+  required int changedAt,
   Value<int> rowid,
 });
-typedef $$PayeeRulesTableUpdateCompanionBuilder = PayeeRulesCompanion Function({
-  Value<String> payeeKey,
-  Value<String?> categoryId,
-  Value<String?> roomId,
-  Value<String?> displayName,
-  Value<int> updatedAt,
+typedef $$SyncStateTableUpdateCompanionBuilder = SyncStateCompanion Function({
+  Value<String> recordId,
+  Value<int> changedAt,
   Value<int> rowid,
 });
 
-final class $$PayeeRulesTableReferences
-    extends BaseReferences<_$AppDatabase, $PayeeRulesTable, PayeeRuleRow> {
-  $$PayeeRulesTableReferences(super.$_db, super.$_table, super.$_typedResult);
-
-  static $CategoriesTable _categoryIdTable(_$AppDatabase db) =>
-      db.categories.createAlias('payee_rules__category_id__categories__id');
-
-  $$CategoriesTableProcessedTableManager? get categoryId {
-    final $_column = $_itemColumn<String>('category_id');
-    if ($_column == null) return null;
-    final manager = $$CategoriesTableTableManager(
-      $_db,
-      $_db.categories,
-    ).filter((f) => f.id.sqlEquals($_column));
-    final item = $_typedResult.readTableOrNull(_categoryIdTable($_db));
-    if (item == null) return manager;
-    return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: [item]),
-    );
-  }
-
-  static $RoomsTable _roomIdTable(_$AppDatabase db) =>
-      db.rooms.createAlias('payee_rules__room_id__rooms__id');
-
-  $$RoomsTableProcessedTableManager? get roomId {
-    final $_column = $_itemColumn<String>('room_id');
-    if ($_column == null) return null;
-    final manager = $$RoomsTableTableManager(
-      $_db,
-      $_db.rooms,
-    ).filter((f) => f.id.sqlEquals($_column));
-    final item = $_typedResult.readTableOrNull(_roomIdTable($_db));
-    if (item == null) return manager;
-    return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: [item]),
-    );
-  }
-}
-
-class $$PayeeRulesTableFilterComposer
-    extends Composer<_$AppDatabase, $PayeeRulesTable> {
-  $$PayeeRulesTableFilterComposer({
+class $$SyncStateTableFilterComposer
+    extends Composer<_$AppDatabase, $SyncStateTable> {
+  $$SyncStateTableFilterComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnFilters<String> get payeeKey => $composableBuilder(
-    column: $table.payeeKey,
+  ColumnFilters<String> get recordId => $composableBuilder(
+    column: $table.recordId,
     builder: (column) => ColumnFilters(column),
   );
 
-  ColumnFilters<String> get displayName => $composableBuilder(
-    column: $table.displayName,
+  ColumnFilters<int> get changedAt => $composableBuilder(
+    column: $table.changedAt,
     builder: (column) => ColumnFilters(column),
   );
-
-  ColumnFilters<int> get updatedAt => $composableBuilder(
-    column: $table.updatedAt,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  $$CategoriesTableFilterComposer get categoryId {
-    final $$CategoriesTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.categoryId,
-      referencedTable: $db.categories,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$CategoriesTableFilterComposer(
-            $db: $db,
-            $table: $db.categories,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return composer;
-  }
-
-  $$RoomsTableFilterComposer get roomId {
-    final $$RoomsTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.roomId,
-      referencedTable: $db.rooms,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$RoomsTableFilterComposer(
-            $db: $db,
-            $table: $db.rooms,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return composer;
-  }
 }
 
-class $$PayeeRulesTableOrderingComposer
-    extends Composer<_$AppDatabase, $PayeeRulesTable> {
-  $$PayeeRulesTableOrderingComposer({
+class $$SyncStateTableOrderingComposer
+    extends Composer<_$AppDatabase, $SyncStateTable> {
+  $$SyncStateTableOrderingComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnOrderings<String> get payeeKey => $composableBuilder(
-    column: $table.payeeKey,
+  ColumnOrderings<String> get recordId => $composableBuilder(
+    column: $table.recordId,
     builder: (column) => ColumnOrderings(column),
   );
 
-  ColumnOrderings<String> get displayName => $composableBuilder(
-    column: $table.displayName,
+  ColumnOrderings<int> get changedAt => $composableBuilder(
+    column: $table.changedAt,
     builder: (column) => ColumnOrderings(column),
   );
-
-  ColumnOrderings<int> get updatedAt => $composableBuilder(
-    column: $table.updatedAt,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  $$CategoriesTableOrderingComposer get categoryId {
-    final $$CategoriesTableOrderingComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.categoryId,
-      referencedTable: $db.categories,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$CategoriesTableOrderingComposer(
-            $db: $db,
-            $table: $db.categories,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return composer;
-  }
-
-  $$RoomsTableOrderingComposer get roomId {
-    final $$RoomsTableOrderingComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.roomId,
-      referencedTable: $db.rooms,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$RoomsTableOrderingComposer(
-            $db: $db,
-            $table: $db.rooms,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return composer;
-  }
 }
 
-class $$PayeeRulesTableAnnotationComposer
-    extends Composer<_$AppDatabase, $PayeeRulesTable> {
-  $$PayeeRulesTableAnnotationComposer({
+class $$SyncStateTableAnnotationComposer
+    extends Composer<_$AppDatabase, $SyncStateTable> {
+  $$SyncStateTableAnnotationComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  GeneratedColumn<String> get payeeKey =>
-      $composableBuilder(column: $table.payeeKey, builder: (column) => column);
+  GeneratedColumn<String> get recordId =>
+      $composableBuilder(column: $table.recordId, builder: (column) => column);
 
-  GeneratedColumn<String> get displayName => $composableBuilder(
-    column: $table.displayName,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<int> get updatedAt =>
-      $composableBuilder(column: $table.updatedAt, builder: (column) => column);
-
-  $$CategoriesTableAnnotationComposer get categoryId {
-    final $$CategoriesTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.categoryId,
-      referencedTable: $db.categories,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$CategoriesTableAnnotationComposer(
-            $db: $db,
-            $table: $db.categories,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return composer;
-  }
-
-  $$RoomsTableAnnotationComposer get roomId {
-    final $$RoomsTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.roomId,
-      referencedTable: $db.rooms,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$RoomsTableAnnotationComposer(
-            $db: $db,
-            $table: $db.rooms,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return composer;
-  }
+  GeneratedColumn<int> get changedAt =>
+      $composableBuilder(column: $table.changedAt, builder: (column) => column);
 }
 
-class $$PayeeRulesTableTableManager
+class $$SyncStateTableTableManager
     extends
         RootTableManager<
           _$AppDatabase,
-          $PayeeRulesTable,
-          PayeeRuleRow,
-          $$PayeeRulesTableFilterComposer,
-          $$PayeeRulesTableOrderingComposer,
-          $$PayeeRulesTableAnnotationComposer,
-          $$PayeeRulesTableCreateCompanionBuilder,
-          $$PayeeRulesTableUpdateCompanionBuilder,
-          (PayeeRuleRow, $$PayeeRulesTableReferences),
-          PayeeRuleRow,
-          PrefetchHooks Function({bool categoryId, bool roomId})
+          $SyncStateTable,
+          SyncStateRow,
+          $$SyncStateTableFilterComposer,
+          $$SyncStateTableOrderingComposer,
+          $$SyncStateTableAnnotationComposer,
+          $$SyncStateTableCreateCompanionBuilder,
+          $$SyncStateTableUpdateCompanionBuilder,
+          (
+            SyncStateRow,
+            BaseReferences<_$AppDatabase, $SyncStateTable, SyncStateRow>,
+          ),
+          SyncStateRow,
+          PrefetchHooks Function()
         > {
-  $$PayeeRulesTableTableManager(_$AppDatabase db, $PayeeRulesTable table)
+  $$SyncStateTableTableManager(_$AppDatabase db, $SyncStateTable table)
     : super(
         TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
-              $$PayeeRulesTableFilterComposer($db: db, $table: table),
+              $$SyncStateTableFilterComposer($db: db, $table: table),
           createOrderingComposer: () =>
-              $$PayeeRulesTableOrderingComposer($db: db, $table: table),
+              $$SyncStateTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
-              $$PayeeRulesTableAnnotationComposer($db: db, $table: table),
+              $$SyncStateTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
-                Value<String> payeeKey = const Value.absent(),
-                Value<String?> categoryId = const Value.absent(),
-                Value<String?> roomId = const Value.absent(),
-                Value<String?> displayName = const Value.absent(),
-                Value<int> updatedAt = const Value.absent(),
+                Value<String> recordId = const Value.absent(),
+                Value<int> changedAt = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
-              }) => PayeeRulesCompanion(
-                payeeKey: payeeKey,
-                categoryId: categoryId,
-                roomId: roomId,
-                displayName: displayName,
-                updatedAt: updatedAt,
+              }) => SyncStateCompanion(
+                recordId: recordId,
+                changedAt: changedAt,
                 rowid: rowid,
               ),
           createCompanionCallback:
               ({
-                required String payeeKey,
-                Value<String?> categoryId = const Value.absent(),
-                Value<String?> roomId = const Value.absent(),
-                Value<String?> displayName = const Value.absent(),
-                required int updatedAt,
+                required String recordId,
+                required int changedAt,
                 Value<int> rowid = const Value.absent(),
-              }) => PayeeRulesCompanion.insert(
-                payeeKey: payeeKey,
-                categoryId: categoryId,
-                roomId: roomId,
-                displayName: displayName,
-                updatedAt: updatedAt,
+              }) => SyncStateCompanion.insert(
+                recordId: recordId,
+                changedAt: changedAt,
                 rowid: rowid,
               ),
           withReferenceMapper: (p0) => p0
               .map(
                 (e) => (
-                  e.readTable<$PayeeRulesTable, PayeeRuleRow>(table),
-                  $$PayeeRulesTableReferences(db, table, e),
+                  e.readTable<$SyncStateTable, SyncStateRow>(table),
+                  BaseReferences<_$AppDatabase, $SyncStateTable, SyncStateRow>(
+                    db,
+                    table,
+                    e,
+                  ),
                 ),
               )
               .toList(),
-          prefetchHooksCallback: ({categoryId = false, roomId = false}) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [],
-              addJoins:
-                  <
-                    T extends TableManagerState<
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic
-                    >
-                  >(state) {
-                    if (categoryId) {
-                      state = state.withJoin(
-                        currentTable: table,
-                        currentColumn: table.categoryId,
-                        referencedTable: $$PayeeRulesTableReferences
-                            ._categoryIdTable(db),
-                        referencedColumn: $$PayeeRulesTableReferences
-                            ._categoryIdTable(db)
-                            .id,
-                      ) as T;
-                    }
-                    if (roomId) {
-                      state = state.withJoin(
-                        currentTable: table,
-                        currentColumn: table.roomId,
-                        referencedTable: $$PayeeRulesTableReferences
-                            ._roomIdTable(db),
-                        referencedColumn: $$PayeeRulesTableReferences
-                            ._roomIdTable(db)
-                            .id,
-                      ) as T;
-                    }
-
-                    return state;
-                  },
-              getPrefetchedDataCallback: (items) async {
-                return [];
-              },
-            );
-          },
+          prefetchHooksCallback: null,
         ),
       );
 }
 
-typedef $$PayeeRulesTableProcessedTableManager =
+typedef $$SyncStateTableProcessedTableManager =
     ProcessedTableManager<
       _$AppDatabase,
-      $PayeeRulesTable,
-      PayeeRuleRow,
-      $$PayeeRulesTableFilterComposer,
-      $$PayeeRulesTableOrderingComposer,
-      $$PayeeRulesTableAnnotationComposer,
-      $$PayeeRulesTableCreateCompanionBuilder,
-      $$PayeeRulesTableUpdateCompanionBuilder,
-      (PayeeRuleRow, $$PayeeRulesTableReferences),
-      PayeeRuleRow,
-      PrefetchHooks Function({bool categoryId, bool roomId})
+      $SyncStateTable,
+      SyncStateRow,
+      $$SyncStateTableFilterComposer,
+      $$SyncStateTableOrderingComposer,
+      $$SyncStateTableAnnotationComposer,
+      $$SyncStateTableCreateCompanionBuilder,
+      $$SyncStateTableUpdateCompanionBuilder,
+      (
+        SyncStateRow,
+        BaseReferences<_$AppDatabase, $SyncStateTable, SyncStateRow>,
+      ),
+      SyncStateRow,
+      PrefetchHooks Function()
     >;
 
 class $AppDatabaseManager {
@@ -10974,12 +12409,20 @@ class $AppDatabaseManager {
   $AppDatabaseManager(this._db);
   $$AccountsTableTableManager get accounts =>
       $$AccountsTableTableManager(_db, _db.accounts);
+  $$SyncMetaTableTableManager get syncMeta =>
+      $$SyncMetaTableTableManager(_db, _db.syncMeta);
+  $$SyncOutboxTableTableManager get syncOutbox =>
+      $$SyncOutboxTableTableManager(_db, _db.syncOutbox);
   $$CategoriesTableTableManager get categories =>
       $$CategoriesTableTableManager(_db, _db.categories);
   $$RoomsTableTableManager get rooms =>
       $$RoomsTableTableManager(_db, _db.rooms);
   $$TransactionsTableTableManager get transactions =>
       $$TransactionsTableTableManager(_db, _db.transactions);
+  $$BudgetsTableTableManager get budgets =>
+      $$BudgetsTableTableManager(_db, _db.budgets);
+  $$PayeeRulesTableTableManager get payeeRules =>
+      $$PayeeRulesTableTableManager(_db, _db.payeeRules);
   $$SettingsTableTableManager get settings =>
       $$SettingsTableTableManager(_db, _db.settings);
   $$RawCapturesTableTableManager get rawCaptures =>
@@ -10988,12 +12431,10 @@ class $AppDatabaseManager {
       $$TransactionSourcesTableTableManager(_db, _db.transactionSources);
   $$UnparsedMessagesTableTableManager get unparsedMessages =>
       $$UnparsedMessagesTableTableManager(_db, _db.unparsedMessages);
-  $$BudgetsTableTableManager get budgets =>
-      $$BudgetsTableTableManager(_db, _db.budgets);
   $$FiredAlertsTableTableManager get firedAlerts =>
       $$FiredAlertsTableTableManager(_db, _db.firedAlerts);
   $$NoticesTableTableManager get notices =>
       $$NoticesTableTableManager(_db, _db.notices);
-  $$PayeeRulesTableTableManager get payeeRules =>
-      $$PayeeRulesTableTableManager(_db, _db.payeeRules);
+  $$SyncStateTableTableManager get syncState =>
+      $$SyncStateTableTableManager(_db, _db.syncState);
 }

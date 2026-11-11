@@ -469,3 +469,67 @@ class PayeeRules extends Table {
   @override
   bool get isStrict => true;
 }
+
+/// Sync's own state on this phone (Phase 9): whether sync is on, where
+/// the last pull ended, and a flag while remote changes are applied.
+/// Never synced.
+@DataClassName('SyncMetaRow')
+class SyncMeta extends Table {
+  @override
+  String get tableName => 'sync_meta';
+
+  /// `enabled`, `cursor` or `applying`.
+  TextColumn get key => text()();
+
+  /// Its value.
+  TextColumn get value => text()();
+
+  @override
+  Set<Column<Object>> get primaryKey => {key};
+
+  @override
+  bool get isStrict => true;
+}
+
+/// Local changes waiting to be uploaded, one row per record (Phase 9).
+/// Filled by triggers (sync.drift) only while sync is on.
+@DataClassName('SyncOutboxRow')
+class SyncOutbox extends Table {
+  @override
+  String get tableName => 'sync_outbox';
+
+  /// The table changed, for example `transactions`.
+  TextColumn get recordTable => text()();
+
+  /// The changed row's key in that table.
+  TextColumn get recordKey => text()();
+
+  /// When it changed, UTC epoch milliseconds.
+  IntColumn get changedAt => integer()();
+
+  @override
+  Set<Column<Object>> get primaryKey => {recordTable, recordKey};
+
+  @override
+  bool get isStrict => true;
+}
+
+/// The time of the newest version of each synced record this phone has
+/// seen, for last-edit-wins (Phase 9). Keyed by the opaque record id.
+@DataClassName('SyncStateRow')
+class SyncState extends Table {
+  @override
+  String get tableName => 'sync_state';
+
+  /// The opaque record id the server knows.
+  TextColumn get recordId => text()();
+
+  /// When that version was made, UTC epoch milliseconds.
+  IntColumn get changedAt => integer()();
+
+  @override
+  Set<Column<Object>> get primaryKey => {recordId};
+
+  @override
+  bool get isStrict => true;
+}

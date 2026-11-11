@@ -1732,11 +1732,494 @@ i1.GeneratedColumn<String> _column_56(String aliasedName) =>
       type: i1.DriftSqlType.string,
       $customConstraints: 'NULL',
     );
+
+final class Schema6 extends i0.VersionedSchema {
+  Schema6({required super.database}) : super(version: 6);
+  @override
+  late final List<i1.DatabaseSchemaEntity> entities = [
+    accounts,
+    syncMeta,
+    syncOutbox,
+    syncAccountsInsert,
+    syncAccountsUpdate,
+    syncAccountsDelete,
+    categories,
+    syncCategoriesInsert,
+    syncCategoriesUpdate,
+    syncCategoriesDelete,
+    rooms,
+    syncRoomsInsert,
+    syncRoomsUpdate,
+    syncRoomsDelete,
+    transactions,
+    syncTransactionsInsert,
+    syncTransactionsUpdate,
+    syncTransactionsDelete,
+    budgets,
+    syncBudgetsInsert,
+    syncBudgetsUpdate,
+    syncBudgetsDelete,
+    payeeRules,
+    syncPayeeRulesInsert,
+    syncPayeeRulesUpdate,
+    syncPayeeRulesDelete,
+    settings,
+    syncSettingsInsert,
+    syncSettingsUpdate,
+    syncSettingsDelete,
+    rawCaptures,
+    transactionSources,
+    unparsed,
+    firedAlerts,
+    notices,
+    syncState,
+    transactionsOccurredAt,
+    transactionsRoomId,
+    transactionsCategoryId,
+    transactionsRefNo,
+    transactionsPayeeKey,
+    transactionSourcesTransaction,
+    noticesCreatedAt,
+  ];
+  late final Shape0 accounts = Shape0(
+    source: i0.VersionedTable(
+      entityName: 'accounts',
+      withoutRowId: false,
+      isStrict: true,
+      tableConstraints: [
+        'PRIMARY KEY(id)',
+        'CHECK(type IN (\'bank\', \'creditCard\', \'cash\', \'wallet\'))',
+      ],
+      columns: [
+        _column_0,
+        _column_1,
+        _column_2,
+        _column_3,
+        _column_4,
+        _column_5,
+        _column_6,
+      ],
+      attachedDatabase: database,
+    ),
+    alias: null,
+  );
+  late final Shape4 syncMeta = Shape4(
+    source: i0.VersionedTable(
+      entityName: 'sync_meta',
+      withoutRowId: false,
+      isStrict: true,
+      tableConstraints: ['PRIMARY KEY("key")'],
+      columns: [_column_34, _column_35],
+      attachedDatabase: database,
+    ),
+    alias: null,
+  );
+  late final Shape12 syncOutbox = Shape12(
+    source: i0.VersionedTable(
+      entityName: 'sync_outbox',
+      withoutRowId: false,
+      isStrict: true,
+      tableConstraints: ['PRIMARY KEY(record_table, record_key)'],
+      columns: [_column_57, _column_58, _column_59],
+      attachedDatabase: database,
+    ),
+    alias: null,
+  );
+  final i1.Trigger syncAccountsInsert = i1.Trigger(
+    'CREATE TRIGGER sync_accounts_insert AFTER INSERT ON accounts WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'accounts\', NEW.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_accounts_insert',
+  );
+  final i1.Trigger syncAccountsUpdate = i1.Trigger(
+    'CREATE TRIGGER sync_accounts_update AFTER UPDATE ON accounts WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'accounts\', NEW.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_accounts_update',
+  );
+  final i1.Trigger syncAccountsDelete = i1.Trigger(
+    'CREATE TRIGGER sync_accounts_delete AFTER DELETE ON accounts WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'accounts\', OLD.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_accounts_delete',
+  );
+  late final Shape1 categories = Shape1(
+    source: i0.VersionedTable(
+      entityName: 'categories',
+      withoutRowId: false,
+      isStrict: true,
+      tableConstraints: [
+        'PRIMARY KEY(id)',
+        'CHECK(kind IN (\'expense\', \'income\', \'system\'))',
+      ],
+      columns: [
+        _column_0,
+        _column_1,
+        _column_7,
+        _column_8,
+        _column_5,
+        _column_9,
+      ],
+      attachedDatabase: database,
+    ),
+    alias: null,
+  );
+  final i1.Trigger syncCategoriesInsert = i1.Trigger(
+    'CREATE TRIGGER sync_categories_insert AFTER INSERT ON categories WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'categories\', NEW.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_categories_insert',
+  );
+  final i1.Trigger syncCategoriesUpdate = i1.Trigger(
+    'CREATE TRIGGER sync_categories_update AFTER UPDATE ON categories WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'categories\', NEW.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_categories_update',
+  );
+  final i1.Trigger syncCategoriesDelete = i1.Trigger(
+    'CREATE TRIGGER sync_categories_delete AFTER DELETE ON categories WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'categories\', OLD.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_categories_delete',
+  );
+  late final Shape2 rooms = Shape2(
+    source: i0.VersionedTable(
+      entityName: 'rooms',
+      withoutRowId: false,
+      isStrict: true,
+      tableConstraints: [
+        'PRIMARY KEY(id)',
+        'CHECK(type IN (\'trip\', \'wedding\', \'event\', \'custom\'))',
+        'CHECK(auto_tag_mode IN (\'dateWindow\', \'suggest\', \'manual\'))',
+        'CHECK(status IN (\'active\', \'archived\'))',
+        'CHECK(budget_paise IS NULL OR budget_paise >= 0)',
+      ],
+      columns: [
+        _column_0,
+        _column_1,
+        _column_2,
+        _column_10,
+        _column_11,
+        _column_12,
+        _column_13,
+        _column_14,
+        _column_15,
+        _column_16,
+        _column_6,
+      ],
+      attachedDatabase: database,
+    ),
+    alias: null,
+  );
+  final i1.Trigger syncRoomsInsert = i1.Trigger(
+    'CREATE TRIGGER sync_rooms_insert AFTER INSERT ON rooms WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'rooms\', NEW.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_rooms_insert',
+  );
+  final i1.Trigger syncRoomsUpdate = i1.Trigger(
+    'CREATE TRIGGER sync_rooms_update AFTER UPDATE ON rooms WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'rooms\', NEW.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_rooms_update',
+  );
+  final i1.Trigger syncRoomsDelete = i1.Trigger(
+    'CREATE TRIGGER sync_rooms_delete AFTER DELETE ON rooms WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'rooms\', OLD.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_rooms_delete',
+  );
+  late final Shape3 transactions = Shape3(
+    source: i0.VersionedTable(
+      entityName: 'transactions',
+      withoutRowId: false,
+      isStrict: true,
+      tableConstraints: [
+        'PRIMARY KEY(id)',
+        'CHECK(amount_paise > 0)',
+        'CHECK(kind IN (\'expense\', \'income\', \'transfer\', \'refund\'))',
+        'CHECK(review_status IN (\'confirmed\', \'needsReview\'))',
+        'CHECK(origin IN (\'manual\', \'auto\'))',
+      ],
+      columns: [
+        _column_0,
+        _column_8,
+        _column_17,
+        _column_18,
+        _column_19,
+        _column_20,
+        _column_21,
+        _column_22,
+        _column_23,
+        _column_24,
+        _column_25,
+        _column_26,
+        _column_27,
+        _column_28,
+        _column_29,
+        _column_30,
+        _column_31,
+        _column_32,
+        _column_6,
+        _column_33,
+      ],
+      attachedDatabase: database,
+    ),
+    alias: null,
+  );
+  final i1.Trigger syncTransactionsInsert = i1.Trigger(
+    'CREATE TRIGGER sync_transactions_insert AFTER INSERT ON transactions WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'transactions\', NEW.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_transactions_insert',
+  );
+  final i1.Trigger syncTransactionsUpdate = i1.Trigger(
+    'CREATE TRIGGER sync_transactions_update AFTER UPDATE ON transactions WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'transactions\', NEW.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_transactions_update',
+  );
+  final i1.Trigger syncTransactionsDelete = i1.Trigger(
+    'CREATE TRIGGER sync_transactions_delete AFTER DELETE ON transactions WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'transactions\', OLD.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_transactions_delete',
+  );
+  late final Shape8 budgets = Shape8(
+    source: i0.VersionedTable(
+      entityName: 'budgets',
+      withoutRowId: false,
+      isStrict: true,
+      tableConstraints: [
+        'PRIMARY KEY(id)',
+        'CHECK(amount_paise > 0)',
+        'CHECK((id = \'month\' AND category_id IS NULL)OR(category_id IS NOT NULL AND id = \'category:\' || category_id))',
+      ],
+      columns: [_column_0, _column_49, _column_17],
+      attachedDatabase: database,
+    ),
+    alias: null,
+  );
+  final i1.Trigger syncBudgetsInsert = i1.Trigger(
+    'CREATE TRIGGER sync_budgets_insert AFTER INSERT ON budgets WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'budgets\', NEW.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_budgets_insert',
+  );
+  final i1.Trigger syncBudgetsUpdate = i1.Trigger(
+    'CREATE TRIGGER sync_budgets_update AFTER UPDATE ON budgets WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'budgets\', NEW.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_budgets_update',
+  );
+  final i1.Trigger syncBudgetsDelete = i1.Trigger(
+    'CREATE TRIGGER sync_budgets_delete AFTER DELETE ON budgets WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'budgets\', OLD.id, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_budgets_delete',
+  );
+  late final Shape11 payeeRules = Shape11(
+    source: i0.VersionedTable(
+      entityName: 'payee_rules',
+      withoutRowId: false,
+      isStrict: true,
+      tableConstraints: ['PRIMARY KEY(payee_key)'],
+      columns: [_column_55, _column_22, _column_23, _column_56, _column_33],
+      attachedDatabase: database,
+    ),
+    alias: null,
+  );
+  final i1.Trigger syncPayeeRulesInsert = i1.Trigger(
+    'CREATE TRIGGER sync_payee_rules_insert AFTER INSERT ON payee_rules WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'payee_rules\', NEW.payee_key, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_payee_rules_insert',
+  );
+  final i1.Trigger syncPayeeRulesUpdate = i1.Trigger(
+    'CREATE TRIGGER sync_payee_rules_update AFTER UPDATE ON payee_rules WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'payee_rules\', NEW.payee_key, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_payee_rules_update',
+  );
+  final i1.Trigger syncPayeeRulesDelete = i1.Trigger(
+    'CREATE TRIGGER sync_payee_rules_delete AFTER DELETE ON payee_rules WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'payee_rules\', OLD.payee_key, CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_payee_rules_delete',
+  );
+  late final Shape4 settings = Shape4(
+    source: i0.VersionedTable(
+      entityName: 'settings',
+      withoutRowId: false,
+      isStrict: true,
+      tableConstraints: ['PRIMARY KEY("key")'],
+      columns: [_column_34, _column_35],
+      attachedDatabase: database,
+    ),
+    alias: null,
+  );
+  final i1.Trigger syncSettingsInsert = i1.Trigger(
+    'CREATE TRIGGER sync_settings_insert AFTER INSERT ON settings WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') AND NEW."key" IN (\'month_start_day\', \'watch_category\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'settings\', NEW."key", CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_settings_insert',
+  );
+  final i1.Trigger syncSettingsUpdate = i1.Trigger(
+    'CREATE TRIGGER sync_settings_update AFTER UPDATE ON settings WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') AND NEW."key" IN (\'month_start_day\', \'watch_category\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'settings\', NEW."key", CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_settings_update',
+  );
+  final i1.Trigger syncSettingsDelete = i1.Trigger(
+    'CREATE TRIGGER sync_settings_delete AFTER DELETE ON settings WHEN EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'enabled\') AND NOT EXISTS (SELECT 1 FROM sync_meta WHERE "key" = \'applying\') AND OLD."key" IN (\'month_start_day\', \'watch_category\') BEGIN INSERT OR REPLACE INTO sync_outbox (record_table, record_key, changed_at) VALUES (\'settings\', OLD."key", CAST((julianday(\'now\') - 2440587.5)* 86400000 AS INTEGER));END',
+    'sync_settings_delete',
+  );
+  late final Shape5 rawCaptures = Shape5(
+    source: i0.VersionedTable(
+      entityName: 'raw_captures',
+      withoutRowId: false,
+      isStrict: true,
+      tableConstraints: [
+        'PRIMARY KEY(id)',
+        'CHECK(source IN (\'android_notification\', \'android_sms\', \'ios_shortcut\', \'share\', \'paste\'))',
+        'CHECK(status IN (\'parsed\', \'dropped\', \'unparsed\', \'duplicate\'))',
+      ],
+      columns: [
+        _column_0,
+        _column_36,
+        _column_37,
+        _column_38,
+        _column_39,
+        _column_40,
+        _column_41,
+      ],
+      attachedDatabase: database,
+    ),
+    alias: null,
+  );
+  late final Shape6 transactionSources = Shape6(
+    source: i0.VersionedTable(
+      entityName: 'transaction_sources',
+      withoutRowId: false,
+      isStrict: true,
+      tableConstraints: ['PRIMARY KEY(id)'],
+      columns: [
+        _column_0,
+        _column_42,
+        _column_43,
+        _column_37,
+        _column_38,
+        _column_39,
+        _column_44,
+        _column_45,
+        _column_46,
+      ],
+      attachedDatabase: database,
+    ),
+    alias: null,
+  );
+  late final Shape7 unparsed = Shape7(
+    source: i0.VersionedTable(
+      entityName: 'unparsed',
+      withoutRowId: false,
+      isStrict: true,
+      tableConstraints: ['PRIMARY KEY(id)'],
+      columns: [_column_0, _column_43, _column_47, _column_39, _column_48],
+      attachedDatabase: database,
+    ),
+    alias: null,
+  );
+  late final Shape9 firedAlerts = Shape9(
+    source: i0.VersionedTable(
+      entityName: 'fired_alerts',
+      withoutRowId: false,
+      isStrict: true,
+      tableConstraints: ['PRIMARY KEY("key")'],
+      columns: [_column_34, _column_50],
+      attachedDatabase: database,
+    ),
+    alias: null,
+  );
+  late final Shape10 notices = Shape10(
+    source: i0.VersionedTable(
+      entityName: 'notices',
+      withoutRowId: false,
+      isStrict: true,
+      tableConstraints: [
+        'PRIMARY KEY(id)',
+        'CHECK(kind IN (\'budget\', \'weekly\', \'room\'))',
+      ],
+      columns: [
+        _column_0,
+        _column_8,
+        _column_51,
+        _column_52,
+        _column_53,
+        _column_6,
+        _column_54,
+      ],
+      attachedDatabase: database,
+    ),
+    alias: null,
+  );
+  late final Shape13 syncState = Shape13(
+    source: i0.VersionedTable(
+      entityName: 'sync_state',
+      withoutRowId: false,
+      isStrict: true,
+      tableConstraints: ['PRIMARY KEY(record_id)'],
+      columns: [_column_60, _column_59],
+      attachedDatabase: database,
+    ),
+    alias: null,
+  );
+  final i1.Index transactionsOccurredAt = i1.Index(
+    'transactions_occurred_at',
+    'CREATE INDEX transactions_occurred_at ON transactions (occurred_at)',
+  );
+  final i1.Index transactionsRoomId = i1.Index(
+    'transactions_room_id',
+    'CREATE INDEX transactions_room_id ON transactions (room_id)',
+  );
+  final i1.Index transactionsCategoryId = i1.Index(
+    'transactions_category_id',
+    'CREATE INDEX transactions_category_id ON transactions (category_id)',
+  );
+  final i1.Index transactionsRefNo = i1.Index(
+    'transactions_ref_no',
+    'CREATE INDEX transactions_ref_no ON transactions (ref_no)',
+  );
+  final i1.Index transactionsPayeeKey = i1.Index(
+    'transactions_payee_key',
+    'CREATE INDEX transactions_payee_key ON transactions (payee_key)',
+  );
+  final i1.Index transactionSourcesTransaction = i1.Index(
+    'transaction_sources_transaction',
+    'CREATE INDEX transaction_sources_transaction ON transaction_sources (transaction_id)',
+  );
+  final i1.Index noticesCreatedAt = i1.Index(
+    'notices_created_at',
+    'CREATE INDEX notices_created_at ON notices (created_at)',
+  );
+}
+
+class Shape12 extends i0.VersionedTable {
+  Shape12({required super.source, required super.alias}) : super.aliased();
+  i1.GeneratedColumn<String> get recordTable =>
+      columnsByName['record_table']! as i1.GeneratedColumn<String>;
+  i1.GeneratedColumn<String> get recordKey =>
+      columnsByName['record_key']! as i1.GeneratedColumn<String>;
+  i1.GeneratedColumn<int> get changedAt =>
+      columnsByName['changed_at']! as i1.GeneratedColumn<int>;
+}
+
+i1.GeneratedColumn<String> _column_57(String aliasedName) =>
+    i1.GeneratedColumn<String>(
+      'record_table',
+      aliasedName,
+      false,
+      type: i1.DriftSqlType.string,
+      $customConstraints: 'NOT NULL',
+    );
+i1.GeneratedColumn<String> _column_58(String aliasedName) =>
+    i1.GeneratedColumn<String>(
+      'record_key',
+      aliasedName,
+      false,
+      type: i1.DriftSqlType.string,
+      $customConstraints: 'NOT NULL',
+    );
+i1.GeneratedColumn<int> _column_59(String aliasedName) =>
+    i1.GeneratedColumn<int>(
+      'changed_at',
+      aliasedName,
+      false,
+      type: i1.DriftSqlType.int,
+      $customConstraints: 'NOT NULL',
+    );
+
+class Shape13 extends i0.VersionedTable {
+  Shape13({required super.source, required super.alias}) : super.aliased();
+  i1.GeneratedColumn<String> get recordId =>
+      columnsByName['record_id']! as i1.GeneratedColumn<String>;
+  i1.GeneratedColumn<int> get changedAt =>
+      columnsByName['changed_at']! as i1.GeneratedColumn<int>;
+}
+
+i1.GeneratedColumn<String> _column_60(String aliasedName) =>
+    i1.GeneratedColumn<String>(
+      'record_id',
+      aliasedName,
+      false,
+      type: i1.DriftSqlType.string,
+      $customConstraints: 'NOT NULL',
+    );
 i0.MigrationStepWithVersion migrationSteps({
   required Future<void> Function(i1.Migrator m, Schema2 schema) from1To2,
   required Future<void> Function(i1.Migrator m, Schema3 schema) from2To3,
   required Future<void> Function(i1.Migrator m, Schema4 schema) from3To4,
   required Future<void> Function(i1.Migrator m, Schema5 schema) from4To5,
+  required Future<void> Function(i1.Migrator m, Schema6 schema) from5To6,
 }) {
   return (currentVersion, database) async {
     switch (currentVersion) {
@@ -1760,6 +2243,11 @@ i0.MigrationStepWithVersion migrationSteps({
         final migrator = i1.Migrator(database, schema);
         await from4To5(migrator, schema);
         return 5;
+      case 5:
+        final schema = Schema6(database: database);
+        final migrator = i1.Migrator(database, schema);
+        await from5To6(migrator, schema);
+        return 6;
       default:
         throw ArgumentError.value('Unknown migration from $currentVersion');
     }
@@ -1771,11 +2259,13 @@ i1.OnUpgrade stepByStep({
   required Future<void> Function(i1.Migrator m, Schema3 schema) from2To3,
   required Future<void> Function(i1.Migrator m, Schema4 schema) from3To4,
   required Future<void> Function(i1.Migrator m, Schema5 schema) from4To5,
+  required Future<void> Function(i1.Migrator m, Schema6 schema) from5To6,
 }) => i0.VersionedSchema.stepByStepHelper(
   step: migrationSteps(
     from1To2: from1To2,
     from2To3: from2To3,
     from3To4: from3To4,
     from4To5: from4To5,
+    from5To6: from5To6,
   ),
 );

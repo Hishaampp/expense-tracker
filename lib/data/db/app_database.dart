@@ -30,7 +30,11 @@ part 'app_database.g.dart';
     FiredAlerts,
     Notices,
     PayeeRules,
+    SyncMeta,
+    SyncOutbox,
+    SyncState,
   ],
+  include: {'sync.drift'},
 )
 class AppDatabase extends _$AppDatabase {
   /// Opens the database on the executor `e`; `clock` stamps seeded rows.
@@ -98,7 +102,7 @@ class AppDatabase extends _$AppDatabase {
   final Clock _clock;
 
   @override
-  int get schemaVersion => 5;
+  int get schemaVersion => 6;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -125,6 +129,15 @@ class AppDatabase extends _$AppDatabase {
       from4To5: (m, schema) async {
         // Phase 7: learned payee rules and the merchant book (spec §8).
         await m.createTable(schema.payeeRules);
+      },
+      from5To6: (m, schema) async {
+        // Phase 9: sync state and the change triggers (sync.drift).
+        await m.createTable(schema.syncMeta);
+        await m.createTable(schema.syncOutbox);
+        await m.createTable(schema.syncState);
+        for (final trigger in schema.entities.whereType<Trigger>()) {
+          await m.createTrigger(trigger);
+        }
       },
     ),
     beforeOpen: (details) async {
