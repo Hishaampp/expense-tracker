@@ -55,7 +55,7 @@ These stay: no ads, no analytics on financial data, no AI calls, and raw SMS and
 
 ## Supabase setup (once, in the dashboard)
 1. **SQL Editor → New query:** paste `supabase/migrations/20261111000000_sync_records.sql` and press **Run**. It creates the `sync_records` table with row-level security, plus the `push_records` and `delete_my_account` functions.
-2. **Authentication → Sign In / Providers → Email:** keep it on. Turn **"Confirm email"** on.
+2. **Authentication → Sign In / Providers → Email:** keep it on, and turn **"Confirm email" off**. The 6-digit code already proves the address; with it on, a new account gets a "Confirm your signup" email whose link points at the Site URL (a website, `localhost:3000` by default), not the app.
 3. **Authentication → Emails → Templates → "Magic Link":** add the line `Your code: {{ .Token }}`, so the email carries the 6-digit code the app asks for.
 4. **Authentication → Rate limits:** the built-in mailer sends only a few emails an hour. Before launch, set up your own SMTP under **Authentication → Emails → SMTP Settings** (for example Resend, Brevo or Amazon SES).
 
