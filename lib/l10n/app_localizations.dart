@@ -388,18 +388,6 @@ abstract class AppLocalizations {
   /// **'Rooms'**
   String get roomsTitle;
 
-  /// No description provided for @roomsComingTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Trips and events, together'**
-  String get roomsComingTitle;
-
-  /// No description provided for @roomsComingBody.
-  ///
-  /// In en, this message translates to:
-  /// **'Rooms arrive in a coming update. A Room keeps a trip\'s or a wedding\'s spending together, and it still counts in your month.'**
-  String get roomsComingBody;
-
   /// No description provided for @quickAddTitle.
   ///
   /// In en, this message translates to:
@@ -1377,6 +1365,414 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Read as {amount} {direction}, {payee}'**
   String iosTestParsedPayee(String amount, String direction, String payee);
+
+  /// No description provided for @roomsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep a trip\'s spending together'**
+  String get roomsEmptyTitle;
+
+  /// No description provided for @roomsEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'A Room collects the spending for a trip or a wedding. It still counts in your month, but stays out of your monthly budget.'**
+  String get roomsEmptyBody;
+
+  /// No description provided for @roomsStartTrip.
+  ///
+  /// In en, this message translates to:
+  /// **'Start a trip'**
+  String get roomsStartTrip;
+
+  /// No description provided for @roomsNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New Room'**
+  String get roomsNew;
+
+  /// No description provided for @roomsHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get roomsHistory;
+
+  /// No description provided for @roomTypeTrip.
+  ///
+  /// In en, this message translates to:
+  /// **'Trip'**
+  String get roomTypeTrip;
+
+  /// No description provided for @roomTypeWedding.
+  ///
+  /// In en, this message translates to:
+  /// **'Wedding'**
+  String get roomTypeWedding;
+
+  /// No description provided for @roomTypeEvent.
+  ///
+  /// In en, this message translates to:
+  /// **'Event'**
+  String get roomTypeEvent;
+
+  /// No description provided for @roomTypeCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get roomTypeCustom;
+
+  /// No description provided for @roomFrom.
+  ///
+  /// In en, this message translates to:
+  /// **'From {date}'**
+  String roomFrom(String date);
+
+  /// No description provided for @roomRange.
+  ///
+  /// In en, this message translates to:
+  /// **'{from} – {to}'**
+  String roomRange(String from, String to);
+
+  /// No description provided for @roomLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} left of {budget}'**
+  String roomLeft(String amount, String budget);
+
+  /// No description provided for @roomOver.
+  ///
+  /// In en, this message translates to:
+  /// **'Over by {amount}'**
+  String roomOver(String amount);
+
+  /// No description provided for @roomCardSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{name}, {details}, {amount} spent'**
+  String roomCardSemantics(String name, String details, String amount);
+
+  /// No description provided for @tripDefaultName.
+  ///
+  /// In en, this message translates to:
+  /// **'Trip from {date}'**
+  String tripDefaultName(String date);
+
+  /// No description provided for @roomNewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New Room'**
+  String get roomNewTitle;
+
+  /// No description provided for @roomEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Room'**
+  String get roomEditTitle;
+
+  /// No description provided for @roomNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get roomNameLabel;
+
+  /// No description provided for @roomNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Goa trip'**
+  String get roomNameHint;
+
+  /// No description provided for @roomNameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Give the Room a name'**
+  String get roomNameRequired;
+
+  /// No description provided for @roomTypeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get roomTypeLabel;
+
+  /// No description provided for @roomEmojiLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Emoji'**
+  String get roomEmojiLabel;
+
+  /// No description provided for @roomNoEmoji.
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get roomNoEmoji;
+
+  /// No description provided for @roomEmojiSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Emoji {emoji}'**
+  String roomEmojiSemantics(String emoji);
+
+  /// No description provided for @roomDatesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Dates'**
+  String get roomDatesLabel;
+
+  /// No description provided for @roomStartLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get roomStartLabel;
+
+  /// No description provided for @roomEndLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'End'**
+  String get roomEndLabel;
+
+  /// No description provided for @roomPickDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a date'**
+  String get roomPickDate;
+
+  /// No description provided for @roomNoEnd.
+  ///
+  /// In en, this message translates to:
+  /// **'Still going'**
+  String get roomNoEnd;
+
+  /// No description provided for @roomStartValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Start: {date}'**
+  String roomStartValue(String date);
+
+  /// No description provided for @roomEndValue.
+  ///
+  /// In en, this message translates to:
+  /// **'End: {date}'**
+  String roomEndValue(String date);
+
+  /// No description provided for @roomClearEnd.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear the end date'**
+  String get roomClearEnd;
+
+  /// No description provided for @roomStartRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'A trip needs a start date'**
+  String get roomStartRequired;
+
+  /// No description provided for @roomEndBeforeStart.
+  ///
+  /// In en, this message translates to:
+  /// **'The end can\'t be before the start'**
+  String get roomEndBeforeStart;
+
+  /// No description provided for @roomWindowNeedsStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Set a start date to add every expense in the dates'**
+  String get roomWindowNeedsStart;
+
+  /// No description provided for @roomBudgetLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Budget (optional)'**
+  String get roomBudgetLabel;
+
+  /// No description provided for @roomBudgetHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount in ₹'**
+  String get roomBudgetHint;
+
+  /// No description provided for @roomModeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Adding expenses'**
+  String get roomModeLabel;
+
+  /// No description provided for @roomModeDateWindow.
+  ///
+  /// In en, this message translates to:
+  /// **'Every expense in the dates'**
+  String get roomModeDateWindow;
+
+  /// No description provided for @roomModeSuggest.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask me each time'**
+  String get roomModeSuggest;
+
+  /// No description provided for @roomModeManual.
+  ///
+  /// In en, this message translates to:
+  /// **'Only when I add them'**
+  String get roomModeManual;
+
+  /// No description provided for @roomModeTripNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Every expense between the dates goes into the trip.'**
+  String get roomModeTripNote;
+
+  /// No description provided for @roomModeWeddingNote.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ll be asked about each expense. Nothing is added on its own.'**
+  String get roomModeWeddingNote;
+
+  /// No description provided for @roomCountsInBudget.
+  ///
+  /// In en, this message translates to:
+  /// **'Count in my monthly budget'**
+  String get roomCountsInBudget;
+
+  /// No description provided for @roomCountsInBudgetNote.
+  ///
+  /// In en, this message translates to:
+  /// **'When off, this Room\'s spending shows in your month but stays out of your monthly budget.'**
+  String get roomCountsInBudgetNote;
+
+  /// No description provided for @roomHeroSpent.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve spent {amount} on {name}.'**
+  String roomHeroSpent(String amount, String name);
+
+  /// No description provided for @roomPerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Per day'**
+  String get roomPerDay;
+
+  /// No description provided for @roomDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Days'**
+  String get roomDays;
+
+  /// No description provided for @roomBudget.
+  ///
+  /// In en, this message translates to:
+  /// **'Budget'**
+  String get roomBudget;
+
+  /// No description provided for @roomWhereItWent.
+  ///
+  /// In en, this message translates to:
+  /// **'Where it went'**
+  String get roomWhereItWent;
+
+  /// No description provided for @roomAddExpense.
+  ///
+  /// In en, this message translates to:
+  /// **'Add expense'**
+  String get roomAddExpense;
+
+  /// No description provided for @roomEndTrip.
+  ///
+  /// In en, this message translates to:
+  /// **'End trip today'**
+  String get roomEndTrip;
+
+  /// No description provided for @roomArchive.
+  ///
+  /// In en, this message translates to:
+  /// **'Move to history'**
+  String get roomArchive;
+
+  /// No description provided for @roomRestore.
+  ///
+  /// In en, this message translates to:
+  /// **'Move back to active'**
+  String get roomRestore;
+
+  /// No description provided for @roomEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing here yet'**
+  String get roomEmptyTitle;
+
+  /// No description provided for @roomEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Expenses you add to this Room show up here.'**
+  String get roomEmptyBody;
+
+  /// No description provided for @roomMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'This Room no longer exists.'**
+  String get roomMissing;
+
+  /// No description provided for @roomEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Room'**
+  String get roomEdit;
+
+  /// No description provided for @roomArchived.
+  ///
+  /// In en, this message translates to:
+  /// **'Moved to history'**
+  String get roomArchived;
+
+  /// No description provided for @roomRestored.
+  ///
+  /// In en, this message translates to:
+  /// **'Back in active Rooms'**
+  String get roomRestored;
+
+  /// No description provided for @quickAddNoRoom.
+  ///
+  /// In en, this message translates to:
+  /// **'No Room'**
+  String get quickAddNoRoom;
+
+  /// No description provided for @quickAddRoomLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Room: {name}'**
+  String quickAddRoomLabel(String name);
+
+  /// No description provided for @quickAddPickRoom.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to a Room'**
+  String get quickAddPickRoom;
+
+  /// No description provided for @reviewAddToRoom.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to {name}?'**
+  String reviewAddToRoom(String name);
+
+  /// No description provided for @reviewInRoom.
+  ///
+  /// In en, this message translates to:
+  /// **'In {name}'**
+  String reviewInRoom(String name);
+
+  /// No description provided for @reviewAddedToRoom.
+  ///
+  /// In en, this message translates to:
+  /// **'Added to {name}'**
+  String reviewAddedToRoom(String name);
+
+  /// No description provided for @homeRoomsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Active Rooms'**
+  String get homeRoomsLabel;
+
+  /// No description provided for @homeStartTrip.
+  ///
+  /// In en, this message translates to:
+  /// **'Start trip'**
+  String get homeStartTrip;
 }
 
 class _AppLocalizationsDelegate

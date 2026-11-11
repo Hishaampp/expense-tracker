@@ -98,6 +98,7 @@ final class MoneyTransaction {
     required String accountId,
     required String? categoryId,
     required String? note,
+    required String? roomId,
     required DateTime updatedAt,
   }) {
     return MoneyTransaction(

@@ -74,7 +74,7 @@ motion live only in `lib/theme/`.
 | 2 | Parser + paste/share capture | built; needs real bank samples before Phase 3 |
 | 3 | Android auto-capture | built; needs real samples and an Android phone test |
 | 4 | iOS auto-capture | built; needs an iPhone test |
-| 5 | Rooms | |
+| 5 | Rooms | built; needs a manual trip and wedding walkthrough |
 | 6 | Budgets | |
 | 7 | Learning & polish | |
 | 8 | Privacy, backup, store readiness | |

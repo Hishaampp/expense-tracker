@@ -931,15 +931,15 @@ class $RoomsTable extends Rooms with TableInfo<$RoomsTable, RoomRow> {
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _typeMeta = const VerificationMeta('type');
   @override
-  late final GeneratedColumn<String> type = GeneratedColumn<String>(
-    'type',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
+  late final GeneratedColumnWithTypeConverter<RoomType, String> type =
+      GeneratedColumn<String>(
+        'type',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      ).withConverter<RoomType>($RoomsTable.$convertertype);
   static const VerificationMeta _emojiMeta = const VerificationMeta('emoji');
   @override
   late final GeneratedColumn<String> emoji = GeneratedColumn<String>(
@@ -980,17 +980,15 @@ class $RoomsTable extends Rooms with TableInfo<$RoomsTable, RoomRow> {
     type: DriftSqlType.int,
     requiredDuringInsert: false,
   );
-  static const VerificationMeta _autoTagModeMeta = const VerificationMeta(
-    'autoTagMode',
-  );
   @override
-  late final GeneratedColumn<String> autoTagMode = GeneratedColumn<String>(
-    'auto_tag_mode',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
+  late final GeneratedColumnWithTypeConverter<AutoTagMode, String> autoTagMode =
+      GeneratedColumn<String>(
+        'auto_tag_mode',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      ).withConverter<AutoTagMode>($RoomsTable.$converterautoTagMode);
   static const VerificationMeta _countsTowardMonthlyBudgetMeta =
       const VerificationMeta('countsTowardMonthlyBudget');
   @override
@@ -1006,16 +1004,16 @@ class $RoomsTable extends Rooms with TableInfo<$RoomsTable, RoomRow> {
         ),
         defaultValue: const Constant(false),
       );
-  static const VerificationMeta _statusMeta = const VerificationMeta('status');
   @override
-  late final GeneratedColumn<String> status = GeneratedColumn<String>(
-    'status',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-    defaultValue: const Constant('active'),
-  );
+  late final GeneratedColumnWithTypeConverter<RoomStatus, String> status =
+      GeneratedColumn<String>(
+        'status',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant('active'),
+      ).withConverter<RoomStatus>($RoomsTable.$converterstatus);
   static const VerificationMeta _createdAtMeta = const VerificationMeta(
     'createdAt',
   );
@@ -1066,14 +1064,6 @@ class $RoomsTable extends Rooms with TableInfo<$RoomsTable, RoomRow> {
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
-    if (data.containsKey('type')) {
-      context.handle(
-        _typeMeta,
-        type.isAcceptableOrUnknown(data['type']!, _typeMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_typeMeta);
-    }
     if (data.containsKey('emoji')) {
       context.handle(
         _emojiMeta,
@@ -1101,17 +1091,6 @@ class $RoomsTable extends Rooms with TableInfo<$RoomsTable, RoomRow> {
         ),
       );
     }
-    if (data.containsKey('auto_tag_mode')) {
-      context.handle(
-        _autoTagModeMeta,
-        autoTagMode.isAcceptableOrUnknown(
-          data['auto_tag_mode']!,
-          _autoTagModeMeta,
-        ),
-      );
-    } else if (isInserting) {
-      context.missing(_autoTagModeMeta);
-    }
     if (data.containsKey('counts_toward_monthly_budget')) {
       context.handle(
         _countsTowardMonthlyBudgetMeta,
@@ -1119,12 +1098,6 @@ class $RoomsTable extends Rooms with TableInfo<$RoomsTable, RoomRow> {
           data['counts_toward_monthly_budget']!,
           _countsTowardMonthlyBudgetMeta,
         ),
-      );
-    }
-    if (data.containsKey('status')) {
-      context.handle(
-        _statusMeta,
-        status.isAcceptableOrUnknown(data['status']!, _statusMeta),
       );
     }
     if (data.containsKey('created_at')) {
@@ -1152,10 +1125,12 @@ class $RoomsTable extends Rooms with TableInfo<$RoomsTable, RoomRow> {
         DriftSqlType.string,
         data['${effectivePrefix}name'],
       )!,
-      type: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}type'],
-      )!,
+      type: $RoomsTable.$convertertype.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}type'],
+        )!,
+      ),
       emoji: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}emoji'],
@@ -1172,18 +1147,22 @@ class $RoomsTable extends Rooms with TableInfo<$RoomsTable, RoomRow> {
         DriftSqlType.int,
         data['${effectivePrefix}budget_paise'],
       ),
-      autoTagMode: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}auto_tag_mode'],
-      )!,
+      autoTagMode: $RoomsTable.$converterautoTagMode.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}auto_tag_mode'],
+        )!,
+      ),
       countsTowardMonthlyBudget: attachedDatabase.typeMapping.read(
         DriftSqlType.bool,
         data['${effectivePrefix}counts_toward_monthly_budget'],
       )!,
-      status: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}status'],
-      )!,
+      status: $RoomsTable.$converterstatus.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}status'],
+        )!,
+      ),
       createdAt: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}created_at'],
@@ -1196,6 +1175,12 @@ class $RoomsTable extends Rooms with TableInfo<$RoomsTable, RoomRow> {
     return $RoomsTable(attachedDatabase, alias);
   }
 
+  static JsonTypeConverter2<RoomType, String, String> $convertertype =
+      const EnumNameConverter<RoomType>(RoomType.values);
+  static JsonTypeConverter2<AutoTagMode, String, String> $converterautoTagMode =
+      const EnumNameConverter<AutoTagMode>(AutoTagMode.values);
+  static JsonTypeConverter2<RoomStatus, String, String> $converterstatus =
+      const EnumNameConverter<RoomStatus>(RoomStatus.values);
   @override
   bool get isStrict => true;
 }
@@ -1208,7 +1193,7 @@ class RoomRow extends DataClass implements Insertable<RoomRow> {
   final String name;
 
   /// `trip`, `wedding`, `event` or `custom`.
-  final String type;
+  final RoomType type;
 
   /// Emoji shown with the name.
   final String? emoji;
@@ -1223,13 +1208,13 @@ class RoomRow extends DataClass implements Insertable<RoomRow> {
   final int? budgetPaise;
 
   /// `dateWindow`, `suggest` or `manual`.
-  final String autoTagMode;
+  final AutoTagMode autoTagMode;
 
   /// Whether Room spending counts toward the monthly budget (spec §5.2).
   final bool countsTowardMonthlyBudget;
 
   /// `active` or `archived`.
-  final String status;
+  final RoomStatus status;
 
   /// Creation instant, UTC epoch milliseconds.
   final int createdAt;
@@ -1251,7 +1236,9 @@ class RoomRow extends DataClass implements Insertable<RoomRow> {
     final map = <String, Expression>{};
     map['id'] = Variable<String>(id);
     map['name'] = Variable<String>(name);
-    map['type'] = Variable<String>(type);
+    {
+      map['type'] = Variable<String>($RoomsTable.$convertertype.toSql(type));
+    }
     if (!nullToAbsent || emoji != null) {
       map['emoji'] = Variable<String>(emoji);
     }
@@ -1264,11 +1251,19 @@ class RoomRow extends DataClass implements Insertable<RoomRow> {
     if (!nullToAbsent || budgetPaise != null) {
       map['budget_paise'] = Variable<int>(budgetPaise);
     }
-    map['auto_tag_mode'] = Variable<String>(autoTagMode);
+    {
+      map['auto_tag_mode'] = Variable<String>(
+        $RoomsTable.$converterautoTagMode.toSql(autoTagMode),
+      );
+    }
     map['counts_toward_monthly_budget'] = Variable<bool>(
       countsTowardMonthlyBudget,
     );
-    map['status'] = Variable<String>(status);
+    {
+      map['status'] = Variable<String>(
+        $RoomsTable.$converterstatus.toSql(status),
+      );
+    }
     map['created_at'] = Variable<int>(createdAt);
     return map;
   }
@@ -1305,16 +1300,22 @@ class RoomRow extends DataClass implements Insertable<RoomRow> {
     return RoomRow(
       id: serializer.fromJson<String>(json['id']),
       name: serializer.fromJson<String>(json['name']),
-      type: serializer.fromJson<String>(json['type']),
+      type: $RoomsTable.$convertertype.fromJson(
+        serializer.fromJson<String>(json['type']),
+      ),
       emoji: serializer.fromJson<String?>(json['emoji']),
       startDay: serializer.fromJson<int?>(json['startDay']),
       endDay: serializer.fromJson<int?>(json['endDay']),
       budgetPaise: serializer.fromJson<int?>(json['budgetPaise']),
-      autoTagMode: serializer.fromJson<String>(json['autoTagMode']),
+      autoTagMode: $RoomsTable.$converterautoTagMode.fromJson(
+        serializer.fromJson<String>(json['autoTagMode']),
+      ),
       countsTowardMonthlyBudget: serializer.fromJson<bool>(
         json['countsTowardMonthlyBudget'],
       ),
-      status: serializer.fromJson<String>(json['status']),
+      status: $RoomsTable.$converterstatus.fromJson(
+        serializer.fromJson<String>(json['status']),
+      ),
       createdAt: serializer.fromJson<int>(json['createdAt']),
     );
   }
@@ -1324,16 +1325,22 @@ class RoomRow extends DataClass implements Insertable<RoomRow> {
     return <String, dynamic>{
       'id': serializer.toJson<String>(id),
       'name': serializer.toJson<String>(name),
-      'type': serializer.toJson<String>(type),
+      'type': serializer.toJson<String>(
+        $RoomsTable.$convertertype.toJson(type),
+      ),
       'emoji': serializer.toJson<String?>(emoji),
       'startDay': serializer.toJson<int?>(startDay),
       'endDay': serializer.toJson<int?>(endDay),
       'budgetPaise': serializer.toJson<int?>(budgetPaise),
-      'autoTagMode': serializer.toJson<String>(autoTagMode),
+      'autoTagMode': serializer.toJson<String>(
+        $RoomsTable.$converterautoTagMode.toJson(autoTagMode),
+      ),
       'countsTowardMonthlyBudget': serializer.toJson<bool>(
         countsTowardMonthlyBudget,
       ),
-      'status': serializer.toJson<String>(status),
+      'status': serializer.toJson<String>(
+        $RoomsTable.$converterstatus.toJson(status),
+      ),
       'createdAt': serializer.toJson<int>(createdAt),
     };
   }
@@ -1341,14 +1348,14 @@ class RoomRow extends DataClass implements Insertable<RoomRow> {
   RoomRow copyWith({
     String? id,
     String? name,
-    String? type,
+    RoomType? type,
     Value<String?> emoji = const Value.absent(),
     Value<int?> startDay = const Value.absent(),
     Value<int?> endDay = const Value.absent(),
     Value<int?> budgetPaise = const Value.absent(),
-    String? autoTagMode,
+    AutoTagMode? autoTagMode,
     bool? countsTowardMonthlyBudget,
-    String? status,
+    RoomStatus? status,
     int? createdAt,
   }) => RoomRow(
     id: id ?? this.id,
@@ -1438,14 +1445,14 @@ class RoomRow extends DataClass implements Insertable<RoomRow> {
 class RoomsCompanion extends UpdateCompanion<RoomRow> {
   final Value<String> id;
   final Value<String> name;
-  final Value<String> type;
+  final Value<RoomType> type;
   final Value<String?> emoji;
   final Value<int?> startDay;
   final Value<int?> endDay;
   final Value<int?> budgetPaise;
-  final Value<String> autoTagMode;
+  final Value<AutoTagMode> autoTagMode;
   final Value<bool> countsTowardMonthlyBudget;
-  final Value<String> status;
+  final Value<RoomStatus> status;
   final Value<int> createdAt;
   final Value<int> rowid;
   const RoomsCompanion({
@@ -1465,12 +1472,12 @@ class RoomsCompanion extends UpdateCompanion<RoomRow> {
   RoomsCompanion.insert({
     required String id,
     required String name,
-    required String type,
+    required RoomType type,
     this.emoji = const Value.absent(),
     this.startDay = const Value.absent(),
     this.endDay = const Value.absent(),
     this.budgetPaise = const Value.absent(),
-    required String autoTagMode,
+    required AutoTagMode autoTagMode,
     this.countsTowardMonthlyBudget = const Value.absent(),
     this.status = const Value.absent(),
     required int createdAt,
@@ -1514,14 +1521,14 @@ class RoomsCompanion extends UpdateCompanion<RoomRow> {
   RoomsCompanion copyWith({
     Value<String>? id,
     Value<String>? name,
-    Value<String>? type,
+    Value<RoomType>? type,
     Value<String?>? emoji,
     Value<int?>? startDay,
     Value<int?>? endDay,
     Value<int?>? budgetPaise,
-    Value<String>? autoTagMode,
+    Value<AutoTagMode>? autoTagMode,
     Value<bool>? countsTowardMonthlyBudget,
-    Value<String>? status,
+    Value<RoomStatus>? status,
     Value<int>? createdAt,
     Value<int>? rowid,
   }) {
@@ -1552,7 +1559,9 @@ class RoomsCompanion extends UpdateCompanion<RoomRow> {
       map['name'] = Variable<String>(name.value);
     }
     if (type.present) {
-      map['type'] = Variable<String>(type.value);
+      map['type'] = Variable<String>(
+        $RoomsTable.$convertertype.toSql(type.value),
+      );
     }
     if (emoji.present) {
       map['emoji'] = Variable<String>(emoji.value);
@@ -1567,7 +1576,9 @@ class RoomsCompanion extends UpdateCompanion<RoomRow> {
       map['budget_paise'] = Variable<int>(budgetPaise.value);
     }
     if (autoTagMode.present) {
-      map['auto_tag_mode'] = Variable<String>(autoTagMode.value);
+      map['auto_tag_mode'] = Variable<String>(
+        $RoomsTable.$converterautoTagMode.toSql(autoTagMode.value),
+      );
     }
     if (countsTowardMonthlyBudget.present) {
       map['counts_toward_monthly_budget'] = Variable<bool>(
@@ -1575,7 +1586,9 @@ class RoomsCompanion extends UpdateCompanion<RoomRow> {
       );
     }
     if (status.present) {
-      map['status'] = Variable<String>(status.value);
+      map['status'] = Variable<String>(
+        $RoomsTable.$converterstatus.toSql(status.value),
+      );
     }
     if (createdAt.present) {
       map['created_at'] = Variable<int>(createdAt.value);
@@ -5202,28 +5215,28 @@ typedef $$CategoriesTableProcessedTableManager =
 typedef $$RoomsTableCreateCompanionBuilder = RoomsCompanion Function({
   required String id,
   required String name,
-  required String type,
+  required RoomType type,
   Value<String?> emoji,
   Value<int?> startDay,
   Value<int?> endDay,
   Value<int?> budgetPaise,
-  required String autoTagMode,
+  required AutoTagMode autoTagMode,
   Value<bool> countsTowardMonthlyBudget,
-  Value<String> status,
+  Value<RoomStatus> status,
   required int createdAt,
   Value<int> rowid,
 });
 typedef $$RoomsTableUpdateCompanionBuilder = RoomsCompanion Function({
   Value<String> id,
   Value<String> name,
-  Value<String> type,
+  Value<RoomType> type,
   Value<String?> emoji,
   Value<int?> startDay,
   Value<int?> endDay,
   Value<int?> budgetPaise,
-  Value<String> autoTagMode,
+  Value<AutoTagMode> autoTagMode,
   Value<bool> countsTowardMonthlyBudget,
-  Value<String> status,
+  Value<RoomStatus> status,
   Value<int> createdAt,
   Value<int> rowid,
 });
@@ -5269,10 +5282,11 @@ class $$RoomsTableFilterComposer extends Composer<_$AppDatabase, $RoomsTable> {
     builder: (column) => ColumnFilters(column),
   );
 
-  ColumnFilters<String> get type => $composableBuilder(
-    column: $table.type,
-    builder: (column) => ColumnFilters(column),
-  );
+  ColumnWithTypeConverterFilters<RoomType, RoomType, String> get type =>
+      $composableBuilder(
+        column: $table.type,
+        builder: (column) => ColumnWithTypeConverterFilters(column),
+      );
 
   ColumnFilters<String> get emoji => $composableBuilder(
     column: $table.emoji,
@@ -5294,9 +5308,10 @@ class $$RoomsTableFilterComposer extends Composer<_$AppDatabase, $RoomsTable> {
     builder: (column) => ColumnFilters(column),
   );
 
-  ColumnFilters<String> get autoTagMode => $composableBuilder(
+  ColumnWithTypeConverterFilters<AutoTagMode, AutoTagMode, String>
+  get autoTagMode => $composableBuilder(
     column: $table.autoTagMode,
-    builder: (column) => ColumnFilters(column),
+    builder: (column) => ColumnWithTypeConverterFilters(column),
   );
 
   ColumnFilters<bool> get countsTowardMonthlyBudget => $composableBuilder(
@@ -5304,10 +5319,11 @@ class $$RoomsTableFilterComposer extends Composer<_$AppDatabase, $RoomsTable> {
     builder: (column) => ColumnFilters(column),
   );
 
-  ColumnFilters<String> get status => $composableBuilder(
-    column: $table.status,
-    builder: (column) => ColumnFilters(column),
-  );
+  ColumnWithTypeConverterFilters<RoomStatus, RoomStatus, String> get status =>
+      $composableBuilder(
+        column: $table.status,
+        builder: (column) => ColumnWithTypeConverterFilters(column),
+      );
 
   ColumnFilters<int> get createdAt => $composableBuilder(
     column: $table.createdAt,
@@ -5420,7 +5436,7 @@ class $$RoomsTableAnnotationComposer
   GeneratedColumn<String> get name =>
       $composableBuilder(column: $table.name, builder: (column) => column);
 
-  GeneratedColumn<String> get type =>
+  GeneratedColumnWithTypeConverter<RoomType, String> get type =>
       $composableBuilder(column: $table.type, builder: (column) => column);
 
   GeneratedColumn<String> get emoji =>
@@ -5437,17 +5453,18 @@ class $$RoomsTableAnnotationComposer
     builder: (column) => column,
   );
 
-  GeneratedColumn<String> get autoTagMode => $composableBuilder(
-    column: $table.autoTagMode,
-    builder: (column) => column,
-  );
+  GeneratedColumnWithTypeConverter<AutoTagMode, String> get autoTagMode =>
+      $composableBuilder(
+        column: $table.autoTagMode,
+        builder: (column) => column,
+      );
 
   GeneratedColumn<bool> get countsTowardMonthlyBudget => $composableBuilder(
     column: $table.countsTowardMonthlyBudget,
     builder: (column) => column,
   );
 
-  GeneratedColumn<String> get status =>
+  GeneratedColumnWithTypeConverter<RoomStatus, String> get status =>
       $composableBuilder(column: $table.status, builder: (column) => column);
 
   GeneratedColumn<int> get createdAt =>
@@ -5509,14 +5526,14 @@ class $$RoomsTableTableManager
               ({
                 Value<String> id = const Value.absent(),
                 Value<String> name = const Value.absent(),
-                Value<String> type = const Value.absent(),
+                Value<RoomType> type = const Value.absent(),
                 Value<String?> emoji = const Value.absent(),
                 Value<int?> startDay = const Value.absent(),
                 Value<int?> endDay = const Value.absent(),
                 Value<int?> budgetPaise = const Value.absent(),
-                Value<String> autoTagMode = const Value.absent(),
+                Value<AutoTagMode> autoTagMode = const Value.absent(),
                 Value<bool> countsTowardMonthlyBudget = const Value.absent(),
-                Value<String> status = const Value.absent(),
+                Value<RoomStatus> status = const Value.absent(),
                 Value<int> createdAt = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => RoomsCompanion(
@@ -5537,14 +5554,14 @@ class $$RoomsTableTableManager
               ({
                 required String id,
                 required String name,
-                required String type,
+                required RoomType type,
                 Value<String?> emoji = const Value.absent(),
                 Value<int?> startDay = const Value.absent(),
                 Value<int?> endDay = const Value.absent(),
                 Value<int?> budgetPaise = const Value.absent(),
-                required String autoTagMode,
+                required AutoTagMode autoTagMode,
                 Value<bool> countsTowardMonthlyBudget = const Value.absent(),
-                Value<String> status = const Value.absent(),
+                Value<RoomStatus> status = const Value.absent(),
                 required int createdAt,
                 Value<int> rowid = const Value.absent(),
               }) => RoomsCompanion.insert(

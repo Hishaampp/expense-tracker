@@ -1,12 +1,15 @@
 import 'package:expense_tracker/core/capture_plan.dart';
 import 'package:expense_tracker/core/dedup.dart';
 import 'package:expense_tracker/core/failure.dart';
+import 'package:expense_tracker/core/local_day.dart';
 import 'package:expense_tracker/core/models/capture_draft.dart';
 import 'package:expense_tracker/core/models/raw_capture.dart';
 import 'package:expense_tracker/core/models/transaction_kind.dart';
 import 'package:expense_tracker/core/result.dart';
+import 'package:expense_tracker/core/room_tagging.dart';
 import 'package:expense_tracker/data/capture/capture_ingestion.dart';
 import 'package:expense_tracker/data/repositories/auto_capture_repository.dart';
+import 'package:expense_tracker/data/repositories/room_repository.dart';
 import 'package:expense_tracker/data/repositories/transaction_repository.dart';
 
 /// What automatic capture did with one message.
@@ -26,11 +29,12 @@ enum AutoOutcome {
 /// current; the review inbox collects what needs a look.
 class AutoIngestion {
   /// Creates the service.
-  new(this._ingestion, this._auto, this._transactions);
+  new(this._ingestion, this._auto, this._transactions, this._rooms);
 
   final CaptureIngestion _ingestion;
   final AutoCaptureRepository _auto;
   final TransactionRepository _transactions;
+  final RoomRepository _rooms;
 
   /// Handles one captured message. Idempotent: the same capture twice is
   /// recorded once (content hash), and the same payment from two sources
@@ -90,6 +94,11 @@ class AutoIngestion {
         roomId = original.roomId;
         reviewStatus = ReviewStatus.confirmed;
       }
+    } else if (plan.kind == TransactionKind.expense && !plan.isHidden) {
+      // A trip's dates claim it; overlaps and suggestions wait for review
+      // (spec §9.3).
+      final tag = tagRoom(day: LocalDay.of(at), rooms: await _rooms.all());
+      if (tag is RoomAssigned) roomId = tag.room.id;
     }
     final saved = await _transactions.addFromCapture(
       draft: draft,

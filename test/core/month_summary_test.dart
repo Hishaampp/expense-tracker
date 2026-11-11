@@ -84,4 +84,34 @@ void main() {
     ]);
     expect(summary.byCategory, isEmpty);
   });
+
+  group('budget exclusion (spec §5.2)', () {
+    test('Room spending counts in the month but not the budget', () {
+      final summary = MonthSummary.of([
+        _txn(100000, categoryId: 'food'),
+        _txn(2000000, roomId: 'wedding'),
+      ]);
+      expect(summary.spent, const Money(2100000));
+      expect(summary.spentInRooms, const Money(2000000));
+      expect(summary.spentForBudget, const Money(100000));
+    });
+
+    test('a Room that opts in counts toward the budget', () {
+      final summary = MonthSummary.of(
+        [_txn(100000), _txn(30000, roomId: 'trip'), _txn(5000, roomId: 'w')],
+        budgetRoomIds: const {'trip'},
+      );
+      expect(summary.spentForBudget, const Money(130000));
+    });
+
+    test('a refund in a Room leaves the budget figure alone', () {
+      final summary = MonthSummary.of([
+        _txn(100000),
+        _txn(40000, roomId: 'trip'),
+        _txn(10000, kind: TransactionKind.refund, roomId: 'trip'),
+      ]);
+      expect(summary.spent, const Money(130000));
+      expect(summary.spentForBudget, const Money(100000));
+    });
+  });
 }

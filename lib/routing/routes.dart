@@ -15,6 +15,25 @@ abstract final class Routes {
   /// Quick Add, for a new expense.
   static const String addExpense = '/add';
 
+  /// Quick Add for a new expense in Room [roomId].
+  static String addToRoom(String roomId) =>
+      Uri(path: addExpense, queryParameters: {'room': roomId}).toString();
+
+  /// Creating a Room.
+  static const String newRoom = '/rooms/new';
+
+  /// Path pattern of a Room's detail screen.
+  static const String roomPattern = '/rooms/:id';
+
+  /// The detail screen of Room [id].
+  static String room(String id) => '/rooms/$id';
+
+  /// Path pattern of a Room's editor.
+  static const String editRoomPattern = '/rooms/:id/edit';
+
+  /// The editor for Room [id].
+  static String editRoom(String id) => '/rooms/$id/edit';
+
   /// Quick Add for shared text, by pending-capture id.
   static const String sharedPattern = '/add/shared/:id';
 

@@ -4,6 +4,8 @@ import 'package:expense_tracker/features/capture/presentation/iphone_setup_scree
 import 'package:expense_tracker/features/home/presentation/home_screen.dart';
 import 'package:expense_tracker/features/quick_add/presentation/quick_add_screen.dart';
 import 'package:expense_tracker/features/review/presentation/review_screen.dart';
+import 'package:expense_tracker/features/rooms/presentation/room_detail_screen.dart';
+import 'package:expense_tracker/features/rooms/presentation/room_editor_screen.dart';
 import 'package:expense_tracker/features/rooms/presentation/rooms_screen.dart';
 import 'package:expense_tracker/features/settings/presentation/settings_screen.dart';
 import 'package:expense_tracker/features/unparsed/presentation/unparsed_screen.dart';
@@ -37,8 +39,18 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: Routes.addExpense,
-        pageBuilder: (context, state) =>
-            _slideUpPage(context, state, const QuickAddScreen()),
+        pageBuilder: (context, state) => _slideUpPage(
+          context,
+          state,
+          QuickAddScreen(
+            args: (
+              editId: null,
+              unparsedId: null,
+              captureId: null,
+              roomId: state.uri.queryParameters['room'],
+            ),
+          ),
+        ),
       ),
       GoRoute(
         path: Routes.sharedPattern,
@@ -50,9 +62,28 @@ final routerProvider = Provider<GoRouter>((ref) {
               editId: null,
               unparsedId: null,
               captureId: state.pathParameters['id'],
+              roomId: null,
             ),
           ),
         ),
+      ),
+      GoRoute(
+        path: Routes.newRoom,
+        pageBuilder: (context, state) =>
+            _slideUpPage(context, state, const RoomEditorScreen()),
+      ),
+      GoRoute(
+        path: Routes.editRoomPattern,
+        pageBuilder: (context, state) => _slideUpPage(
+          context,
+          state,
+          RoomEditorScreen(roomId: state.pathParameters['id']),
+        ),
+      ),
+      GoRoute(
+        path: Routes.roomPattern,
+        builder: (context, state) =>
+            RoomDetailScreen(roomId: state.pathParameters['id']!),
       ),
       GoRoute(
         path: Routes.autoCapture,
@@ -80,6 +111,7 @@ final routerProvider = Provider<GoRouter>((ref) {
               editId: null,
               unparsedId: state.pathParameters['id'],
               captureId: null,
+              roomId: null,
             ),
           ),
         ),
@@ -94,6 +126,7 @@ final routerProvider = Provider<GoRouter>((ref) {
               editId: state.pathParameters['id'],
               unparsedId: null,
               captureId: null,
+              roomId: null,
             ),
           ),
         ),

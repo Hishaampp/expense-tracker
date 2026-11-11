@@ -1,15 +1,19 @@
 import 'dart:async';
 
+import 'package:expense_tracker/core/result.dart';
 import 'package:expense_tracker/data/query_providers.dart';
 import 'package:expense_tracker/features/home/presentation/home_notifier.dart';
 import 'package:expense_tracker/features/home/presentation/widgets/capture_health_card.dart';
 import 'package:expense_tracker/features/home/presentation/widgets/hero_summary.dart';
 import 'package:expense_tracker/features/home/presentation/widgets/recent_card.dart';
-import 'package:expense_tracker/features/home/presentation/widgets/top_categories_card.dart';
+import 'package:expense_tracker/features/home/presentation/widgets/room_chips.dart';
 import 'package:expense_tracker/formatting/date_format.dart';
 import 'package:expense_tracker/l10n/app_localizations.dart';
+import 'package:expense_tracker/l10n/failure_messages.dart';
 import 'package:expense_tracker/routing/routes.dart';
+import 'package:expense_tracker/services/service_providers.dart';
 import 'package:expense_tracker/theme/category_colors.dart';
+import 'package:expense_tracker/widgets/category_totals_card.dart';
 import 'package:expense_tracker/widgets/empty_state_view.dart';
 import 'package:expense_tracker/widgets/entrance.dart';
 import 'package:expense_tracker/widgets/error_state_view.dart';
@@ -27,6 +31,25 @@ import 'package:go_router/go_router.dart';
 class HomeScreen extends ConsumerWidget {
   /// Creates the Home screen.
   const new({super.key});
+
+  Future<void> _startTrip(BuildContext context, WidgetRef ref) async {
+    final l10n = AppLocalizations.of(context);
+    final locale = Localizations.localeOf(context).toString();
+    final today = ref.read(clockProvider).now().toLocal();
+    final messenger = ScaffoldMessenger.of(context);
+    final result = await ref
+        .read(homeNotifierProvider.notifier)
+        .startTrip(l10n.tripDefaultName(formatDayMonth(today, locale)));
+    if (!context.mounted) return;
+    switch (result) {
+      case Ok(:final value):
+        unawaited(context.push(Routes.room(value.id)));
+      case Err(:final failure):
+        messenger.showSnackBar(
+          SnackBar(content: Text(failureMessage(l10n, failure))),
+        );
+    }
+  }
 
   Future<void> _pickMonth(
     BuildContext context,
@@ -103,6 +126,14 @@ class HomeScreen extends ConsumerWidget {
       actions: [?review, add],
       children: [
         enter(HeroSummary(state: state, onSeeAll: seeAll)),
+        if (state.isCurrent)
+          enter(
+            RoomChips(
+              rooms: state.activeRooms,
+              onOpen: (id) => unawaited(context.push(Routes.room(id))),
+              onStartTrip: () => unawaited(_startTrip(context, ref)),
+            ),
+          ),
         if (state.captureMayBeOff)
           enter(
             CaptureHealthCard(
@@ -122,7 +153,12 @@ class HomeScreen extends ConsumerWidget {
           )
         else ...[
           if (state.topCategories.isNotEmpty)
-            enter(TopCategoriesCard(totals: state.topCategories)),
+            enter(
+              CategoryTotalsCard(
+                title: l10n.homeTopCategories,
+                totals: state.topCategories,
+              ),
+            ),
           enter(
             RecentCard(
               items: state.recent,

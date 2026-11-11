@@ -175,8 +175,6 @@
     }
   },
   "roomsTitle": "Rooms",
-  "roomsComingTitle": "Trips and events, together",
-  "roomsComingBody": "Rooms arrive in a coming update. A Room keeps a trip's or a wedding's spending together, and it still counts in your month.",
   "quickAddTitle": "Add expense",
   "quickAddEditTitle": "Edit expense",
   "quickAddAmountHint": "Enter an amount",
@@ -627,5 +625,186 @@
         "type": "String"
       }
     }
-  }
+  },
+  "roomsEmptyTitle": "Keep a trip's spending together",
+  "roomsEmptyBody": "A Room collects the spending for a trip or a wedding. It still counts in your month, but stays out of your monthly budget.",
+  "roomsStartTrip": "Start a trip",
+  "roomsNew": "New Room",
+  "roomsHistory": "History",
+  "roomTypeTrip": "Trip",
+  "roomTypeWedding": "Wedding",
+  "roomTypeEvent": "Event",
+  "roomTypeCustom": "Other",
+  "roomFrom": "From {date}",
+  "@roomFrom": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "roomRange": "{from} – {to}",
+  "@roomRange": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "roomLeft": "{amount} left of {budget}",
+  "@roomLeft": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "budget": {
+        "type": "String"
+      }
+    }
+  },
+  "roomOver": "Over by {amount}",
+  "@roomOver": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "roomCardSemantics": "{name}, {details}, {amount} spent",
+  "@roomCardSemantics": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "details": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "tripDefaultName": "Trip from {date}",
+  "@tripDefaultName": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "roomNewTitle": "New Room",
+  "roomEditTitle": "Edit Room",
+  "roomNameLabel": "Name",
+  "roomNameHint": "Goa trip",
+  "roomNameRequired": "Give the Room a name",
+  "roomTypeLabel": "Type",
+  "roomEmojiLabel": "Emoji",
+  "roomNoEmoji": "None",
+  "roomEmojiSemantics": "Emoji {emoji}",
+  "@roomEmojiSemantics": {
+    "placeholders": {
+      "emoji": {
+        "type": "String"
+      }
+    }
+  },
+  "roomDatesLabel": "Dates",
+  "roomStartLabel": "Start",
+  "roomEndLabel": "End",
+  "roomPickDate": "Pick a date",
+  "roomNoEnd": "Still going",
+  "roomStartValue": "Start: {date}",
+  "@roomStartValue": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "roomEndValue": "End: {date}",
+  "@roomEndValue": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "roomClearEnd": "Clear the end date",
+  "roomStartRequired": "A trip needs a start date",
+  "roomEndBeforeStart": "The end can't be before the start",
+  "roomWindowNeedsStart": "Set a start date to add every expense in the dates",
+  "roomBudgetLabel": "Budget (optional)",
+  "roomBudgetHint": "Amount in ₹",
+  "roomModeLabel": "Adding expenses",
+  "roomModeDateWindow": "Every expense in the dates",
+  "roomModeSuggest": "Ask me each time",
+  "roomModeManual": "Only when I add them",
+  "roomModeTripNote": "Every expense between the dates goes into the trip.",
+  "roomModeWeddingNote": "You'll be asked about each expense. Nothing is added on its own.",
+  "roomCountsInBudget": "Count in my monthly budget",
+  "roomCountsInBudgetNote": "When off, this Room's spending shows in your month but stays out of your monthly budget.",
+  "roomHeroSpent": "You've spent {amount} on {name}.",
+  "@roomHeroSpent": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "roomPerDay": "Per day",
+  "roomDays": "Days",
+  "roomBudget": "Budget",
+  "roomWhereItWent": "Where it went",
+  "roomAddExpense": "Add expense",
+  "roomEndTrip": "End trip today",
+  "roomArchive": "Move to history",
+  "roomRestore": "Move back to active",
+  "roomEmptyTitle": "Nothing here yet",
+  "roomEmptyBody": "Expenses you add to this Room show up here.",
+  "roomMissing": "This Room no longer exists.",
+  "roomEdit": "Edit Room",
+  "roomArchived": "Moved to history",
+  "roomRestored": "Back in active Rooms",
+  "quickAddNoRoom": "No Room",
+  "quickAddRoomLabel": "Room: {name}",
+  "@quickAddRoomLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "quickAddPickRoom": "Add to a Room",
+  "reviewAddToRoom": "Add to {name}?",
+  "@reviewAddToRoom": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "reviewInRoom": "In {name}",
+  "@reviewInRoom": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "reviewAddedToRoom": "Added to {name}",
+  "@reviewAddedToRoom": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "homeRoomsLabel": "Active Rooms",
+  "homeStartTrip": "Start trip"
 }

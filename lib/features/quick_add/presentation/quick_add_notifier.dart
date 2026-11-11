@@ -2,14 +2,17 @@ import 'dart:async';
 
 import 'package:expense_tracker/core/failure.dart';
 import 'package:expense_tracker/core/keypad_amount.dart';
+import 'package:expense_tracker/core/local_day.dart';
 import 'package:expense_tracker/core/models/account.dart';
 import 'package:expense_tracker/core/models/capture_draft.dart';
 import 'package:expense_tracker/core/models/category.dart';
 import 'package:expense_tracker/core/models/money_transaction.dart';
 import 'package:expense_tracker/core/models/raw_capture.dart';
+import 'package:expense_tracker/core/models/room.dart';
 import 'package:expense_tracker/core/models/transaction_kind.dart';
 import 'package:expense_tracker/core/money.dart';
 import 'package:expense_tracker/core/result.dart';
+import 'package:expense_tracker/core/room_tagging.dart';
 import 'package:expense_tracker/data/capture/capture_ingestion.dart';
 import 'package:expense_tracker/data/capture/capture_providers.dart';
 import 'package:expense_tracker/data/data_providers.dart';
@@ -23,10 +26,12 @@ import 'package:txn_parser/txn_parser.dart';
 /// What Quick Add was opened for. At most one id is set: none to add, an
 /// `editId` to edit, an `unparsedId` to resolve an Unparsed message, or a
 /// `captureId` for shared text waiting in `pendingCapturesProvider`.
+/// `roomId` pre-selects a Room for a new expense.
 typedef QuickAddArgs = ({
   String? editId,
   String? unparsedId,
   String? captureId,
+  String? roomId,
 });
 
 /// Opening Quick Add to add a new expense.
@@ -34,6 +39,7 @@ const QuickAddArgs newExpenseArgs = (
   editId: null,
   unparsedId: null,
   captureId: null,
+  roomId: null,
 );
 
 /// How a Quick Add session ended. The screen reacts once, then closes.
@@ -92,6 +98,9 @@ final class QuickAddState {
     required this.incomeCategories,
     required this.earliestDate,
     required this.latestDate,
+    this.rooms = const [],
+    this.roomId,
+    this.roomPicked = false,
     this.kind = TransactionKind.expense,
     this.amount = KeypadAmount.empty,
     this.categoryId,
@@ -123,6 +132,26 @@ final class QuickAddState {
 
   /// The latest date the date picker offers: today.
   final DateTime latestDate;
+
+  /// Rooms the expense can go to: the active ones, and the current one.
+  final List<Room> rooms;
+
+  /// The chosen Room, or null for none.
+  final String? roomId;
+
+  /// Whether the user chose the Room (so a date change keeps it).
+  final bool roomPicked;
+
+  /// The chosen Room, if it is in [rooms].
+  Room? get room {
+    for (final r in rooms) {
+      if (r.id == roomId) return r;
+    }
+    return null;
+  }
+
+  /// Whether a Room can be chosen: expenses only, when any Room exists.
+  bool get offersRoom => kind == TransactionKind.expense && rooms.isNotEmpty;
 
   /// Expense, money in or refund.
   final TransactionKind kind;
@@ -198,6 +227,9 @@ final class QuickAddState {
   /// A copy with the given fields replaced. The failure and notice are
   /// cleared unless passed, because any new input makes them stale.
   QuickAddState copyWith({
+    String? roomId,
+    bool clearRoom = false,
+    bool? roomPicked,
     TransactionKind? kind,
     KeypadAmount? amount,
     String? categoryId,
@@ -216,6 +248,9 @@ final class QuickAddState {
       incomeCategories: incomeCategories,
       earliestDate: earliestDate,
       latestDate: latestDate,
+      rooms: rooms,
+      roomId: clearRoom ? null : roomId ?? this.roomId,
+      roomPicked: roomPicked ?? this.roomPicked,
       kind: kind ?? this.kind,
       amount: amount ?? this.amount,
       categoryId: categoryId ?? this.categoryId,
@@ -265,6 +300,12 @@ class QuickAddNotifier extends AsyncNotifier<QuickAddState> {
         incomeCategories: base.incomeCategories,
         earliestDate: base.earliestDate,
         latestDate: base.latestDate,
+        rooms: [
+          for (final r in await ref.read(roomRepositoryProvider).all())
+            if (r.isActive || r.id == txn.roomId) r,
+        ],
+        roomId: txn.roomId,
+        roomPicked: true,
         kind: txn.kind,
         amount: KeypadAmount.fromMoney(txn.amount),
         categoryId: txn.categoryId,
@@ -326,7 +367,15 @@ class QuickAddNotifier extends AsyncNotifier<QuickAddState> {
           return byUse != 0 ? byUse : a.sortOrder.compareTo(b.sortOrder);
         });
     final latest = DateTime(today.year, today.month, today.day);
+    final rooms = [
+      for (final r in await ref.read(roomRepositoryProvider).all())
+        if (r.isActive) r,
+    ];
+    final asked = args.roomId;
     return QuickAddState(
+      rooms: rooms,
+      roomId: asked ?? _tripOn(rooms, today),
+      roomPicked: asked != null,
       categories: expense,
       incomeCategories: [
         for (final c in all)
@@ -342,6 +391,13 @@ class QuickAddNotifier extends AsyncNotifier<QuickAddState> {
     'cat_other_income',
   };
 
+  // The one trip whose dates cover [day], if any: a new expense goes there
+  // by default (spec §6.4).
+  static String? _tripOn(List<Room> rooms, DateTime day) {
+    final tag = tagRoom(day: LocalDay.of(day), rooms: rooms);
+    return tag is RoomAssigned ? tag.room.id : null;
+  }
+
   QuickAddState _missing(QuickAddState base) => QuickAddState(
     categories: base.categories,
     incomeCategories: base.incomeCategories,
@@ -355,6 +411,12 @@ class QuickAddNotifier extends AsyncNotifier<QuickAddState> {
     if (current == null || current.isSaving) return;
     state = AsyncData(change(current));
   }
+
+  /// Puts the expense in Room [roomId], or in none with null.
+  void setRoom(String? roomId) => _update(
+    (s) =>
+        s.copyWith(roomId: roomId, clearRoom: roomId == null, roomPicked: true),
+  );
 
   /// Types [digit] (0–9).
   void digit(int digit) {
@@ -379,7 +441,11 @@ class QuickAddNotifier extends AsyncNotifier<QuickAddState> {
     final now = ref.read(clockProvider).now().toLocal();
     _update((s) {
       final time = s.occurredAt ?? now;
+      // Unless the user chose a Room, the trip follows the date.
+      final trip = s.roomPicked ? s.roomId : _tripOn(s.rooms, localDay);
       return s.copyWith(
+        roomId: trip,
+        clearRoom: trip == null,
         occurredAt: DateTime(
           localDay.year,
           localDay.month,
@@ -520,6 +586,8 @@ class QuickAddNotifier extends AsyncNotifier<QuickAddState> {
           accountId: txn.accountId,
           categoryId: s.categoryId,
           note: s.note,
+          // A refund or money in keeps the Room it already had.
+          roomId: s.kind == TransactionKind.expense ? s.roomId : txn.roomId,
         ),
         (_) => const ExpenseUpdated(),
       );
@@ -534,6 +602,7 @@ class QuickAddNotifier extends AsyncNotifier<QuickAddState> {
           categoryId: s.categoryId,
           occurredAt: s.occurredAt,
           note: s.note,
+          roomId: _roomFor(s),
         ),
         (saved) => ExpenseAdded(saved.amount),
       );
@@ -548,10 +617,15 @@ class QuickAddNotifier extends AsyncNotifier<QuickAddState> {
         occurredAt: s.occurredAt,
         note: s.note,
         unparsedId: s.unparsedId,
+        roomId: _roomFor(s),
       ),
       (saved) => ExpenseAdded(saved.amount),
     );
   }
+
+  // Only expenses go in Rooms.
+  static String? _roomFor(QuickAddState s) =>
+      s.kind == TransactionKind.expense ? s.roomId : null;
 
   // Persist first; publish the outcome only after the commit returns.
   Future<void> _run(

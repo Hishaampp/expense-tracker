@@ -1,4 +1,4 @@
-import 'package:expense_tracker/features/home/presentation/home_notifier.dart';
+import 'package:expense_tracker/core/models/category_total.dart';
 import 'package:expense_tracker/formatting/money_format.dart';
 import 'package:expense_tracker/l10n/app_localizations.dart';
 import 'package:expense_tracker/theme/app_colors.dart';
@@ -10,10 +10,14 @@ import 'package:expense_tracker/widgets/growing_bar.dart';
 import 'package:expense_tracker/widgets/icon_tile.dart';
 import 'package:flutter/material.dart';
 
-/// The month's largest categories, each with a bar for its share.
-class TopCategoriesCard extends StatelessWidget {
+/// Categories, largest first, each with a bar for its share, under
+/// [title].
+class CategoryTotalsCard extends StatelessWidget {
   /// Creates the card for [totals].
-  const new({required this.totals, super.key});
+  const new({required this.title, required this.totals, super.key});
+
+  /// The card's heading, for example "Top categories".
+  final String title;
 
   /// The categories to show, largest first.
   final List<CategoryTotal> totals;
@@ -28,10 +32,7 @@ class TopCategoriesCard extends StatelessWidget {
         children: [
           Semantics(
             header: true,
-            child: Text(
-              l10n.homeTopCategories,
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
+            child: Text(title, style: Theme.of(context).textTheme.titleMedium),
           ),
           SizedBox(height: metrics.spaceSm),
           for (final total in totals)

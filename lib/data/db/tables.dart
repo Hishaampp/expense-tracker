@@ -1,6 +1,7 @@
 import 'package:drift/drift.dart';
 import 'package:expense_tracker/core/models/account.dart';
 import 'package:expense_tracker/core/models/category.dart';
+import 'package:expense_tracker/core/models/room.dart';
 import 'package:expense_tracker/core/models/transaction_kind.dart';
 
 /// Where money sits (spec §12).
@@ -72,8 +73,8 @@ class Categories extends Table {
   ];
 }
 
-/// A trip, wedding or event bucket (spec §9.1). Used from Phase 5; defined
-/// now because transactions reference it.
+/// A trip, wedding or event bucket (spec §9.1). Its tile colour follows
+/// its type, so no colour is stored.
 @DataClassName('RoomRow')
 class Rooms extends Table {
   /// Stable unique id.
@@ -83,7 +84,7 @@ class Rooms extends Table {
   TextColumn get name => text().withLength(min: 1)();
 
   /// `trip`, `wedding`, `event` or `custom`.
-  TextColumn get type => text()();
+  TextColumn get type => textEnum<RoomType>()();
 
   /// Emoji shown with the name.
   TextColumn get emoji => text().nullable()();
@@ -98,14 +99,15 @@ class Rooms extends Table {
   IntColumn get budgetPaise => integer().nullable()();
 
   /// `dateWindow`, `suggest` or `manual`.
-  TextColumn get autoTagMode => text()();
+  TextColumn get autoTagMode => textEnum<AutoTagMode>()();
 
   /// Whether Room spending counts toward the monthly budget (spec §5.2).
   BoolColumn get countsTowardMonthlyBudget =>
       boolean().withDefault(const Constant(false))();
 
   /// `active` or `archived`.
-  TextColumn get status => text().withDefault(const Constant('active'))();
+  TextColumn get status =>
+      textEnum<RoomStatus>().withDefault(const Constant('active'))();
 
   /// Creation instant, UTC epoch milliseconds.
   IntColumn get createdAt => integer()();

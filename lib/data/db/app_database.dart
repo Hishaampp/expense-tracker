@@ -3,6 +3,7 @@ import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
 import 'package:expense_tracker/core/models/account.dart';
 import 'package:expense_tracker/core/models/category.dart';
+import 'package:expense_tracker/core/models/room.dart';
 import 'package:expense_tracker/core/models/transaction_kind.dart';
 import 'package:expense_tracker/data/db/app_database.steps.dart';
 import 'package:expense_tracker/data/db/seed.dart';

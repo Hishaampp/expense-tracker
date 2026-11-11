@@ -48,6 +48,10 @@ class ReviewScreen extends ConsumerWidget {
         l10n.reviewMarkedTransfer,
         () => unawaited(_undo(messenger, l10n, notifier, transaction)),
       ),
+      ReviewAddedToRoom(:final transaction, :final room) => (
+        l10n.reviewAddedToRoom(room.name),
+        () => unawaited(_undo(messenger, l10n, notifier, transaction)),
+      ),
       ReviewConfirmedAll(:final count) => (
         l10n.reviewConfirmedAll(count),
         null,
@@ -173,6 +177,9 @@ class ReviewScreen extends ConsumerWidget {
                   unawaited(_more(context, ref, item, state.allCategories)),
               onTransfer: () => unawaited(
                 _run(context, ref, () => notifier.markTransfer(item)),
+              ),
+              onAddToRoom: (room) => unawaited(
+                _run(context, ref, () => notifier.addToRoom(item, room)),
               ),
             ),
           ),
