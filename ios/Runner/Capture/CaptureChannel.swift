@@ -34,6 +34,12 @@ final class CaptureChannel: NSObject, FlutterStreamHandler {
       let ids = (call.arguments as? [String: Any])?["ids"] as? [String] ?? []
       queue.remove(ids: Set(ids))
       result(nil)
+    case "openCaptureSettings":
+      // iOS: the automation is made in the Shortcuts app (spec §6.1).
+      if let url = URL(string: "shortcuts://") {
+        UIApplication.shared.open(url)
+      }
+      result(nil)
     case "status":
       result([
         "platform": "ios",

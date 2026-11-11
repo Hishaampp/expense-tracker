@@ -487,7 +487,6 @@
     }
   },
   "autoCaptureIosTitle": "Auto-capture on iPhone",
-  "autoCaptureIosBody": "iPhone apps can't read SMS. Setup with a Shortcuts automation arrives in a coming update; until then, share or paste bank messages into the app.",
   "autoCaptureUnavailable": "Couldn't read the auto-capture status on this phone.",
   "timeJustNow": "just now",
   "timeMinutesAgo": "{minutes, plural, =1{1 minute ago} other{{minutes} minutes ago}}",
@@ -556,5 +555,77 @@
       }
     }
   },
-  "autoCaptureActionFailed": "That didn't work on this phone. Try again."
+  "autoCaptureActionFailed": "That didn't work on this phone. Try again.",
+  "iosSetupTitle": "Set up on iPhone",
+  "iosSetupIntro": "iPhone apps can't read SMS, so you make a small automation once. After that, bank messages are recorded without you opening the app.",
+  "iosSetupStep": "Step {number}",
+  "@iosSetupStep": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "iosStep1Title": "Open Shortcuts",
+  "iosStep1Body": "In the Shortcuts app, tap Automation, then the + button, and choose Message.",
+  "iosStep1Action": "Open Shortcuts",
+  "iosStep2Title": "Choose the messages",
+  "iosStep2Body": "Under Message Contains, type debited. Choose Run Immediately, then tap Next.",
+  "iosStep3Title": "Add this app's action",
+  "iosStep3Body": "Search for Log Bank Message, from this app. Tap its Message field and choose Shortcut Input, then Content. Tap Done.",
+  "iosStep4Title": "Repeat for spent and credited",
+  "iosStep4Body": "Make two more automations the same way, with spent and with credited.",
+  "iosStep5Title": "Test it",
+  "iosStep5Body": "Paste a real bank SMS here to check the app can read it. Nothing is saved.",
+  "iosTestHint": "Paste a bank SMS",
+  "iosTestCheck": "Check",
+  "iosTestParsed": "Read as {amount} {direction}",
+  "@iosTestParsed": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "direction": {
+        "type": "String"
+      }
+    }
+  },
+  "iosTestSpent": "spent",
+  "iosTestReceived": "received",
+  "iosTestRefund": "refunded",
+  "iosTestNotPayment": "Not a payment, so it would be skipped: {reason}.",
+  "@iosTestNotPayment": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "iosTestUnreadable": "The app couldn't read this one. It would be kept under Unparsed messages, and the format can be added later.",
+  "iosTestNoAmount": "There's no amount in this text.",
+  "iosSetupDone": "I've set it up",
+  "iosSetupSaved": "Auto-capture is set up",
+  "iosLimitsTitle": "Good to know",
+  "iosLimitsBody": "Only new bank SMS are recorded: not past messages, and not UPI app notifications, which iPhone apps can't read. It relies on Apple keeping this automation working.",
+  "iosStatusOn": "Set up",
+  "iosStatusOff": "Not set up yet",
+  "iosOpenSetup": "Set up auto-capture",
+  "iosReviewSetup": "See setup steps",
+  "healthTitle": "Auto-capture may be off",
+  "healthBody": "No bank messages have arrived from Shortcuts in 5 days.",
+  "healthAction": "Check setup",
+  "iosTestParsedPayee": "Read as {amount} {direction}, {payee}",
+  "@iosTestParsedPayee": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "direction": {
+        "type": "String"
+      },
+      "payee": {
+        "type": "String"
+      }
+    }
+  }
 }

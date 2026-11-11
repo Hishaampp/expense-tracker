@@ -17,6 +17,40 @@ class SettingsRepository {
 
   static const String _monthStartDayKey = 'month_start_day';
   static const String _appearanceKey = 'appearance';
+  static const String _iosSetupKey = 'ios_shortcut_setup_at';
+
+  /// When the user finished the iPhone Shortcuts setup, or null.
+  Stream<DateTime?> watchIosShortcutSetupAt() {
+    final query = _db.select(_db.settings)
+      ..where((s) => s.key.equals(_iosSetupKey));
+    return query.watchSingleOrNull().map((row) {
+      final ms = int.tryParse(row?.value ?? '');
+      return ms == null
+          ? null
+          : DateTime.fromMillisecondsSinceEpoch(ms, isUtc: true);
+    });
+  }
+
+  /// Records that the iPhone Shortcuts setup was finished at [atUtc].
+  @useResult
+  Future<Result<DateTime, StoreFailure>> setIosShortcutSetupAt(
+    DateTime atUtc,
+  ) async {
+    try {
+      await _db
+          .into(_db.settings)
+          .insertOnConflictUpdate(
+            SettingsCompanion.insert(
+              key: _iosSetupKey,
+              value: '${atUtc.millisecondsSinceEpoch}',
+            ),
+          );
+      return Ok(atUtc);
+    } on SqliteException catch (e, st) {
+      _log.error('settings.ios_setup', e.runtimeType, st);
+      return const Err(StoreWriteFailed());
+    }
+  }
 
   /// Light, dark or follow the phone. Defaults to following the phone.
   Stream<AppearanceMode> watchAppearance() {

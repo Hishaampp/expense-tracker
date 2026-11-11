@@ -75,6 +75,20 @@ class CaptureRepository {
     });
   }
 
+  /// When the newest capture from [source] arrived, or null. Live.
+  Stream<DateTime?> watchLastCaptureAt(CaptureSource source) {
+    final newest = _db.rawCaptures.receivedAt.max();
+    final query = _db.selectOnly(_db.rawCaptures)
+      ..addColumns([newest])
+      ..where(_db.rawCaptures.source.equals(source.wireName));
+    return query.watchSingle().map((row) {
+      final ms = row.read(newest);
+      return ms == null
+          ? null
+          : DateTime.fromMillisecondsSinceEpoch(ms, isUtc: true);
+    });
+  }
+
   /// Unresolved Unparsed messages, newest first. Live.
   Stream<List<UnparsedItem>> watchUnparsed() {
     final query = _db.select(_db.unparsedMessages)

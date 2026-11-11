@@ -2,10 +2,11 @@ import 'dart:async';
 
 import 'package:expense_tracker/core/oem_guidance.dart';
 import 'package:expense_tracker/features/capture/presentation/capture_settings_notifier.dart';
+import 'package:expense_tracker/features/capture/presentation/widgets/capture_status_card.dart';
 import 'package:expense_tracker/features/capture/presentation/widgets/info_card.dart';
 import 'package:expense_tracker/formatting/app_names.dart';
-import 'package:expense_tracker/formatting/relative_time.dart';
 import 'package:expense_tracker/l10n/app_localizations.dart';
+import 'package:expense_tracker/routing/routes.dart';
 import 'package:expense_tracker/theme/app_colors.dart';
 import 'package:expense_tracker/theme/app_metrics.dart';
 import 'package:expense_tracker/theme/category_colors.dart';
@@ -112,14 +113,7 @@ class _CaptureSettingsScreenState extends ConsumerState<CaptureSettingsScreen> {
           PulsingPlaceholder(semanticLabel: l10n.loading),
       ];
     } else if (!state.status.isAndroid) {
-      children = [
-        Entrance(
-          child: InfoCard(
-            title: l10n.autoCaptureIosTitle,
-            body: l10n.autoCaptureIosBody,
-          ),
-        ),
-      ];
+      children = _iphone(context, state);
     } else {
       children = _android(context, state, notifier);
     }
@@ -134,6 +128,38 @@ class _CaptureSettingsScreenState extends ConsumerState<CaptureSettingsScreen> {
       ),
       children: children,
     );
+  }
+
+  List<Widget> _iphone(BuildContext context, CaptureSettingsState state) {
+    final l10n = AppLocalizations.of(context);
+    final ready = state.iosSetupAt != null;
+    final last = state.lastShortcutCaptureAt;
+    void open() => unawaited(context.push(Routes.iphoneSetup));
+    return [
+      Entrance(
+        child: CaptureStatusCard(
+          on: ready,
+          offIcon: Icons.phone_iphone_rounded,
+          title: ready ? l10n.iosStatusOn : l10n.iosStatusOff,
+          lastCaptureAt: last,
+          now: state.now,
+        ),
+      ),
+      Entrance(
+        index: 1,
+        child: InfoCard(
+          title: l10n.autoCaptureIosTitle,
+          body: l10n.iosSetupIntro,
+          extra: l10n.iosLimitsBody,
+          actions: [
+            if (ready)
+              OutlinedButton(onPressed: open, child: Text(l10n.iosReviewSetup))
+            else
+              FilledButton(onPressed: open, child: Text(l10n.iosOpenSetup)),
+          ],
+        ),
+      ),
+    ];
   }
 
   List<Widget> _android(
@@ -151,46 +177,12 @@ class _CaptureSettingsScreenState extends ConsumerState<CaptureSettingsScreen> {
     Widget enter(Widget child) => Entrance(index: index++, child: child);
     return [
       enter(
-        AppCard(
-          child: Semantics(
-            container: true,
-            liveRegion: true,
-            child: Row(
-              children: [
-                IconTile(
-                  icon: on
-                      ? Icons.bolt_rounded
-                      : Icons.power_settings_new_rounded,
-                  color: on ? tiles.green : tiles.grey,
-                ),
-                SizedBox(width: metrics.spaceMd),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Semantics(
-                        header: true,
-                        child: Text(
-                          on
-                              ? l10n.autoCaptureOnTitle
-                              : l10n.autoCaptureOffTitle,
-                          style: textTheme.titleMedium,
-                        ),
-                      ),
-                      Text(
-                        last == null
-                            ? l10n.autoCaptureNever
-                            : l10n.autoCaptureLastCapture(
-                                formatTimeAgo(l10n, last, state.now),
-                              ),
-                        style: textTheme.bodySmall,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+        CaptureStatusCard(
+          on: on,
+          offIcon: Icons.power_settings_new_rounded,
+          title: on ? l10n.autoCaptureOnTitle : l10n.autoCaptureOffTitle,
+          lastCaptureAt: last,
+          now: state.now,
         ),
       ),
       enter(

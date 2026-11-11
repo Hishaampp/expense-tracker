@@ -1,4 +1,5 @@
 import 'package:expense_tracker/core/oem_guidance.dart';
+import 'package:expense_tracker/data/query_providers.dart';
 import 'package:expense_tracker/services/native/capture_control_service.dart';
 import 'package:expense_tracker/services/service_providers.dart';
 import 'package:flutter/services.dart';
@@ -17,6 +18,8 @@ final class CaptureSettingsState {
     required this.now,
     required this.sources,
     required this.defaultSms,
+    this.iosSetupAt,
+    this.lastShortcutCaptureAt,
   });
 
   /// The native status.
@@ -30,6 +33,12 @@ final class CaptureSettingsState {
 
   /// The phone's default SMS app, if known.
   final String? defaultSms;
+
+  /// When the iPhone Shortcuts setup was finished, or null.
+  final DateTime? iosSetupAt;
+
+  /// When the newest Shortcuts capture arrived, or null.
+  final DateTime? lastShortcutCaptureAt;
 
   /// The phone maker's family, for battery steps.
   OemFamily get oem => oemFamilyFor(status.manufacturer);
@@ -57,6 +66,12 @@ class CaptureSettingsNotifier extends AsyncNotifier<CaptureSettingsState> {
       now: ref.read(clockProvider).now().toUtc(),
       sources: sources,
       defaultSms: defaultSms,
+      iosSetupAt: status.isAndroid
+          ? null
+          : await ref.watch(iosShortcutSetupAtProvider.future),
+      lastShortcutCaptureAt: status.isAndroid
+          ? null
+          : await ref.watch(lastShortcutCaptureAtProvider.future),
     );
   }
 
