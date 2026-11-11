@@ -1,7 +1,10 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:expense_tracker/core/cloud_config.dart';
+import 'package:expense_tracker/core/sync_timing.dart';
 import 'package:expense_tracker/services/app_logger.dart';
+import 'package:http/http.dart' as http;
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// Why signing in did not work.
@@ -14,6 +17,15 @@ enum CloudAuthProblem {
 
   /// No connection to the server.
   offline,
+}
+
+/// A sign-in provider besides email.
+enum CloudProvider {
+  /// Sign in with Google.
+  google,
+
+  /// Sign in with Apple.
+  apple,
 }
 
 /// The optional account (Phase 9): sign in with a code sent by email, or
@@ -32,6 +44,14 @@ abstract interface class CloudAuth {
   /// Signs in with the [code] sent to [address]. Returns null, or what
   /// went wrong.
   Future<CloudAuthProblem?> verify(String address, String code);
+
+  /// The providers turned on in the project, besides email. Empty when the
+  /// server cannot be reached.
+  Future<Set<CloudProvider>> providers();
+
+  /// Opens [provider]'s sign-in page. Sign-in finishes when it returns to
+  /// the app; [email] then reports the account.
+  Future<CloudAuthProblem?> signInWith(CloudProvider provider);
 
   /// Signs out on this phone.
   Future<void> signOut();
@@ -74,6 +94,39 @@ class SupabaseCloudAuth implements CloudAuth {
       token: code.trim(),
       type: OtpType.email,
     ),
+  );
+
+  @override
+  Future<Set<CloudProvider>> providers() async {
+    try {
+      final response = await http
+          .get(
+            Uri.parse('${CloudConfig.url}/auth/v1/settings'),
+            headers: {'apikey': CloudConfig.publishableKey},
+          )
+          .timeout(cloudRequestTimeout);
+      if (response.statusCode != 200) return {};
+      final data = jsonDecode(response.body);
+      if (data case {'external': final Map<String, Object?> external}) {
+        return {
+          for (final provider in CloudProvider.values)
+            if (external[provider.name] == true) provider,
+        };
+      }
+      return {};
+    } on Exception catch (e, st) {
+      _log.error('cloud.providers', e.runtimeType, st);
+      return {};
+    }
+  }
+
+  @override
+  Future<CloudAuthProblem?> signInWith(CloudProvider provider) => _guard(
+    'cloud.oauth',
+    () => _client.auth.signInWithOAuth(switch (provider) {
+      CloudProvider.google => OAuthProvider.google,
+      CloudProvider.apple => OAuthProvider.apple,
+    }, redirectTo: CloudConfig.loginRedirect),
   );
 
   @override

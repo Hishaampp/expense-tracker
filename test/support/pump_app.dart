@@ -206,6 +206,21 @@ final class FakeCloudAuth implements CloudAuth {
     return null;
   }
 
+  /// Providers the fake project has turned on.
+  Set<CloudProvider> enabled = {};
+
+  /// The provider last opened.
+  CloudProvider? opened;
+
+  @override
+  Future<Set<CloudProvider>> providers() async => enabled;
+
+  @override
+  Future<CloudAuthProblem?> signInWith(CloudProvider provider) async {
+    opened = provider;
+    return null;
+  }
+
   /// Signs in as if the user tapped the email link.
   void signInByLink(String address) {
     signedIn = address;

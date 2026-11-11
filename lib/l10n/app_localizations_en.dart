@@ -1759,10 +1759,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboardPrivacyTitle => 'Your money stays on your phone';
 
   @override
-  String get onboardPrivacyNoAccount => 'No account, no sign-up';
+  String get onboardPrivacyNoAccount => 'No account needed';
 
   @override
-  String get onboardPrivacyNoInternet => 'Nothing is sent to the internet';
+  String get onboardPrivacyNoInternet =>
+      'Nothing leaves your phone unless you turn on sync, and then it\'s locked first';
 
   @override
   String get onboardPrivacyNoAds => 'No ads, and no one reads your messages';
@@ -2099,4 +2100,36 @@ class AppLocalizationsEn extends AppLocalizations {
   String settingsAccountSemantics(String value) {
     return 'Account and sync, $value';
   }
+
+  @override
+  String get accountContinueApple => 'Continue with Apple';
+
+  @override
+  String get accountContinueGoogle => 'Continue with Google';
+
+  @override
+  String get accountOrEmail => 'Or use your email';
+
+  @override
+  String get onboardPaydayTitle => 'When does your salary come in?';
+
+  @override
+  String get onboardPaydayBody =>
+      'Your month will run from one salary to the next, so the numbers match your real month. You can change it later in Settings.';
+
+  @override
+  String get onboardPaydayFirst => '1st of the month';
+
+  @override
+  String get onboardPaydayOther => 'Another day';
+
+  @override
+  String get onboardSyncTitle => 'Keep your data safe if you change phones';
+
+  @override
+  String get onboardSyncBody =>
+      'Optional. Sign in to sync between phones. Your data is locked on this phone before it\'s sent, so no one else can read it.';
+
+  @override
+  String get onboardSyncEmail => 'Use email instead';
 }

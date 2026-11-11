@@ -7,8 +7,8 @@ import 'package:expense_tracker/data/sync/sync_engine.dart';
 import 'package:expense_tracker/services/cloud/cloud_auth.dart';
 import 'package:expense_tracker/services/cloud/sync_key_store.dart';
 import 'package:expense_tracker/services/service_providers.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:meta/meta.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// Where the optional account and sync stand (Phase 9).
@@ -86,6 +86,11 @@ class SyncController extends AsyncNotifier<SyncStatus> {
     final key = await _keys.read();
     return key == null ? SyncNeedsCode(email) : SyncOn(email);
   }
+
+  /// Opens [provider]'s sign-in page; the result arrives through the
+  /// account's email stream.
+  Future<CloudAuthProblem?> signInWith(CloudProvider provider) =>
+      _auth.signInWith(provider);
 
   /// Sends a sign-in code to [email].
   Future<CloudAuthProblem?> sendCode(String email) => _auth.sendCode(email);
@@ -213,6 +218,17 @@ class SyncController extends AsyncNotifier<SyncStatus> {
 /// Provides [SyncController].
 final AsyncNotifierProvider<SyncController, SyncStatus> syncControllerProvider =
     AsyncNotifierProvider<SyncController, SyncStatus>(SyncController.new);
+
+/// The sign-in providers turned on in the project. Apple is offered on
+/// iPhone only.
+final cloudProvidersProvider = FutureProvider<List<CloudProvider>>((ref) async {
+  final on = await ref.watch(cloudAuthProvider).providers();
+  final ios = defaultTargetPlatform == TargetPlatform.iOS;
+  return [
+    if (ios && on.contains(CloudProvider.apple)) CloudProvider.apple,
+    if (on.contains(CloudProvider.google)) CloudProvider.google,
+  ];
+});
 
 /// The account service. Override with a fake in tests.
 final cloudAuthProvider = Provider<CloudAuth>(

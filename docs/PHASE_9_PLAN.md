@@ -51,7 +51,8 @@ These stay: no ads, no analytics on financial data, no AI calls, and raw SMS and
 
 ## Status
 - Built: steps 1–5 (email-code sign-in) and the docs.
-- Next: Google and Apple sign-in, and an onboarding step.
+- Built: Google and Apple sign-in (browser flow back to the app), salary day and sync steps in onboarding.
+- Next: the owner turns on Google (and Apple with the paid account).
 
 ## Supabase setup (once, in the dashboard)
 1. **SQL Editor → New query:** paste `supabase/migrations/20261111000000_sync_records.sql` and press **Run**. It creates the `sync_records` table with row-level security, plus the `push_records` and `delete_my_account` functions.
@@ -59,6 +60,23 @@ These stay: no ads, no analytics on financial data, no AI calls, and raw SMS and
 3. **Authentication → URL Configuration:** set **Site URL** to `expensetracker://login-callback` and add the same under **Redirect URLs**. The link in the email then opens the app and signs in.
 3b. **Authentication → Emails → Templates → "Magic Link":** add the line `Your code: {{ .Token }}`, so the email carries the 6-digit code the app asks for.
 4. **Authentication → Rate limits:** the built-in mailer sends only a few emails an hour. Before launch, set up your own SMTP under **Authentication → Emails → SMTP Settings** (for example Resend, Brevo or Amazon SES).
+
+## Google and Apple sign-in (the app shows each button once it's on)
+
+The app asks the project which providers are on and shows only those, so
+nothing in the app changes when you turn one on.
+
+**Google** (free):
+1. console.cloud.google.com → create a project.
+2. **APIs & Services → OAuth consent screen:** External; app name, your support email; save.
+3. **APIs & Services → Credentials → Create credentials → OAuth client ID → Web application.**
+   Under **Authorized redirect URIs** add `https://rsfiiiyhajwgfnkxuwtr.supabase.co/auth/v1/callback`. Create.
+4. Copy the **Client ID** and **Client secret** into **Supabase → Authentication → Sign In / Providers → Google**, turn it on, save. (The secret goes only into Supabase.)
+
+**Apple** (needs the paid Apple Developer account, $99/year; shown on iPhone only):
+1. developer.apple.com → **Identifiers → +** → **Services IDs**; turn on **Sign in with Apple** → Configure: domain `rsfiiiyhajwgfnkxuwtr.supabase.co`, return URL `https://rsfiiiyhajwgfnkxuwtr.supabase.co/auth/v1/callback`.
+2. **Keys → +**, tick **Sign in with Apple**, download the `.p8` key.
+3. **Supabase → Sign In / Providers → Apple:** turn on, enter the Services ID and generate the secret from the key, Team ID and Key ID as the page explains; save.
 
 ## What the owner had to do (done)
 

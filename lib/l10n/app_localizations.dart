@@ -2766,13 +2766,13 @@ abstract class AppLocalizations {
   /// No description provided for @onboardPrivacyNoAccount.
   ///
   /// In en, this message translates to:
-  /// **'No account, no sign-up'**
+  /// **'No account needed'**
   String get onboardPrivacyNoAccount;
 
   /// No description provided for @onboardPrivacyNoInternet.
   ///
   /// In en, this message translates to:
-  /// **'Nothing is sent to the internet'**
+  /// **'Nothing leaves your phone unless you turn on sync, and then it\'s locked first'**
   String get onboardPrivacyNoInternet;
 
   /// No description provided for @onboardPrivacyNoAds.
@@ -3349,6 +3349,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Account and sync, {value}'**
   String settingsAccountSemantics(String value);
+
+  /// No description provided for @accountContinueApple.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Apple'**
+  String get accountContinueApple;
+
+  /// No description provided for @accountContinueGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Google'**
+  String get accountContinueGoogle;
+
+  /// No description provided for @accountOrEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Or use your email'**
+  String get accountOrEmail;
+
+  /// No description provided for @onboardPaydayTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'When does your salary come in?'**
+  String get onboardPaydayTitle;
+
+  /// No description provided for @onboardPaydayBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your month will run from one salary to the next, so the numbers match your real month. You can change it later in Settings.'**
+  String get onboardPaydayBody;
+
+  /// No description provided for @onboardPaydayFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'1st of the month'**
+  String get onboardPaydayFirst;
+
+  /// No description provided for @onboardPaydayOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Another day'**
+  String get onboardPaydayOther;
+
+  /// No description provided for @onboardSyncTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep your data safe if you change phones'**
+  String get onboardSyncTitle;
+
+  /// No description provided for @onboardSyncBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional. Sign in to sync between phones. Your data is locked on this phone before it\'s sent, so no one else can read it.'**
+  String get onboardSyncBody;
+
+  /// No description provided for @onboardSyncEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Use email instead'**
+  String get onboardSyncEmail;
 }
 
 class _AppLocalizationsDelegate

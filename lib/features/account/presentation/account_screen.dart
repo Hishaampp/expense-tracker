@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:expense_tracker/data/sync/sync_controller.dart';
 import 'package:expense_tracker/formatting/relative_time.dart';
 import 'package:expense_tracker/l10n/app_localizations.dart';
+import 'package:expense_tracker/l10n/failure_messages.dart';
 import 'package:expense_tracker/services/cloud/cloud_auth.dart';
 import 'package:expense_tracker/services/service_providers.dart';
 import 'package:expense_tracker/theme/app_colors.dart';
@@ -13,6 +14,7 @@ import 'package:expense_tracker/widgets/entrance.dart';
 import 'package:expense_tracker/widgets/error_state_view.dart';
 import 'package:expense_tracker/widgets/icon_tile.dart';
 import 'package:expense_tracker/widgets/large_title_page.dart';
+import 'package:expense_tracker/widgets/provider_buttons.dart';
 import 'package:expense_tracker/widgets/pulsing_placeholder.dart';
 import 'package:expense_tracker/widgets/round_icon_button.dart';
 import 'package:flutter/material.dart';
@@ -62,13 +64,6 @@ class AccountScreen extends ConsumerWidget {
   }
 }
 
-String _problemText(AppLocalizations l10n, CloudAuthProblem problem) =>
-    switch (problem) {
-      CloudAuthProblem.badCode => l10n.accountProblemCode,
-      CloudAuthProblem.tooMany => l10n.accountProblemTooMany,
-      CloudAuthProblem.offline => l10n.accountProblemOffline,
-    };
-
 class _SignIn extends ConsumerStatefulWidget {
   const new();
 
@@ -102,7 +97,7 @@ class _SignInState extends ConsumerState<_SignIn> {
     if (!mounted) return;
     setState(() {
       _busy = false;
-      _problem = problem == null ? null : _problemText(l10n, problem);
+      _problem = problem == null ? null : cloudProblemMessage(l10n, problem);
       if (problem == null) _sent = true;
     });
   }
@@ -143,6 +138,16 @@ class _SignInState extends ConsumerState<_SignIn> {
             Text(l10n.accountIntroBody, style: textTheme.bodyMedium),
             SizedBox(height: metrics.spaceLg),
             if (!_sent) ...[
+              ProviderButtons(
+                onProblem: (problem) => setState(
+                  () => _problem = cloudProblemMessage(l10n, problem),
+                ),
+              ),
+              if (ref.watch(cloudProvidersProvider).value?.isNotEmpty ??
+                  false) ...[
+                Text(l10n.accountOrEmail, style: textTheme.bodySmall),
+                SizedBox(height: metrics.spaceSm),
+              ],
               TextFormField(
                 controller: _email,
                 keyboardType: TextInputType.emailAddress,
@@ -433,7 +438,9 @@ class _Status extends ConsumerWidget {
       ..showSnackBar(
         SnackBar(
           content: Text(
-            problem == null ? l10n.accountDeleted : _problemText(l10n, problem),
+            problem == null
+                ? l10n.accountDeleted
+                : cloudProblemMessage(l10n, problem),
           ),
         ),
       );

@@ -1448,8 +1448,8 @@
   "onboardBudgetTitle": "Know what's safe to spend",
   "onboardBudgetBody": "Set a monthly budget and see each day what you can still spend, with a nudge before you run out.",
   "onboardPrivacyTitle": "Your money stays on your phone",
-  "onboardPrivacyNoAccount": "No account, no sign-up",
-  "onboardPrivacyNoInternet": "Nothing is sent to the internet",
+  "onboardPrivacyNoAccount": "No account needed",
+  "onboardPrivacyNoInternet": "Nothing leaves your phone unless you turn on sync, and then it's locked first",
   "onboardPrivacyNoAds": "No ads, and no one reads your messages",
   "onboardSetupTitle": "Turn on auto-capture",
   "onboardSetupBody": "Takes about two minutes. You can also do it later from Settings.",
@@ -1619,5 +1619,15 @@
         "type": "String"
       }
     }
-  }
+  },
+  "accountContinueApple": "Continue with Apple",
+  "accountContinueGoogle": "Continue with Google",
+  "accountOrEmail": "Or use your email",
+  "onboardPaydayTitle": "When does your salary come in?",
+  "onboardPaydayBody": "Your month will run from one salary to the next, so the numbers match your real month. You can change it later in Settings.",
+  "onboardPaydayFirst": "1st of the month",
+  "onboardPaydayOther": "Another day",
+  "onboardSyncTitle": "Keep your data safe if you change phones",
+  "onboardSyncBody": "Optional. Sign in to sync between phones. Your data is locked on this phone before it's sent, so no one else can read it.",
+  "onboardSyncEmail": "Use email instead"
 }

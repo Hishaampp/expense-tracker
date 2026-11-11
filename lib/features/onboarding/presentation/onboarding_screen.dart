@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:expense_tracker/core/budget_input.dart';
 import 'package:expense_tracker/core/result.dart';
 import 'package:expense_tracker/data/data_providers.dart';
+import 'package:expense_tracker/data/sync/sync_controller.dart';
 import 'package:expense_tracker/formatting/money_format.dart';
 import 'package:expense_tracker/l10n/app_localizations.dart';
 import 'package:expense_tracker/l10n/failure_messages.dart';
@@ -13,8 +14,12 @@ import 'package:expense_tracker/theme/app_metrics.dart';
 import 'package:expense_tracker/theme/app_motion.dart';
 import 'package:expense_tracker/theme/app_text_styles.dart';
 import 'package:expense_tracker/theme/category_colors.dart';
+import 'package:expense_tracker/widgets/choice_pill.dart';
+import 'package:expense_tracker/widgets/entrance.dart';
 import 'package:expense_tracker/widgets/hero_card.dart';
 import 'package:expense_tracker/widgets/icon_tile.dart';
+import 'package:expense_tracker/widgets/month_start_day_sheet.dart';
+import 'package:expense_tracker/widgets/provider_buttons.dart';
 import 'package:expense_tracker/widgets/round_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,8 +27,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 /// The first-launch welcome (spec §11 screen 1): three value cards, the
-/// privacy promise, capture setup (skippable) and a monthly budget
-/// (skippable), then Home.
+/// privacy promise, capture setup (skippable), two questions (salary day
+/// and a monthly budget, both skippable) and the optional account (Phase
+/// 9), then Home.
 class OnboardingScreen extends ConsumerStatefulWidget {
   /// Creates the screen.
   const new({super.key});
@@ -32,13 +38,19 @@ class OnboardingScreen extends ConsumerStatefulWidget {
   ConsumerState<OnboardingScreen> createState() => _OnboardingScreenState();
 }
 
-enum _Step { capture, rooms, budget, privacy, setup, monthly }
+enum _Step { capture, rooms, budget, privacy, setup, payday, monthly, sync }
+
+// Salary days offered as one tap; any other day comes from the sheet.
+const List<int> _paydays = [1, 5, 7, 10, 25];
 
 class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   _Step _step = _Step.capture;
   final TextEditingController _budget = TextEditingController();
   bool _finishing = false;
   bool _invalid = false;
+  bool _forward = true;
+  int _payday = 1;
+  bool _openedAccount = false;
 
   @override
   void dispose() {
@@ -47,33 +59,68 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   }
 
   void _next() {
+    if (_step == _Step.monthly) {
+      final typed = _budget.text.trim();
+      if (typed.isNotEmpty && parseBudget(typed) == null) {
+        setState(() => _invalid = true);
+        return;
+      }
+    }
     final next = _step.index + 1;
     if (next < _Step.values.length) {
-      setState(() => _step = _Step.values[next]);
+      setState(() {
+        _forward = true;
+        _step = _Step.values[next];
+      });
     } else {
-      unawaited(_finish(withBudget: true));
+      unawaited(_finish());
     }
   }
 
-  void _back() => setState(() => _step = _Step.values[_step.index - 1]);
+  void _skipBudget() {
+    _budget.clear();
+    setState(() => _invalid = false);
+    _next();
+  }
 
-  Future<void> _finish({required bool withBudget}) async {
-    if (_finishing) return;
-    final typed = _budget.text.trim();
-    final amount = withBudget ? parseBudget(typed) : null;
-    if (withBudget && typed.isNotEmpty && amount == null) {
-      setState(() => _invalid = true);
-      return;
+  void _back() => setState(() {
+    _forward = false;
+    _step = _Step.values[_step.index - 1];
+  });
+
+  Future<void> _pickOtherPayday() async {
+    final picked = await showMonthStartDaySheet(context, _payday);
+    // Null means dismissed: keep the day.
+    if (picked != null && mounted) setState(() => _payday = picked);
+  }
+
+  Future<void> _openAccount() async {
+    _openedAccount = true;
+    await context.push(Routes.account);
+    if (!mounted) return;
+    _openedAccount = false;
+    if (ref.read(syncControllerProvider).value is! SyncSignedOut) {
+      unawaited(_finish());
     }
+  }
+
+  Future<void> _finish() async {
+    if (_finishing) return;
     setState(() => _finishing = true);
     final l10n = AppLocalizations.of(context);
     final messenger = ScaffoldMessenger.of(context);
+    final amount = parseBudget(_budget.text.trim());
     final saved = amount == null
         ? null
         : await ref.read(budgetRepositoryProvider).setMonthly(amount);
+    final day = _payday == 1
+        ? null
+        : await ref.read(settingsRepositoryProvider).setMonthStartDay(_payday);
     final done = await ref.read(settingsRepositoryProvider).markOnboarded();
-    final failure = switch ((saved, done)) {
-      (Err(:final failure), _) || (_, Err(:final failure)) => failure,
+    final failure = switch ((saved, day, done)) {
+      (Err(:final failure), _, _) ||
+      (_, Err(:final failure), _) ||
+      (_, _, Err(:final failure)) => failure,
       _ => null,
     };
     if (!mounted) return;
@@ -103,6 +150,15 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     final tiles = CategoryColors.of(context);
     final textTheme = Theme.of(context).textTheme;
     final total = _Step.values.length;
+    // A sign-in from the sync step returns through the browser; the
+    // account screen then shows the recovery code.
+    final messenger = ScaffoldMessenger.of(context);
+    ref.listen(syncControllerProvider, (_, next) {
+      final signedIn = next.value is SyncNewKey || next.value is SyncNeedsCode;
+      if (_step == _Step.sync && signedIn && !_openedAccount) {
+        unawaited(_openAccount());
+      }
+    });
     final body = switch (_step) {
       _Step.capture => _Value(
         icon: Icons.bolt_rounded,
@@ -135,6 +191,75 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
         title: l10n.onboardSetupTitle,
         body: l10n.onboardSetupBody,
       ),
+      _Step.payday => Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _Value(
+            icon: Icons.event_repeat_rounded,
+            color: tiles.teal,
+            title: l10n.onboardPaydayTitle,
+            body: l10n.onboardPaydayBody,
+          ),
+          SizedBox(height: metrics.spaceLg),
+          Wrap(
+            spacing: metrics.spaceSm,
+            runSpacing: metrics.spaceSm,
+            children: [
+              for (final (i, day) in _paydays.indexed)
+                Entrance(
+                  index: i + 3,
+                  child: ChoicePill(
+                    label: day == 1
+                        ? l10n.onboardPaydayFirst
+                        : l10n.settingsMonthStartValue(day),
+                    selected: _payday == day,
+                    onTap: () => setState(() => _payday = day),
+                  ),
+                ),
+              Entrance(
+                index: _paydays.length + 3,
+                child: ChoicePill(
+                  label: _paydays.contains(_payday)
+                      ? l10n.onboardPaydayOther
+                      : l10n.settingsMonthStartValue(_payday),
+                  icon: Icons.calendar_month_rounded,
+                  selected: !_paydays.contains(_payday),
+                  onTap: () => unawaited(_pickOtherPayday()),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+      _Step.sync => Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _Value(
+            icon: Icons.cloud_sync_rounded,
+            color: tiles.blue,
+            title: l10n.onboardSyncTitle,
+            body: l10n.onboardSyncBody,
+          ),
+          SizedBox(height: metrics.spaceLg),
+          Entrance(
+            index: 3,
+            child: ProviderButtons(
+              onProblem: (problem) => messenger
+                ..clearSnackBars()
+                ..showSnackBar(
+                  SnackBar(content: Text(cloudProblemMessage(l10n, problem))),
+                ),
+            ),
+          ),
+          Entrance(
+            index: 4,
+            child: OutlinedButton(
+              onPressed: _finishing ? null : () => unawaited(_openAccount()),
+              child: Text(l10n.onboardSyncEmail),
+            ),
+          ),
+        ],
+      ),
       _Step.monthly => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -161,13 +286,13 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
             onChanged: (_) {
               if (_invalid) setState(() => _invalid = false);
             },
-            onSubmitted: (_) => unawaited(_finish(withBudget: true)),
+            onSubmitted: (_) => _next(),
           ),
         ],
       ),
     };
-    final isLast = _step == _Step.monthly;
-    final skippable = _step == _Step.setup || isLast;
+    final isLast = _step == _Step.sync;
+    final skippable = _step == _Step.setup || _step == _Step.monthly;
     return Scaffold(
       backgroundColor: colors.background,
       body: SafeArea(
@@ -205,6 +330,26 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                         duration: resolveMotion(context, motion.medium),
                         switchInCurve: motion.enter,
                         switchOutCurve: motion.exit,
+                        // The new step slides in from the side it comes
+                        // from: ahead going forward, behind going back.
+                        transitionBuilder: (child, animation) {
+                          final incoming = child.key == ValueKey(_step);
+                          final from = (incoming == _forward) ? 1.0 : -1.0;
+                          final dx =
+                              Directionality.of(context) == TextDirection.rtl
+                              ? -from
+                              : from;
+                          return FadeTransition(
+                            opacity: animation,
+                            child: SlideTransition(
+                              position: Tween<Offset>(
+                                begin: Offset(dx * stepSlideShare, 0),
+                                end: Offset.zero,
+                              ).animate(animation),
+                              child: child,
+                            ),
+                          );
+                        },
                         child: KeyedSubtree(
                           key: ValueKey(_step),
                           child: Padding(
@@ -237,8 +382,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                     TextButton(
                       onPressed: _finishing
                           ? null
-                          : isLast
-                          ? () => unawaited(_finish(withBudget: false))
+                          : _step == _Step.monthly
+                          ? _skipBudget
                           : _next,
                       child: Text(l10n.onboardSkip),
                     ),
@@ -269,18 +414,30 @@ class _Value extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final metrics = AppMetrics.of(context);
+    final motion = AppMotion.of(context);
     final textTheme = Theme.of(context).textTheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        IconTile(icon: icon, color: color, large: true),
+        // The icon pops in as the step arrives; still under reduced motion.
+        TweenAnimationBuilder<double>(
+          tween: Tween(begin: popStartScale, end: 1),
+          duration: resolveMotion(context, motion.slow),
+          curve: motion.pop,
+          builder: (context, scale, child) =>
+              Transform.scale(scale: scale, child: child),
+          child: IconTile(icon: icon, color: color, large: true),
+        ),
         SizedBox(height: metrics.spaceXl),
-        Semantics(
-          header: true,
-          child: Text(title, style: textTheme.headlineMedium),
+        Entrance(
+          index: 1,
+          child: Semantics(
+            header: true,
+            child: Text(title, style: textTheme.headlineMedium),
+          ),
         ),
         SizedBox(height: metrics.spaceMd),
-        Text(body, style: textTheme.bodyLarge),
+        Entrance(index: 2, child: Text(body, style: textTheme.bodyLarge)),
       ],
     );
   }
