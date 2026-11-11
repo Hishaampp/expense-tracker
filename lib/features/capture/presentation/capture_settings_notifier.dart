@@ -118,6 +118,9 @@ class CaptureSettingsNotifier extends AsyncNotifier<CaptureSettingsState> {
     } on PlatformException catch (e, st) {
       ref.read(appLoggerProvider).error('capture.import', e.runtimeType, st);
       return null;
+    } on MissingPluginException catch (e, st) {
+      ref.read(appLoggerProvider).error('capture.import', e.runtimeType, st);
+      return null;
     }
   }
 
