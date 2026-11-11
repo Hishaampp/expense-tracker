@@ -3,6 +3,7 @@ import 'package:expense_tracker/data/repositories/account_repository.dart';
 import 'package:expense_tracker/data/repositories/auto_capture_repository.dart';
 import 'package:expense_tracker/data/repositories/capture_repository.dart';
 import 'package:expense_tracker/data/repositories/category_repository.dart';
+import 'package:expense_tracker/data/repositories/room_repository.dart';
 import 'package:expense_tracker/data/repositories/settings_repository.dart';
 import 'package:expense_tracker/data/repositories/transaction_repository.dart';
 import 'package:expense_tracker/services/service_providers.dart';
@@ -55,6 +56,16 @@ final autoCaptureRepositoryProvider = Provider<AutoCaptureRepository>(
   (ref) => AutoCaptureRepository(
     ref.watch(appDatabaseProvider),
     ref.watch(transactionRepositoryProvider),
+    ref.watch(clockProvider),
+    ref.watch(idGeneratorProvider),
+    ref.watch(appLoggerProvider),
+  ),
+);
+
+/// The Room repository.
+final roomRepositoryProvider = Provider<RoomRepository>(
+  (ref) => RoomRepository(
+    ref.watch(appDatabaseProvider),
     ref.watch(clockProvider),
     ref.watch(idGeneratorProvider),
     ref.watch(appLoggerProvider),

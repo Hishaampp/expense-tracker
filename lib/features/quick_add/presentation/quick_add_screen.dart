@@ -13,6 +13,7 @@ import 'package:expense_tracker/theme/app_motion.dart';
 import 'package:expense_tracker/widgets/category/all_categories_sheet.dart';
 import 'package:expense_tracker/widgets/error_state_view.dart';
 import 'package:expense_tracker/widgets/pulsing_placeholder.dart';
+import 'package:expense_tracker/widgets/room_picker_sheet.dart';
 import 'package:expense_tracker/widgets/round_icon_button.dart';
 import 'package:expense_tracker/widgets/sheet_frame.dart';
 import 'package:flutter/material.dart';
@@ -100,6 +101,25 @@ class QuickAddScreen extends ConsumerWidget {
     if (note != null) notifier.setNote(note);
   }
 
+  Future<void> _pickRoom(
+    BuildContext context,
+    WidgetRef ref,
+    QuickAddState state,
+  ) async {
+    final l10n = AppLocalizations.of(context);
+    final notifier = ref.read(quickAddNotifierProvider(args).notifier);
+    final picked = await showAppSheet<RoomPick>(
+      context,
+      RoomPickerSheet(
+        title: l10n.quickAddPickRoom,
+        rooms: state.rooms,
+        selectedId: state.roomId,
+      ),
+    );
+    // Null means dismissed: keep the Room.
+    if (picked != null) notifier.setRoom(picked.roomId);
+  }
+
   Future<void> _showAllCategories(
     BuildContext context,
     WidgetRef ref,
@@ -155,6 +175,7 @@ class QuickAddScreen extends ConsumerWidget {
         onMore: () => unawaited(_showAllCategories(context, ref, state)),
         onPickDate: () => unawaited(_pickDate(context, ref, state)),
         onEditNote: () => unawaited(_editNote(context, ref, state)),
+        onPickRoom: () => unawaited(_pickRoom(context, ref, state)),
         onSave: notifier.save,
       );
     } else if (state != null) {

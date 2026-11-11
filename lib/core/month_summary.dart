@@ -13,15 +13,24 @@ final class MonthSummary {
   const new _({
     required this.spent,
     required this.spentInRooms,
+    required this.spentForBudget,
     required this.moneyIn,
     required this.byCategory,
   });
 
   /// Folds [transactions] into totals. Hidden transactions and transfers
   /// are ignored; a refund reduces spending (spec §5.4, §5.5).
-  factory of(Iterable<MoneyTransaction> transactions) {
+  ///
+  /// [budgetRoomIds] are the Rooms whose spending counts toward the monthly
+  /// budget; every other Room's spending is left out of [spentForBudget]
+  /// (spec §5.2).
+  factory of(
+    Iterable<MoneyTransaction> transactions, {
+    Set<String> budgetRoomIds = const {},
+  }) {
     var spent = 0;
     var inRooms = 0;
+    var outsideBudget = 0;
     var moneyIn = 0;
     final perCategory = <String?, int>{};
     for (final txn in transactions) {
@@ -30,7 +39,10 @@ final class MonthSummary {
       switch (txn.kind) {
         case TransactionKind.expense:
           spent += paise;
-          if (txn.roomId != null) inRooms += paise;
+          if (txn.roomId case final room?) {
+            inRooms += paise;
+            if (!budgetRoomIds.contains(room)) outsideBudget += paise;
+          }
           perCategory.update(
             txn.categoryId,
             (v) => v + paise,
@@ -38,7 +50,10 @@ final class MonthSummary {
           );
         case TransactionKind.refund:
           spent -= paise;
-          if (txn.roomId != null) inRooms -= paise;
+          if (txn.roomId case final room?) {
+            inRooms -= paise;
+            if (!budgetRoomIds.contains(room)) outsideBudget -= paise;
+          }
           perCategory.update(
             txn.categoryId,
             (v) => v - paise,
@@ -57,6 +72,7 @@ final class MonthSummary {
     return MonthSummary._(
       spent: Money(spent),
       spentInRooms: Money(inRooms),
+      spentForBudget: Money(spent - outsideBudget),
       moneyIn: Money(moneyIn),
       byCategory: List.unmodifiable(byCategory),
     );
@@ -67,6 +83,10 @@ final class MonthSummary {
 
   /// The part of [spent] that belongs to a Room.
   final Money spentInRooms;
+
+  /// The part of [spent] the monthly budget counts: everything except
+  /// Rooms that stay out of it (spec §5.2).
+  final Money spentForBudget;
 
   /// Income received.
   final Money moneyIn;

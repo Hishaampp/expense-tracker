@@ -1,4 +1,5 @@
 import 'package:expense_tracker/core/models/category.dart';
+import 'package:expense_tracker/core/models/room.dart';
 import 'package:expense_tracker/core/models/transaction_kind.dart';
 import 'package:expense_tracker/features/review/presentation/review_notifier.dart';
 import 'package:expense_tracker/formatting/money_format.dart';
@@ -9,9 +10,11 @@ import 'package:expense_tracker/theme/app_metrics.dart';
 import 'package:expense_tracker/theme/app_text_styles.dart';
 import 'package:expense_tracker/widgets/app_card.dart';
 import 'package:expense_tracker/widgets/category_style.dart';
+import 'package:expense_tracker/widgets/choice_pill.dart';
 import 'package:expense_tracker/widgets/icon_tile.dart';
 import 'package:expense_tracker/widgets/money_tone.dart';
 import 'package:expense_tracker/widgets/pressable.dart';
+import 'package:expense_tracker/widgets/room_tile.dart';
 import 'package:flutter/material.dart';
 
 /// One captured payment waiting for review: amount, payee, account and
@@ -23,6 +26,7 @@ class ReviewCard extends StatelessWidget {
     required this.onPick,
     required this.onMore,
     required this.onTransfer,
+    required this.onAddToRoom,
     super.key,
   });
 
@@ -37,6 +41,9 @@ class ReviewCard extends StatelessWidget {
 
   /// Marks it as a transfer.
   final VoidCallback onTransfer;
+
+  /// Puts the payment in a Room.
+  final ValueChanged<Room> onAddToRoom;
 
   @override
   Widget build(BuildContext context) {
@@ -110,6 +117,40 @@ class ReviewCard extends StatelessWidget {
               _MorePill(onTap: onMore),
             ],
           ),
+          if (item.room case final room?)
+            Padding(
+              padding: EdgeInsetsDirectional.only(top: metrics.spaceMd),
+              child: Row(
+                children: [
+                  RoomTile(type: room.type, emoji: room.emoji),
+                  SizedBox(width: metrics.spaceSm),
+                  Expanded(
+                    child: Text(
+                      l10n.reviewInRoom(room.name),
+                      style: textTheme.bodyMedium,
+                    ),
+                  ),
+                ],
+              ),
+            )
+          else if (item.roomOffers.isNotEmpty)
+            Padding(
+              padding: EdgeInsetsDirectional.only(top: metrics.spaceMd),
+              child: Wrap(
+                spacing: metrics.spaceSm,
+                runSpacing: metrics.spaceSm,
+                children: [
+                  for (final room in item.roomOffers)
+                    ChoicePill(
+                      key: ValueKey(room.id),
+                      icon: Icons.luggage_rounded,
+                      label: l10n.reviewAddToRoom(room.name),
+                      selected: false,
+                      onTap: () => onAddToRoom(room),
+                    ),
+                ],
+              ),
+            ),
           Align(
             alignment: AlignmentDirectional.centerStart,
             child: TextButton.icon(

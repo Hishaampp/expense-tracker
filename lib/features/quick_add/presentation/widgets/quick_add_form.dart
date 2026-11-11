@@ -6,6 +6,7 @@ import 'package:expense_tracker/features/quick_add/presentation/widgets/notice_t
 import 'package:expense_tracker/features/quick_add/presentation/widgets/pill_button.dart';
 import 'package:expense_tracker/formatting/date_format.dart';
 import 'package:expense_tracker/formatting/money_format.dart';
+import 'package:expense_tracker/formatting/room_text.dart';
 import 'package:expense_tracker/l10n/app_localizations.dart';
 import 'package:expense_tracker/l10n/failure_messages.dart';
 import 'package:expense_tracker/theme/app_colors.dart';
@@ -26,6 +27,7 @@ class QuickAddForm extends StatelessWidget {
     required this.onMore,
     required this.onPickDate,
     required this.onEditNote,
+    required this.onPickRoom,
     required this.onSave,
     super.key,
   });
@@ -53,6 +55,9 @@ class QuickAddForm extends StatelessWidget {
 
   /// Opens the note editor.
   final VoidCallback onEditNote;
+
+  /// Opens the Room picker.
+  final VoidCallback onPickRoom;
 
   /// Saves the edits (edit mode).
   final VoidCallback onSave;
@@ -112,6 +117,19 @@ class QuickAddForm extends StatelessWidget {
                           : l10n.quickAddNoteLabel(state.note),
                       onTap: onEditNote,
                     ),
+                    if (state.offersRoom)
+                      PillButton(
+                        icon: Icons.luggage_rounded,
+                        label: switch (state.room) {
+                          final room? => roomLabel(room),
+                          null => l10n.quickAddNoRoom,
+                        },
+                        semanticLabel: switch (state.room) {
+                          final room? => l10n.quickAddRoomLabel(room.name),
+                          null => l10n.quickAddNoRoom,
+                        },
+                        onTap: onPickRoom,
+                      ),
                   ],
                 ),
                 if (state.draft case final draft?) ...[

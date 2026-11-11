@@ -1,4 +1,6 @@
 import 'package:expense_tracker/core/models/raw_capture.dart';
+import 'package:expense_tracker/core/models/room.dart';
+import 'package:expense_tracker/data/db/app_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -95,5 +97,38 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text("You've spent ₹0 this month."), findsOneWidget);
     expect(find.text('1 to review'), findsNothing);
+  });
+
+  appTest('a wedding is offered, never forced; Undo takes it out', (
+    tester,
+  ) async {
+    final queue = FakeCaptureQueue([
+      _notification('Paid ₹62 to Sharma Dairy', _phonepe),
+    ]);
+    final db = await pumpApp(tester, captureQueue: queue);
+    await db
+        .into(db.rooms)
+        .insert(
+          RoomsCompanion.insert(
+            id: 'wedding',
+            name: 'Wedding',
+            type: RoomType.wedding,
+            autoTagMode: AutoTagMode.suggest,
+            createdAt: 0,
+          ),
+        );
+    await tester.tap(find.text('1 to review'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Add to Wedding?'));
+    await tester.pumpAndSettle();
+    expect(find.text('In Wedding'), findsOneWidget);
+    expect(find.text('Added to Wedding'), findsOneWidget);
+    expect((await db.select(db.transactions).get()).single.roomId, 'wedding');
+
+    await tester.tap(find.text('Undo'));
+    await tester.pumpAndSettle();
+    expect((await db.select(db.transactions).get()).single.roomId, isNull);
+    expect(find.text('Add to Wedding?'), findsOneWidget);
   });
 }

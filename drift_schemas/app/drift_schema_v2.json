@@ -250,7 +250,11 @@
             "customConstraints": null,
             "default_dart": null,
             "default_client_dart": null,
-            "dsl_features": []
+            "dsl_features": [],
+            "type_converter": {
+              "dart_expr": "const EnumNameConverter<RoomType>(RoomType.values)",
+              "dart_type_name": "RoomType"
+            }
           },
           {
             "name": "emoji",
@@ -300,7 +304,11 @@
             "customConstraints": null,
             "default_dart": null,
             "default_client_dart": null,
-            "dsl_features": []
+            "dsl_features": [],
+            "type_converter": {
+              "dart_expr": "const EnumNameConverter<AutoTagMode>(AutoTagMode.values)",
+              "dart_type_name": "AutoTagMode"
+            }
           },
           {
             "name": "counts_toward_monthly_budget",
@@ -324,7 +332,11 @@
             "customConstraints": null,
             "default_dart": "const CustomExpression('\\'active\\'')",
             "default_client_dart": null,
-            "dsl_features": []
+            "dsl_features": [],
+            "type_converter": {
+              "dart_expr": "const EnumNameConverter<RoomStatus>(RoomStatus.values)",
+              "dart_type_name": "RoomStatus"
+            }
           },
           {
             "name": "created_at",

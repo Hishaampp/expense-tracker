@@ -83,6 +83,7 @@ class TransactionRepository {
     DateTime? occurredAt,
     String? note,
     String? unparsedId,
+    String? roomId,
   }) {
     final now = _clock.now().toUtc();
     final txn = MoneyTransaction(
@@ -92,6 +93,7 @@ class TransactionRepository {
       occurredAt: (occurredAt ?? now).toUtc(),
       accountId: accountId,
       categoryId: categoryId,
+      roomId: roomId,
       instrument: Instrument.cash,
       note: _blankToNull(note),
       createdAt: now,
@@ -241,8 +243,8 @@ class TransactionRepository {
     return id;
   }
 
-  /// Saves the user's edits to [txn]'s amount, time, account, category and
-  /// note, and returns the stored transaction.
+  /// Saves the user's edits to [txn]'s amount, time, account, category,
+  /// note and Room, and returns the stored transaction.
   @useResult
   Future<Result<MoneyTransaction, StoreFailure>> edit(
     MoneyTransaction txn, {
@@ -251,6 +253,7 @@ class TransactionRepository {
     required String accountId,
     required String? categoryId,
     required String? note,
+    required String? roomId,
   }) {
     final updated = txn.edited(
       amount: amount,
@@ -258,6 +261,7 @@ class TransactionRepository {
       accountId: accountId,
       categoryId: categoryId,
       note: _blankToNull(note),
+      roomId: roomId,
       updatedAt: _clock.now().toUtc(),
     );
     return _write('transaction.edit', updated, () async {

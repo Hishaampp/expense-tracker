@@ -3,6 +3,7 @@ import 'package:expense_tracker/core/models/appearance_mode.dart';
 import 'package:expense_tracker/core/models/category.dart';
 import 'package:expense_tracker/core/models/money_transaction.dart';
 import 'package:expense_tracker/core/models/raw_capture.dart';
+import 'package:expense_tracker/core/models/room.dart';
 import 'package:expense_tracker/core/month_period.dart';
 import 'package:expense_tracker/data/data_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -60,4 +61,26 @@ final lastShortcutCaptureAtProvider = StreamProvider<DateTime?>(
   (ref) => ref
       .watch(captureRepositoryProvider)
       .watchLastCaptureAt(CaptureSource.iosShortcut),
+);
+
+/// Every Room, active first. Live.
+final roomsProvider = StreamProvider<List<Room>>(
+  (ref) => ref.watch(roomRepositoryProvider).watchAll(),
+);
+
+/// Active Rooms only, newest first. Live.
+final activeRoomsProvider = Provider<AsyncValue<List<Room>>>(
+  (ref) => ref
+      .watch(roomsProvider)
+      .whenData(
+        (rooms) => [
+          for (final r in rooms)
+            if (r.isActive) r,
+        ],
+      ),
+);
+
+/// Spending per Room in paise, by Room id. Live.
+final roomSpentProvider = StreamProvider<Map<String, int>>(
+  (ref) => ref.watch(roomRepositoryProvider).watchSpentByRoom(),
 );

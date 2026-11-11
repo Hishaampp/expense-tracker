@@ -196,13 +196,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get roomsTitle => 'Rooms';
 
   @override
-  String get roomsComingTitle => 'Trips and events, together';
-
-  @override
-  String get roomsComingBody =>
-      'Rooms arrive in a coming update. A Room keeps a trip\'s or a wedding\'s spending together, and it still counts in your month.';
-
-  @override
   String get quickAddTitle => 'Add expense';
 
   @override
@@ -839,4 +832,241 @@ class AppLocalizationsEn extends AppLocalizations {
   String iosTestParsedPayee(String amount, String direction, String payee) {
     return 'Read as $amount $direction, $payee';
   }
+
+  @override
+  String get roomsEmptyTitle => 'Keep a trip\'s spending together';
+
+  @override
+  String get roomsEmptyBody =>
+      'A Room collects the spending for a trip or a wedding. It still counts in your month, but stays out of your monthly budget.';
+
+  @override
+  String get roomsStartTrip => 'Start a trip';
+
+  @override
+  String get roomsNew => 'New Room';
+
+  @override
+  String get roomsHistory => 'History';
+
+  @override
+  String get roomTypeTrip => 'Trip';
+
+  @override
+  String get roomTypeWedding => 'Wedding';
+
+  @override
+  String get roomTypeEvent => 'Event';
+
+  @override
+  String get roomTypeCustom => 'Other';
+
+  @override
+  String roomFrom(String date) {
+    return 'From $date';
+  }
+
+  @override
+  String roomRange(String from, String to) {
+    return '$from – $to';
+  }
+
+  @override
+  String roomLeft(String amount, String budget) {
+    return '$amount left of $budget';
+  }
+
+  @override
+  String roomOver(String amount) {
+    return 'Over by $amount';
+  }
+
+  @override
+  String roomCardSemantics(String name, String details, String amount) {
+    return '$name, $details, $amount spent';
+  }
+
+  @override
+  String tripDefaultName(String date) {
+    return 'Trip from $date';
+  }
+
+  @override
+  String get roomNewTitle => 'New Room';
+
+  @override
+  String get roomEditTitle => 'Edit Room';
+
+  @override
+  String get roomNameLabel => 'Name';
+
+  @override
+  String get roomNameHint => 'Goa trip';
+
+  @override
+  String get roomNameRequired => 'Give the Room a name';
+
+  @override
+  String get roomTypeLabel => 'Type';
+
+  @override
+  String get roomEmojiLabel => 'Emoji';
+
+  @override
+  String get roomNoEmoji => 'None';
+
+  @override
+  String roomEmojiSemantics(String emoji) {
+    return 'Emoji $emoji';
+  }
+
+  @override
+  String get roomDatesLabel => 'Dates';
+
+  @override
+  String get roomStartLabel => 'Start';
+
+  @override
+  String get roomEndLabel => 'End';
+
+  @override
+  String get roomPickDate => 'Pick a date';
+
+  @override
+  String get roomNoEnd => 'Still going';
+
+  @override
+  String roomStartValue(String date) {
+    return 'Start: $date';
+  }
+
+  @override
+  String roomEndValue(String date) {
+    return 'End: $date';
+  }
+
+  @override
+  String get roomClearEnd => 'Clear the end date';
+
+  @override
+  String get roomStartRequired => 'A trip needs a start date';
+
+  @override
+  String get roomEndBeforeStart => 'The end can\'t be before the start';
+
+  @override
+  String get roomWindowNeedsStart =>
+      'Set a start date to add every expense in the dates';
+
+  @override
+  String get roomBudgetLabel => 'Budget (optional)';
+
+  @override
+  String get roomBudgetHint => 'Amount in ₹';
+
+  @override
+  String get roomModeLabel => 'Adding expenses';
+
+  @override
+  String get roomModeDateWindow => 'Every expense in the dates';
+
+  @override
+  String get roomModeSuggest => 'Ask me each time';
+
+  @override
+  String get roomModeManual => 'Only when I add them';
+
+  @override
+  String get roomModeTripNote =>
+      'Every expense between the dates goes into the trip.';
+
+  @override
+  String get roomModeWeddingNote =>
+      'You\'ll be asked about each expense. Nothing is added on its own.';
+
+  @override
+  String get roomCountsInBudget => 'Count in my monthly budget';
+
+  @override
+  String get roomCountsInBudgetNote =>
+      'When off, this Room\'s spending shows in your month but stays out of your monthly budget.';
+
+  @override
+  String roomHeroSpent(String amount, String name) {
+    return 'You\'ve spent $amount on $name.';
+  }
+
+  @override
+  String get roomPerDay => 'Per day';
+
+  @override
+  String get roomDays => 'Days';
+
+  @override
+  String get roomBudget => 'Budget';
+
+  @override
+  String get roomWhereItWent => 'Where it went';
+
+  @override
+  String get roomAddExpense => 'Add expense';
+
+  @override
+  String get roomEndTrip => 'End trip today';
+
+  @override
+  String get roomArchive => 'Move to history';
+
+  @override
+  String get roomRestore => 'Move back to active';
+
+  @override
+  String get roomEmptyTitle => 'Nothing here yet';
+
+  @override
+  String get roomEmptyBody => 'Expenses you add to this Room show up here.';
+
+  @override
+  String get roomMissing => 'This Room no longer exists.';
+
+  @override
+  String get roomEdit => 'Edit Room';
+
+  @override
+  String get roomArchived => 'Moved to history';
+
+  @override
+  String get roomRestored => 'Back in active Rooms';
+
+  @override
+  String get quickAddNoRoom => 'No Room';
+
+  @override
+  String quickAddRoomLabel(String name) {
+    return 'Room: $name';
+  }
+
+  @override
+  String get quickAddPickRoom => 'Add to a Room';
+
+  @override
+  String reviewAddToRoom(String name) {
+    return 'Add to $name?';
+  }
+
+  @override
+  String reviewInRoom(String name) {
+    return 'In $name';
+  }
+
+  @override
+  String reviewAddedToRoom(String name) {
+    return 'Added to $name';
+  }
+
+  @override
+  String get homeRoomsLabel => 'Active Rooms';
+
+  @override
+  String get homeStartTrip => 'Start trip';
 }

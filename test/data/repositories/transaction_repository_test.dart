@@ -96,6 +96,7 @@ void main() {
       accountId: Account.cashId,
       categoryId: 'cat_fuel',
       note: '  petrol ',
+      roomId: null,
     );
     final edited = valueOf(result);
     expect(edited.amount, const Money(555));
@@ -121,6 +122,7 @@ void main() {
       accountId: Account.cashId,
       categoryId: null,
       note: null,
+      roomId: null,
     );
     expect(result, isA<Err<MoneyTransaction, StoreFailure>>());
   });

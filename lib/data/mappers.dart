@@ -1,7 +1,9 @@
 import 'package:drift/drift.dart';
+import 'package:expense_tracker/core/local_day.dart';
 import 'package:expense_tracker/core/models/account.dart';
 import 'package:expense_tracker/core/models/category.dart';
 import 'package:expense_tracker/core/models/money_transaction.dart';
+import 'package:expense_tracker/core/models/room.dart';
 import 'package:expense_tracker/core/money.dart';
 import 'package:expense_tracker/data/db/app_database.dart';
 
@@ -78,5 +80,39 @@ TransactionsCompanion transactionToRow(MoneyTransaction txn) {
     origin: txn.origin,
     createdAt: txn.createdAt.toUtc().millisecondsSinceEpoch,
     updatedAt: txn.updatedAt.toUtc().millisecondsSinceEpoch,
+  );
+}
+
+/// Maps a stored Room to its value type.
+Room roomFromRow(RoomRow row) {
+  return Room(
+    id: row.id,
+    name: row.name,
+    type: row.type,
+    emoji: row.emoji,
+    startDay: row.startDay == null ? null : LocalDay(row.startDay!),
+    endDay: row.endDay == null ? null : LocalDay(row.endDay!),
+    budget: row.budgetPaise == null ? null : Money(row.budgetPaise!),
+    autoTagMode: row.autoTagMode,
+    countsTowardMonthlyBudget: row.countsTowardMonthlyBudget,
+    status: row.status,
+    createdAt: _fromMs(row.createdAt),
+  );
+}
+
+/// Maps a Room to the row that stores it.
+RoomsCompanion roomToRow(Room room) {
+  return RoomsCompanion.insert(
+    id: room.id,
+    name: room.name,
+    type: room.type,
+    emoji: Value(room.emoji),
+    startDay: Value(room.startDay?.value),
+    endDay: Value(room.endDay?.value),
+    budgetPaise: Value(room.budget?.paise),
+    autoTagMode: room.autoTagMode,
+    countsTowardMonthlyBudget: Value(room.countsTowardMonthlyBudget),
+    status: Value(room.status),
+    createdAt: room.createdAt.toUtc().millisecondsSinceEpoch,
   );
 }

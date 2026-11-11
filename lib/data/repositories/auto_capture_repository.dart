@@ -252,6 +252,7 @@ class AutoCaptureRepository {
       TransactionsCompanion(
         kind: Value(txn.kind),
         categoryId: Value(txn.categoryId),
+        roomId: Value(txn.roomId),
         reviewStatus: Value(txn.reviewStatus),
       ),
     );

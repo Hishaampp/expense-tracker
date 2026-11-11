@@ -1,7 +1,11 @@
 import 'package:expense_tracker/core/failure.dart';
+import 'package:expense_tracker/core/local_day.dart';
 import 'package:expense_tracker/core/models/category.dart';
 import 'package:expense_tracker/core/models/money_transaction.dart';
+import 'package:expense_tracker/core/models/room.dart';
+import 'package:expense_tracker/core/models/transaction_kind.dart';
 import 'package:expense_tracker/core/result.dart';
+import 'package:expense_tracker/core/room_tagging.dart';
 import 'package:expense_tracker/data/data_providers.dart';
 import 'package:expense_tracker/data/query_providers.dart';
 import 'package:expense_tracker/services/service_providers.dart';
@@ -17,6 +21,8 @@ final class ReviewItem {
     required this.accountName,
     required this.choices,
     this.suggested,
+    this.room,
+    this.roomOffers = const [],
   });
 
   /// The payment.
@@ -31,6 +37,13 @@ final class ReviewItem {
   /// Up to three categories to offer: the suggestion first, then the most
   /// used.
   final List<Category> choices;
+
+  /// The Room it is in, if any.
+  final Room? room;
+
+  /// Rooms to offer when it is in none: overlapping trips, or Rooms that
+  /// ask (spec §9.3).
+  final List<Room> roomOffers;
 }
 
 /// What the review inbox shows.
@@ -84,6 +97,18 @@ final class ReviewConfirmedAll extends ReviewDone {
   final int count;
 }
 
+/// [transaction] was added to [room]; Undo takes it out.
+final class ReviewAddedToRoom extends ReviewDone {
+  /// Creates the result.
+  const new(this.transaction, this.room);
+
+  /// The payment as it was before.
+  final MoneyTransaction transaction;
+
+  /// The Room it went to.
+  final Room room;
+}
+
 /// A review action could not be saved.
 final class ReviewFailed extends ReviewDone {
   /// Creates the result.
@@ -116,6 +141,8 @@ class ReviewNotifier extends StreamNotifier<ReviewState> {
         });
     final byId = {for (final c in categories) c.id: c};
     final accountName = {for (final a in accounts) a.id: a.name};
+    final rooms = await ref.watch(roomsProvider.future);
+    final roomById = {for (final r in rooms) r.id: r};
     yield* ref
         .watch(autoCaptureRepositoryProvider)
         .watchNeedsReview()
@@ -124,7 +151,12 @@ class ReviewNotifier extends StreamNotifier<ReviewState> {
             allCategories: expense,
             items: [
               for (final txn in txns)
-                _item(txn, byId[txn.categoryId], expense, accountName),
+                _item(
+                  txn,
+                  byId[txn.categoryId],
+                  expense,
+                  accountName,
+                ).withRooms(txn, roomById, rooms),
             ],
           ),
         );
@@ -147,6 +179,18 @@ class ReviewNotifier extends StreamNotifier<ReviewState> {
             .take(choiceCount - (suggested == null ? 0 : 1)),
       ],
     );
+  }
+
+  /// Puts [item] in [room].
+  Future<ReviewDone> addToRoom(ReviewItem item, Room room) async {
+    ref.read(hapticsProvider).commit();
+    final result = await ref
+        .read(roomRepositoryProvider)
+        .setRoom(item.transaction.id, room.id);
+    return switch (result) {
+      Ok() => ReviewAddedToRoom(item.transaction, room),
+      Err(:final failure) => ReviewFailed(failure),
+    };
   }
 
   /// Confirms [item] as [category].
@@ -195,6 +239,33 @@ class ReviewNotifier extends StreamNotifier<ReviewState> {
       Ok() => null,
       Err(:final failure) => failure,
     };
+  }
+}
+
+extension on ReviewItem {
+  // Adds the Room it is in, or the Rooms to offer for an expense in none.
+  ReviewItem withRooms(
+    MoneyTransaction txn,
+    Map<String, Room> roomById,
+    List<Room> rooms,
+  ) {
+    final roomId = txn.roomId;
+    final offers = roomId != null || txn.kind != TransactionKind.expense
+        ? const <Room>[]
+        : switch (tagRoom(day: LocalDay.of(txn.occurredAt), rooms: rooms)) {
+            RoomChoice(:final rooms) || RoomSuggestion(:final rooms) => rooms,
+            // A trip made after the payment was saved: offer it.
+            RoomAssigned(:final room) => [room],
+            NoRoom() => const <Room>[],
+          };
+    return ReviewItem(
+      transaction: transaction,
+      accountName: accountName,
+      choices: choices,
+      suggested: suggested,
+      room: roomById[roomId],
+      roomOffers: offers,
+    );
   }
 }
 

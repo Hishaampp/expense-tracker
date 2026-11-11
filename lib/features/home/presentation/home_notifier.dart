@@ -1,17 +1,18 @@
 import 'package:expense_tracker/core/capture_health.dart';
-import 'package:expense_tracker/core/models/category.dart';
+import 'package:expense_tracker/core/failure.dart';
+import 'package:expense_tracker/core/models/category_total.dart';
+import 'package:expense_tracker/core/models/room.dart';
 import 'package:expense_tracker/core/models/transaction_item.dart';
 import 'package:expense_tracker/core/money.dart';
 import 'package:expense_tracker/core/month_offset.dart';
 import 'package:expense_tracker/core/month_period.dart';
 import 'package:expense_tracker/core/month_summary.dart';
+import 'package:expense_tracker/core/result.dart';
+import 'package:expense_tracker/data/data_providers.dart';
 import 'package:expense_tracker/data/query_providers.dart';
 import 'package:expense_tracker/services/service_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meta/meta.dart';
-
-/// Spending in one category and its share of the month.
-typedef CategoryTotal = ({Category? category, Money spent, double share});
 
 /// A month the picker offers.
 typedef PeriodChoice = ({int offset, MonthPeriod period});
@@ -30,6 +31,7 @@ final class HomeState {
     required this.paymentCount,
     required this.topCategories,
     required this.recent,
+    this.activeRooms = const [],
     this.captureMayBeOff = false,
   });
 
@@ -66,6 +68,9 @@ final class HomeState {
   /// The newest transactions, at most [recentCount].
   final List<TransactionItem> recent;
 
+  /// Active Rooms, newest first.
+  final List<Room> activeRooms;
+
   /// Whether iPhone auto-capture seems to have stopped (spec §6.3).
   final bool captureMayBeOff;
 
@@ -99,10 +104,15 @@ class HomeNotifier extends AsyncNotifier<HomeState> {
     final categories = await ref.watch(categoriesProvider.future);
     final accounts = await ref.watch(accountsProvider.future);
 
-    final summary = MonthSummary.of(transactions);
-    final categoryById = {for (final c in categories) c.id: c};
+    final rooms = await ref.watch(roomsProvider.future);
+    final summary = MonthSummary.of(
+      transactions,
+      budgetRoomIds: {
+        for (final r in rooms)
+          if (r.countsTowardMonthlyBudget) r.id,
+      },
+    );
     final visible = transactions.where((t) => !t.isHidden);
-    final total = summary.spent.paise;
     return HomeState(
       period: period,
       today: today,
@@ -114,13 +124,15 @@ class HomeNotifier extends AsyncNotifier<HomeState> {
       summary: summary,
       dailyAverage: summary.spent.dividedRounded(period.daysElapsedOn(today)),
       paymentCount: visible.length,
-      topCategories: [
-        for (final entry in summary.byCategory.take(HomeState.topCategoryCount))
-          (
-            category: categoryById[entry.categoryId],
-            spent: entry.spent,
-            share: total <= 0 ? 0 : entry.spent.paise / total,
-          ),
+      topCategories: categoryTotals(
+        summary.byCategory,
+        categories,
+        summary.spent,
+        limit: HomeState.topCategoryCount,
+      ),
+      activeRooms: [
+        for (final r in rooms)
+          if (r.isActive) r,
       ],
       captureMayBeOff: captureMayBeOff(
         setupAt: ref.watch(iosShortcutSetupAtProvider).value,
@@ -133,6 +145,13 @@ class HomeNotifier extends AsyncNotifier<HomeState> {
         accounts,
       ),
     );
+  }
+
+  /// Starts a trip named [name] today.
+  Future<Result<Room, StoreFailure>> startTrip(String name) async {
+    final result = await ref.read(roomRepositoryProvider).startTrip(name);
+    if (result is Ok) ref.read(hapticsProvider).commit();
+    return result;
   }
 }
 

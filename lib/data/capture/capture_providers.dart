@@ -51,5 +51,6 @@ final autoIngestionProvider = Provider<AutoIngestion>(
     ref.watch(captureIngestionProvider),
     ref.watch(autoCaptureRepositoryProvider),
     ref.watch(transactionRepositoryProvider),
+    ref.watch(roomRepositoryProvider),
   ),
 );
