@@ -1,14 +1,18 @@
 import 'package:expense_tracker/features/activity/presentation/activity_screen.dart';
+import 'package:expense_tracker/features/budgets/presentation/budgets_screen.dart';
 import 'package:expense_tracker/features/capture/presentation/capture_settings_screen.dart';
 import 'package:expense_tracker/features/capture/presentation/iphone_setup_screen.dart';
 import 'package:expense_tracker/features/home/presentation/home_screen.dart';
+import 'package:expense_tracker/features/notifications/presentation/notifications_screen.dart';
 import 'package:expense_tracker/features/quick_add/presentation/quick_add_screen.dart';
 import 'package:expense_tracker/features/review/presentation/review_screen.dart';
 import 'package:expense_tracker/features/rooms/presentation/room_detail_screen.dart';
 import 'package:expense_tracker/features/rooms/presentation/room_editor_screen.dart';
 import 'package:expense_tracker/features/rooms/presentation/rooms_screen.dart';
 import 'package:expense_tracker/features/settings/presentation/settings_screen.dart';
+import 'package:expense_tracker/features/stats/presentation/stats_screen.dart';
 import 'package:expense_tracker/features/unparsed/presentation/unparsed_screen.dart';
+import 'package:expense_tracker/features/weekly_review/presentation/weekly_review_screen.dart';
 import 'package:expense_tracker/routing/app_shell.dart';
 import 'package:expense_tracker/routing/fading_branches.dart';
 import 'package:expense_tracker/routing/not_found_screen.dart';
@@ -33,6 +37,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         branches: [
           _branch(Routes.home, const HomeScreen()),
           _branch(Routes.activity, const ActivityScreen()),
+          _branch(Routes.stats, const StatsScreen()),
           _branch(Routes.rooms, const RoomsScreen()),
           _branch(Routes.settings, const SettingsScreen()),
         ],
@@ -84,6 +89,18 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: Routes.roomPattern,
         builder: (context, state) =>
             RoomDetailScreen(roomId: state.pathParameters['id']!),
+      ),
+      GoRoute(
+        path: Routes.budgets,
+        builder: (context, state) => const BudgetsScreen(),
+      ),
+      GoRoute(
+        path: Routes.notifications,
+        builder: (context, state) => const NotificationsScreen(),
+      ),
+      GoRoute(
+        path: Routes.weeklyReview,
+        builder: (context, state) => const WeeklyReviewScreen(),
       ),
       GoRoute(
         path: Routes.autoCapture,

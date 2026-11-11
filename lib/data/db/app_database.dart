@@ -3,6 +3,7 @@ import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
 import 'package:expense_tracker/core/models/account.dart';
 import 'package:expense_tracker/core/models/category.dart';
+import 'package:expense_tracker/core/models/notice.dart';
 import 'package:expense_tracker/core/models/room.dart';
 import 'package:expense_tracker/core/models/transaction_kind.dart';
 import 'package:expense_tracker/data/db/app_database.steps.dart';
@@ -22,6 +23,9 @@ part 'app_database.g.dart';
     RawCaptures,
     TransactionSources,
     UnparsedMessages,
+    Budgets,
+    FiredAlerts,
+    Notices,
   ],
 )
 class AppDatabase extends _$AppDatabase {
@@ -49,7 +53,7 @@ class AppDatabase extends _$AppDatabase {
   final Clock _clock;
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 4;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -62,6 +66,16 @@ class AppDatabase extends _$AppDatabase {
         await m.createTable(schema.transactionSources);
         await m.createTable(schema.unparsed);
         await m.createIndex(schema.transactionSourcesTransaction);
+      },
+      from2To3: (m, schema) async {
+        // Phase 6: budgets and the alerts already shown (spec §10).
+        await m.createTable(schema.budgets);
+        await m.createTable(schema.firedAlerts);
+      },
+      from3To4: (m, schema) async {
+        // Phase 6: the in-app notification inbox.
+        await m.createTable(schema.notices);
+        await m.createIndex(schema.noticesCreatedAt);
       },
     ),
     beforeOpen: (details) async {

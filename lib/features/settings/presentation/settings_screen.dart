@@ -5,6 +5,7 @@ import 'package:expense_tracker/features/settings/presentation/settings_notifier
 import 'package:expense_tracker/features/settings/presentation/widgets/appearance_sheet.dart';
 import 'package:expense_tracker/features/settings/presentation/widgets/month_start_day_sheet.dart';
 import 'package:expense_tracker/features/settings/presentation/widgets/settings_group.dart';
+import 'package:expense_tracker/formatting/money_format.dart';
 import 'package:expense_tracker/l10n/app_localizations.dart';
 import 'package:expense_tracker/l10n/failure_messages.dart';
 import 'package:expense_tracker/routing/routes.dart';
@@ -113,6 +114,26 @@ class SettingsScreen extends ConsumerWidget {
                 onTap: () => unawaited(
                   _pickMonthStartDay(context, ref, state.monthStartDay),
                 ),
+              ),
+              InfoRow(
+                leading: IconTile(
+                  icon: Icons.savings_rounded,
+                  color: tiles.green,
+                ),
+                title: l10n.settingsBudgets,
+                trailingText: switch (state.monthlyBudget) {
+                  final budget? => formatMoney(budget),
+                  null => l10n.budgetsNotSet,
+                },
+                trailingIsAmount: state.monthlyBudget != null,
+                showChevron: true,
+                semanticLabel: l10n.settingsBudgetsSemantics(
+                  switch (state.monthlyBudget) {
+                    final budget? => formatMoney(budget),
+                    null => l10n.budgetsNotSet,
+                  },
+                ),
+                onTap: () => unawaited(context.push(Routes.budgets)),
               ),
             ],
           ),

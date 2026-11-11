@@ -11,6 +11,7 @@ import 'package:expense_tracker/services/clipboard_service.dart';
 import 'package:expense_tracker/services/haptics.dart';
 import 'package:expense_tracker/services/native/capture_control_service.dart';
 import 'package:expense_tracker/services/native/capture_queue_service.dart';
+import 'package:expense_tracker/services/notification_service.dart';
 import 'package:expense_tracker/services/service_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -50,6 +51,75 @@ void appTest(String description, Future<void> Function(WidgetTester) body) {
       await tester.pump(const Duration(seconds: 1));
     }
   });
+}
+
+/// Records notifications instead of showing them.
+final class FakeNotifications implements NotificationService {
+  /// Whether the user allows notifications when asked.
+  bool allow = true;
+
+  /// What was shown or scheduled, in order, as `kind:title`.
+  final List<String> shown = [];
+
+  /// The weekly review's state: `on` or `off`, or null if never set.
+  String? weekly;
+
+  /// The payloads shown, by title.
+  final Map<String, String> payloads = {};
+
+  /// The buttons of each Room offer, by title.
+  final Map<String, List<NotificationButton>> buttons = {};
+
+  final StreamController<NotificationTap> _taps =
+      StreamController<NotificationTap>.broadcast();
+
+  /// Simulates the user tapping a notification or one of its buttons.
+  void tap(String title, {String? actionId}) =>
+      _taps.add((payload: payloads[title], actionId: actionId));
+
+  @override
+  Stream<NotificationTap> get taps => _taps.stream;
+
+  @override
+  Future<void> init(NotificationLabels labels) async {}
+
+  @override
+  Future<bool> requestPermission() async => allow;
+
+  @override
+  Future<void> showAlert({
+    required int id,
+    required String title,
+    required String body,
+    required String payload,
+  }) async {
+    shown.add('alert:$title');
+    payloads[title] = payload;
+  }
+
+  @override
+  Future<void> showRoomOffer({
+    required int id,
+    required String title,
+    required String body,
+    required String payload,
+    required List<NotificationButton> buttons,
+  }) async {
+    shown.add('room:$title');
+    payloads[title] = payload;
+    this.buttons[title] = buttons;
+  }
+
+  @override
+  Future<void> scheduleWeekly({
+    required String title,
+    required String body,
+    required String payload,
+    required int hour,
+  }) async => weekly = 'on';
+
+  @override
+  Future<void> cancelWeekly() async => weekly = 'off';
 }
 
 /// A clipboard holding [text].
@@ -185,6 +255,7 @@ Future<AppDatabase> pumpApp(
   FakeClipboard? clipboard,
   FakeCaptureQueue? captureQueue,
   FakeCaptureControl? captureControl,
+  FakeNotifications? notifications,
   Size? size,
   double textScale = 1,
 }) async {
@@ -209,6 +280,9 @@ Future<AppDatabase> pumpApp(
         ),
         captureControlProvider.overrideWithValue(
           captureControl ?? FakeCaptureControl(),
+        ),
+        notificationServiceProvider.overrideWithValue(
+          notifications ?? FakeNotifications(),
         ),
       ],
       child: const App(),

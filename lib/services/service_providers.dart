@@ -5,6 +5,7 @@ import 'package:expense_tracker/services/clipboard_service.dart';
 import 'package:expense_tracker/services/haptics.dart';
 import 'package:expense_tracker/services/native/capture_control_service.dart';
 import 'package:expense_tracker/services/native/capture_queue_service.dart';
+import 'package:expense_tracker/services/notification_service.dart';
 import 'package:expense_tracker/services/uuid_id_generator.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -51,3 +52,11 @@ final FutureProvider<bool?> autoCaptureOnProvider =
         return null;
       }
     });
+
+/// Local notifications. Override with a fake in tests.
+final notificationServiceProvider = Provider<NotificationService>(
+  (ref) => LocalNotificationService(
+    ref.watch(appLoggerProvider),
+    ref.watch(clockProvider),
+  ),
+);

@@ -6,8 +6,20 @@ abstract final class Routes {
   /// Activity: every transaction in a month.
   static const String activity = '/activity';
 
+  /// Stats: charts of where the money went.
+  static const String stats = '/stats';
+
   /// Rooms.
   static const String rooms = '/rooms';
+
+  /// Budgets: the monthly and category limits.
+  static const String budgets = '/budgets';
+
+  /// The notification inbox.
+  static const String notifications = '/notifications';
+
+  /// The weekly review.
+  static const String weeklyReview = '/weekly-review';
 
   /// Settings.
   static const String settings = '/settings';

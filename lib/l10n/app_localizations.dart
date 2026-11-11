@@ -1773,6 +1773,659 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Start trip'**
   String get homeStartTrip;
+
+  /// No description provided for @navStats.
+  ///
+  /// In en, this message translates to:
+  /// **'Stats'**
+  String get navStats;
+
+  /// No description provided for @budgetsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Budgets'**
+  String get budgetsTitle;
+
+  /// No description provided for @budgetsMonthly.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly budget'**
+  String get budgetsMonthly;
+
+  /// No description provided for @budgetsNotSet.
+  ///
+  /// In en, this message translates to:
+  /// **'Not set'**
+  String get budgetsNotSet;
+
+  /// No description provided for @budgetsMonthlyHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Covers everyday spending. Rooms stay out unless you count them in.'**
+  String get budgetsMonthlyHelp;
+
+  /// No description provided for @budgetsSetMonthly.
+  ///
+  /// In en, this message translates to:
+  /// **'Set monthly budget'**
+  String get budgetsSetMonthly;
+
+  /// No description provided for @budgetsChange.
+  ///
+  /// In en, this message translates to:
+  /// **'Change'**
+  String get budgetsChange;
+
+  /// No description provided for @budgetsRemove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove budget'**
+  String get budgetsRemove;
+
+  /// No description provided for @budgetsCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'Category budgets'**
+  String get budgetsCategories;
+
+  /// No description provided for @budgetsCategoriesHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Get a nudge when one category is used up.'**
+  String get budgetsCategoriesHelp;
+
+  /// No description provided for @budgetsAddCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Add category budget'**
+  String get budgetsAddCategory;
+
+  /// No description provided for @budgetsUsedOf.
+  ///
+  /// In en, this message translates to:
+  /// **'{spent} of {budget}'**
+  String budgetsUsedOf(String spent, String budget);
+
+  /// No description provided for @budgetsCategorySemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{name}: {spent} spent of {budget}. Change'**
+  String budgetsCategorySemantics(String name, String spent, String budget);
+
+  /// No description provided for @budgetsCategoryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} budget'**
+  String budgetsCategoryTitle(String name);
+
+  /// No description provided for @budgetsAmountLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount in rupees'**
+  String get budgetsAmountLabel;
+
+  /// No description provided for @budgetsAmountInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter an amount above zero'**
+  String get budgetsAmountInvalid;
+
+  /// No description provided for @budgetsSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get budgetsSave;
+
+  /// No description provided for @budgetsSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Budget saved'**
+  String get budgetsSaved;
+
+  /// No description provided for @budgetsRemoved.
+  ///
+  /// In en, this message translates to:
+  /// **'Budget removed'**
+  String get budgetsRemoved;
+
+  /// No description provided for @budgetsPickCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a category'**
+  String get budgetsPickCategory;
+
+  /// No description provided for @budgetsAlerts.
+  ///
+  /// In en, this message translates to:
+  /// **'Alerts'**
+  String get budgetsAlerts;
+
+  /// No description provided for @budgetsWeeklyReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Sunday weekly review'**
+  String get budgetsWeeklyReview;
+
+  /// No description provided for @budgetsWeeklyReviewHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'A look back at your week, every Sunday at 7 pm.'**
+  String get budgetsWeeklyReviewHelp;
+
+  /// No description provided for @budgetsAlertsHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'You get a notification at 80% and 100% of your monthly budget and of each Room budget, and when a category budget is used up.'**
+  String get budgetsAlertsHelp;
+
+  /// No description provided for @budgetsNotificationsOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications are off, so alerts can\'t reach you. You can turn them on in your phone\'s Settings.'**
+  String get budgetsNotificationsOff;
+
+  /// No description provided for @budgetsOpenWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'See your week'**
+  String get budgetsOpenWeek;
+
+  /// No description provided for @homeBudgetSafe.
+  ///
+  /// In en, this message translates to:
+  /// **'Safe to spend today'**
+  String get homeBudgetSafe;
+
+  /// No description provided for @homeBudgetLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'{left} left of {budget}'**
+  String homeBudgetLeft(String left, String budget);
+
+  /// No description provided for @homeBudgetDays.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Last day of the month} other{{count} days left}}'**
+  String homeBudgetDays(int count);
+
+  /// No description provided for @homeBudgetSafeSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Safe to spend today: {amount}. {left} left of {budget}. {count, plural, =1{Last day of the month.} other{{count} days left.}}'**
+  String homeBudgetSafeSemantics(
+    String amount,
+    String left,
+    String budget,
+    int count,
+  );
+
+  /// No description provided for @homeBudgetOver.
+  ///
+  /// In en, this message translates to:
+  /// **'Over budget by {amount}'**
+  String homeBudgetOver(String amount);
+
+  /// No description provided for @homeBudgetOverBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Spent {spent} of {budget} this month.'**
+  String homeBudgetOverBody(String spent, String budget);
+
+  /// No description provided for @homeBudgetOverSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Over budget by {amount}. Spent {spent} of {budget} this month.'**
+  String homeBudgetOverSemantics(String amount, String spent, String budget);
+
+  /// No description provided for @homeBudgetPercent.
+  ///
+  /// In en, this message translates to:
+  /// **'{percent}%'**
+  String homeBudgetPercent(int percent);
+
+  /// No description provided for @homeBudgetPercentSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{percent}% of the monthly budget used'**
+  String homeBudgetPercentSemantics(int percent);
+
+  /// No description provided for @homeBudgetSetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Set a monthly budget'**
+  String get homeBudgetSetTitle;
+
+  /// No description provided for @homeBudgetSetBody.
+  ///
+  /// In en, this message translates to:
+  /// **'See what\'s safe to spend each day.'**
+  String get homeBudgetSetBody;
+
+  /// No description provided for @homeBudgetSetAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Set budget'**
+  String get homeBudgetSetAction;
+
+  /// No description provided for @homeBudgetOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open budgets'**
+  String get homeBudgetOpen;
+
+  /// No description provided for @homeWatching.
+  ///
+  /// In en, this message translates to:
+  /// **'Watching {name}: {amount} this week'**
+  String homeWatching(String name, String amount);
+
+  /// No description provided for @statsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Stats'**
+  String get statsTitle;
+
+  /// No description provided for @statsWhereItWent.
+  ///
+  /// In en, this message translates to:
+  /// **'Where it went'**
+  String get statsWhereItWent;
+
+  /// No description provided for @statsDonutSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Spending by category, {amount} in all. The categories are listed below.'**
+  String statsDonutSemantics(String amount);
+
+  /// No description provided for @statsShare.
+  ///
+  /// In en, this message translates to:
+  /// **'{percent}%'**
+  String statsShare(int percent);
+
+  /// No description provided for @statsCategorySemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{name}: {amount}, {percent}% of spending'**
+  String statsCategorySemantics(String name, String amount, int percent);
+
+  /// No description provided for @statsByDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Day by day'**
+  String get statsByDay;
+
+  /// No description provided for @statsHighestDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Highest: {amount} on {day}'**
+  String statsHighestDay(String amount, String day);
+
+  /// No description provided for @statsDailyAverage.
+  ///
+  /// In en, this message translates to:
+  /// **'Average {amount} a day'**
+  String statsDailyAverage(String amount);
+
+  /// No description provided for @statsByDaySemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily spending chart. Highest {amount} on {day}. Average {average} a day.'**
+  String statsByDaySemantics(String amount, String day, String average);
+
+  /// No description provided for @statsByMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Last 6 months'**
+  String get statsByMonth;
+
+  /// No description provided for @statsMonthAverage.
+  ///
+  /// In en, this message translates to:
+  /// **'Average {amount} a month'**
+  String statsMonthAverage(String amount);
+
+  /// No description provided for @statsMonthBar.
+  ///
+  /// In en, this message translates to:
+  /// **'{month}: {amount}'**
+  String statsMonthBar(String month, String amount);
+
+  /// No description provided for @statsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing to chart yet'**
+  String get statsEmptyTitle;
+
+  /// No description provided for @statsEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Add or capture a few expenses and your charts appear here.'**
+  String get statsEmptyBody;
+
+  /// No description provided for @statsWeekTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your week'**
+  String get statsWeekTitle;
+
+  /// No description provided for @statsWeekBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This week against last week, and who you paid most.'**
+  String get statsWeekBody;
+
+  /// No description provided for @weeklyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your week'**
+  String get weeklyTitle;
+
+  /// No description provided for @weeklyRange.
+  ///
+  /// In en, this message translates to:
+  /// **'{start} – {end}'**
+  String weeklyRange(String start, String end);
+
+  /// No description provided for @weeklySpent.
+  ///
+  /// In en, this message translates to:
+  /// **'You spent {amount} this week.'**
+  String weeklySpent(String amount);
+
+  /// No description provided for @weeklyMore.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} more than last week'**
+  String weeklyMore(String amount);
+
+  /// No description provided for @weeklyLess.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} less than last week'**
+  String weeklyLess(String amount);
+
+  /// No description provided for @weeklySame.
+  ///
+  /// In en, this message translates to:
+  /// **'The same as last week'**
+  String get weeklySame;
+
+  /// No description provided for @weeklyLastWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Last week: {amount}'**
+  String weeklyLastWeek(String amount);
+
+  /// No description provided for @weeklyTopCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'Top categories'**
+  String get weeklyTopCategories;
+
+  /// No description provided for @weeklyTopPayees.
+  ///
+  /// In en, this message translates to:
+  /// **'Who you paid most'**
+  String get weeklyTopPayees;
+
+  /// No description provided for @weeklyPayeeCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 payment} other{{count} payments}}'**
+  String weeklyPayeeCount(int count);
+
+  /// No description provided for @weeklyPayeeSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} paid to {name}, {count, plural, =1{1 payment} other{{count} payments}}'**
+  String weeklyPayeeSemantics(String amount, String name, int count);
+
+  /// No description provided for @weeklyEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No spending this week.'**
+  String get weeklyEmpty;
+
+  /// No description provided for @weeklyInbox.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{Nothing is waiting in Review.} =1{1 payment is waiting in Review.} other{{count} payments are waiting in Review.}}'**
+  String weeklyInbox(int count);
+
+  /// No description provided for @weeklyOpenReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Review'**
+  String get weeklyOpenReview;
+
+  /// No description provided for @weeklyWatchTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'One thing to watch next week'**
+  String get weeklyWatchTitle;
+
+  /// No description provided for @weeklyWatchHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a category. Home keeps an eye on it for you.'**
+  String get weeklyWatchHelp;
+
+  /// No description provided for @weeklyWatchNone.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing'**
+  String get weeklyWatchNone;
+
+  /// No description provided for @weeklyWatchSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Watching {name} next week'**
+  String weeklyWatchSaved(String name);
+
+  /// No description provided for @weeklyWatchCleared.
+  ///
+  /// In en, this message translates to:
+  /// **'Not watching a category'**
+  String get weeklyWatchCleared;
+
+  /// No description provided for @weeklyWatchMore.
+  ///
+  /// In en, this message translates to:
+  /// **'More'**
+  String get weeklyWatchMore;
+
+  /// No description provided for @notifyAlertsChannel.
+  ///
+  /// In en, this message translates to:
+  /// **'Budget alerts'**
+  String get notifyAlertsChannel;
+
+  /// No description provided for @notifyAlertsChannelInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'When a budget is nearly or fully used'**
+  String get notifyAlertsChannelInfo;
+
+  /// No description provided for @notifyWeeklyChannel.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly review'**
+  String get notifyWeeklyChannel;
+
+  /// No description provided for @notifyWeeklyChannelInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Your week, every Sunday evening'**
+  String get notifyWeeklyChannelInfo;
+
+  /// No description provided for @notifyRoomChannel.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to Room'**
+  String get notifyRoomChannel;
+
+  /// No description provided for @notifyRoomChannelInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Payments that may belong to a Room'**
+  String get notifyRoomChannelInfo;
+
+  /// No description provided for @notifyAddToRoom.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to Room'**
+  String get notifyAddToRoom;
+
+  /// No description provided for @notifyAddTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to {name}'**
+  String notifyAddTo(String name);
+
+  /// No description provided for @notifyMonth80Title.
+  ///
+  /// In en, this message translates to:
+  /// **'80% of your monthly budget used'**
+  String get notifyMonth80Title;
+
+  /// No description provided for @notifyMonth80Body.
+  ///
+  /// In en, this message translates to:
+  /// **'{left} left for the rest of the month.'**
+  String notifyMonth80Body(String left);
+
+  /// No description provided for @notifyMonth100Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly budget used up'**
+  String get notifyMonth100Title;
+
+  /// No description provided for @notifySpentOf.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve spent {spent} of {budget}.'**
+  String notifySpentOf(String spent, String budget);
+
+  /// No description provided for @notifyCategoryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} budget used up'**
+  String notifyCategoryTitle(String name);
+
+  /// No description provided for @notifyRoom80Title.
+  ///
+  /// In en, this message translates to:
+  /// **'80% of the {name} budget used'**
+  String notifyRoom80Title(String name);
+
+  /// No description provided for @notifyRoom100Title.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} budget used up'**
+  String notifyRoom100Title(String name);
+
+  /// No description provided for @notifyWeeklyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your week in money'**
+  String get notifyWeeklyTitle;
+
+  /// No description provided for @notifyWeeklyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'See how the week went, and pick one thing to watch.'**
+  String get notifyWeeklyBody;
+
+  /// No description provided for @notifyRoomOfferTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} at {payee}'**
+  String notifyRoomOfferTitle(String amount, String payee);
+
+  /// No description provided for @notifyRoomOfferTitleNoPayee.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} captured'**
+  String notifyRoomOfferTitleNoPayee(String amount);
+
+  /// No description provided for @notifyRoomOfferBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Add it to {name}?'**
+  String notifyRoomOfferBody(String name);
+
+  /// No description provided for @notifyRoomOfferChoiceBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Add it to a Room?'**
+  String get notifyRoomOfferChoiceBody;
+
+  /// No description provided for @settingsBudgets.
+  ///
+  /// In en, this message translates to:
+  /// **'Budgets'**
+  String get settingsBudgets;
+
+  /// No description provided for @settingsBudgetsSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Budgets, {value}'**
+  String settingsBudgetsSemantics(String value);
+
+  /// No description provided for @noticesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get noticesTitle;
+
+  /// No description provided for @noticesButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get noticesButton;
+
+  /// No description provided for @noticesButtonUnread.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Notifications, 1 new} other{Notifications, {count} new}}'**
+  String noticesButtonUnread(int count);
+
+  /// No description provided for @noticesEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No notifications yet'**
+  String get noticesEmptyTitle;
+
+  /// No description provided for @noticesEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Budget alerts, your Sunday review and Room suggestions will appear here.'**
+  String get noticesEmptyBody;
+
+  /// No description provided for @noticesNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get noticesNew;
+
+  /// No description provided for @noticesItemSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{title}. {body}. {time}'**
+  String noticesItemSemantics(String title, String body, String time);
+
+  /// No description provided for @noticesItemUnreadSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'New: {title}. {body}. {time}'**
+  String noticesItemUnreadSemantics(String title, String body, String time);
+
+  /// No description provided for @noticesKeptFor.
+  ///
+  /// In en, this message translates to:
+  /// **'Kept for 60 days.'**
+  String get noticesKeptFor;
 }
 
 class _AppLocalizationsDelegate

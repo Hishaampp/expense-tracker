@@ -1,5 +1,6 @@
 import 'package:expense_tracker/core/capture_health.dart';
 import 'package:expense_tracker/core/failure.dart';
+import 'package:expense_tracker/core/local_day.dart';
 import 'package:expense_tracker/core/models/category_total.dart';
 import 'package:expense_tracker/core/models/room.dart';
 import 'package:expense_tracker/core/models/transaction_item.dart';
@@ -8,11 +9,16 @@ import 'package:expense_tracker/core/month_offset.dart';
 import 'package:expense_tracker/core/month_period.dart';
 import 'package:expense_tracker/core/month_summary.dart';
 import 'package:expense_tracker/core/result.dart';
+import 'package:expense_tracker/core/safe_to_spend.dart';
+import 'package:expense_tracker/core/weekly_review.dart';
 import 'package:expense_tracker/data/data_providers.dart';
 import 'package:expense_tracker/data/query_providers.dart';
 import 'package:expense_tracker/services/service_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meta/meta.dart';
+
+/// The category watched this week and what it has cost so far.
+typedef WatchedCategory = ({String name, String? iconKey, Money spent});
 
 /// A month the picker offers.
 typedef PeriodChoice = ({int offset, MonthPeriod period});
@@ -33,6 +39,8 @@ final class HomeState {
     required this.recent,
     this.activeRooms = const [],
     this.captureMayBeOff = false,
+    this.safe = const NoBudget(),
+    this.watched,
   });
 
   /// How many top categories Home lists.
@@ -74,6 +82,12 @@ final class HomeState {
   /// Whether iPhone auto-capture seems to have stopped (spec §6.3).
   final bool captureMayBeOff;
 
+  /// The month against its budget (spec §10).
+  final SafeToSpend safe;
+
+  /// The category the user chose to watch, for the current month only.
+  final WatchedCategory? watched;
+
   /// Whether this is the month in progress.
   bool get isCurrent => offset == 0;
 
@@ -113,7 +127,39 @@ class HomeNotifier extends AsyncNotifier<HomeState> {
       },
     );
     final visible = transactions.where((t) => !t.isHidden);
+    final plan = await ref.watch(budgetPlanProvider.future);
+    final watchedId = await ref.watch(watchedCategoryProvider.future);
+    WatchedCategory? watched;
+    if (offset == 0 && watchedId != null) {
+      final category = categories.where((c) => c.id == watchedId).firstOrNull;
+      if (category != null) {
+        final week = LocalWeek.containing(LocalDay.of(now));
+        final weekTransactions = await ref.watch(
+          rangeTransactionsProvider((
+            start: week.startUtcMs,
+            end: week.endUtcMs,
+          )).future,
+        );
+        final spent = MonthSummary.of(
+          weekTransactions.where((t) => t.categoryId == watchedId),
+        ).spent;
+        watched = (
+          name: category.name,
+          iconKey: category.iconKey,
+          spent: spent.isNegative ? Money.zero : spent,
+        );
+      }
+    }
     return HomeState(
+      safe: offset == 0
+          ? SafeToSpend.of(
+              budget: plan.monthly,
+              spent: summary.spentForBudget,
+              period: period,
+              today: today,
+            )
+          : const NoBudget(),
+      watched: watched,
       period: period,
       today: today,
       offset: offset,

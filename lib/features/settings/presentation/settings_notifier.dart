@@ -1,5 +1,6 @@
 import 'package:expense_tracker/core/failure.dart';
 import 'package:expense_tracker/core/models/appearance_mode.dart';
+import 'package:expense_tracker/core/money.dart';
 import 'package:expense_tracker/core/result.dart';
 import 'package:expense_tracker/data/capture/capture_providers.dart';
 import 'package:expense_tracker/data/data_providers.dart';
@@ -17,6 +18,7 @@ final class SettingsState {
     required this.appearance,
     required this.unparsedCount,
     required this.autoCaptureOn,
+    this.monthlyBudget,
   });
 
   /// The day of the month a budgeting month starts on.
@@ -31,6 +33,9 @@ final class SettingsState {
   /// Whether auto-capture is on; null where it does not apply (iPhone) or
   /// is not known yet.
   final bool? autoCaptureOn;
+
+  /// The monthly budget, or null when none is set.
+  final Money? monthlyBudget;
 }
 
 /// The Settings view model over the live settings.
@@ -43,6 +48,7 @@ class SettingsNotifier extends AsyncNotifier<SettingsState> {
       // Not awaited: if the list cannot load, Settings still shows.
       unparsedCount: ref.watch(unparsedMessagesProvider).value?.length,
       autoCaptureOn: ref.watch(autoCaptureOnProvider).value,
+      monthlyBudget: ref.watch(budgetPlanProvider).value?.monthly,
     );
   }
 

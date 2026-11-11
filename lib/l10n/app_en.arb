@@ -806,5 +806,485 @@
     }
   },
   "homeRoomsLabel": "Active Rooms",
-  "homeStartTrip": "Start trip"
+  "homeStartTrip": "Start trip",
+  "navStats": "Stats",
+  "budgetsTitle": "Budgets",
+  "budgetsMonthly": "Monthly budget",
+  "budgetsNotSet": "Not set",
+  "budgetsMonthlyHelp": "Covers everyday spending. Rooms stay out unless you count them in.",
+  "budgetsSetMonthly": "Set monthly budget",
+  "budgetsChange": "Change",
+  "budgetsRemove": "Remove budget",
+  "budgetsCategories": "Category budgets",
+  "budgetsCategoriesHelp": "Get a nudge when one category is used up.",
+  "budgetsAddCategory": "Add category budget",
+  "budgetsUsedOf": "{spent} of {budget}",
+  "@budgetsUsedOf": {
+    "placeholders": {
+      "spent": {
+        "type": "String"
+      },
+      "budget": {
+        "type": "String"
+      }
+    }
+  },
+  "budgetsCategorySemantics": "{name}: {spent} spent of {budget}. Change",
+  "@budgetsCategorySemantics": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "spent": {
+        "type": "String"
+      },
+      "budget": {
+        "type": "String"
+      }
+    }
+  },
+  "budgetsCategoryTitle": "{name} budget",
+  "@budgetsCategoryTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "budgetsAmountLabel": "Amount in rupees",
+  "budgetsAmountInvalid": "Enter an amount above zero",
+  "budgetsSave": "Save",
+  "budgetsSaved": "Budget saved",
+  "budgetsRemoved": "Budget removed",
+  "budgetsPickCategory": "Pick a category",
+  "budgetsAlerts": "Alerts",
+  "budgetsWeeklyReview": "Sunday weekly review",
+  "budgetsWeeklyReviewHelp": "A look back at your week, every Sunday at 7 pm.",
+  "budgetsAlertsHelp": "You get a notification at 80% and 100% of your monthly budget and of each Room budget, and when a category budget is used up.",
+  "budgetsNotificationsOff": "Notifications are off, so alerts can't reach you. You can turn them on in your phone's Settings.",
+  "budgetsOpenWeek": "See your week",
+  "homeBudgetSafe": "Safe to spend today",
+  "homeBudgetLeft": "{left} left of {budget}",
+  "@homeBudgetLeft": {
+    "placeholders": {
+      "left": {
+        "type": "String"
+      },
+      "budget": {
+        "type": "String"
+      }
+    }
+  },
+  "homeBudgetDays": "{count, plural, =1{Last day of the month} other{{count} days left}}",
+  "@homeBudgetDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeBudgetSafeSemantics": "Safe to spend today: {amount}. {left} left of {budget}. {count, plural, =1{Last day of the month.} other{{count} days left.}}",
+  "@homeBudgetSafeSemantics": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "left": {
+        "type": "String"
+      },
+      "budget": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeBudgetOver": "Over budget by {amount}",
+  "@homeBudgetOver": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "homeBudgetOverBody": "Spent {spent} of {budget} this month.",
+  "@homeBudgetOverBody": {
+    "placeholders": {
+      "spent": {
+        "type": "String"
+      },
+      "budget": {
+        "type": "String"
+      }
+    }
+  },
+  "homeBudgetOverSemantics": "Over budget by {amount}. Spent {spent} of {budget} this month.",
+  "@homeBudgetOverSemantics": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "spent": {
+        "type": "String"
+      },
+      "budget": {
+        "type": "String"
+      }
+    }
+  },
+  "homeBudgetPercent": "{percent}%",
+  "@homeBudgetPercent": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "homeBudgetPercentSemantics": "{percent}% of the monthly budget used",
+  "@homeBudgetPercentSemantics": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "homeBudgetSetTitle": "Set a monthly budget",
+  "homeBudgetSetBody": "See what's safe to spend each day.",
+  "homeBudgetSetAction": "Set budget",
+  "homeBudgetOpen": "Open budgets",
+  "homeWatching": "Watching {name}: {amount} this week",
+  "@homeWatching": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "statsTitle": "Stats",
+  "statsWhereItWent": "Where it went",
+  "statsDonutSemantics": "Spending by category, {amount} in all. The categories are listed below.",
+  "@statsDonutSemantics": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "statsShare": "{percent}%",
+  "@statsShare": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "statsCategorySemantics": "{name}: {amount}, {percent}% of spending",
+  "@statsCategorySemantics": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "statsByDay": "Day by day",
+  "statsHighestDay": "Highest: {amount} on {day}",
+  "@statsHighestDay": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "day": {
+        "type": "String"
+      }
+    }
+  },
+  "statsDailyAverage": "Average {amount} a day",
+  "@statsDailyAverage": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "statsByDaySemantics": "Daily spending chart. Highest {amount} on {day}. Average {average} a day.",
+  "@statsByDaySemantics": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "day": {
+        "type": "String"
+      },
+      "average": {
+        "type": "String"
+      }
+    }
+  },
+  "statsByMonth": "Last 6 months",
+  "statsMonthAverage": "Average {amount} a month",
+  "@statsMonthAverage": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "statsMonthBar": "{month}: {amount}",
+  "@statsMonthBar": {
+    "placeholders": {
+      "month": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "statsEmptyTitle": "Nothing to chart yet",
+  "statsEmptyBody": "Add or capture a few expenses and your charts appear here.",
+  "statsWeekTitle": "Your week",
+  "statsWeekBody": "This week against last week, and who you paid most.",
+  "weeklyTitle": "Your week",
+  "weeklyRange": "{start} – {end}",
+  "@weeklyRange": {
+    "placeholders": {
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  },
+  "weeklySpent": "You spent {amount} this week.",
+  "@weeklySpent": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "weeklyMore": "{amount} more than last week",
+  "@weeklyMore": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "weeklyLess": "{amount} less than last week",
+  "@weeklyLess": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "weeklySame": "The same as last week",
+  "weeklyLastWeek": "Last week: {amount}",
+  "@weeklyLastWeek": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "weeklyTopCategories": "Top categories",
+  "weeklyTopPayees": "Who you paid most",
+  "weeklyPayeeCount": "{count, plural, =1{1 payment} other{{count} payments}}",
+  "@weeklyPayeeCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "weeklyPayeeSemantics": "{amount} paid to {name}, {count, plural, =1{1 payment} other{{count} payments}}",
+  "@weeklyPayeeSemantics": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "weeklyEmpty": "No spending this week.",
+  "weeklyInbox": "{count, plural, =0{Nothing is waiting in Review.} =1{1 payment is waiting in Review.} other{{count} payments are waiting in Review.}}",
+  "@weeklyInbox": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "weeklyOpenReview": "Open Review",
+  "weeklyWatchTitle": "One thing to watch next week",
+  "weeklyWatchHelp": "Pick a category. Home keeps an eye on it for you.",
+  "weeklyWatchNone": "Nothing",
+  "weeklyWatchSaved": "Watching {name} next week",
+  "@weeklyWatchSaved": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "weeklyWatchCleared": "Not watching a category",
+  "weeklyWatchMore": "More",
+  "notifyAlertsChannel": "Budget alerts",
+  "notifyAlertsChannelInfo": "When a budget is nearly or fully used",
+  "notifyWeeklyChannel": "Weekly review",
+  "notifyWeeklyChannelInfo": "Your week, every Sunday evening",
+  "notifyRoomChannel": "Add to Room",
+  "notifyRoomChannelInfo": "Payments that may belong to a Room",
+  "notifyAddToRoom": "Add to Room",
+  "notifyAddTo": "Add to {name}",
+  "@notifyAddTo": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "notifyMonth80Title": "80% of your monthly budget used",
+  "notifyMonth80Body": "{left} left for the rest of the month.",
+  "@notifyMonth80Body": {
+    "placeholders": {
+      "left": {
+        "type": "String"
+      }
+    }
+  },
+  "notifyMonth100Title": "Monthly budget used up",
+  "notifySpentOf": "You've spent {spent} of {budget}.",
+  "@notifySpentOf": {
+    "placeholders": {
+      "spent": {
+        "type": "String"
+      },
+      "budget": {
+        "type": "String"
+      }
+    }
+  },
+  "notifyCategoryTitle": "{name} budget used up",
+  "@notifyCategoryTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "notifyRoom80Title": "80% of the {name} budget used",
+  "@notifyRoom80Title": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "notifyRoom100Title": "{name} budget used up",
+  "@notifyRoom100Title": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "notifyWeeklyTitle": "Your week in money",
+  "notifyWeeklyBody": "See how the week went, and pick one thing to watch.",
+  "notifyRoomOfferTitle": "{amount} at {payee}",
+  "@notifyRoomOfferTitle": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "payee": {
+        "type": "String"
+      }
+    }
+  },
+  "notifyRoomOfferTitleNoPayee": "{amount} captured",
+  "@notifyRoomOfferTitleNoPayee": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "notifyRoomOfferBody": "Add it to {name}?",
+  "@notifyRoomOfferBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "notifyRoomOfferChoiceBody": "Add it to a Room?",
+  "settingsBudgets": "Budgets",
+  "settingsBudgetsSemantics": "Budgets, {value}",
+  "@settingsBudgetsSemantics": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "noticesTitle": "Notifications",
+  "noticesButton": "Notifications",
+  "noticesButtonUnread": "{count, plural, =1{Notifications, 1 new} other{Notifications, {count} new}}",
+  "@noticesButtonUnread": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noticesEmptyTitle": "No notifications yet",
+  "noticesEmptyBody": "Budget alerts, your Sunday review and Room suggestions will appear here.",
+  "noticesNew": "New",
+  "noticesItemSemantics": "{title}. {body}. {time}",
+  "@noticesItemSemantics": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "body": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "noticesItemUnreadSemantics": "New: {title}. {body}. {time}",
+  "@noticesItemUnreadSemantics": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "body": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "noticesKeptFor": "Kept for 60 days."
 }

@@ -1,8 +1,10 @@
 import 'package:expense_tracker/data/db/app_database.dart';
 import 'package:expense_tracker/data/repositories/account_repository.dart';
 import 'package:expense_tracker/data/repositories/auto_capture_repository.dart';
+import 'package:expense_tracker/data/repositories/budget_repository.dart';
 import 'package:expense_tracker/data/repositories/capture_repository.dart';
 import 'package:expense_tracker/data/repositories/category_repository.dart';
+import 'package:expense_tracker/data/repositories/notice_repository.dart';
 import 'package:expense_tracker/data/repositories/room_repository.dart';
 import 'package:expense_tracker/data/repositories/settings_repository.dart';
 import 'package:expense_tracker/data/repositories/transaction_repository.dart';
@@ -68,6 +70,24 @@ final roomRepositoryProvider = Provider<RoomRepository>(
     ref.watch(appDatabaseProvider),
     ref.watch(clockProvider),
     ref.watch(idGeneratorProvider),
+    ref.watch(appLoggerProvider),
+  ),
+);
+
+/// Budgets and fired alerts.
+final budgetRepositoryProvider = Provider<BudgetRepository>(
+  (ref) => BudgetRepository(
+    ref.watch(appDatabaseProvider),
+    ref.watch(clockProvider),
+    ref.watch(appLoggerProvider),
+  ),
+);
+
+/// The in-app notification inbox.
+final noticeRepositoryProvider = Provider<NoticeRepository>(
+  (ref) => NoticeRepository(
+    ref.watch(appDatabaseProvider),
+    ref.watch(clockProvider),
     ref.watch(appLoggerProvider),
   ),
 );

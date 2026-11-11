@@ -92,6 +92,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Auto-capture may be off'), findsOneWidget);
+    await bringIntoView(tester, find.text('Check setup'));
     await tester.tap(find.text('Check setup'));
     await tester.pumpAndSettle();
     expect(find.text('Set up on iPhone'), findsWidgets);
