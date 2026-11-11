@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:expense_tracker/core/failure.dart';
 import 'package:expense_tracker/core/models/category.dart';
 import 'package:expense_tracker/core/models/money_transaction.dart';
@@ -188,19 +186,15 @@ class ReviewNotifier extends StreamNotifier<ReviewState> {
   }
 
   /// Puts [transaction] back as it was before a confirm or transfer.
-  void undo(MoneyTransaction transaction) {
-    unawaited(_undo(transaction));
-  }
-
-  Future<void> _undo(MoneyTransaction transaction) async {
-    // A failure is logged by the repository; the card then stays confirmed.
-    switch (await ref
+  /// Returns the failure, or null when it worked.
+  Future<StoreFailure?> undo(MoneyTransaction transaction) async {
+    final result = await ref
         .read(autoCaptureRepositoryProvider)
-        .restoreReview(transaction)) {
-      case Ok():
-      case Err():
-        return;
-    }
+        .restoreReview(transaction);
+    return switch (result) {
+      Ok() => null,
+      Err(:final failure) => failure,
+    };
   }
 }
 

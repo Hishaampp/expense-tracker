@@ -4,6 +4,7 @@ import 'package:expense_tracker/core/result.dart';
 import 'package:expense_tracker/data/capture/capture_providers.dart';
 import 'package:expense_tracker/data/data_providers.dart';
 import 'package:expense_tracker/data/query_providers.dart';
+import 'package:expense_tracker/services/service_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meta/meta.dart';
 
@@ -15,6 +16,7 @@ final class SettingsState {
     required this.monthStartDay,
     required this.appearance,
     required this.unparsedCount,
+    required this.autoCaptureOn,
   });
 
   /// The day of the month a budgeting month starts on.
@@ -25,6 +27,10 @@ final class SettingsState {
 
   /// How many messages wait on the Unparsed list; null until known.
   final int? unparsedCount;
+
+  /// Whether auto-capture is on; null where it does not apply (iPhone) or
+  /// is not known yet.
+  final bool? autoCaptureOn;
 }
 
 /// The Settings view model over the live settings.
@@ -36,6 +42,7 @@ class SettingsNotifier extends AsyncNotifier<SettingsState> {
       appearance: await ref.watch(appearanceProvider.future),
       // Not awaited: if the list cannot load, Settings still shows.
       unparsedCount: ref.watch(unparsedMessagesProvider).value?.length,
+      autoCaptureOn: ref.watch(autoCaptureOnProvider).value,
     );
   }
 

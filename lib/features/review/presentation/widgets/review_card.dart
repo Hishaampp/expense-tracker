@@ -1,8 +1,8 @@
 import 'package:expense_tracker/core/models/category.dart';
 import 'package:expense_tracker/core/models/transaction_kind.dart';
 import 'package:expense_tracker/features/review/presentation/review_notifier.dart';
-import 'package:expense_tracker/formatting/date_format.dart';
 import 'package:expense_tracker/formatting/money_format.dart';
+import 'package:expense_tracker/formatting/review_text.dart';
 import 'package:expense_tracker/l10n/app_localizations.dart';
 import 'package:expense_tracker/theme/app_colors.dart';
 import 'package:expense_tracker/theme/app_metrics.dart';
@@ -51,12 +51,12 @@ class ReviewCard extends StatelessWidget {
         txn.kind == TransactionKind.refund;
     final amount = isIn ? formatMoneyIn(txn.amount) : formatMoney(txn.amount);
     final payee = txn.payeeDisplay ?? l10n.reviewUnknownPayee;
-    final when =
-        '${formatShortDate(txn.occurredAt.toLocal(), locale)}, '
-        '${formatTime(txn.occurredAt.toLocal(), locale)}';
-    final details = item.accountName.isEmpty
-        ? when
-        : '${item.accountName}, $when';
+    final details = reviewDetails(
+      l10n,
+      locale,
+      accountName: item.accountName,
+      localTime: txn.occurredAt.toLocal(),
+    );
     final style = categoryStyle(context, item.suggested?.iconKey ?? 'other');
     final tone = isIn ? MoneyTone.moneyIn : MoneyTone.spent;
     return AppCard(
@@ -65,7 +65,13 @@ class ReviewCard extends StatelessWidget {
         children: [
           Semantics(
             container: true,
-            label: l10n.reviewCardSemantics(amount, payee, details),
+            label: isIn
+                ? l10n.reviewMoneyInSemantics(
+                    formatMoney(txn.amount),
+                    payee,
+                    details,
+                  )
+                : l10n.reviewSpentSemantics(amount, payee, details),
             child: ExcludeSemantics(
               child: Row(
                 children: [

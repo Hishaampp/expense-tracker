@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:expense_tracker/core/models/category.dart';
+import 'package:expense_tracker/core/models/money_transaction.dart';
 import 'package:expense_tracker/features/review/presentation/review_notifier.dart';
 import 'package:expense_tracker/features/review/presentation/widgets/review_card.dart';
 import 'package:expense_tracker/l10n/app_localizations.dart';
@@ -41,11 +42,11 @@ class ReviewScreen extends ConsumerWidget {
     final (String text, VoidCallback? undo) = switch (done) {
       ReviewConfirmed(:final transaction, :final category) => (
         l10n.reviewConfirmed(category.name),
-        () => notifier.undo(transaction),
+        () => unawaited(_undo(messenger, l10n, notifier, transaction)),
       ),
       ReviewTransferred(:final transaction) => (
         l10n.reviewMarkedTransfer,
-        () => notifier.undo(transaction),
+        () => unawaited(_undo(messenger, l10n, notifier, transaction)),
       ),
       ReviewConfirmedAll(:final count) => (
         l10n.reviewConfirmedAll(count),
@@ -62,6 +63,20 @@ class ReviewScreen extends ConsumerWidget {
             : SnackBarAction(label: l10n.undo, onPressed: undo),
       ),
     );
+  }
+
+  // A failed Undo says so; the payment then stays confirmed.
+  static Future<void> _undo(
+    ScaffoldMessengerState messenger,
+    AppLocalizations l10n,
+    ReviewNotifier notifier,
+    MoneyTransaction transaction,
+  ) async {
+    final failure = await notifier.undo(transaction);
+    if (failure == null) return;
+    messenger
+      ..clearSnackBars()
+      ..showSnackBar(SnackBar(content: Text(failureMessage(l10n, failure))));
   }
 
   Future<void> _more(

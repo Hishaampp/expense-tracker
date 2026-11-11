@@ -1,4 +1,5 @@
 import 'package:expense_tracker/theme/app_metrics.dart';
+import 'package:expense_tracker/widgets/pressable.dart';
 import 'package:flutter/material.dart';
 
 /// A settings row with a leading tile, a title and a switch. The whole row
@@ -29,9 +30,9 @@ class SwitchRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final metrics = AppMetrics.of(context);
     return MergeSemantics(
-      child: InkWell(
+      child: Pressable(
         onTap: () => onChanged(!value),
-        customBorder: RoundedRectangleBorder(
+        shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(metrics.radiusTileLarge),
         ),
         child: ConstrainedBox(

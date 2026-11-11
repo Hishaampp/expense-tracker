@@ -54,6 +54,19 @@ class _CaptureSettingsScreenState extends ConsumerState<CaptureSettingsScreen> {
     super.dispose();
   }
 
+  // Runs a phone action; says so if the phone refused it.
+  Future<void> _report(
+    BuildContext context,
+    Future<bool> Function() action,
+  ) async {
+    final messenger = ScaffoldMessenger.of(context);
+    final l10n = AppLocalizations.of(context);
+    if (await action()) return;
+    messenger
+      ..clearSnackBars()
+      ..showSnackBar(SnackBar(content: Text(l10n.autoCaptureActionFailed)));
+  }
+
   Future<void> _import(BuildContext context) async {
     final l10n = AppLocalizations.of(context);
     final messenger = ScaffoldMessenger.of(context);
@@ -67,7 +80,15 @@ class _CaptureSettingsScreenState extends ConsumerState<CaptureSettingsScreen> {
     final count = await notifier.importHistory(months);
     messenger
       ..clearSnackBars()
-      ..showSnackBar(SnackBar(content: Text(l10n.autoCaptureImported(count))));
+      ..showSnackBar(
+        SnackBar(
+          content: Text(
+            count == null
+                ? l10n.autoCaptureActionFailed
+                : l10n.autoCaptureImported(count),
+          ),
+        ),
+      );
   }
 
   @override
@@ -147,9 +168,14 @@ class _CaptureSettingsScreenState extends ConsumerState<CaptureSettingsScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        on ? l10n.autoCaptureOnTitle : l10n.autoCaptureOffTitle,
-                        style: textTheme.titleMedium,
+                      Semantics(
+                        header: true,
+                        child: Text(
+                          on
+                              ? l10n.autoCaptureOnTitle
+                              : l10n.autoCaptureOffTitle,
+                          style: textTheme.titleMedium,
+                        ),
                       ),
                       Text(
                         last == null
@@ -175,12 +201,14 @@ class _CaptureSettingsScreenState extends ConsumerState<CaptureSettingsScreen> {
           actions: [
             if (on)
               OutlinedButton(
-                onPressed: () => unawaited(notifier.openAccess()),
+                onPressed: () =>
+                    unawaited(_report(context, notifier.openAccess)),
                 child: Text(l10n.autoCaptureManage),
               )
             else
               FilledButton(
-                onPressed: () => unawaited(notifier.openAccess()),
+                onPressed: () =>
+                    unawaited(_report(context, notifier.openAccess)),
                 child: Text(l10n.autoCaptureTurnOn),
               ),
           ],
@@ -193,7 +221,8 @@ class _CaptureSettingsScreenState extends ConsumerState<CaptureSettingsScreen> {
             body: l10n.autoCaptureRestrictedBody,
             actions: [
               OutlinedButton(
-                onPressed: () => unawaited(notifier.openAppInfo()),
+                onPressed: () =>
+                    unawaited(_report(context, notifier.openAppInfo)),
                 child: Text(l10n.autoCaptureOpenAppInfo),
               ),
             ],
@@ -211,7 +240,8 @@ class _CaptureSettingsScreenState extends ConsumerState<CaptureSettingsScreen> {
           },
           actions: [
             OutlinedButton(
-              onPressed: () => unawaited(notifier.openBattery()),
+              onPressed: () =>
+                  unawaited(_report(context, notifier.openBattery)),
               child: Text(l10n.autoCaptureBatteryOpen),
             ),
           ],
@@ -252,7 +282,13 @@ class _CaptureSettingsScreenState extends ConsumerState<CaptureSettingsScreen> {
                     ),
                     value: source.enabled,
                     onChanged: (enabled) => unawaited(
-                      notifier.setSource(source.package, enabled: enabled),
+                      _report(
+                        context,
+                        () => notifier.setSource(
+                          source.package,
+                          enabled: enabled,
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -276,7 +312,8 @@ class _CaptureSettingsScreenState extends ConsumerState<CaptureSettingsScreen> {
                 )
               else
                 OutlinedButton(
-                  onPressed: () => unawaited(notifier.requestSms()),
+                  onPressed: () =>
+                      unawaited(_report(context, notifier.requestSms)),
                   child: Text(l10n.autoCaptureSmsAllow),
                 ),
             ],

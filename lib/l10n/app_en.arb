@@ -398,20 +398,6 @@
   "reviewMarkedTransfer": "Marked as a transfer",
   "reviewEmptyTitle": "All caught up",
   "reviewEmptyBody": "Payments captured from your messages wait here until you confirm them.",
-  "reviewCardSemantics": "{amount}, {payee}, {details}",
-  "@reviewCardSemantics": {
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      },
-      "payee": {
-        "type": "String"
-      },
-      "details": {
-        "type": "String"
-      }
-    }
-  },
   "reviewPickSemantics": "Confirm as {category}",
   "@reviewPickSemantics": {
     "placeholders": {
@@ -529,5 +515,46 @@
     }
   },
   "on": "on",
-  "off": "off"
+  "off": "off",
+  "listPair": "{first}, {second}",
+  "@listPair": {
+    "description": "Two short parts of one line, joined by the locale's separator.",
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "second": {
+        "type": "String"
+      }
+    }
+  },
+  "reviewSpentSemantics": "{amount} spent, {payee}, {details}",
+  "@reviewSpentSemantics": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "payee": {
+        "type": "String"
+      },
+      "details": {
+        "type": "String"
+      }
+    }
+  },
+  "reviewMoneyInSemantics": "{amount} money in, {payee}, {details}",
+  "@reviewMoneyInSemantics": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "payee": {
+        "type": "String"
+      },
+      "details": {
+        "type": "String"
+      }
+    }
+  },
+  "autoCaptureActionFailed": "That didn't work on this phone. Try again."
 }

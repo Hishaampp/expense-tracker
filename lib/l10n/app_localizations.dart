@@ -880,12 +880,6 @@ abstract class AppLocalizations {
   /// **'Payments captured from your messages wait here until you confirm them.'**
   String get reviewEmptyBody;
 
-  /// No description provided for @reviewCardSemantics.
-  ///
-  /// In en, this message translates to:
-  /// **'{amount}, {payee}, {details}'**
-  String reviewCardSemantics(String amount, String payee, String details);
-
   /// No description provided for @reviewPickSemantics.
   ///
   /// In en, this message translates to:
@@ -1155,6 +1149,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'off'**
   String get off;
+
+  /// Two short parts of one line, joined by the locale's separator.
+  ///
+  /// In en, this message translates to:
+  /// **'{first}, {second}'**
+  String listPair(String first, String second);
+
+  /// No description provided for @reviewSpentSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} spent, {payee}, {details}'**
+  String reviewSpentSemantics(String amount, String payee, String details);
+
+  /// No description provided for @reviewMoneyInSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} money in, {payee}, {details}'**
+  String reviewMoneyInSemantics(String amount, String payee, String details);
+
+  /// No description provided for @autoCaptureActionFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'That didn\'t work on this phone. Try again.'**
+  String get autoCaptureActionFailed;
 }
 
 class _AppLocalizationsDelegate

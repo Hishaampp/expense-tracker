@@ -506,11 +506,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Payments captured from your messages wait here until you confirm them.';
 
   @override
-  String reviewCardSemantics(String amount, String payee, String details) {
-    return '$amount, $payee, $details';
-  }
-
-  @override
   String reviewPickSemantics(String category) {
     return 'Confirm as $category';
   }
@@ -707,4 +702,23 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get off => 'off';
+
+  @override
+  String listPair(String first, String second) {
+    return '$first, $second';
+  }
+
+  @override
+  String reviewSpentSemantics(String amount, String payee, String details) {
+    return '$amount spent, $payee, $details';
+  }
+
+  @override
+  String reviewMoneyInSemantics(String amount, String payee, String details) {
+    return '$amount money in, $payee, $details';
+  }
+
+  @override
+  String get autoCaptureActionFailed =>
+      'That didn\'t work on this phone. Try again.';
 }

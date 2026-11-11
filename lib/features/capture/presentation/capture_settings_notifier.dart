@@ -1,6 +1,7 @@
 import 'package:expense_tracker/core/oem_guidance.dart';
 import 'package:expense_tracker/services/native/capture_control_service.dart';
 import 'package:expense_tracker/services/service_providers.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meta/meta.dart';
 
@@ -59,49 +60,81 @@ class CaptureSettingsNotifier extends AsyncNotifier<CaptureSettingsState> {
     );
   }
 
-  /// Reads the status again (after returning from system settings).
-  void refresh() => ref.invalidateSelf();
+  /// Reads the status again (after returning from system settings). The
+  /// Settings row reads it too, so that refreshes as well.
+  void refresh() {
+    ref
+      ..invalidateSelf()
+      ..invalidate(autoCaptureOnProvider);
+  }
 
-  /// Turns reading [package] on or off.
-  Future<void> setSource(String package, {required bool enabled}) async {
+  /// Turns reading [package] on or off. Returns false if the phone refused.
+  Future<bool> setSource(String package, {required bool enabled}) async {
     final current = state.value;
-    if (current == null) return;
+    if (current == null) return false;
     SourceToggle toggled(SourceToggle s) =>
         s.package == package ? (package: package, enabled: enabled) : s;
     final next = current.sources.map(toggled).toList();
-    await ref.read(captureControlProvider).setSources([
-      for (final s in next)
-        if (s.enabled) s.package,
-    ]);
-    state = AsyncData(
-      CaptureSettingsState(
-        status: current.status,
-        now: current.now,
-        sources: next,
-        defaultSms: current.defaultSms,
-      ),
+    final ok = await _call(
+      () => ref.read(captureControlProvider).setSources([
+        for (final s in next)
+          if (s.enabled) s.package,
+      ]),
     );
+    if (ok && ref.mounted) {
+      state = AsyncData(
+        CaptureSettingsState(
+          status: current.status,
+          now: current.now,
+          sources: next,
+          defaultSms: current.defaultSms,
+        ),
+      );
+    }
+    return ok;
   }
 
   /// Opens the system notification access screen.
-  Future<void> openAccess() =>
-      ref.read(captureControlProvider).openCaptureSettings();
+  Future<bool> openAccess() =>
+      _call(() => ref.read(captureControlProvider).openCaptureSettings());
 
   /// Opens the system battery settings.
-  Future<void> openBattery() =>
-      ref.read(captureControlProvider).openBatterySettings();
+  Future<bool> openBattery() =>
+      _call(() => ref.read(captureControlProvider).openBatterySettings());
 
   /// Opens this app's system info page.
-  Future<void> openAppInfo() =>
-      ref.read(captureControlProvider).openAppSettings();
+  Future<bool> openAppInfo() =>
+      _call(() => ref.read(captureControlProvider).openAppSettings());
 
   /// Asks for SMS access.
-  Future<void> requestSms() =>
-      ref.read(captureControlProvider).requestSmsPermission();
+  Future<bool> requestSms() =>
+      _call(() => ref.read(captureControlProvider).requestSmsPermission());
 
-  /// Imports bank SMS from the last [months] months; returns how many.
-  Future<int> importHistory(int months) =>
-      ref.read(captureControlProvider).importSmsHistory(months);
+  /// Imports bank SMS from the last [months] months; returns how many, or
+  /// null if the phone refused.
+  Future<int?> importHistory(int months) async {
+    try {
+      return await ref.read(captureControlProvider).importSmsHistory(months);
+    } on PlatformException catch (e, st) {
+      ref.read(appLoggerProvider).error('capture.import', e.runtimeType, st);
+      return null;
+    }
+  }
+
+  // A platform call that may be refused; logs and reports false instead of
+  // throwing into a fire-and-forget tap handler.
+  Future<bool> _call(Future<void> Function() action) async {
+    try {
+      await action();
+      return true;
+    } on PlatformException catch (e, st) {
+      ref.read(appLoggerProvider).error('capture.control', e.runtimeType, st);
+      return false;
+    } on MissingPluginException catch (e, st) {
+      ref.read(appLoggerProvider).error('capture.control', e.runtimeType, st);
+      return false;
+    }
+  }
 }
 
 /// Provides [CaptureSettingsNotifier].
