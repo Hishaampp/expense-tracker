@@ -14,6 +14,7 @@ class RoundIconButton extends StatelessWidget {
     required this.onPressed,
     this.floating = true,
     this.color,
+    this.badgeCount = 0,
     super.key,
   });
 
@@ -31,6 +32,10 @@ class RoundIconButton extends StatelessWidget {
 
   /// The glyph colour; defaults to the accent.
   final Color? color;
+
+  /// A count shown on the button, for example unread notifications; hidden
+  /// at zero. Say it in [tooltip] too: the badge is not announced.
+  final int badgeCount;
 
   @override
   Widget build(BuildContext context) {
@@ -61,12 +66,18 @@ class RoundIconButton extends StatelessWidget {
                     shape: const CircleBorder(),
                     child: SizedBox.square(
                       dimension: metrics.roundButtonSize,
-                      child: Icon(
-                        icon,
-                        size: metrics.iconLargeSize,
-                        color: enabled
-                            ? (color ?? colors.accent)
-                            : colors.onSurfaceMuted,
+                      child: Badge.count(
+                        count: badgeCount,
+                        isLabelVisible: badgeCount > 0,
+                        backgroundColor: colors.accent,
+                        textColor: colors.onAccentFill,
+                        child: Icon(
+                          icon,
+                          size: metrics.iconLargeSize,
+                          color: enabled
+                              ? (color ?? colors.accent)
+                              : colors.onSurfaceMuted,
+                        ),
                       ),
                     ),
                   ),

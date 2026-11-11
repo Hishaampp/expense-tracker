@@ -1,6 +1,7 @@
 import 'package:drift/drift.dart';
 import 'package:expense_tracker/core/models/account.dart';
 import 'package:expense_tracker/core/models/category.dart';
+import 'package:expense_tracker/core/models/notice.dart';
 import 'package:expense_tracker/core/models/room.dart';
 import 'package:expense_tracker/core/models/transaction_kind.dart';
 
@@ -398,4 +399,42 @@ class FiredAlerts extends Table {
 
   @override
   bool get isStrict => true;
+}
+
+/// The in-app notification inbox: a copy of every notification the app
+/// sent (spec §10). Holds only the app's own words, never message text.
+@DataClassName('NoticeRow')
+@TableIndex(name: 'notices_created_at', columns: {#createdAt})
+class Notices extends Table {
+  /// Stable id from what it is about, so the same notice is kept once.
+  TextColumn get id => text()();
+
+  /// `budget`, `weekly` or `room`.
+  TextColumn get kind => textEnum<NoticeKind>()();
+
+  /// The notification's title.
+  TextColumn get title => text()();
+
+  /// The notification's text.
+  TextColumn get body => text()();
+
+  /// The screen it opens, or null.
+  TextColumn get route => text().nullable()();
+
+  /// When it was sent, UTC epoch milliseconds.
+  IntColumn get createdAt => integer()();
+
+  /// When the user saw it in the inbox; null while unread.
+  IntColumn get readAt => integer().nullable()();
+
+  @override
+  Set<Column<Object>> get primaryKey => {id};
+
+  @override
+  bool get isStrict => true;
+
+  @override
+  List<String> get customConstraints => const [
+    "CHECK (kind IN ('budget', 'weekly', 'room'))",
+  ];
 }

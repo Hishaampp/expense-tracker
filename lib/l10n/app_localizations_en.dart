@@ -1489,4 +1489,44 @@ class AppLocalizationsEn extends AppLocalizations {
   String settingsBudgetsSemantics(String value) {
     return 'Budgets, $value';
   }
+
+  @override
+  String get noticesTitle => 'Notifications';
+
+  @override
+  String get noticesButton => 'Notifications';
+
+  @override
+  String noticesButtonUnread(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Notifications, $count new',
+      one: 'Notifications, 1 new',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get noticesEmptyTitle => 'No notifications yet';
+
+  @override
+  String get noticesEmptyBody =>
+      'Budget alerts, your Sunday review and Room suggestions will appear here.';
+
+  @override
+  String get noticesNew => 'New';
+
+  @override
+  String noticesItemSemantics(String title, String body, String time) {
+    return '$title. $body. $time';
+  }
+
+  @override
+  String noticesItemUnreadSemantics(String title, String body, String time) {
+    return 'New: $title. $body. $time';
+  }
+
+  @override
+  String get noticesKeptFor => 'Kept for 60 days.';
 }

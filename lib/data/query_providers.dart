@@ -3,6 +3,7 @@ import 'package:expense_tracker/core/models/appearance_mode.dart';
 import 'package:expense_tracker/core/models/budget_plan.dart';
 import 'package:expense_tracker/core/models/category.dart';
 import 'package:expense_tracker/core/models/money_transaction.dart';
+import 'package:expense_tracker/core/models/notice.dart';
 import 'package:expense_tracker/core/models/raw_capture.dart';
 import 'package:expense_tracker/core/models/room.dart';
 import 'package:expense_tracker/core/month_period.dart';
@@ -110,3 +111,13 @@ rangeTransactionsProvider = StreamProvider.autoDispose
           .watch(transactionRepositoryProvider)
           .watchBetween(range.start, range.end),
     );
+
+/// The notification inbox, newest first. Live.
+final noticesProvider = StreamProvider<List<Notice>>(
+  (ref) => ref.watch(noticeRepositoryProvider).watchAll(),
+);
+
+/// How many notices are unread. Live.
+final unreadNoticesProvider = StreamProvider<int>(
+  (ref) => ref.watch(noticeRepositoryProvider).watchUnreadCount(),
+);

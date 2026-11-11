@@ -3,6 +3,7 @@ import 'package:expense_tracker/features/budgets/presentation/budgets_screen.dar
 import 'package:expense_tracker/features/capture/presentation/capture_settings_screen.dart';
 import 'package:expense_tracker/features/capture/presentation/iphone_setup_screen.dart';
 import 'package:expense_tracker/features/home/presentation/home_screen.dart';
+import 'package:expense_tracker/features/notifications/presentation/notifications_screen.dart';
 import 'package:expense_tracker/features/quick_add/presentation/quick_add_screen.dart';
 import 'package:expense_tracker/features/review/presentation/review_screen.dart';
 import 'package:expense_tracker/features/rooms/presentation/room_detail_screen.dart';
@@ -92,6 +93,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.budgets,
         builder: (context, state) => const BudgetsScreen(),
+      ),
+      GoRoute(
+        path: Routes.notifications,
+        builder: (context, state) => const NotificationsScreen(),
       ),
       GoRoute(
         path: Routes.weeklyReview,

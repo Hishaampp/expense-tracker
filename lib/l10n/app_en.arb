@@ -1244,5 +1244,47 @@
         "type": "String"
       }
     }
-  }
+  },
+  "noticesTitle": "Notifications",
+  "noticesButton": "Notifications",
+  "noticesButtonUnread": "{count, plural, =1{Notifications, 1 new} other{Notifications, {count} new}}",
+  "@noticesButtonUnread": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noticesEmptyTitle": "No notifications yet",
+  "noticesEmptyBody": "Budget alerts, your Sunday review and Room suggestions will appear here.",
+  "noticesNew": "New",
+  "noticesItemSemantics": "{title}. {body}. {time}",
+  "@noticesItemSemantics": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "body": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "noticesItemUnreadSemantics": "New: {title}. {body}. {time}",
+  "@noticesItemUnreadSemantics": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "body": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "noticesKeptFor": "Kept for 60 days."
 }

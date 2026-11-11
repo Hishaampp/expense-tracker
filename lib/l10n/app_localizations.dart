@@ -2372,6 +2372,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Budgets, {value}'**
   String settingsBudgetsSemantics(String value);
+
+  /// No description provided for @noticesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get noticesTitle;
+
+  /// No description provided for @noticesButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get noticesButton;
+
+  /// No description provided for @noticesButtonUnread.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Notifications, 1 new} other{Notifications, {count} new}}'**
+  String noticesButtonUnread(int count);
+
+  /// No description provided for @noticesEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No notifications yet'**
+  String get noticesEmptyTitle;
+
+  /// No description provided for @noticesEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Budget alerts, your Sunday review and Room suggestions will appear here.'**
+  String get noticesEmptyBody;
+
+  /// No description provided for @noticesNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get noticesNew;
+
+  /// No description provided for @noticesItemSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{title}. {body}. {time}'**
+  String noticesItemSemantics(String title, String body, String time);
+
+  /// No description provided for @noticesItemUnreadSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'New: {title}. {body}. {time}'**
+  String noticesItemUnreadSemantics(String title, String body, String time);
+
+  /// No description provided for @noticesKeptFor.
+  ///
+  /// In en, this message translates to:
+  /// **'Kept for 60 days.'**
+  String get noticesKeptFor;
 }
 
 class _AppLocalizationsDelegate

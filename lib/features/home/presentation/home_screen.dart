@@ -91,6 +91,17 @@ class HomeScreen extends ConsumerWidget {
             semanticLabel: l10n.reviewBadgeSemantics(reviewCount),
             onTap: () => unawaited(context.push(Routes.review)),
           );
+    final unread = ref.watch(unreadNoticesProvider).value ?? 0;
+    final bell = RoundIconButton(
+      icon: unread > 0
+          ? Icons.notifications_active_rounded
+          : Icons.notifications_none_rounded,
+      tooltip: unread > 0
+          ? l10n.noticesButtonUnread(unread)
+          : l10n.noticesButton,
+      badgeCount: unread,
+      onPressed: () => unawaited(context.push(Routes.notifications)),
+    );
     final add = RoundIconButton(
       icon: Icons.add_rounded,
       tooltip: l10n.addExpense,
@@ -100,7 +111,7 @@ class HomeScreen extends ConsumerWidget {
     if (state == null) {
       return LargeTitlePage(
         title: Text(l10n.navHome),
-        actions: [?review, add],
+        actions: [?review, bell, add],
         children: [
           if (async.hasError)
             ErrorStateView(
@@ -124,7 +135,7 @@ class HomeScreen extends ConsumerWidget {
         semanticLabel: l10n.changeMonth(month),
         onTap: () => unawaited(_pickMonth(context, ref, state)),
       ),
-      actions: [?review, add],
+      actions: [?review, bell, add],
       children: [
         enter(HeroSummary(state: state, onSeeAll: seeAll)),
         if (state.isCurrent)

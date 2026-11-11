@@ -15,6 +15,9 @@ abstract final class Routes {
   /// Budgets: the monthly and category limits.
   static const String budgets = '/budgets';
 
+  /// The notification inbox.
+  static const String notifications = '/notifications';
+
   /// The weekly review.
   static const String weeklyReview = '/weekly-review';
 

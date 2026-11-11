@@ -5038,6 +5038,474 @@ class FiredAlertsCompanion extends UpdateCompanion<FiredAlertRow> {
   }
 }
 
+class $NoticesTable extends Notices with TableInfo<$NoticesTable, NoticeRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $NoticesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<NoticeKind, String> kind =
+      GeneratedColumn<String>(
+        'kind',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      ).withConverter<NoticeKind>($NoticesTable.$converterkind);
+  static const VerificationMeta _titleMeta = const VerificationMeta('title');
+  @override
+  late final GeneratedColumn<String> title = GeneratedColumn<String>(
+    'title',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _bodyMeta = const VerificationMeta('body');
+  @override
+  late final GeneratedColumn<String> body = GeneratedColumn<String>(
+    'body',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _routeMeta = const VerificationMeta('route');
+  @override
+  late final GeneratedColumn<String> route = GeneratedColumn<String>(
+    'route',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<int> createdAt = GeneratedColumn<int>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _readAtMeta = const VerificationMeta('readAt');
+  @override
+  late final GeneratedColumn<int> readAt = GeneratedColumn<int>(
+    'read_at',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    kind,
+    title,
+    body,
+    route,
+    createdAt,
+    readAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'notices';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<NoticeRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('title')) {
+      context.handle(
+        _titleMeta,
+        title.isAcceptableOrUnknown(data['title']!, _titleMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_titleMeta);
+    }
+    if (data.containsKey('body')) {
+      context.handle(
+        _bodyMeta,
+        body.isAcceptableOrUnknown(data['body']!, _bodyMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_bodyMeta);
+    }
+    if (data.containsKey('route')) {
+      context.handle(
+        _routeMeta,
+        route.isAcceptableOrUnknown(data['route']!, _routeMeta),
+      );
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_createdAtMeta);
+    }
+    if (data.containsKey('read_at')) {
+      context.handle(
+        _readAtMeta,
+        readAt.isAcceptableOrUnknown(data['read_at']!, _readAtMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  NoticeRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return NoticeRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      kind: $NoticesTable.$converterkind.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}kind'],
+        )!,
+      ),
+      title: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}title'],
+      )!,
+      body: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}body'],
+      )!,
+      route: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}route'],
+      ),
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}created_at'],
+      )!,
+      readAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}read_at'],
+      ),
+    );
+  }
+
+  @override
+  $NoticesTable createAlias(String alias) {
+    return $NoticesTable(attachedDatabase, alias);
+  }
+
+  static JsonTypeConverter2<NoticeKind, String, String> $converterkind =
+      const EnumNameConverter<NoticeKind>(NoticeKind.values);
+  @override
+  bool get isStrict => true;
+}
+
+class NoticeRow extends DataClass implements Insertable<NoticeRow> {
+  /// Stable id from what it is about, so the same notice is kept once.
+  final String id;
+
+  /// `budget`, `weekly` or `room`.
+  final NoticeKind kind;
+
+  /// The notification's title.
+  final String title;
+
+  /// The notification's text.
+  final String body;
+
+  /// The screen it opens, or null.
+  final String? route;
+
+  /// When it was sent, UTC epoch milliseconds.
+  final int createdAt;
+
+  /// When the user saw it in the inbox; null while unread.
+  final int? readAt;
+  const NoticeRow({
+    required this.id,
+    required this.kind,
+    required this.title,
+    required this.body,
+    this.route,
+    required this.createdAt,
+    this.readAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    {
+      map['kind'] = Variable<String>($NoticesTable.$converterkind.toSql(kind));
+    }
+    map['title'] = Variable<String>(title);
+    map['body'] = Variable<String>(body);
+    if (!nullToAbsent || route != null) {
+      map['route'] = Variable<String>(route);
+    }
+    map['created_at'] = Variable<int>(createdAt);
+    if (!nullToAbsent || readAt != null) {
+      map['read_at'] = Variable<int>(readAt);
+    }
+    return map;
+  }
+
+  NoticesCompanion toCompanion(bool nullToAbsent) {
+    return NoticesCompanion(
+      id: Value(id),
+      kind: Value(kind),
+      title: Value(title),
+      body: Value(body),
+      route: route == null && nullToAbsent
+          ? const Value.absent()
+          : Value(route),
+      createdAt: Value(createdAt),
+      readAt: readAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(readAt),
+    );
+  }
+
+  factory NoticeRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return NoticeRow(
+      id: serializer.fromJson<String>(json['id']),
+      kind: $NoticesTable.$converterkind.fromJson(
+        serializer.fromJson<String>(json['kind']),
+      ),
+      title: serializer.fromJson<String>(json['title']),
+      body: serializer.fromJson<String>(json['body']),
+      route: serializer.fromJson<String?>(json['route']),
+      createdAt: serializer.fromJson<int>(json['createdAt']),
+      readAt: serializer.fromJson<int?>(json['readAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'kind': serializer.toJson<String>(
+        $NoticesTable.$converterkind.toJson(kind),
+      ),
+      'title': serializer.toJson<String>(title),
+      'body': serializer.toJson<String>(body),
+      'route': serializer.toJson<String?>(route),
+      'createdAt': serializer.toJson<int>(createdAt),
+      'readAt': serializer.toJson<int?>(readAt),
+    };
+  }
+
+  NoticeRow copyWith({
+    String? id,
+    NoticeKind? kind,
+    String? title,
+    String? body,
+    Value<String?> route = const Value.absent(),
+    int? createdAt,
+    Value<int?> readAt = const Value.absent(),
+  }) => NoticeRow(
+    id: id ?? this.id,
+    kind: kind ?? this.kind,
+    title: title ?? this.title,
+    body: body ?? this.body,
+    route: route.present ? route.value : this.route,
+    createdAt: createdAt ?? this.createdAt,
+    readAt: readAt.present ? readAt.value : this.readAt,
+  );
+  NoticeRow copyWithCompanion(NoticesCompanion data) {
+    return NoticeRow(
+      id: data.id.present ? data.id.value : this.id,
+      kind: data.kind.present ? data.kind.value : this.kind,
+      title: data.title.present ? data.title.value : this.title,
+      body: data.body.present ? data.body.value : this.body,
+      route: data.route.present ? data.route.value : this.route,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      readAt: data.readAt.present ? data.readAt.value : this.readAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('NoticeRow(')
+          ..write('id: $id, ')
+          ..write('kind: $kind, ')
+          ..write('title: $title, ')
+          ..write('body: $body, ')
+          ..write('route: $route, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('readAt: $readAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(id, kind, title, body, route, createdAt, readAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is NoticeRow &&
+          other.id == this.id &&
+          other.kind == this.kind &&
+          other.title == this.title &&
+          other.body == this.body &&
+          other.route == this.route &&
+          other.createdAt == this.createdAt &&
+          other.readAt == this.readAt);
+}
+
+class NoticesCompanion extends UpdateCompanion<NoticeRow> {
+  final Value<String> id;
+  final Value<NoticeKind> kind;
+  final Value<String> title;
+  final Value<String> body;
+  final Value<String?> route;
+  final Value<int> createdAt;
+  final Value<int?> readAt;
+  final Value<int> rowid;
+  const NoticesCompanion({
+    this.id = const Value.absent(),
+    this.kind = const Value.absent(),
+    this.title = const Value.absent(),
+    this.body = const Value.absent(),
+    this.route = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.readAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  NoticesCompanion.insert({
+    required String id,
+    required NoticeKind kind,
+    required String title,
+    required String body,
+    this.route = const Value.absent(),
+    required int createdAt,
+    this.readAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       kind = Value(kind),
+       title = Value(title),
+       body = Value(body),
+       createdAt = Value(createdAt);
+  static Insertable<NoticeRow> custom({
+    Expression<String>? id,
+    Expression<String>? kind,
+    Expression<String>? title,
+    Expression<String>? body,
+    Expression<String>? route,
+    Expression<int>? createdAt,
+    Expression<int>? readAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (kind != null) 'kind': kind,
+      if (title != null) 'title': title,
+      if (body != null) 'body': body,
+      if (route != null) 'route': route,
+      if (createdAt != null) 'created_at': createdAt,
+      if (readAt != null) 'read_at': readAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  NoticesCompanion copyWith({
+    Value<String>? id,
+    Value<NoticeKind>? kind,
+    Value<String>? title,
+    Value<String>? body,
+    Value<String?>? route,
+    Value<int>? createdAt,
+    Value<int?>? readAt,
+    Value<int>? rowid,
+  }) {
+    return NoticesCompanion(
+      id: id ?? this.id,
+      kind: kind ?? this.kind,
+      title: title ?? this.title,
+      body: body ?? this.body,
+      route: route ?? this.route,
+      createdAt: createdAt ?? this.createdAt,
+      readAt: readAt ?? this.readAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (kind.present) {
+      map['kind'] = Variable<String>(
+        $NoticesTable.$converterkind.toSql(kind.value),
+      );
+    }
+    if (title.present) {
+      map['title'] = Variable<String>(title.value);
+    }
+    if (body.present) {
+      map['body'] = Variable<String>(body.value);
+    }
+    if (route.present) {
+      map['route'] = Variable<String>(route.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<int>(createdAt.value);
+    }
+    if (readAt.present) {
+      map['read_at'] = Variable<int>(readAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('NoticesCompanion(')
+          ..write('id: $id, ')
+          ..write('kind: $kind, ')
+          ..write('title: $title, ')
+          ..write('body: $body, ')
+          ..write('route: $route, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('readAt: $readAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -5054,6 +5522,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   );
   late final $BudgetsTable budgets = $BudgetsTable(this);
   late final $FiredAlertsTable firedAlerts = $FiredAlertsTable(this);
+  late final $NoticesTable notices = $NoticesTable(this);
   late final Index transactionsOccurredAt = Index(
     'transactions_occurred_at',
     'CREATE INDEX transactions_occurred_at ON transactions (occurred_at)',
@@ -5078,6 +5547,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     'transaction_sources_transaction',
     'CREATE INDEX transaction_sources_transaction ON transaction_sources (transaction_id)',
   );
+  late final Index noticesCreatedAt = Index(
+    'notices_created_at',
+    'CREATE INDEX notices_created_at ON notices (created_at)',
+  );
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -5093,12 +5566,14 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     unparsedMessages,
     budgets,
     firedAlerts,
+    notices,
     transactionsOccurredAt,
     transactionsRoomId,
     transactionsCategoryId,
     transactionsRefNo,
     transactionsPayeeKey,
     transactionSourcesTransaction,
+    noticesCreatedAt,
   ];
   @override
   StreamQueryUpdateRules get streamUpdateRules => const StreamQueryUpdateRules([
@@ -9250,6 +9725,246 @@ typedef $$FiredAlertsTableProcessedTableManager =
       FiredAlertRow,
       PrefetchHooks Function()
     >;
+typedef $$NoticesTableCreateCompanionBuilder = NoticesCompanion Function({
+  required String id,
+  required NoticeKind kind,
+  required String title,
+  required String body,
+  Value<String?> route,
+  required int createdAt,
+  Value<int?> readAt,
+  Value<int> rowid,
+});
+typedef $$NoticesTableUpdateCompanionBuilder = NoticesCompanion Function({
+  Value<String> id,
+  Value<NoticeKind> kind,
+  Value<String> title,
+  Value<String> body,
+  Value<String?> route,
+  Value<int> createdAt,
+  Value<int?> readAt,
+  Value<int> rowid,
+});
+
+class $$NoticesTableFilterComposer
+    extends Composer<_$AppDatabase, $NoticesTable> {
+  $$NoticesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnWithTypeConverterFilters<NoticeKind, NoticeKind, String> get kind =>
+      $composableBuilder(
+        column: $table.kind,
+        builder: (column) => ColumnWithTypeConverterFilters(column),
+      );
+
+  ColumnFilters<String> get title => $composableBuilder(
+    column: $table.title,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get body => $composableBuilder(
+    column: $table.body,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get route => $composableBuilder(
+    column: $table.route,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get readAt => $composableBuilder(
+    column: $table.readAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$NoticesTableOrderingComposer
+    extends Composer<_$AppDatabase, $NoticesTable> {
+  $$NoticesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get kind => $composableBuilder(
+    column: $table.kind,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get title => $composableBuilder(
+    column: $table.title,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get body => $composableBuilder(
+    column: $table.body,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get route => $composableBuilder(
+    column: $table.route,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get readAt => $composableBuilder(
+    column: $table.readAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$NoticesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $NoticesTable> {
+  $$NoticesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumnWithTypeConverter<NoticeKind, String> get kind =>
+      $composableBuilder(column: $table.kind, builder: (column) => column);
+
+  GeneratedColumn<String> get title =>
+      $composableBuilder(column: $table.title, builder: (column) => column);
+
+  GeneratedColumn<String> get body =>
+      $composableBuilder(column: $table.body, builder: (column) => column);
+
+  GeneratedColumn<String> get route =>
+      $composableBuilder(column: $table.route, builder: (column) => column);
+
+  GeneratedColumn<int> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  GeneratedColumn<int> get readAt =>
+      $composableBuilder(column: $table.readAt, builder: (column) => column);
+}
+
+class $$NoticesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $NoticesTable,
+          NoticeRow,
+          $$NoticesTableFilterComposer,
+          $$NoticesTableOrderingComposer,
+          $$NoticesTableAnnotationComposer,
+          $$NoticesTableCreateCompanionBuilder,
+          $$NoticesTableUpdateCompanionBuilder,
+          (NoticeRow, BaseReferences<_$AppDatabase, $NoticesTable, NoticeRow>),
+          NoticeRow,
+          PrefetchHooks Function()
+        > {
+  $$NoticesTableTableManager(_$AppDatabase db, $NoticesTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$NoticesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$NoticesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$NoticesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<NoticeKind> kind = const Value.absent(),
+                Value<String> title = const Value.absent(),
+                Value<String> body = const Value.absent(),
+                Value<String?> route = const Value.absent(),
+                Value<int> createdAt = const Value.absent(),
+                Value<int?> readAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => NoticesCompanion(
+                id: id,
+                kind: kind,
+                title: title,
+                body: body,
+                route: route,
+                createdAt: createdAt,
+                readAt: readAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required NoticeKind kind,
+                required String title,
+                required String body,
+                Value<String?> route = const Value.absent(),
+                required int createdAt,
+                Value<int?> readAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => NoticesCompanion.insert(
+                id: id,
+                kind: kind,
+                title: title,
+                body: body,
+                route: route,
+                createdAt: createdAt,
+                readAt: readAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$NoticesTable, NoticeRow>(table),
+                  BaseReferences<_$AppDatabase, $NoticesTable, NoticeRow>(
+                    db,
+                    table,
+                    e,
+                  ),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$NoticesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $NoticesTable,
+      NoticeRow,
+      $$NoticesTableFilterComposer,
+      $$NoticesTableOrderingComposer,
+      $$NoticesTableAnnotationComposer,
+      $$NoticesTableCreateCompanionBuilder,
+      $$NoticesTableUpdateCompanionBuilder,
+      (NoticeRow, BaseReferences<_$AppDatabase, $NoticesTable, NoticeRow>),
+      NoticeRow,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -9274,4 +9989,6 @@ class $AppDatabaseManager {
       $$BudgetsTableTableManager(_db, _db.budgets);
   $$FiredAlertsTableTableManager get firedAlerts =>
       $$FiredAlertsTableTableManager(_db, _db.firedAlerts);
+  $$NoticesTableTableManager get notices =>
+      $$NoticesTableTableManager(_db, _db.notices);
 }

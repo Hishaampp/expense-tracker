@@ -20,6 +20,33 @@ class SettingsRepository {
   static const String _iosSetupKey = 'ios_shortcut_setup_at';
   static const String _weeklyReviewKey = 'weekly_review';
   static const String _watchCategoryKey = 'watch_category';
+  static const String _weeklySinceKey = 'weekly_review_since';
+
+  /// When the weekly review was first scheduled, or null.
+  Future<DateTime?> weeklyReviewSince() async {
+    final query = _db.select(_db.settings)
+      ..where((s) => s.key.equals(_weeklySinceKey));
+    final ms = int.tryParse((await query.getSingleOrNull())?.value ?? '');
+    return ms == null
+        ? null
+        : DateTime.fromMillisecondsSinceEpoch(ms, isUtc: true);
+  }
+
+  /// Records [atUtc] as when the weekly review was first scheduled, unless
+  /// a time is already recorded.
+  @useResult
+  Future<Result<DateTime, StoreFailure>> markWeeklyReviewSince(
+    DateTime atUtc,
+  ) async {
+    final known = await weeklyReviewSince();
+    if (known != null) return Ok(known);
+    return await _put(
+      'settings.weekly_since',
+      _weeklySinceKey,
+      '${atUtc.millisecondsSinceEpoch}',
+      atUtc,
+    );
+  }
 
   Stream<String?> _watch(String key) {
     final query = _db.select(_db.settings)..where((s) => s.key.equals(key));

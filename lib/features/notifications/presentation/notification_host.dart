@@ -3,11 +3,13 @@ import 'dart:async';
 import 'package:expense_tracker/core/budget_alerts.dart';
 import 'package:expense_tracker/core/local_day.dart';
 import 'package:expense_tracker/core/models/money_transaction.dart';
+import 'package:expense_tracker/core/models/notice.dart';
 import 'package:expense_tracker/core/models/room.dart';
 import 'package:expense_tracker/core/models/transaction_kind.dart';
 import 'package:expense_tracker/core/money.dart';
 import 'package:expense_tracker/core/result.dart';
 import 'package:expense_tracker/core/room_tagging.dart';
+import 'package:expense_tracker/core/weekly_review.dart';
 import 'package:expense_tracker/data/budget_providers.dart';
 import 'package:expense_tracker/data/data_providers.dart';
 import 'package:expense_tracker/data/query_providers.dart';
@@ -52,6 +54,7 @@ class _NotificationHostState extends ConsumerState<NotificationHost> {
   StreamSubscription<NotificationTap>? _taps;
   Set<String>? _seenReview;
   bool _started = false;
+  AppLifecycleListener? _lifecycle;
 
   @override
   void didChangeDependencies() {
@@ -61,6 +64,8 @@ class _NotificationHostState extends ConsumerState<NotificationHost> {
     final l10n = AppLocalizations.of(context);
     final service = ref.read(notificationServiceProvider);
     _taps = service.taps.listen(_onTap);
+    _lifecycle = AppLifecycleListener(onResume: () => unawaited(_keepWeekly()));
+    unawaited(ref.read(noticeRepositoryProvider).purgeOld().then((_) {}));
     unawaited(
       service
           .init((
@@ -79,6 +84,7 @@ class _NotificationHostState extends ConsumerState<NotificationHost> {
   @override
   void dispose() {
     unawaited(_taps?.cancel());
+    _lifecycle?.dispose();
     super.dispose();
   }
 
@@ -94,9 +100,42 @@ class _NotificationHostState extends ConsumerState<NotificationHost> {
         payload: _routePayload(Routes.weeklyReview),
         hour: weeklyReviewHour,
       );
+      final now = ref.read(clockProvider).now().toUtc();
+      final _ = await ref
+          .read(settingsRepositoryProvider)
+          .markWeeklyReviewSince(now);
+      await _keepWeekly();
     } else {
       await service.cancelWeekly();
     }
+  }
+
+  /// Keeps the latest Sunday review in the inbox. The system shows the
+  /// scheduled notification itself, so the copy is made when the app next
+  /// opens after it was due.
+  Future<void> _keepWeekly() async {
+    if (!mounted || !(ref.read(weeklyReviewOnProvider).value ?? false)) return;
+    final since = await ref
+        .read(settingsRepositoryProvider)
+        .weeklyReviewSince();
+    final now = ref.read(clockProvider).now();
+    final due = lastSundayAt(now, weeklyReviewHour);
+    if (since == null || !due.isAfter(since) || !mounted) return;
+    final week = LocalWeek.containing(LocalDay.of(due));
+    await _keep(
+      Notice(
+        id: 'weekly:${week.start.value}',
+        kind: NoticeKind.weekly,
+        title: _l10n.notifyWeeklyTitle,
+        body: _l10n.notifyWeeklyBody,
+        route: Routes.weeklyReview,
+        createdAt: due.toUtc(),
+      ),
+    );
+  }
+
+  Future<void> _keep(Notice notice) async {
+    final _ = await ref.read(noticeRepositoryProvider).add(notice);
   }
 
   // ---- Budget alerts -------------------------------------------------------
@@ -165,6 +204,16 @@ class _NotificationHostState extends ConsumerState<NotificationHost> {
       },
     };
     if (text == null) return;
+    await _keep(
+      Notice(
+        id: 'alert:${alert.key}',
+        kind: NoticeKind.budget,
+        title: text.$1,
+        body: text.$2,
+        route: text.$3,
+        createdAt: ref.read(clockProvider).now().toUtc(),
+      ),
+    );
     await ref
         .read(notificationServiceProvider)
         .showAlert(
@@ -206,16 +255,28 @@ class _NotificationHostState extends ConsumerState<NotificationHost> {
     final l10n = _l10n;
     final amount = formatMoney(txn.amount);
     final payee = txn.payeeDisplay;
+    final title = payee == null
+        ? l10n.notifyRoomOfferTitleNoPayee(amount)
+        : l10n.notifyRoomOfferTitle(amount, payee);
+    final body = rooms.length == 1
+        ? l10n.notifyRoomOfferBody(rooms.single.name)
+        : l10n.notifyRoomOfferChoiceBody;
+    await _keep(
+      Notice(
+        id: 'room:${txn.id}',
+        kind: NoticeKind.room,
+        title: title,
+        body: body,
+        route: Routes.review,
+        createdAt: ref.read(clockProvider).now().toUtc(),
+      ),
+    );
     await ref
         .read(notificationServiceProvider)
         .showRoomOffer(
           id: _idFor('room-offer:${txn.id}'),
-          title: payee == null
-              ? l10n.notifyRoomOfferTitleNoPayee(amount)
-              : l10n.notifyRoomOfferTitle(amount, payee),
-          body: rooms.length == 1
-              ? l10n.notifyRoomOfferBody(rooms.single.name)
-              : l10n.notifyRoomOfferChoiceBody,
+          title: title,
+          body: body,
           payload: _roomPayload(txn.id, [for (final r in rooms) r.id]),
           buttons: [
             for (final (i, room) in rooms.indexed)

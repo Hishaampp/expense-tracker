@@ -305,3 +305,9 @@ DateTime nextSundayAt(DateTime now, int hour) {
   }
   return day;
 }
+
+/// The latest Sunday at [hour]:00 local time at or before [now].
+DateTime lastSundayAt(DateTime now, int hour) {
+  final next = nextSundayAt(now, hour);
+  return DateTime(next.year, next.month, next.day - 7, hour);
+}
