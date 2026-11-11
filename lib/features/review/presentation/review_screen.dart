@@ -139,7 +139,10 @@ class ReviewScreen extends ConsumerWidget {
     final done = await ref
         .read(reviewNotifierProvider.notifier)
         .confirmSelected(ids, category);
-    ref.read(reviewChoicesProvider.notifier).setSelecting(on: false);
+    // On failure the picks stay, so the user can try again.
+    if (done is! ReviewFailed) {
+      ref.read(reviewChoicesProvider.notifier).setSelecting(on: false);
+    }
     if (context.mounted) await _show(context, ref, done);
   }
 
@@ -223,18 +226,21 @@ class ReviewScreen extends ConsumerWidget {
           ),
         ),
         if (selected != null)
-          _SelectionBar(
-            count: selected.length,
-            onChoose: selected.isEmpty
-                ? null
-                : () => unawaited(
-                    _confirmSelected(
-                      context,
-                      ref,
-                      selected,
-                      state.allCategories,
+          Entrance(
+            index: 1,
+            child: _SelectionBar(
+              count: selected.length,
+              onChoose: selected.isEmpty
+                  ? null
+                  : () => unawaited(
+                      _confirmSelected(
+                        context,
+                        ref,
+                        selected,
+                        state.allCategories,
+                      ),
                     ),
-                  ),
+            ),
           )
         else if (state.suggestedCount > 0)
           Entrance(

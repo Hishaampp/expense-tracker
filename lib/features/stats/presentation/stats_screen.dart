@@ -7,6 +7,7 @@ import 'package:expense_tracker/formatting/date_format.dart';
 import 'package:expense_tracker/formatting/money_format.dart';
 import 'package:expense_tracker/l10n/app_localizations.dart';
 import 'package:expense_tracker/routing/routes.dart';
+import 'package:expense_tracker/theme/app_colors.dart';
 import 'package:expense_tracker/theme/app_metrics.dart';
 import 'package:expense_tracker/theme/category_colors.dart';
 import 'package:expense_tracker/widgets/app_card.dart';
@@ -140,6 +141,7 @@ class StatsScreen extends ConsumerWidget {
                     formatPeriodTitle(m.period, state.today, locale),
                     formatMoney(m.spent),
                   ),
+                l10n.statsMonthAverage(formatMoney(monthAverage)),
               ].join('. '),
               lines: [l10n.statsMonthAverage(formatMoney(monthAverage))],
             ),
@@ -165,7 +167,7 @@ class _WeekLink extends StatelessWidget {
     return Semantics(
       container: true,
       button: true,
-      label: '${l10n.statsWeekTitle}. ${l10n.statsWeekBody}',
+      label: l10n.statsWeekSemantics,
       onTap: onTap,
       child: ExcludeSemantics(
         child: AppCard(
@@ -187,7 +189,10 @@ class _WeekLink extends StatelessWidget {
                   ],
                 ),
               ),
-              const Icon(Icons.chevron_right_rounded),
+              Icon(
+                Icons.chevron_right_rounded,
+                color: AppColors.of(context).onSurfaceMuted,
+              ),
             ],
           ),
         ),

@@ -965,7 +965,6 @@
     }
   },
   "statsTitle": "Stats",
-  "statsWhereItWent": "Where it went",
   "statsDonutSemantics": "Spending by category, {amount} in all. The categories are listed below.",
   "@statsDonutSemantics": {
     "placeholders": {
@@ -1145,7 +1144,6 @@
     }
   },
   "weeklyWatchCleared": "Not watching a category",
-  "weeklyWatchMore": "More",
   "notifyAlertsChannel": "Budget alerts",
   "notifyAlertsChannelInfo": "When a budget is nearly or fully used",
   "notifyWeeklyChannel": "Weekly review",
@@ -1342,18 +1340,6 @@
     }
   },
   "reviewChooseCategory": "Choose category",
-  "reviewSelectableSemantics": "{label}. {state}",
-  "@reviewSelectableSemantics": {
-    "placeholders": {
-      "label": {
-        "type": "String"
-      },
-      "state": {
-        "type": "String"
-      }
-    }
-  },
-  "reviewNotSelected": "not selected",
   "payeesTitle": "Payees & rules",
   "payeesHelp": "Name a payee once and teach it a category or a Room. New payments from them follow it.",
   "payeesEmptyTitle": "No payees yet",
@@ -1446,7 +1432,7 @@
   "activityNoMatchTitle": "Nothing matches",
   "activityNoMatchBody": "Try another word, or clear the filters.",
   "activityClearFilters": "Clear filters",
-  "activitySearchingAll": "Searching the last 12 months",
+  "activitySearchingAll": "searching the last 12 months",
   "activityResults": "{count, plural, =1{1 result} other{{count} results}}",
   "@activityResults": {
     "placeholders": {
@@ -1483,5 +1469,24 @@
         "type": "int"
       }
     }
-  }
+  },
+  "budgetsCategoryOverSemantics": "{name}: {spent} spent of {budget}, over by {over}. Change",
+  "@budgetsCategoryOverSemantics": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "spent": {
+        "type": "String"
+      },
+      "budget": {
+        "type": "String"
+      },
+      "over": {
+        "type": "String"
+      }
+    }
+  },
+  "statsWeekSemantics": "Your week. This week against last week, and who you paid most.",
+  "budgetCardSetSemantics": "Set a monthly budget. See what's safe to spend each day."
 }

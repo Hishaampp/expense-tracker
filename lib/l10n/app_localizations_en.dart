@@ -1240,9 +1240,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get statsTitle => 'Stats';
 
   @override
-  String get statsWhereItWent => 'Where it went';
-
-  @override
   String statsDonutSemantics(String amount) {
     return 'Spending by category, $amount in all. The categories are listed below.';
   }
@@ -1396,9 +1393,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get weeklyWatchCleared => 'Not watching a category';
-
-  @override
-  String get weeklyWatchMore => 'More';
 
   @override
   String get notifyAlertsChannel => 'Budget alerts';
@@ -1584,14 +1578,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get reviewChooseCategory => 'Choose category';
 
   @override
-  String reviewSelectableSemantics(String label, String state) {
-    return '$label. $state';
-  }
-
-  @override
-  String get reviewNotSelected => 'not selected';
-
-  @override
   String get payeesTitle => 'Payees & rules';
 
   @override
@@ -1735,7 +1721,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get activityClearFilters => 'Clear filters';
 
   @override
-  String get activitySearchingAll => 'Searching the last 12 months';
+  String get activitySearchingAll => 'searching the last 12 months';
 
   @override
   String activityResults(int count) {
@@ -1810,4 +1796,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String onboardStep(int step, int total) {
     return 'Step $step of $total';
   }
+
+  @override
+  String budgetsCategoryOverSemantics(
+    String name,
+    String spent,
+    String budget,
+    String over,
+  ) {
+    return '$name: $spent spent of $budget, over by $over. Change';
+  }
+
+  @override
+  String get statsWeekSemantics =>
+      'Your week. This week against last week, and who you paid most.';
+
+  @override
+  String get budgetCardSetSemantics =>
+      'Set a monthly budget. See what\'s safe to spend each day.';
 }

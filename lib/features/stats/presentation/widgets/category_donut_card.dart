@@ -38,14 +38,14 @@ class CategoryDonutCard extends StatelessWidget {
     );
     // Large text would not fit inside the ring: it moves under it.
     final inside =
-        MediaQuery.textScalerOf(context).scale(1) <= metrics.stackedTextScale;
+        MediaQuery.textScalerOf(context).scale(1) < metrics.stackedTextScale;
     return AppCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Semantics(
             header: true,
-            child: Text(l10n.statsWhereItWent, style: textTheme.titleMedium),
+            child: Text(l10n.roomWhereItWent, style: textTheme.titleMedium),
           ),
           SizedBox(height: metrics.spaceLg),
           Center(
@@ -113,7 +113,7 @@ class _LegendRow extends StatelessWidget {
       label: l10n.statsCategorySemantics(name, amount, percent),
       child: ExcludeSemantics(
         child: Padding(
-          padding: EdgeInsetsDirectional.symmetric(vertical: metrics.spaceXs),
+          padding: EdgeInsetsDirectional.symmetric(vertical: metrics.spaceSm),
           child: Row(
             children: [
               IconTile(icon: style.icon, color: style.color),

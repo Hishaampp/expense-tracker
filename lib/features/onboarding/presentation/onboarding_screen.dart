@@ -1,8 +1,11 @@
 import 'dart:async';
 
 import 'package:expense_tracker/core/budget_input.dart';
+import 'package:expense_tracker/core/result.dart';
 import 'package:expense_tracker/data/data_providers.dart';
+import 'package:expense_tracker/formatting/money_format.dart';
 import 'package:expense_tracker/l10n/app_localizations.dart';
+import 'package:expense_tracker/l10n/failure_messages.dart';
 import 'package:expense_tracker/routing/routes.dart';
 import 'package:expense_tracker/services/service_providers.dart';
 import 'package:expense_tracker/theme/app_colors.dart';
@@ -12,6 +15,7 @@ import 'package:expense_tracker/theme/app_text_styles.dart';
 import 'package:expense_tracker/theme/category_colors.dart';
 import 'package:expense_tracker/widgets/hero_card.dart';
 import 'package:expense_tracker/widgets/icon_tile.dart';
+import 'package:expense_tracker/widgets/round_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -34,6 +38,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   _Step _step = _Step.capture;
   final TextEditingController _budget = TextEditingController();
   bool _finishing = false;
+  bool _invalid = false;
 
   @override
   void dispose() {
@@ -54,14 +59,33 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
 
   Future<void> _finish({required bool withBudget}) async {
     if (_finishing) return;
-    setState(() => _finishing = true);
-    final amount = withBudget ? parseBudget(_budget.text) : null;
-    if (amount != null) {
-      final _ = await ref.read(budgetRepositoryProvider).setMonthly(amount);
+    final typed = _budget.text.trim();
+    final amount = withBudget ? parseBudget(typed) : null;
+    if (withBudget && typed.isNotEmpty && amount == null) {
+      setState(() => _invalid = true);
+      return;
     }
-    final _ = await ref.read(settingsRepositoryProvider).markOnboarded();
+    setState(() => _finishing = true);
+    final l10n = AppLocalizations.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    final saved = amount == null
+        ? null
+        : await ref.read(budgetRepositoryProvider).setMonthly(amount);
+    final done = await ref.read(settingsRepositoryProvider).markOnboarded();
+    final failure = switch ((saved, done)) {
+      (Err(:final failure), _) || (_, Err(:final failure)) => failure,
+      _ => null,
+    };
+    if (!mounted) return;
+    if (failure != null) {
+      setState(() => _finishing = false);
+      messenger
+        ..clearSnackBars()
+        ..showSnackBar(SnackBar(content: Text(failureMessage(l10n, failure))));
+      return;
+    }
     ref.read(hapticsProvider).commit();
-    if (mounted) context.go(Routes.home);
+    context.go(Routes.home);
   }
 
   Future<void> _setUp() async {
@@ -131,8 +155,12 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
             ],
             decoration: InputDecoration(
               labelText: l10n.budgetsAmountLabel,
-              prefixText: '₹ ',
+              prefixText: rupeeFieldPrefix,
+              errorText: _invalid ? l10n.budgetsAmountInvalid : null,
             ),
+            onChanged: (_) {
+              if (_invalid) setState(() => _invalid = false);
+            },
             onSubmitted: (_) => unawaited(_finish(withBudget: true)),
           ),
         ],
@@ -154,10 +182,12 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                   Row(
                     children: [
                       if (_step.index > 0)
-                        IconButton(
+                        RoundIconButton(
+                          icon: Icons.arrow_back_rounded,
                           tooltip: l10n.back,
+                          floating: false,
+                          color: colors.onSurface,
                           onPressed: _back,
-                          icon: const Icon(Icons.arrow_back_rounded),
                         ),
                       const Spacer(),
                       Semantics(
@@ -322,7 +352,7 @@ class _Dots extends StatelessWidget {
     final colors = AppColors.of(context);
     final metrics = AppMetrics.of(context);
     final motion = AppMotion.of(context);
-    final gap = metrics.spaceXs / 2;
+    final gap = metrics.spaceXs;
     return ExcludeSemantics(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

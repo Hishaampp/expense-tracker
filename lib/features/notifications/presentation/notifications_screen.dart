@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:expense_tracker/core/models/notice.dart';
+import 'package:expense_tracker/core/result.dart';
 import 'package:expense_tracker/data/data_providers.dart';
 import 'package:expense_tracker/data/query_providers.dart';
 import 'package:expense_tracker/formatting/relative_time.dart';
 import 'package:expense_tracker/l10n/app_localizations.dart';
+import 'package:expense_tracker/l10n/failure_messages.dart';
 import 'package:expense_tracker/routing/routes.dart';
 import 'package:expense_tracker/services/service_providers.dart';
 import 'package:expense_tracker/theme/app_colors.dart';
@@ -46,9 +48,19 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
     };
     if (_fresh!.isEmpty) return;
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted) return;
-      unawaited(ref.read(noticeRepositoryProvider).markAllRead().then((_) {}));
+      if (mounted) unawaited(_markRead());
     });
+  }
+
+  Future<void> _markRead() async {
+    final l10n = AppLocalizations.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    final result = await ref.read(noticeRepositoryProvider).markAllRead();
+    if (result case Err(:final failure)) {
+      messenger
+        ..clearSnackBars()
+        ..showSnackBar(SnackBar(content: Text(failureMessage(l10n, failure))));
+    }
   }
 
   @override
@@ -112,7 +124,8 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                 },
               ),
             ),
-          ExcludeSemantics(
+          Entrance(
+            index: notices.length,
             child: Text(
               l10n.noticesKeptFor,
               textAlign: TextAlign.center,

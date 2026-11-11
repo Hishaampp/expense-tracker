@@ -40,7 +40,7 @@ class BudgetCard extends StatelessWidget {
     final metrics = AppMetrics.of(context);
     final watched = this.watched;
     final body = switch (safe) {
-      NoBudget() => _Invite(onOpen: onOpen),
+      NoBudget() => const _Invite(),
       final OnTrack s => _Status(
         used: s.used,
         over: false,
@@ -72,21 +72,35 @@ class BudgetCard extends StatelessWidget {
         ),
       ),
     };
+    final said = switch (body) {
+      _Status(:final semanticLabel) => semanticLabel,
+      _ => l10n.budgetCardSetSemantics,
+    };
+    // One node, one tap: the card says everything and opens Budgets.
     return Semantics(
       container: true,
       button: true,
+      label: watched == null
+          ? said
+          : l10n.listPair(
+              said,
+              l10n.homeWatching(watched.name, formatMoney(watched.spent)),
+            ),
       hint: l10n.homeBudgetOpen,
-      child: AppCard(
-        onTap: onOpen,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            body,
-            if (watched != null) ...[
-              SizedBox(height: metrics.spaceMd),
-              _WatchedLine(watched: watched),
+      onTap: onOpen,
+      child: ExcludeSemantics(
+        child: AppCard(
+          onTap: onOpen,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              body,
+              if (watched != null) ...[
+                SizedBox(height: metrics.spaceMd),
+                _WatchedLine(watched: watched),
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );
@@ -135,7 +149,7 @@ class _Status extends StatelessWidget {
               trackColor: colors.surfaceSunken,
               center: over
                   ? Icon(
-                      Icons.priority_high_rounded,
+                      Icons.warning_amber_rounded,
                       color: colors.danger,
                       size: metrics.iconLargeSize,
                     )
@@ -174,9 +188,7 @@ class _Status extends StatelessWidget {
 }
 
 class _Invite extends StatelessWidget {
-  const new({required this.onOpen});
-
-  final VoidCallback onOpen;
+  const new();
 
   @override
   Widget build(BuildContext context) {
@@ -200,11 +212,16 @@ class _Invite extends StatelessWidget {
           ),
         ),
         SizedBox(width: metrics.spaceSm),
-        ExcludeSemantics(
-          child: TextButton(
-            onPressed: onOpen,
-            child: Text(l10n.homeBudgetSetAction),
+        // The whole card is the button; this only says what it does.
+        Text(
+          l10n.homeBudgetSetAction,
+          style: textTheme.labelLarge?.copyWith(
+            color: AppColors.of(context).accentText,
           ),
+        ),
+        Icon(
+          Icons.chevron_right_rounded,
+          color: AppColors.of(context).onSurfaceMuted,
         ),
       ],
     );

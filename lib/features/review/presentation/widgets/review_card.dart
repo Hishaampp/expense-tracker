@@ -110,11 +110,9 @@ class ReviewCard extends StatelessWidget {
       // Bulk selection: the whole card toggles; a box shows the state.
       return Semantics(
         container: true,
+        button: true,
         checked: isPicked,
-        label: l10n.reviewSelectableSemantics(
-          label,
-          isPicked ? l10n.selected : l10n.reviewNotSelected,
-        ),
+        label: label,
         onTap: onToggleSelected,
         child: ExcludeSemantics(
           child: AppCard(
@@ -142,29 +140,7 @@ class ReviewCard extends StatelessWidget {
           Semantics(
             container: true,
             label: label,
-            child: ExcludeSemantics(
-              child: Row(
-                children: [
-                  IconTile(icon: style.icon, color: style.color),
-                  SizedBox(width: metrics.spaceMd),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(payee, style: textTheme.bodyLarge),
-                        Text(details, style: textTheme.bodySmall),
-                      ],
-                    ),
-                  ),
-                  SizedBox(width: metrics.spaceMd),
-                  Text(
-                    amount,
-                    style: AppTextStyles.of(context).amountRow
-                        .copyWith(color: tone.colorIn(colors)),
-                  ),
-                ],
-              ),
-            ),
+            child: ExcludeSemantics(child: summary),
           ),
           SizedBox(height: metrics.spaceMd),
           Wrap(
@@ -183,29 +159,45 @@ class ReviewCard extends StatelessWidget {
           if (item.canLearn && onToggleLearn != null)
             Padding(
               padding: EdgeInsetsDirectional.only(top: metrics.spaceSm),
-              child: MergeSemantics(
-                child: Pressable(
-                  onTap: onToggleLearn,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(metrics.radiusTile),
-                  ),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minHeight: metrics.minTapTarget,
+              // One node, one tap, like the other rows: a box icon shows
+              // the state, the screen reader hears "checked".
+              child: Semantics(
+                container: true,
+                button: true,
+                checked: learn,
+                label: l10n.reviewLearn(payee),
+                onTap: onToggleLearn,
+                child: ExcludeSemantics(
+                  child: Pressable(
+                    onTap: onToggleLearn,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                        metrics.radiusTileLarge,
+                      ),
                     ),
-                    child: Row(
-                      children: [
-                        Checkbox(
-                          value: learn,
-                          onChanged: (_) => onToggleLearn?.call(),
-                        ),
-                        Expanded(
-                          child: Text(
-                            l10n.reviewLearn(payee),
-                            style: textTheme.bodyMedium,
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minHeight: metrics.minTapTarget,
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            learn
+                                ? Icons.check_box_rounded
+                                : Icons.check_box_outline_blank_rounded,
+                            color: learn
+                                ? colors.accent
+                                : colors.onSurfaceMuted,
                           ),
-                        ),
-                      ],
+                          SizedBox(width: metrics.spaceSm),
+                          Expanded(
+                            child: Text(
+                              l10n.reviewLearn(payee),
+                              style: textTheme.bodyMedium,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

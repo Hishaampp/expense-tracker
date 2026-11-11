@@ -15,7 +15,7 @@ void main() {
     await tester.enterText(find.byType(TextField), 'swig');
     await tester.pumpAndSettle();
     expect(
-      find.text('2 results · Searching the last 12 months'),
+      find.text('2 results, searching the last 12 months'),
       findsOneWidget,
     );
     expect(find.text('Chai Point'), findsNothing);

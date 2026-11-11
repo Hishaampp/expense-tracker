@@ -91,8 +91,7 @@ class WeeklyReviewScreen extends ConsumerWidget {
       tooltip: l10n.back,
       floating: false,
       color: colors.onSurface,
-      onPressed: () =>
-          context.canPop() ? context.pop() : context.go(Routes.home),
+      onPressed: context.pop,
     );
     if (state == null) {
       return LargeTitlePage(
@@ -148,7 +147,7 @@ class WeeklyReviewScreen extends ConsumerWidget {
                   SizedBox(height: metrics.spaceSm),
                   Align(
                     alignment: AlignmentDirectional.centerStart,
-                    child: FilledButton.tonal(
+                    child: OutlinedButton(
                       onPressed: () => unawaited(context.push(Routes.review)),
                       child: Text(l10n.weeklyOpenReview),
                     ),
@@ -186,7 +185,7 @@ class WeeklyReviewScreen extends ConsumerWidget {
                             unawaited(_watch(context, ref, c.id, c.name)),
                       ),
                     ChoicePill(
-                      label: l10n.weeklyWatchMore,
+                      label: l10n.quickAddMore,
                       icon: Icons.more_horiz_rounded,
                       selected: false,
                       onTap: () => unawaited(_more(context, ref, state)),

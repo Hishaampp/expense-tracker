@@ -87,19 +87,26 @@ class ActivityScreen extends ConsumerWidget {
       ),
       actions: [add],
       children: [
-        ActivitySearch(
-          state: state,
-          onChanged: ref.read(activityFilterProvider.notifier).set,
+        Entrance(
+          child: ActivitySearch(
+            state: state,
+            onChanged: ref.read(activityFilterProvider.notifier).set,
+          ),
         ),
         if (state.filter.isActive)
-          Semantics(
-            liveRegion: true,
-            child: Text(
-              state.filter.searches
-                  ? '${l10n.activityResults(state.count)} · '
-                        '${l10n.activitySearchingAll}'
-                  : l10n.activityResults(state.count),
-              style: Theme.of(context).textTheme.bodySmall,
+          Entrance(
+            index: 1,
+            child: Semantics(
+              liveRegion: true,
+              child: Text(
+                state.filter.searches
+                    ? l10n.listPair(
+                        l10n.activityResults(state.count),
+                        l10n.activitySearchingAll,
+                      )
+                    : l10n.activityResults(state.count),
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
             ),
           ),
         if (state.isEmpty && state.filter.isActive)
@@ -130,7 +137,7 @@ class ActivityScreen extends ConsumerWidget {
           for (final (index, group) in state.days.indexed)
             Entrance(
               key: ValueKey(group.day),
-              index: index,
+              index: index + 2,
               child: DayCard(
                 group: group,
                 onOpenTransaction: (id) =>

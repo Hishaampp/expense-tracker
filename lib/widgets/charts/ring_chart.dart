@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:expense_tracker/theme/app_motion.dart';
+import 'package:expense_tracker/theme/chart_style.dart';
 import 'package:flutter/material.dart';
 
 /// One slice of a [RingChart].
@@ -47,7 +48,7 @@ class RingChart extends StatelessWidget {
   Widget build(BuildContext context) {
     final motion = AppMotion.of(context);
     // The centre content keeps clear of the ring by half a stroke.
-    final inset = stroke * 1.5;
+    final inset = stroke * ChartStyle.ringInsetStrokes;
     return SizedBox.square(
       dimension: size,
       child: Stack(
@@ -109,7 +110,9 @@ class _RingPainter extends CustomPainter {
     if (whole <= 0) return;
     // A small gap between slices reads as separate pieces; none for a
     // single progress arc.
-    final gap = segments.length > 1 ? stroke / (size.width / 2) * 0.35 : 0.0;
+    final gap = segments.length > 1
+        ? stroke / (size.width / 2) * ChartStyle.sliceGap
+        : 0.0;
     var start = -math.pi / 2;
     final reach = math.pi * 2 * progress;
     for (var i = 0; i < segments.length; i++) {

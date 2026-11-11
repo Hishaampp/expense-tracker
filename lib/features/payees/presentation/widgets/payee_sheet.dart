@@ -108,76 +108,83 @@ class _PayeeSheetState extends State<PayeeSheet> {
       ),
       child: SheetFrame(
         title: widget.entry.name,
-        subtitle: widget.entry.payeeKey,
-        child: Padding(
-          padding: EdgeInsetsDirectional.symmetric(horizontal: metrics.spaceLg),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TextField(
-                controller: _name,
-                textCapitalization: TextCapitalization.words,
-                textInputAction: TextInputAction.done,
-                decoration: InputDecoration(
-                  labelText: l10n.payeesNameLabel,
-                  hintText: l10n.payeesNameHint,
-                ),
+        // A UPI id helps tell payees apart; an internal name key does not.
+        subtitle: widget.entry.payeeKey.contains('@')
+            ? widget.entry.payeeKey
+            : null,
+        spreadContent: true,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            TextField(
+              controller: _name,
+              textCapitalization: TextCapitalization.words,
+              textInputAction: TextInputAction.done,
+              decoration: InputDecoration(
+                labelText: l10n.payeesNameLabel,
+                hintText: l10n.payeesNameHint,
               ),
+            ),
+            SizedBox(height: metrics.spaceLg),
+            Semantics(
+              header: true,
+              child: Text(l10n.payeesCategory, style: textTheme.titleMedium),
+            ),
+            SizedBox(height: metrics.spaceSm),
+            Wrap(
+              spacing: metrics.spaceSm,
+              runSpacing: metrics.spaceSm,
+              children: [
+                ChoicePill(
+                  label: l10n.payeesAskEachTime,
+                  selected: category == null,
+                  onTap: () => setState(() => _categoryId = null),
+                ),
+                ChoicePill(
+                  label: category?.name ?? l10n.quickAddMore,
+                  icon: Icons.category_rounded,
+                  selected: category != null,
+                  onTap: () => unawaited(_pickCategory()),
+                ),
+              ],
+            ),
+            if (widget.rooms.isNotEmpty || room != null) ...[
               SizedBox(height: metrics.spaceLg),
-              Text(l10n.payeesCategory, style: textTheme.labelLarge),
+              Semantics(
+                header: true,
+                child: Text(l10n.payeesRoom, style: textTheme.titleMedium),
+              ),
               SizedBox(height: metrics.spaceSm),
               Wrap(
                 spacing: metrics.spaceSm,
                 runSpacing: metrics.spaceSm,
                 children: [
                   ChoicePill(
-                    label: l10n.payeesAskEachTime,
-                    selected: category == null,
-                    onTap: () => setState(() => _categoryId = null),
+                    label: l10n.payeesNoRoom,
+                    selected: _roomId == null,
+                    onTap: () => setState(() => _roomId = null),
                   ),
                   ChoicePill(
-                    label: category?.name ?? l10n.quickAddMore,
-                    icon: Icons.category_rounded,
-                    selected: category != null,
-                    onTap: () => unawaited(_pickCategory()),
+                    label: room?.name ?? l10n.quickAddPickRoom,
+                    icon: Icons.luggage_rounded,
+                    selected: room != null,
+                    onTap: () => unawaited(_pickRoom()),
                   ),
                 ],
               ),
-              if (widget.rooms.isNotEmpty || room != null) ...[
-                SizedBox(height: metrics.spaceLg),
-                Text(l10n.payeesRoom, style: textTheme.labelLarge),
-                SizedBox(height: metrics.spaceSm),
-                Wrap(
-                  spacing: metrics.spaceSm,
-                  runSpacing: metrics.spaceSm,
-                  children: [
-                    ChoicePill(
-                      label: l10n.payeesNoRoom,
-                      selected: _roomId == null,
-                      onTap: () => setState(() => _roomId = null),
-                    ),
-                    ChoicePill(
-                      label: room?.name ?? l10n.quickAddPickRoom,
-                      icon: Icons.luggage_rounded,
-                      selected: room != null,
-                      onTap: () => unawaited(_pickRoom()),
-                    ),
-                  ],
-                ),
-              ],
-              SizedBox(height: metrics.spaceXl),
-              FilledButton(onPressed: _save, child: Text(l10n.payeesSave)),
-              if (widget.entry.rule != null) ...[
-                SizedBox(height: metrics.spaceSm),
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop<PayeeEdit>((
-                    rule: PayeeRule(payeeKey: widget.entry.payeeKey),
-                  )),
-                  child: Text(l10n.payeesForget),
-                ),
-              ],
             ],
-          ),
+            SizedBox(height: metrics.spaceXl),
+            FilledButton(onPressed: _save, child: Text(l10n.payeesSave)),
+            if (widget.entry.rule != null) ...[
+              SizedBox(height: metrics.spaceSm),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop<PayeeEdit>((
+                  rule: PayeeRule(payeeKey: widget.entry.payeeKey),
+                )),
+                child: Text(l10n.payeesForget),
+              ),
+            ],
+          ],
         ),
       ),
     );

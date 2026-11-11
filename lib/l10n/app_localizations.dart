@@ -2025,12 +2025,6 @@ abstract class AppLocalizations {
   /// **'Stats'**
   String get statsTitle;
 
-  /// No description provided for @statsWhereItWent.
-  ///
-  /// In en, this message translates to:
-  /// **'Where it went'**
-  String get statsWhereItWent;
-
   /// No description provided for @statsDonutSemantics.
   ///
   /// In en, this message translates to:
@@ -2228,12 +2222,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Not watching a category'**
   String get weeklyWatchCleared;
-
-  /// No description provided for @weeklyWatchMore.
-  ///
-  /// In en, this message translates to:
-  /// **'More'**
-  String get weeklyWatchMore;
 
   /// No description provided for @notifyAlertsChannel.
   ///
@@ -2474,18 +2462,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Choose category'**
   String get reviewChooseCategory;
-
-  /// No description provided for @reviewSelectableSemantics.
-  ///
-  /// In en, this message translates to:
-  /// **'{label}. {state}'**
-  String reviewSelectableSemantics(String label, String state);
-
-  /// No description provided for @reviewNotSelected.
-  ///
-  /// In en, this message translates to:
-  /// **'not selected'**
-  String get reviewNotSelected;
 
   /// No description provided for @payeesTitle.
   ///
@@ -2736,7 +2712,7 @@ abstract class AppLocalizations {
   /// No description provided for @activitySearchingAll.
   ///
   /// In en, this message translates to:
-  /// **'Searching the last 12 months'**
+  /// **'searching the last 12 months'**
   String get activitySearchingAll;
 
   /// No description provided for @activityResults.
@@ -2858,6 +2834,29 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Step {step} of {total}'**
   String onboardStep(int step, int total);
+
+  /// No description provided for @budgetsCategoryOverSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{name}: {spent} spent of {budget}, over by {over}. Change'**
+  String budgetsCategoryOverSemantics(
+    String name,
+    String spent,
+    String budget,
+    String over,
+  );
+
+  /// No description provided for @statsWeekSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Your week. This week against last week, and who you paid most.'**
+  String get statsWeekSemantics;
+
+  /// No description provided for @budgetCardSetSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Set a monthly budget. See what\'s safe to spend each day.'**
+  String get budgetCardSetSemantics;
 }
 
 class _AppLocalizationsDelegate
