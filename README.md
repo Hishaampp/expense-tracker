@@ -78,4 +78,5 @@ motion live only in `lib/theme/`.
 | 6 | Budgets & Stats | built; needs a check of real alerts and the Sunday review on a phone |
 | 7 | Learning & polish | built; needs a week of real use to check the learning |
 | 8 | Privacy, backup, store readiness | built; final name and a release-build design review still open |
-| 9 | Optional account and end-to-end encrypted sync (Supabase) | email sign-in built; needs the Supabase setup in docs/PHASE_9_PLAN.md |
+| 9 | Optional account and end-to-end encrypted sync (Supabase) | built: email, Google; Apple needs the paid Apple account |
+| 10 | Income and balance: month result, carried balance, Home balance card | built |

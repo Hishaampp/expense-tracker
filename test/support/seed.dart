@@ -13,6 +13,7 @@ Future<void> seedExpense(
   String? roomId,
   String reviewStatus = 'confirmed',
   String origin = 'manual',
+  String kind = 'expense',
 }) {
   final at = local.toUtc().millisecondsSinceEpoch;
   return db.customInsert(
@@ -23,7 +24,7 @@ Future<void> seedExpense(
     variables: [
       for (final v in [
         'seed-${_id++}',
-        'expense',
+        kind,
         rupees * 100,
         at,
         'account_cash',
@@ -42,6 +43,14 @@ Future<void> seedExpense(
     updates: {db.transactions},
   );
 }
+
+/// Saves income at [local] time straight into the database.
+Future<void> seedIncome(
+  AppDatabase db,
+  DateTime local,
+  int rupees, {
+  String category = 'cat_salary',
+}) => seedExpense(db, local, rupees, category: category, kind: 'income');
 
 /// Saves a Room straight into the database.
 Future<void> seedRoom(

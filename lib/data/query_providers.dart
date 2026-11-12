@@ -9,6 +9,7 @@ import 'package:expense_tracker/core/models/payee_rule.dart';
 import 'package:expense_tracker/core/models/raw_capture.dart';
 import 'package:expense_tracker/core/models/retention.dart';
 import 'package:expense_tracker/core/models/room.dart';
+import 'package:expense_tracker/core/money.dart';
 import 'package:expense_tracker/core/month_period.dart';
 import 'package:expense_tracker/data/data_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -64,6 +65,21 @@ monthTransactionsProvider = StreamProvider.autoDispose
     .family<List<MoneyTransaction>, MonthPeriod>(
       (ref, period) =>
           ref.watch(transactionRepositoryProvider).watchInPeriod(period),
+    );
+
+/// When the first income was received, UTC milliseconds; null when none
+/// is recorded (Phase 10). Live.
+final firstIncomeAtProvider = StreamProvider<int?>(
+  (ref) => ref.watch(transactionRepositoryProvider).watchFirstIncomeAt(),
+);
+
+/// Money in minus money spent over a UTC millisecond range (Phase 10).
+/// Live.
+final StreamProviderFamily<Money, ({int start, int end})> netBetweenProvider =
+    StreamProvider.autoDispose.family<Money, ({int start, int end})>(
+      (ref, range) => ref
+          .watch(transactionRepositoryProvider)
+          .watchNetBetween(range.start, range.end),
     );
 
 /// How many payments wait in the review inbox. Live.

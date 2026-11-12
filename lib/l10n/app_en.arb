@@ -1629,5 +1629,94 @@
   "onboardPaydayOther": "Another day",
   "onboardSyncTitle": "Keep your data safe if you change phones",
   "onboardSyncBody": "Optional. Sign in to sync between phones. Your data is locked on this phone before it's sent, so no one else can read it.",
-  "onboardSyncEmail": "Use email instead"
+  "onboardSyncEmail": "Use email instead",
+  "heroLeftThisMonth": "You have {amount} left this month.",
+  "@heroLeftThisMonth": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "heroLeftSince": "You have {amount} left since {date}.",
+  "@heroLeftSince": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "heroShortThisMonth": "You've spent {amount} more than you had this month.",
+  "@heroShortThisMonth": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "heroShortSince": "You've spent {amount} more than you had since {date}.",
+  "@heroShortSince": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "heroSavedIn": "You saved {amount} in {month}.",
+  "@heroSavedIn": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "month": {
+        "type": "String"
+      }
+    }
+  },
+  "heroOverspentIn": "You spent {amount} more than came in during {month}.",
+  "@heroOverspentIn": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "month": {
+        "type": "String"
+      }
+    }
+  },
+  "heroBalanceUsed": "{spent} spent of {available}",
+  "@heroBalanceUsed": {
+    "placeholders": {
+      "spent": {
+        "type": "String"
+      },
+      "available": {
+        "type": "String"
+      }
+    }
+  },
+  "heroSpent": "Spent",
+  "heroSpentSemantics": "{amount} spent",
+  "@heroSpentSemantics": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "heroCarried": "Carried over",
+  "heroCarriedSemantics": "{amount} carried over from earlier months",
+  "@heroCarriedSemantics": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  }
 }

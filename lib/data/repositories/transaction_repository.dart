@@ -48,6 +48,35 @@ class TransactionRepository {
     );
   }
 
+  /// When the first income was received, UTC milliseconds, or null when
+  /// none is recorded. Live.
+  Stream<int?> watchFirstIncomeAt() => _db
+      .customSelect(
+        'SELECT min(occurred_at) AS first FROM transactions '
+        "WHERE is_hidden = 0 AND kind = 'income'",
+        readsFrom: {_db.transactions},
+      )
+      .watchSingle()
+      .map((row) => row.read<int?>('first'));
+
+  /// Money in minus money spent from [startUtcMs] (inclusive) to
+  /// [endUtcMs] (exclusive). Hidden transactions and transfers count for
+  /// nothing; a refund gives money back. Live.
+  Stream<Money> watchNetBetween(int startUtcMs, int endUtcMs) => _db
+      .customSelect(
+        'SELECT coalesce(sum(CASE kind '
+        "WHEN 'income' THEN amount_paise "
+        "WHEN 'refund' THEN amount_paise "
+        "WHEN 'expense' THEN -amount_paise "
+        'ELSE 0 END), 0) AS net '
+        'FROM transactions WHERE is_hidden = 0 '
+        'AND occurred_at >= ? AND occurred_at < ?',
+        variables: [Variable.withInt(startUtcMs), Variable.withInt(endUtcMs)],
+        readsFrom: {_db.transactions},
+      )
+      .watchSingle()
+      .map((row) => Money(row.read<int>('net')));
+
   /// Every transaction, oldest first, read once (for CSV export).
   Future<List<MoneyTransaction>> all() async {
     final query = _db.select(_db.transactions)

@@ -2132,4 +2132,55 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onboardSyncEmail => 'Use email instead';
+
+  @override
+  String heroLeftThisMonth(String amount) {
+    return 'You have $amount left this month.';
+  }
+
+  @override
+  String heroLeftSince(String amount, String date) {
+    return 'You have $amount left since $date.';
+  }
+
+  @override
+  String heroShortThisMonth(String amount) {
+    return 'You\'ve spent $amount more than you had this month.';
+  }
+
+  @override
+  String heroShortSince(String amount, String date) {
+    return 'You\'ve spent $amount more than you had since $date.';
+  }
+
+  @override
+  String heroSavedIn(String amount, String month) {
+    return 'You saved $amount in $month.';
+  }
+
+  @override
+  String heroOverspentIn(String amount, String month) {
+    return 'You spent $amount more than came in during $month.';
+  }
+
+  @override
+  String heroBalanceUsed(String spent, String available) {
+    return '$spent spent of $available';
+  }
+
+  @override
+  String get heroSpent => 'Spent';
+
+  @override
+  String heroSpentSemantics(String amount) {
+    return '$amount spent';
+  }
+
+  @override
+  String get heroCarried => 'Carried over';
+
+  @override
+  String heroCarriedSemantics(String amount) {
+    return '$amount carried over from earlier months';
+  }
 }
