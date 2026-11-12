@@ -221,6 +221,11 @@ final class QuickAddState {
     return picks;
   }
 
+  /// Whether the Spent / Money in switch is offered: for a new entry, or
+  /// an edit of one or the other (Phase 10).
+  bool get offersKindSwitch =>
+      kind == TransactionKind.expense || kind == TransactionKind.income;
+
   /// Whether a "More" tile is needed.
   bool get hasMore => categoriesForKind.length > quickPickCount;
 
@@ -233,6 +238,7 @@ final class QuickAddState {
     TransactionKind? kind,
     KeypadAmount? amount,
     String? categoryId,
+    bool clearCategory = false,
     DateTime? occurredAt,
     String? note,
     CaptureDraft? draft,
@@ -253,7 +259,7 @@ final class QuickAddState {
       roomPicked: roomPicked ?? this.roomPicked,
       kind: kind ?? this.kind,
       amount: amount ?? this.amount,
-      categoryId: categoryId ?? this.categoryId,
+      categoryId: clearCategory ? null : categoryId ?? this.categoryId,
       occurredAt: occurredAt ?? this.occurredAt,
       note: note ?? this.note,
       draft: draft ?? this.draft,
@@ -410,6 +416,23 @@ class QuickAddNotifier extends AsyncNotifier<QuickAddState> {
     final current = state.value;
     if (current == null || current.isSaving) return;
     state = AsyncData(change(current));
+  }
+
+  /// Switches between spending and money in (Phase 10). The categories
+  /// change to that kind's; money in is never in a Room.
+  void setKind(TransactionKind kind) {
+    final current = state.value;
+    if (current == null || current.kind == kind) return;
+    if (!current.offersKindSwitch) return;
+    ref.read(hapticsProvider).select();
+    _update((s) {
+      final next = s.copyWith(
+        kind: kind,
+        clearRoom: kind != TransactionKind.expense,
+      );
+      final fits = next.categoriesForKind.any((c) => c.id == s.categoryId);
+      return fits ? next : next.copyWith(clearCategory: true);
+    });
   }
 
   /// Puts the expense in Room [roomId], or in none with null.

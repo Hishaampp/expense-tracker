@@ -18,9 +18,11 @@ import 'package:expense_tracker/widgets/empty_state_view.dart';
 import 'package:expense_tracker/widgets/entrance.dart';
 import 'package:expense_tracker/widgets/error_state_view.dart';
 import 'package:expense_tracker/widgets/large_title_page.dart';
+import 'package:expense_tracker/widgets/option_sheet.dart';
 import 'package:expense_tracker/widgets/pulsing_placeholder.dart';
 import 'package:expense_tracker/widgets/room_tile.dart';
 import 'package:expense_tracker/widgets/round_icon_button.dart';
+import 'package:expense_tracker/widgets/sheet_frame.dart';
 import 'package:expense_tracker/widgets/transaction_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -48,6 +50,50 @@ class RoomDetailScreen extends ConsumerWidget {
       ..showSnackBar(
         SnackBar(
           content: Text(failure == null ? done : failureMessage(l10n, failure)),
+        ),
+      );
+  }
+
+  // Asks whether the payments go too, then deletes and leaves the page.
+  // Dismissing the sheet changes nothing.
+  Future<void> _delete(
+    BuildContext context,
+    RoomDetailNotifier notifier,
+    String name,
+  ) async {
+    final l10n = AppLocalizations.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    final picked = await showAppSheet<OptionPick>(
+      context,
+      OptionSheet(
+        title: l10n.roomDeleteTitle(name),
+        subtitle: l10n.roomDeleteBody,
+        options: [
+          (
+            value: _keepPayments,
+            label: l10n.roomDeleteKeep,
+            icon: Icons.receipt_long_rounded,
+          ),
+          (
+            value: _withPayments,
+            label: l10n.roomDeleteAll,
+            icon: Icons.delete_outline_rounded,
+          ),
+        ],
+        selected: null,
+      ),
+    );
+    final value = picked?.value;
+    if (value == null || !context.mounted) return;
+    final failure = await notifier.delete(withPayments: value == _withPayments);
+    if (failure == null && context.mounted) context.pop();
+    messenger
+      ..clearSnackBars()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(
+            failure == null ? l10n.roomDeleted : failureMessage(l10n, failure),
+          ),
         ),
       );
   }
@@ -177,6 +223,14 @@ class RoomDetailScreen extends ConsumerWidget {
                   ),
                   child: Text(l10n.roomRestore),
                 ),
+              TextButton(
+                onPressed: () =>
+                    unawaited(_delete(context, notifier, room.name)),
+                child: Text(
+                  l10n.roomDelete,
+                  style: TextStyle(color: colors.danger),
+                ),
+              ),
             ],
           ),
         ),
@@ -184,6 +238,10 @@ class RoomDetailScreen extends ConsumerWidget {
     );
   }
 }
+
+// The delete sheet's choices.
+const String _keepPayments = 'keep';
+const String _withPayments = 'all';
 
 /// One day: a heading with the day's total, then its rows in a card.
 class _DaySection extends StatelessWidget {

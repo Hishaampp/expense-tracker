@@ -48,6 +48,7 @@
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <data android:scheme="expensetracker" android:host="login-callback"/>
+                <data android:scheme="expensetracker" android:host="add"/>
             </intent-filter>
             <!-- Links are read by Supabase, not turned into app routes. -->
             <meta-data

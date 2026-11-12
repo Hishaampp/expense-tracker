@@ -3,5 +3,10 @@
 // Dart: lib/core/app_identity.dart.
 APP_BUNDLE_ID = com.hishaam.expensetracker
 APP_DISPLAY_NAME = Expenses
+// Apple signing team for every target (app, Share Extension, widget),
+// from a local file git ignores, so Xcode never writes it into
+// project.pbxproj. Create ios/Flutter/Signing.xcconfig with one line:
+//   DEVELOPMENT_TEAM = <your 10-character Team ID>
+#include? "Signing.xcconfig"
 // App Group shared with the App Intent / Share Extension capture queue (spec §6.3).
 APP_GROUP_ID = group.$(APP_BUNDLE_ID).capture

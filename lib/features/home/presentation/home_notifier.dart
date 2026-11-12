@@ -41,6 +41,7 @@ final class HomeState {
     this.captureMayBeOff = false,
     this.safe = const NoBudget(),
     this.watched,
+    this.carried = Money.zero,
   });
 
   /// How many top categories Home lists.
@@ -88,6 +89,24 @@ final class HomeState {
   /// The category the user chose to watch, for the current month only.
   final WatchedCategory? watched;
 
+  /// What carried into the month from earlier months: money in minus
+  /// money spent since the month of the first income (Phase 10).
+  final Money carried;
+
+  /// What is left: [carried] plus this month's money in, minus what it
+  /// spent.
+  Money get balance => carried + summary.result;
+
+  /// What the month had to spend: [carried] (when positive) plus its money
+  /// in.
+  Money get available =>
+      (carried.isPositive ? carried : Money.zero) + summary.moneyIn;
+
+  /// Whether to lead with the balance: once any income is recorded, this
+  /// month or before. Someone tracking only spending keeps the spending
+  /// view.
+  bool get showsBalance => summary.moneyIn.isPositive || carried != Money.zero;
+
   /// Whether this is the month in progress.
   bool get isCurrent => offset == 0;
 
@@ -127,6 +146,21 @@ class HomeNotifier extends AsyncNotifier<HomeState> {
       },
     );
     final visible = transactions.where((t) => !t.isHidden);
+    // The balance starts with the month of the first income, so months of
+    // spending tracked before any income do not count against it.
+    final firstIncomeAt = await ref.watch(firstIncomeAtProvider.future);
+    final balanceStart = firstIncomeAt == null
+        ? null
+        : MonthPeriod.containing(
+            DateTime.fromMillisecondsSinceEpoch(firstIncomeAt),
+            startDay: startDay,
+          ).startUtcMs;
+    final carried = balanceStart == null || balanceStart >= period.startUtcMs
+        ? Money.zero
+        : await ref.watch(
+            netBetweenProvider((start: balanceStart, end: period.startUtcMs))
+                .future,
+          );
     final plan = await ref.watch(budgetPlanProvider.future);
     final watchedId = await ref.watch(watchedCategoryProvider.future);
     WatchedCategory? watched;
@@ -151,6 +185,7 @@ class HomeNotifier extends AsyncNotifier<HomeState> {
       }
     }
     return HomeState(
+      carried: carried,
       safe: offset == 0
           ? SafeToSpend.of(
               budget: plan.monthly,

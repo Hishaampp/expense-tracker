@@ -3409,6 +3409,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Use email instead'**
   String get onboardSyncEmail;
+
+  /// No description provided for @heroLeftThisMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'You have {amount} left this month.'**
+  String heroLeftThisMonth(String amount);
+
+  /// No description provided for @heroLeftSince.
+  ///
+  /// In en, this message translates to:
+  /// **'You have {amount} left since {date}.'**
+  String heroLeftSince(String amount, String date);
+
+  /// No description provided for @heroShortThisMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve spent {amount} more than you had this month.'**
+  String heroShortThisMonth(String amount);
+
+  /// No description provided for @heroShortSince.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve spent {amount} more than you had since {date}.'**
+  String heroShortSince(String amount, String date);
+
+  /// No description provided for @heroSavedIn.
+  ///
+  /// In en, this message translates to:
+  /// **'You saved {amount} in {month}.'**
+  String heroSavedIn(String amount, String month);
+
+  /// No description provided for @heroOverspentIn.
+  ///
+  /// In en, this message translates to:
+  /// **'You spent {amount} more than came in during {month}.'**
+  String heroOverspentIn(String amount, String month);
+
+  /// No description provided for @heroBalanceUsed.
+  ///
+  /// In en, this message translates to:
+  /// **'{spent} spent of {available}'**
+  String heroBalanceUsed(String spent, String available);
+
+  /// No description provided for @heroSpent.
+  ///
+  /// In en, this message translates to:
+  /// **'Spent'**
+  String get heroSpent;
+
+  /// No description provided for @heroSpentSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} spent'**
+  String heroSpentSemantics(String amount);
+
+  /// No description provided for @heroCarried.
+  ///
+  /// In en, this message translates to:
+  /// **'Carried over'**
+  String get heroCarried;
+
+  /// No description provided for @heroCarriedSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} carried over from earlier months'**
+  String heroCarriedSemantics(String amount);
+
+  /// No description provided for @roomDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Room'**
+  String get roomDelete;
+
+  /// No description provided for @roomDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete {name}?'**
+  String roomDeleteTitle(String name);
+
+  /// No description provided for @roomDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Kept payments go back into your normal month. This can\'t be undone.'**
+  String get roomDeleteBody;
+
+  /// No description provided for @roomDeleteKeep.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete the Room, keep its payments'**
+  String get roomDeleteKeep;
+
+  /// No description provided for @roomDeleteAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete the Room and its payments'**
+  String get roomDeleteAll;
+
+  /// No description provided for @roomDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Room deleted'**
+  String get roomDeleted;
 }
 
 class _AppLocalizationsDelegate

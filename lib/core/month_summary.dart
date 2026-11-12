@@ -109,6 +109,10 @@ final class MonthSummary {
   /// Income received.
   final Money moneyIn;
 
+  /// What the month itself left: money in minus money spent. Negative
+  /// when more went out than came in (Phase 10).
+  Money get result => moneyIn - spent;
+
   /// Spending per category, largest first. A null id is "uncategorised".
   final List<CategorySpend> byCategory;
 

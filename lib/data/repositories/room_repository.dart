@@ -171,6 +171,44 @@ class RoomRepository {
     }
   }
 
+  /// Deletes [room] in one transaction. With [withPayments] its payments
+  /// go too; otherwise they stay and leave the Room, back in the normal
+  /// month. Payee rules that sent payments to it stop doing so either way.
+  @useResult
+  Future<Result<Room, StoreFailure>> delete(
+    Room room, {
+    required bool withPayments,
+  }) {
+    return _write('room.delete', room, () {
+      return _db.transaction(() async {
+        // Explicit writes rather than relying on ON DELETE SET NULL, so
+        // the change is stamped and queued for sync like any other edit.
+        final now = _clock.now().toUtc().millisecondsSinceEpoch;
+        if (withPayments) {
+          await (_db.delete(
+            _db.transactions,
+          )..where((t) => t.roomId.equals(room.id))).go();
+        } else {
+          await (_db.update(
+            _db.transactions,
+          )..where((t) => t.roomId.equals(room.id))).write(
+            TransactionsCompanion(
+              roomId: const Value(null),
+              updatedAt: Value(now),
+            ),
+          );
+        }
+        await (_db.update(_db.payeeRules)
+              ..where((r) => r.roomId.equals(room.id)))
+            .write(const PayeeRulesCompanion(roomId: Value(null)));
+        final removed = await (_db.delete(
+          _db.rooms,
+        )..where((r) => r.id.equals(room.id))).go();
+        return removed > 0;
+      });
+    });
+  }
+
   Future<Result<Room, StoreFailure>> _write(
     String event,
     Room room,
