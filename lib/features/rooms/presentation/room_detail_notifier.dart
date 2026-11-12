@@ -103,6 +103,23 @@ class RoomDetailNotifier extends AsyncNotifier<RoomDetailState?> {
   Future<StoreFailure?> archive() =>
       _save((r) => r.copyWith(status: RoomStatus.archived));
 
+  /// Deletes the Room; with [withPayments] its payments too. Returns the
+  /// failure, or null.
+  Future<StoreFailure?> delete({required bool withPayments}) async {
+    final room = state.value?.room;
+    if (room == null) return null;
+    final result = await ref
+        .read(roomRepositoryProvider)
+        .delete(room, withPayments: withPayments);
+    switch (result) {
+      case Ok():
+        ref.read(hapticsProvider).commit();
+        return null;
+      case Err(:final failure):
+        return failure;
+    }
+  }
+
   /// Moves the Room back to active. Returns the failure, or null.
   Future<StoreFailure?> restore() =>
       _save((r) => r.copyWith(status: RoomStatus.active));

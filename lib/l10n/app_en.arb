@@ -1718,5 +1718,18 @@
         "type": "String"
       }
     }
-  }
+  },
+  "roomDelete": "Delete Room",
+  "roomDeleteTitle": "Delete {name}?",
+  "@roomDeleteTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "roomDeleteBody": "Kept payments go back into your normal month. This can't be undone.",
+  "roomDeleteKeep": "Delete the Room, keep its payments",
+  "roomDeleteAll": "Delete the Room and its payments",
+  "roomDeleted": "Room deleted"
 }

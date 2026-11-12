@@ -2183,4 +2183,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String heroCarriedSemantics(String amount) {
     return '$amount carried over from earlier months';
   }
+
+  @override
+  String get roomDelete => 'Delete Room';
+
+  @override
+  String roomDeleteTitle(String name) {
+    return 'Delete $name?';
+  }
+
+  @override
+  String get roomDeleteBody =>
+      'Kept payments go back into your normal month. This can\'t be undone.';
+
+  @override
+  String get roomDeleteKeep => 'Delete the Room, keep its payments';
+
+  @override
+  String get roomDeleteAll => 'Delete the Room and its payments';
+
+  @override
+  String get roomDeleted => 'Room deleted';
 }
