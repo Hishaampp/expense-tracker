@@ -1,3 +1,4 @@
+import 'package:expense_tracker/core/models/transaction_kind.dart';
 import 'package:expense_tracker/features/quick_add/presentation/quick_add_notifier.dart';
 import 'package:expense_tracker/features/quick_add/presentation/widgets/amount_display.dart';
 import 'package:expense_tracker/features/quick_add/presentation/widgets/capture_draft_card.dart';
@@ -12,6 +13,7 @@ import 'package:expense_tracker/l10n/failure_messages.dart';
 import 'package:expense_tracker/theme/app_colors.dart';
 import 'package:expense_tracker/theme/app_metrics.dart';
 import 'package:expense_tracker/widgets/category/category_grid.dart';
+import 'package:expense_tracker/widgets/choice_pill.dart';
 import 'package:flutter/material.dart';
 
 /// The Quick Add layout: big amount, Cash/date/note pills, the most-used
@@ -28,6 +30,7 @@ class QuickAddForm extends StatelessWidget {
     required this.onPickDate,
     required this.onEditNote,
     required this.onPickRoom,
+    required this.onPickKind,
     required this.onSave,
     super.key,
   });
@@ -59,6 +62,9 @@ class QuickAddForm extends StatelessWidget {
   /// Opens the Room picker.
   final VoidCallback onPickRoom;
 
+  /// Switches between Spent and Money in.
+  final ValueChanged<TransactionKind> onPickKind;
+
   /// Saves the edits (edit mode).
   final VoidCallback onSave;
 
@@ -84,7 +90,27 @@ class QuickAddForm extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SizedBox(height: metrics.spaceXl),
+                if (state.offersKindSwitch) ...[
+                  SizedBox(height: metrics.spaceMd),
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    spacing: metrics.spaceSm,
+                    runSpacing: metrics.spaceSm,
+                    children: [
+                      for (final (kind, label) in [
+                        (TransactionKind.expense, l10n.kindSpent),
+                        (TransactionKind.income, l10n.kindMoneyIn),
+                      ])
+                        ChoicePill(
+                          label: label,
+                          selected: state.kind == kind,
+                          onTap: () => onPickKind(kind),
+                        ),
+                    ],
+                  ),
+                  SizedBox(height: metrics.spaceLg),
+                ] else
+                  SizedBox(height: metrics.spaceXl),
                 AmountDisplay(
                   amountText: amountText,
                   semanticLabel: l10n.quickAddAmountSemantics(amountText),

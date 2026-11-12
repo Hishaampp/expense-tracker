@@ -176,6 +176,7 @@ class QuickAddScreen extends ConsumerWidget {
         onPickDate: () => unawaited(_pickDate(context, ref, state)),
         onEditNote: () => unawaited(_editNote(context, ref, state)),
         onPickRoom: () => unawaited(_pickRoom(context, ref, state)),
+        onPickKind: notifier.setKind,
         onSave: notifier.save,
       );
     } else if (state != null) {
