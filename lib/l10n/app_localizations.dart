@@ -3511,6 +3511,162 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Room deleted'**
   String get roomDeleted;
+
+  /// No description provided for @scanPay.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan & Pay'**
+  String get scanPay;
+
+  /// No description provided for @scanHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Point the camera at a UPI QR code'**
+  String get scanHint;
+
+  /// No description provided for @scanNotUpi.
+  ///
+  /// In en, this message translates to:
+  /// **'This isn\'t a UPI payment QR. Try another one.'**
+  String get scanNotUpi;
+
+  /// No description provided for @scanCameraOff.
+  ///
+  /// In en, this message translates to:
+  /// **'The camera isn\'t available. Allow camera access in Settings to scan.'**
+  String get scanCameraOff;
+
+  /// No description provided for @scanPayTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay'**
+  String get scanPayTitle;
+
+  /// No description provided for @scanPayTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Paying'**
+  String get scanPayTo;
+
+  /// No description provided for @scanPayFixedAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'This QR sets the amount.'**
+  String get scanPayFixedAmount;
+
+  /// No description provided for @scanPayCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'Check the name before you pay. Your UPI PIN is only ever entered in your UPI app.'**
+  String get scanPayCheck;
+
+  /// No description provided for @scanPayAmountLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get scanPayAmountLabel;
+
+  /// No description provided for @scanPayAmountInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the amount you\'re paying'**
+  String get scanPayAmountInvalid;
+
+  /// No description provided for @scanPayFor.
+  ///
+  /// In en, this message translates to:
+  /// **'For'**
+  String get scanPayFor;
+
+  /// No description provided for @scanPayButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay {amount}'**
+  String scanPayButton(String amount);
+
+  /// No description provided for @scanPayWith.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay with'**
+  String get scanPayWith;
+
+  /// No description provided for @scanPayNoApps.
+  ///
+  /// In en, this message translates to:
+  /// **'No UPI app found on this phone. Install Google Pay, PhonePe, Paytm or BHIM to pay.'**
+  String get scanPayNoApps;
+
+  /// No description provided for @scanPayNotOpened.
+  ///
+  /// In en, this message translates to:
+  /// **'{app} couldn\'t be opened. Try another app.'**
+  String scanPayNotOpened(String app);
+
+  /// No description provided for @scanPayAskTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Did the payment go through?'**
+  String get scanPayAskTitle;
+
+  /// No description provided for @scanPayAskBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} to {name}'**
+  String scanPayAskBody(String amount, String name);
+
+  /// No description provided for @scanPayAskYes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, it went through'**
+  String get scanPayAskYes;
+
+  /// No description provided for @scanPayAskNo.
+  ///
+  /// In en, this message translates to:
+  /// **'No, it failed'**
+  String get scanPayAskNo;
+
+  /// No description provided for @scanPayAskOther.
+  ///
+  /// In en, this message translates to:
+  /// **'It was a different amount'**
+  String get scanPayAskOther;
+
+  /// No description provided for @scanPayOtherTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How much did you pay?'**
+  String get scanPayOtherTitle;
+
+  /// No description provided for @scanPaySave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get scanPaySave;
+
+  /// No description provided for @scanPaySaved.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} to {name} saved'**
+  String scanPaySaved(String amount, String name);
+
+  /// No description provided for @scanPayFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment failed. Nothing was saved.'**
+  String get scanPayFailed;
+
+  /// No description provided for @scanPayPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment pending. It\'s in Review until you confirm it.'**
+  String get scanPayPending;
+
+  /// No description provided for @scanPayToReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved to Review. Confirm it there once you know it went through.'**
+  String get scanPayToReview;
 }
 
 class _AppLocalizationsDelegate

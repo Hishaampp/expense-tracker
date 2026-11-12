@@ -7,6 +7,19 @@ abstract final class Routes {
   /// iPhone lock-screen widget.
   static const String addLinkHost = 'add';
 
+  /// Scan & Pay's camera (Phase 11).
+  static const String scan = '/scan';
+
+  /// Scan & Pay's payment screen; the scanned text is its `qr` parameter.
+  static const String scanPayPath = '/scan/pay';
+
+  /// The payment screen for scanned QR text [qr].
+  static String scanPay(String qr) =>
+      Uri(path: scanPayPath, queryParameters: {'qr': qr}).toString();
+
+  /// The host of the expensetracker://scan link that opens Scan & Pay.
+  static const String scanLinkHost = 'scan';
+
   /// The first-launch welcome.
   static const String welcome = '/welcome';
 

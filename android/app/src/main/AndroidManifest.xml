@@ -49,6 +49,7 @@
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <data android:scheme="expensetracker" android:host="login-callback"/>
                 <data android:scheme="expensetracker" android:host="add"/>
+                <data android:scheme="expensetracker" android:host="scan"/>
             </intent-filter>
             <!-- Links are read by Supabase, not turned into app routes. -->
             <meta-data
@@ -102,6 +103,11 @@
         <intent>
             <action android:name="android.intent.action.PROCESS_TEXT"/>
             <data android:mimeType="text/plain"/>
+        </intent>
+        <!-- Scan & Pay (Phase 11): which UPI apps can take a payment link. -->
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <data android:scheme="upi" android:host="pay"/>
         </intent>
     </queries>
 </manifest>

@@ -2,8 +2,10 @@ import AppIntents
 import SwiftUI
 import WidgetKit
 
-// Opens the app on Add (handled by QuickAddLinkHost in Dart).
+// Open the app on Add or on Scan & Pay (handled by QuickAddLinkHost in
+// Dart).
 private let addURL = URL(string: "expensetracker://add")!
+private let scanURL = URL(string: "expensetracker://scan")!
 
 private struct QuickAddEntry: TimelineEntry {
   let date: Date
@@ -104,12 +106,78 @@ struct QuickAddControl: ControlWidget {
   }
 }
 
+private struct ScanPayView: View {
+  @Environment(\.widgetFamily) private var family
+
+  var body: some View {
+    switch family {
+    case .accessoryCircular:
+      ZStack {
+        AccessoryWidgetBackground()
+        Image(systemName: "qrcode.viewfinder")
+          .font(.title2.weight(.semibold))
+      }
+      .accessibilityLabel("Scan & Pay")
+    case .accessoryRectangular:
+      HStack(spacing: 8) {
+        Image(systemName: "qrcode.viewfinder")
+          .font(.title2)
+        VStack(alignment: .leading, spacing: 2) {
+          Text("Scan & Pay")
+            .font(.headline)
+          Text("Pay a UPI QR and save it")
+            .font(.caption)
+        }
+      }
+      .frame(maxWidth: .infinity, alignment: .leading)
+    default:
+      Label("Scan & Pay", systemImage: "qrcode.viewfinder")
+    }
+  }
+}
+
+struct ScanPayWidget: Widget {
+  var body: some WidgetConfiguration {
+    StaticConfiguration(kind: "ScanPayWidget", provider: QuickAddProvider()) { _ in
+      ScanPayView()
+        .widgetURL(scanURL)
+        .containerBackground(.fill.tertiary, for: .widget)
+    }
+    .configurationDisplayName("Scan & Pay")
+    .description("Scan a UPI QR, pay in your UPI app, and the payment is saved.")
+    .supportedFamilies([.accessoryCircular, .accessoryRectangular, .accessoryInline])
+  }
+}
+
+@available(iOS 18.0, *)
+struct OpenScanIntent: AppIntent {
+  static let title: LocalizedStringResource = "Scan & Pay"
+
+  func perform() async throws -> some IntentResult & OpensIntent {
+    .result(opensIntent: OpenURLIntent(scanURL))
+  }
+}
+
+@available(iOS 18.0, *)
+struct ScanPayControl: ControlWidget {
+  var body: some ControlWidgetConfiguration {
+    StaticControlConfiguration(kind: "ScanPayControl") {
+      ControlWidgetButton(action: OpenScanIntent()) {
+        Label("Scan & Pay", systemImage: "qrcode.viewfinder")
+      }
+    }
+    .displayName("Scan & Pay")
+  }
+}
+
 @main
 struct QuickAddWidgets: WidgetBundle {
   var body: some Widget {
     QuickAddWidget()
+    ScanPayWidget()
     if #available(iOS 18.0, *) {
       QuickAddControl()
+      ScanPayControl()
     }
   }
 }

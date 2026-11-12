@@ -155,6 +155,62 @@ class TransactionRepository {
     });
   }
 
+  /// The account Scan & Pay payments are recorded in (Phase 11).
+  static const String upiAccountId = 'account_upi';
+
+  /// Saves a payment made with Scan & Pay (Phase 11): to UPI id
+  /// [payeeVpa], named [payeeName], in the "UPI" account (made the first
+  /// time). [refNo] is the UPI reference when the UPI app gave one, so a
+  /// later bank SMS for it merges instead of counting twice.
+  @useResult
+  Future<Result<MoneyTransaction, StoreFailure>> addUpiPayment({
+    required Money amount,
+    required String payeeVpa,
+    required String payeeName,
+    required String? categoryId,
+    String? refNo,
+    String? roomId,
+    String? note,
+    ReviewStatus reviewStatus = ReviewStatus.confirmed,
+    DateTime? occurredAt,
+  }) {
+    final now = _clock.now().toUtc();
+    final txn = MoneyTransaction(
+      id: _ids.newId(),
+      kind: TransactionKind.expense,
+      amount: amount,
+      occurredAt: (occurredAt ?? now).toUtc(),
+      accountId: upiAccountId,
+      categoryId: categoryId,
+      roomId: roomId,
+      payeeKey: payeeVpa,
+      payeeDisplay: payeeName,
+      instrument: Instrument.upi,
+      refNo: refNo,
+      note: _blankToNull(note),
+      reviewStatus: reviewStatus,
+      createdAt: now,
+      updatedAt: now,
+    );
+    return _write('transaction.add_upi', txn, () {
+      return _db.transaction(() async {
+        await _db
+            .into(_db.accounts)
+            .insert(
+              AccountsCompanion.insert(
+                id: upiAccountId,
+                name: 'UPI',
+                type: AccountType.bank,
+                createdAt: now.millisecondsSinceEpoch,
+              ),
+              mode: InsertMode.insertOrIgnore,
+            );
+        await _db.into(_db.transactions).insert(transactionToRow(txn));
+        return true;
+      });
+    });
+  }
+
   /// Saves a transaction read from a message, in one database transaction:
   /// finds or creates its account ("HDFC ••1234"), records the capture as
   /// parsed, stores the transaction and links the two (spec §7.6, §7.7).

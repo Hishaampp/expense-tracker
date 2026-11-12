@@ -24,6 +24,7 @@ import 'package:expense_tracker/services/native/capture_control_service.dart';
 import 'package:expense_tracker/services/native/capture_queue_service.dart';
 import 'package:expense_tracker/services/notification_service.dart';
 import 'package:expense_tracker/services/service_providers.dart';
+import 'package:expense_tracker/services/upi_pay_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -174,6 +175,27 @@ final class FakeFileShare implements FileShare {
 
   @override
   Future<Uint8List?> pick() async => toPick;
+}
+
+/// UPI apps, faked: [answer] is what paying returns.
+final class FakeUpiPayService implements UpiPayService {
+  /// Installed apps.
+  List<UpiApp> installed = const [(id: 'gpay', name: 'Google Pay')];
+
+  /// What paying returns; null as if the app could not be opened.
+  UpiResult? answer = (outcome: UpiOutcome.unknown, refNo: null);
+
+  /// The links paid, in order.
+  final List<Uri> paid = [];
+
+  @override
+  Future<List<UpiApp>> apps() async => installed;
+
+  @override
+  Future<UpiResult?> pay(UpiApp app, Uri link) async {
+    paid.add(link);
+    return answer;
+  }
 }
 
 /// Links that open the app, faked: [send] delivers one.
@@ -411,6 +433,7 @@ Future<AppDatabase> pumpApp(
   FakeFileShare? fileShare,
   FakeCloudAuth? cloudAuth,
   FakeAppLinkSource? appLinks,
+  FakeUpiPayService? upi,
   FakeSyncKeyStore? syncKeys,
   MemorySyncServer? syncServer,
   Size? size,
@@ -446,6 +469,7 @@ Future<AppDatabase> pumpApp(
         deviceAuthProvider.overrideWithValue(deviceAuth ?? FakeDeviceAuth()),
         fileShareProvider.overrideWithValue(fileShare ?? FakeFileShare()),
         cloudAuthProvider.overrideWithValue(cloudAuth ?? FakeCloudAuth()),
+        upiPayServiceProvider.overrideWithValue(upi ?? FakeUpiPayService()),
         appLinkSourceProvider.overrideWithValue(
           appLinks ?? FakeAppLinkSource(),
         ),

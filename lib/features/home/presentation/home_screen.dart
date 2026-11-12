@@ -108,6 +108,11 @@ class HomeScreen extends ConsumerWidget {
       badgeCount: unread,
       onPressed: () => unawaited(context.push(Routes.notifications)),
     );
+    final scan = RoundIconButton(
+      icon: Icons.qr_code_scanner_rounded,
+      tooltip: l10n.scanPay,
+      onPressed: () => unawaited(context.push(Routes.scan)),
+    );
     final add = RoundIconButton(
       icon: Icons.add_rounded,
       tooltip: l10n.addExpense,
@@ -117,7 +122,7 @@ class HomeScreen extends ConsumerWidget {
     if (state == null) {
       return LargeTitlePage(
         title: Text(l10n.navHome),
-        actions: [if (roomy) ?review, bell, add],
+        actions: [if (roomy) ?review, bell, scan, add],
         children: [
           if (async.hasError)
             ErrorStateView(
@@ -141,7 +146,7 @@ class HomeScreen extends ConsumerWidget {
         semanticLabel: l10n.changeMonth(month),
         onTap: () => unawaited(_pickMonth(context, ref, state)),
       ),
-      actions: [if (roomy) ?review, bell, add],
+      actions: [if (roomy) ?review, bell, scan, add],
       children: [
         if (!roomy && review != null) enter(review),
         enter(HeroSummary(state: state, onSeeAll: seeAll)),

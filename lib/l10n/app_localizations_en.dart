@@ -2204,4 +2204,95 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get roomDeleted => 'Room deleted';
+
+  @override
+  String get scanPay => 'Scan & Pay';
+
+  @override
+  String get scanHint => 'Point the camera at a UPI QR code';
+
+  @override
+  String get scanNotUpi => 'This isn\'t a UPI payment QR. Try another one.';
+
+  @override
+  String get scanCameraOff =>
+      'The camera isn\'t available. Allow camera access in Settings to scan.';
+
+  @override
+  String get scanPayTitle => 'Pay';
+
+  @override
+  String get scanPayTo => 'Paying';
+
+  @override
+  String get scanPayFixedAmount => 'This QR sets the amount.';
+
+  @override
+  String get scanPayCheck =>
+      'Check the name before you pay. Your UPI PIN is only ever entered in your UPI app.';
+
+  @override
+  String get scanPayAmountLabel => 'Amount';
+
+  @override
+  String get scanPayAmountInvalid => 'Enter the amount you\'re paying';
+
+  @override
+  String get scanPayFor => 'For';
+
+  @override
+  String scanPayButton(String amount) {
+    return 'Pay $amount';
+  }
+
+  @override
+  String get scanPayWith => 'Pay with';
+
+  @override
+  String get scanPayNoApps =>
+      'No UPI app found on this phone. Install Google Pay, PhonePe, Paytm or BHIM to pay.';
+
+  @override
+  String scanPayNotOpened(String app) {
+    return '$app couldn\'t be opened. Try another app.';
+  }
+
+  @override
+  String get scanPayAskTitle => 'Did the payment go through?';
+
+  @override
+  String scanPayAskBody(String amount, String name) {
+    return '$amount to $name';
+  }
+
+  @override
+  String get scanPayAskYes => 'Yes, it went through';
+
+  @override
+  String get scanPayAskNo => 'No, it failed';
+
+  @override
+  String get scanPayAskOther => 'It was a different amount';
+
+  @override
+  String get scanPayOtherTitle => 'How much did you pay?';
+
+  @override
+  String get scanPaySave => 'Save';
+
+  @override
+  String scanPaySaved(String amount, String name) {
+    return '$amount to $name saved';
+  }
+
+  @override
+  String get scanPayFailed => 'Payment failed. Nothing was saved.';
+
+  @override
+  String get scanPayPending =>
+      'Payment pending. It\'s in Review until you confirm it.';
+
+  @override
+  String get scanPayToReview =>
+      'Saved to Review. Confirm it there once you know it went through.';
 }

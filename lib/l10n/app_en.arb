@@ -1731,5 +1731,65 @@
   "roomDeleteBody": "Kept payments go back into your normal month. This can't be undone.",
   "roomDeleteKeep": "Delete the Room, keep its payments",
   "roomDeleteAll": "Delete the Room and its payments",
-  "roomDeleted": "Room deleted"
+  "roomDeleted": "Room deleted",
+  "scanPay": "Scan & Pay",
+  "scanHint": "Point the camera at a UPI QR code",
+  "scanNotUpi": "This isn't a UPI payment QR. Try another one.",
+  "scanCameraOff": "The camera isn't available. Allow camera access in Settings to scan.",
+  "scanPayTitle": "Pay",
+  "scanPayTo": "Paying",
+  "scanPayFixedAmount": "This QR sets the amount.",
+  "scanPayCheck": "Check the name before you pay. Your UPI PIN is only ever entered in your UPI app.",
+  "scanPayAmountLabel": "Amount",
+  "scanPayAmountInvalid": "Enter the amount you're paying",
+  "scanPayFor": "For",
+  "scanPayButton": "Pay {amount}",
+  "@scanPayButton": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "scanPayWith": "Pay with",
+  "scanPayNoApps": "No UPI app found on this phone. Install Google Pay, PhonePe, Paytm or BHIM to pay.",
+  "scanPayNotOpened": "{app} couldn't be opened. Try another app.",
+  "@scanPayNotOpened": {
+    "placeholders": {
+      "app": {
+        "type": "String"
+      }
+    }
+  },
+  "scanPayAskTitle": "Did the payment go through?",
+  "scanPayAskBody": "{amount} to {name}",
+  "@scanPayAskBody": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "scanPayAskYes": "Yes, it went through",
+  "scanPayAskNo": "No, it failed",
+  "scanPayAskOther": "It was a different amount",
+  "scanPayOtherTitle": "How much did you pay?",
+  "scanPaySave": "Save",
+  "scanPaySaved": "{amount} to {name} saved",
+  "@scanPaySaved": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "scanPayFailed": "Payment failed. Nothing was saved.",
+  "scanPayPending": "Payment pending. It's in Review until you confirm it.",
+  "scanPayToReview": "Saved to Review. Confirm it there once you know it went through."
 }
