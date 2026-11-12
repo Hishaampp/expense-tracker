@@ -36,6 +36,9 @@ Future<void> bootstrap() async {
     publishableKey: CloudConfig.publishableKey,
     authOptions: const FlutterAuthClientOptions(
       localStorage: SecureSessionStorage(),
+      // Only the sign-in link is Supabase's; others, such as the widget's
+      // expensetracker://add, are the app's own.
+      detectSessionInUriPredicate: _isLoginLink,
     ),
   );
   final settings = SettingsRepository(database, const DeveloperLogger());
@@ -60,3 +63,6 @@ Stream<LicenseEntry> _fontLicenses() async* {
   final text = await rootBundle.loadString('assets/fonts/AnekLatin-OFL.txt');
   yield LicenseEntryWithLineBreaks(const ['Anek Latin'], text);
 }
+
+bool _isLoginLink(Uri uri) =>
+    uri.toString().startsWith(CloudConfig.loginRedirect);

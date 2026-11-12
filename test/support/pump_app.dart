@@ -13,6 +13,7 @@ import 'package:expense_tracker/data/sync/sync_crypto.dart';
 import 'package:expense_tracker/data/sync/sync_engine.dart';
 import 'package:expense_tracker/features/quick_add/presentation/widgets/keypad.dart';
 import 'package:expense_tracker/routing/floating_tab_bar.dart';
+import 'package:expense_tracker/services/app_link_source.dart';
 import 'package:expense_tracker/services/clipboard_service.dart';
 import 'package:expense_tracker/services/cloud/cloud_auth.dart';
 import 'package:expense_tracker/services/cloud/sync_key_store.dart';
@@ -173,6 +174,23 @@ final class FakeFileShare implements FileShare {
 
   @override
   Future<Uint8List?> pick() async => toPick;
+}
+
+/// Links that open the app, faked: [send] delivers one.
+final class FakeAppLinkSource implements AppLinkSource {
+  final StreamController<Uri> _links = StreamController<Uri>.broadcast();
+
+  /// The link the app was launched with.
+  Uri? launchedWith;
+
+  /// Delivers [uri] as if tapped while the app runs.
+  void send(Uri uri) => _links.add(uri);
+
+  @override
+  Future<Uri?> initial() async => launchedWith;
+
+  @override
+  Stream<Uri> get links => _links.stream;
 }
 
 /// The account, faked: any email, the code `123456`.
@@ -392,6 +410,7 @@ Future<AppDatabase> pumpApp(
   FakeDeviceAuth? deviceAuth,
   FakeFileShare? fileShare,
   FakeCloudAuth? cloudAuth,
+  FakeAppLinkSource? appLinks,
   FakeSyncKeyStore? syncKeys,
   MemorySyncServer? syncServer,
   Size? size,
@@ -427,6 +446,9 @@ Future<AppDatabase> pumpApp(
         deviceAuthProvider.overrideWithValue(deviceAuth ?? FakeDeviceAuth()),
         fileShareProvider.overrideWithValue(fileShare ?? FakeFileShare()),
         cloudAuthProvider.overrideWithValue(cloudAuth ?? FakeCloudAuth()),
+        appLinkSourceProvider.overrideWithValue(
+          appLinks ?? FakeAppLinkSource(),
+        ),
         syncKeyStoreProvider.overrideWithValue(syncKeys ?? FakeSyncKeyStore()),
         syncServerProvider.overrideWithValue(syncServer ?? MemorySyncServer()),
         // Fast key stretching: the real 600,000 rounds take seconds.

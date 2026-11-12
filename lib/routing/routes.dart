@@ -3,6 +3,10 @@ abstract final class Routes {
   /// Home (month view).
   static const String home = '/';
 
+  /// The host of the expensetracker://add link that opens Add, from the
+  /// iPhone lock-screen widget.
+  static const String addLinkHost = 'add';
+
   /// The first-launch welcome.
   static const String welcome = '/welcome';
 

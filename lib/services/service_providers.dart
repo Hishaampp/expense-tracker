@@ -1,5 +1,6 @@
 import 'package:clock/clock.dart';
 import 'package:expense_tracker/core/id_generator.dart';
+import 'package:expense_tracker/services/app_link_source.dart';
 import 'package:expense_tracker/services/app_logger.dart';
 import 'package:expense_tracker/services/clipboard_service.dart';
 import 'package:expense_tracker/services/device_auth.dart';
@@ -14,6 +15,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// The source of "now". Override with `Clock.fixed` in tests.
 final clockProvider = Provider<Clock>((ref) => const Clock());
+
+/// Links that open the app. Override with a fake in tests.
+final appLinkSourceProvider = Provider<AppLinkSource>(
+  (ref) => PlatformAppLinkSource(),
+);
 
 /// Makes ids for new records.
 final idGeneratorProvider = Provider<IdGenerator>(

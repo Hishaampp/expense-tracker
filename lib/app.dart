@@ -5,6 +5,7 @@ import 'package:expense_tracker/features/account/presentation/sync_host.dart';
 import 'package:expense_tracker/features/capture/presentation/capture_inbox.dart';
 import 'package:expense_tracker/features/lock/presentation/app_lock_gate.dart';
 import 'package:expense_tracker/features/notifications/presentation/notification_host.dart';
+import 'package:expense_tracker/features/quick_add/presentation/quick_add_link_host.dart';
 import 'package:expense_tracker/l10n/app_localizations.dart';
 import 'package:expense_tracker/routing/app_router.dart';
 import 'package:expense_tracker/theme/app_theme.dart';
@@ -37,8 +38,10 @@ class App extends ConsumerWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       builder: (context, child) => AppLockGate(
         child: SyncHost(
-          child: NotificationHost(
-            child: CaptureInbox(child: child ?? const SizedBox.shrink()),
+          child: QuickAddLinkHost(
+            child: NotificationHost(
+              child: CaptureInbox(child: child ?? const SizedBox.shrink()),
+            ),
           ),
         ),
       ),

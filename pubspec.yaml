@@ -12,6 +12,7 @@ workspace:
   - packages/txn_parser
 
 dependencies:
+  app_links: ^7.2.2
   clock: ^1.1.3
   cryptography: ^2.9.0
   cryptography_flutter: ^2.3.4
