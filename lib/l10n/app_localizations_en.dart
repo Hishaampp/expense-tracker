@@ -2295,4 +2295,8 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get scanPayToReview =>
       'Saved to Review. Confirm it there once you know it went through.';
+
+  @override
+  String get scanPayTypeThere =>
+      'Type the same amount again in your UPI app. This one is what gets recorded.';
 }

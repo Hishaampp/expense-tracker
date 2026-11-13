@@ -65,24 +65,11 @@ final class UpiRequest {
   /// The name to show and record: the QR's name, else the UPI id.
   String get displayName => payeeName ?? payeeVpa;
 
-  /// The payment link to hand to a UPI app for [amount]. A fixed request
-  /// is passed on unchanged; otherwise the typed amount and the payee are
-  /// all that is sent.
-  Uri payUri(Money amount) {
-    if (isFixed) return uri;
-    final rupees = (amount.paise ~/ 100).toString();
-    final paise = (amount.paise % 100).toString().padLeft(2, '0');
-    return Uri(
-      scheme: 'upi',
-      host: 'pay',
-      queryParameters: {
-        'pa': payeeVpa,
-        'pn': ?payeeName,
-        'am': '$rupees.$paise',
-        'cu': 'INR',
-      },
-    );
-  }
+  /// The payment link to hand to a UPI app: the QR exactly as scanned.
+  /// UPI apps refuse a link another app has rebuilt or added an amount to
+  /// ("UPI risk policy"), so nothing is changed; the payer types the
+  /// amount in the UPI app when the QR has none.
+  Uri get payUri => uri;
 
   static final RegExp _vpa = RegExp(
     r'^[a-z0-9._-]{1,256}@[a-z][a-z0-9.-]{1,63}$',

@@ -3667,6 +3667,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Saved to Review. Confirm it there once you know it went through.'**
   String get scanPayToReview;
+
+  /// No description provided for @scanPayTypeThere.
+  ///
+  /// In en, this message translates to:
+  /// **'Type the same amount again in your UPI app. This one is what gets recorded.'**
+  String get scanPayTypeThere;
 }
 
 class _AppLocalizationsDelegate

@@ -141,7 +141,7 @@ class ScanPayNotifier extends AsyncNotifier<ScanPayState> {
     try {
       return await ref
           .read(upiPayServiceProvider)
-          .pay(app, current.request.payUri(amount));
+          .pay(app, current.request.payUri);
     } finally {
       final now = state.value;
       if (now != null) state = AsyncData(now.copyWith(isBusy: false));

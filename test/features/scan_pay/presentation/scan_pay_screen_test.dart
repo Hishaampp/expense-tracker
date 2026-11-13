@@ -37,7 +37,8 @@ void main() {
     final db = await pumpApp(tester, upi: upi);
     await _payShop(tester);
 
-    expect(upi.paid.single.queryParameters['am'], '250.00');
+    // The QR is handed over as scanned; the amount is typed there too.
+    expect(upi.paid.single.toString(), _shop);
     final txn = (await db.select(db.transactions).get()).single;
     expect(txn.amountPaise, 25000);
     expect(txn.payeeDisplay, 'Sharma Store');

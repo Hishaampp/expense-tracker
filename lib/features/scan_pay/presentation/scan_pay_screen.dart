@@ -339,6 +339,8 @@ class _PayForm extends StatelessWidget {
                     decoration: InputDecoration(
                       labelText: l10n.scanPayAmountLabel,
                       prefixText: rupeeFieldPrefix,
+                      helperText: l10n.scanPayTypeThere,
+                      helperMaxLines: 2,
                     ),
                     onChanged: onAmount,
                   ),

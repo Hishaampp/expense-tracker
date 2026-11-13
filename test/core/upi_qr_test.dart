@@ -13,13 +13,15 @@ void main() {
     expect(r.isFixed, isFalse);
   });
 
-  test('a typed amount goes into the payment link', () {
-    final r = UpiRequest.tryParse('upi://pay?pa=ravi@ybl&pn=Ravi')!;
-    final link = r.payUri(const Money(25050));
-    expect(link.scheme, 'upi');
-    expect(link.queryParameters['am'], '250.50');
-    expect(link.queryParameters['pa'], 'ravi@ybl');
-    expect(link.queryParameters['cu'], 'INR');
+  test('the payment link is the QR exactly as scanned', () {
+    // A shop QR's merchant details must reach the UPI app untouched, or
+    // it refuses the payment under its risk policy.
+    const text =
+        'upi://pay?pa=paytm.s2fr2ln@pty&pn=Green%20And%20Protein'
+        '&mc=5499&mode=02&orgid=000000&purpose=00';
+    final r = UpiRequest.tryParse(text)!;
+    expect(r.payUri.toString(), text);
+    expect(r.payUri.queryParameters.containsKey('am'), isFalse);
   });
 
   test('a signed billing QR is passed on exactly as scanned', () {
@@ -28,7 +30,7 @@ void main() {
     final r = UpiRequest.tryParse(text)!;
     expect(r.amount, const Money(49900));
     expect(r.isFixed, isTrue);
-    expect(r.payUri(const Money(100)).toString(), text);
+    expect(r.payUri.toString(), text);
   });
 
   test('a QR with no name shows the UPI id', () {
