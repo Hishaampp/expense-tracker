@@ -1743,7 +1743,7 @@
   "scanPayAmountLabel": "Amount",
   "scanPayAmountInvalid": "Enter the amount you're paying",
   "scanPayFor": "For",
-  "scanPayButton": "Pay {amount}",
+  "scanPayButton": "Record {amount} & pay",
   "@scanPayButton": {
     "placeholders": {
       "amount": {
@@ -1753,7 +1753,7 @@
   },
   "scanPayWith": "Pay with",
   "scanPayNoApps": "No UPI app found on this phone. Install Google Pay, PhonePe, Paytm or BHIM to pay.",
-  "scanPayNotOpened": "{app} couldn't be opened. Try another app.",
+  "scanPayNotOpened": "{app} couldn't be opened, so nothing was recorded. Try another app.",
   "@scanPayNotOpened": {
     "placeholders": {
       "app": {
@@ -1789,8 +1789,7 @@
       }
     }
   },
-  "scanPayFailed": "Payment failed. Nothing was saved.",
-  "scanPayPending": "Payment pending. It's in Review until you confirm it.",
+  "scanPayFailed": "Payment not made, so nothing was recorded.",
   "scanPayToReview": "Saved to Review. Confirm it there once you know it went through.",
-  "scanPayTypeThere": "Type the same amount again in your UPI app. This one is what gets recorded."
+  "scanPayTypeThere": "Next, your UPI app opens. Scan this QR there to pay. The amount here is what gets recorded."
 }

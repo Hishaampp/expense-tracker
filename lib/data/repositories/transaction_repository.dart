@@ -211,6 +211,35 @@ class TransactionRepository {
     });
   }
 
+  /// Settles a Scan & Record payment [id] once the payer says how it went
+  /// (Phase 11): [paid] false deletes it; true confirms it, at [amount]
+  /// when the payer paid a different amount.
+  @useResult
+  Future<Result<String, StoreFailure>> settleUpiPayment(
+    String id, {
+    required bool paid,
+    Money? amount,
+  }) async {
+    try {
+      final where = _db.transactions.id.equals(id);
+      final changed = paid
+          ? await (_db.update(_db.transactions)..where((_) => where)).write(
+              TransactionsCompanion(
+                reviewStatus: const Value(ReviewStatus.confirmed),
+                amountPaise: amount == null
+                    ? const Value.absent()
+                    : Value(amount.paise),
+                updatedAt: Value(_clock.now().toUtc().millisecondsSinceEpoch),
+              ),
+            )
+          : await (_db.delete(_db.transactions)..where((_) => where)).go();
+      return changed > 0 ? Ok(id) : Err(StoreRecordMissing(id));
+    } on SqliteException catch (e, st) {
+      _log.error('transaction.settle_upi', e.runtimeType, st);
+      return const Err(StoreWriteFailed());
+    }
+  }
+
   /// Saves a transaction read from a message, in one database transaction:
   /// finds or creates its account ("HDFC ••1234"), records the capture as
   /// parsed, stores the transaction and links the two (spec §7.6, §7.7).

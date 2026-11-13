@@ -2242,7 +2242,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String scanPayButton(String amount) {
-    return 'Pay $amount';
+    return 'Record $amount & pay';
   }
 
   @override
@@ -2254,7 +2254,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String scanPayNotOpened(String app) {
-    return '$app couldn\'t be opened. Try another app.';
+    return '$app couldn\'t be opened, so nothing was recorded. Try another app.';
   }
 
   @override
@@ -2286,11 +2286,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get scanPayFailed => 'Payment failed. Nothing was saved.';
-
-  @override
-  String get scanPayPending =>
-      'Payment pending. It\'s in Review until you confirm it.';
+  String get scanPayFailed => 'Payment not made, so nothing was recorded.';
 
   @override
   String get scanPayToReview =>
@@ -2298,5 +2294,5 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get scanPayTypeThere =>
-      'Type the same amount again in your UPI app. This one is what gets recorded.';
+      'Next, your UPI app opens. Scan this QR there to pay. The amount here is what gets recorded.';
 }

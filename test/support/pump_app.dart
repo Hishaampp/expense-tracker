@@ -177,24 +177,24 @@ final class FakeFileShare implements FileShare {
   Future<Uint8List?> pick() async => toPick;
 }
 
-/// UPI apps, faked: [answer] is what paying returns.
+/// UPI apps, faked: [opens] says whether opening one works.
 final class FakeUpiPayService implements UpiPayService {
   /// Installed apps.
   List<UpiApp> installed = const [(id: 'gpay', name: 'Google Pay')];
 
-  /// What paying returns; null as if the app could not be opened.
-  UpiResult? answer = (outcome: UpiOutcome.unknown, refNo: null);
+  /// Whether opening an app works.
+  bool opens = true;
 
-  /// The links paid, in order.
-  final List<Uri> paid = [];
+  /// The apps opened, in order.
+  final List<String> opened = [];
 
   @override
   Future<List<UpiApp>> apps() async => installed;
 
   @override
-  Future<UpiResult?> pay(UpiApp app, Uri link) async {
-    paid.add(link);
-    return answer;
+  Future<bool> open(UpiApp app) async {
+    opened.add(app.id);
+    return opens;
   }
 }
 

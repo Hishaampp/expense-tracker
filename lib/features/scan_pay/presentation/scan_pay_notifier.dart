@@ -131,47 +131,57 @@ class ScanPayNotifier extends AsyncNotifier<ScanPayState> {
     _update((s) => s.copyWith(categoryId: id));
   }
 
-  /// Opens [app] to pay and waits for the payer to come back. Null when
-  /// the app could not be opened.
-  Future<UpiResult?> pay(UpiApp app) async {
+  /// Records the payment, waiting in Review, then opens [app] for the
+  /// payer to scan and pay there, and waits until they are back. Returns
+  /// the saved payment's id, or null when nothing was saved; `opened` is
+  /// false when the UPI app could not be opened.
+  Future<({String? id, bool opened, StoreFailure? failure})> recordAndOpen(
+    UpiApp app,
+  ) async {
     final current = state.value;
     final amount = current?.amount;
-    if (current == null || amount == null || !current.canPay) return null;
+    if (current == null || amount == null || !current.canPay) {
+      return (id: null, opened: false, failure: null);
+    }
     state = AsyncData(current.copyWith(isBusy: true));
     try {
-      return await ref
-          .read(upiPayServiceProvider)
-          .pay(app, current.request.payUri);
+      final saved = await ref
+          .read(transactionRepositoryProvider)
+          .addUpiPayment(
+            amount: amount,
+            payeeVpa: current.request.payeeVpa,
+            payeeName: current.request.displayName,
+            categoryId: current.categoryId,
+            reviewStatus: ReviewStatus.needsReview,
+          );
+      final String id;
+      switch (saved) {
+        case Ok(:final value):
+          id = value.id;
+        case Err(:final failure):
+          return (id: null, opened: false, failure: failure);
+      }
+      final opened = await ref.read(upiPayServiceProvider).open(app);
+      return (id: id, opened: opened, failure: null);
     } finally {
       final now = state.value;
       if (now != null) state = AsyncData(now.copyWith(isBusy: false));
     }
   }
 
-  /// Records the payment: [status] confirmed when it is known to have gone
-  /// through, needsReview while that is not known. [amount] replaces the
-  /// planned amount when the payer says it differed.
-  Future<StoreFailure?> save({
-    required ReviewStatus status,
-    String? refNo,
+  /// Settles payment [id] with the payer's answer: [paid] false removes it,
+  /// true confirms it (at [amount] when that differed).
+  Future<StoreFailure?> settle(
+    String id, {
+    required bool paid,
     Money? amount,
   }) async {
-    final current = state.value;
-    final paid = amount ?? current?.amount;
-    if (current == null || paid == null) return null;
     final result = await ref
         .read(transactionRepositoryProvider)
-        .addUpiPayment(
-          amount: paid,
-          payeeVpa: current.request.payeeVpa,
-          payeeName: current.request.displayName,
-          categoryId: current.categoryId,
-          refNo: refNo,
-          reviewStatus: status,
-        );
+        .settleUpiPayment(id, paid: paid, amount: amount);
     switch (result) {
       case Ok():
-        ref.read(hapticsProvider).commit();
+        if (paid) ref.read(hapticsProvider).commit();
         return null;
       case Err(:final failure):
         return failure;

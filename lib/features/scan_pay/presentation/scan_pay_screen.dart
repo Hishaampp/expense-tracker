@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:expense_tracker/core/models/transaction_kind.dart';
 import 'package:expense_tracker/core/money.dart';
 import 'package:expense_tracker/features/scan_pay/presentation/leave_scan_pay.dart';
 import 'package:expense_tracker/features/scan_pay/presentation/scan_pay_notifier.dart';
@@ -51,31 +50,27 @@ class _ScanPayScreenState extends ConsumerState<ScanPayScreen> {
   ScanPayNotifier get _notifier =>
       ref.read(scanPayNotifierProvider(widget.qr).notifier);
 
+  // Records the payment (waiting in Review), opens the UPI app for the
+  // payer to scan and pay there, then settles it with their answer.
   Future<void> _pay(ScanPayState state) async {
     final l10n = AppLocalizations.of(context);
     final messenger = ScaffoldMessenger.of(context);
     final app = await _chooseApp(state.apps);
     if (app == null || !mounted) return;
-    final result = await _notifier.pay(app);
+    final result = await _notifier.recordAndOpen(app);
     if (!mounted) return;
-    if (result == null) {
+    if (result.failure case final failure?) {
+      _say(messenger, failureMessage(l10n, failure));
+      return;
+    }
+    final id = result.id;
+    if (id == null) return;
+    if (!result.opened) {
+      await _notifier.settle(id, paid: false);
       _say(messenger, l10n.scanPayNotOpened(app.name));
       return;
     }
-    switch (result.outcome) {
-      case UpiOutcome.success:
-        await _save(ReviewStatus.confirmed, refNo: result.refNo);
-      case UpiOutcome.failure:
-        _say(messenger, l10n.scanPayFailed);
-      case UpiOutcome.pending:
-        await _save(
-          ReviewStatus.needsReview,
-          refNo: result.refNo,
-          message: l10n.scanPayPending,
-        );
-      case UpiOutcome.unknown:
-        await _ask(state);
-    }
+    await _ask(state, id);
   }
 
   Future<UpiApp?> _chooseApp(List<UpiApp> apps) async {
@@ -95,19 +90,18 @@ class _ScanPayScreenState extends ConsumerState<ScanPayScreen> {
     return apps.where((a) => a.id == picked?.value).firstOrNull;
   }
 
-  // No answer from the UPI app (always on iPhone): ask the payer.
-  Future<void> _ask(ScanPayState state) async {
+  // Back from the UPI app: ask how it went.
+  Future<void> _ask(ScanPayState state, String id) async {
     final l10n = AppLocalizations.of(context);
     final messenger = ScaffoldMessenger.of(context);
     final amount = state.amount;
     if (amount == null) return;
+    final name = state.request.displayName;
     final answer = await showDialog<_Answer>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(l10n.scanPayAskTitle),
-        content: Text(
-          l10n.scanPayAskBody(formatMoney(amount), state.request.displayName),
-        ),
+        content: Text(l10n.scanPayAskBody(formatMoney(amount), name)),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(_Answer.no),
@@ -127,17 +121,31 @@ class _ScanPayScreenState extends ConsumerState<ScanPayScreen> {
     if (!mounted) return;
     switch (answer) {
       case _Answer.yes:
-        await _save(ReviewStatus.confirmed);
+        await _settle(
+          id,
+          paid: true,
+          message: l10n.scanPaySaved(formatMoney(amount), name),
+        );
       case _Answer.no:
-        _say(messenger, l10n.scanPayFailed);
+        await _settle(id, paid: false, message: l10n.scanPayFailed);
       case _Answer.other:
         final paid = await _askAmount();
-        if (paid != null && mounted) {
-          await _save(ReviewStatus.confirmed, amount: paid);
+        if (!mounted) return;
+        if (paid == null) {
+          _say(messenger, l10n.scanPayToReview);
+          leaveScanPay(context);
+          return;
         }
-      // Dismissed: not known yet, so it waits in Review.
+        await _settle(
+          id,
+          paid: true,
+          amount: paid,
+          message: l10n.scanPaySaved(formatMoney(paid), name),
+        );
+      // Dismissed: not known yet, so it stays in Review.
       case null:
-        await _save(ReviewStatus.needsReview, message: l10n.scanPayToReview);
+        _say(messenger, l10n.scanPayToReview);
+        leaveScanPay(context);
     }
   }
 
@@ -146,34 +154,17 @@ class _ScanPayScreenState extends ConsumerState<ScanPayScreen> {
     builder: (_) => const _AmountDialog(),
   );
 
-  Future<void> _save(
-    ReviewStatus status, {
-    String? refNo,
+  Future<void> _settle(
+    String id, {
+    required bool paid,
+    required String message,
     Money? amount,
-    String? message,
   }) async {
     final l10n = AppLocalizations.of(context);
     final messenger = ScaffoldMessenger.of(context);
-    final state = ref.read(scanPayNotifierProvider(widget.qr)).value;
-    final paid = amount ?? state?.amount;
-    final failure = await _notifier.save(
-      status: status,
-      refNo: refNo,
-      amount: amount,
-    );
-    if (failure != null) {
-      _say(messenger, failureMessage(l10n, failure));
-      return;
-    }
-    _say(
-      messenger,
-      message ??
-          l10n.scanPaySaved(
-            paid == null ? '' : formatMoney(paid),
-            state?.request.displayName ?? '',
-          ),
-    );
-    if (mounted) leaveScanPay(context);
+    final failure = await _notifier.settle(id, paid: paid, amount: amount);
+    _say(messenger, failure == null ? message : failureMessage(l10n, failure));
+    if (failure == null && mounted) leaveScanPay(context);
   }
 
   void _say(ScaffoldMessengerState messenger, String text) => messenger
@@ -326,6 +317,8 @@ class _PayForm extends StatelessWidget {
                 if (request.isFixed && paying != null) ...[
                   Text(formatMoney(paying), style: textTheme.headlineMedium),
                   Text(l10n.scanPayFixedAmount, style: textTheme.bodySmall),
+                  SizedBox(height: metrics.spaceXs),
+                  Text(l10n.scanPayTypeThere, style: textTheme.bodySmall),
                 ] else
                   TextField(
                     controller: amount,
@@ -339,11 +332,13 @@ class _PayForm extends StatelessWidget {
                     decoration: InputDecoration(
                       labelText: l10n.scanPayAmountLabel,
                       prefixText: rupeeFieldPrefix,
-                      helperText: l10n.scanPayTypeThere,
-                      helperMaxLines: 2,
                     ),
                     onChanged: onAmount,
                   ),
+                if (!request.isFixed || paying == null) ...[
+                  SizedBox(height: metrics.spaceXs),
+                  Text(l10n.scanPayTypeThere, style: textTheme.bodySmall),
+                ],
                 SizedBox(height: metrics.spaceLg),
                 Semantics(
                   header: true,

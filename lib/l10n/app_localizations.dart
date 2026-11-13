@@ -3581,7 +3581,7 @@ abstract class AppLocalizations {
   /// No description provided for @scanPayButton.
   ///
   /// In en, this message translates to:
-  /// **'Pay {amount}'**
+  /// **'Record {amount} & pay'**
   String scanPayButton(String amount);
 
   /// No description provided for @scanPayWith.
@@ -3599,7 +3599,7 @@ abstract class AppLocalizations {
   /// No description provided for @scanPayNotOpened.
   ///
   /// In en, this message translates to:
-  /// **'{app} couldn\'t be opened. Try another app.'**
+  /// **'{app} couldn\'t be opened, so nothing was recorded. Try another app.'**
   String scanPayNotOpened(String app);
 
   /// No description provided for @scanPayAskTitle.
@@ -3653,14 +3653,8 @@ abstract class AppLocalizations {
   /// No description provided for @scanPayFailed.
   ///
   /// In en, this message translates to:
-  /// **'Payment failed. Nothing was saved.'**
+  /// **'Payment not made, so nothing was recorded.'**
   String get scanPayFailed;
-
-  /// No description provided for @scanPayPending.
-  ///
-  /// In en, this message translates to:
-  /// **'Payment pending. It\'s in Review until you confirm it.'**
-  String get scanPayPending;
 
   /// No description provided for @scanPayToReview.
   ///
@@ -3671,7 +3665,7 @@ abstract class AppLocalizations {
   /// No description provided for @scanPayTypeThere.
   ///
   /// In en, this message translates to:
-  /// **'Type the same amount again in your UPI app. This one is what gets recorded.'**
+  /// **'Next, your UPI app opens. Scan this QR there to pay. The amount here is what gets recorded.'**
   String get scanPayTypeThere;
 }
 
