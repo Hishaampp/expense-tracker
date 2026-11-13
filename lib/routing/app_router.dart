@@ -14,6 +14,8 @@ import 'package:expense_tracker/features/review/presentation/review_screen.dart'
 import 'package:expense_tracker/features/rooms/presentation/room_detail_screen.dart';
 import 'package:expense_tracker/features/rooms/presentation/room_editor_screen.dart';
 import 'package:expense_tracker/features/rooms/presentation/rooms_screen.dart';
+import 'package:expense_tracker/features/scan_pay/presentation/scan_pay_screen.dart';
+import 'package:expense_tracker/features/scan_pay/presentation/scan_screen.dart';
 import 'package:expense_tracker/features/settings/presentation/settings_screen.dart';
 import 'package:expense_tracker/features/stats/presentation/stats_screen.dart';
 import 'package:expense_tracker/features/unparsed/presentation/unparsed_screen.dart';
@@ -104,6 +106,19 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.welcome,
         builder: (context, state) => const OnboardingScreen(),
+      ),
+      GoRoute(
+        path: Routes.scan,
+        pageBuilder: (context, state) =>
+            _slideUpPage(context, state, const ScanScreen()),
+      ),
+      GoRoute(
+        path: Routes.scanPayPath,
+        pageBuilder: (context, state) => _slideUpPage(
+          context,
+          state,
+          ScanPayScreen(qr: state.uri.queryParameters['qr'] ?? ''),
+        ),
       ),
       GoRoute(
         path: Routes.account,

@@ -6,9 +6,10 @@ import 'package:expense_tracker/services/service_providers.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-/// Opens Add when the app is opened by an expensetracker://add link, the
-/// iPhone lock-screen widget's tap. Before onboarding is finished the link
-/// is ignored. Wraps the app; renders [child] unchanged.
+/// Opens Add for an expensetracker://add link and Scan & Pay for an
+/// expensetracker://scan link: the iPhone Lock Screen widgets' taps.
+/// Before onboarding is finished the links are ignored. Wraps the app;
+/// renders [child] unchanged.
 class QuickAddLinkHost extends ConsumerStatefulWidget {
   /// Wraps [child].
   const new({required this.child, super.key});
@@ -32,11 +33,17 @@ class _QuickAddLinkHostState extends ConsumerState<QuickAddLinkHost> {
   }
 
   void _open(Uri uri) {
-    if (!mounted || uri.host != Routes.addLinkHost) return;
+    if (!mounted) return;
+    final target = switch (uri.host) {
+      Routes.addLinkHost => Routes.addExpense,
+      Routes.scanLinkHost => Routes.scan,
+      _ => null,
+    };
+    if (target == null) return;
     final router = ref.read(routerProvider);
     final at = router.routerDelegate.currentConfiguration.uri.path;
-    if (at == Routes.welcome || at == Routes.addExpense) return;
-    unawaited(router.push(Routes.addExpense));
+    if (at == Routes.welcome || at == target) return;
+    unawaited(router.push(target));
   }
 
   @override

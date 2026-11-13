@@ -30,6 +30,8 @@ The user can export a backup or CSV file and share it through the system share s
 - **SMS (`READ_SMS`, `RECEIVE_SMS`):** only in the **sideload** flavor, which is **not** uploaded to Play. The `play` flavor's merged manifest is checked in CI to contain neither.
 - **`POST_NOTIFICATIONS`:** budget alerts and the weekly review.
 - **`USE_BIOMETRIC`:** the optional app lock.
+- **`CAMERA`:** Scan & Pay reads UPI QR codes; no image is stored. iOS: `NSCameraUsageDescription`.
+- **Package visibility (`<queries>` for `upi://pay`):** lists the installed UPI apps Scan & Pay can open. Not `QUERY_ALL_PACKAGES`.
 - **`RECEIVE_BOOT_COMPLETED`:** keeps capture and the Sunday review scheduled after a restart.
 
 ### Prominent disclosure (shown before notification access)

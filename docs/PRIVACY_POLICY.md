@@ -11,6 +11,8 @@
   - Personal chats are never stored. Notifications that are not about a payment are thrown away.
 - **SMS** (Android "sideload" version only, if you allow it): bank messages, read the same way.
 - **Messages you share or paste into the app**, and **iPhone Shortcuts** you set up yourself.
+- **The camera**, only while you use **Scan & Pay**, to read a UPI QR code. No picture is taken or kept; the app reads the payee's name and UPI ID from the code.
+- **Scan & Pay** records the payment from the QR (name, UPI ID, the amount you type) and then opens your UPI app (Google Pay, PhonePe, Paytm or BHIM), where you scan and pay as usual with your UPI PIN. This app never sees your PIN, never moves money and is not told how the payment ended; it asks you.
 
 ## What the app stores, and where
 

@@ -22,6 +22,8 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
     required this.iconLargeSize,
     required this.roundButtonSize,
     required this.heroArrowSize,
+    required this.scanFrameSize,
+    required this.scanFrameStroke,
     required this.minTapTarget,
     required this.progressHeight,
     required this.hairlineWidth,
@@ -61,6 +63,8 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
     iconLargeSize: 24,
     roundButtonSize: 44,
     heroArrowSize: 48,
+    scanFrameSize: 248,
+    scanFrameStroke: 3,
     minTapTarget: 48,
     progressHeight: 6,
     hairlineWidth: 1,
@@ -127,6 +131,12 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
 
   /// Diameter of the arrow button on the hero card.
   final double heroArrowSize;
+
+  /// The square Scan & Pay asks you to aim the QR code into.
+  final double scanFrameSize;
+
+  /// The width of that square's outline.
+  final double scanFrameStroke;
 
   /// Minimum height and width of anything tappable.
   final double minTapTarget;
@@ -212,6 +222,8 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
     double? iconLargeSize,
     double? roundButtonSize,
     double? heroArrowSize,
+    double? scanFrameSize,
+    double? scanFrameStroke,
     double? minTapTarget,
     double? progressHeight,
     double? hairlineWidth,
@@ -249,6 +261,8 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
       iconLargeSize: iconLargeSize ?? this.iconLargeSize,
       roundButtonSize: roundButtonSize ?? this.roundButtonSize,
       heroArrowSize: heroArrowSize ?? this.heroArrowSize,
+      scanFrameSize: scanFrameSize ?? this.scanFrameSize,
+      scanFrameStroke: scanFrameStroke ?? this.scanFrameStroke,
       minTapTarget: minTapTarget ?? this.minTapTarget,
       progressHeight: progressHeight ?? this.progressHeight,
       hairlineWidth: hairlineWidth ?? this.hairlineWidth,
@@ -292,6 +306,8 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
       iconLargeSize: mix(iconLargeSize, other.iconLargeSize),
       roundButtonSize: mix(roundButtonSize, other.roundButtonSize),
       heroArrowSize: mix(heroArrowSize, other.heroArrowSize),
+      scanFrameSize: mix(scanFrameSize, other.scanFrameSize),
+      scanFrameStroke: mix(scanFrameStroke, other.scanFrameStroke),
       minTapTarget: mix(minTapTarget, other.minTapTarget),
       progressHeight: mix(progressHeight, other.progressHeight),
       hairlineWidth: mix(hairlineWidth, other.hairlineWidth),

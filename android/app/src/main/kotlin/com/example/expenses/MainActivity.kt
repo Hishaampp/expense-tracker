@@ -3,11 +3,13 @@ package com.example.expenses
 import android.content.Intent
 import android.os.Bundle
 import com.example.expenses.capture.CaptureChannel
+import com.example.expenses.upi.UpiChannel
 import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine
 
 class MainActivity : FlutterFragmentActivity() {
     private var capture: CaptureChannel? = null
+    private var upi: UpiChannel? = null
     private var pendingShare: Intent? = null
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
@@ -16,6 +18,10 @@ class MainActivity : FlutterFragmentActivity() {
             applicationContext,
             flutterEngine.dartExecutor.binaryMessenger,
         ) { this }
+        upi = UpiChannel(
+            applicationContext,
+            flutterEngine.dartExecutor.binaryMessenger,
+        )
         pendingShare?.let { handleShare(it) }
         pendingShare = null
     }

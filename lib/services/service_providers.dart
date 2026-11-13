@@ -9,12 +9,22 @@ import 'package:expense_tracker/services/haptics.dart';
 import 'package:expense_tracker/services/native/capture_control_service.dart';
 import 'package:expense_tracker/services/native/capture_queue_service.dart';
 import 'package:expense_tracker/services/notification_service.dart';
+import 'package:expense_tracker/services/upi_pay_service.dart';
 import 'package:expense_tracker/services/uuid_id_generator.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// The source of "now". Override with `Clock.fixed` in tests.
 final clockProvider = Provider<Clock>((ref) => const Clock());
+
+/// Opens UPI apps for Scan & Pay (Phase 11). Override with a fake in
+/// tests.
+final upiPayServiceProvider = Provider<UpiPayService>(
+  (ref) => defaultTargetPlatform == TargetPlatform.iOS
+      ? const IosUpiPayService()
+      : const AndroidUpiPayService(),
+);
 
 /// Links that open the app. Override with a fake in tests.
 final appLinkSourceProvider = Provider<AppLinkSource>(
