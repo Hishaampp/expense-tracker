@@ -298,6 +298,7 @@ class ReviewScreen extends ConsumerWidget {
       actions: [
         if (state != null && state.items.length > 1)
           RoundIconButton(
+            floating: false,
             icon: selected == null
                 ? Icons.checklist_rounded
                 : Icons.close_rounded,

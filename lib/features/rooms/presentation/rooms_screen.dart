@@ -129,6 +129,7 @@ class RoomsScreen extends ConsumerWidget {
       title: Text(l10n.roomsTitle),
       actions: [
         RoundIconButton(
+          floating: false,
           icon: Icons.add_rounded,
           tooltip: l10n.roomsNew,
           onPressed: create,

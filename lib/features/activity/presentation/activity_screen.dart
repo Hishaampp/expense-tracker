@@ -57,6 +57,7 @@ class ActivityScreen extends ConsumerWidget {
     // Keep the last month on screen while the next one loads.
     final state = async.value;
     final add = RoundIconButton(
+      floating: false,
       icon: Icons.add_rounded,
       tooltip: l10n.addExpense,
       onPressed: () => unawaited(context.push(Routes.addExpense)),

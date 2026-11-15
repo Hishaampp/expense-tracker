@@ -99,6 +99,7 @@ class HomeScreen extends ConsumerWidget {
         AppMetrics.of(context).stackedTextScale;
     final unread = ref.watch(unreadNoticesProvider).value ?? 0;
     final bell = RoundIconButton(
+      floating: false,
       icon: unread > 0
           ? Icons.notifications_active_rounded
           : Icons.notifications_none_rounded,
@@ -109,11 +110,13 @@ class HomeScreen extends ConsumerWidget {
       onPressed: () => unawaited(context.push(Routes.notifications)),
     );
     final scan = RoundIconButton(
+      floating: false,
       icon: Icons.qr_code_scanner_rounded,
       tooltip: l10n.scanPay,
       onPressed: () => unawaited(context.push(Routes.scan)),
     );
     final add = RoundIconButton(
+      floating: false,
       icon: Icons.add_rounded,
       tooltip: l10n.addExpense,
       onPressed: () => unawaited(context.push(Routes.addExpense)),

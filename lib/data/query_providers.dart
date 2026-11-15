@@ -33,7 +33,7 @@ final monthStartDayProvider = StreamProvider<int>(
 /// The appearance read before the first frame, so the app never flashes
 /// the wrong theme. `bootstrap()` overrides it.
 final initialAppearanceProvider = Provider<AppearanceMode>(
-  (ref) => AppearanceMode.system,
+  (ref) => AppearanceMode.initial,
 );
 
 /// Whether the first-launch welcome was done, read before the first
