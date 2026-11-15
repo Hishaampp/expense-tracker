@@ -5,12 +5,13 @@ plugins {
 }
 
 // ---------------------------------------------------------------------------
-// App identity — PLACEHOLDERS until the owner picks a name (spec §15, Phase 8).
-// Android: change these two values only. iOS: ios/Flutter/AppIdentity.xcconfig.
+// App identity (chosen 2026-11-15). The applicationId can never change
+// after the first Play Store upload.
+// Android: these two values. iOS: ios/Flutter/AppIdentity.xcconfig.
 // Dart: lib/core/app_identity.dart.
 // ---------------------------------------------------------------------------
-val appApplicationId = "com.example.expenses"
-val appDisplayName = "Expenses"
+val appApplicationId = "com.hishaam.ample"
+val appDisplayName = "Ample"
 
 android {
     // Kotlin source package. Independent of applicationId; does not need to

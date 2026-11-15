@@ -14,6 +14,11 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
     required this.spaceXl,
     required this.spaceXxl,
     required this.radiusCard,
+    required this.radiusGroup,
+    required this.radiusInput,
+    required this.cardShadowBlur,
+    required this.cardShadowOffset,
+    required this.cardShadowNearBlur,
     required this.radiusTile,
     required this.radiusTileLarge,
     required this.iconTileSize,
@@ -23,6 +28,8 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
     required this.roundButtonSize,
     required this.heroArrowSize,
     required this.scanFrameSize,
+    required this.introMarkSize,
+    required this.markSize,
     required this.scanFrameStroke,
     required this.minTapTarget,
     required this.progressHeight,
@@ -55,6 +62,11 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
     spaceXl: 24,
     spaceXxl: 32,
     radiusCard: 24,
+    radiusGroup: 14,
+    radiusInput: 8,
+    cardShadowBlur: 24,
+    cardShadowOffset: 8,
+    cardShadowNearBlur: 2,
     radiusTile: 9,
     radiusTileLarge: 16,
     iconTileSize: 32,
@@ -64,6 +76,8 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
     roundButtonSize: 44,
     heroArrowSize: 48,
     scanFrameSize: 248,
+    introMarkSize: 119,
+    markSize: 72,
     scanFrameStroke: 3,
     minTapTarget: 48,
     progressHeight: 6,
@@ -108,6 +122,23 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
   /// Corner radius of cards and sheets.
   final double radiusCard;
 
+  /// Corner radius of white cards and list groups (brand `radius-md`); the
+  /// dark balance card and sheets keep [radiusCard] (brand `radius-lg`).
+  final double radiusGroup;
+
+  /// Corner radius of inputs, chips and small tags (brand `radius-sm`).
+  final double radiusInput;
+
+  /// Blur of the soft, far layer of a card's shadow (brand `shadow-card`).
+  final double cardShadowBlur;
+
+  /// Drop of that far layer.
+  final double cardShadowOffset;
+
+  /// Blur of the near, crisp layer of a card's shadow; it drops by
+  /// [hairlineWidth].
+  final double cardShadowNearBlur;
+
   /// Corner radius of small icon tiles.
   final double radiusTile;
 
@@ -134,6 +165,13 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
 
   /// The square Scan & Pay asks you to aim the QR code into.
   final double scanFrameSize;
+
+  /// The animated logo at a cold start: the same size as the launch
+  /// screen's still mark, so one hands over to the other unseen.
+  final double introMarkSize;
+
+  /// The living Ample mark in empty states and the welcome.
+  final double markSize;
 
   /// The width of that square's outline.
   final double scanFrameStroke;
@@ -214,6 +252,11 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
     double? spaceXl,
     double? spaceXxl,
     double? radiusCard,
+    double? radiusGroup,
+    double? radiusInput,
+    double? cardShadowBlur,
+    double? cardShadowOffset,
+    double? cardShadowNearBlur,
     double? radiusTile,
     double? radiusTileLarge,
     double? iconTileSize,
@@ -223,6 +266,8 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
     double? roundButtonSize,
     double? heroArrowSize,
     double? scanFrameSize,
+    double? introMarkSize,
+    double? markSize,
     double? scanFrameStroke,
     double? minTapTarget,
     double? progressHeight,
@@ -253,6 +298,11 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
       spaceXl: spaceXl ?? this.spaceXl,
       spaceXxl: spaceXxl ?? this.spaceXxl,
       radiusCard: radiusCard ?? this.radiusCard,
+      radiusGroup: radiusGroup ?? this.radiusGroup,
+      radiusInput: radiusInput ?? this.radiusInput,
+      cardShadowBlur: cardShadowBlur ?? this.cardShadowBlur,
+      cardShadowOffset: cardShadowOffset ?? this.cardShadowOffset,
+      cardShadowNearBlur: cardShadowNearBlur ?? this.cardShadowNearBlur,
       radiusTile: radiusTile ?? this.radiusTile,
       radiusTileLarge: radiusTileLarge ?? this.radiusTileLarge,
       iconTileSize: iconTileSize ?? this.iconTileSize,
@@ -262,6 +312,8 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
       roundButtonSize: roundButtonSize ?? this.roundButtonSize,
       heroArrowSize: heroArrowSize ?? this.heroArrowSize,
       scanFrameSize: scanFrameSize ?? this.scanFrameSize,
+      introMarkSize: introMarkSize ?? this.introMarkSize,
+      markSize: markSize ?? this.markSize,
       scanFrameStroke: scanFrameStroke ?? this.scanFrameStroke,
       minTapTarget: minTapTarget ?? this.minTapTarget,
       progressHeight: progressHeight ?? this.progressHeight,
@@ -298,6 +350,11 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
       spaceXl: mix(spaceXl, other.spaceXl),
       spaceXxl: mix(spaceXxl, other.spaceXxl),
       radiusCard: mix(radiusCard, other.radiusCard),
+      radiusGroup: mix(radiusGroup, other.radiusGroup),
+      radiusInput: mix(radiusInput, other.radiusInput),
+      cardShadowBlur: mix(cardShadowBlur, other.cardShadowBlur),
+      cardShadowOffset: mix(cardShadowOffset, other.cardShadowOffset),
+      cardShadowNearBlur: mix(cardShadowNearBlur, other.cardShadowNearBlur),
       radiusTile: mix(radiusTile, other.radiusTile),
       radiusTileLarge: mix(radiusTileLarge, other.radiusTileLarge),
       iconTileSize: mix(iconTileSize, other.iconTileSize),
@@ -307,6 +364,8 @@ class AppMetrics extends ThemeExtension<AppMetrics> {
       roundButtonSize: mix(roundButtonSize, other.roundButtonSize),
       heroArrowSize: mix(heroArrowSize, other.heroArrowSize),
       scanFrameSize: mix(scanFrameSize, other.scanFrameSize),
+      introMarkSize: mix(introMarkSize, other.introMarkSize),
+      markSize: mix(markSize, other.markSize),
       scanFrameStroke: mix(scanFrameStroke, other.scanFrameStroke),
       minTapTarget: mix(minTapTarget, other.minTapTarget),
       progressHeight: mix(progressHeight, other.progressHeight),

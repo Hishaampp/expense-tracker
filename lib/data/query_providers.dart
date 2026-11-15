@@ -1,4 +1,5 @@
 import 'package:drift/drift.dart' show countAll;
+import 'package:expense_tracker/core/app_lock.dart';
 import 'package:expense_tracker/core/models/account.dart';
 import 'package:expense_tracker/core/models/appearance_mode.dart';
 import 'package:expense_tracker/core/models/budget_plan.dart';
@@ -33,7 +34,7 @@ final monthStartDayProvider = StreamProvider<int>(
 /// The appearance read before the first frame, so the app never flashes
 /// the wrong theme. `bootstrap()` overrides it.
 final initialAppearanceProvider = Provider<AppearanceMode>(
-  (ref) => AppearanceMode.system,
+  (ref) => AppearanceMode.initial,
 );
 
 /// Whether the first-launch welcome was done, read before the first
@@ -43,6 +44,23 @@ final initialOnboardedProvider = Provider<bool>((ref) => true);
 /// Whether the app lock was on, read before the first frame so the app
 /// opens locked. `bootstrap()` overrides it.
 final initialAppLockProvider = Provider<bool>((ref) => false);
+
+/// Provides the lock's status; the app lock gate keeps it current.
+class LockStatusNotifier extends Notifier<LockStatus> {
+  @override
+  LockStatus build() =>
+      ref.read(initialAppLockProvider) ? LockStatus.asking : LockStatus.open;
+
+  /// The gate's status.
+  LockStatus get status => state;
+
+  /// Records the gate's status.
+  set status(LockStatus value) => state = value;
+}
+
+/// Provides [LockStatusNotifier].
+final NotifierProvider<LockStatusNotifier, LockStatus> lockStatusProvider =
+    NotifierProvider<LockStatusNotifier, LockStatus>(LockStatusNotifier.new);
 
 /// Whether the app lock is on. Live.
 final appLockProvider = StreamProvider<bool>(

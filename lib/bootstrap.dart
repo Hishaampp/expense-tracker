@@ -4,6 +4,7 @@ import 'package:expense_tracker/data/data_providers.dart';
 import 'package:expense_tracker/data/db/app_database.dart';
 import 'package:expense_tracker/data/query_providers.dart';
 import 'package:expense_tracker/data/repositories/settings_repository.dart';
+import 'package:expense_tracker/features/intro/presentation/intro_overlay.dart';
 import 'package:expense_tracker/services/app_logger.dart';
 import 'package:expense_tracker/services/cloud/secure_session_storage.dart';
 import 'package:expense_tracker/services/database_key.dart';
@@ -52,17 +53,29 @@ Future<void> bootstrap() async {
         initialAppearanceProvider.overrideWithValue(appearance),
         initialOnboardedProvider.overrideWithValue(onboarded),
         initialAppLockProvider.overrideWithValue(locked),
+        // A cold start plays the Ample intro.
+        introPendingProvider.overrideWith(_ColdStartIntro.new),
       ],
       child: const App(),
     ),
   );
 }
 
-/// The bundled font's licence, shown on the platform licences page.
+/// The bundled fonts' licences, shown on the platform licences page.
 Stream<LicenseEntry> _fontLicenses() async* {
-  final text = await rootBundle.loadString('assets/fonts/AnekLatin-OFL.txt');
-  yield LicenseEntryWithLineBreaks(const ['Anek Latin'], text);
+  for (final (family, file) in [
+    ('Manrope', 'Manrope-OFL.txt'),
+    ('Fraunces', 'Fraunces-OFL.txt'),
+  ]) {
+    final text = await rootBundle.loadString('assets/fonts/$file');
+    yield LicenseEntryWithLineBreaks([family], text);
+  }
 }
 
 bool _isLoginLink(Uri uri) =>
     uri.toString().startsWith(CloudConfig.loginRedirect);
+
+class _ColdStartIntro extends IntroNotifier {
+  @override
+  bool build() => true;
+}

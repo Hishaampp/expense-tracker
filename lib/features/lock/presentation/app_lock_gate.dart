@@ -56,6 +56,7 @@ class _AppLockGateState extends ConsumerState<AppLockGate> {
     if (!on || since == null) return;
     if (_clock.now().difference(since) >= appLockGrace) {
       setState(() => _locked = true);
+      _report(LockStatus.locked);
       _askSoon();
     }
   }
@@ -66,10 +67,17 @@ class _AppLockGateState extends ConsumerState<AppLockGate> {
   Future<void> _unlock() async {
     if (_asking || !mounted) return;
     _asking = true;
+    _report(LockStatus.asking);
     final reason = AppLocalizations.of(context).lockReason;
     final ok = await ref.read(deviceAuthProvider).unlock(reason);
     _asking = false;
-    if (ok && mounted) setState(() => _locked = false);
+    if (!mounted) return;
+    if (ok) setState(() => _locked = false);
+    _report(ok ? LockStatus.open : LockStatus.locked);
+  }
+
+  void _report(LockStatus status) {
+    if (mounted) ref.read(lockStatusProvider.notifier).status = status;
   }
 
   @override
@@ -83,7 +91,10 @@ class _AppLockGateState extends ConsumerState<AppLockGate> {
     // Turning the lock off in Settings opens the app at once.
     ref.listen(appLockProvider, (previous, next) {
       final turnedOff = previous?.value == true && next.value == false;
-      if (turnedOff && _locked) setState(() => _locked = false);
+      if (turnedOff && _locked) {
+        setState(() => _locked = false);
+        _report(LockStatus.open);
+      }
     });
     if (!_locked) return widget.child;
     return Stack(

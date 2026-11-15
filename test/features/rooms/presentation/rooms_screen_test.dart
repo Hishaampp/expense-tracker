@@ -18,15 +18,39 @@ Future<void> _createRoom(WidgetTester tester, String name) async {
 }
 
 void main() {
-  appTest('no Rooms yet: say what they are and offer a trip', (tester) async {
-    await pumpApp(tester);
+  appTest('Start a trip opens the trip form; only Save creates it', (
+    tester,
+  ) async {
+    final db = await pumpApp(tester);
     await openTab(tester, 'Rooms');
 
     expect(find.text("Keep a trip's spending together"), findsOneWidget);
     await tester.tap(find.text('Start a trip'));
     await tester.pumpAndSettle();
-    expect(find.text('Trip from Nov 10'), findsWidgets);
-    expect(find.text("You've spent ₹0 on Trip from Nov 10."), findsOneWidget);
+    expect(find.text('New Room'), findsWidgets);
+    expect(await db.select(db.rooms).get(), isEmpty, reason: 'nothing yet');
+
+    await tester.enterText(find.byType(TextFormField).first, 'Goa');
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle();
+    final save = find.widgetWithText(FilledButton, 'Save');
+    await tester.ensureVisible(save);
+    await tester.pumpAndSettle();
+    await tester.tap(save);
+    await tester.pumpAndSettle();
+    final room = (await db.select(db.rooms).get()).single;
+    expect(room.name, 'Goa');
+    expect(room.type.name, 'trip');
+  });
+
+  appTest('closing the trip form creates nothing', (tester) async {
+    final db = await pumpApp(tester);
+    await openTab(tester, 'Rooms');
+    await tester.tap(find.text('Start a trip'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('Close'));
+    await tester.pumpAndSettle();
+    expect(await db.select(db.rooms).get(), isEmpty);
   });
 
   appTest('a new trip collects the expenses added to it', (tester) async {

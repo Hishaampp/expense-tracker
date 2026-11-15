@@ -143,6 +143,7 @@ class RoomDetailScreen extends ConsumerWidget {
       leading: back,
       actions: [
         RoundIconButton(
+          floating: false,
           icon: Icons.edit_rounded,
           tooltip: l10n.roomEdit,
           onPressed: () => unawaited(context.push(Routes.editRoom(room.id))),

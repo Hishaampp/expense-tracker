@@ -887,11 +887,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String tripDefaultName(String date) {
-    return 'Trip from $date';
-  }
-
-  @override
   String get roomNewTitle => 'New Room';
 
   @override

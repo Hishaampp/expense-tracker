@@ -1,0 +1,12 @@
+# The still launch screen (Ample mark on card ink), shown until Flutter
+# draws its first frame; the animated intro then takes over. Regenerate:
+#   dart run flutter_native_splash:create
+flutter_native_splash:
+  color: "#121212"
+  image: assets/brand/ample-splash.png
+  android_12:
+    color: "#121212"
+    image: assets/brand/ample-splash-android12.png
+  ios_content_mode: center
+  fullscreen: false
+  web: false

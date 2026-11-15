@@ -18,6 +18,8 @@ class AppMotion extends ThemeExtension<AppMotion> {
     required this.pop,
     required this.undoWindow,
     required this.undoWindowAccessible,
+    required this.intro,
+    required this.honeyWave,
   });
 
   /// The standard motion.
@@ -34,7 +36,16 @@ class AppMotion extends ThemeExtension<AppMotion> {
     pop: Curves.easeOutBack,
     undoWindow: Duration(seconds: 6),
     undoWindowAccessible: Duration(seconds: 30),
+    intro: Duration(milliseconds: 1900),
+    honeyWave: Duration(milliseconds: 2600),
   );
+
+  /// The Ample intro at a cold start: coins fall into the logo's bowl, the
+  /// honey rises, the name appears, then the app.
+  final Duration intro;
+
+  /// One cycle of the honey's gentle wave in the animated logo.
+  final Duration honeyWave;
 
   /// Presses, keypad digits, the selected-tile pop.
   final Duration quick;
@@ -93,6 +104,8 @@ class AppMotion extends ThemeExtension<AppMotion> {
     Curve? pop,
     Duration? undoWindow,
     Duration? undoWindowAccessible,
+    Duration? intro,
+    Duration? honeyWave,
   }) {
     return AppMotion(
       quick: quick ?? this.quick,
@@ -107,6 +120,8 @@ class AppMotion extends ThemeExtension<AppMotion> {
       pop: pop ?? this.pop,
       undoWindow: undoWindow ?? this.undoWindow,
       undoWindowAccessible: undoWindowAccessible ?? this.undoWindowAccessible,
+      intro: intro ?? this.intro,
+      honeyWave: honeyWave ?? this.honeyWave,
     );
   }
 

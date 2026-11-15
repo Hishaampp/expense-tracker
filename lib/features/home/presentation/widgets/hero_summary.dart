@@ -225,8 +225,8 @@ class _BalanceCard extends StatelessWidget {
             SizedBox(height: metrics.spaceLg),
             GrowingBar(
               fraction: summary.spent.paise / available.paise,
-              color: over ? colors.danger : colors.accent,
-              trackColor: colors.onHeroMuted,
+              color: over ? colors.dangerOnHero : colors.honey,
+              trackColor: colors.heroTrack,
             ),
             SizedBox(height: metrics.spaceSm),
             Row(
@@ -429,17 +429,14 @@ class _ArrowButton extends StatelessWidget {
       onTap: onTap,
       child: ExcludeSemantics(
         child: Material(
-          color: colors.accentFill,
+          color: colors.honey,
           shape: const CircleBorder(),
           child: Pressable(
             onTap: onTap,
             shape: const CircleBorder(),
             child: SizedBox.square(
               dimension: metrics.heroArrowSize,
-              child: Icon(
-                Icons.arrow_forward_rounded,
-                color: colors.onAccentFill,
-              ),
+              child: Icon(Icons.arrow_forward_rounded, color: colors.onHoney),
             ),
           ),
         ),

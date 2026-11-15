@@ -11,86 +11,8 @@ abstract final class Primitives {
   /// Black at 40% opacity: the shadow under floating controls (dark).
   static const Color shadow40 = Color(0x66000000);
 
-  /// #F6F1EA.
-  static const Color sand96 = Color(0xFFF6F1EA);
-
-  /// #EFE9E2.
-  static const Color sand94 = Color(0xFFEFE9E2);
-
   /// #FFFFFF.
   static const Color white100 = Color(0xFFFFFFFF);
-
-  /// #141414.
-  static const Color ink19 = Color(0xFF141414);
-
-  /// #6B655F.
-  static const Color stone51 = Color(0xFF6B655F);
-
-  /// #A8A29C.
-  static const Color stone72 = Color(0xFFA8A29C);
-
-  /// #E2600F.
-  static const Color saffron64 = Color(0xFFE2600F);
-
-  /// #C8500A.
-  static const Color saffron58 = Color(0xFFC8500A);
-
-  /// #AD4806.
-  static const Color saffron53 = Color(0xFFAD4806);
-
-  /// #1A7742.
-  static const Color green50 = Color(0xFF1A7742);
-
-  /// #5BD38F.
-  static const Color green78 = Color(0xFF5BD38F);
-
-  /// #C93439.
-  static const Color red56 = Color(0xFFC93439);
-
-  /// #7A4F00.
-  static const Color amber46 = Color(0xFF7A4F00);
-
-  /// #FCEBC5.
-  static const Color amber94 = Color(0xFFFCEBC5);
-
-  /// #0F0E0D.
-  static const Color night16 = Color(0xFF0F0E0D);
-
-  /// #1C1A18.
-  static const Color night22 = Color(0xFF1C1A18);
-
-  /// #2A2724.
-  static const Color night27 = Color(0xFF2A2724);
-
-  /// #262320.
-  static const Color night26 = Color(0xFF262320);
-
-  /// #F4F1EC.
-  static const Color stone96 = Color(0xFFF4F1EC);
-
-  /// #A8A19A.
-  static const Color stone71 = Color(0xFFA8A19A);
-
-  /// #B3ADA6.
-  static const Color stone75 = Color(0xFFB3ADA6);
-
-  /// #FF8A3D.
-  static const Color saffron75 = Color(0xFFFF8A3D);
-
-  /// #FF9A55.
-  static const Color saffron78 = Color(0xFFFF9A55);
-
-  /// #1A0E05.
-  static const Color saffron18 = Color(0xFF1A0E05);
-
-  /// #FF7B7F.
-  static const Color red74 = Color(0xFFFF7B7F);
-
-  /// #F5D58A.
-  static const Color amber88 = Color(0xFFF5D58A);
-
-  /// #3A2E0F.
-  static const Color amber31 = Color(0xFF3A2E0F);
 
   /// #E2600F.
   static const Color tileOrange64 = Color(0xFFE2600F);
@@ -121,4 +43,93 @@ abstract final class Primitives {
 
   /// #7A746E.
   static const Color tileGrey56 = Color(0xFF7A746E);
+
+  // Ample brand kit (tokens.json, 2026-11-15): named by brand token.
+
+  /// #FFFFFF (surface, light).
+  static const Color brandWhite = Color(0xFFFFFFFF);
+
+  /// #0D0D0D (surface, dark).
+  static const Color brandNight = Color(0xFF0D0D0D);
+
+  /// #181818 (surface-raised, dark).
+  static const Color brandNightRaised = Color(0xFF181818);
+
+  /// #F4EFE5 (surface-sunken, light).
+  static const Color brandSand = Color(0xFFF4EFE5);
+
+  /// #050505 (surface-sunken, dark).
+  static const Color brandNightSunken = Color(0xFF050505);
+
+  /// #121212 (ink, light; card-ink, light).
+  static const Color brandInk = Color(0xFF121212);
+
+  /// #F4F1EA (ink, dark; on-card, dark).
+  static const Color brandInkDark = Color(0xFFF4F1EA);
+
+  /// #616161 (ink-muted, light).
+  static const Color brandInkMuted = Color(0xFF616161);
+
+  /// #ABABAB (ink-muted, dark).
+  static const Color brandInkMutedDark = Color(0xFFABABAB);
+
+  /// #EAE3D6 (line, light).
+  static const Color brandLine = Color(0xFFEAE3D6);
+
+  /// #2A2A2A (line, dark).
+  static const Color brandLineDark = Color(0xFF2A2A2A);
+
+  /// #8A8270 (line-strong, light).
+  static const Color brandLineStrong = Color(0xFF8A8270);
+
+  /// #6E6E6E (line-strong, dark).
+  static const Color brandLineStrongDark = Color(0xFF6E6E6E);
+
+  /// #F2B33D (honey: the signature fill).
+  static const Color brandHoney = Color(0xFFF2B33D);
+
+  /// #7A5200 (honey-ink, light).
+  static const Color brandHoneyInk = Color(0xFF7A5200);
+
+  /// #F5C25E (honey-ink, dark).
+  static const Color brandHoneyInkDark = Color(0xFFF5C25E);
+
+  /// #FCEBC4 (honey-soft, light).
+  static const Color brandHoneySoft = Color(0xFFFCEBC4);
+
+  /// #3A2F17 (honey-soft, dark).
+  static const Color brandHoneySoftDark = Color(0xFF3A2F17);
+
+  /// #1E1E1E (card-ink, dark).
+  static const Color brandCardInkDark = Color(0xFF1E1E1E);
+
+  /// #BDBDBD (on-card-muted).
+  static const Color brandOnCardMuted = Color(0xFFBDBDBD);
+
+  /// #333333 (card-track, light).
+  static const Color brandCardTrack = Color(0xFF333333);
+
+  /// #3A3A3A (card-track, dark).
+  static const Color brandCardTrackDark = Color(0xFF3A3A3A);
+
+  /// #1B7346 (income, light).
+  static const Color brandIncome = Color(0xFF1B7346);
+
+  /// #55C68F (income, dark).
+  static const Color brandIncomeDark = Color(0xFF55C68F);
+
+  /// #B3261E (danger, light).
+  static const Color brandDanger = Color(0xFFB3261E);
+
+  /// #FF8A78 (danger, dark).
+  static const Color brandDangerDark = Color(0xFFFF8A78);
+
+  /// #000000 (shadow-card near layer: black 5%).
+  static const Color brandShadowNear = Color(0x0D000000);
+
+  /// #000000 (shadow-card far layer: black 6%).
+  static const Color brandShadowFar = Color(0x0F000000);
+
+  /// #FFFFFF (shadow-card, dark: white 4%).
+  static const Color brandShadowDark = Color(0x0AFFFFFF);
 }

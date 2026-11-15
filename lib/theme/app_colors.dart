@@ -28,52 +28,79 @@ class AppColors extends ThemeExtension<AppColors> {
     required this.review,
     required this.reviewContainer,
     required this.floatingShadow,
+    required this.heroTrack,
+    required this.lineStrong,
+    required this.cardShadow,
+    required this.cardShadowFar,
+    required this.honey,
+    required this.onHoney,
+    required this.splash,
+    required this.onSplash,
+    required this.dangerOnHero,
   });
 
   /// The light palette.
   static const AppColors light = AppColors(
-    background: Primitives.sand96,
-    surface: Primitives.white100,
-    surfaceSunken: Primitives.sand94,
-    onSurface: Primitives.ink19,
-    onSurfaceMuted: Primitives.stone51,
-    hairline: Primitives.sand94,
-    accent: Primitives.saffron64,
-    accentFill: Primitives.saffron58,
-    onAccentFill: Primitives.white100,
-    accentText: Primitives.saffron53,
-    hero: Primitives.ink19,
-    onHero: Primitives.white100,
-    onHeroMuted: Primitives.stone72,
-    moneyIn: Primitives.green50,
-    moneyInOnHero: Primitives.green78,
-    danger: Primitives.red56,
-    review: Primitives.amber46,
-    reviewContainer: Primitives.amber94,
+    background: Primitives.brandWhite,
+    surface: Primitives.brandWhite,
+    surfaceSunken: Primitives.brandSand,
+    onSurface: Primitives.brandInk,
+    onSurfaceMuted: Primitives.brandInkMuted,
+    hairline: Primitives.brandLine,
+    accent: Primitives.brandHoneyInk,
+    accentFill: Primitives.brandInk,
+    onAccentFill: Primitives.brandWhite,
+    accentText: Primitives.brandHoneyInk,
+    hero: Primitives.brandInk,
+    onHero: Primitives.brandWhite,
+    onHeroMuted: Primitives.brandOnCardMuted,
+    moneyIn: Primitives.brandIncome,
+    moneyInOnHero: Primitives.brandIncomeDark,
+    danger: Primitives.brandDanger,
+    review: Primitives.brandHoneyInk,
+    reviewContainer: Primitives.brandHoneySoft,
     floatingShadow: Primitives.shadow08,
+    heroTrack: Primitives.brandCardTrack,
+    lineStrong: Primitives.brandLineStrong,
+    cardShadow: Primitives.brandShadowNear,
+    cardShadowFar: Primitives.brandShadowFar,
+    honey: Primitives.brandHoney,
+    onHoney: Primitives.brandInk,
+    splash: Primitives.brandInk,
+    onSplash: Primitives.brandWhite,
+    dangerOnHero: Primitives.brandDangerDark,
   );
 
   /// The dark palette, authored by hand (not a flip of light).
   static const AppColors dark = AppColors(
-    background: Primitives.night16,
-    surface: Primitives.night22,
-    surfaceSunken: Primitives.night27,
-    onSurface: Primitives.stone96,
-    onSurfaceMuted: Primitives.stone71,
-    hairline: Primitives.night27,
-    accent: Primitives.saffron75,
-    accentFill: Primitives.saffron75,
-    onAccentFill: Primitives.saffron18,
-    accentText: Primitives.saffron78,
-    hero: Primitives.night26,
-    onHero: Primitives.white100,
-    onHeroMuted: Primitives.stone75,
-    moneyIn: Primitives.green78,
-    moneyInOnHero: Primitives.green78,
-    danger: Primitives.red74,
-    review: Primitives.amber88,
-    reviewContainer: Primitives.amber31,
+    background: Primitives.brandNight,
+    surface: Primitives.brandNightRaised,
+    surfaceSunken: Primitives.brandNightSunken,
+    onSurface: Primitives.brandInkDark,
+    onSurfaceMuted: Primitives.brandInkMutedDark,
+    hairline: Primitives.brandLineDark,
+    accent: Primitives.brandHoney,
+    accentFill: Primitives.brandHoney,
+    onAccentFill: Primitives.brandInk,
+    accentText: Primitives.brandHoneyInkDark,
+    hero: Primitives.brandCardInkDark,
+    onHero: Primitives.brandInkDark,
+    onHeroMuted: Primitives.brandOnCardMuted,
+    moneyIn: Primitives.brandIncomeDark,
+    moneyInOnHero: Primitives.brandIncomeDark,
+    danger: Primitives.brandDangerDark,
+    review: Primitives.brandHoneyInkDark,
+    reviewContainer: Primitives.brandHoneySoftDark,
     floatingShadow: Primitives.shadow40,
+    heroTrack: Primitives.brandCardTrackDark,
+    lineStrong: Primitives.brandLineStrongDark,
+    cardShadow: Primitives.brandShadowDark,
+    cardShadowFar: Primitives.brandShadowDark,
+    honey: Primitives.brandHoney,
+    onHoney: Primitives.brandInk,
+    splash: Primitives.brandInk,
+    onSplash: Primitives.brandWhite,
+    dangerOnHero: Primitives.brandDangerDark,
   );
 
   /// Page background.
@@ -94,10 +121,12 @@ class AppColors extends ThemeExtension<AppColors> {
   /// The rare divider between rows inside one card.
   final Color hairline;
 
-  /// Vivid accent for icons, progress and the floating + glyph. Not for text.
+  /// The accent for icons, progress and the floating + glyph on [surface]
+  /// and [background]: honey-ink in light (honey itself is too pale on
+  /// white), honey in dark. Not for text. On [hero], use [honey].
   final Color accent;
 
-  /// Fill of primary buttons.
+  /// Fill of primary buttons: ink in light, honey in dark.
   final Color accentFill;
 
   /// Text and icons on [accentFill].
@@ -133,6 +162,36 @@ class AppColors extends ThemeExtension<AppColors> {
   /// Shadow under the floating round buttons and tab bar only.
   final Color floatingShadow;
 
+  /// The empty part of a meter on [hero].
+  final Color heroTrack;
+
+  /// Outlines of inputs and secondary buttons (3:1).
+  final Color lineStrong;
+
+  /// The near shadow under cards on the page.
+  final Color cardShadow;
+
+  /// The soft, far shadow under cards on the page.
+  final Color cardShadowFar;
+
+  /// Honey, the brand signature, as a fill on [hero]: the balance meter
+  /// and the arrow button. Never thin lines or text on white.
+  final Color honey;
+
+  /// Text and icons on [honey].
+  final Color onHoney;
+
+  /// The launch screen and the intro behind the animated logo: card ink,
+  /// the same in light and dark so the still launch screen hands over
+  /// without a flash.
+  final Color splash;
+
+  /// The logo's "a" on [splash].
+  final Color onSplash;
+
+  /// Over budget on [hero]: brighter than [danger], which is too dark there.
+  final Color dangerOnHero;
+
   /// Reads the colours from the theme; asserts if the theme lacks them.
   static AppColors of(BuildContext context) {
     final extension = Theme.of(context).extension<AppColors>();
@@ -161,6 +220,15 @@ class AppColors extends ThemeExtension<AppColors> {
     Color? review,
     Color? reviewContainer,
     Color? floatingShadow,
+    Color? heroTrack,
+    Color? lineStrong,
+    Color? cardShadow,
+    Color? cardShadowFar,
+    Color? honey,
+    Color? onHoney,
+    Color? splash,
+    Color? onSplash,
+    Color? dangerOnHero,
   }) {
     return AppColors(
       background: background ?? this.background,
@@ -182,6 +250,15 @@ class AppColors extends ThemeExtension<AppColors> {
       review: review ?? this.review,
       reviewContainer: reviewContainer ?? this.reviewContainer,
       floatingShadow: floatingShadow ?? this.floatingShadow,
+      heroTrack: heroTrack ?? this.heroTrack,
+      lineStrong: lineStrong ?? this.lineStrong,
+      cardShadow: cardShadow ?? this.cardShadow,
+      cardShadowFar: cardShadowFar ?? this.cardShadowFar,
+      honey: honey ?? this.honey,
+      onHoney: onHoney ?? this.onHoney,
+      splash: splash ?? this.splash,
+      onSplash: onSplash ?? this.onSplash,
+      dangerOnHero: dangerOnHero ?? this.dangerOnHero,
     );
   }
 
@@ -209,6 +286,15 @@ class AppColors extends ThemeExtension<AppColors> {
       review: mix(review, other.review),
       reviewContainer: mix(reviewContainer, other.reviewContainer),
       floatingShadow: mix(floatingShadow, other.floatingShadow),
+      heroTrack: mix(heroTrack, other.heroTrack),
+      lineStrong: mix(lineStrong, other.lineStrong),
+      cardShadow: mix(cardShadow, other.cardShadow),
+      cardShadowFar: mix(cardShadowFar, other.cardShadowFar),
+      honey: mix(honey, other.honey),
+      onHoney: mix(onHoney, other.onHoney),
+      splash: mix(splash, other.splash),
+      onSplash: mix(onSplash, other.onSplash),
+      dangerOnHero: mix(dangerOnHero, other.dangerOnHero),
     );
   }
 }

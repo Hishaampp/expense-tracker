@@ -122,17 +122,6 @@ class RoomRepository {
     });
   }
 
-  /// Starts a trip today with no end yet (spec §9.4 "Start trip").
-  @useResult
-  Future<Result<Room, StoreFailure>> startTrip(String name) {
-    return create(
-      name: name,
-      type: RoomType.trip,
-      autoTagMode: AutoTagMode.dateWindow,
-      startDay: LocalDay.of(_clock.now()),
-    );
-  }
-
   /// Saves every field of [room].
   @useResult
   Future<Result<Room, StoreFailure>> save(Room room) {
