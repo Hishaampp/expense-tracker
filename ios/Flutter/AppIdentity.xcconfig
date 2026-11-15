@@ -1,8 +1,8 @@
-// App identity — PLACEHOLDERS until the owner picks a name (spec §15, Phase 8).
-// iOS: change these two values only. Android: android/app/build.gradle.kts.
+// App identity (chosen 2026-11-15).
+// iOS: these two values. Android: android/app/build.gradle.kts.
 // Dart: lib/core/app_identity.dart.
-APP_BUNDLE_ID = com.hishaam.expensetracker
-APP_DISPLAY_NAME = Expenses
+APP_BUNDLE_ID = com.hishaam.ample
+APP_DISPLAY_NAME = Ample
 // Apple signing team for every target (app, Share Extension, widget),
 // from a local file git ignores, so Xcode never writes it into
 // project.pbxproj. Create ios/Flutter/Signing.xcconfig with one line:

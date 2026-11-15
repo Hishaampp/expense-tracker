@@ -65,9 +65,9 @@ ThemeData buildAppTheme(Brightness brightness) {
       style: OutlinedButton.styleFrom(
         shape: pill,
         minimumSize: minButtonSize,
-        foregroundColor: colors.accentText,
+        foregroundColor: colors.onSurface,
         backgroundColor: colors.surface,
-        side: BorderSide.none,
+        side: BorderSide(color: colors.lineStrong),
         textStyle: textTheme.labelLarge,
       ),
     ),
@@ -134,7 +134,7 @@ ThemeData buildAppTheme(Brightness brightness) {
       behavior: SnackBarBehavior.floating,
       backgroundColor: colors.hero,
       contentTextStyle: textTheme.bodyMedium?.copyWith(color: colors.onHero),
-      actionTextColor: colors.accent,
+      actionTextColor: colors.honey,
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(metrics.radiusTileLarge),
@@ -143,9 +143,21 @@ ThemeData buildAppTheme(Brightness brightness) {
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: colors.surfaceSunken,
+      // Brand: inputs are outlined in line-strong (3:1), ink when focused.
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(metrics.radiusTileLarge),
-        borderSide: BorderSide.none,
+        borderRadius: BorderRadius.circular(metrics.radiusInput),
+        borderSide: BorderSide(color: colors.lineStrong),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(metrics.radiusInput),
+        borderSide: BorderSide(color: colors.lineStrong),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(metrics.radiusInput),
+        borderSide: BorderSide(
+          color: colors.onSurface,
+          width: metrics.hairlineWidth * 2,
+        ),
       ),
     ),
     extensions: <ThemeExtension<dynamic>>[

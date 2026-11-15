@@ -45,6 +45,8 @@ dependencies:
 dev_dependencies:
   build_runner: ^2.16.1
   drift_dev: ^2.35.3
+  flutter_launcher_icons: ^0.14.4
+  flutter_native_splash: ^2.2.16
   flutter_test:
     sdk: flutter
   test: ^1.31.1
@@ -61,9 +63,22 @@ flutter:
   # Bundled, never fetched at runtime (docs/DESIGN.md, "Type"). One variable
   # file: FontWeight drives its weight axis. Licence: AnekLatin-OFL.txt.
   fonts:
-    - family: Anek Latin
+    # Ample brand kit: Manrope for text, Fraunces (soft) for display.
+    - family: Manrope
       fonts:
-        - asset: assets/fonts/AnekLatin-Variable.ttf
+        - asset: assets/fonts/Manrope-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Manrope-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Manrope-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Manrope-Bold.ttf
+          weight: 700
+    - family: Fraunces
+      fonts:
+        - asset: assets/fonts/Fraunces-SoftSemiBold.ttf
+          weight: 600
   assets:
-    - assets/fonts/AnekLatin-OFL.txt
+    - assets/fonts/Manrope-OFL.txt
+    - assets/fonts/Fraunces-OFL.txt
   generate: true

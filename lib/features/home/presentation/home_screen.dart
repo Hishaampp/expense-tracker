@@ -177,6 +177,7 @@ class HomeScreen extends ConsumerWidget {
             EmptyStateView(
               icon: Icons.receipt_long_rounded,
               iconColor: CategoryColors.of(context).orange,
+              brandMark: true,
               title: l10n.homeEmptyTitle,
               body: l10n.homeEmptyBody,
               actionLabel: l10n.addExpense,

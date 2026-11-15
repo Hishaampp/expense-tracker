@@ -1,0 +1,12 @@
+# App icons from the Ample brand kit (assets/brand). Regenerate with:
+#   dart run flutter_launcher_icons
+flutter_launcher_icons:
+  image_path: "assets/brand/ample-icon-1024.png"
+  android: "ic_launcher"
+  ios: true
+  remove_alpha_ios: true
+  min_sdk_android: 26
+  adaptive_icon_background: "#121212"
+  adaptive_icon_foreground: "assets/brand/ample-foreground.png"
+  adaptive_icon_monochrome: "assets/brand/ample-monochrome.png"
+  adaptive_icon_foreground_inset: 0

@@ -127,6 +127,7 @@ class ActivityScreen extends ConsumerWidget {
             child: EmptyStateView(
               icon: Icons.receipt_long_rounded,
               iconColor: CategoryColors.of(context).blue,
+              brandMark: true,
               title: l10n.activityEmptyTitle(month),
               body: l10n.activityEmptyBody,
               actionLabel: l10n.addExpense,

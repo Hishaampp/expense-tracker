@@ -56,8 +56,8 @@ class RoomHero extends StatelessWidget {
             SizedBox(height: metrics.spaceLg),
             GrowingBar(
               fraction: (summary.progress ?? 1).clamp(0, 1),
-              color: over ? colors.danger : colors.accent,
-              trackColor: colors.onHeroMuted,
+              color: over ? colors.dangerOnHero : colors.honey,
+              trackColor: colors.heroTrack,
             ),
             SizedBox(height: metrics.spaceSm),
             Row(

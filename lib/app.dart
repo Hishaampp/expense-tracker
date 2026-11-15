@@ -3,6 +3,7 @@ import 'package:expense_tracker/core/models/appearance_mode.dart';
 import 'package:expense_tracker/data/query_providers.dart';
 import 'package:expense_tracker/features/account/presentation/sync_host.dart';
 import 'package:expense_tracker/features/capture/presentation/capture_inbox.dart';
+import 'package:expense_tracker/features/intro/presentation/intro_overlay.dart';
 import 'package:expense_tracker/features/lock/presentation/app_lock_gate.dart';
 import 'package:expense_tracker/features/notifications/presentation/notification_host.dart';
 import 'package:expense_tracker/features/quick_add/presentation/quick_add_link_host.dart';
@@ -36,11 +37,13 @@ class App extends ConsumerWidget {
       themeAnimationStyle: AnimationStyle.noAnimation,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      builder: (context, child) => AppLockGate(
-        child: SyncHost(
-          child: QuickAddLinkHost(
-            child: NotificationHost(
-              child: CaptureInbox(child: child ?? const SizedBox.shrink()),
+      builder: (context, child) => IntroOverlay(
+        child: AppLockGate(
+          child: SyncHost(
+            child: QuickAddLinkHost(
+              child: NotificationHost(
+                child: CaptureInbox(child: child ?? const SizedBox.shrink()),
+              ),
             ),
           ),
         ),

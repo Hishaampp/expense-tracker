@@ -3,19 +3,26 @@ import 'dart:io';
 import 'package:expense_tracker/theme/app_text_styles.dart';
 import 'package:test/test.dart';
 
-/// Contract (docs/DESIGN.md, "Type"): the app font is bundled with its
-/// licence. A family name with no file behind it falls back to the
+/// Contract (docs/DESIGN.md, "Type"): the brand fonts are bundled with
+/// their licences. A family name with no file behind it falls back to the
 /// platform font silently, so check the wiring here.
 void main() {
-  test('the theme font family is declared in pubspec with a real file', () {
+  test('both theme font families are declared with real files', () {
     final pubspec = File('pubspec.yaml').readAsStringSync();
-    expect(pubspec, contains('- family: $appFontFamily'));
-    final asset = RegExp(r'- asset: (assets/fonts/\S+\.ttf)')
-        .firstMatch(pubspec)
-        ?.group(1);
-    expect(asset, isNotNull, reason: 'no font asset declared');
-    expect(File(asset!).existsSync(), isTrue, reason: '$asset is missing');
-    expect(File('assets/fonts/AnekLatin-OFL.txt').existsSync(), isTrue);
+    for (final family in [appFontFamily, displayFontFamily]) {
+      expect(pubspec, contains('- family: $family'), reason: family);
+    }
+    final assets = RegExp(r'- asset: (assets/fonts/\S+\.ttf)')
+        .allMatches(pubspec)
+        .map((m) => m.group(1)!)
+        .toList();
+    expect(assets, isNotEmpty, reason: 'no font asset declared');
+    for (final asset in assets) {
+      expect(File(asset).existsSync(), isTrue, reason: '$asset is missing');
+    }
+    for (final licence in ['Manrope-OFL.txt', 'Fraunces-OFL.txt']) {
+      expect(File('assets/fonts/$licence').existsSync(), isTrue);
+    }
   });
 
   test('no runtime font download', () {

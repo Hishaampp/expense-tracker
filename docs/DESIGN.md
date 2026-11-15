@@ -1,12 +1,52 @@
-# Design direction: Warm cards
+# Design direction: Ample
 
-Chosen by the owner on 2026-11-10, replacing the first direction
-("Passbook"), which they found too dense. The owner supplied screenshots of a
-polished app as a reference for feel; this direction takes its qualities, not
-its identity (own accent colour, own content, own wording).
+The app is **Ample** (brand kit received 2026-11-15; source files in
+`assets/brand/`, geometry renderer in `tool/render_brand_mark.py`). The
+brand replaces the earlier saffron palette and Anek Latin type; the layout
+ideas below ("Warm cards") still hold, restyled.
 
-This file and `lib/theme/` decide look and feel. The spec decides what a
-screen shows.
+## Brand at a glance
+
+- **Mark:** an "a" whose bowl holds honey. Honey means "what you have".
+- **Colour roles** (`lib/theme/app_colors.dart`, hex only in
+  `primitives.dart`, named by brand token):
+
+  | Role | Brand token | Note |
+  |---|---|---|
+  | `background`, `surface` | surface / surface-raised | White on white in light; cards get a `line` border and `shadow-card`. |
+  | `surfaceSunken` | surface-sunken | Chips, input fills, meter tracks. |
+  | `onSurface`, `onSurfaceMuted` | ink, ink-muted | Spending is ink, never red. |
+  | `hairline`, `lineStrong` | line, line-strong | `lineStrong` outlines inputs and secondary buttons (3:1). |
+  | `accent` | honey-ink (light), honey (dark) | Icons and progress on white; honey itself is too pale there. |
+  | `accentFill` / `onAccentFill` | ink / white (light), honey / ink (dark) | Primary buttons. |
+  | `accentText`, `review` | honey-ink | Honey-family text. |
+  | `reviewContainer` | honey-soft | Quiet highlight ground. |
+  | `hero`, `onHero`, `onHeroMuted`, `heroTrack` | card-ink, on-card, on-card-muted, card-track | The one deep balance card per screen. |
+  | `honey` / `onHoney` | honey / on-honey | Fills on the balance card: its meter and arrow. |
+  | `moneyIn`, `danger` | income, danger | Always with "+" or words, never colour alone. |
+  | `splash` / `onSplash` | ink / white | Launch screen and intro, same in both themes. |
+
+- **Type** (`app_text_styles.dart`): **Fraunces** (soft, semibold) for
+  display, the hero sentence and the typed amount; **Manrope** for
+  everything else. Captions never below 12. Amounts use tabular figures.
+- **Shape** (`app_metrics.dart`): `radiusGroup` 14 for white cards,
+  `radiusCard` 24 for the balance card and sheets, `radiusInput` 8 for
+  fields, pills for buttons. Spacing stays on the 4-point scale.
+
+## Brand motion
+
+- **Intro** (`features/intro`): at a cold start, over the still launch
+  screen (the mark with an empty bowl), three ₹ coins fall into the bowl,
+  the honey rises with a wave, "Ample" rises in, then it fades into the
+  app (`AppMotion.intro`, 1.9 s). A tap skips it; reduced motion skips it.
+- **Living mark** (`widgets/ample_mark.dart`): the honey pours in and
+  sways (`AppMotion.honeyWave`) in the welcome and the main empty states.
+- Everything else keeps the catalogue below: staggered entrances,
+  count-up amounts, growing meters, the press scale.
+
+---
+
+## Layout (from "Warm cards")
 
 ## The idea
 

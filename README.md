@@ -1,16 +1,16 @@
-# Expense tracker (working name: "Expenses")
+# Ample
 
 An automatic expense tracker for India. It records UPI, card and bank payments
 without typing and groups trip and wedding spending into **Rooms**. Built in
 Flutter for Android and iPhone. All data stays on the phone: there is no server
 and no login.
 
-> The app has no final name yet. "Expenses" is a placeholder. The iOS id is
-> `com.hishaam.expensetracker` (a Personal Team cannot sign `com.example.*`);
-> Android still uses the placeholder `com.example.expenses`. To rename, change
-> these three files together:
+> The app is **Ample** (brand kit 2026-11-15), id `com.hishaam.ample` on
+> Android and iPhone. The name and id live in three files, changed together:
 > `lib/core/app_identity.dart`, `android/app/build.gradle.kts`,
-> `ios/Flutter/AppIdentity.xcconfig`.
+> `ios/Flutter/AppIdentity.xcconfig`. The Kotlin package stays
+> `com.example.expenses` (internal). Links use the `expensetracker://` scheme
+> (sign-in redirect and widgets); users never see it.
 
 ## Run
 

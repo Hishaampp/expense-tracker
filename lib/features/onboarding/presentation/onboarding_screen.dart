@@ -14,6 +14,7 @@ import 'package:expense_tracker/theme/app_metrics.dart';
 import 'package:expense_tracker/theme/app_motion.dart';
 import 'package:expense_tracker/theme/app_text_styles.dart';
 import 'package:expense_tracker/theme/category_colors.dart';
+import 'package:expense_tracker/widgets/ample_mark.dart';
 import 'package:expense_tracker/widgets/choice_pill.dart';
 import 'package:expense_tracker/widgets/entrance.dart';
 import 'package:expense_tracker/widgets/hero_card.dart';
@@ -163,6 +164,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       _Step.capture => _Value(
         icon: Icons.bolt_rounded,
         color: tiles.green,
+        brandMark: true,
         title: l10n.onboardCaptureTitle,
         body: l10n.onboardCaptureBody,
       ),
@@ -404,12 +406,16 @@ class _Value extends StatelessWidget {
     required this.color,
     required this.title,
     required this.body,
+    this.brandMark = false,
   });
 
   final IconData icon;
   final Color color;
   final String title;
   final String body;
+
+  // The welcome's first step shows the living Ample mark, honey pouring in.
+  final bool brandMark;
 
   @override
   Widget build(BuildContext context) {
@@ -419,15 +425,18 @@ class _Value extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // The icon pops in as the step arrives; still under reduced motion.
-        TweenAnimationBuilder<double>(
-          tween: Tween(begin: popStartScale, end: 1),
-          duration: resolveMotion(context, motion.slow),
-          curve: motion.pop,
-          builder: (context, scale, child) =>
-              Transform.scale(scale: scale, child: child),
-          child: IconTile(icon: icon, color: color, large: true),
-        ),
+        if (brandMark)
+          const PouringAmpleMark(fill: 1)
+        else
+          // The icon pops in as the step arrives; still under reduced motion.
+          TweenAnimationBuilder<double>(
+            tween: Tween(begin: popStartScale, end: 1),
+            duration: resolveMotion(context, motion.slow),
+            curve: motion.pop,
+            builder: (context, scale, child) =>
+                Transform.scale(scale: scale, child: child),
+            child: IconTile(icon: icon, color: color, large: true),
+          ),
         SizedBox(height: metrics.spaceXl),
         Entrance(
           index: 1,

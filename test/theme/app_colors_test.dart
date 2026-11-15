@@ -26,6 +26,10 @@ List<(String, Color, Color)> _textPairs(AppColors c) => [
   ('onHero on hero', c.onHero, c.hero),
   ('onHeroMuted on hero', c.onHeroMuted, c.hero),
   ('moneyInOnHero on hero', c.moneyInOnHero, c.hero),
+  ('onHoney on honey', c.onHoney, c.honey),
+  ('honey text on hero', c.honey, c.hero),
+  ('onSplash on splash', c.onSplash, c.splash),
+  ('accentText on reviewContainer', c.accentText, c.reviewContainer),
   ('moneyIn on surface', c.moneyIn, c.surface),
   ('moneyIn on background', c.moneyIn, c.background),
   ('danger on surface', c.danger, c.surface),
@@ -36,7 +40,13 @@ List<(String, Color, Color)> _textPairs(AppColors c) => [
 List<(String, Color, Color)> _shapePairs(AppColors c) => [
   ('accent on surface', c.accent, c.surface),
   ('accent on background', c.accent, c.background),
-  ('accentFill on hero', c.accentFill, c.hero),
+  ('honey on hero', c.honey, c.hero),
+  ('dangerOnHero on hero', c.dangerOnHero, c.hero),
+  ('honey on splash', c.honey, c.splash),
+  ('accent on surfaceSunken', c.accent, c.surfaceSunken),
+  ('lineStrong on surfaceSunken', c.lineStrong, c.surfaceSunken),
+  ('heroTrack against honey', c.honey, c.heroTrack),
+  ('lineStrong on surface', c.lineStrong, c.surface),
 ];
 
 void main() {

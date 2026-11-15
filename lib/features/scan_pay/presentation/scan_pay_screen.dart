@@ -11,6 +11,7 @@ import 'package:expense_tracker/theme/app_colors.dart';
 import 'package:expense_tracker/theme/app_metrics.dart';
 import 'package:expense_tracker/widgets/app_card.dart';
 import 'package:expense_tracker/widgets/choice_pill.dart';
+import 'package:expense_tracker/widgets/entrance.dart';
 import 'package:expense_tracker/widgets/error_state_view.dart';
 import 'package:expense_tracker/widgets/option_sheet.dart';
 import 'package:expense_tracker/widgets/pulsing_placeholder.dart';
@@ -185,12 +186,14 @@ class _ScanPayScreenState extends ConsumerState<ScanPayScreen> {
     }
     final Widget body;
     if (state != null) {
-      body = _PayForm(
-        state: state,
-        amount: _amount,
-        onAmount: _notifier.setAmount,
-        onCategory: _notifier.pickCategory,
-        onPay: () => unawaited(_pay(state)),
+      body = Entrance(
+        child: _PayForm(
+          state: state,
+          amount: _amount,
+          onAmount: _notifier.setAmount,
+          onCategory: _notifier.pickCategory,
+          onPay: () => unawaited(_pay(state)),
+        ),
       );
     } else if (async.hasError) {
       body = Center(

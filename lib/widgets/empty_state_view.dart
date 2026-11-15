@@ -1,4 +1,5 @@
 import 'package:expense_tracker/theme/app_metrics.dart';
+import 'package:expense_tracker/widgets/ample_mark.dart';
 import 'package:expense_tracker/widgets/app_card.dart';
 import 'package:expense_tracker/widgets/icon_tile.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class EmptyStateView extends StatelessWidget {
     required this.icon,
     required this.iconColor,
     required this.title,
+    this.brandMark = false,
     this.body,
     this.actionLabel,
     this.onAction,
@@ -25,6 +27,10 @@ class EmptyStateView extends StatelessWidget {
 
   /// What is missing, for example "No expenses yet".
   final String title;
+
+  /// Show the living Ample mark instead of [icon]: for the app's main
+  /// "nothing here yet" moments.
+  final bool brandMark;
 
   /// One supporting sentence.
   final String? body;
@@ -46,7 +52,10 @@ class EmptyStateView extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          IconTile(icon: icon, color: iconColor, large: true),
+          if (brandMark)
+            const PouringAmpleMark()
+          else
+            IconTile(icon: icon, color: iconColor, large: true),
           SizedBox(height: metrics.spaceLg),
           Text(title, style: textTheme.titleLarge, textAlign: TextAlign.center),
           if (body != null) ...[

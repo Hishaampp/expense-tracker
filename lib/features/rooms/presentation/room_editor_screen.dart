@@ -14,6 +14,7 @@ import 'package:expense_tracker/theme/app_metrics.dart';
 import 'package:expense_tracker/theme/category_colors.dart';
 import 'package:expense_tracker/widgets/app_card.dart';
 import 'package:expense_tracker/widgets/choice_pill.dart';
+import 'package:expense_tracker/widgets/entrance.dart';
 import 'package:expense_tracker/widgets/error_state_view.dart';
 import 'package:expense_tracker/widgets/icon_tile.dart';
 import 'package:expense_tracker/widgets/large_title_page.dart';
@@ -154,222 +155,226 @@ class _RoomEditorScreenState extends ConsumerState<RoomEditorScreen> {
       title: title,
       leading: close,
       children: [
-        Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TextFormField(
-                controller: _name,
-                autofocus: widget.roomId == null,
-                textCapitalization: TextCapitalization.sentences,
-                textInputAction: TextInputAction.done,
-                decoration: InputDecoration(
-                  labelText: l10n.roomNameLabel,
-                  hintText: l10n.roomNameHint,
+        Entrance(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                TextFormField(
+                  controller: _name,
+                  autofocus: widget.roomId == null,
+                  textCapitalization: TextCapitalization.sentences,
+                  textInputAction: TextInputAction.done,
+                  decoration: InputDecoration(
+                    labelText: l10n.roomNameLabel,
+                    hintText: l10n.roomNameHint,
+                  ),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (v) =>
+                      (v ?? '').trim().isEmpty ? l10n.roomNameRequired : null,
                 ),
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (v) =>
-                    (v ?? '').trim().isEmpty ? l10n.roomNameRequired : null,
-              ),
-              heading(l10n.roomTypeLabel),
-              Wrap(
-                spacing: pillGap,
-                runSpacing: pillGap,
-                children: [
-                  for (final type in RoomType.values)
-                    ChoicePill(
-                      label: roomTypeName(l10n, type),
-                      selected: state.type == type,
-                      onTap: () => notifier.setType(type),
-                    ),
-                ],
-              ),
-              heading(l10n.roomEmojiLabel),
-              Wrap(
-                spacing: pillGap,
-                runSpacing: pillGap,
-                children: [
-                  for (final emoji in RoomEditorState.emojis)
-                    ChoicePill(
-                      label: emoji,
-                      semanticLabel: l10n.roomEmojiSemantics(emoji),
-                      selected: state.emoji == emoji,
-                      onTap: () => notifier.setEmoji(emoji),
-                    ),
-                  ChoicePill(
-                    label: l10n.roomNoEmoji,
-                    selected: state.emoji == null,
-                    onTap: () => notifier.setEmoji(null),
-                  ),
-                ],
-              ),
-              heading(l10n.roomDatesLabel),
-              Wrap(
-                spacing: pillGap,
-                runSpacing: pillGap,
-                children: [
-                  ChoicePill(
-                    icon: Icons.event_rounded,
-                    label: start == null
-                        ? l10n.roomStartLabel
-                        : l10n.roomStartValue(
-                            formatShortDate(start.date, locale),
-                          ),
-                    selected: false,
-                    onTap: () => unawaited(
-                      _pickDate(
-                        current: start?.date,
-                        first: null,
-                        onPicked: notifier.setStart,
-                      ),
-                    ),
-                  ),
-                  ChoicePill(
-                    icon: Icons.event_available_rounded,
-                    label: end == null
-                        ? (state.type == RoomType.trip
-                              ? l10n.roomNoEnd
-                              : l10n.roomEndLabel)
-                        : l10n.roomEndValue(formatShortDate(end.date, locale)),
-                    selected: false,
-                    onTap: () => unawaited(
-                      _pickDate(
-                        current: end?.date,
-                        first: start?.date,
-                        onPicked: notifier.setEnd,
-                      ),
-                    ),
-                  ),
-                  if (end != null)
-                    TextButton(
-                      onPressed: () => notifier.setEnd(null),
-                      child: Text(l10n.roomClearEnd),
-                    ),
-                ],
-              ),
-              if (dateError != null)
-                Padding(
-                  padding: EdgeInsetsDirectional.only(
-                    top: metrics.spaceSm,
-                    start: metrics.spaceXs,
-                  ),
-                  child: Semantics(
-                    liveRegion: true,
-                    child: Text(
-                      dateError,
-                      style: textTheme.bodySmall?.copyWith(
-                        color: colors.danger,
-                      ),
-                    ),
-                  ),
-                ),
-              heading(l10n.roomModeLabel),
-              if (state.type.choosesMode)
+                heading(l10n.roomTypeLabel),
                 Wrap(
                   spacing: pillGap,
                   runSpacing: pillGap,
                   children: [
-                    for (final mode in [
-                      AutoTagMode.suggest,
-                      AutoTagMode.dateWindow,
-                      AutoTagMode.manual,
-                    ])
+                    for (final type in RoomType.values)
                       ChoicePill(
-                        label: switch (mode) {
-                          AutoTagMode.dateWindow => l10n.roomModeDateWindow,
-                          AutoTagMode.suggest => l10n.roomModeSuggest,
-                          AutoTagMode.manual => l10n.roomModeManual,
-                        },
-                        selected: state.mode == mode,
-                        onTap: () => notifier.setMode(mode),
+                        label: roomTypeName(l10n, type),
+                        selected: state.type == type,
+                        onTap: () => notifier.setType(type),
                       ),
                   ],
-                )
-              else
-                Padding(
-                  padding: EdgeInsetsDirectional.only(start: metrics.spaceXs),
-                  child: Text(
-                    state.type == RoomType.trip
-                        ? l10n.roomModeTripNote
-                        : l10n.roomModeWeddingNote,
-                    style: textTheme.bodyMedium,
-                  ),
                 ),
-              SizedBox(height: metrics.spaceLg),
-              TextFormField(
-                controller: _budget,
-                keyboardType: TextInputType.number,
-                inputFormatters: [
-                  FilteringTextInputFormatter.digitsOnly,
-                  LengthLimitingTextInputFormatter(maxBudgetDigits),
-                ],
-                decoration: InputDecoration(
-                  labelText: l10n.roomBudgetLabel,
-                  hintText: l10n.roomBudgetHint,
-                ),
-              ),
-              SizedBox(height: metrics.spaceLg),
-              AppCard(
-                padding: EdgeInsetsDirectional.symmetric(
-                  horizontal: metrics.spaceLg,
-                  vertical: metrics.spaceSm,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                heading(l10n.roomEmojiLabel),
+                Wrap(
+                  spacing: pillGap,
+                  runSpacing: pillGap,
                   children: [
-                    SwitchRow(
-                      leading: IconTile(
-                        icon: Icons.account_balance_wallet_rounded,
-                        color: CategoryColors.of(context).amber,
+                    for (final emoji in RoomEditorState.emojis)
+                      ChoicePill(
+                        label: emoji,
+                        semanticLabel: l10n.roomEmojiSemantics(emoji),
+                        selected: state.emoji == emoji,
+                        onTap: () => notifier.setEmoji(emoji),
                       ),
-                      title: l10n.roomCountsInBudget,
-                      value: state.countsInBudget,
-                      onChanged: (v) => notifier.setCountsInBudget(value: v),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.only(
-                        bottom: metrics.spaceSm,
-                      ),
-                      child: Text(
-                        l10n.roomCountsInBudgetNote,
-                        style: textTheme.bodySmall,
-                      ),
+                    ChoicePill(
+                      label: l10n.roomNoEmoji,
+                      selected: state.emoji == null,
+                      onTap: () => notifier.setEmoji(null),
                     ),
                   ],
                 ),
-              ),
-              if (failure != null)
-                Padding(
-                  padding: EdgeInsetsDirectional.only(top: metrics.spaceMd),
-                  child: Semantics(
-                    liveRegion: true,
-                    child: Text(
-                      failureMessage(l10n, failure),
-                      style: textTheme.bodySmall?.copyWith(
-                        color: colors.danger,
+                heading(l10n.roomDatesLabel),
+                Wrap(
+                  spacing: pillGap,
+                  runSpacing: pillGap,
+                  children: [
+                    ChoicePill(
+                      icon: Icons.event_rounded,
+                      label: start == null
+                          ? l10n.roomStartLabel
+                          : l10n.roomStartValue(
+                              formatShortDate(start.date, locale),
+                            ),
+                      selected: false,
+                      onTap: () => unawaited(
+                        _pickDate(
+                          current: start?.date,
+                          first: null,
+                          onPicked: notifier.setStart,
+                        ),
+                      ),
+                    ),
+                    ChoicePill(
+                      icon: Icons.event_available_rounded,
+                      label: end == null
+                          ? (state.type == RoomType.trip
+                                ? l10n.roomNoEnd
+                                : l10n.roomEndLabel)
+                          : l10n.roomEndValue(
+                              formatShortDate(end.date, locale),
+                            ),
+                      selected: false,
+                      onTap: () => unawaited(
+                        _pickDate(
+                          current: end?.date,
+                          first: start?.date,
+                          onPicked: notifier.setEnd,
+                        ),
+                      ),
+                    ),
+                    if (end != null)
+                      TextButton(
+                        onPressed: () => notifier.setEnd(null),
+                        child: Text(l10n.roomClearEnd),
+                      ),
+                  ],
+                ),
+                if (dateError != null)
+                  Padding(
+                    padding: EdgeInsetsDirectional.only(
+                      top: metrics.spaceSm,
+                      start: metrics.spaceXs,
+                    ),
+                    child: Semantics(
+                      liveRegion: true,
+                      child: Text(
+                        dateError,
+                        style: textTheme.bodySmall?.copyWith(
+                          color: colors.danger,
+                        ),
                       ),
                     ),
                   ),
+                heading(l10n.roomModeLabel),
+                if (state.type.choosesMode)
+                  Wrap(
+                    spacing: pillGap,
+                    runSpacing: pillGap,
+                    children: [
+                      for (final mode in [
+                        AutoTagMode.suggest,
+                        AutoTagMode.dateWindow,
+                        AutoTagMode.manual,
+                      ])
+                        ChoicePill(
+                          label: switch (mode) {
+                            AutoTagMode.dateWindow => l10n.roomModeDateWindow,
+                            AutoTagMode.suggest => l10n.roomModeSuggest,
+                            AutoTagMode.manual => l10n.roomModeManual,
+                          },
+                          selected: state.mode == mode,
+                          onTap: () => notifier.setMode(mode),
+                        ),
+                    ],
+                  )
+                else
+                  Padding(
+                    padding: EdgeInsetsDirectional.only(start: metrics.spaceXs),
+                    child: Text(
+                      state.type == RoomType.trip
+                          ? l10n.roomModeTripNote
+                          : l10n.roomModeWeddingNote,
+                      style: textTheme.bodyMedium,
+                    ),
+                  ),
+                SizedBox(height: metrics.spaceLg),
+                TextFormField(
+                  controller: _budget,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    LengthLimitingTextInputFormatter(maxBudgetDigits),
+                  ],
+                  decoration: InputDecoration(
+                    labelText: l10n.roomBudgetLabel,
+                    hintText: l10n.roomBudgetHint,
+                  ),
                 ),
-              SizedBox(height: metrics.spaceLg),
-              FilledButton(
-                onPressed: state.isSaving
-                    ? null
-                    : () {
-                        if (!(_formKey.currentState?.validate() ?? false)) {
-                          return;
-                        }
-                        unawaited(
-                          notifier.save(
-                            name: _name.text,
-                            budgetText: _budget.text,
-                          ),
-                        );
-                      },
-                child: Text(l10n.save),
-              ),
-            ],
+                SizedBox(height: metrics.spaceLg),
+                AppCard(
+                  padding: EdgeInsetsDirectional.symmetric(
+                    horizontal: metrics.spaceLg,
+                    vertical: metrics.spaceSm,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      SwitchRow(
+                        leading: IconTile(
+                          icon: Icons.account_balance_wallet_rounded,
+                          color: CategoryColors.of(context).amber,
+                        ),
+                        title: l10n.roomCountsInBudget,
+                        value: state.countsInBudget,
+                        onChanged: (v) => notifier.setCountsInBudget(value: v),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.only(
+                          bottom: metrics.spaceSm,
+                        ),
+                        child: Text(
+                          l10n.roomCountsInBudgetNote,
+                          style: textTheme.bodySmall,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                if (failure != null)
+                  Padding(
+                    padding: EdgeInsetsDirectional.only(top: metrics.spaceMd),
+                    child: Semantics(
+                      liveRegion: true,
+                      child: Text(
+                        failureMessage(l10n, failure),
+                        style: textTheme.bodySmall?.copyWith(
+                          color: colors.danger,
+                        ),
+                      ),
+                    ),
+                  ),
+                SizedBox(height: metrics.spaceLg),
+                FilledButton(
+                  onPressed: state.isSaving
+                      ? null
+                      : () {
+                          if (!(_formKey.currentState?.validate() ?? false)) {
+                            return;
+                          }
+                          unawaited(
+                            notifier.save(
+                              name: _name.text,
+                              budgetText: _budget.text,
+                            ),
+                          );
+                        },
+                  child: Text(l10n.save),
+                ),
+              ],
+            ),
           ),
         ),
       ],
