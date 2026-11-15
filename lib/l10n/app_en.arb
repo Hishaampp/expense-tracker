@@ -687,14 +687,6 @@
       }
     }
   },
-  "tripDefaultName": "Trip from {date}",
-  "@tripDefaultName": {
-    "placeholders": {
-      "date": {
-        "type": "String"
-      }
-    }
-  },
   "roomNewTitle": "New Room",
   "roomEditTitle": "Edit Room",
   "roomNameLabel": "Name",

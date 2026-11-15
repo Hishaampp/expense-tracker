@@ -1,13 +1,9 @@
 import 'dart:async';
 
-import 'package:expense_tracker/core/result.dart';
 import 'package:expense_tracker/features/rooms/presentation/rooms_notifier.dart';
 import 'package:expense_tracker/features/rooms/presentation/widgets/room_card.dart';
-import 'package:expense_tracker/formatting/date_format.dart';
 import 'package:expense_tracker/l10n/app_localizations.dart';
-import 'package:expense_tracker/l10n/failure_messages.dart';
 import 'package:expense_tracker/routing/routes.dart';
-import 'package:expense_tracker/services/service_providers.dart';
 import 'package:expense_tracker/theme/app_metrics.dart';
 import 'package:expense_tracker/theme/category_colors.dart';
 import 'package:expense_tracker/widgets/empty_state_view.dart';
@@ -25,25 +21,9 @@ class RoomsScreen extends ConsumerWidget {
   /// Creates the Rooms screen.
   const new({super.key});
 
-  Future<void> _startTrip(BuildContext context, WidgetRef ref) async {
-    final l10n = AppLocalizations.of(context);
-    final locale = Localizations.localeOf(context).toString();
-    final today = ref.read(clockProvider).now().toLocal();
-    final messenger = ScaffoldMessenger.of(context);
-    final name = l10n.tripDefaultName(formatDayMonth(today, locale));
-    final result = await ref
-        .read(roomsNotifierProvider.notifier)
-        .startTrip(name);
-    if (!context.mounted) return;
-    switch (result) {
-      case Ok(:final value):
-        unawaited(context.push(Routes.room(value.id)));
-      case Err(:final failure):
-        messenger.showSnackBar(
-          SnackBar(content: Text(failureMessage(l10n, failure))),
-        );
-    }
-  }
+  // Opens the trip form; nothing is created until it is saved.
+  void _startTrip(BuildContext context) =>
+      unawaited(context.push(Routes.newRoom));
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -65,7 +45,7 @@ class RoomsScreen extends ConsumerWidget {
             title: l10n.roomsEmptyTitle,
             body: l10n.roomsEmptyBody,
             actionLabel: l10n.roomsStartTrip,
-            onAction: () => unawaited(_startTrip(context, ref)),
+            onAction: () => _startTrip(context),
           ),
         ),
       ],
@@ -83,7 +63,7 @@ class RoomsScreen extends ConsumerWidget {
           enter(
             Align(
               child: FilledButton.icon(
-                onPressed: () => unawaited(_startTrip(context, ref)),
+                onPressed: () => _startTrip(context),
                 icon: const Icon(Icons.flight_takeoff_rounded),
                 label: Text(l10n.roomsStartTrip),
               ),

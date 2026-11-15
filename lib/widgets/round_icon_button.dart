@@ -66,17 +66,21 @@ class RoundIconButton extends StatelessWidget {
                     shape: const CircleBorder(),
                     child: SizedBox.square(
                       dimension: metrics.roundButtonSize,
-                      child: Badge.count(
-                        count: badgeCount,
-                        isLabelVisible: badgeCount > 0,
-                        backgroundColor: colors.accent,
-                        textColor: colors.onAccentFill,
-                        child: Icon(
-                          icon,
-                          size: metrics.iconLargeSize,
-                          color: enabled
-                              ? (color ?? colors.accent)
-                              : colors.onSurfaceMuted,
+                      // Centred as a pair: the badge's layer would otherwise
+                      // pin the icon to the corner whenever a count shows.
+                      child: Center(
+                        child: Badge.count(
+                          count: badgeCount,
+                          isLabelVisible: badgeCount > 0,
+                          backgroundColor: colors.accent,
+                          textColor: colors.onAccentFill,
+                          child: Icon(
+                            icon,
+                            size: metrics.iconLargeSize,
+                            color: enabled
+                                ? (color ?? colors.accent)
+                                : colors.onSurfaceMuted,
+                          ),
                         ),
                       ),
                     ),

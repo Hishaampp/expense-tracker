@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:expense_tracker/core/result.dart';
 import 'package:expense_tracker/data/query_providers.dart';
 import 'package:expense_tracker/features/home/presentation/home_notifier.dart';
 import 'package:expense_tracker/features/home/presentation/widgets/budget_card.dart';
@@ -10,9 +9,7 @@ import 'package:expense_tracker/features/home/presentation/widgets/recent_card.d
 import 'package:expense_tracker/features/home/presentation/widgets/room_chips.dart';
 import 'package:expense_tracker/formatting/date_format.dart';
 import 'package:expense_tracker/l10n/app_localizations.dart';
-import 'package:expense_tracker/l10n/failure_messages.dart';
 import 'package:expense_tracker/routing/routes.dart';
-import 'package:expense_tracker/services/service_providers.dart';
 import 'package:expense_tracker/theme/app_metrics.dart';
 import 'package:expense_tracker/theme/category_colors.dart';
 import 'package:expense_tracker/widgets/category_totals_card.dart';
@@ -34,24 +31,9 @@ class HomeScreen extends ConsumerWidget {
   /// Creates the Home screen.
   const new({super.key});
 
-  Future<void> _startTrip(BuildContext context, WidgetRef ref) async {
-    final l10n = AppLocalizations.of(context);
-    final locale = Localizations.localeOf(context).toString();
-    final today = ref.read(clockProvider).now().toLocal();
-    final messenger = ScaffoldMessenger.of(context);
-    final result = await ref
-        .read(homeNotifierProvider.notifier)
-        .startTrip(l10n.tripDefaultName(formatDayMonth(today, locale)));
-    if (!context.mounted) return;
-    switch (result) {
-      case Ok(:final value):
-        unawaited(context.push(Routes.room(value.id)));
-      case Err(:final failure):
-        messenger.showSnackBar(
-          SnackBar(content: Text(failureMessage(l10n, failure))),
-        );
-    }
-  }
+  // Opens the trip form; nothing is created until it is saved.
+  void _startTrip(BuildContext context) =>
+      unawaited(context.push(Routes.newRoom));
 
   Future<void> _pickMonth(
     BuildContext context,
@@ -166,7 +148,7 @@ class HomeScreen extends ConsumerWidget {
             RoomChips(
               rooms: state.activeRooms,
               onOpen: (id) => unawaited(context.push(Routes.room(id))),
-              onStartTrip: () => unawaited(_startTrip(context, ref)),
+              onStartTrip: () => _startTrip(context),
             ),
           ),
         if (state.captureMayBeOff)

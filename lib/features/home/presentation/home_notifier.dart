@@ -1,5 +1,4 @@
 import 'package:expense_tracker/core/capture_health.dart';
-import 'package:expense_tracker/core/failure.dart';
 import 'package:expense_tracker/core/local_day.dart';
 import 'package:expense_tracker/core/models/category_total.dart';
 import 'package:expense_tracker/core/models/room.dart';
@@ -8,10 +7,8 @@ import 'package:expense_tracker/core/money.dart';
 import 'package:expense_tracker/core/month_offset.dart';
 import 'package:expense_tracker/core/month_period.dart';
 import 'package:expense_tracker/core/month_summary.dart';
-import 'package:expense_tracker/core/result.dart';
 import 'package:expense_tracker/core/safe_to_spend.dart';
 import 'package:expense_tracker/core/weekly_review.dart';
-import 'package:expense_tracker/data/data_providers.dart';
 import 'package:expense_tracker/data/query_providers.dart';
 import 'package:expense_tracker/services/service_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -226,13 +223,6 @@ class HomeNotifier extends AsyncNotifier<HomeState> {
         accounts,
       ),
     );
-  }
-
-  /// Starts a trip named [name] today.
-  Future<Result<Room, StoreFailure>> startTrip(String name) async {
-    final result = await ref.read(roomRepositoryProvider).startTrip(name);
-    if (result is Ok) ref.read(hapticsProvider).commit();
-    return result;
   }
 }
 

@@ -1450,12 +1450,6 @@ abstract class AppLocalizations {
   /// **'{name}, {details}, {amount} spent'**
   String roomCardSemantics(String name, String details, String amount);
 
-  /// No description provided for @tripDefaultName.
-  ///
-  /// In en, this message translates to:
-  /// **'Trip from {date}'**
-  String tripDefaultName(String date);
-
   /// No description provided for @roomNewTitle.
   ///
   /// In en, this message translates to:

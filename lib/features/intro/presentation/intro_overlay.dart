@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:expense_tracker/core/app_identity.dart';
+import 'package:expense_tracker/core/app_lock.dart';
+import 'package:expense_tracker/data/query_providers.dart';
 import 'package:expense_tracker/theme/app_colors.dart';
 import 'package:expense_tracker/theme/app_metrics.dart';
 import 'package:expense_tracker/theme/app_motion.dart';
@@ -55,7 +57,24 @@ class _IntroOverlayState extends ConsumerState<IntroOverlay>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    _maybeStart(ref.read(lockStatusProvider));
+  }
+
+  // Plays once the app is open. While Face ID is asked the logo waits,
+  // still, as on the launch screen; if unlocking fails the intro steps
+  // aside so the lock screen's Unlock button can be reached.
+  void _maybeStart(LockStatus lock) {
     if (_started || !ref.read(introPendingProvider)) return;
+    switch (lock) {
+      case LockStatus.asking:
+        return;
+      case LockStatus.locked:
+        _started = true;
+        WidgetsBinding.instance.addPostFrameCallback((_) => _finish());
+        return;
+      case LockStatus.open:
+        break;
+    }
     _started = true;
     if (reducesMotion(context)) {
       WidgetsBinding.instance.addPostFrameCallback((_) => _finish());
@@ -81,6 +100,7 @@ class _IntroOverlayState extends ConsumerState<IntroOverlay>
   @override
   Widget build(BuildContext context) {
     final pending = ref.watch(introPendingProvider);
+    ref.listen(lockStatusProvider, (_, lock) => _maybeStart(lock));
     final colors = AppColors.of(context);
     final metrics = AppMetrics.of(context);
     final motion = AppMotion.of(context);
