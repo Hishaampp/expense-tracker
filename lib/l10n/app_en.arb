@@ -1803,5 +1803,16 @@
   },
   "linkDone": "Computer linked. Your records are opening there now.",
   "linkFailed": "Couldn't reach the server. Check your connection and scan again.",
-  "linkNotSyncing": "Turn on Account & sync first, then link a computer."
+  "linkNotSyncing": "Turn on Account & sync first, then link a computer.",
+  "accountLostCode": "Lost your code? Start over",
+  "@accountLostCode": {
+    "description": "Button under the recovery code field for someone who lost the code."
+  },
+  "accountStartOverTitle": "Start over without the code?",
+  "accountStartOverBody": "Your cloud copy is sealed with the code you lost, so no one can open it, not even us. Starting over clears it and uploads the records on this phone with a new recovery code. Records that are only in the cloud are lost. If another phone still uses the old code, sign it out first.",
+  "accountStartOver": "Start over",
+  "accountStartOverReason": "Confirm it's you to start sync over",
+  "@accountStartOverReason": {
+    "description": "Face ID / fingerprint prompt reason before starting sync over."
+  }
 }

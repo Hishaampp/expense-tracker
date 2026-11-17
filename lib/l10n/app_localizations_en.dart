@@ -2328,4 +2328,20 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get linkNotSyncing =>
       'Turn on Account & sync first, then link a computer.';
+
+  @override
+  String get accountLostCode => 'Lost your code? Start over';
+
+  @override
+  String get accountStartOverTitle => 'Start over without the code?';
+
+  @override
+  String get accountStartOverBody =>
+      'Your cloud copy is sealed with the code you lost, so no one can open it, not even us. Starting over clears it and uploads the records on this phone with a new recovery code. Records that are only in the cloud are lost. If another phone still uses the old code, sign it out first.';
+
+  @override
+  String get accountStartOver => 'Start over';
+
+  @override
+  String get accountStartOverReason => 'Confirm it\'s you to start sync over';
 }

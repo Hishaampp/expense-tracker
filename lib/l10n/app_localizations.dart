@@ -3727,6 +3727,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Turn on Account & sync first, then link a computer.'**
   String get linkNotSyncing;
+
+  /// Button under the recovery code field for someone who lost the code.
+  ///
+  /// In en, this message translates to:
+  /// **'Lost your code? Start over'**
+  String get accountLostCode;
+
+  /// No description provided for @accountStartOverTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Start over without the code?'**
+  String get accountStartOverTitle;
+
+  /// No description provided for @accountStartOverBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your cloud copy is sealed with the code you lost, so no one can open it, not even us. Starting over clears it and uploads the records on this phone with a new recovery code. Records that are only in the cloud are lost. If another phone still uses the old code, sign it out first.'**
+  String get accountStartOverBody;
+
+  /// No description provided for @accountStartOver.
+  ///
+  /// In en, this message translates to:
+  /// **'Start over'**
+  String get accountStartOver;
+
+  /// Face ID / fingerprint prompt reason before starting sync over.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm it\'s you to start sync over'**
+  String get accountStartOverReason;
 }
 
 class _AppLocalizationsDelegate

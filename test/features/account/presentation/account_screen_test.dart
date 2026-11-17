@@ -5,6 +5,7 @@ import 'package:drift/drift.dart' show driftRuntimeOptions;
 import 'package:expense_tracker/data/sync/computer_link.dart';
 import 'package:expense_tracker/data/sync/computer_link_server.dart';
 import 'package:expense_tracker/data/sync/sync_controller.dart';
+import 'package:expense_tracker/data/sync/sync_crypto.dart';
 import 'package:expense_tracker/data/sync/sync_engine.dart';
 import 'package:expense_tracker/features/account/presentation/account_screen.dart';
 import 'package:expense_tracker/features/account/presentation/link_computer_screen.dart';
@@ -107,6 +108,54 @@ void main() {
     expect(find.text('Signed in as asha@example.com'), findsOneWidget);
     final txns = await phone.select(phone.transactions).get();
     expect(txns.single.payeeDisplay, 'Swiggy');
+  });
+
+  appTest('a lost code: start over with the phone records and a new code', (
+    tester,
+  ) async {
+    // The first phone synced, then its code was lost.
+    final server = MemorySyncServer();
+    final oldKeys = FakeSyncKeyStore();
+    final first = await pumpApp(tester, syncServer: server, syncKeys: oldKeys);
+    await seedExpense(first, DateTime(2026, 11, 3, 13), 300, payee: 'Swiggy');
+    await _open(tester);
+    await _signIn(tester);
+    final oldKey = oldKeys.key!;
+    await tester.pumpWidget(const SizedBox.shrink());
+    await tester.pump(const Duration(seconds: 1));
+
+    // A new phone, same account, its records restored from a backup.
+    final keys = FakeSyncKeyStore();
+    final phone = await pumpApp(tester, syncServer: server, syncKeys: keys);
+    await seedExpense(phone, DateTime(2026, 11, 4, 9), 120, payee: 'Chai');
+    await _open(tester);
+    await _signIn(tester);
+    expect(find.text('Enter your recovery code'), findsOneWidget);
+
+    // Backing out of the warning changes nothing.
+    await tester.tap(find.text('Lost your code? Start over'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Cancel'));
+    await tester.pumpAndSettle();
+    expect(find.text('Enter your recovery code'), findsOneWidget);
+    expect(keys.key, isNull);
+
+    await tester.tap(find.text('Lost your code? Start over'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.widgetWithText(TextButton, 'Start over'));
+    await tester.pumpAndSettle();
+    expect(find.text('Write down your recovery code'), findsOneWidget);
+    expect(find.text(keys.key!.recoveryCode), findsOneWidget);
+
+    // The cloud now holds only this phone's records, under the new key.
+    final records = server.stored;
+    expect(records, isNotEmpty);
+    for (final record in records) {
+      expect(await SyncCrypto(keys.key!).open(record), isNotNull);
+      expect(await SyncCrypto(oldKey).open(record), isNull);
+    }
+    final txns = await phone.select(phone.transactions).get();
+    expect(txns.single.payeeDisplay, 'Chai');
   });
 
   appTest('signing out keeps the data on the phone', (tester) async {

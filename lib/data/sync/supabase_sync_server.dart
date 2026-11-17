@@ -30,6 +30,13 @@ class SupabaseSyncServer implements SyncServer {
   }
 
   @override
+  Future<void> clear() async {
+    // Row-level security limits this to the signed-in user's own rows;
+    // PostgREST still wants a filter on a delete.
+    await _client.from('sync_records').delete().gte('seq', 0);
+  }
+
+  @override
   Future<List<PulledRecord>> pull(int after) async {
     final out = <PulledRecord>[];
     var cursor = after;
