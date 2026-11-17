@@ -2,6 +2,7 @@
 
 import { Check, KeyRound, LogOut, QrCode } from "lucide-react";
 import { useMemo, useState } from "react";
+import { ScanUnlock } from "@/components/link/scan-unlock";
 import { cloud } from "@/lib/cloud/client";
 import {
   formatRecoveryCode,
@@ -21,7 +22,7 @@ const FAILURE_TEXT: Record<UnlockFailure, string> = {
   network: "Couldn't reach your records. Check your connection and try again.",
 };
 
-/** Unlock with the recovery code (QR from the phone comes in the next step). */
+/** Unlock by scanning with the phone (first) or by typing the recovery code. */
 export function Unlock({
   email,
   failure,
@@ -31,6 +32,7 @@ export function Unlock({
   failure?: UnlockFailure;
   onUnlock: (key: Uint8Array) => void;
 }) {
+  const [method, setMethod] = useState<"scan" | "code">("scan");
   const [code, setCode] = useState("");
   const clean = normalizeRecoveryCode(code);
   const complete = clean.length === RECOVERY_CODE_LENGTH;
@@ -42,22 +44,49 @@ export function Unlock({
     <div>
       <h1 className="rise font-display text-[2.6rem] leading-[1.05] tracking-[-0.02em]">Unlock your records</h1>
       <p className="rise mt-5 text-[1.0625rem] leading-relaxed text-ink-muted" style={{ "--i": 1 } as React.CSSProperties}>
-        Your records reach this computer sealed. Your recovery code opens them here, in this tab only. It never leaves this computer.
+        Your records reach this computer sealed and open here, in this tab only. Scan with your phone, or type your recovery code.
       </p>
 
       <div role="tablist" aria-label="How to unlock" className="rise mt-9 grid grid-cols-2 rounded-full bg-sunken p-1 text-[0.875rem] font-semibold" style={{ "--i": 2 } as React.CSSProperties}>
-        <button role="tab" aria-selected className="flex h-10 items-center justify-center gap-2 rounded-full bg-raised text-ink shadow-[var(--shadow-near)]">
-          <KeyRound className="size-4" aria-hidden />
-          Recovery code
-        </button>
-        <button role="tab" aria-selected={false} disabled className="flex h-10 cursor-not-allowed items-center justify-center gap-2 rounded-full text-ink-faint">
-          <QrCode className="size-4" aria-hidden />
-          Scan with phone
-          <span className="rounded-full border border-line px-1.5 py-px text-[0.6875rem] font-semibold">Soon</span>
-        </button>
+        {(
+          [
+            { id: "scan", label: "Scan with phone", Icon: QrCode },
+            { id: "code", label: "Recovery code", Icon: KeyRound },
+          ] as const
+        ).map(({ id, label, Icon }) => (
+          <button
+            key={id}
+            type="button"
+            role="tab"
+            id={`tab-${id}`}
+            aria-selected={method === id}
+            aria-controls={`panel-${id}`}
+            onClick={() => setMethod(id)}
+            className={`relative flex h-10 items-center justify-center gap-2 rounded-full transition-colors ${
+              method === id ? "bg-raised text-ink shadow-[var(--shadow-near)]" : "text-ink-muted hover:text-ink"
+            }`}
+          >
+            <Icon className="size-4" aria-hidden />
+            {label}
+          </button>
+        ))}
       </div>
 
+      {failure && method === "scan" && (
+        <p role="alert" className="mt-6 rounded-xl bg-honey-soft px-4 py-3 text-[0.9375rem] leading-relaxed text-ink">
+          {FAILURE_TEXT[failure]}
+        </p>
+      )}
+
+      {method === "scan" ? (
+        <div id="panel-scan" role="tabpanel" aria-labelledby="tab-scan" className="rise mt-8" style={{ "--i": 3 } as React.CSSProperties}>
+          <ScanUnlock onUnlock={onUnlock} />
+        </div>
+      ) : (
       <form
+        id="panel-code"
+        role="tabpanel"
+        aria-labelledby="tab-code"
         className="rise mt-8 grid gap-3"
         style={{ "--i": 3 } as React.CSSProperties}
         onSubmit={(e) => {
@@ -115,6 +144,7 @@ export function Unlock({
           Unlock
         </button>
       </form>
+      )}
 
       <div className="rise mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-6 text-[0.875rem] text-ink-muted" style={{ "--i": 4 } as React.CSSProperties}>
         <span className="min-w-0 truncate">

@@ -2290,4 +2290,42 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get scanPayTypeThere =>
       'Next, your UPI app opens. Scan this QR there to pay. The amount here is what gets recorded.';
+
+  @override
+  String get accountLinkComputer => 'Link a computer';
+
+  @override
+  String get linkTitle => 'Link a computer';
+
+  @override
+  String get linkHint =>
+      'On your computer, open ample-money.vercel.app, choose Scan with phone and point the camera at the code';
+
+  @override
+  String get linkNotAmple =>
+      'That isn\'t an Ample code. Scan the code on the Ample website.';
+
+  @override
+  String get linkConfirmTitle => 'Open your records on this computer?';
+
+  @override
+  String get linkConfirmBody =>
+      'The computer showing this code can read your Ample records until it locks. Only link a computer you\'re using right now.';
+
+  @override
+  String get linkConfirm => 'Link computer';
+
+  @override
+  String get linkReason => 'Confirm it\'s you to link a computer';
+
+  @override
+  String get linkDone => 'Computer linked. Your records are opening there now.';
+
+  @override
+  String get linkFailed =>
+      'Couldn\'t reach the server. Check your connection and scan again.';
+
+  @override
+  String get linkNotSyncing =>
+      'Turn on Account & sync first, then link a computer.';
 }

@@ -4,6 +4,7 @@ import 'package:expense_tracker/data/sync/sync_controller.dart';
 import 'package:expense_tracker/formatting/relative_time.dart';
 import 'package:expense_tracker/l10n/app_localizations.dart';
 import 'package:expense_tracker/l10n/failure_messages.dart';
+import 'package:expense_tracker/routing/routes.dart';
 import 'package:expense_tracker/services/cloud/cloud_auth.dart';
 import 'package:expense_tracker/services/service_providers.dart';
 import 'package:expense_tracker/theme/app_colors.dart';
@@ -503,6 +504,12 @@ class _Status extends ConsumerWidget {
             onPressed: () =>
                 unawaited(ref.read(syncControllerProvider.notifier).syncNow()),
             child: Text(l10n.accountSyncNow),
+          ),
+          SizedBox(height: metrics.spaceSm),
+          OutlinedButton.icon(
+            onPressed: () => unawaited(context.push(Routes.linkComputer)),
+            icon: const Icon(Icons.qr_code_scanner_rounded),
+            label: Text(l10n.accountLinkComputer),
           ),
           SizedBox(height: metrics.spaceSm),
           OutlinedButton(

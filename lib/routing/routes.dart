@@ -41,6 +41,9 @@ abstract final class Routes {
   /// Settings → Account & sync (Phase 9).
   static const String account = '/settings/account';
 
+  /// Settings → Account & sync → Link a computer (Ample for the web).
+  static const String linkComputer = '/settings/account/link';
+
   /// Settings → Backup & export.
   static const String backup = '/settings/backup';
 

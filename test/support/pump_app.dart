@@ -8,6 +8,7 @@ import 'package:expense_tracker/data/backup/backup_codec.dart';
 import 'package:expense_tracker/data/data_providers.dart';
 import 'package:expense_tracker/data/db/app_database.dart';
 import 'package:expense_tracker/data/query_providers.dart';
+import 'package:expense_tracker/data/sync/computer_link_server.dart';
 import 'package:expense_tracker/data/sync/sync_controller.dart';
 import 'package:expense_tracker/data/sync/sync_crypto.dart';
 import 'package:expense_tracker/data/sync/sync_engine.dart';
@@ -436,6 +437,7 @@ Future<AppDatabase> pumpApp(
   FakeUpiPayService? upi,
   FakeSyncKeyStore? syncKeys,
   MemorySyncServer? syncServer,
+  MemoryComputerLinkServer? linkServer,
   Size? size,
   double textScale = 1,
 }) async {
@@ -475,6 +477,9 @@ Future<AppDatabase> pumpApp(
         ),
         syncKeyStoreProvider.overrideWithValue(syncKeys ?? FakeSyncKeyStore()),
         syncServerProvider.overrideWithValue(syncServer ?? MemorySyncServer()),
+        computerLinkServerProvider.overrideWithValue(
+          linkServer ?? MemoryComputerLinkServer(),
+        ),
         // Fast key stretching: the real 600,000 rounds take seconds.
         backupCodecProvider.overrideWith(
           (ref) =>

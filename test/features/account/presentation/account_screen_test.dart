@@ -1,5 +1,13 @@
+import 'dart:convert';
+
+import 'package:cryptography/cryptography.dart';
 import 'package:drift/drift.dart' show driftRuntimeOptions;
+import 'package:expense_tracker/data/sync/computer_link.dart';
+import 'package:expense_tracker/data/sync/computer_link_server.dart';
+import 'package:expense_tracker/data/sync/sync_controller.dart';
 import 'package:expense_tracker/data/sync/sync_engine.dart';
+import 'package:expense_tracker/features/account/presentation/account_screen.dart';
+import 'package:expense_tracker/features/account/presentation/link_computer_screen.dart';
 import 'package:expense_tracker/routing/app_router.dart';
 import 'package:expense_tracker/routing/routes.dart';
 import 'package:flutter/material.dart';
@@ -137,5 +145,110 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Write down your recovery code'), findsOneWidget);
     expect(find.text(keys.key!.recoveryCode), findsOneWidget);
+  });
+
+  group('Link a computer', () {
+    // The website's half, in Dart: a one-time key pair and its QR.
+    Future<(SimpleKeyPair, ComputerLink)> website() async {
+      final pair = await X25519().newKeyPair();
+      final public = (await pair.extractPublicKey()).bytes;
+      final key = base64Url.encode(public).replaceAll('=', '');
+      return (pair, ComputerLink.tryParse('AMPLE1:${'5e' * 16}:$key')!);
+    }
+
+    Future<List<int>> open(
+      SimpleKeyPair web,
+      ComputerLink link,
+      SealedLink s,
+    ) async {
+      final shared = await X25519().sharedSecretKey(
+        keyPair: web,
+        remotePublicKey: SimplePublicKey(
+          base64.decode(s.phoneKey),
+          type: KeyPairType.x25519,
+        ),
+      );
+      final boxKey = await Hkdf(
+        hmac: Hmac.sha256(),
+        outputLength: 32,
+      ).deriveKey(secretKey: shared, info: utf8.encode('ample-link-v1'));
+      final bytes = base64.decode(s.sealed);
+      return await AesGcm.with256bits().decrypt(
+        SecretBox(
+          bytes.sublist(12, bytes.length - 16),
+          nonce: bytes.sublist(0, 12),
+          mac: Mac(bytes.sublist(bytes.length - 16)),
+        ),
+        secretKey: boxKey,
+        aad: utf8.encode(link.id),
+      );
+    }
+
+    LinkOutcome? outcome;
+
+    Future<void> link(WidgetTester tester, ComputerLink computer) async {
+      // A Consumer widget's element is its WidgetRef.
+      final element = tester.element(find.byType(AccountScreen));
+      final done = confirmAndLink(
+        element,
+        element as WidgetRef,
+        computer,
+      ).then((value) => outcome = value);
+      await tester.pumpAndSettle();
+      await tester.tap(find.widgetWithText(FilledButton, 'Link computer'));
+      await tester.pumpAndSettle();
+      await done;
+    }
+
+    appTest('a syncing phone hands its key to that computer only', (
+      tester,
+    ) async {
+      final keys = FakeSyncKeyStore();
+      final links = MemoryComputerLinkServer();
+      await pumpApp(tester, syncKeys: keys, linkServer: links);
+      await _open(tester);
+      await _signIn(tester);
+      await tester.tap(find.text("I've written it down"));
+      await tester.pumpAndSettle();
+      expect(find.text('Link a computer'), findsOneWidget);
+
+      final (web, computer) = await website();
+      await link(tester, computer);
+      expect(outcome, LinkOutcome.linked);
+      expect(
+        find.text('Computer linked. Your records are opening there now.'),
+        findsOneWidget,
+      );
+      final sealed = links.posted[computer.id]!;
+      expect(await open(web, computer, sealed), keys.key!.bytes);
+    });
+
+    appTest('without sync there is no key to give', (tester) async {
+      final links = MemoryComputerLinkServer();
+      await pumpApp(tester, linkServer: links);
+      await _open(tester);
+      final (_, computer) = await website();
+      await link(tester, computer);
+      expect(outcome, LinkOutcome.notSyncing);
+      expect(links.posted, isEmpty);
+    });
+
+    appTest('offline, it says so and leaves nothing behind', (tester) async {
+      final links = MemoryComputerLinkServer()..offline = true;
+      await pumpApp(tester, linkServer: links);
+      await _open(tester);
+      await _signIn(tester);
+      await tester.tap(find.text("I've written it down"));
+      await tester.pumpAndSettle();
+      final (_, computer) = await website();
+      await link(tester, computer);
+      expect(outcome, LinkOutcome.failed);
+      expect(
+        find.text(
+          "Couldn't reach the server. Check your connection and scan again.",
+        ),
+        findsOneWidget,
+      );
+    });
   });
 }

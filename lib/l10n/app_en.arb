@@ -1783,5 +1783,25 @@
   },
   "scanPayFailed": "Payment not made, so nothing was recorded.",
   "scanPayToReview": "Saved to Review. Confirm it there once you know it went through.",
-  "scanPayTypeThere": "Next, your UPI app opens. Scan this QR there to pay. The amount here is what gets recorded."
+  "scanPayTypeThere": "Next, your UPI app opens. Scan this QR there to pay. The amount here is what gets recorded.",
+  "accountLinkComputer": "Link a computer",
+  "@accountLinkComputer": {
+    "description": "Button on Account & sync: open the scanner to unlock Ample for the web on a computer."
+  },
+  "linkTitle": "Link a computer",
+  "linkHint": "On your computer, open ample-money.vercel.app, choose Scan with phone and point the camera at the code",
+  "@linkHint": {
+    "description": "Instruction under the scanner on Link a computer."
+  },
+  "linkNotAmple": "That isn't an Ample code. Scan the code on the Ample website.",
+  "linkConfirmTitle": "Open your records on this computer?",
+  "linkConfirmBody": "The computer showing this code can read your Ample records until it locks. Only link a computer you're using right now.",
+  "linkConfirm": "Link computer",
+  "linkReason": "Confirm it's you to link a computer",
+  "@linkReason": {
+    "description": "Face ID / fingerprint prompt reason when linking a computer."
+  },
+  "linkDone": "Computer linked. Your records are opening there now.",
+  "linkFailed": "Couldn't reach the server. Check your connection and scan again.",
+  "linkNotSyncing": "Turn on Account & sync first, then link a computer."
 }

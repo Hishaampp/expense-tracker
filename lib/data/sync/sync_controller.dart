@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:expense_tracker/data/data_providers.dart';
+import 'package:expense_tracker/data/sync/computer_link.dart';
+import 'package:expense_tracker/data/sync/computer_link_server.dart';
 import 'package:expense_tracker/data/sync/supabase_sync_server.dart';
 import 'package:expense_tracker/data/sync/sync_crypto.dart';
 import 'package:expense_tracker/data/sync/sync_engine.dart';
@@ -58,6 +60,18 @@ final class SyncOn extends SyncStatus {
 
   /// Whether the last try could not reach the server.
   final bool offline;
+}
+
+/// How linking a computer went.
+enum LinkOutcome {
+  /// The computer can now open the records.
+  linked,
+
+  /// Sync is off on this phone, so there is no key to give.
+  notSyncing,
+
+  /// The server could not be reached.
+  failed,
 }
 
 /// The account and sync's view model (Phase 9).
@@ -189,6 +203,22 @@ class SyncController extends AsyncNotifier<SyncStatus> {
     }
   }
 
+  /// Gives the sync key to the computer that showed [link]'s QR (Ample
+  /// for the web): sealed so only that browser tab can open it.
+  Future<LinkOutcome> linkComputer(ComputerLink link) async {
+    if (state.value is! SyncOn) return LinkOutcome.notSyncing;
+    final key = await _keys.read();
+    if (key == null) return LinkOutcome.notSyncing;
+    try {
+      final sealed = await sealForComputer(key, link);
+      await ref.read(computerLinkServerProvider).post(link.id, sealed);
+      return LinkOutcome.linked;
+    } on Exception catch (e, st) {
+      ref.read(appLoggerProvider).error('sync.link', e.runtimeType, st);
+      return LinkOutcome.failed;
+    }
+  }
+
   /// Signs out and stops sync on this phone. Its data stays.
   Future<void> signOut() async {
     if (await _keys.read() case final key?) await _engine(key).disable();
@@ -239,6 +269,11 @@ final cloudAuthProvider = Provider<CloudAuth>(
 /// Where the sync key is kept. Override with a fake in tests.
 final syncKeyStoreProvider = Provider<SyncKeyStore>(
   (ref) => const SecureSyncKeyStore(),
+);
+
+/// Where a sealed key waits for a computer. Override in tests.
+final computerLinkServerProvider = Provider<ComputerLinkServer>(
+  (ref) => SupabaseComputerLinkServer(Supabase.instance.client),
 );
 
 /// The sync server. Override with a [MemorySyncServer] in tests.

@@ -3661,6 +3661,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Next, your UPI app opens. Scan this QR there to pay. The amount here is what gets recorded.'**
   String get scanPayTypeThere;
+
+  /// Button on Account & sync: open the scanner to unlock Ample for the web on a computer.
+  ///
+  /// In en, this message translates to:
+  /// **'Link a computer'**
+  String get accountLinkComputer;
+
+  /// No description provided for @linkTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Link a computer'**
+  String get linkTitle;
+
+  /// Instruction under the scanner on Link a computer.
+  ///
+  /// In en, this message translates to:
+  /// **'On your computer, open ample-money.vercel.app, choose Scan with phone and point the camera at the code'**
+  String get linkHint;
+
+  /// No description provided for @linkNotAmple.
+  ///
+  /// In en, this message translates to:
+  /// **'That isn\'t an Ample code. Scan the code on the Ample website.'**
+  String get linkNotAmple;
+
+  /// No description provided for @linkConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Open your records on this computer?'**
+  String get linkConfirmTitle;
+
+  /// No description provided for @linkConfirmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The computer showing this code can read your Ample records until it locks. Only link a computer you\'re using right now.'**
+  String get linkConfirmBody;
+
+  /// No description provided for @linkConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Link computer'**
+  String get linkConfirm;
+
+  /// Face ID / fingerprint prompt reason when linking a computer.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm it\'s you to link a computer'**
+  String get linkReason;
+
+  /// No description provided for @linkDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Computer linked. Your records are opening there now.'**
+  String get linkDone;
+
+  /// No description provided for @linkFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t reach the server. Check your connection and scan again.'**
+  String get linkFailed;
+
+  /// No description provided for @linkNotSyncing.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn on Account & sync first, then link a computer.'**
+  String get linkNotSyncing;
 }
 
 class _AppLocalizationsDelegate

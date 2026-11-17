@@ -4,7 +4,9 @@ import 'package:test/test.dart';
 
 /// Contract (spec §13, Phase 9): the only code that may reach the network
 /// is the optional account's sync with the project's own Supabase server,
-/// and it only ever sends sealed records. Everything else stays offline. A
+/// and it only ever sends sealed records (and, to link a computer, the
+/// sync key sealed for that one browser tab). Everything else stays
+/// offline. A
 /// banned import that is never reached at runtime is invisible to every
 /// other test, so grep it.
 void main() {
@@ -13,6 +15,7 @@ void main() {
     'lib/services/cloud/cloud_auth.dart',
     'lib/services/cloud/secure_session_storage.dart',
     'lib/data/sync/supabase_sync_server.dart',
+    'lib/data/sync/computer_link_server.dart',
     'lib/data/sync/sync_controller.dart',
     'lib/bootstrap.dart',
   };
