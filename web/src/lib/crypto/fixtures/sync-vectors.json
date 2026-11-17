@@ -1,0 +1,101 @@
+{
+  "recoveryCode": "000G-40R4-0M30-E209-185G-R38E-1W81-24GK-2GAH-C5RR-34D1-P70X-3RFT-0",
+  "keyBytes": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+  ],
+  "records": [
+    {
+      "id": "51911434d359c933dd5ec67eed991538830d5309d6cbf28ab430ade99911a545",
+      "changed_at": 1763365200000,
+      "blob": "HGW+FZJe6hd71He2SxslG7LicLt25bl+61BgW1UuEc/um+MY8QEB6wXbpzMEx0VS1acng7PHV2RKDnSyyFfzq6oO9TY0hQVKwQD607uPPnoLySl78z/TFKy0m0tJA4KvgxyORQPwTbgi0mgFzSuz8FpVfQBzK/Y4ST9nbl3vgpIyhpK8AicEwQcGNH2AYJJxOdknNz0uI65JuiuztEXrglvL2X8LXC9Dven1jcYOGNX7ZV59wQnUu29t0od5o7uN7t1lQ2WoLo/APaOmjCLQrMnwtriSC8lAUvZrLVdt5UhD6tjo631nv7y4y5IcmJeCAoOlGT8nGK8viQ9hb8nRKNeMGrarz4znS53jZVC4jwIqCfx5DX80uzyIoP7miySNhxyqKsM0YMsH1J6njyXHXxpOvtl/+/NOj8clwO9yzlQrVMskVG84K3+zOrE9vrIJL6nZSuYIj1kLMZjMhqE3I/N0dezo9a2ySdtne/90bNThEamQ+6X1UWRVQGiJD0VgIlvSLPsREDakOgCkugL1mu+o/VxGiW6va4Lnvl8DSCmo8tIBfCfLg3Qm63QrWM/7Bz86E0t/CyYsy/rjMRTak06HKczbAN/neyMx31Gym6fWHc7BMyTkcCrw493FHZqjcOoNPQ4oY940ncy1jxe5eaeJ/Dd8UBwEcjkCE341hTvQX0fQzjKGKRP6ef51PbuIByOg1V9ztYo6rR+SC7bBPz8=",
+      "opened": {
+        "t": "transactions",
+        "k": "t-1",
+        "at": 1763365200000,
+        "row": {
+          "id": "t-1",
+          "kind": "expense",
+          "amount_paise": 6000,
+          "currency": "INR",
+          "occurred_at": 1763364000000,
+          "account_id": "a-1",
+          "to_account_id": null,
+          "category_id": "food",
+          "room_id": null,
+          "payee_key": "upi:greenandprotein@okaxis",
+          "payee_display": "Green And Protein ₹ café",
+          "instrument": "upi",
+          "ref_no": "531122334455",
+          "note": null,
+          "review_status": "confirmed",
+          "is_hidden": 0,
+          "linked_transaction_id": null,
+          "origin": "notification",
+          "created_at": 1763364000000,
+          "updated_at": 1763365200000
+        }
+      }
+    },
+    {
+      "id": "4cbf7002c0f5254d380e80d434b762c075d16219ee0c5c88747d4b993fa63221",
+      "changed_at": 1763365300000,
+      "blob": "2BrlUAVI3fM8pIMtCqEEcoz3h/YkNuMEN3Nh74CBJpUUoEMiywmGXyjpTgVUH4G4Zc06ynxVRHtDyAuBiWgpzKF2HccmaxJPm2aq+i21O9m68qm0hEnsTw==",
+      "opened": {
+        "t": "transactions",
+        "k": "t-2",
+        "at": 1763365300000,
+        "row": null
+      }
+    },
+    {
+      "id": "592100dd5307ec1d3bb03022f9dd6cb339c500445eeb2a3d8971ee8ee7ad6e82",
+      "changed_at": 1763365400000,
+      "blob": "knw0VWk+qNKK7UCrcUqGRXY2+tPa7s1zWT3JlVZF/VnIA59v3tsympFBwgxN7ebiMFFTq+O3HPbttKtOrQ2zkRu7+v5Nh53rpmfWc941Gt/P61GmptubGIq+bkDitV2dMVaQ8Cw+Ddt19ZDiSF8IdcAuPsVdNRsGiNbC+944AjLc",
+      "opened": {
+        "t": "settings",
+        "k": "month_start_day",
+        "at": 1763365400000,
+        "row": {
+          "key": "month_start_day",
+          "value": "5"
+        }
+      }
+    }
+  ],
+  "foreignRecord": {
+    "id": "51911434d359c933dd5ec67eed991538830d5309d6cbf28ab430ade99911a545",
+    "changed_at": 1763365200000,
+    "blob": "884t59BIODpq6nH7oPCjnioLmU0ekCCUYKbtEYGc1J+GkmvDWnpd4bu9SnrqMme8VDHreUI99oa7BpXKYCtbUGgQrs6wVEkuDb4W++NDV956YJY95xh+LSYPd4YcaqcGZCnCTuet1cg/xMacuTktFo6clPNb7//2yu51/JolnCZOt5pkipE5dXj9igUIMGw2jPrS75tNmqWW4M80OfKdHT620KKU/RLG5+/oN/tJg9S/DD9Uquf/IKc2MXu5ov+JBRAuf/c8GGdoskiNWjRoQvtE8m8hPIbOFNlZwoTK1tWpECxO1TBP2KmD+pIWcrrzkCnoR7OuDGkPh/AJ/t2Df1HGxDnJhos0BNTGunwjScPxIviL/MZakzGVOCi1cWPxVwysFL1vCr/+OlgqZSo9bzPccHrujAfiTWJXY/oDxdnqZYqV63Qif3vocSQtS0T4NyfL6InvNv+pxuWvkBPX047PtLjK5DtimL6qRRQ9+ROP6cLGnAzBe8cBh+huvH/vb4g0D3Aks1/6cAvwn0tBJAWVGBMOkHWDV1VX1G4qxoBHBzetIKy2irwbsM5C/NdqbK/GuQTb6HpLEGPNMTUSQiO7xNNpQ0mNkiwTedQcjtCNCDHwrNbXktqaBBEpvHhOqVfBEYvfZXWprX2lEdSQz0cF6mT7uAz7+AXK9eYfsUMIft344YrLFZxKNKGNN7xOTHm5OIkwnIRi8CTkLh+cacY="
+  }
+}
