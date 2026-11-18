@@ -30,3 +30,44 @@ export function formatWhen(ms: number): string {
 export function formatMonth(ms: number): string {
   return new Intl.DateTimeFormat("en-IN", { month: "short", year: "numeric" }).format(ms);
 }
+
+/** ₹ in a few characters for chart axes: ₹950, ₹12.5k, ₹1.2L, ₹3.4Cr. */
+export function formatPaiseCompact(paise: number): string {
+  const sign = paise < 0 ? "−" : "";
+  const r = Math.abs(paise) / 100;
+  const trim = (n: number) => (n >= 100 ? Math.round(n).toString() : n.toFixed(1).replace(/\.0$/, ""));
+  if (r >= 1e7) return `${sign}₹${trim(r / 1e7)}Cr`;
+  if (r >= 1e5) return `${sign}₹${trim(r / 1e5)}L`;
+  if (r >= 1e3) return `${sign}₹${trim(r / 1e3)}k`;
+  return `${sign}₹${Math.round(r)}`;
+}
+
+// The app's naming (lib/formatting/date_format.dart): a month that starts
+// mid-month is named after the month it ends in.
+const named = (p: { start: Date; end: Date }) =>
+  p.start.getDate() === 1 ? p.start : new Date(p.end.getFullYear(), p.end.getMonth(), p.end.getDate() - 1);
+
+/** "November", with the year when it isn't [today]'s. */
+export function formatPeriodTitle(p: { start: Date; end: Date }, today: Date): string {
+  const d = named(p);
+  return new Intl.DateTimeFormat("en-IN", d.getFullYear() === today.getFullYear() ? { month: "long" } : { month: "long", year: "numeric" }).format(d);
+}
+
+/** "November 2026", or "25 Oct – 24 Nov 2026" for a month starting on another day. */
+export function formatPeriodRange(p: { start: Date; end: Date }): string {
+  if (p.start.getDate() === 1) return new Intl.DateTimeFormat("en-IN", { month: "long", year: "numeric" }).format(p.start);
+  const last = named(p);
+  const from = new Intl.DateTimeFormat("en-IN", { day: "numeric", month: "short" }).format(p.start);
+  const to = new Intl.DateTimeFormat("en-IN", { day: "numeric", month: "short", year: "numeric" }).format(last);
+  return `${from} – ${to}`;
+}
+
+/** "Nov", for a chart axis. */
+export function formatMonthShort(p: { start: Date; end: Date }): string {
+  return new Intl.DateTimeFormat("en-IN", { month: "short" }).format(named(p));
+}
+
+/** "Tue, 3 Nov". */
+export function formatDay(d: Date): string {
+  return new Intl.DateTimeFormat("en-IN", { weekday: "short", day: "numeric", month: "short" }).format(d);
+}

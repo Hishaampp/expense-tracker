@@ -1,96 +1,102 @@
 "use client";
 
-import { ArrowDownLeft, CalendarRange, Inbox, Landmark, Plane, Shapes, Wallet } from "lucide-react";
-import { useMemo } from "react";
-import { AmpleMark } from "@/components/brand/ample-mark";
-import { CountUp } from "@/components/ui/count-up";
-import { inventory } from "@/lib/insights/inventory";
-import { formatCount, formatMonth, formatWhen } from "@/lib/format/format";
+import { Inbox } from "lucide-react";
+import { useMemo, useState } from "react";
+import { CategoryBreakdown } from "@/components/overview/category-breakdown";
+import { OverviewHero } from "@/components/overview/hero";
+import { KeyNumbers } from "@/components/overview/key-numbers";
+import { PeriodPicker } from "@/components/overview/period-picker";
+import { SpendCalendar } from "@/components/overview/spend-calendar";
+import { TopPayees } from "@/components/overview/top-payees";
+import { TrendChart } from "@/components/overview/trend-chart";
+import { formatCount, formatPeriodTitle } from "@/lib/format/format";
+import { overview, transactionsOf, TREND_MONTHS } from "@/lib/insights/overview";
 import { useVault } from "@/lib/vault/vault-context";
+
+/** How far back the picker goes. */
+const OLDEST = -35;
 
 function greeting(hour: number) {
   return hour < 5 ? "Good evening." : hour < 12 ? "Good morning." : hour < 17 ? "Good afternoon." : "Good evening.";
 }
 
+function Card({ id, title, note, children, i }: { id: string; title: string; note?: string; children: React.ReactNode; i: number }) {
+  return (
+    <section aria-labelledby={id} className="rise grid content-start gap-5 rounded-[1.25rem] border border-line bg-raised p-5 sm:p-7" style={{ "--i": i } as React.CSSProperties}>
+      <div className="grid gap-1">
+        <h2 id={id} className="font-display text-[1.5rem] tracking-[-0.01em]">
+          {title}
+        </h2>
+        {note && <p className="text-[0.875rem] text-ink-muted">{note}</p>}
+      </div>
+      {children}
+    </section>
+  );
+}
+
+const Quiet = ({ children }: { children: React.ReactNode }) => <p className="rounded-xl bg-sunken px-4 py-6 text-center text-[0.9375rem] text-ink-muted">{children}</p>;
+
 export default function OverviewPage() {
   const { state } = useVault();
   const vault = state.status === "open" ? state.vault : null;
-  const inv = useMemo(() => (vault ? inventory(vault) : null), [vault]);
-  if (!vault || !inv) return null;
+  const [offset, setOffset] = useState(0);
+  // "Now" is fixed while the page is open, so the numbers don't shift under the reader.
+  const [now] = useState(() => new Date());
+  const txns = useMemo(() => (vault ? transactionsOf(vault) : []), [vault]);
+  const o = useMemo(() => (vault ? overview(vault, now, offset, txns) : null), [vault, now, offset, txns]);
+  if (!vault || !o) return null;
 
-  const since = inv.firstAt ? formatMonth(inv.firstAt) : null;
-  const rows = [
-    { icon: Wallet, label: "Payments", value: inv.payments, note: inv.refunds ? `${formatCount(inv.refunds)} refunds linked` : "Spending you recorded or Ample captured" },
-    { icon: ArrowDownLeft, label: "Money in", value: inv.moneyIn, note: "Salary, refunds received and other income" },
-    { icon: Landmark, label: "Accounts", value: inv.accounts, note: inv.transfers ? `${formatCount(inv.transfers)} transfers between them` : "Banks, cards, wallets and cash" },
-    { icon: Shapes, label: "Categories", value: inv.categories, note: `${formatCount(inv.budgets)} with a budget` },
-    { icon: Plane, label: "Rooms and trips", value: inv.rooms, note: "Spending kept together" },
-  ];
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const month = formatPeriodTitle(o.period, today);
+  const empty = o.summary.spent === 0 && o.summary.moneyIn === 0 && o.payments === 0;
 
   return (
-    <div className="mx-auto grid max-w-[68rem] gap-10">
-      <header className="grid gap-3">
-        <h1 className="rise font-display text-[2.4rem] leading-[1.05] tracking-[-0.02em] sm:text-[3rem]">{greeting(new Date().getHours())}</h1>
-        <p className="rise text-[1.0625rem] text-ink-muted" style={{ "--i": 1 } as React.CSSProperties}>
-          Everything from your phone, unlocked in this tab.
-        </p>
+    <div className="mx-auto grid max-w-[76rem] gap-8">
+      <header className="flex flex-wrap items-end justify-between gap-x-6 gap-y-4">
+        <div className="grid gap-2">
+          <h1 className="rise font-display text-[2.4rem] leading-[1.05] tracking-[-0.02em] sm:text-[3rem]">{greeting(now.getHours())}</h1>
+          <p className="rise text-[1.0625rem] text-ink-muted" style={{ "--i": 1 } as React.CSSProperties}>
+            {o.isCurrent ? "Here's how this month is going." : `Looking back at ${month}.`}
+          </p>
+        </div>
+        <div className="rise" style={{ "--i": 1 } as React.CSSProperties}>
+          <PeriodPicker period={o.period} offset={offset} oldest={OLDEST} onChange={setOffset} />
+        </div>
       </header>
 
-      <section
-        aria-label="Your records"
-        className="rise relative overflow-hidden rounded-[1.75rem] bg-hero p-8 text-on-hero shadow-[var(--shadow-far)] sm:p-10"
-        style={{ "--i": 2 } as React.CSSProperties}
-      >
-        <AmpleMark size={300} sway title={null} honeyOpacity={0.14} className="pointer-events-none absolute -right-16 -bottom-20 text-on-hero/[0.07]" />
-        <p className="relative max-w-[34rem] font-display text-[1.9rem] leading-[1.15] tracking-[-0.015em] text-balance sm:text-[2.35rem]">
-          Your records are here: <span className="text-honey">
-            <CountUp value={inv.payments + inv.moneyIn} format={formatCount} /> {inv.payments + inv.moneyIn === 1 ? "entry" : "entries"}
-          </span>
-          {since ? <> since {since}.</> : "."}
-        </p>
-        <div className="relative mt-8 flex flex-wrap gap-x-8 gap-y-3 text-[0.9375rem] text-on-hero-muted">
-          {vault.lastChangedAt && (
-            <span className="inline-flex items-center gap-2">
-              <CalendarRange className="size-4 text-honey" aria-hidden /> Last change from your phone: {formatWhen(vault.lastChangedAt)}
-            </span>
-          )}
-          {inv.needsReview > 0 && (
-            <span className="inline-flex items-center gap-2">
-              <Inbox className="size-4 text-honey" aria-hidden /> {formatCount(inv.needsReview)} waiting for a category on your phone
-            </span>
-          )}
-        </div>
-      </section>
+      <OverviewHero o={o} today={today} />
 
-      <section aria-labelledby="came-across" className="grid gap-5">
-        <h2 id="came-across" className="rise font-display text-[1.5rem] tracking-[-0.01em]" style={{ "--i": 3 } as React.CSSProperties}>
-          What came across
-        </h2>
-        <dl className="rise divide-y divide-line overflow-hidden rounded-[1.25rem] border border-line bg-raised" style={{ "--i": 4 } as React.CSSProperties}>
-          {rows.map(({ icon: Icon, label, value, note }) => (
-            <div key={label} className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-x-4 px-5 py-4 transition-colors hover:bg-raised-2 sm:px-6">
-              <span className="grid size-10 place-items-center rounded-xl bg-honey-soft text-honey-text">
-                <Icon className="size-[18px]" strokeWidth={1.85} aria-hidden />
-              </span>
-              <div className="min-w-0">
-                <dt className="text-[1rem] font-semibold">{label}</dt>
-                <p className="truncate text-[0.875rem] text-ink-muted">{note}</p>
-              </div>
-              <dd className="font-display text-[1.5rem]">
-                <CountUp value={value} format={formatCount} />
-              </dd>
-            </div>
-          ))}
-        </dl>
-        {vault.unreadable > 0 && (
-          <p className="rounded-xl bg-honey-soft px-4 py-3 text-[0.9375rem] text-ink">
-            {formatCount(vault.unreadable)} records couldn&apos;t be opened with this code, so they&apos;re left out. They may come from an older sync key.
-          </p>
-        )}
-        <p className="text-[0.9375rem] text-ink-muted">
-          Month totals, trends, categories and exports arrive here in the next updates.
+      {o.needsReview > 0 && (
+        <p className="rise flex items-center gap-3 rounded-xl bg-honey-soft px-4 py-3 text-[0.9375rem] text-ink" style={{ "--i": 3 } as React.CSSProperties}>
+          <Inbox className="size-[18px] shrink-0 text-honey-text" aria-hidden />
+          {formatCount(o.needsReview)} captured {o.needsReview === 1 ? "payment is" : "payments are"} waiting for a category. Sort them on your phone, in Review.
         </p>
-      </section>
+      )}
+
+      <KeyNumbers o={o} today={today} />
+
+      <Card id="trend" title="The last 12 months" note="Choose a month to see it here." i={7}>
+        <TrendChart months={o.trend} onPick={(index) => setOffset(Math.max(OLDEST, offset - (TREND_MONTHS - 1 - index)))} />
+      </Card>
+
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
+        <Card id="categories" title="Where it went" note={o.categories.some((c) => c.budget !== null) ? "Each category against its budget, where one is set." : undefined} i={8}>
+          {o.categories.length ? <CategoryBreakdown lines={o.categories} total={o.summary.spent} /> : <Quiet>{empty ? `Nothing recorded in ${month}.` : `No spending in ${month}.`}</Quiet>}
+        </Card>
+        <Card id="payees" title="Top payees" i={9}>
+          {o.payees.length ? <TopPayees lines={o.payees} /> : <Quiet>No payees in {month}.</Quiet>}
+        </Card>
+      </div>
+
+      <Card id="calendar" title="Day by day" note={`What each day of ${month} cost.`} i={10}>
+        <SpendCalendar days={o.days} />
+      </Card>
+
+      {vault.unreadable > 0 && (
+        <p className="rounded-xl bg-honey-soft px-4 py-3 text-[0.9375rem] text-ink">
+          {formatCount(vault.unreadable)} records couldn&apos;t be opened with this code, so they&apos;re left out. They may come from an older sync key.
+        </p>
+      )}
     </div>
   );
 }
