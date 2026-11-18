@@ -1,0 +1,100 @@
+{
+ "categories": [
+  {
+   "id": "food",
+   "name": "Food, drinks"
+  }
+ ],
+ "accounts": [
+  {
+   "id": "hdfc",
+   "name": "HDFC \"Savings\""
+  }
+ ],
+ "rooms": [
+  {
+   "id": "goa",
+   "name": "Goa"
+  }
+ ],
+ "transactions": [
+  {
+   "id": "a",
+   "kind": "expense",
+   "paise": 24050,
+   "at": [
+    2026,
+    11,
+    3,
+    9,
+    5
+   ],
+   "categoryId": "food",
+   "accountId": "hdfc",
+   "payee": "Swiggy",
+   "note": "Dinner, with \"Asha\""
+  },
+  {
+   "id": "b",
+   "kind": "refund",
+   "paise": 7,
+   "at": [
+    2026,
+    11,
+    4,
+    23,
+    59
+   ],
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payee": "=HYPERLINK(\"http://x\")",
+   "note": "line one\nline two",
+   "review": "needsReview",
+   "origin": "auto"
+  },
+  {
+   "id": "c",
+   "kind": "income",
+   "paise": 8500000,
+   "at": [
+    2026,
+    11,
+    1,
+    0,
+    0
+   ],
+   "accountId": "missing",
+   "payee": "-minus",
+   "note": "@mention"
+  },
+  {
+   "id": "d",
+   "kind": "transfer",
+   "paise": 100,
+   "at": [
+    2026,
+    10,
+    31,
+    12,
+    30
+   ],
+   "accountId": "hdfc",
+   "payee": "+plus"
+  },
+  {
+   "id": "e",
+   "kind": "expense",
+   "paise": 99999,
+   "at": [
+    2026,
+    11,
+    5,
+    8,
+    0
+   ],
+   "accountId": "hdfc",
+   "hidden": true
+  }
+ ],
+ "csv": "Date,Time,Type,Amount (INR),Category,Account,Room,Payee,Note,Status,Source\r\n2026-11-03,09:05,expense,240.50,\"Food, drinks\",\"HDFC \"\"Savings\"\"\",,Swiggy,\"Dinner, with \"\"Asha\"\"\",confirmed,manual\r\n2026-11-04,23:59,refund,0.07,,\"HDFC \"\"Savings\"\"\",Goa,\"'=HYPERLINK(\"\"http://x\"\")\",\"line one\nline two\",needsReview,auto\r\n2026-11-01,00:00,income,85000.00,,,,'-minus,'@mention,confirmed,manual\r\n2026-10-31,12:30,transfer,1.00,,\"HDFC \"\"Savings\"\"\",,'+plus,,confirmed,manual\r\n"
+}

@@ -1,5 +1,7 @@
 "use client";
 
+import { ArrowDownToLine } from "lucide-react";
+import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { TransactionDetail } from "@/components/transactions/detail";
 import { FilterBar, SearchField } from "@/components/transactions/filters";
@@ -162,6 +164,7 @@ export default function TransactionsPage() {
             )
           }
         />
+        <div className="flex flex-wrap items-center justify-between gap-3">
         <p className="tabular flex flex-wrap gap-x-5 gap-y-1 text-[0.9375rem] text-ink-muted" aria-live="polite">
           <span>
             <span className="font-semibold text-ink">{formatCount(rows.length)}</span> {rows.length === 1 ? "transaction" : "transactions"}
@@ -178,6 +181,14 @@ export default function TransactionsPage() {
             </span>
           )}
         </p>
+        <Link
+          href={`/export${typeof window === "undefined" ? "" : window.location.search}`}
+          className="inline-flex h-10 items-center gap-2 rounded-full border border-line px-4 text-[0.875rem] font-semibold text-ink-muted transition-colors hover:border-honey hover:text-honey-text"
+        >
+          <ArrowDownToLine className="size-4" aria-hidden /> Export {rows.length === ledger.items.filter((i) => !i.t.hidden).length ? "" : "these "}
+          {formatCount(rows.length)}
+        </Link>
+        </div>
       </div>
 
       <div className="rise" style={{ "--i": 3 } as React.CSSProperties}>

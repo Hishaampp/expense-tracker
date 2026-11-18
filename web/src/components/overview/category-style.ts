@@ -27,35 +27,41 @@ import {
 
 type Style = { Icon: LucideIcon; color: string };
 
-const c = (name: string) => `var(--cat-${name})`;
+export type CategoryColorName = "orange" | "green" | "blue" | "red" | "purple" | "amber" | "violet" | "teal" | "pink" | "grey";
 
 // The app's lib/widgets/category_style.dart, with Lucide's nearest glyphs.
-const STYLES: Record<string, Style> = {
-  food: { Icon: Utensils, color: c("orange") },
-  groceries: { Icon: ShoppingBasket, color: c("green") },
-  transport: { Icon: Bus, color: c("blue") },
-  fuel: { Icon: Fuel, color: c("red") },
-  shopping: { Icon: ShoppingBag, color: c("purple") },
-  bills: { Icon: ReceiptText, color: c("amber") },
-  mobile: { Icon: Smartphone, color: c("teal") },
-  rent: { Icon: House, color: c("violet") },
-  emi: { Icon: Landmark, color: c("blue") },
-  health: { Icon: Heart, color: c("red") },
-  education: { Icon: GraduationCap, color: c("violet") },
-  entertainment: { Icon: Clapperboard, color: c("pink") },
-  personal: { Icon: Sparkles, color: c("teal") },
-  gifts: { Icon: Gift, color: c("pink") },
-  family: { Icon: Users, color: c("orange") },
-  travel: { Icon: Plane, color: c("blue") },
-  fees: { Icon: Percent, color: c("grey") },
-  transfer: { Icon: ArrowLeftRight, color: c("grey") },
-  salary: { Icon: BriefcaseBusiness, color: c("green") },
-  refund: { Icon: Undo2, color: c("green") },
-  income: { Icon: ArrowDownLeft, color: c("green") },
-  more: { Icon: Ellipsis, color: c("grey") },
+const STYLES: Record<string, [LucideIcon, CategoryColorName]> = {
+  food: [Utensils, "orange"],
+  groceries: [ShoppingBasket, "green"],
+  transport: [Bus, "blue"],
+  fuel: [Fuel, "red"],
+  shopping: [ShoppingBag, "purple"],
+  bills: [ReceiptText, "amber"],
+  mobile: [Smartphone, "teal"],
+  rent: [House, "violet"],
+  emi: [Landmark, "blue"],
+  health: [Heart, "red"],
+  education: [GraduationCap, "violet"],
+  entertainment: [Clapperboard, "pink"],
+  personal: [Sparkles, "teal"],
+  gifts: [Gift, "pink"],
+  family: [Users, "orange"],
+  travel: [Plane, "blue"],
+  fees: [Percent, "grey"],
+  transfer: [ArrowLeftRight, "grey"],
+  salary: [BriefcaseBusiness, "green"],
+  refund: [Undo2, "green"],
+  income: [ArrowDownLeft, "green"],
+  more: [Ellipsis, "grey"],
 };
+
+/** The palette colour of a stored icon key (the PDF uses it too). */
+export function categoryColorName(icon: string | null): CategoryColorName {
+  return (icon && STYLES[icon]?.[1]) || "grey";
+}
 
 /** The glyph and tile colour for a stored icon key; unknown keys get a neutral pair. */
 export function categoryStyle(icon: string | null): Style {
-  return (icon && STYLES[icon]) || { Icon: Shapes, color: c("grey") };
+  const s = icon ? STYLES[icon] : undefined;
+  return { Icon: s?.[0] ?? Shapes, color: `var(--cat-${s?.[1] ?? "grey"})` };
 }

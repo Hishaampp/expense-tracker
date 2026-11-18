@@ -10,5 +10,5 @@ export const NAV: NavItem[] = [
   { href: "/payees", label: "Payees", icon: Store, ready: true },
   { href: "/rooms", label: "Rooms", icon: Plane, ready: true },
   { href: "/budgets", label: "Budgets", icon: PiggyBank, ready: true },
-  { href: "/export", label: "Export", icon: ArrowDownToLine, ready: false },
+  { href: "/export", label: "Export", icon: ArrowDownToLine, ready: true },
 ];
