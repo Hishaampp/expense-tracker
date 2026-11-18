@@ -4,12 +4,14 @@ import { createContext, useCallback, useContext, useEffect, useRef, useState } f
 import { cloud } from "@/lib/cloud/client";
 import { CloudError, fetchSealedRecords } from "@/lib/cloud/records";
 import { SyncCrypto } from "@/lib/crypto/sync-crypto";
+import { useSession } from "@/lib/session/session";
+import { browserDeviceStore, recallKey, rememberedUntil, rememberKey } from "./remember";
 import { openVault, type Vault } from "./vault";
 
 /** How long the records stay unlocked without use. */
 export const IDLE_LOCK_MS = 15 * 60 * 1000;
 
-export type UnlockFailure = "wrong-key" | "empty" | "network";
+export type UnlockFailure = "wrong-key" | "empty" | "network" | "forgotten";
 
 export type VaultState =
   | { status: "locked"; failure?: UnlockFailure }
@@ -18,28 +20,52 @@ export type VaultState =
 
 type VaultApi = {
   state: VaultState;
-  unlock: (key: Uint8Array) => Promise<void>;
+  /** Opens the records with [key]; [remember] keeps it on this computer. */
+  unlock: (key: Uint8Array, remember?: boolean) => Promise<void>;
   lock: () => void;
+  /** Until when this computer is remembered, or null. */
+  remembered: number | null;
+  /** False until a remembered key has been tried on this page load. */
+  ready: boolean;
+  /** Opens with the key remembered on this computer (one click after a lock). */
+  unlockRemembered: () => Promise<void>;
+  /** Removes the key kept on this computer. */
+  forget: () => Promise<void>;
 };
 
 const VaultContext = createContext<VaultApi>({
   state: { status: "locked" },
   unlock: async () => {},
   lock: () => {},
+  remembered: null,
+  ready: true,
+  unlockRemembered: async () => {},
+  forget: async () => {},
 });
 
 /**
- * Holds the unlocked records in this tab's memory only. Nothing readable
- * goes to storage or the URL; a reload, closing the tab, 15 minutes idle
- * or Lock forgets it all.
+ * Holds the unlocked records in this tab's memory only; nothing readable
+ * goes to storage or the URL. 15 minutes idle or Lock closes them. When
+ * the person chose to keep this computer unlocked, the key (sealed, see
+ * remember.ts) opens them again on the next visit without a scan.
  */
 export function VaultProvider({ children }: { children: React.ReactNode }) {
+  const session = useSession();
+  const userId = session.status === "signed-in" ? session.session.user.id : null;
   const [state, setState] = useState<VaultState>({ status: "locked" });
+  const [remembered, setRemembered] = useState<number | null>(null);
+  const [ready, setReady] = useState(false);
+  const tried = useRef(false);
   const lockAt = useRef(0);
 
   const lock = useCallback(() => setState({ status: "locked" }), []);
 
-  const unlock = useCallback(async (key: Uint8Array) => {
+  const forget = useCallback(async () => {
+    await browserDeviceStore.clear();
+    setRemembered(null);
+  }, []);
+
+  const openWith = useCallback(async (key: Uint8Array, opts: { remember?: boolean; fromDevice?: boolean }) => {
     setState({ status: "opening", phase: "download", done: 0, total: 0 });
     try {
       const [crypto, records] = await Promise.all([
@@ -52,20 +78,63 @@ export function VaultProvider({ children }: { children: React.ReactNode }) {
         setState({ status: "locked", failure: "empty" });
         return;
       }
+      // A key that no longer opens anything (sync was started over) is forgotten.
+      const stale = async () => {
+        if (!opts.fromDevice) return false;
+        await browserDeviceStore.clear();
+        setRemembered(null);
+        setState({ status: "locked", failure: "forgotten" });
+        return true;
+      };
       const vault = await openVault(records, crypto, (done, total) =>
         setState({ status: "opening", phase: "unlock", done, total }),
       );
       if (vault.opened === 0) {
-        setState({ status: "locked", failure: "wrong-key" });
+        if (!(await stale())) setState({ status: "locked", failure: "wrong-key" });
         return;
       }
+      if (opts.remember && userId) setRemembered(await rememberKey(browserDeviceStore, userId, key));
       lockAt.current = Date.now() + IDLE_LOCK_MS;
       setState({ status: "open", vault, lockAt: lockAt.current });
     } catch (error) {
       if (!(error instanceof CloudError) && !(error instanceof TypeError)) throw error;
       setState({ status: "locked", failure: "network" });
     }
-  }, []);
+  }, [userId]);
+
+  const unlock = useCallback((key: Uint8Array, remember = false) => openWith(key, { remember }), [openWith]);
+
+  const unlockRemembered = useCallback(async () => {
+    if (!userId) return;
+    const r = await recallKey(browserDeviceStore, userId);
+    if (!r) {
+      setRemembered(null);
+      return;
+    }
+    await openWith(r.key, { fromDevice: true });
+  }, [userId, openWith]);
+
+  // On each visit, once signed in: open with the remembered key, if any.
+  // Signing out forgets it.
+  useEffect(() => {
+    if (session.status === "loading") return;
+    if (!userId) {
+      tried.current = false;
+      void browserDeviceStore.clear().then(() => {
+        setRemembered(null);
+        setReady(true);
+      });
+      return;
+    }
+    if (tried.current) return;
+    tried.current = true;
+    void (async () => {
+      const until = await rememberedUntil(browserDeviceStore, userId);
+      setRemembered(until);
+      if (until) await unlockRemembered();
+      setReady(true);
+    })();
+  }, [session.status, userId, unlockRemembered]);
 
   // Any use pushes the idle lock back; a timer checks it.
   const open = state.status === "open";
@@ -90,7 +159,7 @@ export function VaultProvider({ children }: { children: React.ReactNode }) {
     };
   }, [open]);
 
-  return <VaultContext.Provider value={{ state, unlock, lock }}>{children}</VaultContext.Provider>;
+  return <VaultContext.Provider value={{ state, unlock, lock, remembered, ready, unlockRemembered, forget }}>{children}</VaultContext.Provider>;
 }
 
 export const useVault = () => useContext(VaultContext);

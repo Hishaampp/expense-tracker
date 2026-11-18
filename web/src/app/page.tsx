@@ -8,20 +8,22 @@ import { SignIn } from "@/components/gate/sign-in";
 import { SplitFrame } from "@/components/gate/split-frame";
 import { Unlock } from "@/components/gate/unlock";
 import { Unlocking } from "@/components/gate/unlocking";
+import { WelcomeBack } from "@/components/gate/welcome-back";
 import { useSession } from "@/lib/session/session";
 import { useVault } from "@/lib/vault/vault-context";
 
 /** The front door: sign in, then unlock, then into the dashboard. */
 export default function Gate() {
   const session = useSession();
-  const { state, unlock } = useVault();
+  const { state, unlock, remembered, ready, unlockRemembered, forget } = useVault();
   const router = useRouter();
 
   useEffect(() => {
     if (state.status === "open") router.replace("/overview");
   }, [state.status, router]);
 
-  if (session.status === "loading" || state.status === "open") {
+  // While a remembered key is tried, show the mark rather than the unlock screen.
+  if (session.status === "loading" || state.status === "open" || (session.status === "signed-in" && !ready && state.status === "locked")) {
     return (
       <div className="grid min-h-dvh place-items-center text-ink" aria-busy>
         <AmpleMark size={56} sway title="Loading Ample" />
@@ -46,12 +48,20 @@ export default function Gate() {
     );
   }
 
+  if (remembered && (!state.failure || state.failure === "network")) {
+    return (
+      <SplitFrame art={<AmpleMark size={208} level={0} title={null} className="text-ink" />}>
+        <WelcomeBack email={session.session.user.email ?? "your account"} until={remembered} offline={state.failure === "network"} onOpen={() => void unlockRemembered()} onForget={() => void forget()} />
+      </SplitFrame>
+    );
+  }
+
   return (
     <SplitFrame art={<AmpleMark size={208} level={0} title={null} className="text-ink" />}>
       <Unlock
         email={session.session.user.email ?? "your account"}
         failure={state.failure}
-        onUnlock={(key) => void unlock(key)}
+        onUnlock={(key, remember) => void unlock(key, remember)}
       />
     </SplitFrame>
   );

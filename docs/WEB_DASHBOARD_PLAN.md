@@ -119,9 +119,12 @@ Each step is its own commit, tested, with CI passing; the whole web dashboard is
 3. **Google Cloud:** add the website's address to the sign-in client's **Authorized JavaScript origins** (W1 and W6).
 4. **Your recovery code**, or the phone at hand, to test with your real data.
 
+## Remember this computer (added after W4)
+
+Scanning on every visit was too much, so the unlock screen offers **Keep this computer unlocked for 30 days** (on by default, with a note to leave it off on a shared computer). The sync key is sealed with AES-256-GCM under a **non-extractable** wrapping key in IndexedDB, tied to the account; it opens the dashboard on the next visit without a scan. Lock and the idle lock still lock the tab (one click reopens), and **Forget this computer** or signing out removes it. A key that no longer opens the records (sync started over) is removed automatically.
+
 ## Not in v1
 
 - Editing, adding or deleting from the web (v2).
 - Auto-capture on the web (it only exists on the phone).
 - Sharing a dashboard with someone else.
-- Staying unlocked across browser restarts ("remember this computer"), which would need a carefully stored, non-exportable key. Possibly later.

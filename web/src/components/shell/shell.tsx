@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AmpleLockup } from "@/components/brand/ample-mark";
 import { cloud } from "@/lib/cloud/client";
+import { formatDate } from "@/lib/format/format";
 import { useSession } from "@/lib/session/session";
 import { useTheme } from "@/lib/theme/theme";
 import { IDLE_LOCK_MS, useVault } from "@/lib/vault/vault-context";
@@ -63,7 +64,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
 }
 
 function SidebarFooter() {
-  const { state, lock } = useVault();
+  const { state, lock, remembered, forget } = useVault();
   const session = useSession();
   const { theme, toggle } = useTheme();
   const minutes = useMinutesLeft(state.status === "open" ? state.lockAt : 0);
@@ -79,6 +80,14 @@ function SidebarFooter() {
           Unlocked in this tab
         </p>
         <p className="tabular mt-1 text-[0.8125rem] text-ink-muted">Locks after {minutes} min without use</p>
+        {remembered && (
+          <p className="tabular mt-1 text-[0.8125rem] text-ink-muted">
+            Remembered here until {formatDate(remembered)} ·{" "}
+            <button type="button" onClick={() => void forget()} className="font-semibold text-honey-text underline-offset-2 hover:underline">
+              Forget
+            </button>
+          </p>
+        )}
         <button
           type="button"
           onClick={lock}
@@ -103,7 +112,7 @@ function SidebarFooter() {
           type="button"
           onClick={() => {
             lock();
-            void cloud().auth.signOut();
+            void forget().then(() => cloud().auth.signOut());
           }}
           aria-label="Sign out"
           className="grid size-9 place-items-center rounded-full text-ink-muted transition-colors hover:bg-raised hover:text-ink"

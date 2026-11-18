@@ -3,6 +3,7 @@
 import { Check, KeyRound, LogOut, QrCode } from "lucide-react";
 import { useMemo, useState } from "react";
 import { ScanUnlock } from "@/components/link/scan-unlock";
+import { REMEMBER_DAYS } from "@/lib/vault/remember";
 import { cloud } from "@/lib/cloud/client";
 import {
   formatRecoveryCode,
@@ -20,6 +21,7 @@ const FAILURE_TEXT: Record<UnlockFailure, string> = {
   empty:
     "This account has no synced records yet. On your phone, open Settings → Account & sync and let it finish syncing, then try again.",
   network: "Couldn't reach your records. Check your connection and try again.",
+  forgotten: "The key saved on this computer no longer opens your records (sync may have been started over on your phone), so it was removed. Scan with your phone again.",
 };
 
 /** Unlock by scanning with the phone (first) or by typing the recovery code. */
@@ -30,9 +32,10 @@ export function Unlock({
 }: {
   email: string;
   failure?: UnlockFailure;
-  onUnlock: (key: Uint8Array) => void;
+  onUnlock: (key: Uint8Array, remember: boolean) => void;
 }) {
   const [method, setMethod] = useState<"scan" | "code">("scan");
+  const [remember, setRemember] = useState(true);
   const [code, setCode] = useState("");
   const clean = normalizeRecoveryCode(code);
   const complete = clean.length === RECOVERY_CODE_LENGTH;
@@ -44,7 +47,7 @@ export function Unlock({
     <div>
       <h1 className="rise font-display text-[2.6rem] leading-[1.05] tracking-[-0.02em]">Unlock your records</h1>
       <p className="rise mt-5 text-[1.0625rem] leading-relaxed text-ink-muted" style={{ "--i": 1 } as React.CSSProperties}>
-        Your records reach this computer sealed and open here, in this tab only. Scan with your phone, or type your recovery code.
+        Your records reach this computer sealed and open only here, in your browser. Scan with your phone, or type your recovery code.
       </p>
 
       <div role="tablist" aria-label="How to unlock" className="rise mt-9 grid grid-cols-2 rounded-full bg-sunken p-1 text-[0.875rem] font-semibold" style={{ "--i": 2 } as React.CSSProperties}>
@@ -80,7 +83,7 @@ export function Unlock({
 
       {method === "scan" ? (
         <div id="panel-scan" role="tabpanel" aria-labelledby="tab-scan" className="rise mt-8" style={{ "--i": 3 } as React.CSSProperties}>
-          <ScanUnlock onUnlock={onUnlock} />
+          <ScanUnlock onUnlock={(k) => onUnlock(k, remember)} />
         </div>
       ) : (
       <form
@@ -91,7 +94,7 @@ export function Unlock({
         style={{ "--i": 3 } as React.CSSProperties}
         onSubmit={(e) => {
           e.preventDefault();
-          if (key) onUnlock(key);
+          if (key) onUnlock(key, remember);
         }}
       >
         <label htmlFor="code" className="text-[0.875rem] font-semibold">
@@ -145,6 +148,14 @@ export function Unlock({
         </button>
       </form>
       )}
+
+      <label className="rise mt-6 flex cursor-pointer items-start gap-3 rounded-2xl border border-line p-4 transition-colors hover:bg-raised" style={{ "--i": 4 } as React.CSSProperties}>
+        <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} className="mt-0.5 size-[18px] shrink-0 accent-[var(--honey)]" />
+        <span className="grid gap-0.5">
+          <span className="text-[0.9375rem] font-semibold">Keep this computer unlocked for {REMEMBER_DAYS} days</span>
+          <span className="text-[0.8125rem] leading-relaxed text-ink-muted">Opens straight to your records next time, without a scan. Leave it off on a shared or office computer.</span>
+        </span>
+      </label>
 
       <div className="rise mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-6 text-[0.875rem] text-ink-muted" style={{ "--i": 4 } as React.CSSProperties}>
         <span className="min-w-0 truncate">
