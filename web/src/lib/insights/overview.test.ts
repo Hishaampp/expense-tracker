@@ -17,6 +17,14 @@ const txns: Txn[] = vectors.transactions.map((t) => {
     payeeDisplay: null,
     hidden: t.hidden,
     needsReview: false,
+    accountId: null,
+    toAccountId: null,
+    note: null,
+    origin: "manual",
+    instrument: null,
+    refNo: null,
+    linkedId: null,
+    createdAt: 0,
   };
 });
 const day = (s: string) => {

@@ -9,6 +9,7 @@ import { PeriodPicker } from "@/components/overview/period-picker";
 import { SpendCalendar } from "@/components/overview/spend-calendar";
 import { TopPayees } from "@/components/overview/top-payees";
 import { TrendChart } from "@/components/overview/trend-chart";
+import { Card, Quiet } from "@/components/ui/card";
 import { formatCount, formatPeriodTitle } from "@/lib/format/format";
 import { overview, transactionsOf, TREND_MONTHS } from "@/lib/insights/overview";
 import { useVault } from "@/lib/vault/vault-context";
@@ -19,22 +20,6 @@ const OLDEST = -35;
 function greeting(hour: number) {
   return hour < 5 ? "Good evening." : hour < 12 ? "Good morning." : hour < 17 ? "Good afternoon." : "Good evening.";
 }
-
-function Card({ id, title, note, children, i }: { id: string; title: string; note?: string; children: React.ReactNode; i: number }) {
-  return (
-    <section aria-labelledby={id} className="rise grid content-start gap-5 rounded-[1.25rem] border border-line bg-raised p-5 sm:p-7" style={{ "--i": i } as React.CSSProperties}>
-      <div className="grid gap-1">
-        <h2 id={id} className="font-display text-[1.5rem] tracking-[-0.01em]">
-          {title}
-        </h2>
-        {note && <p className="text-[0.875rem] text-ink-muted">{note}</p>}
-      </div>
-      {children}
-    </section>
-  );
-}
-
-const Quiet = ({ children }: { children: React.ReactNode }) => <p className="rounded-xl bg-sunken px-4 py-6 text-center text-[0.9375rem] text-ink-muted">{children}</p>;
 
 export default function OverviewPage() {
   const { state } = useVault();

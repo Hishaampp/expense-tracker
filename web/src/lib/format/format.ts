@@ -71,3 +71,16 @@ export function formatMonthShort(p: { start: Date; end: Date }): string {
 export function formatDay(d: Date): string {
   return new Intl.DateTimeFormat("en-IN", { weekday: "short", day: "numeric", month: "short" }).format(d);
 }
+
+const shortDate = new Intl.DateTimeFormat("en-IN", { day: "numeric", month: "short", year: "numeric" });
+const clock = new Intl.DateTimeFormat("en-IN", { hour: "numeric", minute: "2-digit" });
+const fullWhen = new Intl.DateTimeFormat("en-IN", { weekday: "long", day: "numeric", month: "long", year: "numeric", hour: "numeric", minute: "2-digit" });
+
+/** "17 Nov 2026". */
+export const formatDate = (at: number | Date) => shortDate.format(at);
+
+/** "4:32 pm". */
+export const formatTime = (at: number | Date) => clock.format(at);
+
+/** "Tuesday, 17 November 2026 at 4:32 pm". */
+export const formatFullWhen = (at: number | Date) => fullWhen.format(at);

@@ -19,6 +19,15 @@ export type Txn = {
   payeeDisplay: string | null;
   hidden: boolean;
   needsReview: boolean;
+  accountId: string | null;
+  toAccountId: string | null;
+  note: string | null;
+  /** "manual" (typed in) or "auto" (captured). */
+  origin: string;
+  instrument: string | null;
+  refNo: string | null;
+  linkedId: string | null;
+  createdAt: number;
 };
 
 const text = (v: unknown) => (typeof v === "string" && v !== "" ? v : null);
@@ -41,6 +50,14 @@ export function txnFromRow(row: Row): Txn | null {
     payeeDisplay: text(row.payee_display),
     hidden: row.is_hidden === 1 || row.is_hidden === true,
     needsReview: row.review_status === "needsReview",
+    accountId: text(row.account_id),
+    toAccountId: text(row.to_account_id),
+    note: text(row.note),
+    origin: text(row.origin) ?? "manual",
+    instrument: text(row.instrument),
+    refNo: text(row.ref_no),
+    linkedId: text(row.linked_transaction_id),
+    createdAt: Number(row.created_at) || at,
   };
 }
 

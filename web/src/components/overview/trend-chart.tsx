@@ -13,9 +13,11 @@ function niceTop(max: number): number {
 }
 
 /** Twelve months of spending (honey) and money in (green), the shown month marked. */
-export function TrendChart({ months, onPick }: { months: TrendMonth[]; onPick: (index: number) => void }) {
+export function TrendChart({ months, onPick, label = "spent" }: { months: TrendMonth[]; onPick?: (index: number) => void; label?: string }) {
   const [focus, setFocus] = useState<number | null>(null);
   const showIncome = months.some((m) => m.moneyIn > 0);
+  // An income-only history (a salary category) has no spending series.
+  const showSpent = !showIncome || months.some((m) => m.spent !== 0);
   const top = niceTop(Math.max(...months.map((m) => Math.max(m.spent, showIncome ? m.moneyIn : 0))));
   const ticks = [top, top / 2, 0];
   const active = focus ?? months.length - 1;
@@ -27,19 +29,25 @@ export function TrendChart({ months, onPick }: { months: TrendMonth[]; onPick: (
         <div>
           <p className="text-[0.875rem] text-ink-muted">{formatPeriodRange(a)}</p>
           <p className="tabular font-display text-[1.5rem]">
-            {formatPaise(Math.max(0, a.spent))} <span className="font-sans text-[0.9375rem] text-ink-muted">spent</span>
+            {showSpent && (
+              <>
+                {formatPaise(Math.max(0, a.spent))} <span className="font-sans text-[0.9375rem] text-ink-muted">{label}</span>
+              </>
+            )}
             {showIncome && (
               <>
-                {" · "}
+                {showSpent && " · "}
                 <span className="text-income">{formatPaise(a.moneyIn)}</span> <span className="font-sans text-[0.9375rem] text-ink-muted">in</span>
               </>
             )}
           </p>
         </div>
         <div className="flex items-center gap-4 text-[0.8125rem] text-ink-muted" aria-hidden>
-          <span className="inline-flex items-center gap-1.5">
-            <span className="size-2.5 rounded-[3px] bg-honey" /> Spent
-          </span>
+          {showSpent && (
+            <span className="inline-flex items-center gap-1.5">
+              <span className="size-2.5 rounded-[3px] bg-honey" /> Spent
+            </span>
+          )}
           {showIncome && (
             <span className="inline-flex items-center gap-1.5">
               <span className="size-2.5 rounded-[3px] bg-income" /> Money in
@@ -72,8 +80,8 @@ export function TrendChart({ months, onPick }: { months: TrendMonth[]; onPick: (
                     onMouseEnter={() => setFocus(i)}
                     onFocus={() => setFocus(i)}
                     onBlur={() => setFocus(null)}
-                    onClick={() => onPick(i)}
-                    aria-label={`${formatPeriodRange(m)}: ${formatPaise(Math.max(0, m.spent))} spent${showIncome ? `, ${formatPaise(m.moneyIn)} in` : ""}. Show this month.`}
+                    onClick={onPick ? () => onPick(i) : undefined}
+                    aria-label={`${formatPeriodRange(m)}: ${formatPaise(Math.max(0, m.spent))} spent${showIncome ? `, ${formatPaise(m.moneyIn)} in` : ""}${onPick ? ". Show this month." : ""}`}
                     aria-current={m.isShown ? "date" : undefined}
                     className={`group flex h-full w-full items-end justify-center gap-[3px] rounded-lg px-0.5 transition-colors ${on ? "bg-raised-2" : "hover:bg-raised-2/60"}`}
                   >
