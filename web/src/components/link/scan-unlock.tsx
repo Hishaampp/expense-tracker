@@ -3,7 +3,7 @@
 import { RotateCw, Smartphone } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { cloud } from "@/lib/cloud/client";
-import { newLinkRequest, type LinkRequest } from "@/lib/link/link-crypto";
+import { newLinkRequest, type LinkRequest, type PhonePass } from "@/lib/link/link-crypto";
 import { AmpleQr } from "./ample-qr";
 
 /** How long one code is good for; the server forgets answers after two minutes. */
@@ -13,11 +13,13 @@ const POLL_MS = 1_500;
 type Problem = "not-set-up" | "unreadable" | null;
 
 /**
- * Unlock by scanning: shows a one-time QR, waits for this account's phone
- * to leave the sealed key, opens it here and hands it to [onUnlock]. A new
- * code is made before the old one expires.
+ * The way in: shows a one-time QR, waits for a signed-in phone to leave
+ * its sealed pass (the sync key and a one-time sign-in), opens it here and
+ * hands it to [onPass]. Works signed out: the pass is collected with the
+ * request id only this tab knows. A new code is made before the old one
+ * expires.
  */
-export function ScanUnlock({ onUnlock }: { onUnlock: (key: Uint8Array) => void }) {
+export function ScanUnlock({ onPass }: { onPass: (pass: PhonePass) => void }) {
   const [request, setRequest] = useState<LinkRequest | null>(null);
   const [madeAt, setMadeAt] = useState(0);
   const [problem, setProblem] = useState<Problem>(null);
@@ -53,36 +55,31 @@ export function ScanUnlock({ onUnlock }: { onUnlock: (key: Uint8Array) => void }
         void fresh();
         return;
       }
-      const { data, error } = await cloud()
-        .from("link_requests")
-        .select("phone_key, sealed")
-        .eq("id", request.id)
-        .maybeSingle();
+      // Collecting removes it from the server in the same step.
+      const { data, error } = await cloud().rpc("claim_link_request", { request_id: request.id });
       if (stopped) return;
       if (error) {
-        // The table is missing until the migration runs in Supabase.
-        if (error.code === "PGRST205" || error.code === "42P01") setProblem("not-set-up");
+        // The function is missing until the migration runs in Supabase.
+        if (error.code === "PGRST202" || error.code === "42883") setProblem("not-set-up");
         return;
       }
-      if (!data) return;
-      const key = await request.open(data.phone_key, data.sealed);
-      // Supabase sends a request only when it is awaited. The server forgets
-      // it after two minutes anyway; this clears it at once.
-      await cloud().from("link_requests").delete().eq("id", request.id);
-      if (!key) {
+      const row = Array.isArray(data) ? data[0] : null;
+      if (!row) return;
+      const pass = await request.open(row.phone_key, row.sealed);
+      if (!pass) {
         setProblem("unreadable");
         void fresh();
         return;
       }
       done.current = true;
-      onUnlock(key);
+      onPass(pass);
     };
     const timer = window.setInterval(() => void tick(), POLL_MS);
     return () => {
       stopped = true;
       window.clearInterval(timer);
     };
-  }, [request, madeAt, fresh, onUnlock]);
+  }, [request, madeAt, fresh, onPass]);
 
   const left = request && now ? Math.max(0, 1 - (now - madeAt) / CODE_LIFETIME_MS) : 1;
 
@@ -126,7 +123,7 @@ export function ScanUnlock({ onUnlock }: { onUnlock: (key: Uint8Array) => void }
 
       {problem === "not-set-up" && (
         <p role="alert" className="rounded-xl bg-honey-soft px-4 py-3 text-[0.9375rem] leading-relaxed text-ink">
-          Scan unlock isn&apos;t switched on for this server yet. Use your recovery code for now.
+          Signing in with your phone isn&apos;t switched on for this server yet.
         </p>
       )}
       {problem === "unreadable" && (
@@ -137,7 +134,7 @@ export function ScanUnlock({ onUnlock }: { onUnlock: (key: Uint8Array) => void }
       )}
       <p className="flex items-start gap-2 text-[0.8125rem] leading-relaxed text-ink-faint">
         <Smartphone className="mt-0.5 size-4 shrink-0" aria-hidden />
-        Your phone must be signed in to this same account with Account & sync on.
+        Only a phone signed in to Ample, with Account & sync on, can sign a computer in. Update Ample on your phone if it says the code isn&apos;t an Ample code.
       </p>
     </div>
   );

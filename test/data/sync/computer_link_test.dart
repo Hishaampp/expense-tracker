@@ -16,12 +16,17 @@ const _path = 'web/src/lib/link/fixtures/link-vectors.json';
 void main() {
   test('reads the website QR and refuses anything else', () {
     final key = base64Url.encode(List.filled(32, 7)).replaceAll('=', '');
-    final good = 'AMPLE1:${'ab' * 16}:$key';
+    final good = 'AMPLE2:${'ab' * 16}:$key';
     final link = ComputerLink.tryParse(good)!;
     expect(link.id, 'ab' * 16);
     expect(link.publicKey, List.filled(32, 7));
     expect(ComputerLink.tryParse('upi://pay?pa=a@b'), isNull);
-    expect(ComputerLink.tryParse('AMPLE1:${'ab' * 16}:short'), isNull);
+    expect(ComputerLink.tryParse('AMPLE2:${'ab' * 16}:short'), isNull);
+    // A version-1 code from an older website asked for the key only.
+    expect(
+      ComputerLink.tryParse(good.replaceFirst('AMPLE2', 'AMPLE1')),
+      isNull,
+    );
     expect(ComputerLink.tryParse(good.toUpperCase()), isNull);
   });
 
@@ -35,9 +40,12 @@ void main() {
     );
     final key = SyncKey.fromBytes(List.generate(32, (i) => i))!;
     final id = 'c0ffee00' * 4;
-    final qr = 'AMPLE1:$id:${base64Url.encode(webPublic).replaceAll('=', '')}';
+    final qr = 'AMPLE2:$id:${base64Url.encode(webPublic).replaceAll('=', '')}';
+    const email = 'asha@example.com';
+    const tokenHash =
+        'pkce_3f2a9c0d6e1b4a7c8d5e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d5e';
     final sealed = await sealForComputer(
-      key,
+      (key: key, email: email, tokenHash: tokenHash),
       ComputerLink.tryParse(qr)!,
       phoneKeyPair: phone,
       random: Random(5),
@@ -50,6 +58,8 @@ void main() {
       'phoneKey': sealed.phoneKey,
       'sealed': sealed.sealed,
       'keyBytes': key.bytes,
+      'email': email,
+      'tokenHash': tokenHash,
     });
     final fresh = '$json\n';
     final file = File(_path);

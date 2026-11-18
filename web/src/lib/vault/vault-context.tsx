@@ -11,7 +11,7 @@ import { openVault, type Vault } from "./vault";
 /** How long the records stay unlocked without use. */
 export const IDLE_LOCK_MS = 15 * 60 * 1000;
 
-export type UnlockFailure = "wrong-key" | "empty" | "network" | "forgotten";
+export type UnlockFailure = "wrong-key" | "empty" | "network" | "forgotten" | "sign-in";
 
 export type VaultState =
   | { status: "locked"; failure?: UnlockFailure }
@@ -20,8 +20,13 @@ export type VaultState =
 
 type VaultApi = {
   state: VaultState;
-  /** Opens the records with [key]; [remember] keeps it on this computer. */
-  unlock: (key: Uint8Array, remember?: boolean) => Promise<void>;
+  /**
+   * Opens the records with [key]; [remember] keeps it on this computer for
+   * [asUser] (the account just signed in, before the session has caught up).
+   */
+  unlock: (key: Uint8Array, remember?: boolean, asUser?: string) => Promise<void>;
+  /** Shows that signing this computer in failed. */
+  fail: (failure: UnlockFailure) => void;
   lock: () => void;
   /** Until when this computer is remembered, or null. */
   remembered: number | null;
@@ -36,6 +41,7 @@ type VaultApi = {
 const VaultContext = createContext<VaultApi>({
   state: { status: "locked" },
   unlock: async () => {},
+  fail: () => {},
   lock: () => {},
   remembered: null,
   ready: true,
@@ -65,7 +71,7 @@ export function VaultProvider({ children }: { children: React.ReactNode }) {
     setRemembered(null);
   }, []);
 
-  const openWith = useCallback(async (key: Uint8Array, opts: { remember?: boolean; fromDevice?: boolean }) => {
+  const openWith = useCallback(async (key: Uint8Array, opts: { remember?: boolean; fromDevice?: boolean; asUser?: string }) => {
     setState({ status: "opening", phase: "download", done: 0, total: 0 });
     try {
       const [crypto, records] = await Promise.all([
@@ -93,7 +99,8 @@ export function VaultProvider({ children }: { children: React.ReactNode }) {
         if (!(await stale())) setState({ status: "locked", failure: "wrong-key" });
         return;
       }
-      if (opts.remember && userId) setRemembered(await rememberKey(browserDeviceStore, userId, key));
+      const owner = opts.asUser ?? userId;
+      if (opts.remember && owner) setRemembered(await rememberKey(browserDeviceStore, owner, key));
       lockAt.current = Date.now() + IDLE_LOCK_MS;
       setState({ status: "open", vault, lockAt: lockAt.current });
     } catch (error) {
@@ -102,7 +109,8 @@ export function VaultProvider({ children }: { children: React.ReactNode }) {
     }
   }, [userId]);
 
-  const unlock = useCallback((key: Uint8Array, remember = false) => openWith(key, { remember }), [openWith]);
+  const unlock = useCallback((key: Uint8Array, remember = false, asUser?: string) => openWith(key, { remember, asUser }), [openWith]);
+  const fail = useCallback((failure: UnlockFailure) => setState({ status: "locked", failure }), []);
 
   const unlockRemembered = useCallback(async () => {
     if (!userId) return;
@@ -159,7 +167,7 @@ export function VaultProvider({ children }: { children: React.ReactNode }) {
     };
   }, [open]);
 
-  return <VaultContext.Provider value={{ state, unlock, lock, remembered, ready, unlockRemembered, forget }}>{children}</VaultContext.Provider>;
+  return <VaultContext.Provider value={{ state, unlock, fail, lock, remembered, ready, unlockRemembered, forget }}>{children}</VaultContext.Provider>;
 }
 
 export const useVault = () => useContext(VaultContext);

@@ -4,7 +4,7 @@ import { AmpleLockup } from "@/components/brand/ample-mark";
 const FACTS = [
   { icon: ShieldCheck, text: "Sealed with AES-256 on your phone. The server holds only locked records." },
   { icon: LockKeyhole, text: "Opened only in your browser. Keep this computer unlocked, or forget it in one click." },
-  { icon: MonitorSmartphone, text: "The same records as your phone, to the paisa." },
+  { icon: MonitorSmartphone, text: "Only your signed-in phone can let a computer in. The same records, to the paisa." },
 ];
 
 /**

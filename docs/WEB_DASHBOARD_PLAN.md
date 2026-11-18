@@ -123,6 +123,10 @@ Each step is its own commit, tested, with CI passing; the whole web dashboard is
 
 Scanning on every visit was too much, so the unlock screen offers **Keep this computer unlocked for 30 days** (on by default, with a note to leave it off on a shared computer). The sync key is sealed with AES-256-GCM under a **non-extractable** wrapping key in IndexedDB, tied to the account; it opens the dashboard on the next visit without a scan. Lock and the idle lock still lock the tab (one click reopens), and **Forget this computer** or signing out removes it. A key that no longer opens the records (sync started over) is removed automatically.
 
+## Only a signed-in phone lets a computer in
+
+The website has no sign-in of its own (no email, Google or recovery code). It shows a one-time QR (`AMPLE2:<id>:<public key>`). Ample on a signed-in phone scans it, confirms with Face ID or fingerprint, asks the `link-session` Edge Function for a one-time magic-link token for its own account (nothing is emailed), and seals the token and the sync key for that browser tab only. The signed-out tab collects the handover with `claim_link_request(id)` (the 128-bit id is known only to that tab and the phone), signs in with the token and opens the records. Migration: `20261119000000_phone_only_web_sign_in.sql`; function: `supabase/functions/link-session`. An older app refuses the version-2 code and asks to update.
+
 ## Not in v1
 
 - Editing, adding or deleting from the web (v2).

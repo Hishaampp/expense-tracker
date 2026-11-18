@@ -202,7 +202,7 @@ void main() {
       final pair = await X25519().newKeyPair();
       final public = (await pair.extractPublicKey()).bytes;
       final key = base64Url.encode(public).replaceAll('=', '');
-      return (pair, ComputerLink.tryParse('AMPLE1:${'5e' * 16}:$key')!);
+      return (pair, ComputerLink.tryParse('AMPLE2:${'5e' * 16}:$key')!);
     }
 
     Future<List<int>> open(
@@ -220,7 +220,7 @@ void main() {
       final boxKey = await Hkdf(
         hmac: Hmac.sha256(),
         outputLength: 32,
-      ).deriveKey(secretKey: shared, info: utf8.encode('ample-link-v1'));
+      ).deriveKey(secretKey: shared, info: utf8.encode('ample-link-v2'));
       final bytes = base64.decode(s.sealed);
       return await AesGcm.with256bits().decrypt(
         SecretBox(
@@ -244,7 +244,7 @@ void main() {
         computer,
       ).then((value) => outcome = value);
       await tester.pumpAndSettle();
-      await tester.tap(find.widgetWithText(FilledButton, 'Link computer'));
+      await tester.tap(find.widgetWithText(FilledButton, 'Sign in computer'));
       await tester.pumpAndSettle();
       await done;
     }
@@ -265,11 +265,16 @@ void main() {
       await link(tester, computer);
       expect(outcome, LinkOutcome.linked);
       expect(
-        find.text('Computer linked. Your records are opening there now.'),
+        find.text('Computer signed in. Your records are opening there now.'),
         findsOneWidget,
       );
       final sealed = links.posted[computer.id]!;
-      expect(await open(web, computer, sealed), keys.key!.bytes);
+      final pass = jsonDecode(
+        utf8.decode(await open(web, computer, sealed)),
+      ) as Map<String, dynamic>;
+      expect(base64.decode(pass['key'] as String), keys.key!.bytes);
+      expect(pass['email'], 'asha@example.com');
+      expect(pass['token'], 'pkce_test');
     });
 
     appTest('without sync there is no key to give', (tester) async {

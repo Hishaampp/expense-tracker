@@ -2299,27 +2299,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get linkHint =>
-      'On your computer, open ample-money.vercel.app, choose Scan with phone and point the camera at the code';
+      'On your computer, open ample-money.vercel.app and point the camera at the code';
 
   @override
   String get linkNotAmple =>
-      'That isn\'t an Ample code. Scan the code on the Ample website.';
+      'That isn\'t an Ample code. Scan the code on the Ample website, and update Ample if the website is newer.';
 
   @override
-  String get linkConfirmTitle => 'Open your records on this computer?';
+  String get linkConfirmTitle => 'Sign in on this computer?';
 
   @override
   String get linkConfirmBody =>
-      'The computer showing this code can read your Ample records until it locks. Only link a computer you\'re using right now.';
+      'The computer showing this code will be signed in to your account and can read your Ample records. Only link a computer you\'re using right now.';
 
   @override
-  String get linkConfirm => 'Link computer';
+  String get linkConfirm => 'Sign in computer';
 
   @override
-  String get linkReason => 'Confirm it\'s you to link a computer';
+  String get linkReason => 'Confirm it\'s you to sign in a computer';
 
   @override
-  String get linkDone => 'Computer linked. Your records are opening there now.';
+  String get linkDone =>
+      'Computer signed in. Your records are opening there now.';
 
   @override
   String get linkFailed =>

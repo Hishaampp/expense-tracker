@@ -19,10 +19,12 @@ describe("link crypto", () => {
     expect(request.qr).toBe(vectors.qr);
   });
 
-  it("opens the key the app sealed for this tab", async () => {
+  it("opens the key and the sign-in the app sealed for this tab", async () => {
     const request = await linkRequestFrom(await webKeys(), vectors.id);
-    const key = await request.open(vectors.phoneKey, vectors.sealed);
-    expect(Array.from(key!)).toEqual(vectors.keyBytes);
+    const pass = await request.open(vectors.phoneKey, vectors.sealed);
+    expect(Array.from(pass!.key)).toEqual(vectors.keyBytes);
+    expect(pass!.email).toBe(vectors.email);
+    expect(pass!.tokenHash).toBe(vectors.tokenHash);
   });
 
   it("refuses it under another request id or another tab's key", async () => {
@@ -30,6 +32,6 @@ describe("link crypto", () => {
     expect(await swapped.open(vectors.phoneKey, vectors.sealed)).toBeNull();
     const other = await newLinkRequest();
     expect(await other.open(vectors.phoneKey, vectors.sealed)).toBeNull();
-    expect(other.qr).toMatch(/^AMPLE1:[0-9a-f]{32}:[A-Za-z0-9_-]{43}$/);
+    expect(other.qr).toMatch(/^AMPLE2:[0-9a-f]{32}:[A-Za-z0-9_-]{43}$/);
   });
 });

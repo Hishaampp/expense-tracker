@@ -3677,43 +3677,43 @@ abstract class AppLocalizations {
   /// Instruction under the scanner on Link a computer.
   ///
   /// In en, this message translates to:
-  /// **'On your computer, open ample-money.vercel.app, choose Scan with phone and point the camera at the code'**
+  /// **'On your computer, open ample-money.vercel.app and point the camera at the code'**
   String get linkHint;
 
   /// No description provided for @linkNotAmple.
   ///
   /// In en, this message translates to:
-  /// **'That isn\'t an Ample code. Scan the code on the Ample website.'**
+  /// **'That isn\'t an Ample code. Scan the code on the Ample website, and update Ample if the website is newer.'**
   String get linkNotAmple;
 
   /// No description provided for @linkConfirmTitle.
   ///
   /// In en, this message translates to:
-  /// **'Open your records on this computer?'**
+  /// **'Sign in on this computer?'**
   String get linkConfirmTitle;
 
   /// No description provided for @linkConfirmBody.
   ///
   /// In en, this message translates to:
-  /// **'The computer showing this code can read your Ample records until it locks. Only link a computer you\'re using right now.'**
+  /// **'The computer showing this code will be signed in to your account and can read your Ample records. Only link a computer you\'re using right now.'**
   String get linkConfirmBody;
 
   /// No description provided for @linkConfirm.
   ///
   /// In en, this message translates to:
-  /// **'Link computer'**
+  /// **'Sign in computer'**
   String get linkConfirm;
 
   /// Face ID / fingerprint prompt reason when linking a computer.
   ///
   /// In en, this message translates to:
-  /// **'Confirm it\'s you to link a computer'**
+  /// **'Confirm it\'s you to sign in a computer'**
   String get linkReason;
 
   /// No description provided for @linkDone.
   ///
   /// In en, this message translates to:
-  /// **'Computer linked. Your records are opening there now.'**
+  /// **'Computer signed in. Your records are opening there now.'**
   String get linkDone;
 
   /// No description provided for @linkFailed.

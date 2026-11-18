@@ -222,15 +222,23 @@ class SyncController extends AsyncNotifier<SyncStatus> {
     return null;
   }
 
-  /// Gives the sync key to the computer that showed [link]'s QR (Ample
-  /// for the web): sealed so only that browser tab can open it.
+  /// Signs in and unlocks the computer that showed [link]'s QR (Ample for
+  /// the web): a one-time sign-in for this account and the sync key,
+  /// sealed so only that browser tab can open them. Only a signed-in phone
+  /// can let a computer in.
   Future<LinkOutcome> linkComputer(ComputerLink link) async {
     if (state.value is! SyncOn) return LinkOutcome.notSyncing;
     final key = await _keys.read();
     if (key == null) return LinkOutcome.notSyncing;
     try {
-      final sealed = await sealForComputer(key, link);
-      await ref.read(computerLinkServerProvider).post(link.id, sealed);
+      final server = ref.read(computerLinkServerProvider);
+      final signIn = await server.signIn();
+      final sealed = await sealForComputer((
+        key: key,
+        email: signIn.email,
+        tokenHash: signIn.tokenHash,
+      ), link);
+      await server.post(link.id, sealed);
       return LinkOutcome.linked;
     } on Exception catch (e, st) {
       ref.read(appLoggerProvider).error('sync.link', e.runtimeType, st);
