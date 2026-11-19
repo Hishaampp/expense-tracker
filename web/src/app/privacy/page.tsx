@@ -158,8 +158,7 @@ export default function PrivacyPage() {
       <p>We use a few service providers, only to run Ample. They process data for us and may not use it for anything else.</p>
       <ul>
         <li>
-          <strong>Supabase</strong> hosts the optional account: sign-in and the encrypted records, on servers in Sydney, Australia. So if you create an
-          account, your email address and your encrypted records are stored outside India. The records stay end-to-end encrypted there and can&apos;t be read.
+          <strong>Supabase</strong> hosts the optional account: sign-in and the encrypted records, on servers in Mumbai, India.
         </li>
         <li>
           <strong>Vercel</strong> hosts the Ample website. Like any website host, its servers see your IP address and the pages you ask for, in their logs.

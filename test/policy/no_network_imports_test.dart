@@ -87,7 +87,7 @@ void main() {
       }
     }
     expect(
-      found.where((u) => !u.contains(': https://rsfiiiyhajwgfnkxuwtr.')),
+      found.where((u) => !u.contains(': https://sefgzcqghdlejfmruxdg.')),
       isEmpty,
       reason: 'A new server must be agreed first (Phase 9 plan).',
     );
