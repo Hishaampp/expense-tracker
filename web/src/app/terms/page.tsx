@@ -3,7 +3,7 @@ import Link from "next/link";
 import { CONTACT_EMAIL, DEVELOPER, LegalPage } from "@/components/legal/legal-page";
 
 export const metadata: Metadata = {
-  title: "Terms of use · Ample",
+  title: "Terms of use",
   description: "The terms for using the Ample apps and website.",
 };
 

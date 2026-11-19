@@ -3,7 +3,7 @@ import Link from "next/link";
 import { CONTACT_EMAIL, DEVELOPER, LegalPage } from "@/components/legal/legal-page";
 
 export const metadata: Metadata = {
-  title: "Privacy policy · Ample",
+  title: "Privacy policy",
   description: "How Ample handles your data: on your phone by default, end-to-end encrypted if you turn on the optional account. No ads, no tracking.",
 };
 
