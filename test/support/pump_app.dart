@@ -26,6 +26,7 @@ import 'package:expense_tracker/services/native/capture_queue_service.dart';
 import 'package:expense_tracker/services/notification_service.dart';
 import 'package:expense_tracker/services/service_providers.dart';
 import 'package:expense_tracker/services/upi_pay_service.dart';
+import 'package:expense_tracker/services/web_link_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -294,6 +295,21 @@ final class FakeSyncKeyStore implements SyncKeyStore {
   Future<void> delete() async => key = null;
 }
 
+/// Web pages opened, in order; [opens] says whether a browser was there.
+final class FakeWebLinks implements WebLinkService {
+  /// The pages opened.
+  final List<Uri> opened = [];
+
+  /// Whether a browser opens them.
+  bool opens = true;
+
+  @override
+  Future<bool> open(Uri url) async {
+    opened.add(url);
+    return opens;
+  }
+}
+
 /// A clipboard holding [text].
 final class FakeClipboard implements ClipboardService {
   /// Creates the clipboard.
@@ -438,6 +454,7 @@ Future<AppDatabase> pumpApp(
   FakeSyncKeyStore? syncKeys,
   MemorySyncServer? syncServer,
   MemoryComputerLinkServer? linkServer,
+  FakeWebLinks? webLinks,
   Size? size,
   double textScale = 1,
 }) async {
@@ -480,6 +497,7 @@ Future<AppDatabase> pumpApp(
         computerLinkServerProvider.overrideWithValue(
           linkServer ?? MemoryComputerLinkServer(),
         ),
+        webLinkServiceProvider.overrideWithValue(webLinks ?? FakeWebLinks()),
         // Fast key stretching: the real 600,000 rounds take seconds.
         backupCodecProvider.overrideWith(
           (ref) =>

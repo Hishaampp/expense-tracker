@@ -3757,6 +3757,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Confirm it\'s you to start sync over'**
   String get accountStartOverReason;
+
+  /// No description provided for @settingsSectionAbout.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get settingsSectionAbout;
+
+  /// No description provided for @settingsPrivacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy policy'**
+  String get settingsPrivacyPolicy;
+
+  /// No description provided for @settingsTerms.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of use'**
+  String get settingsTerms;
+
+  /// Accessibility hint on links that open a web page.
+  ///
+  /// In en, this message translates to:
+  /// **'Opens in your browser'**
+  String get settingsOpensInBrowser;
+
+  /// Shown when no browser could open a web page.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t open your browser. Visit {url}'**
+  String linkOpenFailed(String url);
+
+  /// Under the sign-in buttons; the two documents are linked below it.
+  ///
+  /// In en, this message translates to:
+  /// **'By signing in, you agree to the terms of use and privacy policy.'**
+  String get accountAgree;
 }
 
 class _AppLocalizationsDelegate

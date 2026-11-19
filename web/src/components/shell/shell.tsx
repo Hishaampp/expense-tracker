@@ -96,6 +96,14 @@ function SidebarFooter() {
           <LockKeyhole className="size-4" aria-hidden /> Lock now
         </button>
       </div>
+      <p className="flex gap-3 px-1 text-[0.75rem] text-ink-faint">
+        <Link href="/privacy" className="hover:text-ink">
+          Privacy
+        </Link>
+        <Link href="/terms" className="hover:text-ink">
+          Terms
+        </Link>
+      </p>
       <div className="flex items-center gap-2 px-1">
         <span className="min-w-0 flex-1 truncate text-[0.8125rem] text-ink-muted" title={email ?? undefined}>
           {email}

@@ -15,6 +15,7 @@ import 'package:expense_tracker/widgets/entrance.dart';
 import 'package:expense_tracker/widgets/error_state_view.dart';
 import 'package:expense_tracker/widgets/icon_tile.dart';
 import 'package:expense_tracker/widgets/large_title_page.dart';
+import 'package:expense_tracker/widgets/legal_links.dart';
 import 'package:expense_tracker/widgets/provider_buttons.dart';
 import 'package:expense_tracker/widgets/pulsing_placeholder.dart';
 import 'package:expense_tracker/widgets/round_icon_button.dart';
@@ -215,6 +216,13 @@ class _SignInState extends ConsumerState<_SignIn> {
                 ),
               ),
             ],
+            SizedBox(height: metrics.spaceMd),
+            Text(
+              l10n.accountAgree,
+              textAlign: TextAlign.center,
+              style: textTheme.bodySmall,
+            ),
+            const LegalLinks(),
           ],
         ),
       ),

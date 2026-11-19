@@ -56,4 +56,38 @@ void main() {
       AppearanceMode.dark,
     );
   });
+
+  appTest('About opens the privacy policy and the terms in the browser', (
+    tester,
+  ) async {
+    final links = FakeWebLinks();
+    await pumpApp(tester, webLinks: links);
+    await openTab(tester, 'Settings');
+
+    await tester.scrollUntilVisible(find.text('Terms of use'), 200);
+    await tester.tap(find.text('Privacy policy'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Terms of use'));
+    await tester.pumpAndSettle();
+    expect(links.opened.map((u) => u.toString()), [
+      'https://ample-money.vercel.app/privacy',
+      'https://ample-money.vercel.app/terms',
+    ]);
+  });
+
+  appTest('without a browser it says where to find the page', (tester) async {
+    final links = FakeWebLinks()..opens = false;
+    await pumpApp(tester, webLinks: links);
+    await openTab(tester, 'Settings');
+
+    await tester.scrollUntilVisible(find.text('Privacy policy'), 200);
+    await tester.tap(find.text('Privacy policy'));
+    await tester.pumpAndSettle();
+    expect(
+      find.text(
+        "Couldn't open your browser. Visit ample-money.vercel.app/privacy",
+      ),
+      findsOneWidget,
+    );
+  });
 }

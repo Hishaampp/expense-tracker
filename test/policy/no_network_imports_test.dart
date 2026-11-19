@@ -68,17 +68,26 @@ void main() {
   });
 
   test('the app talks to no server but its own Supabase project', () {
+    // Pages the phone's browser opens (the app sends nothing there): the
+    // privacy policy and terms on Ample's own website, defined in one file.
+    const browserPages = {
+      'lib/core/app_identity.dart': {
+        'https://ample-money.vercel.app/privacy',
+        'https://ample-money.vercel.app/terms',
+      },
+    };
     final urls = RegExp(r'''https?://[^'"\s)]+''');
     final found = <String>{};
     for (final file in Directory('lib').listSync(recursive: true)) {
       if (file is! File || !file.path.endsWith('.dart')) continue;
       if (file.path.endsWith('.g.dart')) continue;
+      final allowed = browserPages[file.path] ?? const <String>{};
       for (final m in urls.allMatches(file.readAsStringSync())) {
-        found.add(m.group(0)!);
+        if (!allowed.contains(m.group(0))) found.add('${file.path}: ${m[0]}');
       }
     }
     expect(
-      found.where((u) => !u.startsWith('https://rsfiiiyhajwgfnkxuwtr.')),
+      found.where((u) => !u.contains(': https://rsfiiiyhajwgfnkxuwtr.')),
       isEmpty,
       reason: 'A new server must be agreed first (Phase 9 plan).',
     );

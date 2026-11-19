@@ -8,7 +8,9 @@
    - `lib/core/app_identity.dart`.
 
    The Android ID can never change after the first upload. Check the name for trademarks and check that it is free in both stores.
-2. A contact email for the privacy policy and the store listings.
+2. ~~A contact email~~ Done: hishampp198@gmail.com, developer Hisham P P (2026-11-19).
+   - Privacy policy URL: https://ample-money.vercel.app/privacy
+   - Terms of use URL: https://ample-money.vercel.app/terms
 3. A release signing key (Android) and an App Store Connect account (iOS).
 
 ## Google Play: Data safety form
@@ -19,7 +21,10 @@
 | Is the data processed ephemerally? | No | Kept until the user deletes their account. |
 | Is collection required? | **No, optional** | The app works fully without an account. |
 | Is all user data encrypted in transit? | Yes | TLS only (cleartext is blocked by a CI check). Records are also end-to-end encrypted. |
-| Do you provide a way for users to request that their data be deleted? | Yes | Settings → Account & sync → Delete account removes the login and every server record at once. |
+| Do you provide a way for users to request that their data be deleted? | Yes | Settings → Account & sync → Delete account removes the login and every server record at once. Or email hishampp198@gmail.com. |
+| Delete-account URL (Play asks for one) | https://ample-money.vercel.app/privacy#delete-account | Explains in-app deletion and the email route. |
+
+Linking a computer to the website hands that browser tab a sealed pass (key and one-time sign-in) through the server for at most two minutes; it is end-to-end encrypted and deleted when collected, so it adds no new data type.
 
 The user can export a backup or CSV file and share it through the system share sheet. Play treats that as user-initiated sharing, not collection. Mention it in the listing.
 
@@ -35,7 +40,7 @@ The user can export a backup or CSV file and share it through the system share s
 - **`RECEIVE_BOOT_COMPLETED`:** keeps capture and the Sunday review scheduled after a restart.
 
 ### Prominent disclosure (shown before notification access)
-> To record payments for you, Expenses reads notifications from the apps you choose, like your SMS app and UPI apps. It only keeps the amount, payee and account of payments; other notifications are ignored and personal chats are never saved. Everything stays on this phone.
+> To record payments for you, Ample reads notifications from the apps you choose, like your SMS app and UPI apps. It only keeps the amount, payee and account of payments; other notifications are ignored and personal chats are never saved. Everything stays on this phone.
 
 ## App Store: privacy label ("nutrition label")
 - **Data Linked to You** (only with the optional account): **Contact Info: Email Address** (App Functionality); **Financial Info: Other Financial Info** (App Functionality, end-to-end encrypted).

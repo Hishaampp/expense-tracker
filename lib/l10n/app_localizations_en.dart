@@ -2345,4 +2345,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get accountStartOverReason => 'Confirm it\'s you to start sync over';
+
+  @override
+  String get settingsSectionAbout => 'About';
+
+  @override
+  String get settingsPrivacyPolicy => 'Privacy policy';
+
+  @override
+  String get settingsTerms => 'Terms of use';
+
+  @override
+  String get settingsOpensInBrowser => 'Opens in your browser';
+
+  @override
+  String linkOpenFailed(String url) {
+    return 'Couldn\'t open your browser. Visit $url';
+  }
+
+  @override
+  String get accountAgree =>
+      'By signing in, you agree to the terms of use and privacy policy.';
 }

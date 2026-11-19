@@ -1814,5 +1814,25 @@
   "accountStartOverReason": "Confirm it's you to start sync over",
   "@accountStartOverReason": {
     "description": "Face ID / fingerprint prompt reason before starting sync over."
+  },
+  "settingsSectionAbout": "About",
+  "settingsPrivacyPolicy": "Privacy policy",
+  "settingsTerms": "Terms of use",
+  "settingsOpensInBrowser": "Opens in your browser",
+  "@settingsOpensInBrowser": {
+    "description": "Accessibility hint on links that open a web page."
+  },
+  "linkOpenFailed": "Couldn't open your browser. Visit {url}",
+  "@linkOpenFailed": {
+    "description": "Shown when no browser could open a web page.",
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    }
+  },
+  "accountAgree": "By signing in, you agree to the terms of use and privacy policy.",
+  "@accountAgree": {
+    "description": "Under the sign-in buttons; the two documents are linked below it."
   }
 }

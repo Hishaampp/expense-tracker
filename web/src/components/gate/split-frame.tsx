@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { LockKeyhole, MonitorSmartphone, ShieldCheck } from "lucide-react";
 import { AmpleLockup } from "@/components/brand/ample-mark";
 
@@ -35,7 +36,15 @@ export function SplitFrame({ art, children }: { art: React.ReactNode; children: 
         <div className="flex flex-1 items-center">
           <div className="w-full max-w-[27rem] py-12">{children}</div>
         </div>
-        <p className="text-[0.8125rem] text-ink-faint">Free for every Ample user.</p>
+        <p className="flex flex-wrap gap-x-4 gap-y-1 text-[0.8125rem] text-ink-faint">
+          <span>Free for every Ample user.</span>
+          <Link href="/privacy" className="hover:text-ink">
+            Privacy
+          </Link>
+          <Link href="/terms" className="hover:text-ink">
+            Terms
+          </Link>
+        </p>
       </main>
     </div>
   );

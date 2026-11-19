@@ -58,6 +58,25 @@ void main() {
     expect(find.text('Signed in as asha@example.com'), findsOneWidget);
   });
 
+  appTest('signing in links to the terms and the privacy policy', (
+    tester,
+  ) async {
+    final links = FakeWebLinks();
+    await pumpApp(tester, webLinks: links);
+    await _open(tester);
+    expect(
+      find.text(
+        'By signing in, you agree to the terms of use and privacy policy.',
+      ),
+      findsOneWidget,
+    );
+    await tester.ensureVisible(find.widgetWithText(TextButton, 'Terms of use'));
+    await tester.tap(find.widgetWithText(TextButton, 'Terms of use'));
+    await tester.tap(find.widgetWithText(TextButton, 'Privacy policy'));
+    await tester.pumpAndSettle();
+    expect(links.opened.map((u) => u.path), ['/terms', '/privacy']);
+  });
+
   appTest('a wrong email code says so', (tester) async {
     await pumpApp(tester);
     await _open(tester);
