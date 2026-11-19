@@ -6,7 +6,7 @@ The goal: an optional login, so your data follows you to a new phone and stays t
 
 | v1 rule (spec §2, §13) | Phase 9 |
 |---|---|
-| No backend server | One hosted backend, **Supabase**: Postgres + Auth, Mumbai region, free tier to start |
+| No backend server | One hosted backend, **Supabase**: Postgres + Auth, free tier to start. Planned for Mumbai; the project was created in **Sydney (ap-southeast-2)**, which the privacy policy states |
 | No accounts or login | **Optional** account. Skippable; the app works fully offline without one |
 | No `INTERNET` in release builds | `INTERNET` is allowed. CI then checks that the **only** host contacted is the Supabase project URL |
 | Nothing leaves the phone | Only **end-to-end encrypted** blobs leave the phone. The server holds ciphertext it cannot read |
