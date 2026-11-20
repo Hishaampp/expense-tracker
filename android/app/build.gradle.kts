@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
@@ -12,6 +14,12 @@ plugins {
 // ---------------------------------------------------------------------------
 val appApplicationId = "com.hishaam.ample"
 val appDisplayName = "Ample"
+
+// The owner's upload key, if this machine has one (android/key.properties).
+val uploadKey: Properties? =
+    rootProject.file("key.properties").takeIf { it.exists() }?.let { f ->
+        Properties().apply { f.inputStream().use { stream -> load(stream) } }
+    }
 
 android {
     // Kotlin source package. Independent of applicationId; does not need to
@@ -49,12 +57,40 @@ android {
         }
     }
 
+    // Release signing: the owner's upload key, described in
+    // android/key.properties (never committed; see docs/RELEASING.md).
+    // Without it, release builds fall back to the debug key so
+    // `flutter run --release` keeps working, but a store bundle refuses to
+    // build (below).
+    signingConfigs {
+        if (uploadKey != null) {
+            create("upload") {
+                storeFile = file(uploadKey.getProperty("storeFile"))
+                storePassword = uploadKey.getProperty("storePassword")
+                keyAlias = uploadKey.getProperty("keyAlias")
+                keyPassword = uploadKey.getProperty("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
         release {
-            // TODO(phase-8): real signing config. Debug keys keep
-            // `flutter run --release` working until then.
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig =
+                if (uploadKey != null) signingConfigs.getByName("upload")
+                else signingConfigs.getByName("debug")
         }
+    }
+}
+
+// A bundle for Google Play must be signed with the upload key: Play rejects
+// debug-signed bundles, and a bundle signed with the wrong key can never
+// update the app.
+gradle.taskGraph.whenReady {
+    val bundlingRelease = allTasks.any { it.name.startsWith("bundle") && it.name.endsWith("Release") }
+    if (bundlingRelease && uploadKey == null) {
+        throw GradleException(
+            "No upload key: create android/key.properties first (docs/RELEASING.md).",
+        )
     }
 }
 
