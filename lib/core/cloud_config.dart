@@ -4,7 +4,7 @@
 /// service-role key in the app.
 abstract final class CloudConfig {
   /// The project URL.
-  static const String url = 'https://rsfiiiyhajwgfnkxuwtr.supabase.co';
+  static const String url = 'https://sefgzcqghdlejfmruxdg.supabase.co';
 
   /// Where the sign-in link in the account email returns to: this app.
   /// Must be listed in Supabase → Authentication → URL Configuration.
@@ -12,5 +12,5 @@ abstract final class CloudConfig {
 
   /// The project's publishable key.
   static const String publishableKey =
-      'sb_publishable_XcpwLSWBcjVEOT6n56OXzw_cB8Lj0Sj';
+      'sb_publishable_tWDRIY7Q1m3pmBp1McBVvA_EpSaRGGd';
 }

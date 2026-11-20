@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:expense_tracker/data/data_providers.dart';
+import 'package:expense_tracker/data/sync/computer_link.dart';
+import 'package:expense_tracker/data/sync/computer_link_server.dart';
 import 'package:expense_tracker/data/sync/supabase_sync_server.dart';
 import 'package:expense_tracker/data/sync/sync_crypto.dart';
 import 'package:expense_tracker/data/sync/sync_engine.dart';
@@ -58,6 +60,18 @@ final class SyncOn extends SyncStatus {
 
   /// Whether the last try could not reach the server.
   final bool offline;
+}
+
+/// How linking a computer went.
+enum LinkOutcome {
+  /// The computer can now open the records.
+  linked,
+
+  /// Sync is off on this phone, so there is no key to give.
+  notSyncing,
+
+  /// The server could not be reached.
+  failed,
 }
 
 /// The account and sync's view model (Phase 9).
@@ -189,6 +203,49 @@ class SyncController extends AsyncNotifier<SyncStatus> {
     }
   }
 
+  /// Starts sync over without the lost recovery code: the cloud copy,
+  /// which nobody can open any more, is cleared; this phone's records go
+  /// up sealed with a new key, shown once as a new code to write down.
+  Future<CloudAuthProblem?> startOver() async {
+    final current = state.value;
+    if (current is! SyncNeedsCode) return null;
+    final fresh = SyncKey.generate();
+    try {
+      await _server.clear();
+    } on Exception catch (e, st) {
+      ref.read(appLoggerProvider).error('sync.start_over', e.runtimeType, st);
+      return CloudAuthProblem.offline;
+    }
+    await _keys.write(fresh);
+    await _start(current.email, fresh);
+    state = AsyncData(SyncNewKey(current.email, fresh.recoveryCode));
+    return null;
+  }
+
+  /// Signs in and unlocks the computer that showed [link]'s QR (Ample for
+  /// the web): a one-time sign-in for this account and the sync key,
+  /// sealed so only that browser tab can open them. Only a signed-in phone
+  /// can let a computer in.
+  Future<LinkOutcome> linkComputer(ComputerLink link) async {
+    if (state.value is! SyncOn) return LinkOutcome.notSyncing;
+    final key = await _keys.read();
+    if (key == null) return LinkOutcome.notSyncing;
+    try {
+      final server = ref.read(computerLinkServerProvider);
+      final signIn = await server.signIn();
+      final sealed = await sealForComputer((
+        key: key,
+        email: signIn.email,
+        tokenHash: signIn.tokenHash,
+      ), link);
+      await server.post(link.id, sealed);
+      return LinkOutcome.linked;
+    } on Exception catch (e, st) {
+      ref.read(appLoggerProvider).error('sync.link', e.runtimeType, st);
+      return LinkOutcome.failed;
+    }
+  }
+
   /// Signs out and stops sync on this phone. Its data stays.
   Future<void> signOut() async {
     if (await _keys.read() case final key?) await _engine(key).disable();
@@ -239,6 +296,11 @@ final cloudAuthProvider = Provider<CloudAuth>(
 /// Where the sync key is kept. Override with a fake in tests.
 final syncKeyStoreProvider = Provider<SyncKeyStore>(
   (ref) => const SecureSyncKeyStore(),
+);
+
+/// Where a sealed key waits for a computer. Override in tests.
+final computerLinkServerProvider = Provider<ComputerLinkServer>(
+  (ref) => SupabaseComputerLinkServer(Supabase.instance.client),
 );
 
 /// The sync server. Override with a [MemorySyncServer] in tests.

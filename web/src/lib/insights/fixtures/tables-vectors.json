@@ -1,0 +1,3986 @@
+{
+ "today": [
+  2026,
+  11,
+  19
+ ],
+ "categories": [
+  {
+   "id": "food",
+   "name": "Food & drinks"
+  },
+  {
+   "id": "fuel",
+   "name": "Fuel"
+  },
+  {
+   "id": "salary",
+   "name": "Salary"
+  }
+ ],
+ "accounts": [
+  {
+   "id": "hdfc",
+   "name": "HDFC Savings"
+  },
+  {
+   "id": "cash",
+   "name": "Cash"
+  }
+ ],
+ "transactions": [
+  {
+   "id": "r0",
+   "kind": "expense",
+   "paise": 165000,
+   "at": [
+    2026,
+    11,
+    12,
+    17,
+    14
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r1",
+   "kind": "expense",
+   "paise": 91133,
+   "at": [
+    2026,
+    9,
+    18,
+    7,
+    5
+   ],
+   "categoryId": "food",
+   "accountId": "hdfc",
+   "roomId": "wedding",
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r2",
+   "kind": "expense",
+   "paise": 217462,
+   "at": [
+    2026,
+    10,
+    25,
+    2,
+    12
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": "wedding",
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": "office lunch",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r3",
+   "kind": "expense",
+   "paise": 9319,
+   "at": [
+    2026,
+    10,
+    13,
+    12,
+    39
+   ],
+   "categoryId": "fuel",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": "Dinner with Asha",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r4",
+   "kind": "transfer",
+   "paise": 167600,
+   "at": [
+    2026,
+    9,
+    26,
+    23,
+    48
+   ],
+   "categoryId": "salary",
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": "Dinner with Asha",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r5",
+   "kind": "expense",
+   "paise": 260367,
+   "at": [
+    2026,
+    11,
+    27,
+    7,
+    16
+   ],
+   "categoryId": "salary",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": "Dinner with Asha",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r6",
+   "kind": "expense",
+   "paise": 221400,
+   "at": [
+    2026,
+    11,
+    11,
+    7,
+    14
+   ],
+   "categoryId": null,
+   "accountId": "hdfc",
+   "roomId": "wedding",
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": "office lunch",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r7",
+   "kind": "expense",
+   "paise": 179300,
+   "at": [
+    2026,
+    11,
+    2,
+    1,
+    38
+   ],
+   "categoryId": "salary",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "swiggy",
+   "payeeDisplay": "Swiggy",
+   "note": "office lunch",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r8",
+   "kind": "expense",
+   "paise": 12487,
+   "at": [
+    2026,
+    11,
+    3,
+    22,
+    1
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": null,
+   "origin": "auto",
+   "hidden": true
+  },
+  {
+   "id": "r9",
+   "kind": "expense",
+   "paise": 290401,
+   "at": [
+    2026,
+    9,
+    19,
+    7,
+    6
+   ],
+   "categoryId": "food",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": "office lunch",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r10",
+   "kind": "refund",
+   "paise": 168828,
+   "at": [
+    2026,
+    11,
+    21,
+    21,
+    0
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": "Dinner with Asha",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r11",
+   "kind": "expense",
+   "paise": 37154,
+   "at": [
+    2026,
+    9,
+    22,
+    2,
+    1
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": "office lunch",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r12",
+   "kind": "expense",
+   "paise": 91600,
+   "at": [
+    2026,
+    9,
+    24,
+    10,
+    53
+   ],
+   "categoryId": "salary",
+   "accountId": "cash",
+   "roomId": "goa",
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r13",
+   "kind": "refund",
+   "paise": 235800,
+   "at": [
+    2026,
+    10,
+    14,
+    16,
+    46
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r14",
+   "kind": "expense",
+   "paise": 57173,
+   "at": [
+    2026,
+    11,
+    20,
+    8,
+    18
+   ],
+   "categoryId": null,
+   "accountId": "cash",
+   "roomId": "wedding",
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": "Dinner with Asha",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r15",
+   "kind": "expense",
+   "paise": 18081,
+   "at": [
+    2026,
+    10,
+    25,
+    19,
+    38
+   ],
+   "categoryId": "fuel",
+   "accountId": "cash",
+   "roomId": "wedding",
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r16",
+   "kind": "refund",
+   "paise": 57153,
+   "at": [
+    2026,
+    10,
+    5,
+    8,
+    15
+   ],
+   "categoryId": "food",
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r17",
+   "kind": "expense",
+   "paise": 45905,
+   "at": [
+    2026,
+    10,
+    9,
+    4,
+    49
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r18",
+   "kind": "income",
+   "paise": 202655,
+   "at": [
+    2026,
+    10,
+    4,
+    22,
+    38
+   ],
+   "categoryId": "salary",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": "Dinner with Asha",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r19",
+   "kind": "expense",
+   "paise": 49467,
+   "at": [
+    2026,
+    9,
+    19,
+    17,
+    22
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": "Dinner with Asha",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r20",
+   "kind": "expense",
+   "paise": 38600,
+   "at": [
+    2026,
+    11,
+    14,
+    11,
+    27
+   ],
+   "categoryId": "salary",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r21",
+   "kind": "transfer",
+   "paise": 255300,
+   "at": [
+    2026,
+    10,
+    14,
+    13,
+    19
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r22",
+   "kind": "expense",
+   "paise": 67600,
+   "at": [
+    2026,
+    10,
+    24,
+    15,
+    14
+   ],
+   "categoryId": null,
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": "tank full",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r23",
+   "kind": "expense",
+   "paise": 73852,
+   "at": [
+    2026,
+    10,
+    10,
+    16,
+    11
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": "wedding",
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": "Dinner with Asha",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r24",
+   "kind": "expense",
+   "paise": 138200,
+   "at": [
+    2026,
+    11,
+    7,
+    7,
+    34
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": "office lunch",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r25",
+   "kind": "expense",
+   "paise": 225745,
+   "at": [
+    2026,
+    9,
+    21,
+    15,
+    28
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "swiggy",
+   "payeeDisplay": "Swiggy",
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r26",
+   "kind": "expense",
+   "paise": 182500,
+   "at": [
+    2026,
+    10,
+    9,
+    17,
+    53
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": "office lunch",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r27",
+   "kind": "expense",
+   "paise": 261436,
+   "at": [
+    2026,
+    9,
+    7,
+    2,
+    40
+   ],
+   "categoryId": null,
+   "accountId": "cash",
+   "roomId": "wedding",
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r28",
+   "kind": "expense",
+   "paise": 117620,
+   "at": [
+    2026,
+    11,
+    26,
+    6,
+    34
+   ],
+   "categoryId": null,
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r29",
+   "kind": "income",
+   "paise": 165596,
+   "at": [
+    2026,
+    10,
+    25,
+    21,
+    35
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": "Dinner with Asha",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r30",
+   "kind": "expense",
+   "paise": 188700,
+   "at": [
+    2026,
+    10,
+    26,
+    13,
+    37
+   ],
+   "categoryId": "salary",
+   "accountId": "cash",
+   "roomId": "goa",
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r31",
+   "kind": "expense",
+   "paise": 50000,
+   "at": [
+    2026,
+    11,
+    21,
+    0,
+    34
+   ],
+   "categoryId": null,
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": "Dinner with Asha",
+   "origin": "manual",
+   "hidden": true
+  },
+  {
+   "id": "r32",
+   "kind": "transfer",
+   "paise": 233500,
+   "at": [
+    2026,
+    9,
+    26,
+    6,
+    15
+   ],
+   "categoryId": "salary",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": "office lunch",
+   "origin": "manual",
+   "hidden": true
+  },
+  {
+   "id": "r33",
+   "kind": "expense",
+   "paise": 292500,
+   "at": [
+    2026,
+    9,
+    3,
+    23,
+    32
+   ],
+   "categoryId": "food",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": "office lunch",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r34",
+   "kind": "transfer",
+   "paise": 258307,
+   "at": [
+    2026,
+    11,
+    7,
+    7,
+    24
+   ],
+   "categoryId": "food",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r35",
+   "kind": "expense",
+   "paise": 234083,
+   "at": [
+    2026,
+    9,
+    15,
+    13,
+    46
+   ],
+   "categoryId": null,
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": null,
+   "origin": "manual",
+   "hidden": true
+  },
+  {
+   "id": "r36",
+   "kind": "income",
+   "paise": 277700,
+   "at": [
+    2026,
+    9,
+    24,
+    21,
+    30
+   ],
+   "categoryId": null,
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "swiggy",
+   "payeeDisplay": "Swiggy",
+   "note": "tank full",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r37",
+   "kind": "income",
+   "paise": 237400,
+   "at": [
+    2026,
+    10,
+    14,
+    20,
+    29
+   ],
+   "categoryId": "salary",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r38",
+   "kind": "expense",
+   "paise": 220100,
+   "at": [
+    2026,
+    10,
+    6,
+    19,
+    22
+   ],
+   "categoryId": "salary",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": "Dinner with Asha",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r39",
+   "kind": "expense",
+   "paise": 104200,
+   "at": [
+    2026,
+    11,
+    14,
+    17,
+    53
+   ],
+   "categoryId": null,
+   "accountId": "cash",
+   "roomId": "wedding",
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": "office lunch",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r40",
+   "kind": "transfer",
+   "paise": 8934,
+   "at": [
+    2026,
+    11,
+    15,
+    0,
+    6
+   ],
+   "categoryId": "fuel",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r41",
+   "kind": "expense",
+   "paise": 135815,
+   "at": [
+    2026,
+    10,
+    7,
+    18,
+    15
+   ],
+   "categoryId": "salary",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r42",
+   "kind": "expense",
+   "paise": 75211,
+   "at": [
+    2026,
+    10,
+    10,
+    5,
+    47
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": "Dinner with Asha",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r43",
+   "kind": "refund",
+   "paise": 381,
+   "at": [
+    2026,
+    11,
+    20,
+    6,
+    30
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": "goa",
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": "tank full",
+   "origin": "manual",
+   "hidden": true
+  },
+  {
+   "id": "r44",
+   "kind": "expense",
+   "paise": 160993,
+   "at": [
+    2026,
+    9,
+    12,
+    10,
+    47
+   ],
+   "categoryId": "food",
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": "Dinner with Asha",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r45",
+   "kind": "expense",
+   "paise": 112900,
+   "at": [
+    2026,
+    11,
+    1,
+    1,
+    36
+   ],
+   "categoryId": null,
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": "office lunch",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r46",
+   "kind": "transfer",
+   "paise": 147900,
+   "at": [
+    2026,
+    11,
+    18,
+    19,
+    29
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": "office lunch",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r47",
+   "kind": "expense",
+   "paise": 145200,
+   "at": [
+    2026,
+    9,
+    16,
+    18,
+    25
+   ],
+   "categoryId": "salary",
+   "accountId": "cash",
+   "roomId": "wedding",
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": "office lunch",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r48",
+   "kind": "income",
+   "paise": 174200,
+   "at": [
+    2026,
+    10,
+    22,
+    2,
+    2
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": "wedding",
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": "Dinner with Asha",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r49",
+   "kind": "expense",
+   "paise": 227341,
+   "at": [
+    2026,
+    10,
+    20,
+    5,
+    10
+   ],
+   "categoryId": "salary",
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": "office lunch",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r50",
+   "kind": "expense",
+   "paise": 91710,
+   "at": [
+    2026,
+    10,
+    28,
+    8,
+    12
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r51",
+   "kind": "transfer",
+   "paise": 204988,
+   "at": [
+    2026,
+    10,
+    26,
+    5,
+    12
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": "wedding",
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": "tank full",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r52",
+   "kind": "expense",
+   "paise": 83900,
+   "at": [
+    2026,
+    9,
+    12,
+    0,
+    26
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": "goa",
+   "payeeKey": "swiggy",
+   "payeeDisplay": "Swiggy",
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r53",
+   "kind": "income",
+   "paise": 184743,
+   "at": [
+    2026,
+    11,
+    18,
+    1,
+    11
+   ],
+   "categoryId": "salary",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": "office lunch",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r54",
+   "kind": "refund",
+   "paise": 50788,
+   "at": [
+    2026,
+    11,
+    26,
+    3,
+    5
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": "wedding",
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r55",
+   "kind": "income",
+   "paise": 258700,
+   "at": [
+    2026,
+    10,
+    9,
+    21,
+    25
+   ],
+   "categoryId": "food",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "swiggy",
+   "payeeDisplay": "Swiggy",
+   "note": "tank full",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r56",
+   "kind": "expense",
+   "paise": 150226,
+   "at": [
+    2026,
+    10,
+    19,
+    14,
+    28
+   ],
+   "categoryId": "salary",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": "tank full",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r57",
+   "kind": "expense",
+   "paise": 220939,
+   "at": [
+    2026,
+    9,
+    3,
+    12,
+    42
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": "goa",
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": "Dinner with Asha",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r58",
+   "kind": "transfer",
+   "paise": 34000,
+   "at": [
+    2026,
+    11,
+    21,
+    19,
+    39
+   ],
+   "categoryId": "fuel",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": "tank full",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r59",
+   "kind": "transfer",
+   "paise": 110800,
+   "at": [
+    2026,
+    10,
+    23,
+    13,
+    59
+   ],
+   "categoryId": null,
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": "Dinner with Asha",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r60",
+   "kind": "expense",
+   "paise": 81200,
+   "at": [
+    2026,
+    9,
+    22,
+    18,
+    4
+   ],
+   "categoryId": "fuel",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": "office lunch",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r61",
+   "kind": "transfer",
+   "paise": 147700,
+   "at": [
+    2026,
+    11,
+    25,
+    8,
+    8
+   ],
+   "categoryId": "salary",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": "office lunch",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r62",
+   "kind": "expense",
+   "paise": 97150,
+   "at": [
+    2026,
+    10,
+    24,
+    0,
+    16
+   ],
+   "categoryId": "fuel",
+   "accountId": "cash",
+   "roomId": "goa",
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": "office lunch",
+   "origin": "manual",
+   "hidden": true
+  },
+  {
+   "id": "r63",
+   "kind": "refund",
+   "paise": 77200,
+   "at": [
+    2026,
+    10,
+    1,
+    19,
+    43
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": "tank full",
+   "origin": "auto",
+   "hidden": true
+  },
+  {
+   "id": "r64",
+   "kind": "expense",
+   "paise": 16500,
+   "at": [
+    2026,
+    11,
+    15,
+    23,
+    52
+   ],
+   "categoryId": null,
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": "office lunch",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r65",
+   "kind": "expense",
+   "paise": 288000,
+   "at": [
+    2026,
+    9,
+    13,
+    5,
+    40
+   ],
+   "categoryId": "food",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r66",
+   "kind": "income",
+   "paise": 41600,
+   "at": [
+    2026,
+    10,
+    10,
+    21,
+    52
+   ],
+   "categoryId": "food",
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": "Dinner with Asha",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r67",
+   "kind": "transfer",
+   "paise": 90200,
+   "at": [
+    2026,
+    10,
+    20,
+    19,
+    0
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": "wedding",
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": "Dinner with Asha",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r68",
+   "kind": "transfer",
+   "paise": 194073,
+   "at": [
+    2026,
+    11,
+    25,
+    7,
+    21
+   ],
+   "categoryId": "salary",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": "Dinner with Asha",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r69",
+   "kind": "expense",
+   "paise": 200113,
+   "at": [
+    2026,
+    9,
+    20,
+    4,
+    45
+   ],
+   "categoryId": "food",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": "office lunch",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r70",
+   "kind": "expense",
+   "paise": 227600,
+   "at": [
+    2026,
+    9,
+    10,
+    21,
+    10
+   ],
+   "categoryId": "fuel",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": "tank full",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r71",
+   "kind": "transfer",
+   "paise": 125300,
+   "at": [
+    2026,
+    9,
+    28,
+    23,
+    20
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": "goa",
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r72",
+   "kind": "expense",
+   "paise": 111541,
+   "at": [
+    2026,
+    10,
+    14,
+    15,
+    32
+   ],
+   "categoryId": "salary",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": "Dinner with Asha",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r73",
+   "kind": "expense",
+   "paise": 257700,
+   "at": [
+    2026,
+    9,
+    11,
+    23,
+    24
+   ],
+   "categoryId": "fuel",
+   "accountId": "cash",
+   "roomId": "wedding",
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r74",
+   "kind": "expense",
+   "paise": 8900,
+   "at": [
+    2026,
+    10,
+    3,
+    19,
+    14
+   ],
+   "categoryId": "food",
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": "office lunch",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r75",
+   "kind": "expense",
+   "paise": 182630,
+   "at": [
+    2026,
+    11,
+    14,
+    23,
+    25
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r76",
+   "kind": "income",
+   "paise": 252884,
+   "at": [
+    2026,
+    11,
+    9,
+    20,
+    58
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": "goa",
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": "office lunch",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r77",
+   "kind": "refund",
+   "paise": 208200,
+   "at": [
+    2026,
+    9,
+    8,
+    2,
+    36
+   ],
+   "categoryId": null,
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r78",
+   "kind": "expense",
+   "paise": 122731,
+   "at": [
+    2026,
+    9,
+    10,
+    23,
+    8
+   ],
+   "categoryId": null,
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "swiggy",
+   "payeeDisplay": "Swiggy",
+   "note": "tank full",
+   "origin": "manual",
+   "hidden": true
+  },
+  {
+   "id": "r79",
+   "kind": "expense",
+   "paise": 210100,
+   "at": [
+    2026,
+    11,
+    11,
+    18,
+    43
+   ],
+   "categoryId": "food",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": "office lunch",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r80",
+   "kind": "expense",
+   "paise": 166200,
+   "at": [
+    2026,
+    11,
+    20,
+    0,
+    37
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payeeKey": "swiggy",
+   "payeeDisplay": "Swiggy",
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r81",
+   "kind": "refund",
+   "paise": 160700,
+   "at": [
+    2026,
+    11,
+    23,
+    23,
+    28
+   ],
+   "categoryId": "salary",
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": "office lunch",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r82",
+   "kind": "expense",
+   "paise": 103200,
+   "at": [
+    2026,
+    10,
+    25,
+    21,
+    57
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": "goa",
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r83",
+   "kind": "expense",
+   "paise": 150300,
+   "at": [
+    2026,
+    9,
+    19,
+    8,
+    13
+   ],
+   "categoryId": "food",
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": "office lunch",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r84",
+   "kind": "transfer",
+   "paise": 245631,
+   "at": [
+    2026,
+    11,
+    21,
+    17,
+    52
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": "wedding",
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r85",
+   "kind": "refund",
+   "paise": 69500,
+   "at": [
+    2026,
+    10,
+    16,
+    9,
+    59
+   ],
+   "categoryId": "salary",
+   "accountId": "cash",
+   "roomId": "goa",
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r86",
+   "kind": "expense",
+   "paise": 188500,
+   "at": [
+    2026,
+    11,
+    25,
+    8,
+    14
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payeeKey": "swiggy",
+   "payeeDisplay": "Swiggy",
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r87",
+   "kind": "refund",
+   "paise": 101652,
+   "at": [
+    2026,
+    11,
+    24,
+    0,
+    2
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": "Dinner with Asha",
+   "origin": "auto",
+   "hidden": true
+  },
+  {
+   "id": "r88",
+   "kind": "expense",
+   "paise": 30066,
+   "at": [
+    2026,
+    9,
+    24,
+    7,
+    34
+   ],
+   "categoryId": null,
+   "accountId": "hdfc",
+   "roomId": "wedding",
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": "office lunch",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r89",
+   "kind": "transfer",
+   "paise": 71611,
+   "at": [
+    2026,
+    9,
+    5,
+    16,
+    38
+   ],
+   "categoryId": "salary",
+   "accountId": "hdfc",
+   "roomId": "wedding",
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": "office lunch",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r90",
+   "kind": "expense",
+   "paise": 212500,
+   "at": [
+    2026,
+    9,
+    6,
+    20,
+    7
+   ],
+   "categoryId": "fuel",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "swiggy",
+   "payeeDisplay": "Swiggy",
+   "note": "tank full",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r91",
+   "kind": "refund",
+   "paise": 126152,
+   "at": [
+    2026,
+    9,
+    23,
+    23,
+    4
+   ],
+   "categoryId": "salary",
+   "accountId": "cash",
+   "roomId": "wedding",
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": "tank full",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r92",
+   "kind": "expense",
+   "paise": 23600,
+   "at": [
+    2026,
+    9,
+    17,
+    12,
+    47
+   ],
+   "categoryId": "fuel",
+   "accountId": "cash",
+   "roomId": "wedding",
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": null,
+   "origin": "auto",
+   "hidden": true
+  },
+  {
+   "id": "r93",
+   "kind": "expense",
+   "paise": 21800,
+   "at": [
+    2026,
+    9,
+    16,
+    16,
+    1
+   ],
+   "categoryId": "salary",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": "Dinner with Asha",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r94",
+   "kind": "expense",
+   "paise": 43600,
+   "at": [
+    2026,
+    10,
+    13,
+    0,
+    6
+   ],
+   "categoryId": "salary",
+   "accountId": "hdfc",
+   "roomId": "wedding",
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r95",
+   "kind": "income",
+   "paise": 188800,
+   "at": [
+    2026,
+    9,
+    25,
+    20,
+    19
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": "office lunch",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r96",
+   "kind": "expense",
+   "paise": 72200,
+   "at": [
+    2026,
+    10,
+    22,
+    5,
+    34
+   ],
+   "categoryId": null,
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": "office lunch",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r97",
+   "kind": "expense",
+   "paise": 68300,
+   "at": [
+    2026,
+    10,
+    2,
+    14,
+    28
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": "Dinner with Asha",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r98",
+   "kind": "transfer",
+   "paise": 26349,
+   "at": [
+    2026,
+    9,
+    9,
+    3,
+    46
+   ],
+   "categoryId": "food",
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": "tank full",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r99",
+   "kind": "expense",
+   "paise": 27300,
+   "at": [
+    2026,
+    10,
+    9,
+    18,
+    56
+   ],
+   "categoryId": "salary",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": "tank full",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r100",
+   "kind": "expense",
+   "paise": 71070,
+   "at": [
+    2026,
+    10,
+    5,
+    5,
+    26
+   ],
+   "categoryId": null,
+   "accountId": "cash",
+   "roomId": "wedding",
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": "tank full",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r101",
+   "kind": "expense",
+   "paise": 247433,
+   "at": [
+    2026,
+    11,
+    15,
+    8,
+    50
+   ],
+   "categoryId": null,
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": "Dinner with Asha",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r102",
+   "kind": "expense",
+   "paise": 13309,
+   "at": [
+    2026,
+    9,
+    3,
+    21,
+    54
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": "wedding",
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": "tank full",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r103",
+   "kind": "expense",
+   "paise": 213500,
+   "at": [
+    2026,
+    10,
+    23,
+    13,
+    13
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "swiggy",
+   "payeeDisplay": "Swiggy",
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r104",
+   "kind": "expense",
+   "paise": 180747,
+   "at": [
+    2026,
+    11,
+    24,
+    7,
+    31
+   ],
+   "categoryId": "salary",
+   "accountId": "hdfc",
+   "roomId": "wedding",
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r105",
+   "kind": "expense",
+   "paise": 240300,
+   "at": [
+    2026,
+    11,
+    18,
+    15,
+    18
+   ],
+   "categoryId": null,
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": "Dinner with Asha",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r106",
+   "kind": "income",
+   "paise": 117600,
+   "at": [
+    2026,
+    10,
+    28,
+    22,
+    49
+   ],
+   "categoryId": null,
+   "accountId": "hdfc",
+   "roomId": "wedding",
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r107",
+   "kind": "refund",
+   "paise": 185800,
+   "at": [
+    2026,
+    10,
+    20,
+    8,
+    50
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": null,
+   "origin": "auto",
+   "hidden": true
+  },
+  {
+   "id": "r108",
+   "kind": "expense",
+   "paise": 169662,
+   "at": [
+    2026,
+    11,
+    18,
+    0,
+    50
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payeeKey": "swiggy",
+   "payeeDisplay": "Swiggy",
+   "note": "Dinner with Asha",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r109",
+   "kind": "transfer",
+   "paise": 270053,
+   "at": [
+    2026,
+    9,
+    4,
+    13,
+    30
+   ],
+   "categoryId": "fuel",
+   "accountId": "cash",
+   "roomId": "goa",
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r110",
+   "kind": "income",
+   "paise": 99000,
+   "at": [
+    2026,
+    9,
+    11,
+    21,
+    39
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": "wedding",
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r111",
+   "kind": "expense",
+   "paise": 257892,
+   "at": [
+    2026,
+    10,
+    2,
+    4,
+    46
+   ],
+   "categoryId": "salary",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": "office lunch",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r112",
+   "kind": "expense",
+   "paise": 179000,
+   "at": [
+    2026,
+    10,
+    21,
+    2,
+    54
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": "Dinner with Asha",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r113",
+   "kind": "expense",
+   "paise": 9287,
+   "at": [
+    2026,
+    10,
+    25,
+    21,
+    33
+   ],
+   "categoryId": "fuel",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r114",
+   "kind": "expense",
+   "paise": 3100,
+   "at": [
+    2026,
+    10,
+    7,
+    19,
+    5
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": "wedding",
+   "payeeKey": "swiggy",
+   "payeeDisplay": "Swiggy",
+   "note": "tank full",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r115",
+   "kind": "expense",
+   "paise": 48951,
+   "at": [
+    2026,
+    11,
+    26,
+    6,
+    10
+   ],
+   "categoryId": null,
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payeeKey": "swiggy",
+   "payeeDisplay": "Swiggy",
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r116",
+   "kind": "transfer",
+   "paise": 262431,
+   "at": [
+    2026,
+    11,
+    10,
+    16,
+    9
+   ],
+   "categoryId": "salary",
+   "accountId": "cash",
+   "roomId": "wedding",
+   "payeeKey": "swiggy",
+   "payeeDisplay": "Swiggy",
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r117",
+   "kind": "expense",
+   "paise": 225667,
+   "at": [
+    2026,
+    9,
+    12,
+    5,
+    40
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r118",
+   "kind": "income",
+   "paise": 29700,
+   "at": [
+    2026,
+    11,
+    4,
+    11,
+    38
+   ],
+   "categoryId": "food",
+   "accountId": "hdfc",
+   "roomId": "wedding",
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r119",
+   "kind": "refund",
+   "paise": 112539,
+   "at": [
+    2026,
+    9,
+    9,
+    5,
+    44
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payeeKey": "swiggy",
+   "payeeDisplay": "Swiggy",
+   "note": "tank full",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r120",
+   "kind": "expense",
+   "paise": 133330,
+   "at": [
+    2026,
+    10,
+    6,
+    13,
+    46
+   ],
+   "categoryId": "salary",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "swiggy",
+   "payeeDisplay": "Swiggy",
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r121",
+   "kind": "expense",
+   "paise": 54885,
+   "at": [
+    2026,
+    10,
+    10,
+    16,
+    27
+   ],
+   "categoryId": null,
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "swiggy",
+   "payeeDisplay": "Swiggy",
+   "note": "Dinner with Asha",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r122",
+   "kind": "income",
+   "paise": 30600,
+   "at": [
+    2026,
+    11,
+    13,
+    19,
+    47
+   ],
+   "categoryId": "salary",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": "tank full",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r123",
+   "kind": "income",
+   "paise": 68500,
+   "at": [
+    2026,
+    10,
+    8,
+    20,
+    33
+   ],
+   "categoryId": null,
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": "Dinner with Asha",
+   "origin": "auto",
+   "hidden": true
+  },
+  {
+   "id": "r124",
+   "kind": "transfer",
+   "paise": 291200,
+   "at": [
+    2026,
+    11,
+    10,
+    14,
+    47
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": "goa",
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r125",
+   "kind": "expense",
+   "paise": 150315,
+   "at": [
+    2026,
+    9,
+    19,
+    20,
+    16
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "swiggy",
+   "payeeDisplay": "Swiggy",
+   "note": "office lunch",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r126",
+   "kind": "transfer",
+   "paise": 82500,
+   "at": [
+    2026,
+    10,
+    25,
+    1,
+    41
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r127",
+   "kind": "expense",
+   "paise": 271600,
+   "at": [
+    2026,
+    10,
+    27,
+    9,
+    36
+   ],
+   "categoryId": "salary",
+   "accountId": "cash",
+   "roomId": "goa",
+   "payeeKey": "swiggy",
+   "payeeDisplay": "Swiggy",
+   "note": "tank full",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r128",
+   "kind": "expense",
+   "paise": 100413,
+   "at": [
+    2026,
+    11,
+    12,
+    17,
+    35
+   ],
+   "categoryId": "food",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r129",
+   "kind": "refund",
+   "paise": 166200,
+   "at": [
+    2026,
+    11,
+    18,
+    22,
+    20
+   ],
+   "categoryId": "salary",
+   "accountId": "cash",
+   "roomId": "goa",
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r130",
+   "kind": "expense",
+   "paise": 163900,
+   "at": [
+    2026,
+    10,
+    8,
+    17,
+    30
+   ],
+   "categoryId": "salary",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": "tank full",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r131",
+   "kind": "expense",
+   "paise": 62066,
+   "at": [
+    2026,
+    9,
+    23,
+    2,
+    32
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": "wedding",
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": null,
+   "origin": "manual",
+   "hidden": true
+  },
+  {
+   "id": "r132",
+   "kind": "expense",
+   "paise": 35653,
+   "at": [
+    2026,
+    11,
+    1,
+    10,
+    31
+   ],
+   "categoryId": "salary",
+   "accountId": "cash",
+   "roomId": "goa",
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": "tank full",
+   "origin": "manual",
+   "hidden": true
+  },
+  {
+   "id": "r133",
+   "kind": "expense",
+   "paise": 61604,
+   "at": [
+    2026,
+    10,
+    28,
+    14,
+    7
+   ],
+   "categoryId": null,
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r134",
+   "kind": "expense",
+   "paise": 218600,
+   "at": [
+    2026,
+    11,
+    28,
+    17,
+    26
+   ],
+   "categoryId": null,
+   "accountId": "hdfc",
+   "roomId": "wedding",
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": "tank full",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r135",
+   "kind": "expense",
+   "paise": 196615,
+   "at": [
+    2026,
+    11,
+    24,
+    7,
+    20
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": null,
+   "origin": "manual",
+   "hidden": true
+  },
+  {
+   "id": "r136",
+   "kind": "expense",
+   "paise": 264253,
+   "at": [
+    2026,
+    9,
+    11,
+    3,
+    13
+   ],
+   "categoryId": "fuel",
+   "accountId": "cash",
+   "roomId": "goa",
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r137",
+   "kind": "refund",
+   "paise": 15900,
+   "at": [
+    2026,
+    11,
+    24,
+    11,
+    56
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": "office lunch",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r138",
+   "kind": "income",
+   "paise": 25071,
+   "at": [
+    2026,
+    10,
+    26,
+    12,
+    16
+   ],
+   "categoryId": "salary",
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": "office lunch",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r139",
+   "kind": "expense",
+   "paise": 33138,
+   "at": [
+    2026,
+    10,
+    21,
+    5,
+    58
+   ],
+   "categoryId": null,
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "swiggy",
+   "payeeDisplay": "Swiggy",
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r140",
+   "kind": "expense",
+   "paise": 93666,
+   "at": [
+    2026,
+    9,
+    26,
+    9,
+    37
+   ],
+   "categoryId": "fuel",
+   "accountId": "cash",
+   "roomId": "wedding",
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": "office lunch",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r141",
+   "kind": "refund",
+   "paise": 297217,
+   "at": [
+    2026,
+    11,
+    21,
+    17,
+    48
+   ],
+   "categoryId": "salary",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": null,
+   "origin": "manual",
+   "hidden": true
+  },
+  {
+   "id": "r142",
+   "kind": "expense",
+   "paise": 222141,
+   "at": [
+    2026,
+    10,
+    19,
+    12,
+    59
+   ],
+   "categoryId": null,
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r143",
+   "kind": "expense",
+   "paise": 71400,
+   "at": [
+    2026,
+    9,
+    23,
+    23,
+    51
+   ],
+   "categoryId": null,
+   "accountId": "cash",
+   "roomId": "wedding",
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": "office lunch",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r144",
+   "kind": "income",
+   "paise": 152900,
+   "at": [
+    2026,
+    11,
+    20,
+    20,
+    8
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "swiggy",
+   "payeeDisplay": "Swiggy",
+   "note": "tank full",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r145",
+   "kind": "refund",
+   "paise": 235200,
+   "at": [
+    2026,
+    9,
+    11,
+    20,
+    56
+   ],
+   "categoryId": null,
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": "Dinner with Asha",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r146",
+   "kind": "expense",
+   "paise": 275919,
+   "at": [
+    2026,
+    10,
+    25,
+    21,
+    5
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r147",
+   "kind": "income",
+   "paise": 271437,
+   "at": [
+    2026,
+    9,
+    9,
+    0,
+    35
+   ],
+   "categoryId": null,
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": "office lunch",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r148",
+   "kind": "expense",
+   "paise": 106400,
+   "at": [
+    2026,
+    11,
+    17,
+    8,
+    6
+   ],
+   "categoryId": "fuel",
+   "accountId": "cash",
+   "roomId": "wedding",
+   "payeeKey": "rahul@okhdfc",
+   "payeeDisplay": null,
+   "note": "tank full",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r149",
+   "kind": "refund",
+   "paise": 195262,
+   "at": [
+    2026,
+    9,
+    6,
+    15,
+    22
+   ],
+   "categoryId": "fuel",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "hp-petrol",
+   "payeeDisplay": "HP Petrol Pump",
+   "note": "office lunch",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r150",
+   "kind": "expense",
+   "paise": 297710,
+   "at": [
+    2026,
+    10,
+    11,
+    9,
+    12
+   ],
+   "categoryId": "salary",
+   "accountId": "hdfc",
+   "roomId": "wedding",
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r151",
+   "kind": "expense",
+   "paise": 14900,
+   "at": [
+    2026,
+    10,
+    16,
+    14,
+    35
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": "goa",
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": null,
+   "origin": "manual",
+   "hidden": true
+  },
+  {
+   "id": "r152",
+   "kind": "expense",
+   "paise": 225900,
+   "at": [
+    2026,
+    11,
+    16,
+    2,
+    3
+   ],
+   "categoryId": "salary",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "swiggy",
+   "payeeDisplay": "Swiggy",
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r153",
+   "kind": "transfer",
+   "paise": 51200,
+   "at": [
+    2026,
+    9,
+    1,
+    13,
+    21
+   ],
+   "categoryId": "fuel",
+   "accountId": "hdfc",
+   "roomId": "goa",
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": "Dinner with Asha",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r154",
+   "kind": "expense",
+   "paise": 91700,
+   "at": [
+    2026,
+    10,
+    19,
+    15,
+    41
+   ],
+   "categoryId": "food",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": null,
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r155",
+   "kind": "refund",
+   "paise": 153600,
+   "at": [
+    2026,
+    10,
+    14,
+    0,
+    47
+   ],
+   "categoryId": "salary",
+   "accountId": "hdfc",
+   "roomId": "wedding",
+   "payeeKey": "zomato",
+   "payeeDisplay": "Zomato Ltd",
+   "note": null,
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r156",
+   "kind": "expense",
+   "paise": 197647,
+   "at": [
+    2026,
+    9,
+    27,
+    1,
+    38
+   ],
+   "categoryId": "fuel",
+   "accountId": "cash",
+   "roomId": null,
+   "payeeKey": "swiggy",
+   "payeeDisplay": "Swiggy",
+   "note": null,
+   "origin": "auto",
+   "hidden": true
+  },
+  {
+   "id": "r157",
+   "kind": "refund",
+   "paise": 36500,
+   "at": [
+    2026,
+    10,
+    11,
+    13,
+    13
+   ],
+   "categoryId": "salary",
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": "tank full",
+   "origin": "manual",
+   "hidden": false
+  },
+  {
+   "id": "r158",
+   "kind": "refund",
+   "paise": 205600,
+   "at": [
+    2026,
+    9,
+    27,
+    17,
+    28
+   ],
+   "categoryId": "salary",
+   "accountId": "cash",
+   "roomId": "wedding",
+   "payeeKey": null,
+   "payeeDisplay": null,
+   "note": "office lunch",
+   "origin": "auto",
+   "hidden": false
+  },
+  {
+   "id": "r159",
+   "kind": "transfer",
+   "paise": 132800,
+   "at": [
+    2026,
+    9,
+    9,
+    5,
+    50
+   ],
+   "categoryId": null,
+   "accountId": "hdfc",
+   "roomId": null,
+   "payeeKey": "swiggy",
+   "payeeDisplay": "Swiggy",
+   "note": "Dinner with Asha",
+   "origin": "manual",
+   "hidden": false
+  }
+ ],
+ "filters": [
+  {
+   "name": "everything",
+   "query": "",
+   "categoryId": null,
+   "roomId": null,
+   "accountId": null,
+   "kind": null,
+   "origin": null,
+   "ids": [
+    "r0",
+    "r1",
+    "r2",
+    "r3",
+    "r4",
+    "r5",
+    "r6",
+    "r7",
+    "r9",
+    "r10",
+    "r11",
+    "r12",
+    "r13",
+    "r14",
+    "r15",
+    "r16",
+    "r17",
+    "r18",
+    "r19",
+    "r20",
+    "r21",
+    "r22",
+    "r23",
+    "r24",
+    "r25",
+    "r26",
+    "r27",
+    "r28",
+    "r29",
+    "r30",
+    "r33",
+    "r34",
+    "r36",
+    "r37",
+    "r38",
+    "r39",
+    "r40",
+    "r41",
+    "r42",
+    "r44",
+    "r45",
+    "r46",
+    "r47",
+    "r48",
+    "r49",
+    "r50",
+    "r51",
+    "r52",
+    "r53",
+    "r54",
+    "r55",
+    "r56",
+    "r57",
+    "r58",
+    "r59",
+    "r60",
+    "r61",
+    "r64",
+    "r65",
+    "r66",
+    "r67",
+    "r68",
+    "r69",
+    "r70",
+    "r71",
+    "r72",
+    "r73",
+    "r74",
+    "r75",
+    "r76",
+    "r77",
+    "r79",
+    "r80",
+    "r81",
+    "r82",
+    "r83",
+    "r84",
+    "r85",
+    "r86",
+    "r88",
+    "r89",
+    "r90",
+    "r91",
+    "r93",
+    "r94",
+    "r95",
+    "r96",
+    "r97",
+    "r98",
+    "r99",
+    "r100",
+    "r101",
+    "r102",
+    "r103",
+    "r104",
+    "r105",
+    "r106",
+    "r108",
+    "r109",
+    "r110",
+    "r111",
+    "r112",
+    "r113",
+    "r114",
+    "r115",
+    "r116",
+    "r117",
+    "r118",
+    "r119",
+    "r120",
+    "r121",
+    "r122",
+    "r124",
+    "r125",
+    "r126",
+    "r127",
+    "r128",
+    "r129",
+    "r130",
+    "r133",
+    "r134",
+    "r136",
+    "r137",
+    "r138",
+    "r139",
+    "r140",
+    "r142",
+    "r143",
+    "r144",
+    "r145",
+    "r146",
+    "r147",
+    "r148",
+    "r149",
+    "r150",
+    "r152",
+    "r153",
+    "r154",
+    "r155",
+    "r157",
+    "r158",
+    "r159"
+   ]
+  },
+  {
+   "name": "swig",
+   "query": "swig",
+   "categoryId": null,
+   "roomId": null,
+   "accountId": null,
+   "kind": null,
+   "origin": null,
+   "ids": [
+    "r7",
+    "r25",
+    "r36",
+    "r52",
+    "r55",
+    "r80",
+    "r86",
+    "r90",
+    "r103",
+    "r108",
+    "r114",
+    "r115",
+    "r116",
+    "r119",
+    "r120",
+    "r121",
+    "r125",
+    "r127",
+    "r139",
+    "r144",
+    "r152",
+    "r159"
+   ]
+  },
+  {
+   "name": "two words",
+   "query": "  Dinner   ASHA ",
+   "categoryId": null,
+   "roomId": null,
+   "accountId": null,
+   "kind": null,
+   "origin": null,
+   "ids": [
+    "r3",
+    "r4",
+    "r5",
+    "r10",
+    "r14",
+    "r18",
+    "r19",
+    "r23",
+    "r29",
+    "r38",
+    "r42",
+    "r44",
+    "r48",
+    "r57",
+    "r59",
+    "r66",
+    "r67",
+    "r68",
+    "r72",
+    "r93",
+    "r97",
+    "r101",
+    "r105",
+    "r108",
+    "r112",
+    "r121",
+    "r145",
+    "r153",
+    "r159"
+   ]
+  },
+  {
+   "name": "category name",
+   "query": "drinks",
+   "categoryId": null,
+   "roomId": null,
+   "accountId": null,
+   "kind": null,
+   "origin": null,
+   "ids": [
+    "r1",
+    "r9",
+    "r13",
+    "r16",
+    "r17",
+    "r23",
+    "r24",
+    "r25",
+    "r26",
+    "r29",
+    "r33",
+    "r34",
+    "r44",
+    "r46",
+    "r51",
+    "r52",
+    "r54",
+    "r55",
+    "r57",
+    "r65",
+    "r66",
+    "r69",
+    "r71",
+    "r74",
+    "r76",
+    "r79",
+    "r82",
+    "r83",
+    "r84",
+    "r97",
+    "r98",
+    "r117",
+    "r118",
+    "r124",
+    "r128",
+    "r144",
+    "r154"
+   ]
+  },
+  {
+   "name": "account name",
+   "query": "savings",
+   "categoryId": null,
+   "roomId": null,
+   "accountId": null,
+   "kind": null,
+   "origin": null,
+   "ids": [
+    "r0",
+    "r1",
+    "r2",
+    "r4",
+    "r5",
+    "r6",
+    "r7",
+    "r9",
+    "r10",
+    "r11",
+    "r16",
+    "r18",
+    "r19",
+    "r21",
+    "r22",
+    "r28",
+    "r33",
+    "r34",
+    "r37",
+    "r41",
+    "r42",
+    "r44",
+    "r48",
+    "r49",
+    "r50",
+    "r55",
+    "r59",
+    "r65",
+    "r66",
+    "r67",
+    "r69",
+    "r72",
+    "r74",
+    "r75",
+    "r79",
+    "r80",
+    "r81",
+    "r83",
+    "r86",
+    "r88",
+    "r89",
+    "r93",
+    "r94",
+    "r95",
+    "r96",
+    "r98",
+    "r99",
+    "r101",
+    "r102",
+    "r103",
+    "r104",
+    "r105",
+    "r106",
+    "r108",
+    "r110",
+    "r111",
+    "r112",
+    "r114",
+    "r115",
+    "r118",
+    "r119",
+    "r120",
+    "r121",
+    "r125",
+    "r126",
+    "r128",
+    "r133",
+    "r134",
+    "r137",
+    "r138",
+    "r139",
+    "r142",
+    "r146",
+    "r150",
+    "r153",
+    "r155",
+    "r157",
+    "r159"
+   ]
+  },
+  {
+   "name": "upi id",
+   "query": "okhdfc",
+   "categoryId": null,
+   "roomId": null,
+   "accountId": null,
+   "kind": null,
+   "origin": null,
+   "ids": [
+    "r0",
+    "r1",
+    "r3",
+    "r12",
+    "r18",
+    "r21",
+    "r22",
+    "r23",
+    "r30",
+    "r47",
+    "r48",
+    "r54",
+    "r60",
+    "r61",
+    "r69",
+    "r70",
+    "r77",
+    "r82",
+    "r85",
+    "r88",
+    "r94",
+    "r96",
+    "r100",
+    "r104",
+    "r111",
+    "r112",
+    "r113",
+    "r124",
+    "r147",
+    "r148"
+   ]
+  },
+  {
+   "name": "amount 24",
+   "query": "24",
+   "categoryId": null,
+   "roomId": null,
+   "accountId": null,
+   "kind": null,
+   "origin": null,
+   "ids": [
+    "r84",
+    "r101",
+    "r105"
+   ]
+  },
+  {
+   "name": "amount with rupee and comma",
+   "query": "₹1,2",
+   "categoryId": null,
+   "roomId": null,
+   "accountId": null,
+   "kind": null,
+   "origin": null,
+   "ids": [
+    "r71",
+    "r91"
+   ]
+  },
+  {
+   "name": "amount with paise",
+   "query": "12.5",
+   "categoryId": null,
+   "roomId": null,
+   "accountId": null,
+   "kind": null,
+   "origin": null,
+   "ids": []
+  },
+  {
+   "name": "amount with paise found",
+   "query": "911.3",
+   "categoryId": null,
+   "roomId": null,
+   "accountId": null,
+   "kind": null,
+   "origin": null,
+   "ids": [
+    "r1"
+   ]
+  },
+  {
+   "name": "no match",
+   "query": "nothing here",
+   "categoryId": null,
+   "roomId": null,
+   "accountId": null,
+   "kind": null,
+   "origin": null,
+   "ids": []
+  },
+  {
+   "name": "food in goa",
+   "query": "",
+   "categoryId": "food",
+   "roomId": "goa",
+   "accountId": null,
+   "kind": null,
+   "origin": null,
+   "ids": [
+    "r16",
+    "r44",
+    "r52",
+    "r57",
+    "r66",
+    "r71",
+    "r74",
+    "r76",
+    "r82",
+    "r83",
+    "r98",
+    "r124"
+   ]
+  },
+  {
+   "name": "hdfc refunds",
+   "query": "",
+   "categoryId": null,
+   "roomId": null,
+   "accountId": "hdfc",
+   "kind": "refund",
+   "origin": null,
+   "ids": [
+    "r10",
+    "r16",
+    "r81",
+    "r119",
+    "r137",
+    "r155",
+    "r157"
+   ]
+  },
+  {
+   "name": "captured petrol",
+   "query": "petrol",
+   "categoryId": null,
+   "roomId": null,
+   "accountId": null,
+   "kind": null,
+   "origin": "auto",
+   "ids": [
+    "r4",
+    "r20",
+    "r28",
+    "r46",
+    "r59",
+    "r91",
+    "r93",
+    "r98",
+    "r109",
+    "r118",
+    "r129",
+    "r137",
+    "r142",
+    "r149"
+   ]
+  }
+ ],
+ "rooms": [
+  {
+   "id": "goa",
+   "startDay": 20699,
+   "endDay": 20746,
+   "budget": 15000000,
+   "spent": 2429757,
+   "byCategory": [
+    [
+     "fuel",
+     946786
+    ],
+    [
+     "food",
+     671079
+    ],
+    [
+     null,
+     429051
+    ],
+    [
+     "salary",
+     382841
+    ]
+   ],
+   "byDay": [
+    [
+     "2026-11-26",
+     48951
+    ],
+    [
+     "2026-11-25",
+     188500
+    ],
+    [
+     "2026-11-20",
+     166200
+    ],
+    [
+     "2026-11-18",
+     243762
+    ],
+    [
+     "2026-10-28",
+     91710
+    ],
+    [
+     "2026-10-27",
+     271600
+    ],
+    [
+     "2026-10-26",
+     188700
+    ],
+    [
+     "2026-10-25",
+     103200
+    ],
+    [
+     "2026-10-24",
+     67600
+    ],
+    [
+     "2026-10-22",
+     72200
+    ],
+    [
+     "2026-10-21",
+     179000
+    ],
+    [
+     "2026-10-20",
+     227341
+    ],
+    [
+     "2026-10-03",
+     8900
+    ],
+    [
+     "2026-09-24",
+     91600
+    ],
+    [
+     "2026-09-19",
+     150300
+    ],
+    [
+     "2026-09-12",
+     244893
+    ],
+    [
+     "2026-09-11",
+     264253
+    ],
+    [
+     "2026-09-03",
+     220939
+    ]
+   ],
+   "days": 48,
+   "perDay": 50619,
+   "remaining": 12570243
+  },
+  {
+   "id": "wedding",
+   "startDay": 20728,
+   "endDay": null,
+   "budget": null,
+   "spent": 2041165,
+   "byCategory": [
+    [
+     null,
+     1035345
+    ],
+    [
+     "fuel",
+     709718
+    ],
+    [
+     "salary",
+     181905
+    ],
+    [
+     "food",
+     114197
+    ]
+   ],
+   "byDay": [
+    [
+     "2026-11-28",
+     218600
+    ],
+    [
+     "2026-11-24",
+     180747
+    ],
+    [
+     "2026-11-20",
+     57173
+    ],
+    [
+     "2026-11-17",
+     106400
+    ],
+    [
+     "2026-11-14",
+     104200
+    ],
+    [
+     "2026-11-11",
+     221400
+    ],
+    [
+     "2026-10-25",
+     235543
+    ],
+    [
+     "2026-10-13",
+     43600
+    ],
+    [
+     "2026-10-11",
+     297710
+    ],
+    [
+     "2026-10-10",
+     73852
+    ],
+    [
+     "2026-10-07",
+     3100
+    ],
+    [
+     "2026-10-05",
+     71070
+    ],
+    [
+     "2026-09-26",
+     93666
+    ],
+    [
+     "2026-09-24",
+     30066
+    ],
+    [
+     "2026-09-18",
+     91133
+    ],
+    [
+     "2026-09-16",
+     145200
+    ],
+    [
+     "2026-09-11",
+     257700
+    ],
+    [
+     "2026-09-07",
+     261436
+    ],
+    [
+     "2026-09-03",
+     13309
+    ]
+   ],
+   "days": 49,
+   "perDay": 41656,
+   "remaining": null
+  },
+  {
+   "id": "later",
+   "startDay": 20789,
+   "endDay": null,
+   "budget": 0,
+   "spent": 0,
+   "byCategory": [],
+   "byDay": [],
+   "days": null,
+   "perDay": null,
+   "remaining": 0
+  }
+ ]
+}

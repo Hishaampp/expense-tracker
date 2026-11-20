@@ -2290,4 +2290,80 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get scanPayTypeThere =>
       'Next, your UPI app opens. Scan this QR there to pay. The amount here is what gets recorded.';
+
+  @override
+  String get accountLinkComputer => 'Link a computer';
+
+  @override
+  String get linkTitle => 'Link a computer';
+
+  @override
+  String get linkHint =>
+      'On your computer, open ample-money.vercel.app and point the camera at the code';
+
+  @override
+  String get linkNotAmple =>
+      'That isn\'t an Ample code. Scan the code on the Ample website, and update Ample if the website is newer.';
+
+  @override
+  String get linkConfirmTitle => 'Sign in on this computer?';
+
+  @override
+  String get linkConfirmBody =>
+      'The computer showing this code will be signed in to your account and can read your Ample records. Only link a computer you\'re using right now.';
+
+  @override
+  String get linkConfirm => 'Sign in computer';
+
+  @override
+  String get linkReason => 'Confirm it\'s you to sign in a computer';
+
+  @override
+  String get linkDone =>
+      'Computer signed in. Your records are opening there now.';
+
+  @override
+  String get linkFailed =>
+      'Couldn\'t reach the server. Check your connection and scan again.';
+
+  @override
+  String get linkNotSyncing =>
+      'Turn on Account & sync first, then link a computer.';
+
+  @override
+  String get accountLostCode => 'Lost your code? Start over';
+
+  @override
+  String get accountStartOverTitle => 'Start over without the code?';
+
+  @override
+  String get accountStartOverBody =>
+      'Your cloud copy is sealed with the code you lost, so no one can open it, not even us. Starting over clears it and uploads the records on this phone with a new recovery code. Records that are only in the cloud are lost. If another phone still uses the old code, sign it out first.';
+
+  @override
+  String get accountStartOver => 'Start over';
+
+  @override
+  String get accountStartOverReason => 'Confirm it\'s you to start sync over';
+
+  @override
+  String get settingsSectionAbout => 'About';
+
+  @override
+  String get settingsPrivacyPolicy => 'Privacy policy';
+
+  @override
+  String get settingsTerms => 'Terms of use';
+
+  @override
+  String get settingsOpensInBrowser => 'Opens in your browser';
+
+  @override
+  String linkOpenFailed(String url) {
+    return 'Couldn\'t open your browser. Visit $url';
+  }
+
+  @override
+  String get accountAgree =>
+      'By signing in, you agree to the terms of use and privacy policy.';
 }

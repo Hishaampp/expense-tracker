@@ -1,0 +1,249 @@
+@import "tailwindcss";
+
+/*
+ * Ample brand tokens for the web, from lib/theme/primitives.dart and
+ * docs/DESIGN.md. Dark is the default; light follows data-theme="light".
+ */
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ground: #0d0d0d;
+  --rail: #050505;
+  --raised: #181818;
+  --raised-2: #1e1e1e;
+  --sunken: #050505;
+  --ink: #f4f1ea;
+  --ink-muted: #ababab;
+  --ink-faint: #8a8a8a;
+  --line: #2a2a2a;
+  --line-strong: #6e6e6e;
+  --honey: #f2b33d;
+  --honey-text: #f5c25e;
+  --honey-soft: #3a2f17;
+  --on-honey: #121212;
+  --income: #55c68f;
+  --danger: #ff8a78;
+  --fill: #f2b33d;
+  --on-fill: #121212;
+  --hero: #1e1e1e;
+  --on-hero: #f4f1ea;
+  --on-hero-muted: #bdbdbd;
+  --shadow-near: 0 1px 2px rgb(0 0 0 / 0.5);
+  --shadow-far: 0 18px 48px -18px rgb(0 0 0 / 0.7);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --ground: #ffffff;
+  --rail: #f4efe5;
+  --raised: #ffffff;
+  --raised-2: #faf7f1;
+  --sunken: #f4efe5;
+  --ink: #121212;
+  --ink-muted: #616161;
+  --ink-faint: #6f6a60;
+  --line: #eae3d6;
+  --line-strong: #8a8270;
+  --honey: #f2b33d;
+  --honey-text: #7a5200;
+  --honey-soft: #fcebc4;
+  --on-honey: #121212;
+  --income: #1b7346;
+  --danger: #b3261e;
+  --fill: #121212;
+  --on-fill: #ffffff;
+  --hero: #121212;
+  --on-hero: #ffffff;
+  --on-hero-muted: #bdbdbd;
+  --shadow-near: 0 1px 2px rgb(18 18 18 / 0.06);
+  --shadow-far: 0 18px 44px -20px rgb(80 60 20 / 0.22);
+}
+
+/* Category tiles: the app's lib/theme/primitives.dart, the same in both themes. */
+:root {
+  --cat-orange: #e2600f;
+  --cat-green: #1e9550;
+  --cat-blue: #3b5bdb;
+  --cat-red: #d9383e;
+  --cat-purple: #a63bbf;
+  --cat-amber: #b87300;
+  --cat-violet: #6a4fe0;
+  --cat-teal: #0f8a80;
+  --cat-pink: #c2347a;
+  --cat-grey: #7a746e;
+  --cat-on-tile: #ffffff;
+  /* The hero card is dark in both themes, so its good/bad colours stay light. */
+  --hero-good: #55c68f;
+  --hero-danger: #ff8a78;
+}
+
+@theme inline {
+  --color-ground: var(--ground);
+  --color-rail: var(--rail);
+  --color-raised: var(--raised);
+  --color-raised-2: var(--raised-2);
+  --color-sunken: var(--sunken);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-honey: var(--honey);
+  --color-honey-text: var(--honey-text);
+  --color-honey-soft: var(--honey-soft);
+  --color-on-honey: var(--on-honey);
+  --color-income: var(--income);
+  --color-danger: var(--danger);
+  --color-fill: var(--fill);
+  --color-on-fill: var(--on-fill);
+  --color-hero: var(--hero);
+  --color-on-hero: var(--on-hero);
+  --color-on-hero-muted: var(--on-hero-muted);
+  --color-on-tile: var(--cat-on-tile);
+  --color-hero-good: var(--hero-good);
+  --color-hero-danger: var(--hero-danger);
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-honey: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+html {
+  background: var(--ground);
+}
+
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* The parts the browser draws carry the brand too. */
+::selection {
+  background: var(--honey);
+  color: var(--on-honey);
+}
+* {
+  caret-color: var(--honey);
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+:focus-visible {
+  outline: 2px solid var(--honey);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+a {
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 1px;
+}
+.tabular {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* Entrances: a short rise, exponential ease-out; skipped with reduced motion. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+.rise {
+  animation: rise 900ms var(--ease-out-expo) both;
+  animation-delay: calc(var(--i, 0) * 70ms + 120ms);
+}
+
+@keyframes honey-sway {
+  0%,
+  100% {
+    transform: translateX(-12%);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+}
+
+/* Chart marks grow from their baseline once; reduced motion skips it below. */
+@keyframes grow-y {
+  from {
+    transform: scaleY(0);
+  }
+}
+@keyframes grow-x {
+  from {
+    transform: scaleX(0);
+  }
+}
+.grow-y {
+  transform-origin: bottom;
+  animation: grow-y 900ms var(--ease-out-expo) both;
+  animation-delay: calc(var(--i, 0) * 35ms + 250ms);
+}
+.grow-x {
+  animation: grow-x 1100ms var(--ease-out-expo) both;
+  animation-delay: 300ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+/* Long-form documents (privacy policy, terms). */
+.legal h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 2.5rem 0 0.75rem;
+}
+.legal h3 {
+  font-weight: 700;
+  font-size: 1.0625rem;
+  margin: 1.5rem 0 0.5rem;
+}
+.legal p,
+.legal li {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--ink);
+}
+.legal p + p {
+  margin-top: 0.75rem;
+}
+.legal ul {
+  list-style: disc;
+  padding-left: 1.4rem;
+  margin: 0.5rem 0 0.75rem;
+}
+.legal li + li {
+  margin-top: 0.35rem;
+}
+.legal li::marker {
+  color: var(--honey);
+}
+.legal strong {
+  font-weight: 700;
+}
+.legal a {
+  color: var(--honey-text);
+  font-weight: 600;
+  text-decoration: underline;
+}

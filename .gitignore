@@ -49,3 +49,6 @@ app.*.map.json
 
 # Local Apple signing team (see ios/Flutter/AppIdentity.xcconfig).
 ios/Flutter/Signing.xcconfig
+
+# Supabase CLI cache
+supabase/.temp/

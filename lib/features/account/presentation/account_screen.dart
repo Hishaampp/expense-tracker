@@ -4,6 +4,7 @@ import 'package:expense_tracker/data/sync/sync_controller.dart';
 import 'package:expense_tracker/formatting/relative_time.dart';
 import 'package:expense_tracker/l10n/app_localizations.dart';
 import 'package:expense_tracker/l10n/failure_messages.dart';
+import 'package:expense_tracker/routing/routes.dart';
 import 'package:expense_tracker/services/cloud/cloud_auth.dart';
 import 'package:expense_tracker/services/service_providers.dart';
 import 'package:expense_tracker/theme/app_colors.dart';
@@ -14,6 +15,7 @@ import 'package:expense_tracker/widgets/entrance.dart';
 import 'package:expense_tracker/widgets/error_state_view.dart';
 import 'package:expense_tracker/widgets/icon_tile.dart';
 import 'package:expense_tracker/widgets/large_title_page.dart';
+import 'package:expense_tracker/widgets/legal_links.dart';
 import 'package:expense_tracker/widgets/provider_buttons.dart';
 import 'package:expense_tracker/widgets/pulsing_placeholder.dart';
 import 'package:expense_tracker/widgets/round_icon_button.dart';
@@ -214,6 +216,13 @@ class _SignInState extends ConsumerState<_SignIn> {
                 ),
               ),
             ],
+            SizedBox(height: metrics.spaceMd),
+            Text(
+              l10n.accountAgree,
+              textAlign: TextAlign.center,
+              style: textTheme.bodySmall,
+            ),
+            const LegalLinks(),
           ],
         ),
       ),
@@ -330,6 +339,48 @@ class _EnterCodeState extends ConsumerState<_EnterCode> {
     }
   }
 
+  Future<void> _startOver() async {
+    final l10n = AppLocalizations.of(context);
+    final colors = AppColors.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    final sure = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.accountStartOverTitle),
+        content: Text(l10n.accountStartOverBody),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text(l10n.cancel),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text(
+              l10n.accountStartOver,
+              style: TextStyle(color: colors.danger),
+            ),
+          ),
+        ],
+      ),
+    );
+    // Null means dismissed: keep waiting for the code.
+    if (sure != true || !mounted) return;
+    final itsYou = await ref
+        .read(deviceAuthProvider)
+        .unlock(l10n.accountStartOverReason);
+    if (!itsYou || !mounted) return;
+    setState(() => _busy = true);
+    final problem = await ref.read(syncControllerProvider.notifier).startOver();
+    if (mounted) setState(() => _busy = false);
+    if (problem != null) {
+      messenger
+        ..clearSnackBars()
+        ..showSnackBar(
+          SnackBar(content: Text(cloudProblemMessage(l10n, problem))),
+        );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -364,6 +415,11 @@ class _EnterCodeState extends ConsumerState<_EnterCode> {
           FilledButton(
             onPressed: _busy ? null : () => unawaited(_unlock()),
             child: Text(l10n.accountUnlock),
+          ),
+          SizedBox(height: metrics.spaceSm),
+          TextButton(
+            onPressed: _busy ? null : () => unawaited(_startOver()),
+            child: Text(l10n.accountLostCode),
           ),
         ],
       ),
@@ -503,6 +559,12 @@ class _Status extends ConsumerWidget {
             onPressed: () =>
                 unawaited(ref.read(syncControllerProvider.notifier).syncNow()),
             child: Text(l10n.accountSyncNow),
+          ),
+          SizedBox(height: metrics.spaceSm),
+          OutlinedButton.icon(
+            onPressed: () => unawaited(context.push(Routes.linkComputer)),
+            icon: const Icon(Icons.qr_code_scanner_rounded),
+            label: Text(l10n.accountLinkComputer),
           ),
           SizedBox(height: metrics.spaceSm),
           OutlinedButton(

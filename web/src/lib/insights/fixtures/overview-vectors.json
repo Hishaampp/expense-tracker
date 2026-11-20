@@ -1,0 +1,7991 @@
+{
+ "budgetRooms": [
+  "office"
+ ],
+ "monthlyBudget": 1500000,
+ "transactions": [
+  {
+   "id": "t0",
+   "kind": "expense",
+   "paise": 216358,
+   "at": [
+    2025,
+    11,
+    4,
+    21,
+    6
+   ],
+   "categoryId": "rent",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t1",
+   "kind": "expense",
+   "paise": 34173,
+   "at": [
+    2026,
+    10,
+    31,
+    0,
+    58
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t2",
+   "kind": "transfer",
+   "paise": 179893,
+   "at": [
+    2026,
+    9,
+    19,
+    20,
+    35
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t3",
+   "kind": "expense",
+   "paise": 217746,
+   "at": [
+    2026,
+    1,
+    8,
+    0,
+    46
+   ],
+   "categoryId": "rent",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t4",
+   "kind": "expense",
+   "paise": 165222,
+   "at": [
+    2026,
+    9,
+    7,
+    14,
+    43
+   ],
+   "categoryId": "shopping",
+   "roomId": "goa",
+   "hidden": true
+  },
+  {
+   "id": "t5",
+   "kind": "expense",
+   "paise": 214227,
+   "at": [
+    2025,
+    11,
+    13,
+    21,
+    13
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t6",
+   "kind": "expense",
+   "paise": 229676,
+   "at": [
+    2026,
+    7,
+    6,
+    16,
+    10
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t7",
+   "kind": "refund",
+   "paise": 96633,
+   "at": [
+    2026,
+    5,
+    3,
+    15,
+    9
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t8",
+   "kind": "income",
+   "paise": 6118143,
+   "at": [
+    2026,
+    9,
+    16,
+    16,
+    51
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t9",
+   "kind": "expense",
+   "paise": 115916,
+   "at": [
+    2026,
+    5,
+    16,
+    13,
+    24
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t10",
+   "kind": "income",
+   "paise": 3939777,
+   "at": [
+    2026,
+    4,
+    12,
+    5,
+    39
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t11",
+   "kind": "expense",
+   "paise": 98309,
+   "at": [
+    2026,
+    7,
+    17,
+    8,
+    51
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t12",
+   "kind": "expense",
+   "paise": 110120,
+   "at": [
+    2025,
+    9,
+    24,
+    0,
+    6
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t13",
+   "kind": "expense",
+   "paise": 29141,
+   "at": [
+    2026,
+    9,
+    10,
+    11,
+    20
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t14",
+   "kind": "expense",
+   "paise": 53877,
+   "at": [
+    2026,
+    1,
+    1,
+    17,
+    36
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t15",
+   "kind": "expense",
+   "paise": 131093,
+   "at": [
+    2025,
+    11,
+    1,
+    11,
+    20
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t16",
+   "kind": "expense",
+   "paise": 82540,
+   "at": [
+    2026,
+    4,
+    11,
+    13,
+    22
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t17",
+   "kind": "expense",
+   "paise": 217150,
+   "at": [
+    2026,
+    10,
+    18,
+    2,
+    12
+   ],
+   "categoryId": "rent",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t18",
+   "kind": "expense",
+   "paise": 157557,
+   "at": [
+    2026,
+    4,
+    17,
+    9,
+    7
+   ],
+   "categoryId": "fuel",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t19",
+   "kind": "income",
+   "paise": 3114974,
+   "at": [
+    2026,
+    3,
+    28,
+    20,
+    41
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t20",
+   "kind": "expense",
+   "paise": 94740,
+   "at": [
+    2026,
+    10,
+    14,
+    0,
+    25
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t21",
+   "kind": "income",
+   "paise": 2651584,
+   "at": [
+    2026,
+    6,
+    15,
+    19,
+    30
+   ],
+   "categoryId": null,
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t22",
+   "kind": "refund",
+   "paise": 84927,
+   "at": [
+    2026,
+    10,
+    23,
+    23,
+    5
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t23",
+   "kind": "income",
+   "paise": 5309009,
+   "at": [
+    2026,
+    10,
+    13,
+    4,
+    8
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t24",
+   "kind": "income",
+   "paise": 3113464,
+   "at": [
+    2026,
+    10,
+    6,
+    7,
+    55
+   ],
+   "categoryId": "fuel",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t25",
+   "kind": "expense",
+   "paise": 209179,
+   "at": [
+    2026,
+    10,
+    8,
+    19,
+    18
+   ],
+   "categoryId": "food",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t26",
+   "kind": "expense",
+   "paise": 23691,
+   "at": [
+    2026,
+    9,
+    16,
+    18,
+    52
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t27",
+   "kind": "expense",
+   "paise": 149792,
+   "at": [
+    2026,
+    1,
+    22,
+    4,
+    2
+   ],
+   "categoryId": null,
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t28",
+   "kind": "expense",
+   "paise": 126678,
+   "at": [
+    2026,
+    8,
+    4,
+    9,
+    8
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t29",
+   "kind": "refund",
+   "paise": 223607,
+   "at": [
+    2026,
+    6,
+    23,
+    21,
+    37
+   ],
+   "categoryId": null,
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t30",
+   "kind": "refund",
+   "paise": 220833,
+   "at": [
+    2026,
+    5,
+    12,
+    0,
+    46
+   ],
+   "categoryId": "rent",
+   "roomId": "office",
+   "hidden": true
+  },
+  {
+   "id": "t31",
+   "kind": "refund",
+   "paise": 230475,
+   "at": [
+    2025,
+    12,
+    11,
+    6,
+    42
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t32",
+   "kind": "transfer",
+   "paise": 35890,
+   "at": [
+    2026,
+    8,
+    14,
+    2,
+    20
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t33",
+   "kind": "expense",
+   "paise": 59918,
+   "at": [
+    2026,
+    4,
+    23,
+    19,
+    4
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t34",
+   "kind": "expense",
+   "paise": 239896,
+   "at": [
+    2025,
+    10,
+    12,
+    18,
+    52
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t35",
+   "kind": "expense",
+   "paise": 53327,
+   "at": [
+    2026,
+    3,
+    1,
+    15,
+    28
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t36",
+   "kind": "expense",
+   "paise": 203629,
+   "at": [
+    2026,
+    9,
+    14,
+    19,
+    36
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t37",
+   "kind": "transfer",
+   "paise": 232718,
+   "at": [
+    2026,
+    6,
+    28,
+    11,
+    1
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t38",
+   "kind": "income",
+   "paise": 4798168,
+   "at": [
+    2026,
+    11,
+    16,
+    3,
+    27
+   ],
+   "categoryId": null,
+   "roomId": "office",
+   "hidden": true
+  },
+  {
+   "id": "t39",
+   "kind": "expense",
+   "paise": 30864,
+   "at": [
+    2026,
+    5,
+    17,
+    15,
+    22
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t40",
+   "kind": "expense",
+   "paise": 246846,
+   "at": [
+    2026,
+    6,
+    12,
+    11,
+    0
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t41",
+   "kind": "income",
+   "paise": 3605907,
+   "at": [
+    2026,
+    10,
+    5,
+    14,
+    31
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t42",
+   "kind": "expense",
+   "paise": 233335,
+   "at": [
+    2026,
+    10,
+    31,
+    2,
+    33
+   ],
+   "categoryId": "fuel",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t43",
+   "kind": "expense",
+   "paise": 157982,
+   "at": [
+    2025,
+    12,
+    17,
+    18,
+    50
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t44",
+   "kind": "refund",
+   "paise": 67762,
+   "at": [
+    2025,
+    12,
+    18,
+    11,
+    57
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t45",
+   "kind": "income",
+   "paise": 2726204,
+   "at": [
+    2025,
+    9,
+    8,
+    4,
+    48
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t46",
+   "kind": "expense",
+   "paise": 134534,
+   "at": [
+    2026,
+    11,
+    20,
+    21,
+    56
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t47",
+   "kind": "transfer",
+   "paise": 211590,
+   "at": [
+    2026,
+    9,
+    24,
+    23,
+    55
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t48",
+   "kind": "refund",
+   "paise": 108120,
+   "at": [
+    2025,
+    11,
+    26,
+    11,
+    21
+   ],
+   "categoryId": null,
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t49",
+   "kind": "expense",
+   "paise": 25556,
+   "at": [
+    2025,
+    9,
+    20,
+    4,
+    39
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t50",
+   "kind": "expense",
+   "paise": 169080,
+   "at": [
+    2026,
+    5,
+    4,
+    2,
+    12
+   ],
+   "categoryId": "fuel",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t51",
+   "kind": "income",
+   "paise": 7408202,
+   "at": [
+    2026,
+    9,
+    18,
+    1,
+    24
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t52",
+   "kind": "income",
+   "paise": 3799827,
+   "at": [
+    2025,
+    12,
+    17,
+    3,
+    28
+   ],
+   "categoryId": "shopping",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t53",
+   "kind": "expense",
+   "paise": 49125,
+   "at": [
+    2025,
+    12,
+    6,
+    2,
+    27
+   ],
+   "categoryId": "fuel",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t54",
+   "kind": "expense",
+   "paise": 15234,
+   "at": [
+    2026,
+    2,
+    7,
+    7,
+    54
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t55",
+   "kind": "income",
+   "paise": 6371590,
+   "at": [
+    2025,
+    11,
+    30,
+    13,
+    54
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t56",
+   "kind": "expense",
+   "paise": 225612,
+   "at": [
+    2026,
+    5,
+    3,
+    7,
+    50
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t57",
+   "kind": "expense",
+   "paise": 54726,
+   "at": [
+    2025,
+    9,
+    21,
+    8,
+    10
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t58",
+   "kind": "refund",
+   "paise": 26399,
+   "at": [
+    2026,
+    9,
+    21,
+    1,
+    4
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t59",
+   "kind": "expense",
+   "paise": 215019,
+   "at": [
+    2026,
+    3,
+    23,
+    0,
+    36
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t60",
+   "kind": "income",
+   "paise": 5276349,
+   "at": [
+    2026,
+    10,
+    31,
+    1,
+    40
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t61",
+   "kind": "expense",
+   "paise": 225582,
+   "at": [
+    2026,
+    7,
+    28,
+    13,
+    56
+   ],
+   "categoryId": "rent",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t62",
+   "kind": "expense",
+   "paise": 116897,
+   "at": [
+    2025,
+    9,
+    9,
+    20,
+    20
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t63",
+   "kind": "expense",
+   "paise": 46484,
+   "at": [
+    2025,
+    11,
+    12,
+    6,
+    9
+   ],
+   "categoryId": "shopping",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t64",
+   "kind": "expense",
+   "paise": 246463,
+   "at": [
+    2026,
+    2,
+    12,
+    8,
+    51
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t65",
+   "kind": "expense",
+   "paise": 90048,
+   "at": [
+    2026,
+    3,
+    25,
+    21,
+    35
+   ],
+   "categoryId": "food",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t66",
+   "kind": "expense",
+   "paise": 237245,
+   "at": [
+    2025,
+    9,
+    24,
+    17,
+    40
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t67",
+   "kind": "expense",
+   "paise": 106752,
+   "at": [
+    2026,
+    7,
+    4,
+    0,
+    36
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t68",
+   "kind": "refund",
+   "paise": 8577,
+   "at": [
+    2026,
+    6,
+    5,
+    23,
+    56
+   ],
+   "categoryId": "food",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t69",
+   "kind": "expense",
+   "paise": 86697,
+   "at": [
+    2025,
+    10,
+    11,
+    23,
+    39
+   ],
+   "categoryId": "shopping",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t70",
+   "kind": "income",
+   "paise": 7930417,
+   "at": [
+    2026,
+    4,
+    28,
+    19,
+    29
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t71",
+   "kind": "expense",
+   "paise": 240135,
+   "at": [
+    2026,
+    10,
+    19,
+    3,
+    14
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t72",
+   "kind": "expense",
+   "paise": 224354,
+   "at": [
+    2026,
+    3,
+    20,
+    8,
+    12
+   ],
+   "categoryId": "shopping",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t73",
+   "kind": "expense",
+   "paise": 106136,
+   "at": [
+    2026,
+    10,
+    2,
+    0,
+    36
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t74",
+   "kind": "transfer",
+   "paise": 43354,
+   "at": [
+    2026,
+    9,
+    9,
+    14,
+    8
+   ],
+   "categoryId": "food",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t75",
+   "kind": "expense",
+   "paise": 74947,
+   "at": [
+    2026,
+    10,
+    28,
+    15,
+    59
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t76",
+   "kind": "transfer",
+   "paise": 216879,
+   "at": [
+    2026,
+    4,
+    1,
+    23,
+    26
+   ],
+   "categoryId": null,
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t77",
+   "kind": "transfer",
+   "paise": 52424,
+   "at": [
+    2026,
+    8,
+    27,
+    23,
+    23
+   ],
+   "categoryId": "food",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t78",
+   "kind": "expense",
+   "paise": 240660,
+   "at": [
+    2026,
+    5,
+    9,
+    5,
+    34
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t79",
+   "kind": "expense",
+   "paise": 35745,
+   "at": [
+    2026,
+    8,
+    3,
+    14,
+    40
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t80",
+   "kind": "expense",
+   "paise": 103610,
+   "at": [
+    2025,
+    11,
+    13,
+    10,
+    42
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t81",
+   "kind": "expense",
+   "paise": 207322,
+   "at": [
+    2025,
+    10,
+    22,
+    20,
+    19
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t82",
+   "kind": "expense",
+   "paise": 126020,
+   "at": [
+    2026,
+    5,
+    21,
+    5,
+    45
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t83",
+   "kind": "transfer",
+   "paise": 199157,
+   "at": [
+    2026,
+    6,
+    28,
+    18,
+    27
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t84",
+   "kind": "expense",
+   "paise": 122688,
+   "at": [
+    2026,
+    8,
+    19,
+    7,
+    2
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t85",
+   "kind": "expense",
+   "paise": 81636,
+   "at": [
+    2026,
+    3,
+    3,
+    16,
+    34
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t86",
+   "kind": "refund",
+   "paise": 171320,
+   "at": [
+    2025,
+    12,
+    31,
+    9,
+    40
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t87",
+   "kind": "expense",
+   "paise": 58827,
+   "at": [
+    2026,
+    11,
+    16,
+    23,
+    24
+   ],
+   "categoryId": "shopping",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t88",
+   "kind": "refund",
+   "paise": 177665,
+   "at": [
+    2026,
+    8,
+    19,
+    6,
+    26
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t89",
+   "kind": "expense",
+   "paise": 197124,
+   "at": [
+    2026,
+    5,
+    4,
+    0,
+    37
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t90",
+   "kind": "expense",
+   "paise": 5503,
+   "at": [
+    2026,
+    7,
+    29,
+    18,
+    59
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t91",
+   "kind": "transfer",
+   "paise": 84513,
+   "at": [
+    2026,
+    11,
+    14,
+    6,
+    53
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t92",
+   "kind": "expense",
+   "paise": 202614,
+   "at": [
+    2026,
+    9,
+    2,
+    14,
+    19
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t93",
+   "kind": "expense",
+   "paise": 176972,
+   "at": [
+    2025,
+    10,
+    20,
+    18,
+    27
+   ],
+   "categoryId": null,
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t94",
+   "kind": "expense",
+   "paise": 217568,
+   "at": [
+    2025,
+    12,
+    9,
+    17,
+    52
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t95",
+   "kind": "expense",
+   "paise": 149982,
+   "at": [
+    2026,
+    1,
+    1,
+    22,
+    1
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t96",
+   "kind": "transfer",
+   "paise": 140435,
+   "at": [
+    2025,
+    9,
+    4,
+    7,
+    8
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t97",
+   "kind": "expense",
+   "paise": 193899,
+   "at": [
+    2026,
+    1,
+    3,
+    5,
+    11
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t98",
+   "kind": "expense",
+   "paise": 123196,
+   "at": [
+    2026,
+    8,
+    27,
+    4,
+    47
+   ],
+   "categoryId": "food",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t99",
+   "kind": "transfer",
+   "paise": 73802,
+   "at": [
+    2026,
+    9,
+    26,
+    11,
+    4
+   ],
+   "categoryId": "fuel",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t100",
+   "kind": "expense",
+   "paise": 76515,
+   "at": [
+    2026,
+    5,
+    23,
+    13,
+    47
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t101",
+   "kind": "expense",
+   "paise": 1055,
+   "at": [
+    2025,
+    9,
+    28,
+    17,
+    30
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t102",
+   "kind": "income",
+   "paise": 6816534,
+   "at": [
+    2025,
+    10,
+    30,
+    22,
+    38
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t103",
+   "kind": "expense",
+   "paise": 119875,
+   "at": [
+    2025,
+    12,
+    29,
+    0,
+    28
+   ],
+   "categoryId": "shopping",
+   "roomId": "office",
+   "hidden": true
+  },
+  {
+   "id": "t104",
+   "kind": "expense",
+   "paise": 199094,
+   "at": [
+    2026,
+    5,
+    11,
+    22,
+    8
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t105",
+   "kind": "expense",
+   "paise": 198140,
+   "at": [
+    2025,
+    12,
+    24,
+    23,
+    10
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t106",
+   "kind": "expense",
+   "paise": 41735,
+   "at": [
+    2026,
+    3,
+    19,
+    19,
+    16
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t107",
+   "kind": "expense",
+   "paise": 47917,
+   "at": [
+    2026,
+    2,
+    2,
+    16,
+    16
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t108",
+   "kind": "expense",
+   "paise": 217462,
+   "at": [
+    2026,
+    7,
+    19,
+    22,
+    32
+   ],
+   "categoryId": "shopping",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t109",
+   "kind": "expense",
+   "paise": 223612,
+   "at": [
+    2026,
+    4,
+    22,
+    3,
+    24
+   ],
+   "categoryId": "rent",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t110",
+   "kind": "refund",
+   "paise": 51987,
+   "at": [
+    2026,
+    9,
+    13,
+    9,
+    24
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t111",
+   "kind": "transfer",
+   "paise": 110654,
+   "at": [
+    2026,
+    2,
+    18,
+    0,
+    19
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t112",
+   "kind": "expense",
+   "paise": 127014,
+   "at": [
+    2026,
+    7,
+    26,
+    7,
+    7
+   ],
+   "categoryId": null,
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t113",
+   "kind": "expense",
+   "paise": 72429,
+   "at": [
+    2026,
+    4,
+    14,
+    0,
+    43
+   ],
+   "categoryId": null,
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t114",
+   "kind": "expense",
+   "paise": 249935,
+   "at": [
+    2026,
+    1,
+    11,
+    10,
+    2
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t115",
+   "kind": "expense",
+   "paise": 154054,
+   "at": [
+    2026,
+    10,
+    17,
+    1,
+    43
+   ],
+   "categoryId": "food",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t116",
+   "kind": "expense",
+   "paise": 209354,
+   "at": [
+    2026,
+    11,
+    14,
+    17,
+    3
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t117",
+   "kind": "expense",
+   "paise": 154096,
+   "at": [
+    2026,
+    8,
+    26,
+    2,
+    15
+   ],
+   "categoryId": "fuel",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t118",
+   "kind": "expense",
+   "paise": 193805,
+   "at": [
+    2026,
+    9,
+    8,
+    4,
+    43
+   ],
+   "categoryId": "shopping",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t119",
+   "kind": "expense",
+   "paise": 236808,
+   "at": [
+    2026,
+    1,
+    24,
+    20,
+    45
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t120",
+   "kind": "expense",
+   "paise": 114452,
+   "at": [
+    2026,
+    9,
+    8,
+    14,
+    31
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t121",
+   "kind": "refund",
+   "paise": 238589,
+   "at": [
+    2025,
+    10,
+    18,
+    18,
+    40
+   ],
+   "categoryId": null,
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t122",
+   "kind": "expense",
+   "paise": 120236,
+   "at": [
+    2026,
+    6,
+    27,
+    16,
+    47
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t123",
+   "kind": "income",
+   "paise": 3703432,
+   "at": [
+    2026,
+    1,
+    18,
+    22,
+    5
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t124",
+   "kind": "expense",
+   "paise": 153047,
+   "at": [
+    2025,
+    9,
+    9,
+    10,
+    51
+   ],
+   "categoryId": "fuel",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t125",
+   "kind": "transfer",
+   "paise": 204292,
+   "at": [
+    2026,
+    6,
+    25,
+    2,
+    58
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t126",
+   "kind": "expense",
+   "paise": 38121,
+   "at": [
+    2025,
+    10,
+    11,
+    4,
+    57
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t127",
+   "kind": "expense",
+   "paise": 235679,
+   "at": [
+    2025,
+    12,
+    10,
+    15,
+    34
+   ],
+   "categoryId": "fuel",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t128",
+   "kind": "expense",
+   "paise": 217710,
+   "at": [
+    2026,
+    5,
+    16,
+    22,
+    1
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t129",
+   "kind": "expense",
+   "paise": 207085,
+   "at": [
+    2026,
+    2,
+    27,
+    6,
+    15
+   ],
+   "categoryId": null,
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t130",
+   "kind": "expense",
+   "paise": 64689,
+   "at": [
+    2026,
+    1,
+    31,
+    22,
+    19
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t131",
+   "kind": "expense",
+   "paise": 86840,
+   "at": [
+    2026,
+    3,
+    24,
+    13,
+    43
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t132",
+   "kind": "expense",
+   "paise": 40900,
+   "at": [
+    2025,
+    12,
+    3,
+    18,
+    36
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t133",
+   "kind": "expense",
+   "paise": 55589,
+   "at": [
+    2026,
+    7,
+    3,
+    17,
+    29
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t134",
+   "kind": "transfer",
+   "paise": 220083,
+   "at": [
+    2025,
+    9,
+    12,
+    9,
+    23
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t135",
+   "kind": "expense",
+   "paise": 198271,
+   "at": [
+    2025,
+    11,
+    13,
+    18,
+    6
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t136",
+   "kind": "refund",
+   "paise": 228937,
+   "at": [
+    2026,
+    1,
+    13,
+    0,
+    25
+   ],
+   "categoryId": "fuel",
+   "roomId": "office",
+   "hidden": true
+  },
+  {
+   "id": "t137",
+   "kind": "refund",
+   "paise": 43629,
+   "at": [
+    2026,
+    4,
+    12,
+    9,
+    54
+   ],
+   "categoryId": "rent",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t138",
+   "kind": "income",
+   "paise": 2833892,
+   "at": [
+    2026,
+    5,
+    10,
+    22,
+    52
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t139",
+   "kind": "expense",
+   "paise": 29675,
+   "at": [
+    2025,
+    12,
+    8,
+    11,
+    57
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t140",
+   "kind": "expense",
+   "paise": 191123,
+   "at": [
+    2026,
+    7,
+    22,
+    19,
+    36
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t141",
+   "kind": "expense",
+   "paise": 206233,
+   "at": [
+    2026,
+    10,
+    2,
+    20,
+    4
+   ],
+   "categoryId": "fuel",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t142",
+   "kind": "expense",
+   "paise": 135400,
+   "at": [
+    2026,
+    5,
+    18,
+    21,
+    34
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t143",
+   "kind": "expense",
+   "paise": 154493,
+   "at": [
+    2026,
+    7,
+    27,
+    23,
+    4
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t144",
+   "kind": "expense",
+   "paise": 174569,
+   "at": [
+    2025,
+    10,
+    3,
+    21,
+    37
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t145",
+   "kind": "expense",
+   "paise": 162897,
+   "at": [
+    2026,
+    3,
+    24,
+    13,
+    0
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t146",
+   "kind": "refund",
+   "paise": 103176,
+   "at": [
+    2026,
+    8,
+    24,
+    7,
+    16
+   ],
+   "categoryId": "food",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t147",
+   "kind": "expense",
+   "paise": 24195,
+   "at": [
+    2026,
+    5,
+    3,
+    13,
+    14
+   ],
+   "categoryId": "food",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t148",
+   "kind": "expense",
+   "paise": 147864,
+   "at": [
+    2025,
+    12,
+    18,
+    16,
+    24
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t149",
+   "kind": "expense",
+   "paise": 173749,
+   "at": [
+    2026,
+    11,
+    6,
+    21,
+    10
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t150",
+   "kind": "expense",
+   "paise": 236043,
+   "at": [
+    2025,
+    10,
+    2,
+    6,
+    54
+   ],
+   "categoryId": null,
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t151",
+   "kind": "expense",
+   "paise": 83356,
+   "at": [
+    2025,
+    10,
+    11,
+    20,
+    54
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t152",
+   "kind": "expense",
+   "paise": 210707,
+   "at": [
+    2026,
+    10,
+    1,
+    14,
+    1
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t153",
+   "kind": "expense",
+   "paise": 126082,
+   "at": [
+    2026,
+    8,
+    14,
+    6,
+    30
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t154",
+   "kind": "expense",
+   "paise": 5573,
+   "at": [
+    2025,
+    11,
+    26,
+    18,
+    35
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t155",
+   "kind": "income",
+   "paise": 6254354,
+   "at": [
+    2026,
+    2,
+    4,
+    6,
+    37
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t156",
+   "kind": "expense",
+   "paise": 72691,
+   "at": [
+    2025,
+    10,
+    26,
+    2,
+    56
+   ],
+   "categoryId": "fuel",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t157",
+   "kind": "expense",
+   "paise": 178146,
+   "at": [
+    2026,
+    8,
+    28,
+    14,
+    20
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t158",
+   "kind": "expense",
+   "paise": 178675,
+   "at": [
+    2026,
+    11,
+    16,
+    0,
+    21
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t159",
+   "kind": "expense",
+   "paise": 231131,
+   "at": [
+    2026,
+    2,
+    21,
+    5,
+    0
+   ],
+   "categoryId": "rent",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t160",
+   "kind": "expense",
+   "paise": 82673,
+   "at": [
+    2026,
+    5,
+    16,
+    4,
+    31
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t161",
+   "kind": "expense",
+   "paise": 118824,
+   "at": [
+    2026,
+    2,
+    2,
+    21,
+    39
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t162",
+   "kind": "expense",
+   "paise": 40712,
+   "at": [
+    2026,
+    9,
+    28,
+    16,
+    42
+   ],
+   "categoryId": null,
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t163",
+   "kind": "expense",
+   "paise": 107708,
+   "at": [
+    2026,
+    1,
+    8,
+    5,
+    1
+   ],
+   "categoryId": "fuel",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t164",
+   "kind": "income",
+   "paise": 6330266,
+   "at": [
+    2025,
+    9,
+    21,
+    9,
+    57
+   ],
+   "categoryId": null,
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t165",
+   "kind": "expense",
+   "paise": 84927,
+   "at": [
+    2026,
+    9,
+    1,
+    14,
+    0
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t166",
+   "kind": "expense",
+   "paise": 236514,
+   "at": [
+    2026,
+    2,
+    19,
+    10,
+    22
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t167",
+   "kind": "expense",
+   "paise": 149544,
+   "at": [
+    2026,
+    2,
+    20,
+    18,
+    9
+   ],
+   "categoryId": "rent",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t168",
+   "kind": "expense",
+   "paise": 152113,
+   "at": [
+    2026,
+    4,
+    3,
+    22,
+    55
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t169",
+   "kind": "expense",
+   "paise": 17074,
+   "at": [
+    2026,
+    4,
+    27,
+    22,
+    38
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t170",
+   "kind": "income",
+   "paise": 7707718,
+   "at": [
+    2026,
+    4,
+    3,
+    21,
+    42
+   ],
+   "categoryId": "rent",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t171",
+   "kind": "expense",
+   "paise": 60071,
+   "at": [
+    2026,
+    2,
+    19,
+    11,
+    16
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t172",
+   "kind": "expense",
+   "paise": 163203,
+   "at": [
+    2026,
+    6,
+    17,
+    16,
+    47
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t173",
+   "kind": "expense",
+   "paise": 135911,
+   "at": [
+    2025,
+    9,
+    29,
+    22,
+    15
+   ],
+   "categoryId": "shopping",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t174",
+   "kind": "expense",
+   "paise": 48249,
+   "at": [
+    2026,
+    12,
+    1,
+    11,
+    1
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t175",
+   "kind": "expense",
+   "paise": 145300,
+   "at": [
+    2026,
+    7,
+    2,
+    19,
+    34
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t176",
+   "kind": "expense",
+   "paise": 149633,
+   "at": [
+    2026,
+    3,
+    20,
+    23,
+    20
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t177",
+   "kind": "income",
+   "paise": 2293385,
+   "at": [
+    2025,
+    12,
+    24,
+    19,
+    54
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t178",
+   "kind": "refund",
+   "paise": 142571,
+   "at": [
+    2025,
+    10,
+    7,
+    4,
+    33
+   ],
+   "categoryId": "fuel",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t179",
+   "kind": "income",
+   "paise": 6515875,
+   "at": [
+    2026,
+    4,
+    27,
+    20,
+    56
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t180",
+   "kind": "expense",
+   "paise": 220253,
+   "at": [
+    2025,
+    12,
+    1,
+    20,
+    37
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t181",
+   "kind": "refund",
+   "paise": 49064,
+   "at": [
+    2026,
+    9,
+    19,
+    1,
+    41
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t182",
+   "kind": "income",
+   "paise": 3197155,
+   "at": [
+    2025,
+    11,
+    15,
+    17,
+    9
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t183",
+   "kind": "income",
+   "paise": 2092716,
+   "at": [
+    2026,
+    4,
+    1,
+    14,
+    4
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t184",
+   "kind": "expense",
+   "paise": 200357,
+   "at": [
+    2025,
+    12,
+    22,
+    16,
+    19
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t185",
+   "kind": "expense",
+   "paise": 114876,
+   "at": [
+    2025,
+    10,
+    24,
+    5,
+    38
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t186",
+   "kind": "expense",
+   "paise": 37673,
+   "at": [
+    2026,
+    11,
+    27,
+    13,
+    13
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t187",
+   "kind": "expense",
+   "paise": 166262,
+   "at": [
+    2025,
+    12,
+    21,
+    2,
+    18
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t188",
+   "kind": "expense",
+   "paise": 3908,
+   "at": [
+    2025,
+    11,
+    26,
+    15,
+    17
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t189",
+   "kind": "refund",
+   "paise": 219766,
+   "at": [
+    2026,
+    3,
+    27,
+    2,
+    31
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t190",
+   "kind": "transfer",
+   "paise": 160990,
+   "at": [
+    2026,
+    3,
+    27,
+    23,
+    39
+   ],
+   "categoryId": "rent",
+   "roomId": "goa",
+   "hidden": true
+  },
+  {
+   "id": "t191",
+   "kind": "transfer",
+   "paise": 138890,
+   "at": [
+    2025,
+    10,
+    19,
+    18,
+    55
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t192",
+   "kind": "expense",
+   "paise": 5374,
+   "at": [
+    2026,
+    7,
+    18,
+    2,
+    50
+   ],
+   "categoryId": "food",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t193",
+   "kind": "expense",
+   "paise": 169499,
+   "at": [
+    2026,
+    4,
+    16,
+    15,
+    24
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t194",
+   "kind": "expense",
+   "paise": 170493,
+   "at": [
+    2026,
+    2,
+    26,
+    2,
+    7
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t195",
+   "kind": "expense",
+   "paise": 25174,
+   "at": [
+    2026,
+    5,
+    4,
+    23,
+    30
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t196",
+   "kind": "expense",
+   "paise": 93577,
+   "at": [
+    2026,
+    8,
+    24,
+    5,
+    0
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t197",
+   "kind": "expense",
+   "paise": 157045,
+   "at": [
+    2026,
+    1,
+    30,
+    21,
+    6
+   ],
+   "categoryId": "fuel",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t198",
+   "kind": "expense",
+   "paise": 112265,
+   "at": [
+    2026,
+    3,
+    22,
+    23,
+    36
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t199",
+   "kind": "expense",
+   "paise": 213132,
+   "at": [
+    2025,
+    12,
+    19,
+    18,
+    49
+   ],
+   "categoryId": "rent",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t200",
+   "kind": "expense",
+   "paise": 159840,
+   "at": [
+    2026,
+    3,
+    9,
+    21,
+    0
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t201",
+   "kind": "refund",
+   "paise": 171556,
+   "at": [
+    2026,
+    11,
+    13,
+    14,
+    12
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t202",
+   "kind": "refund",
+   "paise": 162957,
+   "at": [
+    2025,
+    12,
+    27,
+    10,
+    49
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t203",
+   "kind": "income",
+   "paise": 7178848,
+   "at": [
+    2026,
+    4,
+    29,
+    11,
+    7
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t204",
+   "kind": "expense",
+   "paise": 31470,
+   "at": [
+    2026,
+    7,
+    30,
+    20,
+    11
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t205",
+   "kind": "income",
+   "paise": 3937173,
+   "at": [
+    2025,
+    11,
+    22,
+    13,
+    47
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t206",
+   "kind": "expense",
+   "paise": 60680,
+   "at": [
+    2025,
+    10,
+    16,
+    21,
+    46
+   ],
+   "categoryId": "shopping",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t207",
+   "kind": "expense",
+   "paise": 57153,
+   "at": [
+    2026,
+    2,
+    14,
+    0,
+    37
+   ],
+   "categoryId": null,
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t208",
+   "kind": "expense",
+   "paise": 231532,
+   "at": [
+    2026,
+    8,
+    5,
+    8,
+    49
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t209",
+   "kind": "expense",
+   "paise": 17452,
+   "at": [
+    2026,
+    3,
+    28,
+    18,
+    13
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t210",
+   "kind": "expense",
+   "paise": 82429,
+   "at": [
+    2025,
+    10,
+    2,
+    1,
+    26
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t211",
+   "kind": "expense",
+   "paise": 169784,
+   "at": [
+    2026,
+    9,
+    2,
+    19,
+    19
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t212",
+   "kind": "expense",
+   "paise": 151624,
+   "at": [
+    2025,
+    12,
+    21,
+    10,
+    48
+   ],
+   "categoryId": "food",
+   "roomId": "office",
+   "hidden": true
+  },
+  {
+   "id": "t213",
+   "kind": "transfer",
+   "paise": 228197,
+   "at": [
+    2026,
+    2,
+    21,
+    3,
+    48
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t214",
+   "kind": "expense",
+   "paise": 204256,
+   "at": [
+    2026,
+    10,
+    7,
+    5,
+    10
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t215",
+   "kind": "expense",
+   "paise": 86145,
+   "at": [
+    2025,
+    10,
+    4,
+    20,
+    38
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t216",
+   "kind": "expense",
+   "paise": 2019,
+   "at": [
+    2026,
+    9,
+    23,
+    5,
+    36
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t217",
+   "kind": "expense",
+   "paise": 119678,
+   "at": [
+    2026,
+    11,
+    23,
+    8,
+    13
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t218",
+   "kind": "expense",
+   "paise": 4268,
+   "at": [
+    2026,
+    1,
+    7,
+    5,
+    17
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t219",
+   "kind": "expense",
+   "paise": 80596,
+   "at": [
+    2026,
+    4,
+    10,
+    21,
+    21
+   ],
+   "categoryId": "food",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t220",
+   "kind": "expense",
+   "paise": 71768,
+   "at": [
+    2026,
+    2,
+    22,
+    14,
+    11
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t221",
+   "kind": "expense",
+   "paise": 156090,
+   "at": [
+    2026,
+    1,
+    22,
+    18,
+    43
+   ],
+   "categoryId": null,
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t222",
+   "kind": "income",
+   "paise": 7266018,
+   "at": [
+    2026,
+    11,
+    22,
+    5,
+    51
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t223",
+   "kind": "expense",
+   "paise": 245211,
+   "at": [
+    2025,
+    10,
+    13,
+    22,
+    17
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t224",
+   "kind": "expense",
+   "paise": 175858,
+   "at": [
+    2025,
+    10,
+    16,
+    6,
+    45
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t225",
+   "kind": "transfer",
+   "paise": 194644,
+   "at": [
+    2026,
+    1,
+    23,
+    15,
+    12
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t226",
+   "kind": "expense",
+   "paise": 48580,
+   "at": [
+    2026,
+    6,
+    1,
+    10,
+    33
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t227",
+   "kind": "refund",
+   "paise": 129466,
+   "at": [
+    2026,
+    7,
+    20,
+    11,
+    55
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t228",
+   "kind": "expense",
+   "paise": 149991,
+   "at": [
+    2026,
+    5,
+    3,
+    10,
+    8
+   ],
+   "categoryId": "fuel",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t229",
+   "kind": "expense",
+   "paise": 202533,
+   "at": [
+    2026,
+    6,
+    11,
+    18,
+    38
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t230",
+   "kind": "expense",
+   "paise": 208360,
+   "at": [
+    2026,
+    8,
+    8,
+    17,
+    28
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t231",
+   "kind": "expense",
+   "paise": 59470,
+   "at": [
+    2025,
+    12,
+    1,
+    9,
+    26
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t232",
+   "kind": "expense",
+   "paise": 178484,
+   "at": [
+    2026,
+    1,
+    28,
+    7,
+    50
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t233",
+   "kind": "expense",
+   "paise": 222184,
+   "at": [
+    2026,
+    5,
+    22,
+    15,
+    8
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t234",
+   "kind": "expense",
+   "paise": 66816,
+   "at": [
+    2026,
+    10,
+    5,
+    20,
+    32
+   ],
+   "categoryId": null,
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t235",
+   "kind": "expense",
+   "paise": 147487,
+   "at": [
+    2025,
+    11,
+    9,
+    10,
+    23
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t236",
+   "kind": "expense",
+   "paise": 29838,
+   "at": [
+    2026,
+    9,
+    28,
+    17,
+    22
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t237",
+   "kind": "expense",
+   "paise": 137348,
+   "at": [
+    2026,
+    7,
+    26,
+    13,
+    35
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t238",
+   "kind": "expense",
+   "paise": 160294,
+   "at": [
+    2026,
+    1,
+    2,
+    16,
+    22
+   ],
+   "categoryId": "rent",
+   "roomId": "goa",
+   "hidden": true
+  },
+  {
+   "id": "t239",
+   "kind": "expense",
+   "paise": 124494,
+   "at": [
+    2026,
+    3,
+    31,
+    16,
+    52
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t240",
+   "kind": "transfer",
+   "paise": 132586,
+   "at": [
+    2026,
+    11,
+    1,
+    9,
+    3
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t241",
+   "kind": "expense",
+   "paise": 24427,
+   "at": [
+    2026,
+    11,
+    28,
+    4,
+    21
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t242",
+   "kind": "expense",
+   "paise": 181081,
+   "at": [
+    2025,
+    12,
+    7,
+    22,
+    7
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t243",
+   "kind": "expense",
+   "paise": 167596,
+   "at": [
+    2025,
+    10,
+    12,
+    22,
+    38
+   ],
+   "categoryId": "rent",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t244",
+   "kind": "expense",
+   "paise": 182322,
+   "at": [
+    2026,
+    7,
+    1,
+    5,
+    7
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t245",
+   "kind": "income",
+   "paise": 7634853,
+   "at": [
+    2026,
+    3,
+    30,
+    17,
+    53
+   ],
+   "categoryId": null,
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t246",
+   "kind": "expense",
+   "paise": 214702,
+   "at": [
+    2026,
+    10,
+    22,
+    2,
+    53
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t247",
+   "kind": "expense",
+   "paise": 146891,
+   "at": [
+    2026,
+    4,
+    11,
+    17,
+    16
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t248",
+   "kind": "expense",
+   "paise": 120213,
+   "at": [
+    2026,
+    9,
+    4,
+    15,
+    9
+   ],
+   "categoryId": "food",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t249",
+   "kind": "transfer",
+   "paise": 90062,
+   "at": [
+    2025,
+    11,
+    4,
+    8,
+    1
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t250",
+   "kind": "expense",
+   "paise": 6781,
+   "at": [
+    2026,
+    10,
+    7,
+    3,
+    22
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t251",
+   "kind": "expense",
+   "paise": 57727,
+   "at": [
+    2026,
+    1,
+    19,
+    1,
+    18
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t252",
+   "kind": "expense",
+   "paise": 146045,
+   "at": [
+    2025,
+    10,
+    12,
+    18,
+    46
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t253",
+   "kind": "income",
+   "paise": 6434362,
+   "at": [
+    2026,
+    1,
+    13,
+    6,
+    27
+   ],
+   "categoryId": "shopping",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t254",
+   "kind": "expense",
+   "paise": 44417,
+   "at": [
+    2026,
+    1,
+    12,
+    13,
+    48
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t255",
+   "kind": "refund",
+   "paise": 146122,
+   "at": [
+    2026,
+    10,
+    1,
+    9,
+    58
+   ],
+   "categoryId": "fuel",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t256",
+   "kind": "transfer",
+   "paise": 59059,
+   "at": [
+    2026,
+    3,
+    24,
+    12,
+    44
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t257",
+   "kind": "refund",
+   "paise": 69423,
+   "at": [
+    2026,
+    9,
+    11,
+    2,
+    35
+   ],
+   "categoryId": "shopping",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t258",
+   "kind": "expense",
+   "paise": 48960,
+   "at": [
+    2026,
+    7,
+    5,
+    1,
+    11
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t259",
+   "kind": "expense",
+   "paise": 189016,
+   "at": [
+    2026,
+    3,
+    27,
+    10,
+    50
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t260",
+   "kind": "expense",
+   "paise": 36306,
+   "at": [
+    2025,
+    12,
+    4,
+    7,
+    44
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t261",
+   "kind": "expense",
+   "paise": 177361,
+   "at": [
+    2025,
+    9,
+    7,
+    8,
+    24
+   ],
+   "categoryId": "rent",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t262",
+   "kind": "expense",
+   "paise": 210474,
+   "at": [
+    2026,
+    2,
+    22,
+    16,
+    37
+   ],
+   "categoryId": "shopping",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t263",
+   "kind": "expense",
+   "paise": 196954,
+   "at": [
+    2026,
+    4,
+    21,
+    17,
+    15
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t264",
+   "kind": "expense",
+   "paise": 134243,
+   "at": [
+    2026,
+    4,
+    12,
+    11,
+    57
+   ],
+   "categoryId": "shopping",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t265",
+   "kind": "expense",
+   "paise": 213792,
+   "at": [
+    2026,
+    7,
+    19,
+    23,
+    9
+   ],
+   "categoryId": "rent",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t266",
+   "kind": "expense",
+   "paise": 108617,
+   "at": [
+    2026,
+    4,
+    5,
+    8,
+    59
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t267",
+   "kind": "expense",
+   "paise": 158733,
+   "at": [
+    2026,
+    9,
+    24,
+    20,
+    43
+   ],
+   "categoryId": "fuel",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t268",
+   "kind": "expense",
+   "paise": 130962,
+   "at": [
+    2026,
+    6,
+    24,
+    21,
+    8
+   ],
+   "categoryId": "fuel",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t269",
+   "kind": "expense",
+   "paise": 135767,
+   "at": [
+    2026,
+    8,
+    7,
+    2,
+    39
+   ],
+   "categoryId": "fuel",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t270",
+   "kind": "expense",
+   "paise": 214506,
+   "at": [
+    2025,
+    12,
+    27,
+    7,
+    22
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t271",
+   "kind": "income",
+   "paise": 6332861,
+   "at": [
+    2025,
+    9,
+    2,
+    23,
+    40
+   ],
+   "categoryId": "fuel",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t272",
+   "kind": "expense",
+   "paise": 38269,
+   "at": [
+    2026,
+    8,
+    22,
+    12,
+    18
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t273",
+   "kind": "expense",
+   "paise": 103758,
+   "at": [
+    2026,
+    2,
+    7,
+    7,
+    22
+   ],
+   "categoryId": null,
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t274",
+   "kind": "expense",
+   "paise": 165485,
+   "at": [
+    2026,
+    11,
+    9,
+    3,
+    58
+   ],
+   "categoryId": null,
+   "roomId": "office",
+   "hidden": true
+  },
+  {
+   "id": "t275",
+   "kind": "income",
+   "paise": 3066752,
+   "at": [
+    2026,
+    9,
+    27,
+    21,
+    0
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t276",
+   "kind": "expense",
+   "paise": 94354,
+   "at": [
+    2026,
+    1,
+    26,
+    9,
+    8
+   ],
+   "categoryId": "shopping",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t277",
+   "kind": "transfer",
+   "paise": 51764,
+   "at": [
+    2026,
+    6,
+    5,
+    20,
+    49
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t278",
+   "kind": "expense",
+   "paise": 93915,
+   "at": [
+    2026,
+    10,
+    20,
+    10,
+    2
+   ],
+   "categoryId": "rent",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t279",
+   "kind": "expense",
+   "paise": 133719,
+   "at": [
+    2025,
+    9,
+    10,
+    1,
+    53
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t280",
+   "kind": "expense",
+   "paise": 233397,
+   "at": [
+    2026,
+    1,
+    22,
+    9,
+    0
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t281",
+   "kind": "refund",
+   "paise": 160335,
+   "at": [
+    2026,
+    2,
+    3,
+    18,
+    42
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t282",
+   "kind": "income",
+   "paise": 6205898,
+   "at": [
+    2026,
+    2,
+    10,
+    5,
+    22
+   ],
+   "categoryId": "rent",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t283",
+   "kind": "expense",
+   "paise": 227031,
+   "at": [
+    2026,
+    3,
+    19,
+    11,
+    37
+   ],
+   "categoryId": "food",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t284",
+   "kind": "expense",
+   "paise": 114614,
+   "at": [
+    2026,
+    10,
+    27,
+    21,
+    3
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t285",
+   "kind": "expense",
+   "paise": 246852,
+   "at": [
+    2026,
+    7,
+    4,
+    2,
+    12
+   ],
+   "categoryId": "shopping",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t286",
+   "kind": "refund",
+   "paise": 16002,
+   "at": [
+    2026,
+    5,
+    24,
+    4,
+    43
+   ],
+   "categoryId": null,
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t287",
+   "kind": "income",
+   "paise": 5089491,
+   "at": [
+    2026,
+    1,
+    17,
+    19,
+    49
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t288",
+   "kind": "expense",
+   "paise": 83652,
+   "at": [
+    2025,
+    11,
+    27,
+    9,
+    26
+   ],
+   "categoryId": "shopping",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t289",
+   "kind": "expense",
+   "paise": 225095,
+   "at": [
+    2025,
+    9,
+    26,
+    5,
+    10
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t290",
+   "kind": "expense",
+   "paise": 29074,
+   "at": [
+    2025,
+    11,
+    30,
+    4,
+    47
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t291",
+   "kind": "expense",
+   "paise": 88496,
+   "at": [
+    2026,
+    1,
+    4,
+    20,
+    59
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t292",
+   "kind": "expense",
+   "paise": 181764,
+   "at": [
+    2025,
+    9,
+    7,
+    8,
+    59
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t293",
+   "kind": "expense",
+   "paise": 168078,
+   "at": [
+    2026,
+    11,
+    18,
+    3,
+    12
+   ],
+   "categoryId": "fuel",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t294",
+   "kind": "expense",
+   "paise": 151028,
+   "at": [
+    2026,
+    3,
+    3,
+    18,
+    5
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t295",
+   "kind": "expense",
+   "paise": 29513,
+   "at": [
+    2025,
+    9,
+    10,
+    3,
+    22
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t296",
+   "kind": "expense",
+   "paise": 92027,
+   "at": [
+    2026,
+    2,
+    16,
+    7,
+    3
+   ],
+   "categoryId": null,
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t297",
+   "kind": "expense",
+   "paise": 160579,
+   "at": [
+    2026,
+    11,
+    2,
+    11,
+    31
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t298",
+   "kind": "expense",
+   "paise": 133567,
+   "at": [
+    2026,
+    3,
+    9,
+    21,
+    6
+   ],
+   "categoryId": "fuel",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t299",
+   "kind": "expense",
+   "paise": 65231,
+   "at": [
+    2026,
+    5,
+    16,
+    23,
+    18
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t300",
+   "kind": "expense",
+   "paise": 143861,
+   "at": [
+    2026,
+    3,
+    8,
+    22,
+    55
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t301",
+   "kind": "refund",
+   "paise": 17425,
+   "at": [
+    2026,
+    4,
+    2,
+    2,
+    18
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t302",
+   "kind": "expense",
+   "paise": 240492,
+   "at": [
+    2025,
+    11,
+    5,
+    21,
+    9
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t303",
+   "kind": "transfer",
+   "paise": 33984,
+   "at": [
+    2026,
+    2,
+    6,
+    0,
+    48
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t304",
+   "kind": "expense",
+   "paise": 172899,
+   "at": [
+    2026,
+    9,
+    7,
+    15,
+    53
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t305",
+   "kind": "transfer",
+   "paise": 184441,
+   "at": [
+    2026,
+    4,
+    26,
+    16,
+    3
+   ],
+   "categoryId": "fuel",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t306",
+   "kind": "expense",
+   "paise": 72768,
+   "at": [
+    2026,
+    2,
+    14,
+    2,
+    10
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t307",
+   "kind": "expense",
+   "paise": 78106,
+   "at": [
+    2026,
+    1,
+    6,
+    17,
+    4
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t308",
+   "kind": "expense",
+   "paise": 166884,
+   "at": [
+    2026,
+    11,
+    5,
+    8,
+    54
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t309",
+   "kind": "income",
+   "paise": 5773750,
+   "at": [
+    2025,
+    11,
+    9,
+    20,
+    58
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t310",
+   "kind": "expense",
+   "paise": 243073,
+   "at": [
+    2026,
+    10,
+    1,
+    19,
+    33
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t311",
+   "kind": "expense",
+   "paise": 136110,
+   "at": [
+    2025,
+    9,
+    24,
+    11,
+    52
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t312",
+   "kind": "expense",
+   "paise": 178996,
+   "at": [
+    2026,
+    6,
+    18,
+    17,
+    52
+   ],
+   "categoryId": null,
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t313",
+   "kind": "expense",
+   "paise": 188598,
+   "at": [
+    2026,
+    2,
+    23,
+    19,
+    4
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t314",
+   "kind": "expense",
+   "paise": 163134,
+   "at": [
+    2025,
+    11,
+    16,
+    4,
+    14
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t315",
+   "kind": "expense",
+   "paise": 173564,
+   "at": [
+    2026,
+    7,
+    7,
+    7,
+    37
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t316",
+   "kind": "income",
+   "paise": 6132785,
+   "at": [
+    2025,
+    12,
+    10,
+    20,
+    34
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t317",
+   "kind": "expense",
+   "paise": 157668,
+   "at": [
+    2026,
+    11,
+    16,
+    14,
+    33
+   ],
+   "categoryId": "fuel",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t318",
+   "kind": "income",
+   "paise": 7309530,
+   "at": [
+    2025,
+    11,
+    17,
+    0,
+    58
+   ],
+   "categoryId": null,
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t319",
+   "kind": "expense",
+   "paise": 173053,
+   "at": [
+    2026,
+    5,
+    8,
+    3,
+    42
+   ],
+   "categoryId": "shopping",
+   "roomId": "office",
+   "hidden": true
+  },
+  {
+   "id": "t320",
+   "kind": "income",
+   "paise": 7192395,
+   "at": [
+    2026,
+    1,
+    13,
+    15,
+    12
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t321",
+   "kind": "expense",
+   "paise": 138380,
+   "at": [
+    2026,
+    5,
+    1,
+    2,
+    40
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t322",
+   "kind": "transfer",
+   "paise": 163441,
+   "at": [
+    2025,
+    12,
+    30,
+    22,
+    53
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t323",
+   "kind": "income",
+   "paise": 5917525,
+   "at": [
+    2025,
+    9,
+    13,
+    5,
+    34
+   ],
+   "categoryId": "rent",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t324",
+   "kind": "refund",
+   "paise": 216191,
+   "at": [
+    2025,
+    12,
+    29,
+    5,
+    42
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t325",
+   "kind": "expense",
+   "paise": 108441,
+   "at": [
+    2026,
+    5,
+    31,
+    6,
+    41
+   ],
+   "categoryId": "fuel",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t326",
+   "kind": "expense",
+   "paise": 187931,
+   "at": [
+    2025,
+    12,
+    7,
+    18,
+    39
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t327",
+   "kind": "expense",
+   "paise": 157242,
+   "at": [
+    2025,
+    10,
+    9,
+    15,
+    11
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t328",
+   "kind": "transfer",
+   "paise": 204831,
+   "at": [
+    2025,
+    12,
+    22,
+    20,
+    30
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t329",
+   "kind": "expense",
+   "paise": 226006,
+   "at": [
+    2026,
+    8,
+    3,
+    13,
+    10
+   ],
+   "categoryId": "shopping",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t330",
+   "kind": "refund",
+   "paise": 105688,
+   "at": [
+    2026,
+    11,
+    12,
+    22,
+    39
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t331",
+   "kind": "expense",
+   "paise": 94369,
+   "at": [
+    2026,
+    1,
+    28,
+    4,
+    23
+   ],
+   "categoryId": null,
+   "roomId": "office",
+   "hidden": true
+  },
+  {
+   "id": "t332",
+   "kind": "refund",
+   "paise": 45898,
+   "at": [
+    2026,
+    7,
+    26,
+    16,
+    8
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t333",
+   "kind": "refund",
+   "paise": 134992,
+   "at": [
+    2026,
+    6,
+    15,
+    11,
+    23
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t334",
+   "kind": "expense",
+   "paise": 106137,
+   "at": [
+    2026,
+    1,
+    15,
+    9,
+    2
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t335",
+   "kind": "expense",
+   "paise": 24605,
+   "at": [
+    2026,
+    9,
+    10,
+    18,
+    56
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t336",
+   "kind": "expense",
+   "paise": 24040,
+   "at": [
+    2026,
+    6,
+    25,
+    20,
+    12
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t337",
+   "kind": "expense",
+   "paise": 171502,
+   "at": [
+    2026,
+    1,
+    31,
+    5,
+    7
+   ],
+   "categoryId": "rent",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t338",
+   "kind": "transfer",
+   "paise": 174051,
+   "at": [
+    2025,
+    9,
+    3,
+    21,
+    9
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t339",
+   "kind": "transfer",
+   "paise": 9868,
+   "at": [
+    2026,
+    8,
+    20,
+    5,
+    46
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t340",
+   "kind": "expense",
+   "paise": 103173,
+   "at": [
+    2025,
+    11,
+    7,
+    7,
+    1
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t341",
+   "kind": "income",
+   "paise": 2860272,
+   "at": [
+    2025,
+    9,
+    13,
+    8,
+    12
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t342",
+   "kind": "income",
+   "paise": 3284835,
+   "at": [
+    2025,
+    12,
+    26,
+    3,
+    28
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t343",
+   "kind": "refund",
+   "paise": 236335,
+   "at": [
+    2026,
+    5,
+    20,
+    8,
+    36
+   ],
+   "categoryId": "shopping",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t344",
+   "kind": "expense",
+   "paise": 45729,
+   "at": [
+    2026,
+    8,
+    1,
+    6,
+    53
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t345",
+   "kind": "expense",
+   "paise": 114544,
+   "at": [
+    2026,
+    9,
+    11,
+    8,
+    41
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t346",
+   "kind": "expense",
+   "paise": 191824,
+   "at": [
+    2026,
+    5,
+    14,
+    18,
+    49
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t347",
+   "kind": "income",
+   "paise": 6794307,
+   "at": [
+    2026,
+    2,
+    10,
+    21,
+    32
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t348",
+   "kind": "expense",
+   "paise": 190155,
+   "at": [
+    2025,
+    10,
+    10,
+    6,
+    49
+   ],
+   "categoryId": "fuel",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t349",
+   "kind": "expense",
+   "paise": 115299,
+   "at": [
+    2026,
+    5,
+    4,
+    17,
+    58
+   ],
+   "categoryId": null,
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t350",
+   "kind": "expense",
+   "paise": 87214,
+   "at": [
+    2026,
+    10,
+    6,
+    4,
+    11
+   ],
+   "categoryId": "fuel",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t351",
+   "kind": "expense",
+   "paise": 90281,
+   "at": [
+    2025,
+    12,
+    30,
+    9,
+    35
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t352",
+   "kind": "income",
+   "paise": 7662595,
+   "at": [
+    2026,
+    5,
+    6,
+    10,
+    9
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t353",
+   "kind": "transfer",
+   "paise": 235546,
+   "at": [
+    2026,
+    4,
+    5,
+    22,
+    5
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t354",
+   "kind": "expense",
+   "paise": 182860,
+   "at": [
+    2026,
+    3,
+    19,
+    1,
+    58
+   ],
+   "categoryId": "rent",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t355",
+   "kind": "refund",
+   "paise": 147107,
+   "at": [
+    2026,
+    5,
+    26,
+    8,
+    4
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t356",
+   "kind": "expense",
+   "paise": 167479,
+   "at": [
+    2026,
+    9,
+    18,
+    19,
+    35
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t357",
+   "kind": "refund",
+   "paise": 41705,
+   "at": [
+    2025,
+    9,
+    4,
+    14,
+    40
+   ],
+   "categoryId": null,
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t358",
+   "kind": "expense",
+   "paise": 5315,
+   "at": [
+    2025,
+    12,
+    1,
+    10,
+    14
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t359",
+   "kind": "expense",
+   "paise": 205783,
+   "at": [
+    2025,
+    9,
+    16,
+    0,
+    13
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t360",
+   "kind": "expense",
+   "paise": 89401,
+   "at": [
+    2026,
+    8,
+    17,
+    21,
+    40
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t361",
+   "kind": "transfer",
+   "paise": 223992,
+   "at": [
+    2025,
+    9,
+    17,
+    11,
+    21
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t362",
+   "kind": "income",
+   "paise": 3659796,
+   "at": [
+    2026,
+    2,
+    19,
+    14,
+    59
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t363",
+   "kind": "expense",
+   "paise": 5978,
+   "at": [
+    2025,
+    9,
+    4,
+    8,
+    23
+   ],
+   "categoryId": "food",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t364",
+   "kind": "refund",
+   "paise": 202059,
+   "at": [
+    2026,
+    5,
+    22,
+    14,
+    43
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t365",
+   "kind": "expense",
+   "paise": 95172,
+   "at": [
+    2026,
+    8,
+    23,
+    16,
+    37
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t366",
+   "kind": "income",
+   "paise": 2174379,
+   "at": [
+    2025,
+    9,
+    22,
+    18,
+    46
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t367",
+   "kind": "refund",
+   "paise": 65728,
+   "at": [
+    2025,
+    10,
+    5,
+    7,
+    40
+   ],
+   "categoryId": null,
+   "roomId": "goa",
+   "hidden": true
+  },
+  {
+   "id": "t368",
+   "kind": "expense",
+   "paise": 139497,
+   "at": [
+    2026,
+    11,
+    27,
+    18,
+    33
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t369",
+   "kind": "income",
+   "paise": 7155076,
+   "at": [
+    2026,
+    10,
+    29,
+    12,
+    21
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t370",
+   "kind": "expense",
+   "paise": 211250,
+   "at": [
+    2025,
+    12,
+    14,
+    7,
+    17
+   ],
+   "categoryId": "rent",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t371",
+   "kind": "expense",
+   "paise": 94926,
+   "at": [
+    2026,
+    11,
+    28,
+    22,
+    29
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t372",
+   "kind": "expense",
+   "paise": 151159,
+   "at": [
+    2026,
+    7,
+    30,
+    20,
+    12
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t373",
+   "kind": "expense",
+   "paise": 247871,
+   "at": [
+    2025,
+    12,
+    31,
+    7,
+    16
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t374",
+   "kind": "expense",
+   "paise": 2158,
+   "at": [
+    2026,
+    5,
+    7,
+    14,
+    52
+   ],
+   "categoryId": null,
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t375",
+   "kind": "expense",
+   "paise": 118963,
+   "at": [
+    2026,
+    10,
+    10,
+    2,
+    1
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t376",
+   "kind": "transfer",
+   "paise": 219025,
+   "at": [
+    2025,
+    9,
+    30,
+    1,
+    19
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t377",
+   "kind": "expense",
+   "paise": 113315,
+   "at": [
+    2025,
+    12,
+    22,
+    13,
+    35
+   ],
+   "categoryId": "shopping",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t378",
+   "kind": "expense",
+   "paise": 54912,
+   "at": [
+    2026,
+    7,
+    7,
+    22,
+    47
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t379",
+   "kind": "expense",
+   "paise": 185650,
+   "at": [
+    2026,
+    10,
+    3,
+    5,
+    0
+   ],
+   "categoryId": "rent",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t380",
+   "kind": "expense",
+   "paise": 125114,
+   "at": [
+    2025,
+    12,
+    24,
+    10,
+    12
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t381",
+   "kind": "expense",
+   "paise": 3112,
+   "at": [
+    2026,
+    8,
+    2,
+    3,
+    20
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t382",
+   "kind": "expense",
+   "paise": 106614,
+   "at": [
+    2026,
+    11,
+    16,
+    23,
+    54
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t383",
+   "kind": "expense",
+   "paise": 238014,
+   "at": [
+    2025,
+    12,
+    16,
+    3,
+    10
+   ],
+   "categoryId": null,
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t384",
+   "kind": "expense",
+   "paise": 15725,
+   "at": [
+    2026,
+    8,
+    9,
+    11,
+    37
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t385",
+   "kind": "expense",
+   "paise": 2770,
+   "at": [
+    2026,
+    1,
+    4,
+    13,
+    5
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t386",
+   "kind": "income",
+   "paise": 5937668,
+   "at": [
+    2026,
+    9,
+    5,
+    9,
+    20
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t387",
+   "kind": "transfer",
+   "paise": 7047,
+   "at": [
+    2026,
+    3,
+    18,
+    1,
+    32
+   ],
+   "categoryId": "food",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t388",
+   "kind": "transfer",
+   "paise": 199280,
+   "at": [
+    2026,
+    11,
+    24,
+    11,
+    28
+   ],
+   "categoryId": null,
+   "roomId": "goa",
+   "hidden": true
+  },
+  {
+   "id": "t389",
+   "kind": "expense",
+   "paise": 93569,
+   "at": [
+    2026,
+    4,
+    9,
+    11,
+    54
+   ],
+   "categoryId": "shopping",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t390",
+   "kind": "expense",
+   "paise": 245297,
+   "at": [
+    2026,
+    9,
+    12,
+    17,
+    11
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t391",
+   "kind": "expense",
+   "paise": 138806,
+   "at": [
+    2026,
+    6,
+    14,
+    7,
+    19
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t392",
+   "kind": "expense",
+   "paise": 68314,
+   "at": [
+    2026,
+    4,
+    26,
+    1,
+    27
+   ],
+   "categoryId": "food",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t393",
+   "kind": "expense",
+   "paise": 205444,
+   "at": [
+    2026,
+    6,
+    6,
+    18,
+    18
+   ],
+   "categoryId": "fuel",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t394",
+   "kind": "expense",
+   "paise": 152371,
+   "at": [
+    2025,
+    9,
+    2,
+    22,
+    18
+   ],
+   "categoryId": "rent",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t395",
+   "kind": "expense",
+   "paise": 162600,
+   "at": [
+    2026,
+    3,
+    30,
+    17,
+    15
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t396",
+   "kind": "expense",
+   "paise": 219894,
+   "at": [
+    2025,
+    9,
+    6,
+    5,
+    47
+   ],
+   "categoryId": "food",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t397",
+   "kind": "expense",
+   "paise": 73680,
+   "at": [
+    2025,
+    9,
+    16,
+    11,
+    38
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t398",
+   "kind": "expense",
+   "paise": 99703,
+   "at": [
+    2026,
+    7,
+    25,
+    17,
+    57
+   ],
+   "categoryId": "rent",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t399",
+   "kind": "transfer",
+   "paise": 180435,
+   "at": [
+    2026,
+    11,
+    8,
+    20,
+    56
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t400",
+   "kind": "expense",
+   "paise": 225471,
+   "at": [
+    2026,
+    11,
+    11,
+    19,
+    34
+   ],
+   "categoryId": "fuel",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t401",
+   "kind": "expense",
+   "paise": 78378,
+   "at": [
+    2025,
+    12,
+    12,
+    17,
+    46
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t402",
+   "kind": "expense",
+   "paise": 79985,
+   "at": [
+    2026,
+    3,
+    28,
+    11,
+    53
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t403",
+   "kind": "income",
+   "paise": 3908903,
+   "at": [
+    2026,
+    3,
+    23,
+    11,
+    42
+   ],
+   "categoryId": "fuel",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t404",
+   "kind": "expense",
+   "paise": 132637,
+   "at": [
+    2025,
+    12,
+    2,
+    17,
+    27
+   ],
+   "categoryId": "shopping",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t405",
+   "kind": "expense",
+   "paise": 181379,
+   "at": [
+    2026,
+    7,
+    8,
+    4,
+    17
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": true
+  },
+  {
+   "id": "t406",
+   "kind": "income",
+   "paise": 2162263,
+   "at": [
+    2025,
+    9,
+    14,
+    6,
+    48
+   ],
+   "categoryId": "shopping",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t407",
+   "kind": "expense",
+   "paise": 53868,
+   "at": [
+    2025,
+    11,
+    20,
+    4,
+    30
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t408",
+   "kind": "expense",
+   "paise": 46379,
+   "at": [
+    2026,
+    6,
+    29,
+    6,
+    37
+   ],
+   "categoryId": "fuel",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t409",
+   "kind": "expense",
+   "paise": 212798,
+   "at": [
+    2026,
+    5,
+    11,
+    7,
+    35
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t410",
+   "kind": "expense",
+   "paise": 162254,
+   "at": [
+    2025,
+    11,
+    17,
+    5,
+    4
+   ],
+   "categoryId": "fuel",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t411",
+   "kind": "transfer",
+   "paise": 89788,
+   "at": [
+    2026,
+    2,
+    26,
+    16,
+    37
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t412",
+   "kind": "income",
+   "paise": 4959539,
+   "at": [
+    2026,
+    2,
+    5,
+    12,
+    44
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t413",
+   "kind": "expense",
+   "paise": 144466,
+   "at": [
+    2026,
+    8,
+    25,
+    23,
+    46
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t414",
+   "kind": "expense",
+   "paise": 93203,
+   "at": [
+    2026,
+    11,
+    10,
+    17,
+    8
+   ],
+   "categoryId": "rent",
+   "roomId": "office",
+   "hidden": false
+  },
+  {
+   "id": "t415",
+   "kind": "income",
+   "paise": 2429664,
+   "at": [
+    2025,
+    12,
+    10,
+    22,
+    32
+   ],
+   "categoryId": "fuel",
+   "roomId": "goa",
+   "hidden": false
+  },
+  {
+   "id": "t416",
+   "kind": "expense",
+   "paise": 66577,
+   "at": [
+    2026,
+    11,
+    10,
+    6,
+    5
+   ],
+   "categoryId": "shopping",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t417",
+   "kind": "transfer",
+   "paise": 158668,
+   "at": [
+    2026,
+    3,
+    26,
+    1,
+    4
+   ],
+   "categoryId": "rent",
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t418",
+   "kind": "expense",
+   "paise": 182528,
+   "at": [
+    2025,
+    9,
+    7,
+    2,
+    20
+   ],
+   "categoryId": null,
+   "roomId": null,
+   "hidden": false
+  },
+  {
+   "id": "t419",
+   "kind": "expense",
+   "paise": 171135,
+   "at": [
+    2026,
+    8,
+    21,
+    7,
+    33
+   ],
+   "categoryId": "food",
+   "roomId": null,
+   "hidden": false
+  }
+ ],
+ "cases": [
+  {
+   "startDay": 1,
+   "today": "2026-11-19",
+   "offset": 0,
+   "start": "2026-11-01",
+   "end": "2026-12-01",
+   "daysElapsed": 19,
+   "daysLeft": 12,
+   "summary": {
+    "spent": 2039170,
+    "spentInRooms": 703247,
+    "spentForBudget": 1980343,
+    "moneyIn": 7266018,
+    "byCategory": [
+     [
+      "fuel",
+      619278
+     ],
+     [
+      "shopping",
+      533010
+     ],
+     [
+      null,
+      445523
+     ],
+     [
+      "food",
+      273601
+     ],
+     [
+      "rent",
+      167758
+     ]
+    ],
+    "budgetByCategory": {
+     "": 445523,
+     "shopping": 474183,
+     "fuel": 619278,
+     "food": 273601,
+     "rent": 167758
+    }
+   },
+   "dailyAverage": 107325,
+   "carried": 170782364,
+   "safe": {
+    "kind": "over",
+    "over": 480343
+   }
+  },
+  {
+   "startDay": 1,
+   "today": "2026-11-19",
+   "offset": -1,
+   "start": "2026-10-01",
+   "end": "2026-11-01",
+   "daysElapsed": 31,
+   "daysLeft": 0,
+   "summary": {
+    "spent": 2675017,
+    "spentInRooms": 1307424,
+    "spentForBudget": 1864269,
+    "moneyIn": 24459805,
+    "byCategory": [
+     [
+      "rent",
+      739788
+     ],
+     [
+      null,
+      587295
+     ],
+     [
+      "shopping",
+      460885
+     ],
+     [
+      "fuel",
+      455607
+     ],
+     [
+      "food",
+      431442
+     ]
+    ],
+    "budgetByCategory": {
+     "food": 431442,
+     "": 520479,
+     "shopping": 460885,
+     "fuel": -71175,
+     "rent": 522638
+    }
+   },
+   "dailyAverage": 86291,
+   "carried": 148997576,
+   "safe": {
+    "kind": "none"
+   }
+  },
+  {
+   "startDay": 1,
+   "today": "2026-11-19",
+   "offset": -5,
+   "start": "2026-06-01",
+   "end": "2026-07-01",
+   "daysElapsed": 30,
+   "daysLeft": 0,
+   "summary": {
+    "spent": 1110638,
+    "spentInRooms": 329597,
+    "spentForBudget": 951460,
+    "moneyIn": 2651584,
+    "byCategory": [
+     [
+      "fuel",
+      406825
+     ],
+     [
+      "rent",
+      367082
+     ],
+     [
+      "food",
+      193956
+     ],
+     [
+      "shopping",
+      138806
+     ],
+     [
+      null,
+      3969
+     ]
+    ],
+    "budgetByCategory": {
+     "rent": 367082,
+     "food": 193956,
+     "": 227576,
+     "fuel": 24040,
+     "shopping": 138806
+    }
+   },
+   "dailyAverage": 37021,
+   "carried": 131488986,
+   "safe": {
+    "kind": "none"
+   }
+  },
+  {
+   "startDay": 1,
+   "today": "2026-02-28",
+   "offset": 0,
+   "start": "2026-02-01",
+   "end": "2026-03-01",
+   "daysElapsed": 28,
+   "daysLeft": 1,
+   "summary": {
+    "spent": 1882973,
+    "spentInRooms": 1051172,
+    "spentForBudget": 1615346,
+    "moneyIn": 27873894,
+    "byCategory": [
+     [
+      "rent",
+      569273
+     ],
+     [
+      null,
+      504295
+     ],
+     [
+      "shopping",
+      380967
+     ],
+     [
+      "fuel",
+      380521
+     ],
+     [
+      "food",
+      47917
+     ]
+    ],
+    "budgetByCategory": {
+     "fuel": 380521,
+     "food": 47917,
+     "": 447142,
+     "rent": 569273,
+     "shopping": 170493
+    }
+   },
+   "dailyAverage": 67249,
+   "carried": 80670097,
+   "safe": {
+    "kind": "over",
+    "over": 115346
+   }
+  },
+  {
+   "startDay": 1,
+   "today": "2026-02-28",
+   "offset": -1,
+   "start": "2026-01-01",
+   "end": "2026-02-01",
+   "daysElapsed": 31,
+   "daysLeft": 0,
+   "summary": {
+    "spent": 2560421,
+    "spentInRooms": 1054237,
+    "spentForBudget": 2036793,
+    "moneyIn": 15227285,
+    "byCategory": [
+     [
+      "shopping",
+      952569
+     ],
+     [
+      "fuel",
+      512529
+     ],
+     [
+      "rent",
+      396286
+     ],
+     [
+      "food",
+      393155
+     ],
+     [
+      null,
+      305882
+     ]
+    ],
+    "budgetByCategory": {
+     "fuel": 512529,
+     "food": 393155,
+     "shopping": 952569,
+     "rent": 178540
+    }
+   },
+   "dailyAverage": 82594,
+   "carried": 68003233,
+   "safe": {
+    "kind": "none"
+   }
+  },
+  {
+   "startDay": 1,
+   "today": "2026-02-28",
+   "offset": -5,
+   "start": "2025-09-01",
+   "end": "2025-10-01",
+   "daysElapsed": 30,
+   "daysLeft": 0,
+   "summary": {
+    "spent": 2487135,
+    "spentInRooms": 802857,
+    "spentForBudget": 1997550,
+    "moneyIn": 25777566,
+    "byCategory": [
+     [
+      "fuel",
+      1101960
+     ],
+     [
+      "rent",
+      628507
+     ],
+     [
+      null,
+      277988
+     ],
+     [
+      "shopping",
+      252808
+     ],
+     [
+      "food",
+      225872
+     ]
+    ],
+    "budgetByCategory": {
+     "fuel": 948913,
+     "shopping": 252808,
+     "": 319693,
+     "rent": 476136
+    }
+   },
+   "dailyAverage": 82905,
+   "carried": 0,
+   "safe": {
+    "kind": "none"
+   }
+  },
+  {
+   "startDay": 1,
+   "today": "2026-03-01",
+   "offset": 0,
+   "start": "2026-03-01",
+   "end": "2026-04-01",
+   "daysElapsed": 1,
+   "daysLeft": 31,
+   "summary": {
+    "spent": 2569722,
+    "spentInRooms": 857860,
+    "spentForBudget": 2162508,
+    "moneyIn": 14658730,
+    "byCategory": [
+     [
+      "food",
+      1026554
+     ],
+     [
+      "shopping",
+      583451
+     ],
+     [
+      "fuel",
+      462750
+     ],
+     [
+      "rent",
+      281948
+     ],
+     [
+      null,
+      215019
+     ]
+    ],
+    "budgetByCategory": {
+     "fuel": 462750,
+     "": 215019,
+     "food": 1026554,
+     "rent": 99088,
+     "shopping": 359097
+    }
+   },
+   "dailyAverage": 2569722,
+   "carried": 106661018,
+   "safe": {
+    "kind": "over",
+    "over": 662508
+   }
+  },
+  {
+   "startDay": 1,
+   "today": "2026-03-01",
+   "offset": -1,
+   "start": "2026-02-01",
+   "end": "2026-03-01",
+   "daysElapsed": 28,
+   "daysLeft": 0,
+   "summary": {
+    "spent": 1882973,
+    "spentInRooms": 1051172,
+    "spentForBudget": 1615346,
+    "moneyIn": 27873894,
+    "byCategory": [
+     [
+      "rent",
+      569273
+     ],
+     [
+      null,
+      504295
+     ],
+     [
+      "shopping",
+      380967
+     ],
+     [
+      "fuel",
+      380521
+     ],
+     [
+      "food",
+      47917
+     ]
+    ],
+    "budgetByCategory": {
+     "fuel": 380521,
+     "food": 47917,
+     "": 447142,
+     "rent": 569273,
+     "shopping": 170493
+    }
+   },
+   "dailyAverage": 67249,
+   "carried": 80670097,
+   "safe": {
+    "kind": "none"
+   }
+  },
+  {
+   "startDay": 1,
+   "today": "2026-03-01",
+   "offset": -5,
+   "start": "2025-10-01",
+   "end": "2025-11-01",
+   "daysElapsed": 31,
+   "daysLeft": 0,
+   "summary": {
+    "spent": 1974101,
+    "spentInRooms": 609674,
+    "spentForBudget": 1624727,
+    "moneyIn": 6816534,
+    "byCategory": [
+     [
+      "food",
+      681783
+     ],
+     [
+      "fuel",
+      513168
+     ],
+     [
+      "shopping",
+      354699
+     ],
+     [
+      "rent",
+      250025
+     ],
+     [
+      null,
+      174426
+     ]
+    ],
+    "budgetByCategory": {
+     "fuel": 655739,
+     "shopping": 207322,
+     "": -2546,
+     "food": 681783,
+     "rent": 82429
+    }
+   },
+   "dailyAverage": 63681,
+   "carried": 23290431,
+   "safe": {
+    "kind": "none"
+   }
+  },
+  {
+   "startDay": 1,
+   "today": "2026-12-31",
+   "offset": 0,
+   "start": "2026-12-01",
+   "end": "2027-01-01",
+   "daysElapsed": 31,
+   "daysLeft": 1,
+   "summary": {
+    "spent": 48249,
+    "spentInRooms": 0,
+    "spentForBudget": 48249,
+    "moneyIn": 0,
+    "byCategory": [
+     [
+      null,
+      48249
+     ]
+    ],
+    "budgetByCategory": {
+     "": 48249
+    }
+   },
+   "dailyAverage": 1556,
+   "carried": 176009212,
+   "safe": {
+    "kind": "onTrack",
+    "left": 1451751,
+    "daysLeft": 1,
+    "perDay": 1451751
+   }
+  },
+  {
+   "startDay": 1,
+   "today": "2026-12-31",
+   "offset": -1,
+   "start": "2026-11-01",
+   "end": "2026-12-01",
+   "daysElapsed": 30,
+   "daysLeft": 0,
+   "summary": {
+    "spent": 2039170,
+    "spentInRooms": 703247,
+    "spentForBudget": 1980343,
+    "moneyIn": 7266018,
+    "byCategory": [
+     [
+      "fuel",
+      619278
+     ],
+     [
+      "shopping",
+      533010
+     ],
+     [
+      null,
+      445523
+     ],
+     [
+      "food",
+      273601
+     ],
+     [
+      "rent",
+      167758
+     ]
+    ],
+    "budgetByCategory": {
+     "": 445523,
+     "shopping": 474183,
+     "fuel": 619278,
+     "food": 273601,
+     "rent": 167758
+    }
+   },
+   "dailyAverage": 67972,
+   "carried": 170782364,
+   "safe": {
+    "kind": "none"
+   }
+  },
+  {
+   "startDay": 1,
+   "today": "2026-12-31",
+   "offset": -5,
+   "start": "2026-07-01",
+   "end": "2026-08-01",
+   "daysElapsed": 31,
+   "daysLeft": 0,
+   "summary": {
+    "spent": 2856361,
+    "spentInRooms": 1135779,
+    "spentForBudget": 2051241,
+    "moneyIn": 0,
+    "byCategory": [
+     [
+      null,
+      712982
+     ],
+     [
+      "shopping",
+      705474
+     ],
+     [
+      "rent",
+      539077
+     ],
+     [
+      "food",
+      522321
+     ],
+     [
+      "fuel",
+      376507
+     ]
+    ],
+    "budgetByCategory": {
+     "food": 522321,
+     "shopping": 241160,
+     "rent": 325285,
+     "": 585968,
+     "fuel": 376507
+    }
+   },
+   "dailyAverage": 92141,
+   "carried": 133029932,
+   "safe": {
+    "kind": "none"
+   }
+  },
+  {
+   "startDay": 25,
+   "today": "2026-11-19",
+   "offset": 0,
+   "start": "2026-10-25",
+   "end": "2026-11-25",
+   "daysElapsed": 26,
+   "daysLeft": 6,
+   "summary": {
+    "spent": 2199716,
+    "spentInRooms": 936582,
+    "spentForBudget": 1907554,
+    "moneyIn": 19697443,
+    "byCategory": [
+     [
+      "fuel",
+      927560
+     ],
+     [
+      "shopping",
+      609951
+     ],
+     [
+      null,
+      421096
+     ],
+     [
+      "food",
+      212848
+     ],
+     [
+      "rent",
+      28261
+     ]
+    ],
+    "budgetByCategory": {
+     "food": 212848,
+     "": 421096,
+     "fuel": 694225,
+     "shopping": 551124,
+     "rent": 28261
+    }
+   },
+   "dailyAverage": 84604,
+   "carried": 158808008,
+   "safe": {
+    "kind": "over",
+    "over": 407554
+   }
+  },
+  {
+   "startDay": 25,
+   "today": "2026-11-19",
+   "offset": -1,
+   "start": "2026-09-25",
+   "end": "2026-10-25",
+   "daysElapsed": 30,
+   "daysLeft": 0,
+   "summary": {
+    "spent": 2288498,
+    "spentInRooms": 1114801,
+    "spentForBudget": 1670373,
+    "moneyIn": 15095132,
+    "byCategory": [
+     [
+      "rent",
+      739788
+     ],
+     [
+      null,
+      628007
+     ],
+     [
+      "food",
+      397269
+     ],
+     [
+      "shopping",
+      376109
+     ],
+     [
+      "fuel",
+      147325
+     ]
+    ],
+    "budgetByCategory": {
+     "": 520479,
+     "food": 397269,
+     "shopping": 376109,
+     "fuel": -146122,
+     "rent": 522638
+    }
+   },
+   "dailyAverage": 76283,
+   "carried": 146001374,
+   "safe": {
+    "kind": "none"
+   }
+  },
+  {
+   "startDay": 25,
+   "today": "2026-11-19",
+   "offset": -5,
+   "start": "2026-05-25",
+   "end": "2026-06-25",
+   "daysElapsed": 31,
+   "daysLeft": 0,
+   "summary": {
+    "spent": 881317,
+    "spentInRooms": 391659,
+    "spentForBudget": 660077,
+    "moneyIn": 2651584,
+    "byCategory": [
+     [
+      "fuel",
+      444847
+     ],
+     [
+      "rent",
+      246846
+     ],
+     [
+      "food",
+      193956
+     ],
+     [
+      "shopping",
+      138806
+     ]
+    ],
+    "budgetByCategory": {
+     "rent": 246846,
+     "food": 193956,
+     "": 80469,
+     "shopping": 138806
+    }
+   },
+   "dailyAverage": 28430,
+   "carried": 131450320,
+   "safe": {
+    "kind": "none"
+   }
+  },
+  {
+   "startDay": 25,
+   "today": "2026-02-28",
+   "offset": 0,
+   "start": "2026-02-25",
+   "end": "2026-03-25",
+   "daysElapsed": 4,
+   "daysLeft": 25,
+   "summary": {
+    "spent": 2503471,
+    "spentInRooms": 974897,
+    "spentForBudget": 2096257,
+    "moneyIn": 3908903,
+    "byCategory": [
+     [
+      "shopping",
+      973710
+     ],
+     [
+      "food",
+      569427
+     ],
+     [
+      null,
+      422104
+     ],
+     [
+      "fuel",
+      273734
+     ],
+     [
+      "rent",
+      264496
+     ]
+    ],
+    "budgetByCategory": {
+     "fuel": 273734,
+     "": 422104,
+     "rent": 81636,
+     "food": 569427,
+     "shopping": 749356
+    }
+   },
+   "dailyAverage": 625868,
+   "carried": 107038596,
+   "safe": {
+    "kind": "over",
+    "over": 596257
+   }
+  },
+  {
+   "startDay": 25,
+   "today": "2026-02-28",
+   "offset": -1,
+   "start": "2026-01-25",
+   "end": "2026-02-25",
+   "daysElapsed": 31,
+   "daysLeft": 0,
+   "summary": {
+    "spent": 2171469,
+    "spentInRooms": 1266988,
+    "spentForBudget": 1903842,
+    "moneyIn": 27873894,
+    "byCategory": [
+     [
+      "rent",
+      740775
+     ],
+     [
+      "fuel",
+      537566
+     ],
+     [
+      "shopping",
+      304828
+     ],
+     [
+      null,
+      297210
+     ],
+     [
+      "food",
+      291090
+     ]
+    ],
+    "budgetByCategory": {
+     "fuel": 537566,
+     "food": 291090,
+     "rent": 740775,
+     "": 240057,
+     "shopping": 94354
+    }
+   },
+   "dailyAverage": 70047,
+   "carried": 81336171,
+   "safe": {
+    "kind": "none"
+   }
+  },
+  {
+   "startDay": 25,
+   "today": "2026-02-28",
+   "offset": -5,
+   "start": "2025-09-25",
+   "end": "2025-10-25",
+   "daysElapsed": 30,
+   "daysLeft": 0,
+   "summary": {
+    "spent": 2263471,
+    "spentInRooms": 672894,
+    "spentForBudget": 1914097,
+    "moneyIn": 0,
+    "byCategory": [
+     [
+      "food",
+      681783
+     ],
+     [
+      "shopping",
+      490610
+     ],
+     [
+      "rent",
+      475120
+     ],
+     [
+      "fuel",
+      440477
+     ],
+     [
+      null,
+      175481
+     ]
+    ],
+    "budgetByCategory": {
+     "fuel": 583048,
+     "shopping": 343233,
+     "": -1491,
+     "food": 681783,
+     "rent": 307524
+    }
+   },
+   "dailyAverage": 75449,
+   "carried": 23652492,
+   "safe": {
+    "kind": "none"
+   }
+  },
+  {
+   "startDay": 25,
+   "today": "2026-03-01",
+   "offset": 0,
+   "start": "2026-02-25",
+   "end": "2026-03-25",
+   "daysElapsed": 5,
+   "daysLeft": 24,
+   "summary": {
+    "spent": 2503471,
+    "spentInRooms": 974897,
+    "spentForBudget": 2096257,
+    "moneyIn": 3908903,
+    "byCategory": [
+     [
+      "shopping",
+      973710
+     ],
+     [
+      "food",
+      569427
+     ],
+     [
+      null,
+      422104
+     ],
+     [
+      "fuel",
+      273734
+     ],
+     [
+      "rent",
+      264496
+     ]
+    ],
+    "budgetByCategory": {
+     "fuel": 273734,
+     "": 422104,
+     "rent": 81636,
+     "food": 569427,
+     "shopping": 749356
+    }
+   },
+   "dailyAverage": 500694,
+   "carried": 107038596,
+   "safe": {
+    "kind": "over",
+    "over": 596257
+   }
+  },
+  {
+   "startDay": 25,
+   "today": "2026-03-01",
+   "offset": -1,
+   "start": "2026-01-25",
+   "end": "2026-02-25",
+   "daysElapsed": 31,
+   "daysLeft": 0,
+   "summary": {
+    "spent": 2171469,
+    "spentInRooms": 1266988,
+    "spentForBudget": 1903842,
+    "moneyIn": 27873894,
+    "byCategory": [
+     [
+      "rent",
+      740775
+     ],
+     [
+      "fuel",
+      537566
+     ],
+     [
+      "shopping",
+      304828
+     ],
+     [
+      null,
+      297210
+     ],
+     [
+      "food",
+      291090
+     ]
+    ],
+    "budgetByCategory": {
+     "fuel": 537566,
+     "food": 291090,
+     "rent": 740775,
+     "": 240057,
+     "shopping": 94354
+    }
+   },
+   "dailyAverage": 70047,
+   "carried": 81336171,
+   "safe": {
+    "kind": "none"
+   }
+  },
+  {
+   "startDay": 25,
+   "today": "2026-03-01",
+   "offset": -5,
+   "start": "2025-09-25",
+   "end": "2025-10-25",
+   "daysElapsed": 30,
+   "daysLeft": 0,
+   "summary": {
+    "spent": 2263471,
+    "spentInRooms": 672894,
+    "spentForBudget": 1914097,
+    "moneyIn": 0,
+    "byCategory": [
+     [
+      "food",
+      681783
+     ],
+     [
+      "shopping",
+      490610
+     ],
+     [
+      "rent",
+      475120
+     ],
+     [
+      "fuel",
+      440477
+     ],
+     [
+      null,
+      175481
+     ]
+    ],
+    "budgetByCategory": {
+     "fuel": 583048,
+     "shopping": 343233,
+     "": -1491,
+     "food": 681783,
+     "rent": 307524
+    }
+   },
+   "dailyAverage": 75449,
+   "carried": 23652492,
+   "safe": {
+    "kind": "none"
+   }
+  },
+  {
+   "startDay": 25,
+   "today": "2026-12-31",
+   "offset": 0,
+   "start": "2026-12-25",
+   "end": "2027-01-25",
+   "daysElapsed": 7,
+   "daysLeft": 25,
+   "summary": {
+    "spent": 0,
+    "spentInRooms": 0,
+    "spentForBudget": 0,
+    "moneyIn": 0,
+    "byCategory": [],
+    "budgetByCategory": {}
+   },
+   "dailyAverage": 0,
+   "carried": 175960963,
+   "safe": {
+    "kind": "onTrack",
+    "left": 1500000,
+    "daysLeft": 25,
+    "perDay": 60000
+   }
+  },
+  {
+   "startDay": 25,
+   "today": "2026-12-31",
+   "offset": -1,
+   "start": "2026-11-25",
+   "end": "2026-12-25",
+   "daysElapsed": 30,
+   "daysLeft": 0,
+   "summary": {
+    "spent": 344772,
+    "spentInRooms": 0,
+    "spentForBudget": 344772,
+    "moneyIn": 0,
+    "byCategory": [
+     [
+      "rent",
+      139497
+     ],
+     [
+      "food",
+      94926
+     ],
+     [
+      null,
+      72676
+     ],
+     [
+      "shopping",
+      37673
+     ]
+    ],
+    "budgetByCategory": {
+     "": 72676,
+     "shopping": 37673,
+     "rent": 139497,
+     "food": 94926
+    }
+   },
+   "dailyAverage": 11492,
+   "carried": 176305735,
+   "safe": {
+    "kind": "none"
+   }
+  },
+  {
+   "startDay": 25,
+   "today": "2026-12-31",
+   "offset": -5,
+   "start": "2026-07-25",
+   "end": "2026-08-25",
+   "daysElapsed": 31,
+   "daysLeft": 0,
+   "summary": {
+    "spent": 2319041,
+    "spentInRooms": 710896,
+    "spentForBudget": 1966021,
+    "moneyIn": 0,
+    "byCategory": [
+     [
+      null,
+      638729
+     ],
+     [
+      "rent",
+      555587
+     ],
+     [
+      "fuel",
+      529761
+     ],
+     [
+      "shopping",
+      368857
+     ],
+     [
+      "food",
+      226107
+     ]
+    ],
+    "budgetByCategory": {
+     "food": 226107,
+     "rent": 555587,
+     "": 511715,
+     "shopping": 142851,
+     "fuel": 529761
+    }
+   },
+   "dailyAverage": 74808,
+   "carried": 131059945,
+   "safe": {
+    "kind": "none"
+   }
+  },
+  {
+   "startDay": 28,
+   "today": "2026-11-19",
+   "offset": 0,
+   "start": "2026-10-28",
+   "end": "2026-11-28",
+   "daysElapsed": 23,
+   "daysLeft": 9,
+   "summary": {
+    "spent": 2262272,
+    "spentInRooms": 936582,
+    "spentForBudget": 1970110,
+    "moneyIn": 19697443,
+    "byCategory": [
+     [
+      "fuel",
+      927560
+     ],
+     [
+      "shopping",
+      533010
+     ],
+     [
+      null,
+      421096
+     ],
+     [
+      "food",
+      212848
+     ],
+     [
+      "rent",
+      167758
+     ]
+    ],
+    "budgetByCategory": {
+     "food": 212848,
+     "": 421096,
+     "fuel": 694225,
+     "shopping": 474183,
+     "rent": 167758
+    }
+   },
+   "dailyAverage": 98360,
+   "carried": 158693394,
+   "safe": {
+    "kind": "over",
+    "over": 470110
+   }
+  },
+  {
+   "startDay": 28,
+   "today": "2026-11-19",
+   "offset": -1,
+   "start": "2026-09-28",
+   "end": "2026-10-28",
+   "daysElapsed": 30,
+   "daysLeft": 0,
+   "summary": {
+    "spent": 2403112,
+    "spentInRooms": 1114801,
+    "spentForBudget": 1784987,
+    "moneyIn": 12028380,
+    "byCategory": [
+     [
+      "rent",
+      739788
+     ],
+     [
+      null,
+      628007
+     ],
+     [
+      "shopping",
+      490723
+     ],
+     [
+      "food",
+      397269
+     ],
+     [
+      "fuel",
+      147325
+     ]
+    ],
+    "budgetByCategory": {
+     "": 520479,
+     "food": 397269,
+     "shopping": 490723,
+     "fuel": -146122,
+     "rent": 522638
+    }
+   },
+   "dailyAverage": 80104,
+   "carried": 149068126,
+   "safe": {
+    "kind": "none"
+   }
+  },
+  {
+   "startDay": 28,
+   "today": "2026-11-19",
+   "offset": -5,
+   "start": "2026-05-28",
+   "end": "2026-06-28",
+   "daysElapsed": 31,
+   "daysLeft": 0,
+   "summary": {
+    "spent": 1172700,
+    "spentInRooms": 391659,
+    "spentForBudget": 951460,
+    "moneyIn": 2651584,
+    "byCategory": [
+     [
+      "fuel",
+      468887
+     ],
+     [
+      "rent",
+      367082
+     ],
+     [
+      "food",
+      193956
+     ],
+     [
+      "shopping",
+      138806
+     ],
+     [
+      null,
+      3969
+     ]
+    ],
+    "budgetByCategory": {
+     "rent": 367082,
+     "food": 193956,
+     "": 227576,
+     "fuel": 24040,
+     "shopping": 138806
+    }
+   },
+   "dailyAverage": 37829,
+   "carried": 131597427,
+   "safe": {
+    "kind": "none"
+   }
+  },
+  {
+   "startDay": 28,
+   "today": "2026-02-28",
+   "offset": 0,
+   "start": "2026-02-28",
+   "end": "2026-03-28",
+   "daysElapsed": 1,
+   "daysLeft": 28,
+   "summary": {
+    "spent": 2185191,
+    "spentInRooms": 857860,
+    "spentForBudget": 1777977,
+    "moneyIn": 3908903,
+    "byCategory": [
+     [
+      "food",
+      659475
+     ],
+     [
+      "shopping",
+      583451
+     ],
+     [
+      "fuel",
+      462750
+     ],
+     [
+      "rent",
+      264496
+     ],
+     [
+      null,
+      215019
+     ]
+    ],
+    "budgetByCategory": {
+     "fuel": 462750,
+     "": 215019,
+     "food": 659475,
+     "rent": 81636,
+     "shopping": 359097
+    }
+   },
+   "dailyAverage": 2185191,
+   "carried": 106661018,
+   "safe": {
+    "kind": "over",
+    "over": 277977
+   }
+  },
+  {
+   "startDay": 28,
+   "today": "2026-02-28",
+   "offset": -1,
+   "start": "2026-01-28",
+   "end": "2026-02-28",
+   "daysElapsed": 31,
+   "daysLeft": 0,
+   "summary": {
+    "spent": 2454693,
+    "spentInRooms": 1379719,
+    "spentForBudget": 2187066,
+    "moneyIn": 27873894,
+    "byCategory": [
+     [
+      "rent",
+      740775
+     ],
+     [
+      "fuel",
+      537566
+     ],
+     [
+      null,
+      504295
+     ],
+     [
+      "shopping",
+      380967
+     ],
+     [
+      "food",
+      291090
+     ]
+    ],
+    "budgetByCategory": {
+     "fuel": 537566,
+     "food": 291090,
+     "": 447142,
+     "rent": 740775,
+     "shopping": 170493
+    }
+   },
+   "dailyAverage": 79184,
+   "carried": 81241817,
+   "safe": {
+    "kind": "none"
+   }
+  },
+  {
+   "startDay": 28,
+   "today": "2026-02-28",
+   "offset": -5,
+   "start": "2025-09-28",
+   "end": "2025-10-28",
+   "daysElapsed": 30,
+   "daysLeft": 0,
+   "summary": {
+    "spent": 2111067,
+    "spentInRooms": 745585,
+    "spentForBudget": 1761693,
+    "moneyIn": 0,
+    "byCategory": [
+     [
+      "food",
+      681783
+     ],
+     [
+      "fuel",
+      513168
+     ],
+     [
+      "shopping",
+      490610
+     ],
+     [
+      "rent",
+      250025
+     ],
+     [
+      null,
+      175481
+     ]
+    ],
+    "budgetByCategory": {
+     "fuel": 655739,
+     "shopping": 343233,
+     "": -1491,
+     "food": 681783,
+     "rent": 82429
+    }
+   },
+   "dailyAverage": 70369,
+   "carried": 23427397,
+   "safe": {
+    "kind": "none"
+   }
+  },
+  {
+   "startDay": 28,
+   "today": "2026-03-01",
+   "offset": 0,
+   "start": "2026-02-28",
+   "end": "2026-03-28",
+   "daysElapsed": 2,
+   "daysLeft": 27,
+   "summary": {
+    "spent": 2185191,
+    "spentInRooms": 857860,
+    "spentForBudget": 1777977,
+    "moneyIn": 3908903,
+    "byCategory": [
+     [
+      "food",
+      659475
+     ],
+     [
+      "shopping",
+      583451
+     ],
+     [
+      "fuel",
+      462750
+     ],
+     [
+      "rent",
+      264496
+     ],
+     [
+      null,
+      215019
+     ]
+    ],
+    "budgetByCategory": {
+     "fuel": 462750,
+     "": 215019,
+     "food": 659475,
+     "rent": 81636,
+     "shopping": 359097
+    }
+   },
+   "dailyAverage": 1092596,
+   "carried": 106661018,
+   "safe": {
+    "kind": "over",
+    "over": 277977
+   }
+  },
+  {
+   "startDay": 28,
+   "today": "2026-03-01",
+   "offset": -1,
+   "start": "2026-01-28",
+   "end": "2026-02-28",
+   "daysElapsed": 31,
+   "daysLeft": 0,
+   "summary": {
+    "spent": 2454693,
+    "spentInRooms": 1379719,
+    "spentForBudget": 2187066,
+    "moneyIn": 27873894,
+    "byCategory": [
+     [
+      "rent",
+      740775
+     ],
+     [
+      "fuel",
+      537566
+     ],
+     [
+      null,
+      504295
+     ],
+     [
+      "shopping",
+      380967
+     ],
+     [
+      "food",
+      291090
+     ]
+    ],
+    "budgetByCategory": {
+     "fuel": 537566,
+     "food": 291090,
+     "": 447142,
+     "rent": 740775,
+     "shopping": 170493
+    }
+   },
+   "dailyAverage": 79184,
+   "carried": 81241817,
+   "safe": {
+    "kind": "none"
+   }
+  },
+  {
+   "startDay": 28,
+   "today": "2026-03-01",
+   "offset": -5,
+   "start": "2025-09-28",
+   "end": "2025-10-28",
+   "daysElapsed": 30,
+   "daysLeft": 0,
+   "summary": {
+    "spent": 2111067,
+    "spentInRooms": 745585,
+    "spentForBudget": 1761693,
+    "moneyIn": 0,
+    "byCategory": [
+     [
+      "food",
+      681783
+     ],
+     [
+      "fuel",
+      513168
+     ],
+     [
+      "shopping",
+      490610
+     ],
+     [
+      "rent",
+      250025
+     ],
+     [
+      null,
+      175481
+     ]
+    ],
+    "budgetByCategory": {
+     "fuel": 655739,
+     "shopping": 343233,
+     "": -1491,
+     "food": 681783,
+     "rent": 82429
+    }
+   },
+   "dailyAverage": 70369,
+   "carried": 23427397,
+   "safe": {
+    "kind": "none"
+   }
+  },
+  {
+   "startDay": 28,
+   "today": "2026-12-31",
+   "offset": 0,
+   "start": "2026-12-28",
+   "end": "2027-01-28",
+   "daysElapsed": 4,
+   "daysLeft": 28,
+   "summary": {
+    "spent": 0,
+    "spentInRooms": 0,
+    "spentForBudget": 0,
+    "moneyIn": 0,
+    "byCategory": [],
+    "budgetByCategory": {}
+   },
+   "dailyAverage": 0,
+   "carried": 175960963,
+   "safe": {
+    "kind": "onTrack",
+    "left": 1500000,
+    "daysLeft": 28,
+    "perDay": 53571
+   }
+  },
+  {
+   "startDay": 28,
+   "today": "2026-12-31",
+   "offset": -1,
+   "start": "2026-11-28",
+   "end": "2026-12-28",
+   "daysElapsed": 30,
+   "daysLeft": 0,
+   "summary": {
+    "spent": 167602,
+    "spentInRooms": 0,
+    "spentForBudget": 167602,
+    "moneyIn": 0,
+    "byCategory": [
+     [
+      "food",
+      94926
+     ],
+     [
+      null,
+      72676
+     ]
+    ],
+    "budgetByCategory": {
+     "": 72676,
+     "food": 94926
+    }
+   },
+   "dailyAverage": 5587,
+   "carried": 176128565,
+   "safe": {
+    "kind": "none"
+   }
+  },
+  {
+   "startDay": 28,
+   "today": "2026-12-31",
+   "offset": -5,
+   "start": "2026-07-28",
+   "end": "2026-08-28",
+   "daysElapsed": 31,
+   "daysLeft": 0,
+   "summary": {
+    "spent": 2268139,
+    "spentInRooms": 761471,
+    "spentForBudget": 1764841,
+    "moneyIn": 0,
+    "byCategory": [
+     [
+      "fuel",
+      729755
+     ],
+     [
+      "food",
+      493769
+     ],
+     [
+      "rent",
+      455884
+     ],
+     [
+      null,
+      357222
+     ],
+     [
+      "shopping",
+      231509
+     ]
+    ],
+    "budgetByCategory": {
+     "food": 370573,
+     "rent": 455884,
+     "": 357222,
+     "shopping": 5503,
+     "fuel": 575659
+    }
+   },
+   "dailyAverage": 73166,
+   "carried": 130587285,
+   "safe": {
+    "kind": "none"
+   }
+  }
+ ]
+}

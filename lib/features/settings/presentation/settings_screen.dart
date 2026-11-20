@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:expense_tracker/core/app_identity.dart';
 import 'package:expense_tracker/core/models/appearance_mode.dart';
 import 'package:expense_tracker/core/models/retention.dart';
 import 'package:expense_tracker/features/settings/presentation/settings_notifier.dart';
@@ -15,6 +16,7 @@ import 'package:expense_tracker/widgets/error_state_view.dart';
 import 'package:expense_tracker/widgets/icon_tile.dart';
 import 'package:expense_tracker/widgets/info_row.dart';
 import 'package:expense_tracker/widgets/large_title_page.dart';
+import 'package:expense_tracker/widgets/legal_links.dart';
 import 'package:expense_tracker/widgets/month_start_day_sheet.dart';
 import 'package:expense_tracker/widgets/option_sheet.dart';
 import 'package:expense_tracker/widgets/pulsing_placeholder.dart';
@@ -321,6 +323,40 @@ class SettingsScreen extends ConsumerWidget {
                 showChevron: true,
                 semanticLabel: l10n.settingsBackupSemantics,
                 onTap: () => unawaited(context.push(Routes.backup)),
+              ),
+            ],
+          ),
+        ),
+        Entrance(
+          index: 4,
+          child: SettingsGroup(
+            label: l10n.settingsSectionAbout,
+            rows: [
+              InfoRow(
+                leading: IconTile(
+                  icon: Icons.privacy_tip_rounded,
+                  color: tiles.green,
+                ),
+                title: l10n.settingsPrivacyPolicy,
+                trailingIsAmount: false,
+                showChevron: true,
+                semanticLabel:
+                    '${l10n.settingsPrivacyPolicy}, '
+                    '${l10n.settingsOpensInBrowser}',
+                onTap: () =>
+                    unawaited(openWebPage(context, ref, privacyPolicyUrl)),
+              ),
+              InfoRow(
+                leading: IconTile(
+                  icon: Icons.description_rounded,
+                  color: tiles.grey,
+                ),
+                title: l10n.settingsTerms,
+                trailingIsAmount: false,
+                showChevron: true,
+                semanticLabel:
+                    '${l10n.settingsTerms}, ${l10n.settingsOpensInBrowser}',
+                onTap: () => unawaited(openWebPage(context, ref, termsUrl)),
               ),
             ],
           ),

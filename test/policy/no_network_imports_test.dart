@@ -4,7 +4,9 @@ import 'package:test/test.dart';
 
 /// Contract (spec §13, Phase 9): the only code that may reach the network
 /// is the optional account's sync with the project's own Supabase server,
-/// and it only ever sends sealed records. Everything else stays offline. A
+/// and it only ever sends sealed records (and, to link a computer, the
+/// sync key sealed for that one browser tab). Everything else stays
+/// offline. A
 /// banned import that is never reached at runtime is invisible to every
 /// other test, so grep it.
 void main() {
@@ -13,6 +15,7 @@ void main() {
     'lib/services/cloud/cloud_auth.dart',
     'lib/services/cloud/secure_session_storage.dart',
     'lib/data/sync/supabase_sync_server.dart',
+    'lib/data/sync/computer_link_server.dart',
     'lib/data/sync/sync_controller.dart',
     'lib/bootstrap.dart',
   };
@@ -65,17 +68,26 @@ void main() {
   });
 
   test('the app talks to no server but its own Supabase project', () {
+    // Pages the phone's browser opens (the app sends nothing there): the
+    // privacy policy and terms on Ample's own website, defined in one file.
+    const browserPages = {
+      'lib/core/app_identity.dart': {
+        'https://ample-money.vercel.app/privacy',
+        'https://ample-money.vercel.app/terms',
+      },
+    };
     final urls = RegExp(r'''https?://[^'"\s)]+''');
     final found = <String>{};
     for (final file in Directory('lib').listSync(recursive: true)) {
       if (file is! File || !file.path.endsWith('.dart')) continue;
       if (file.path.endsWith('.g.dart')) continue;
+      final allowed = browserPages[file.path] ?? const <String>{};
       for (final m in urls.allMatches(file.readAsStringSync())) {
-        found.add(m.group(0)!);
+        if (!allowed.contains(m.group(0))) found.add('${file.path}: ${m[0]}');
       }
     }
     expect(
-      found.where((u) => !u.startsWith('https://rsfiiiyhajwgfnkxuwtr.')),
+      found.where((u) => !u.contains(': https://sefgzcqghdlejfmruxdg.')),
       isEmpty,
       reason: 'A new server must be agreed first (Phase 9 plan).',
     );

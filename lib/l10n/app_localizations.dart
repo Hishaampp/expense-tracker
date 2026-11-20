@@ -3661,6 +3661,138 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Next, your UPI app opens. Scan this QR there to pay. The amount here is what gets recorded.'**
   String get scanPayTypeThere;
+
+  /// Button on Account & sync: open the scanner to unlock Ample for the web on a computer.
+  ///
+  /// In en, this message translates to:
+  /// **'Link a computer'**
+  String get accountLinkComputer;
+
+  /// No description provided for @linkTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Link a computer'**
+  String get linkTitle;
+
+  /// Instruction under the scanner on Link a computer.
+  ///
+  /// In en, this message translates to:
+  /// **'On your computer, open ample-money.vercel.app and point the camera at the code'**
+  String get linkHint;
+
+  /// No description provided for @linkNotAmple.
+  ///
+  /// In en, this message translates to:
+  /// **'That isn\'t an Ample code. Scan the code on the Ample website, and update Ample if the website is newer.'**
+  String get linkNotAmple;
+
+  /// No description provided for @linkConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in on this computer?'**
+  String get linkConfirmTitle;
+
+  /// No description provided for @linkConfirmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The computer showing this code will be signed in to your account and can read your Ample records. Only link a computer you\'re using right now.'**
+  String get linkConfirmBody;
+
+  /// No description provided for @linkConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in computer'**
+  String get linkConfirm;
+
+  /// Face ID / fingerprint prompt reason when linking a computer.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm it\'s you to sign in a computer'**
+  String get linkReason;
+
+  /// No description provided for @linkDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Computer signed in. Your records are opening there now.'**
+  String get linkDone;
+
+  /// No description provided for @linkFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t reach the server. Check your connection and scan again.'**
+  String get linkFailed;
+
+  /// No description provided for @linkNotSyncing.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn on Account & sync first, then link a computer.'**
+  String get linkNotSyncing;
+
+  /// Button under the recovery code field for someone who lost the code.
+  ///
+  /// In en, this message translates to:
+  /// **'Lost your code? Start over'**
+  String get accountLostCode;
+
+  /// No description provided for @accountStartOverTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Start over without the code?'**
+  String get accountStartOverTitle;
+
+  /// No description provided for @accountStartOverBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your cloud copy is sealed with the code you lost, so no one can open it, not even us. Starting over clears it and uploads the records on this phone with a new recovery code. Records that are only in the cloud are lost. If another phone still uses the old code, sign it out first.'**
+  String get accountStartOverBody;
+
+  /// No description provided for @accountStartOver.
+  ///
+  /// In en, this message translates to:
+  /// **'Start over'**
+  String get accountStartOver;
+
+  /// Face ID / fingerprint prompt reason before starting sync over.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm it\'s you to start sync over'**
+  String get accountStartOverReason;
+
+  /// No description provided for @settingsSectionAbout.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get settingsSectionAbout;
+
+  /// No description provided for @settingsPrivacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy policy'**
+  String get settingsPrivacyPolicy;
+
+  /// No description provided for @settingsTerms.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of use'**
+  String get settingsTerms;
+
+  /// Accessibility hint on links that open a web page.
+  ///
+  /// In en, this message translates to:
+  /// **'Opens in your browser'**
+  String get settingsOpensInBrowser;
+
+  /// Shown when no browser could open a web page.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t open your browser. Visit {url}'**
+  String linkOpenFailed(String url);
+
+  /// Under the sign-in buttons; the two documents are linked below it.
+  ///
+  /// In en, this message translates to:
+  /// **'By signing in, you agree to the terms of use and privacy policy.'**
+  String get accountAgree;
 }
 
 class _AppLocalizationsDelegate

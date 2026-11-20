@@ -15,6 +15,10 @@ abstract interface class SyncServer {
 
   /// Every record stored after the running number [after], oldest first.
   Future<List<PulledRecord>> pull(int after);
+
+  /// Removes every record of this account (starting over without the
+  /// recovery code: nobody can open them any more).
+  Future<void> clear();
 }
 
 /// What one sync did.
@@ -273,4 +277,10 @@ class MemorySyncServer implements SyncServer {
     for (final p in _log)
       if (p.seq > after) p,
   ];
+
+  @override
+  Future<void> clear() async {
+    _log.clear();
+    _newest.clear();
+  }
 }

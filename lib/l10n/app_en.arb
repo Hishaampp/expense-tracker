@@ -1783,5 +1783,56 @@
   },
   "scanPayFailed": "Payment not made, so nothing was recorded.",
   "scanPayToReview": "Saved to Review. Confirm it there once you know it went through.",
-  "scanPayTypeThere": "Next, your UPI app opens. Scan this QR there to pay. The amount here is what gets recorded."
+  "scanPayTypeThere": "Next, your UPI app opens. Scan this QR there to pay. The amount here is what gets recorded.",
+  "accountLinkComputer": "Link a computer",
+  "@accountLinkComputer": {
+    "description": "Button on Account & sync: open the scanner to unlock Ample for the web on a computer."
+  },
+  "linkTitle": "Link a computer",
+  "linkHint": "On your computer, open ample-money.vercel.app and point the camera at the code",
+  "@linkHint": {
+    "description": "Instruction under the scanner on Link a computer."
+  },
+  "linkNotAmple": "That isn't an Ample code. Scan the code on the Ample website, and update Ample if the website is newer.",
+  "linkConfirmTitle": "Sign in on this computer?",
+  "linkConfirmBody": "The computer showing this code will be signed in to your account and can read your Ample records. Only link a computer you're using right now.",
+  "linkConfirm": "Sign in computer",
+  "linkReason": "Confirm it's you to sign in a computer",
+  "@linkReason": {
+    "description": "Face ID / fingerprint prompt reason when linking a computer."
+  },
+  "linkDone": "Computer signed in. Your records are opening there now.",
+  "linkFailed": "Couldn't reach the server. Check your connection and scan again.",
+  "linkNotSyncing": "Turn on Account & sync first, then link a computer.",
+  "accountLostCode": "Lost your code? Start over",
+  "@accountLostCode": {
+    "description": "Button under the recovery code field for someone who lost the code."
+  },
+  "accountStartOverTitle": "Start over without the code?",
+  "accountStartOverBody": "Your cloud copy is sealed with the code you lost, so no one can open it, not even us. Starting over clears it and uploads the records on this phone with a new recovery code. Records that are only in the cloud are lost. If another phone still uses the old code, sign it out first.",
+  "accountStartOver": "Start over",
+  "accountStartOverReason": "Confirm it's you to start sync over",
+  "@accountStartOverReason": {
+    "description": "Face ID / fingerprint prompt reason before starting sync over."
+  },
+  "settingsSectionAbout": "About",
+  "settingsPrivacyPolicy": "Privacy policy",
+  "settingsTerms": "Terms of use",
+  "settingsOpensInBrowser": "Opens in your browser",
+  "@settingsOpensInBrowser": {
+    "description": "Accessibility hint on links that open a web page."
+  },
+  "linkOpenFailed": "Couldn't open your browser. Visit {url}",
+  "@linkOpenFailed": {
+    "description": "Shown when no browser could open a web page.",
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    }
+  },
+  "accountAgree": "By signing in, you agree to the terms of use and privacy policy.",
+  "@accountAgree": {
+    "description": "Under the sign-in buttons; the two documents are linked below it."
+  }
 }

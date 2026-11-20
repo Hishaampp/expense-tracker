@@ -6,7 +6,7 @@ The goal: an optional login, so your data follows you to a new phone and stays t
 
 | v1 rule (spec §2, §13) | Phase 9 |
 |---|---|
-| No backend server | One hosted backend, **Supabase**: Postgres + Auth, Mumbai region, free tier to start |
+| No backend server | One hosted backend, **Supabase**: Postgres + Auth, Mumbai region (`ap-south-1`, project `sefgzcqghdlejfmruxdg`), free tier to start. The first project was created in Sydney by mistake and replaced on 2026-11-19 |
 | No accounts or login | **Optional** account. Skippable; the app works fully offline without one |
 | No `INTERNET` in release builds | `INTERNET` is allowed. CI then checks that the **only** host contacted is the Supabase project URL |
 | Nothing leaves the phone | Only **end-to-end encrypted** blobs leave the phone. The server holds ciphertext it cannot read |
@@ -70,11 +70,11 @@ nothing in the app changes when you turn one on.
 1. console.cloud.google.com → create a project.
 2. **APIs & Services → OAuth consent screen:** External; app name, your support email; save.
 3. **APIs & Services → Credentials → Create credentials → OAuth client ID → Web application.**
-   Under **Authorized redirect URIs** add `https://rsfiiiyhajwgfnkxuwtr.supabase.co/auth/v1/callback`. Create.
+   Under **Authorized redirect URIs** add `https://sefgzcqghdlejfmruxdg.supabase.co/auth/v1/callback`. Create.
 4. Copy the **Client ID** and **Client secret** into **Supabase → Authentication → Sign In / Providers → Google**, turn it on, save. (The secret goes only into Supabase.)
 
 **Apple** (needs the paid Apple Developer account, $99/year; shown on iPhone only):
-1. developer.apple.com → **Identifiers → +** → **Services IDs**; turn on **Sign in with Apple** → Configure: domain `rsfiiiyhajwgfnkxuwtr.supabase.co`, return URL `https://rsfiiiyhajwgfnkxuwtr.supabase.co/auth/v1/callback`.
+1. developer.apple.com → **Identifiers → +** → **Services IDs**; turn on **Sign in with Apple** → Configure: domain `sefgzcqghdlejfmruxdg.supabase.co`, return URL `https://sefgzcqghdlejfmruxdg.supabase.co/auth/v1/callback`.
 2. **Keys → +**, tick **Sign in with Apple**, download the `.p8` key.
 3. **Supabase → Sign In / Providers → Apple:** turn on, enter the Services ID and generate the secret from the key, Team ID and Key ID as the page explains; save.
 
